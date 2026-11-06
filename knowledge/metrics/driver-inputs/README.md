@@ -4,7 +4,7 @@
 
 输入齐备仅针对表内所选公司、产品、范围和期间，不表示最新季度覆盖、全部商业模式覆盖或六步研究完成。尚未绑定不等于所有来源均未披露；口径差异、背景数值不计入必需输入。
 
-[机器可读台账索引](../../../data/financial/industry-driver-input-verification.json) · [绑定方案](../industry-input-binding-plans.json) · [说明书](../../../docs/industry-driver-inputs.md)
+机器可读台账索引：参见本地数据台账 (data/financial/industry-driver-input-verification.json) · [绑定方案](../industry-input-binding-plans.json) · [说明书](../../../docs/industry-driver-inputs.md)
 
 | 行业及分表 | 代表公司 | 驱动 1 | 驱动 2 | 驱动 3 |
 |---|---|---|---|---|
