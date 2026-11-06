@@ -1,0 +1,2619 @@
+{
+  "schema_version": "1.1.0",
+  "notes": "22 个共享候选定义和 123 个行业驱动定义；未填观测，单位、来源与适用子口径确定后才能计算；数值阈值未验证",
+  "metrics": [
+    {
+      "id": "revenue_growth",
+      "name": "收入增长",
+      "definition": "(本期可比收入/同期可比收入)-1",
+      "unit": "ratio",
+      "comparability_notes": "同币种、同范围；有机增长另列",
+      "source_candidates": "财报；公司调节表",
+      "cadence": "quarterly",
+      "applicability": "一般经营业务",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "operating_margin",
+      "name": "营业利润率",
+      "definition": "营业利润/收入",
+      "unit": "ratio",
+      "comparability_notes": "合并/分部及 GAAP/调整后分别记录",
+      "source_candidates": "财报",
+      "cadence": "quarterly",
+      "applicability": "一般经营业务；金融业务需专门口径",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "roe",
+      "name": "净资产收益率",
+      "definition": "归属普通股股东净利润/平均普通股权益",
+      "unit": "ratio",
+      "comparability_notes": "期间匹配；负权益或一次性收益时不直接解释",
+      "source_candidates": "财报",
+      "cadence": "quarterly",
+      "applicability": "权益为正且口径可比",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "fcf",
+      "name": "自由现金流代理",
+      "definition": "经营现金流-资本支出现金流出额",
+      "unit": "currency",
+      "comparability_notes": "是项目代理口径，不自动等于 FCFF/FCFE；并购另列",
+      "source_candidates": "现金流量表",
+      "cadence": "quarterly",
+      "applicability": "一般非金融业务",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "net_debt",
+      "name": "净债务",
+      "definition": "计息债务-可用于偿债的现金",
+      "unit": "currency",
+      "comparability_notes": "租赁、受限现金、投资资产单列；金融企业不通用",
+      "source_candidates": "财报附注",
+      "cadence": "quarterly",
+      "applicability": "非金融企业",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "inventory_days",
+      "name": "库存周转天数",
+      "definition": "平均库存/期间销售成本×期间天数",
+      "unit": "days",
+      "comparability_notes": "季节性和存货减值影响可比性；成本为零不可算",
+      "source_candidates": "财报",
+      "cadence": "quarterly",
+      "applicability": "持有存货业务",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "capex_intensity",
+      "name": "资本开支强度",
+      "definition": "资本支出现金流出额/收入",
+      "unit": "ratio",
+      "comparability_notes": "维持/增长资本开支如未披露则未知",
+      "source_candidates": "财报",
+      "cadence": "quarterly",
+      "applicability": "经营业务",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "drawdown",
+      "name": "价格回撤",
+      "definition": "当前可比复权价格/指定窗口历史高点-1",
+      "unit": "ratio",
+      "comparability_notes": "记录窗口、复权方式、观察时点与盘段；不得混用",
+      "source_candidates": "行情来源待接入",
+      "cadence": "daily",
+      "applicability": "价格历史充分的证券",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "realized_vol",
+      "name": "历史波动率",
+      "definition": "收益率标准差×sqrt(年化频率)",
+      "unit": "ratio",
+      "comparability_notes": "简单/对数收益、窗口、频率显式指定",
+      "source_candidates": "行情来源待接入",
+      "cadence": "daily",
+      "applicability": "连续且可比的行情",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "credit_spread",
+      "name": "信用利差",
+      "definition": "信用工具收益率减对应基准或直接引用 OAS",
+      "unit": "basis_points",
+      "comparability_notes": "不同利差方法不可混合，期限和评级另列",
+      "source_candidates": "官方/授权金融数据待选",
+      "cadence": "daily",
+      "applicability": "有可比信用工具",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "penetration",
+      "name": "渗透率",
+      "definition": "采用量/明确界定的潜在总量",
+      "unit": "ratio",
+      "comparability_notes": "明确产品、地区、分母、估算来源；不通用套阈值",
+      "source_candidates": "行业与公司材料待核验",
+      "cadence": "source_dependent",
+      "applicability": "可合理界定市场的产品",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "capacity_utilization",
+      "name": "产能利用率",
+      "definition": "实际产出/可比可用产能",
+      "unit": "ratio",
+      "comparability_notes": "名义与有效产能分开；单位与期间匹配",
+      "source_candidates": "行业统计与公司披露",
+      "cadence": "source_dependent",
+      "applicability": "产能可度量业务",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "net_retention",
+      "name": "净收入留存率",
+      "definition": "同一客户群本期经常性收入/基期经常性收入",
+      "unit": "ratio",
+      "comparability_notes": "公司定义可能不同；客户群、汇率、并购和窗口须记录",
+      "source_candidates": "公司经营指标披露",
+      "cadence": "quarterly",
+      "applicability": "披露可比客户群的订阅业务",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "take_rate",
+      "name": "交易变现率",
+      "definition": "可比交易相关净收入/对应交易额",
+      "unit": "ratio",
+      "comparability_notes": "净/总收入、支付/交易额及排除项要匹配",
+      "source_candidates": "公司披露",
+      "cadence": "quarterly",
+      "applicability": "交易平台或支付",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "cash_runway",
+      "name": "现金跑道",
+      "definition": "可用现金/每期正常化净现金消耗",
+      "unit": "periods",
+      "comparability_notes": "注明期单位；不替代融资和债务情景；消耗非正时不适用",
+      "source_candidates": "财报及研发支出计划",
+      "cadence": "quarterly",
+      "applicability": "现金消耗企业",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "net_interest_margin",
+      "name": "净息差",
+      "definition": "年化净利息收入/平均生息资产",
+      "unit": "ratio",
+      "comparability_notes": "年化方法、税等价和资产口径记录",
+      "source_candidates": "银行财报",
+      "cadence": "quarterly",
+      "applicability": "银行/放贷",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "credit_loss_ratio",
+      "name": "贷款净核销率",
+      "definition": "期间年化净核销额/平均贷款余额",
+      "unit": "ratio",
+      "comparability_notes": "净核销与拨备费用不同；年化、贷款范围及回收款口径须记录",
+      "source_candidates": "财报及监管披露",
+      "cadence": "quarterly",
+      "applicability": "银行/放贷业务",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "insurance_loss_ratio",
+      "name": "保险赔付率",
+      "definition": "赔付及相关损失调整费用/已赚保费",
+      "unit": "ratio",
+      "comparability_notes": "准备金发展、再保险及损失调整费用口径须匹配",
+      "source_candidates": "保险财报",
+      "cadence": "quarterly",
+      "applicability": "财产险；医疗保险使用 medical_loss_ratio",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "medical_loss_ratio",
+      "name": "医疗赔付率",
+      "definition": "对应医疗成本/匹配的保费收入",
+      "unit": "ratio",
+      "comparability_notes": "按公司业务口径记录，监管 MLR 另列，不与财产险综合成本率混用",
+      "source_candidates": "医疗保险财报及监管披露",
+      "cadence": "quarterly",
+      "applicability": "医疗保险与管理式医疗",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "combined_ratio",
+      "name": "综合成本率",
+      "definition": "赔付率+费用率（匹配同一口径）",
+      "unit": "ratio",
+      "comparability_notes": "已赚保费、准备金发展、再保险口径必须说明",
+      "source_candidates": "保险财报",
+      "cadence": "quarterly",
+      "applicability": "财产险；不自动适用寿险/医疗险",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "occupancy",
+      "name": "出租率",
+      "definition": "已出租面积/可出租面积，或明确的单位口径",
+      "unit": "ratio",
+      "comparability_notes": "面积/单元不可混用；酒店入住另设指标",
+      "source_candidates": "房地产披露",
+      "cadence": "quarterly",
+      "applicability": "租赁资产",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "noi",
+      "name": "物业净经营收益",
+      "definition": "物业收入-物业经营费用",
+      "unit": "currency",
+      "comparability_notes": "融资、折旧、总部费用一般另列；保留公司调节口径",
+      "source_candidates": "房地产披露",
+      "cadence": "quarterly",
+      "applicability": "物业资产",
+      "validation_status": "draft",
+      "threshold": null
+    },
+    {
+      "id": "oil_gas_driver_1",
+      "name": "实现售价",
+      "definition": "销售收入/可比销售量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "oil_gas",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "oil_gas_driver_2",
+      "name": "单位现金成本",
+      "definition": "可比开采现金成本/产量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "oil_gas",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "oil_gas_driver_3",
+      "name": "储量寿命",
+      "definition": "可比已探明储量/年产量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "oil_gas",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "energy_services_driver_1",
+      "name": "设备利用率",
+      "definition": "实际使用设备/可用设备",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "energy_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "energy_services_driver_2",
+      "name": "订单收入比",
+      "definition": "同期间新增订单额/确认收入",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "energy_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "energy_services_driver_3",
+      "name": "合同日费率",
+      "definition": "可比合同收入/服务天数",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "energy_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "midstream_driver_1",
+      "name": "吞吐量",
+      "definition": "按产品与运输单位披露",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "midstream",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "midstream_driver_2",
+      "name": "收费合同占比",
+      "definition": "固定收费合同收入/相关收入",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "midstream",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "midstream_driver_3",
+      "name": "维持资本开支",
+      "definition": "维持现有资产的现金投入",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "midstream",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "mining_driver_1",
+      "name": "实现价格",
+      "definition": "可比商品收入/销量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "mining",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "mining_driver_2",
+      "name": "单位成本",
+      "definition": "可比生产现金成本/商品产量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "mining",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "mining_driver_3",
+      "name": "矿石品位",
+      "definition": "有效成分量/矿石量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "mining",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "chemicals_driver_1",
+      "name": "产品原料价差",
+      "definition": "单位产品价格减匹配原料成本",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "chemicals",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "chemicals_driver_2",
+      "name": "开工率",
+      "definition": "实际产出/有效产能",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "chemicals",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "chemicals_driver_3",
+      "name": "行业库存",
+      "definition": "明确覆盖范围的存量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "chemicals",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "packaging_driver_1",
+      "name": "销量",
+      "definition": "按品类与单位披露",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "packaging",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "packaging_driver_2",
+      "name": "价格传导时滞",
+      "definition": "成本变化至合同调价的时间",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "packaging",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "packaging_driver_3",
+      "name": "回收材料成本",
+      "definition": "可比单位投入成本",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "packaging",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "capital_goods_driver_1",
+      "name": "订单收入比",
+      "definition": "同期间新增订单额/确认收入",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "capital_goods",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "capital_goods_driver_2",
+      "name": "积压订单",
+      "definition": "未履约订单金额并列取消条款",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "capital_goods",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "capital_goods_driver_3",
+      "name": "交付周期",
+      "definition": "接单到交付的可比时长",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "capital_goods",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "aerospace_defense_driver_1",
+      "name": "订单可执行比例",
+      "definition": "已获拨款或承诺订单/可比订单",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "aerospace_defense",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "aerospace_defense_driver_2",
+      "name": "项目成本偏差",
+      "definition": "预计总成本与基准之差",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "aerospace_defense",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "aerospace_defense_driver_3",
+      "name": "交付数量",
+      "definition": "按产品与验收口径披露",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "aerospace_defense",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "transport_logistics_driver_1",
+      "name": "载运或利用率",
+      "definition": "已使用运力/可用运力",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "transport_logistics",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "transport_logistics_driver_2",
+      "name": "单位运价",
+      "definition": "可比运输收入/运输工作量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "transport_logistics",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "transport_logistics_driver_3",
+      "name": "单位燃料成本",
+      "definition": "燃料支出/可比运输工作量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "transport_logistics",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "business_services_driver_1",
+      "name": "人员利用率",
+      "definition": "可计费工时/可用工时",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "business_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "business_services_driver_2",
+      "name": "客户留存率",
+      "definition": "留存客户/基期客户",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "business_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "business_services_driver_3",
+      "name": "合同单价",
+      "definition": "可比服务收入/计费单位",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "business_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "construction_driver_1",
+      "name": "订单覆盖",
+      "definition": "可执行积压订单/可比年度收入",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "construction",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "construction_driver_2",
+      "name": "项目成本偏差",
+      "definition": "预计总成本与合同预算之差",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "construction",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "construction_driver_3",
+      "name": "合同现金占用",
+      "definition": "合同资产与预收款分别记录",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "construction",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "autos_driver_1",
+      "name": "终端销量",
+      "definition": "交付终端客户的车辆数",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "autos",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "autos_driver_2",
+      "name": "库存天数",
+      "definition": "渠道存量/匹配日销售量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "autos",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "autos_driver_3",
+      "name": "单车贡献",
+      "definition": "净收入减明确范围变动成本后除销量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "autos",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "retail_driver_1",
+      "name": "同店销售增长",
+      "definition": "相同门店范围收入同比",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "retail",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "retail_driver_2",
+      "name": "库存周转",
+      "definition": "销售成本/平均库存",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "retail",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "retail_driver_3",
+      "name": "履约成本率",
+      "definition": "可比履约成本/相关收入",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "retail",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "restaurants_driver_1",
+      "name": "同店销售增长",
+      "definition": "相同门店范围收入同比",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "restaurants",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "restaurants_driver_2",
+      "name": "单店经营利润",
+      "definition": "门店收入减门店成本且排除项明确",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "restaurants",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "restaurants_driver_3",
+      "name": "加盟商健康",
+      "definition": "闭店及违约记录",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "restaurants",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "travel_leisure_driver_1",
+      "name": "酒店入住率",
+      "definition": "售出间夜/可售间夜",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "travel_leisure",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "travel_leisure_driver_2",
+      "name": "酒店平均房价",
+      "definition": "客房收入/售出间夜",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "travel_leisure",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "travel_leisure_driver_3",
+      "name": "预订取消率",
+      "definition": "取消预订/匹配预订群",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "travel_leisure",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "housing_durables_driver_1",
+      "name": "订单取消率",
+      "definition": "取消订单/明确订单群",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "housing_durables",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "housing_durables_driver_2",
+      "name": "交付数量",
+      "definition": "完成交付的单位数",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "housing_durables",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "housing_durables_driver_3",
+      "name": "土地库存",
+      "definition": "持有及承诺土地分开",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "housing_durables",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "food_beverage_driver_1",
+      "name": "销量增长",
+      "definition": "可比销量同比",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "food_beverage",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "food_beverage_driver_2",
+      "name": "价格组合贡献",
+      "definition": "明确方法的价格与产品组合收入变化",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "food_beverage",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "food_beverage_driver_3",
+      "name": "渠道库存",
+      "definition": "按渠道覆盖记录存量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "food_beverage",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "household_personal_driver_1",
+      "name": "可比销量增长",
+      "definition": "同范围销量同比",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "household_personal",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "household_personal_driver_2",
+      "name": "市场份额",
+      "definition": "销量或收入/明确市场总量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "household_personal",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "household_personal_driver_3",
+      "name": "营销投入率",
+      "definition": "可比营销费用/收入",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "household_personal",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "staples_retail_driver_1",
+      "name": "同店销售增长",
+      "definition": "相同门店范围收入同比",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "staples_retail",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "staples_retail_driver_2",
+      "name": "损耗率",
+      "definition": "损耗金额/匹配销售或库存基数",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "staples_retail",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "staples_retail_driver_3",
+      "name": "客流增长",
+      "definition": "可比到店或交易数同比",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "staples_retail",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "tobacco_driver_1",
+      "name": "传统产品销量",
+      "definition": "按产品和地区披露",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "tobacco",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "tobacco_driver_2",
+      "name": "净售价",
+      "definition": "扣税后的可比收入/销量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "tobacco",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "tobacco_driver_3",
+      "name": "替代产品盈利",
+      "definition": "替代业务收入与利润分开",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "tobacco",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "pharma_driver_1",
+      "name": "产品净收入",
+      "definition": "按药品及返利后口径",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "pharma",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "pharma_driver_2",
+      "name": "专利到期暴露",
+      "definition": "指定时间到期产品收入/匹配收入",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "pharma",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "pharma_driver_3",
+      "name": "研发里程碑",
+      "definition": "按项目阶段与终点记录",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "pharma",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "biotech_driver_1",
+      "name": "研发里程碑",
+      "definition": "项目阶段及预设终点",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "biotech",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "biotech_driver_2",
+      "name": "现金跑道",
+      "definition": "可用现金/正常化期现金消耗",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "biotech",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "biotech_driver_3",
+      "name": "稀释需求",
+      "definition": "情景融资需求与可能股数变化",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "biotech",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "medical_devices_driver_1",
+      "name": "手术或耗材量",
+      "definition": "按产品与临床用途记录",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "medical_devices",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "medical_devices_driver_2",
+      "name": "装机数量",
+      "definition": "新增和存量装机分开",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "medical_devices",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "medical_devices_driver_3",
+      "name": "耗材附着收入",
+      "definition": "可比耗材收入/明确装机基数",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "medical_devices",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "health_services_driver_1",
+      "name": "服务量",
+      "definition": "按就诊或服务单位记录",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "health_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "health_services_driver_2",
+      "name": "单位报销收入",
+      "definition": "净服务收入/匹配服务量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "health_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "health_services_driver_3",
+      "name": "人员成本率",
+      "definition": "相关人工成本/服务收入",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "health_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "managed_care_driver_1",
+      "name": "医疗赔付率",
+      "definition": "匹配医疗成本/保费收入",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "managed_care",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "managed_care_driver_2",
+      "name": "会员数量",
+      "definition": "按险种与期间记录",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "managed_care",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "managed_care_driver_3",
+      "name": "费率调整",
+      "definition": "同险种可比保费变化",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "managed_care",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "banks_driver_1",
+      "name": "净息差",
+      "definition": "年化净利息收入/平均生息资产",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "banks",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "banks_driver_2",
+      "name": "贷款净核销率",
+      "definition": "年化净核销额/平均贷款",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "banks",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "banks_driver_3",
+      "name": "资本与流动性",
+      "definition": "记录机构披露口径及适用要求",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "banks",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "insurance_driver_1",
+      "name": "综合成本率",
+      "definition": "财产险赔付率加匹配费用率",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "insurance",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "insurance_driver_2",
+      "name": "准备金发展",
+      "definition": "前期准备金有利或不利变化",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "insurance",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "insurance_driver_3",
+      "name": "负债资产匹配",
+      "definition": "期限和币种暴露",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "insurance",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "asset_management_driver_1",
+      "name": "净流入",
+      "definition": "剔除市场变化的客户资金流",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "asset_management",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "asset_management_driver_2",
+      "name": "收费管理资产",
+      "definition": "按费率对应资产群",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "asset_management",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "asset_management_driver_3",
+      "name": "有效费率",
+      "definition": "管理费/匹配平均收费资产",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "asset_management",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "payments_driver_1",
+      "name": "处理金额",
+      "definition": "按支付或交易定义",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "payments",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "payments_driver_2",
+      "name": "净变现率",
+      "definition": "匹配交易相关净收入/处理金额",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "payments",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "payments_driver_3",
+      "name": "欺诈信用损失",
+      "definition": "损失/匹配处理或信贷基数",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "payments",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "software_driver_1",
+      "name": "净收入留存率",
+      "definition": "同群客户经常收入之比",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "software",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "software_driver_2",
+      "name": "经常性收入",
+      "definition": "ARR 或订阅收入分开",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "software",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "software_driver_3",
+      "name": "股权稀释",
+      "definition": "股数变化与股权激励成本分别记录",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "software",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "semiconductors_driver_1",
+      "name": "渠道库存",
+      "definition": "按终端与口径记录",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "semiconductors",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "semiconductors_driver_2",
+      "name": "产能利用率",
+      "definition": "产出/可比有效产能",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "semiconductors",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "semiconductors_driver_3",
+      "name": "平均售价",
+      "definition": "可比产品收入/销量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "semiconductors",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "semi_equipment_driver_1",
+      "name": "订单收入比",
+      "definition": "同期间新增订单额/收入",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "semi_equipment",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "semi_equipment_driver_2",
+      "name": "客户资本开支",
+      "definition": "按制程和客户记录",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "semi_equipment",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "semi_equipment_driver_3",
+      "name": "订单取消",
+      "definition": "取消与延期分别记录",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "semi_equipment",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "hardware_driver_1",
+      "name": "终端出货",
+      "definition": "按可比产品单位",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "hardware",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "hardware_driver_2",
+      "name": "渠道库存",
+      "definition": "经销渠道存量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "hardware",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "hardware_driver_3",
+      "name": "产品组合毛利",
+      "definition": "分产品毛利与占比",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "hardware",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "it_services_driver_1",
+      "name": "可计费利用率",
+      "definition": "计费工时/可用工时",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "it_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "it_services_driver_2",
+      "name": "合同新增额",
+      "definition": "同范围签约金额",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "it_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "it_services_driver_3",
+      "name": "单位费率",
+      "definition": "可比收入/计费单位",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "it_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "telecom_driver_1",
+      "name": "ARPU",
+      "definition": "可比服务收入/平均匹配用户",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "telecom",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "telecom_driver_2",
+      "name": "用户流失率",
+      "definition": "流失用户/明确平均用户基数",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "telecom",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "telecom_driver_3",
+      "name": "网络资本开支",
+      "definition": "现金投入按维持与扩张分开",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "telecom",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "digital_platforms_driver_1",
+      "name": "活跃用户",
+      "definition": "明确活跃标准与频率",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "digital_platforms",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "digital_platforms_driver_2",
+      "name": "单位用户变现",
+      "definition": "匹配收入/平均活跃用户",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "digital_platforms",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "digital_platforms_driver_3",
+      "name": "交易变现率",
+      "definition": "净交易收入/匹配交易额",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "digital_platforms",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "media_entertainment_driver_1",
+      "name": "付费用户",
+      "definition": "明确平均与期末口径",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "media_entertainment",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "media_entertainment_driver_2",
+      "name": "内容现金投入",
+      "definition": "当期内容现金支出",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "media_entertainment",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "media_entertainment_driver_3",
+      "name": "内容摊销",
+      "definition": "当期确认的内容成本",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "media_entertainment",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "regulated_utilities_driver_1",
+      "name": "费率基数",
+      "definition": "经批准的可获回报资产",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "regulated_utilities",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "regulated_utilities_driver_2",
+      "name": "准许 ROE",
+      "definition": "适用监管决定的权益回报",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "regulated_utilities",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "regulated_utilities_driver_3",
+      "name": "回收时滞",
+      "definition": "支出到获准回收的期间",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "regulated_utilities",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "merchant_power_driver_1",
+      "name": "捕获电价",
+      "definition": "售电收入/匹配售电量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "merchant_power",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "merchant_power_driver_2",
+      "name": "燃料价差",
+      "definition": "单位电价减效率调整燃料成本",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "merchant_power",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "merchant_power_driver_3",
+      "name": "合同覆盖",
+      "definition": "已对冲或长约电量/匹配预期电量",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "merchant_power",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "equity_reit_driver_1",
+      "name": "同物业 NOI 增长",
+      "definition": "固定可比物业群 NOI 同比",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "equity_reit",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "equity_reit_driver_2",
+      "name": "出租率",
+      "definition": "出租面积/可出租面积",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "equity_reit",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "equity_reit_driver_3",
+      "name": "AFFO 调节",
+      "definition": "FFO 到 AFFO 的逐项桥接",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "equity_reit",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "real_estate_services_driver_1",
+      "name": "开发回款",
+      "definition": "实际现金回款与确认收入分开",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "real_estate_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "real_estate_services_driver_2",
+      "name": "预售取消",
+      "definition": "取消/匹配订单群",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "real_estate_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "real_estate_services_driver_3",
+      "name": "服务佣金",
+      "definition": "服务收入/匹配成交基数",
+      "unit": "context_defined",
+      "comparability_notes": "分析时必须指定单位、期间、子行业及分母；未定义不得计算或跨公司比较",
+      "source_candidates": "项目内公司/行业证据记录，尚未接入",
+      "cadence": "source_dependent",
+      "applicability": "real_estate_services",
+      "validation_status": "draft",
+      "threshold": null,
+      "industry_specific": true,
+      "evidence_refs": [
+        "knowledge/02-industry-framework.md",
+        "knowledge/framework/common.md"
+      ],
+      "provenance": "project_design_inference",
+      "observations": []
+    },
+    {
+      "id": "market_price",
+      "name": "研究基准每股价格",
+      "definition": "指定交易日、时段和价格类型的每股价格",
+      "unit": "currency_per_share",
+      "comparability_notes": "记录币种、盘段、复权及股数口径，与估值基准一致",
+      "source_candidates": "项目内行情证据，尚未接入",
+      "cadence": "daily",
+      "applicability": "上市证券",
+      "validation_status": "draft",
+      "threshold": null
+    }
+  ]
+}

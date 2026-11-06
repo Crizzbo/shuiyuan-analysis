@@ -1,0 +1,291 @@
+# batch · 行业指标批输入
+
+[返回统一目录](../10a-指标批输入数据字典.md)
+
+全部字段必填；仅 1.1.0 的 source.published_at 允许 null。禁止额外字段。scale 必须大于零，由执行语义校验补充。
+
+| 字段 | 中文名称 | 类型/引用 | 业务含义 |
+| --- | --- | --- | --- |
+| schema_version | 请求契约版本 | const | 1.1.0 支持未知精确发布时间；可得时间仍必填 |
+| entity_id | 公司标识 | string | 本批同一公司 |
+| scope_id | 业务范围标识 | string | 本批统一合并或分部范围 |
+| industry_id | 行业标识 | string | 须在项目行业契约中存在 |
+| currency | 批币种 | string | 全部输入同币种，不自动兑换 |
+| as_of | 研究时点 | string | 禁止使用晚于此时点可得的资料 |
+| is_synthetic | 是否合成数据 | boolean | 合成结果不能替代真实公司研究 |
+| facts | 原始事实列表 | array | 真实缺失时允许为空；对应指标阻断 |
+| requests | 请求指标列表 | array | 现有指标 ID，不自动计算全部指标 |
+
+## 精确结构
+
+```json
+{
+  "type": "object",
+  "title": "行业指标批输入",
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "1.0.0",
+        "1.1.0"
+      ],
+      "title": "请求契约版本",
+      "description": "1.1.0 支持未知精确发布时间；可得时间仍必填"
+    },
+    "entity_id": {
+      "type": "string",
+      "title": "公司标识",
+      "description": "本批同一公司",
+      "minLength": 1
+    },
+    "scope_id": {
+      "type": "string",
+      "title": "业务范围标识",
+      "description": "本批统一合并或分部范围",
+      "minLength": 1
+    },
+    "industry_id": {
+      "type": "string",
+      "title": "行业标识",
+      "description": "须在项目行业契约中存在",
+      "minLength": 1
+    },
+    "currency": {
+      "type": "string",
+      "title": "批币种",
+      "description": "全部输入同币种，不自动兑换",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "as_of": {
+      "type": "string",
+      "title": "研究时点",
+      "description": "禁止使用晚于此时点可得的资料",
+      "format": "date-time"
+    },
+    "is_synthetic": {
+      "type": "boolean",
+      "title": "是否合成数据",
+      "description": "合成结果不能替代真实公司研究"
+    },
+    "facts": {
+      "type": "array",
+      "title": "原始事实列表",
+      "description": "真实缺失时允许为空；对应指标阻断",
+      "items": {
+        "$ref": "#/$defs/fact"
+      }
+    },
+    "requests": {
+      "type": "array",
+      "title": "请求指标列表",
+      "description": "现有指标 ID，不自动计算全部指标",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "entity_id",
+    "scope_id",
+    "industry_id",
+    "currency",
+    "as_of",
+    "is_synthetic",
+    "facts",
+    "requests"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shuiyuan:metric-batch:1.1.0",
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "title": "原始输入事实",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "原始事实标识",
+          "description": "批内原始事实 ID，不是正式研究 observation ID",
+          "minLength": 1
+        },
+        "field": {
+          "type": "string",
+          "title": "原始字段代码",
+          "description": "执行绑定规定的输入字段",
+          "minLength": 1
+        },
+        "entity_id": {
+          "type": "string",
+          "title": "公司标识",
+          "description": "必须与请求公司一致",
+          "minLength": 1
+        },
+        "scope_id": {
+          "type": "string",
+          "title": "业务范围标识",
+          "description": "合并或指定分部，禁止混用",
+          "minLength": 1
+        },
+        "period": {
+          "$ref": "#/$defs/period",
+          "title": "财务期间",
+          "description": "分子分母需完全匹配"
+        },
+        "accounting_basis": {
+          "type": "string",
+          "title": "会计口径",
+          "description": "本批仅支持 GAAP",
+          "enum": [
+            "GAAP"
+          ]
+        },
+        "value": {
+          "type": "number",
+          "title": "金额数值",
+          "description": "有限实际数值，不自动填零"
+        },
+        "unit": {
+          "type": "string",
+          "title": "量纲",
+          "description": "本批分子分母均为金额",
+          "enum": [
+            "currency"
+          ]
+        },
+        "currency": {
+          "type": "string",
+          "title": "币种",
+          "description": "三位大写 ASCII 代码",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "scale": {
+          "type": "number",
+          "title": "金额尺度乘数",
+          "description": "如百万美元填 1000000；统一为基础货币单位后计算",
+          "minimum": 0
+        },
+        "source": {
+          "$ref": "#/$defs/source",
+          "title": "来源与时点",
+          "description": "定位、内容及可得时间"
+        }
+      },
+      "required": [
+        "id",
+        "field",
+        "entity_id",
+        "scope_id",
+        "period",
+        "accounting_basis",
+        "value",
+        "unit",
+        "currency",
+        "scale",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    "period": {
+      "type": "object",
+      "title": "财务期间",
+      "properties": {
+        "start": {
+          "type": "string",
+          "title": "期间起日",
+          "description": "财务统计期间开始",
+          "format": "date"
+        },
+        "end": {
+          "type": "string",
+          "title": "期间止日",
+          "description": "财务统计期间结束",
+          "format": "date"
+        },
+        "basis": {
+          "type": "string",
+          "title": "期间口径",
+          "description": "季度、年度或滚动十二个月",
+          "enum": [
+            "quarter",
+            "annual",
+            "ttm"
+          ]
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "basis"
+      ],
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "title": "输入来源",
+      "properties": {
+        "path": {
+          "type": "string",
+          "title": "来源路径",
+          "description": "项目内 UTF-8 文本相对路径；不能指向项目外"
+        },
+        "sha256": {
+          "type": "string",
+          "title": "来源内容摘要",
+          "description": "原文件字节 SHA-256，运行时比对",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "locator": {
+          "type": "string",
+          "title": "来源定位",
+          "description": "页码、表名或行号，不仅记录文件名",
+          "minLength": 1
+        },
+        "excerpt": {
+          "type": "string",
+          "title": "原文摘录",
+          "description": "需要在本地文本中逐字找到；不自动证明数值含义",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "title": "来源类型",
+          "description": "真实数据仅 primary，合成数据仅 synthetic",
+          "enum": [
+            "primary",
+            "secondary",
+            "synthetic"
+          ]
+        },
+        "published_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "发布时间",
+          "description": "精确来源发布时间；1.1.0 未核实时填 null，不补造时刻",
+          "format": "date-time"
+        },
+        "available_at": {
+          "type": "string",
+          "title": "可得时间",
+          "description": "带时区，不得晚于研究时点",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "locator",
+        "excerpt",
+        "kind",
+        "published_at",
+        "available_at"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
+```

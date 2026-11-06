@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "nflx_content_amortization_driver3",
+      "parent_metric_id": "media_entertainment_driver_3",
+      "name_zh": "年度内容资产摊销费用",
+      "binding_role": "reported_metric",
+      "limitation_zh": "现金流表同期间内容摊销；不是新增内容资产或现金支付，不覆盖其他内容成本",
+      "raw_unit": "USD_thousand",
+      "unit": "USD"
+    }
+  ]
+}

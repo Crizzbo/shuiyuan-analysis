@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "pld_q4_same_store_cash_noi",
+      "parent_metric_id": "equity_reit_driver_1",
+      "name_zh": "普洛斯 4Q25 权益份额现金同店净营业收入",
+      "binding_role": "formula_input",
+      "limitation_zh": "2025 Q4 普洛斯权益份额现金同店净营业收入（$1,281 million）；与 5.7% 现金同店增速同范围同期间",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    },
+    {
+      "component": "isrg_tradein_retirements_q4",
+      "parent_metric_id": "medical_devices_driver_2",
+      "name_zh": "直觉外科 2025 Q4 达芬奇系统置换与退役调整数",
+      "binding_role": "formula_input",
+      "limitation_zh": "2025 Q4 达芬奇手术系统置换与退役台数（79 systems）；同 2025 Q4 期间与装机量变化对齐",
+      "raw_unit": "systems",
+      "unit": "systems"
+    },
+    {
+      "component": "duk_carolinas_equity_capital_ratio_2024",
+      "parent_metric_id": "regulated_utilities_driver_2",
+      "name_zh": "杜克能源卡罗莱纳监管核准权益资本结构比例",
+      "binding_role": "formula_input",
+      "limitation_zh": "北卡罗莱纳公用事业委员会核准的法定权益资本结构比例（52.0%）；与 9.8% 允许 ROE 同裁定口径同期间",
+      "raw_unit": "percent",
+      "unit": "ratio"
+    },
+    {
+      "component": "jpm_nsfr_ratio_2025",
+      "parent_metric_id": "banks_driver_3",
+      "name_zh": "摩根大通 2025 年末全集团净稳定资金比率 NSFR",
+      "binding_role": "formula_input",
+      "limitation_zh": "2025 年末全集团净稳定资金比率 NSFR（116%）；巴塞尔 III 监管流动性指标，与标准化 CET1 14.6% 同年末截面",
+      "raw_unit": "percent",
+      "unit": "ratio"
+    }
+  ]
+}

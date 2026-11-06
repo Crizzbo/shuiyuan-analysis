@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ETFPenetrationDossier",
+  "description": "全球核心指数与主题行业 ETF 穿透深度分析规范",
+  "type": "object",
+  "required": [
+    "ticker",
+    "name_zh",
+    "category",
+    "asset_class",
+    "expense_ratio_display",
+    "aum_display",
+    "concentration",
+    "top_holdings",
+    "factor_scores",
+    "fee_drag_simulation",
+    "cross_etf_overlaps"
+  ],
+  "properties": {
+    "ticker": { "type": "string" },
+    "name_zh": { "type": "string" },
+    "category": { "type": "string" },
+    "asset_class": { "type": "string" },
+    "expense_ratio_display": { "type": "string" },
+    "aum_display": { "type": "string" },
+    "concentration": {
+      "type": "object",
+      "required": ["top_10_weight_pct", "hhi_index", "concentration_rating"],
+      "properties": {
+        "top_10_weight_pct": { "type": "number" },
+        "hhi_index": { "type": "number" },
+        "concentration_rating": { "type": "string" }
+      }
+    },
+    "top_holdings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["symbol", "weight_pct"],
+        "properties": {
+          "symbol": { "type": "string" },
+          "weight_pct": { "type": "string" }
+        }
+      }
+    },
+    "factor_scores": {
+      "type": "object",
+      "additionalProperties": { "type": "number" }
+    },
+    "fee_drag_simulation": {
+      "type": "object",
+      "required": ["assumed_capital", "drag_1_year", "drag_3_years", "drag_5_years"],
+      "properties": {
+        "assumed_capital": { "type": "string" },
+        "drag_1_year": { "type": "string" },
+        "drag_3_years": { "type": "string" },
+        "drag_5_years": { "type": "string" }
+      }
+    },
+    "cross_etf_overlaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["target_etf", "target_name_zh", "overlap_pct", "verdict"],
+        "properties": {
+          "target_etf": { "type": "string" },
+          "target_name_zh": { "type": "string" },
+          "overlap_pct": { "type": "number" },
+          "verdict": { "type": "string" }
+        }
+      }
+    }
+  }
+}

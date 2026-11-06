@@ -1,0 +1,218 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "title": "契约版本",
+      "description": "本数据结构版本，与知识修订和统计验证状态分开。"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "title": "知识修订号",
+      "description": "该知识对象的修订标识；此模块尚无不可变历史登记接口。"
+    },
+    "definitions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/definition"
+      },
+      "minItems": 1,
+      "title": "指标口径定义列表",
+      "description": "对现有指标定义作可计算性和取数要求登记，非观测数据。"
+    }
+  },
+  "required": [
+    "schema_version",
+    "revision",
+    "definitions"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shuiyuan:metric-definition:1.0.0",
+  "$defs": {
+    "source": {
+      "type": "object",
+      "properties": {
+        "source_path": {
+          "type": "string",
+          "minLength": 1,
+          "title": "依据文件路径",
+          "description": "相对项目根目录的已存在文件，真实路径不得越界。"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "title": "依据定位信息",
+          "description": "章节、条目或 JSON 对象标识；由人工核实内容相关性。"
+        },
+        "source_kind": {
+          "enum": [
+            "project_design",
+            "primary",
+            "secondary",
+            "synthetic"
+          ],
+          "title": "依据类型",
+          "description": "project_design 为项目知识设计，primary/secondary 为实际资料，synthetic 为模拟。"
+        }
+      },
+      "required": [
+        "source_path",
+        "locator",
+        "source_kind"
+      ],
+      "additionalProperties": false
+    },
+    "definition": {
+      "type": "object",
+      "properties": {
+        "metric_id": {
+          "type": "string",
+          "minLength": 1,
+          "title": "指标标识",
+          "description": "引用现有指标字典；细化口径不能冒充不同公司的可比观测。"
+        },
+        "name_zh": {
+          "type": "string",
+          "minLength": 1,
+          "title": "中文名称",
+          "description": "知识对象或指标的中文阅读名称。"
+        },
+        "definition_status": {
+          "enum": [
+            "specified",
+            "needs_definition"
+          ],
+          "title": "口径状态",
+          "description": "specified 是已写明口径，needs_definition 是仍待细化；均不等于统计验证。"
+        },
+        "formula": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "公式或计算方法",
+          "description": "可计算时明确公式；复合指标未拆分时允许 null 并登记阻断原因。"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "title": "公式输入项列表",
+          "description": "记录输入名称及来源方向，未来接入时还需绑定具体观测。"
+        },
+        "denominator": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "分母口径",
+          "description": "比例类明确分母；非比例应写不适用而非随意留空。"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "title": "计量单位",
+          "description": "必须与指标字典一致；context_defined 表示仍需选择具体单位，不能用于观测值。"
+        },
+        "period_basis": {
+          "type": "string",
+          "minLength": 1,
+          "title": "统计期间口径",
+          "description": "季度、年度、TTM、单时点或 source_dependent；取值时明确对应日期。"
+        },
+        "cadence": {
+          "type": "string",
+          "minLength": 1,
+          "title": "更新频率",
+          "description": "按原始资料实际发布频率取值，不表示调度已实现。"
+        },
+        "applicability": {
+          "type": "string",
+          "minLength": 1,
+          "title": "适用条件",
+          "description": "方法、指标或资料可以使用的业务范围。"
+        },
+        "comparability_notes": {
+          "type": "string",
+          "minLength": 1,
+          "title": "可比性说明",
+          "description": "统一合并范围、货币、复权、分母和版本等口径后方可比较。"
+        },
+        "missing_data_policy": {
+          "const": "record_null_and_block_calculation",
+          "title": "缺失数据策略",
+          "description": "不补零、不猜测；保留缺失原因并限制计算和结论。"
+        },
+        "source_requirements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "title": "实际取数证据要求",
+          "description": "需要哪些原始资料支持实际值；设计依据不能代替这些资料。"
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          },
+          "minItems": 1,
+          "title": "项目内设计依据",
+          "description": "引用支持知识设计的文件及原文位置；不得冒充公司事实。"
+        },
+        "blocking_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "title": "口径阻断原因列表",
+          "description": "阻止指标直接计算、跨公司比较或阈值启用的缺口。"
+        },
+        "validation_status": {
+          "const": "not_validated",
+          "title": "口径验证状态",
+          "description": "not_validated 为仅设计；不代表公式和金融适用性已测试。"
+        }
+      },
+      "required": [
+        "metric_id",
+        "name_zh",
+        "definition_status",
+        "formula",
+        "inputs",
+        "denominator",
+        "unit",
+        "period_basis",
+        "cadence",
+        "applicability",
+        "comparability_notes",
+        "missing_data_policy",
+        "source_requirements",
+        "source_refs",
+        "blocking_reasons",
+        "validation_status"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "title": "指标口径设计目录"
+}

@@ -1,0 +1,172 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CompanyDeepDossier",
+  "description": "公司全景商业与财报深度档案规范 (Deep Company Dossier Schema)",
+  "type": "object",
+  "required": [
+    "overview",
+    "financial_statement_deep_dive",
+    "moat_analysis",
+    "supply_chain_analysis",
+    "industry_dynamics",
+    "long_term_outlook"
+  ],
+  "properties": {
+    "overview": {
+      "type": "object",
+      "required": ["ticker", "company_name", "market", "industry_id", "business_model"],
+      "properties": {
+        "ticker": { "type": "string" },
+        "company_name": { "type": "string" },
+        "market": { "type": "string", "enum": ["US", "JP"] },
+        "industry_id": { "type": "string" },
+        "industry_name_zh": { "type": "string" },
+        "business_model": { "type": "string" },
+        "revenue_mix": { "type": "string" }
+      }
+    },
+    "financial_statement_deep_dive": {
+      "type": "object",
+      "required": [
+        "profitability_quality",
+        "cash_and_liquidity",
+        "inventory_cycle_analysis",
+        "debt_structure_and_solvency"
+      ],
+      "properties": {
+        "profitability_quality": { "type": "string" },
+        "cash_and_liquidity": {
+          "type": "object",
+          "required": ["total_cash_and_equivalents", "net_cash_status", "interest_income_dividend"],
+          "properties": {
+            "total_cash_and_equivalents": { "type": "string" },
+            "restricted_cash": { "type": "string" },
+            "net_cash_status": { "type": "string" },
+            "interest_income_dividend": { "type": "string" }
+          }
+        },
+        "inventory_cycle_analysis": {
+          "type": "object",
+          "required": ["inventory_scale", "inventory_turnover_days", "inventory_cycle_position"],
+          "properties": {
+            "inventory_scale": { "type": "string" },
+            "inventory_turnover_days": { "type": "string" },
+            "inventory_cycle_position": { "type": "string" },
+            "inventory_write_down_risk": { "type": "string" }
+          }
+        },
+        "debt_structure_and_solvency": {
+          "type": "object",
+          "required": ["short_vs_long_term_debt", "interest_coverage_ratio", "debt_wall_24m"],
+          "properties": {
+            "short_vs_long_term_debt": { "type": "string" },
+            "debt_wall_24m": { "type": "string" },
+            "interest_coverage_ratio": { "type": "string" },
+            "refinancing_stress_test": { "type": "string" }
+          }
+        }
+      }
+    },
+    "moat_analysis": {
+      "type": "object",
+      "required": [
+        "network_effects",
+        "switching_costs",
+        "cost_advantage_and_scale",
+        "intangible_assets",
+        "reinvestment_efficiency"
+      ],
+      "properties": {
+        "network_effects": { "type": "string" },
+        "switching_costs": { "type": "string" },
+        "cost_advantage_and_scale": { "type": "string" },
+        "intangible_assets": { "type": "string" },
+        "reinvestment_efficiency": { "type": "string" }
+      }
+    },
+    "supply_chain_analysis": {
+      "type": "object",
+      "required": ["upstream_suppliers", "downstream_customers"],
+      "properties": {
+        "upstream_suppliers": {
+          "type": "object",
+          "required": ["core_suppliers", "supplier_concentration", "supply_chain_risks"],
+          "properties": {
+            "core_suppliers": { "type": "string" },
+            "supplier_concentration": { "type": "string" },
+            "supply_chain_risks": { "type": "string" }
+          }
+        },
+        "downstream_customers": {
+          "type": "object",
+          "required": ["customer_structure", "top5_customer_concentration", "default_and_churn_risks"],
+          "properties": {
+            "customer_structure": { "type": "string" },
+            "top5_customer_concentration": { "type": "string" },
+            "default_and_churn_risks": { "type": "string" }
+          }
+        }
+      }
+    },
+    "industry_dynamics": {
+      "type": "object",
+      "required": ["winner_factor", "market_share_and_crn", "tam_and_cagr"],
+      "properties": {
+        "winner_factor": { "type": "string" },
+        "market_share_and_crn": { "type": "string" },
+        "tam_and_cagr": { "type": "string" }
+      }
+    },
+    "long_term_outlook": {
+      "type": "object",
+      "required": ["catalysts", "kill_switch_risks", "dcf_valuation_matrix"],
+      "properties": {
+        "catalysts": { "type": "array", "items": { "type": "string" } },
+        "kill_switch_risks": { "type": "array", "items": { "type": "string" } },
+        "dcf_valuation_matrix": {
+          "type": "object",
+          "required": ["base_fair_value", "conservative_fair_value", "margin_of_safety_buy_zone"],
+          "properties": {
+            "base_fair_value": { "type": "string" },
+            "conservative_fair_value": { "type": "string" },
+            "margin_of_safety_buy_zone": { "type": "string" }
+          }
+        }
+      }
+    },
+    "sepa_result": {
+      "type": "object",
+      "description": "米奈尔维尼 SEPA 买方时机决策与技术足迹全息对象",
+      "properties": {
+        "ticker": { "type": "string" },
+        "val_current_price": { "type": "number" },
+        "status_trend_stage": { "type": "string" },
+        "status_vcp_contraction": { "type": "string" },
+        "status_buy_signal": { "type": "string" },
+        "is_trend_template_passed": { "type": "boolean" },
+        "technical_footprint_code": { "type": "string" },
+        "cnt_contractions": { "type": "integer" },
+        "is_volume_dryup_confirmed": { "type": "boolean" },
+        "is_breakout_volume_confirmed": { "type": "boolean" },
+        "is_squat_holding": { "type": "boolean" },
+        "directive_action_zh": { "type": "string" },
+        "price_boundaries": {
+          "type": "object",
+          "properties": {
+            "val_pivot_price": { "type": "number" },
+            "val_stop_loss_price": { "type": "number" },
+            "val_recommended_stop_price": { "type": "number" },
+            "val_risk_unit_usd": { "type": "number" },
+            "val_breakeven_trigger_price": { "type": "number" },
+            "val_extended_limit_price": { "type": "number" },
+            "val_target_profit_price": { "type": "number" },
+            "pct_hard_stop_loss": { "type": "number" },
+            "pct_recommended_stop_loss": { "type": "number" },
+            "pct_current_to_pivot": { "type": "number" },
+            "is_within_buy_range": { "type": "boolean" }
+          }
+        }
+      }
+    }
+  }
+}

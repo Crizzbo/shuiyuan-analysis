@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "adp_es_client_revenue_retention_fy24",
+      "parent_metric_id": "business_services_driver_2",
+      "name_zh": "ADP FY2024 雇主服务客户收入留存率",
+      "binding_role": "formula_input",
+      "limitation_zh": "全财年雇主服务分部收入加权口径留存率；原始物理客户家数留存待附注拆分",
+      "raw_unit": "percent",
+      "unit": "ratio"
+    },
+    {
+      "component": "tel_annual_net_sales_fy24",
+      "parent_metric_id": "semi_equipment_driver_1",
+      "name_zh": "东京电子 FY2024 半导体制造装置为主合并净销售额",
+      "binding_role": "formula_input",
+      "limitation_zh": "全财年合并净销售额（以半导体制造设备为主，十亿日元口径）；匹配新增订单待核",
+      "raw_unit": "JPY_billion",
+      "unit": "JPY"
+    },
+    {
+      "component": "duk_carolinas_allowed_roe_2024",
+      "parent_metric_id": "regulated_utilities_driver_2",
+      "name_zh": "杜克能源卡罗莱纳零售监管批准权益回报率",
+      "binding_role": "formula_input",
+      "limitation_zh": "经监管委员会裁定批准之法定 ROE；适用范围为杜克能源卡罗莱纳零售电力业务",
+      "raw_unit": "percent",
+      "unit": "ratio"
+    }
+  ]
+}

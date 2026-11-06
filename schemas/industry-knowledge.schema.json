@@ -1,0 +1,380 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "title": "契约版本",
+      "description": "本数据结构版本，与知识修订和统计验证状态分开。"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "title": "知识修订号",
+      "description": "该知识对象的修订标识；此模块尚无不可变历史登记接口。"
+    },
+    "industry_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "行业标识",
+      "description": "引用项目行业字典的 industry 节点。"
+    },
+    "name_zh": {
+      "type": "string",
+      "minLength": 1,
+      "title": "中文名称",
+      "description": "知识对象或指标的中文阅读名称。"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1,
+      "title": "适用边界",
+      "description": "明确包含的业务和排除的业务，不表示证券自动分类完成。"
+    },
+    "required_segmentation": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "title": "必需细分项",
+      "description": "研究前须解释的产品、收入模式、地区等细分口径。"
+    },
+    "business_model_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "title": "商业模式标识列表",
+      "description": "候选模式，实际公司分部归类需另有证据。"
+    },
+    "required_metric_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "title": "必查指标列表",
+      "description": "须检查适用性和可得性的指标；允许说明不适用，但不能跳过整个维度。"
+    },
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dimension"
+      },
+      "minItems": 6,
+      "title": "维度要求列表",
+      "description": "恰好六个不同维度，语义检查集合完整性。",
+      "maxItems": 6
+    },
+    "valuation_routes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/route"
+      },
+      "minItems": 1,
+      "title": "估值适配路径列表",
+      "description": "按商业模式选择的方法及适用限制，未执行估值计算。"
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      },
+      "minItems": 1,
+      "title": "项目内设计依据",
+      "description": "引用支持知识设计的文件及原文位置；不得冒充公司事实。"
+    },
+    "statistical_validation_status": {
+      "enum": [
+        "not_validated",
+        "validation_planned"
+      ],
+      "title": "统计验证状态",
+      "description": "本版仅登记未验证种子或验证计划，不能切换成已验证。"
+    },
+    "empirical_validation_plan": {
+      "type": "string",
+      "minLength": 1,
+      "title": "经验验证计划",
+      "description": "未来数据、时点控制、时间分割及样本外评估的计划，不是结果。"
+    },
+    "thresholds": {
+      "type": "object",
+      "properties": {
+        "drawdown": {
+          "type": "null",
+          "title": "深跌阈值",
+          "description": "当前禁止启用；回撤仅为候选提示。"
+        },
+        "valuation": {
+          "type": "null",
+          "title": "估值阈值",
+          "description": "当前禁止统一估值阈值，按商业模式研究。"
+        }
+      },
+      "required": [
+        "drawdown",
+        "valuation"
+      ],
+      "additionalProperties": false,
+      "title": "行业阈值状态",
+      "description": "深跌与估值数值尚未验证，当前必须保持 null。"
+    },
+    "research_gate": {
+      "type": "object",
+      "properties": {
+        "required_steps": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5",
+              "S6"
+            ]
+          },
+          "minItems": 6,
+          "title": "要求覆盖步骤",
+          "description": "六步仍按 S1—S6 执行，本契约不替代 research.schema。",
+          "maxItems": 6
+        },
+        "missing_data_action": {
+          "const": "insufficient_evidence",
+          "title": "缺资料处理",
+          "description": "缺本地数据时返回证据不足，不自动访问外部资料或补零。"
+        },
+        "real_case_status": {
+          "const": "pending_local_data",
+          "title": "真实样板状态",
+          "description": "当前没有公司观测和真实结论，样板为知识设计填写示例。"
+        }
+      },
+      "required": [
+        "required_steps",
+        "missing_data_action",
+        "real_case_status"
+      ],
+      "additionalProperties": false,
+      "title": "真实研究验收要求",
+      "description": "明确知识设计完成与真实分析通过是不同条件。"
+    },
+    "external_reference_status": {
+      "enum": [
+        "not_available_in_project",
+        "project_copy_reviewed"
+      ],
+      "title": "猫哥参考资料状态",
+      "description": "记录所请求外部资料是否已在本项目内核对，本版尚未取得。"
+    }
+  },
+  "required": [
+    "schema_version",
+    "revision",
+    "industry_id",
+    "name_zh",
+    "scope",
+    "required_segmentation",
+    "business_model_ids",
+    "required_metric_ids",
+    "dimensions",
+    "valuation_routes",
+    "source_refs",
+    "statistical_validation_status",
+    "empirical_validation_plan",
+    "thresholds",
+    "research_gate",
+    "external_reference_status"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shuiyuan:industry-knowledge:1.0.0",
+  "$defs": {
+    "source": {
+      "type": "object",
+      "properties": {
+        "source_path": {
+          "type": "string",
+          "minLength": 1,
+          "title": "依据文件路径",
+          "description": "相对项目根目录的已存在文件，真实路径不得越界。"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "title": "依据定位信息",
+          "description": "章节、条目或 JSON 对象标识；由人工核实内容相关性。"
+        },
+        "source_kind": {
+          "enum": [
+            "project_design",
+            "primary",
+            "secondary",
+            "synthetic"
+          ],
+          "title": "依据类型",
+          "description": "project_design 为项目知识设计，primary/secondary 为实际资料，synthetic 为模拟。"
+        }
+      },
+      "required": [
+        "source_path",
+        "locator",
+        "source_kind"
+      ],
+      "additionalProperties": false
+    },
+    "criteria": {
+      "type": "object",
+      "properties": {
+        "improving": {
+          "type": "string",
+          "minLength": 1,
+          "title": "改善判断条件",
+          "description": "哪些证据组合支持改善，并须检查相反解释。"
+        },
+        "deteriorating": {
+          "type": "string",
+          "minLength": 1,
+          "title": "恶化判断条件",
+          "description": "哪些证据组合支持恶化，区分周期与结构因素。"
+        },
+        "unknown": {
+          "type": "string",
+          "minLength": 1,
+          "title": "无法判断条件",
+          "description": "缺失、冲突、不可比或边界未定义时应返回 unknown。"
+        }
+      },
+      "required": [
+        "improving",
+        "deteriorating",
+        "unknown"
+      ],
+      "additionalProperties": false
+    },
+    "dimension": {
+      "type": "object",
+      "properties": {
+        "dimension_id": {
+          "enum": [
+            "lifecycle",
+            "supply_demand",
+            "earnings",
+            "credit",
+            "sentiment",
+            "pricing"
+          ],
+          "title": "研究维度标识",
+          "description": "长期生命周期与供需、盈利、融资、情绪、定价分别登记。"
+        },
+        "name_zh": {
+          "type": "string",
+          "minLength": 1,
+          "title": "中文名称",
+          "description": "知识对象或指标的中文阅读名称。"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "title": "研究问题",
+          "description": "本维度需要回答的问题，而非预设结论。"
+        },
+        "required_metric_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "title": "必查指标列表",
+          "description": "须检查适用性和可得性的指标；允许说明不适用，但不能跳过整个维度。"
+        },
+        "evidence_requirements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "title": "证据要求列表",
+          "description": "拟取证的内容、口径及时间要求，不表示已有该证据。"
+        },
+        "judgment_criteria": {
+          "$ref": "#/$defs/criteria",
+          "title": "判断准则",
+          "description": "定性判断条件，不构成统计验证后的数值阈值。"
+        },
+        "counterevidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "title": "反证方向列表",
+          "description": "应主动查找的相反证据；不是已登记的实际反证。"
+        }
+      },
+      "required": [
+        "dimension_id",
+        "name_zh",
+        "question",
+        "required_metric_ids",
+        "evidence_requirements",
+        "judgment_criteria",
+        "counterevidence"
+      ],
+      "additionalProperties": false
+    },
+    "route": {
+      "type": "object",
+      "properties": {
+        "business_model_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "title": "商业模式标识列表",
+          "description": "候选模式，实际公司分部归类需另有证据。"
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1,
+          "title": "方法说明",
+          "description": "估值路线或指标计算的具体文字口径。"
+        },
+        "applicability": {
+          "type": "string",
+          "minLength": 1,
+          "title": "适用条件",
+          "description": "方法、指标或资料可以使用的业务范围。"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "title": "局限说明列表",
+          "description": "缺口、失效条件和不可自动检查的事项。"
+        }
+      },
+      "required": [
+        "business_model_ids",
+        "method",
+        "applicability",
+        "limitations"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "title": "行业知识库设计契约（非公司研究结果）"
+}

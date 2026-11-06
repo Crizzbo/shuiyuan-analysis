@@ -1,0 +1,255 @@
+{
+  "schema_version": "1.0.0",
+  "research_id": "fictional_blocked",
+  "revision": 1,
+  "is_fictional": true,
+  "as_of": "2026-10-10T12:00:00Z",
+  "recorded_at": "2026-10-11T00:00:00Z",
+  "market_session_date": "2026-10-09",
+  "investment_horizon_months": 12,
+  "subject": {
+    "company_id": "fictional_company",
+    "security_ids": [
+      "fictional_security"
+    ],
+    "segments": [
+      {
+        "id": "segment_software",
+        "name": "虚构软件分部",
+        "industry_ids": [
+          "software"
+        ],
+        "business_model_ids": [
+          "subscription"
+        ],
+        "classification_evidence_refs": [
+          "e_main"
+        ],
+        "subindustry_description": "虚构订阅业务，仅字段演示",
+        "weight_basis": "unknown",
+        "weight": null,
+        "weight_period": null,
+        "weight_evidence_refs": []
+      }
+    ],
+    "is_adr": false,
+    "is_reit": false,
+    "classification_status": "reviewed",
+    "unallocated_or_elimination_notes": "测试没有真实分部权重"
+  },
+  "evidence": [
+    {
+      "id": "e_main",
+      "source_path": "examples/support/fictional_evidence.md",
+      "locator": "基础信息",
+      "source_kind": "synthetic",
+      "published_at": "2026-10-10T12:00:00Z",
+      "available_at": "2026-10-10T12:00:00Z",
+      "acquired_at": "2026-10-10T12:00:00Z",
+      "excerpt_or_summary": "合成输入，仅验证结构",
+      "limitations": [
+        "不能支持真实交易"
+      ]
+    },
+    {
+      "id": "e_counter",
+      "source_path": "examples/support/fictional_evidence.md",
+      "locator": "反证",
+      "source_kind": "synthetic",
+      "published_at": "2026-10-10T12:00:00Z",
+      "available_at": "2026-10-10T12:00:00Z",
+      "acquired_at": "2026-10-10T12:00:00Z",
+      "excerpt_or_summary": "合成输入，仅验证结构",
+      "limitations": [
+        "不能支持真实交易"
+      ]
+    },
+    {
+      "id": "e_check",
+      "source_path": "examples/support/fictional_evidence.md",
+      "locator": "计算核对",
+      "source_kind": "synthetic",
+      "published_at": "2026-10-10T12:00:00Z",
+      "available_at": "2026-10-10T12:00:00Z",
+      "acquired_at": "2026-10-10T12:00:00Z",
+      "excerpt_or_summary": "合成输入，仅验证结构",
+      "limitations": [
+        "不能支持真实交易"
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "id": "o_price",
+      "metric_id": "market_price",
+      "segment_id": null,
+      "period": {
+        "start": "2026-10-09",
+        "end": "2026-10-09",
+        "basis": "point_in_time"
+      },
+      "available_at": "2026-10-10T12:00:00Z",
+      "value": {
+        "value": 100,
+        "unit": "currency_per_share",
+        "currency": "USD"
+      },
+      "missing_reason": null,
+      "accounting_basis": "不适用；合成收盘价",
+      "comparability_notes": "合成单位，非真实行情",
+      "evidence_refs": [
+        "e_main"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "c_fact",
+      "kind": "fact",
+      "statement": "合成测试判断，不对应真实公司",
+      "evidence_refs": [
+        "e_main"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [
+        "e_counter"
+      ],
+      "assumption_refs": [],
+      "uncertainty": "无真实证据，禁止行动"
+    },
+    {
+      "id": "c_inference",
+      "kind": "inference",
+      "statement": "合成测试判断，不对应真实公司",
+      "evidence_refs": [
+        "e_main"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [
+        "e_counter"
+      ],
+      "assumption_refs": [],
+      "uncertainty": "无真实证据，禁止行动"
+    },
+    {
+      "id": "c_assumption",
+      "kind": "assumption",
+      "statement": "合成测试判断，不对应真实公司",
+      "evidence_refs": [
+        "e_main"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [
+        "e_counter"
+      ],
+      "assumption_refs": [],
+      "uncertainty": "无真实证据，禁止行动"
+    }
+  ],
+  "calculations": [],
+  "steps": [
+    {
+      "id": "S1",
+      "version": 1,
+      "status": "insufficient_evidence",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "缺真实分部与生命周期证据，后续不启动"
+      ]
+    },
+    {
+      "id": "S2",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "合成演示禁止交易"
+      ]
+    },
+    {
+      "id": "S3",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "合成演示禁止交易"
+      ]
+    },
+    {
+      "id": "S4",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "合成演示禁止交易"
+      ]
+    },
+    {
+      "id": "S5",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "合成演示禁止交易"
+      ]
+    },
+    {
+      "id": "S6",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "合成演示禁止交易"
+      ]
+    }
+  ],
+  "invalidation_events": []
+}

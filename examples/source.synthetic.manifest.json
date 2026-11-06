@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "synthetic_demo_document",
+  "revision": 1,
+  "source_path": "examples/support/fictional_evidence.md",
+  "source_kind": "synthetic",
+  "dataset_kind": "research_material",
+  "published_at": "2026-10-10T12:00:00Z",
+  "available_at": "2026-10-10T12:00:00Z",
+  "acquired_at": "2026-10-10T12:00:00Z",
+  "effective_period": null,
+  "license_notes": "项目自建合成测试资料；不能用于真实投资判断",
+  "quality_notes": ["仅软件测试", "不是原始公司资料"],
+  "supersedes_revision": null
+}

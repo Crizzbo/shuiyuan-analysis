@@ -1,0 +1,122 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "title": "契约版本",
+      "description": "宏观指标目录 Schema 版本"
+    },
+    "description_zh": {
+      "type": "string",
+      "minLength": 1,
+      "title": "目录说明",
+      "description": "宏观经济指标目录说明，覆盖美债、汇率、就业率与通胀等四大支柱"
+    },
+    "indicators": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/indicator"
+      },
+      "minItems": 1,
+      "title": "宏观指标列表",
+      "description": "宏观经济基础指标与合成利差指标集合"
+    }
+  },
+  "required": [
+    "schema_version",
+    "indicators"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shuiyuan:macro-catalog:1.0.0",
+  "$defs": {
+    "indicator": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$",
+          "title": "宏观指标唯一标识",
+          "description": "小写下划线命名，如 us_treasury_10y_yield"
+        },
+        "name_zh": {
+          "type": "string",
+          "minLength": 1,
+          "title": "指标中文名称",
+          "description": "发行机构标准中文名称"
+        },
+        "pillar": {
+          "enum": [
+            "rates_and_credit",
+            "foreign_exchange",
+            "labor_market",
+            "inflation_and_policy"
+          ],
+          "title": "所属宏观支柱",
+          "description": "四大支柱：利率与信用、外汇、劳动力市场、通胀与货币政策"
+        },
+        "definition_zh": {
+          "type": "string",
+          "minLength": 1,
+          "title": "定义与计算口径",
+          "description": "官方公布定义或明确的合成减法口径"
+        },
+        "raw_unit": {
+          "type": "string",
+          "minLength": 1,
+          "title": "原始披露单位",
+          "description": "如 percent、index_points、persons"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "title": "标准化单位",
+          "description": "如 ratio、points、persons"
+        },
+        "frequency": {
+          "enum": [
+            "daily",
+            "weekly",
+            "monthly",
+            "quarterly"
+          ],
+          "title": "公布频率",
+          "description": "官方统计发布频次"
+        },
+        "source_agency": {
+          "type": "string",
+          "minLength": 1,
+          "title": "发布官方机构",
+          "description": "如 US Treasury、Federal Reserve、BLS"
+        },
+        "revision_nature": {
+          "enum": [
+            "final_unrevised",
+            "subject_to_monthly_revision",
+            "annual_benchmark_revision"
+          ],
+          "title": "数据修订属性",
+          "description": "是否含初值与后续月度/年度基准修订，用于防时间前视"
+        },
+        "threshold": {
+          "type": "null",
+          "title": "数值阈值",
+          "description": "无历史样本校准前强制为 null，严禁硬编码未经验证门槛"
+        }
+      },
+      "required": [
+        "id",
+        "name_zh",
+        "pillar",
+        "definition_zh",
+        "raw_unit",
+        "unit",
+        "frequency",
+        "source_agency",
+        "revision_nature",
+        "threshold"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

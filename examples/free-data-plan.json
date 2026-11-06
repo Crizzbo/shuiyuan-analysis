@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "jobs": [
+    {
+      "id": "us-risk-free-10y",
+      "provider": "fred_csv",
+      "dataset": "series",
+      "params": {
+        "series_id": "DGS10"
+      }
+    },
+    {
+      "id": "us-policy-rate",
+      "provider": "fred_csv",
+      "dataset": "series",
+      "params": {
+        "series_id": "FEDFUNDS"
+      }
+    },
+    {
+      "id": "jp-fx-metadata",
+      "provider": "boj",
+      "dataset": "metadata",
+      "params": {
+        "db": "fm08"
+      }
+    },
+    {
+      "id": "fed-official-news",
+      "provider": "rss",
+      "dataset": "feed",
+      "params": {
+        "url": "https://www.federalreserve.gov/feeds/press_all.xml"
+      }
+    }
+  ]
+}

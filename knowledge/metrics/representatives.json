@@ -1,0 +1,662 @@
+{
+  "schema_version": "1.0.0",
+  "selection_is_not_investment_recommendation": true,
+  "representatives": [
+    {
+      "industry_id": "oil_gas",
+      "ticker": "EOG",
+      "name": "EOG Resources",
+      "market": "US",
+      "scope_zh": "油气勘探生产",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.oil_gas"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "energy_services",
+      "ticker": "RIG",
+      "name": "Transocean",
+      "market": "US",
+      "scope_zh": "海上合同钻井",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.energy_services"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "midstream",
+      "ticker": "EPD",
+      "name": "Enterprise Products Partners",
+      "market": "US",
+      "scope_zh": "管输处理与储运",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.midstream"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "mining",
+      "ticker": "FCX",
+      "name": "Freeport-McMoRan",
+      "market": "US",
+      "scope_zh": "铜金矿业",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.mining"
+        }
+      ],
+      "original_review_status": "pending_full_original_metric_review"
+    },
+    {
+      "industry_id": "chemicals",
+      "ticker": "DOW",
+      "name": "Dow",
+      "market": "US",
+      "scope_zh": "基础及特种化工",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.chemicals"
+        }
+      ],
+      "original_review_status": "pending_full_original_metric_review"
+    },
+    {
+      "industry_id": "packaging",
+      "ticker": "PKG",
+      "name": "Packaging Corporation of America",
+      "market": "US",
+      "scope_zh": "纸箱与箱板纸",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.packaging"
+        }
+      ],
+      "original_review_status": "pending_full_original_metric_review"
+    },
+    {
+      "industry_id": "capital_goods",
+      "ticker": "GEV",
+      "name": "GE Vernova",
+      "market": "US",
+      "scope_zh": "电力及电网设备",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.capital_goods"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "aerospace_defense",
+      "ticker": "LMT",
+      "name": "Lockheed Martin",
+      "market": "US",
+      "scope_zh": "国防航空项目",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.aerospace_defense"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "transport_logistics",
+      "ticker": "DAL",
+      "name": "Delta Air Lines",
+      "market": "US",
+      "scope_zh": "航空运输",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.transport_logistics"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "business_services",
+      "ticker": "ADP",
+      "name": "Automatic Data Processing",
+      "market": "US",
+      "scope_zh": "工资处理与人力资源服务",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.business_services"
+        }
+      ],
+      "original_review_status": "pending_full_original_metric_review"
+    },
+    {
+      "industry_id": "construction",
+      "ticker": "FLR",
+      "name": "Fluor",
+      "market": "US",
+      "scope_zh": "工程建设合同",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.construction"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "autos",
+      "ticker": "7203",
+      "name": "Toyota Motor",
+      "market": "JP",
+      "scope_zh": "整车零售与生产，金融分部单列",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.autos"
+        }
+      ],
+      "original_review_status": "pending_full_original_metric_review"
+    },
+    {
+      "industry_id": "retail",
+      "ticker": "WMT",
+      "name": "Walmart",
+      "market": "US",
+      "scope_zh": "一般零售分部",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.retail"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "restaurants",
+      "ticker": "MCD",
+      "name": "McDonald’s",
+      "market": "US",
+      "scope_zh": "直营及加盟餐饮",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.restaurants"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "travel_leisure",
+      "ticker": "MAR",
+      "name": "Marriott International",
+      "market": "US",
+      "scope_zh": "管理及加盟酒店",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.travel_leisure"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "housing_durables",
+      "ticker": "DHI",
+      "name": "D.R. Horton",
+      "market": "US",
+      "scope_zh": "住宅建造交付",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.housing_durables"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "food_beverage",
+      "ticker": "KO",
+      "name": "Coca-Cola",
+      "market": "US",
+      "scope_zh": "饮料系统及浓缩液",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.food_beverage"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "household_personal",
+      "ticker": "PG",
+      "name": "Procter & Gamble",
+      "market": "US",
+      "scope_zh": "家庭及个人消费品",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.household_personal"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "staples_retail",
+      "ticker": "COST",
+      "name": "Costco",
+      "market": "US",
+      "scope_zh": "会员仓储必需消费零售",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.staples_retail"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "tobacco",
+      "ticker": "PM",
+      "name": "Philip Morris International",
+      "market": "US",
+      "scope_zh": "卷烟及无烟产品",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.tobacco"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "pharma",
+      "ticker": "PFE",
+      "name": "Pfizer",
+      "market": "US",
+      "scope_zh": "商业化药品与研发管线",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.pharma"
+        }
+      ],
+      "original_review_status": "pending_full_original_metric_review"
+    },
+    {
+      "industry_id": "biotech",
+      "ticker": "MRNA",
+      "name": "Moderna",
+      "market": "US",
+      "scope_zh": "生物技术研发与产品",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.biotech"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "medical_devices",
+      "ticker": "ISRG",
+      "name": "Intuitive Surgical",
+      "market": "US",
+      "scope_zh": "手术机器人及耗材",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.medical_devices"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "health_services",
+      "ticker": "HCA",
+      "name": "HCA Healthcare",
+      "market": "US",
+      "scope_zh": "医院医疗服务",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.health_services"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "managed_care",
+      "ticker": "UNH",
+      "name": "UnitedHealth Group",
+      "market": "US",
+      "scope_zh": "UnitedHealthcare 医疗保险，Optum 单列",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.managed_care"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "banks",
+      "ticker": "JPM",
+      "name": "JPMorgan Chase",
+      "market": "US",
+      "scope_zh": "银行及贷款业务",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.banks"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "insurance",
+      "ticker": "CB",
+      "name": "Chubb",
+      "market": "US",
+      "scope_zh": "财产险分部，寿险单列",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.insurance"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "asset_management",
+      "ticker": "BLK",
+      "name": "BlackRock",
+      "market": "US",
+      "scope_zh": "收费资产管理，技术服务单列",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.asset_management"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "payments",
+      "ticker": "V",
+      "name": "Visa",
+      "market": "US",
+      "scope_zh": "支付网络，非发卡贷款业务",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.payments"
+        }
+      ],
+      "original_review_status": "pending_full_original_metric_review"
+    },
+    {
+      "industry_id": "software",
+      "ticker": "DDOG",
+      "name": "Datadog",
+      "market": "US",
+      "scope_zh": "订阅及按使用量的软件服务",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.software"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "semiconductors",
+      "ticker": "MU",
+      "name": "Micron Technology",
+      "market": "US",
+      "scope_zh": "DRAM 与 NAND 制造",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.semiconductors"
+        }
+      ],
+      "original_review_status": "pending_full_original_metric_review"
+    },
+    {
+      "industry_id": "semi_equipment",
+      "ticker": "8035",
+      "name": "Tokyo Electron",
+      "market": "JP",
+      "scope_zh": "半导体制造设备",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.semi_equipment"
+        }
+      ],
+      "original_review_status": "pending_full_original_metric_review"
+    },
+    {
+      "industry_id": "hardware",
+      "ticker": "6758",
+      "name": "Sony Group",
+      "market": "JP",
+      "scope_zh": "游戏硬件等明确产品分部",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.hardware"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "it_services",
+      "ticker": "ACN",
+      "name": "Accenture",
+      "market": "US",
+      "scope_zh": "咨询与托管 IT 服务",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.it_services"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "telecom",
+      "ticker": "VZ",
+      "name": "Verizon",
+      "market": "US",
+      "scope_zh": "无线消费者及企业通信分部",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.telecom"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "digital_platforms",
+      "ticker": "META",
+      "name": "Meta Platforms",
+      "market": "US",
+      "scope_zh": "社交广告平台",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.digital_platforms"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "media_entertainment",
+      "ticker": "NFLX",
+      "name": "Netflix",
+      "market": "US",
+      "scope_zh": "订阅影视内容服务",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.media_entertainment"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "regulated_utilities",
+      "ticker": "DUK",
+      "name": "Duke Energy",
+      "market": "US",
+      "scope_zh": "受监管公用事业法律主体",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.regulated_utilities"
+        }
+      ],
+      "original_review_status": "pending_full_original_metric_review"
+    },
+    {
+      "industry_id": "merchant_power",
+      "ticker": "CEG",
+      "name": "Constellation Energy",
+      "market": "US",
+      "scope_zh": "竞争性发电及售电",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.merchant_power"
+        }
+      ],
+      "original_review_status": "pending_full_original_metric_review"
+    },
+    {
+      "industry_id": "equity_reit",
+      "ticker": "PLD",
+      "name": "Prologis",
+      "market": "US",
+      "scope_zh": "物流物业权益 REIT",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.equity_reit"
+        }
+      ],
+      "original_review_status": "sample_excerpt_registered_full_driver_review_pending"
+    },
+    {
+      "industry_id": "real_estate_services",
+      "ticker": "HHH",
+      "name": "Howard Hughes Holdings",
+      "market": "US",
+      "scope_zh": "地产开发分部；集团及其他业务单列",
+      "selection_reason_zh": "以该具体业务作为经营披露和口径验证样本；不将集团总数自动映射为分部指标",
+      "classification_status": "candidate_requires_segment_review",
+      "source_discovery_refs": [
+        {
+          "source_path": "knowledge/metrics/representative-source-discovery.json",
+          "locator": "sources.real_estate_services"
+        }
+      ],
+      "original_review_status": "pending_full_original_metric_review"
+    }
+  ]
+}

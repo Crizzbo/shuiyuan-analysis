@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shuiyuan:industry-specific-specifications:1.0.0",
+  "title": "行业专属原子采集规格",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "specifications"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "specifications": {
+      "type": "array",
+      "minItems": 123,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "parent_metric_id",
+          "industry_id",
+          "name_zh",
+          "parent_name_zh",
+          "business_definition_zh",
+          "unit",
+          "comparability_rules_zh",
+          "value_kind",
+          "required_inputs_zh",
+          "source_priority",
+          "collection_method",
+          "validation_status",
+          "numeric_threshold",
+          "component_specs"
+        ],
+        "properties": {
+          "parent_metric_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "父驱动标识"
+          },
+          "industry_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "行业标识"
+          },
+          "name_zh": {
+            "type": "string",
+            "minLength": 1,
+            "title": "原子口径中文名称"
+          },
+          "parent_name_zh": {
+            "type": "string",
+            "minLength": 1,
+            "title": "父驱动中文名称"
+          },
+          "business_definition_zh": {
+            "type": "string",
+            "minLength": 1,
+            "title": "父驱动业务定义"
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "title": "单位类型"
+          },
+          "comparability_rules_zh": {
+            "type": "string",
+            "minLength": 1,
+            "title": "口径及禁止替代规则"
+          },
+          "value_kind": {
+            "enum": [
+              "scalar",
+              "components",
+              "event_records",
+              "scenario"
+            ],
+            "title": "值结构类型"
+          },
+          "required_inputs_zh": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "title": "必需原始输入项"
+          },
+          "source_priority": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "enum": [
+                "issuer_annual_report",
+                "issuer_operating_supplement",
+                "regulator_original",
+                "official_industry_statistics"
+              ]
+            },
+            "title": "原始来源优先级"
+          },
+          "collection_method": {
+            "const": "ai_browser_original_review",
+            "title": "原文采集方法"
+          },
+          "validation_status": {
+            "const": "specification_defined_observation_pending",
+            "title": "规格与观测状态"
+          },
+          "numeric_threshold": {
+            "type": "null",
+            "title": "未经验证禁用的数值阈值"
+          },
+          "component_specs": {
+            "type": "array",
+            "minItems": 1,
+            "title": "原子字段数据字典",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "component_id",
+                "name_zh",
+                "unit_family",
+                "period_basis",
+                "requires_explicit_source_definition"
+              ],
+              "properties": {
+                "component_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "title": "原子字段标识"
+                },
+                "name_zh": {
+                  "type": "string",
+                  "minLength": 1,
+                  "title": "原子字段中文名称"
+                },
+                "unit_family": {
+                  "type": "string",
+                  "minLength": 1,
+                  "title": "单位类型"
+                },
+                "period_basis": {
+                  "type": "string",
+                  "minLength": 1,
+                  "title": "统计期间类型"
+                },
+                "requires_explicit_source_definition": {
+                  "const": true,
+                  "title": "必须绑定原文口径"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

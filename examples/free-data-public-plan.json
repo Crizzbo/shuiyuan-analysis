@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "jobs": [
+    {"id": "jp-usdjpy", "provider": "boj", "dataset": "series", "params": {"db": "fm08", "code": "FXERD01", "startDate": "202610", "endDate": "202610"}},
+    {"id": "us-cpi", "provider": "bls", "dataset": "series", "params": {"series_ids": ["CUUR0000SA0"], "start_year": 2025, "end_year": 2026}},
+    {"id": "jp-tdnet-20261009", "provider": "tdnet", "dataset": "index", "params": {"date": "2026-10-09", "page": "001"}},
+    {"id": "nvidia-company-feed", "provider": "rss", "dataset": "feed", "params": {"url": "https://blogs.nvidia.com/feed/"}},
+    {"id": "us-jp-news-discovery", "provider": "gdelt", "dataset": "news", "params": {"query": "(Toyota OR Intuit)"}}
+  ]
+}

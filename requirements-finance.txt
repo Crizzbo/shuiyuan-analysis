@@ -1,0 +1,5 @@
+# Python 3.13；基础计算库版本固定，完整依赖见 requirements-finance.lock.txt。
+financetoolkit==2.2.1
+pyxirr==0.10.8
+quantstats==0.0.86
+numpy-financial==1.1.0

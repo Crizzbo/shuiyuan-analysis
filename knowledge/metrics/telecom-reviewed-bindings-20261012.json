@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "vz_total_postpaid_phone_churn_q4",
+      "parent_metric_id": "telecom_driver_2",
+      "name_zh": "全无线后付费电话季度报告流失率",
+      "binding_role": "reported_metric",
+      "limitation_zh": "消费者和企业无线合计后付费电话；不是全设备或预付费流失率；断开数和平均连接数未取得",
+      "raw_unit": "percent",
+      "unit": "ratio"
+    },
+    {
+      "component": "vz_core_prepaid_arpu_q4",
+      "parent_metric_id": "telecom_driver_1",
+      "name_zh": "核心预付费每连接报告服务收入",
+      "binding_role": "context_sample",
+      "limitation_zh": "剔除SafeLink的预付费ARPU；不是后付费ARPA，服务收入及平均同群连接数未拆出，不能充当公式分子分母",
+      "raw_unit": "USD_per_connection",
+      "unit": "USD_per_connection"
+    }
+  ]
+}

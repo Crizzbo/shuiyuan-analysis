@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "mu_dram_annual_revenue_fy26",
+      "parent_metric_id": "semiconductors_driver_3",
+      "name_zh": "美光科技 DRAM 年度产品报告收入",
+      "binding_role": "formula_input",
+      "limitation_zh": "全财年DRAM产品合并收入；未拆分HBM与传统DRAM单项；匹配bit出货量待核",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    },
+    {
+      "component": "mu_nand_annual_revenue_fy26",
+      "parent_metric_id": "semiconductors_driver_3",
+      "name_zh": "美光科技 NAND 年度产品报告收入",
+      "binding_role": "formula_input",
+      "limitation_zh": "全财年NAND产品合并收入；匹配bit出货量待核",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    },
+    {
+      "component": "wmt_cost_of_sales_fy25",
+      "parent_metric_id": "retail_driver_2",
+      "name_zh": "沃尔玛合并营业销售成本",
+      "binding_role": "formula_input",
+      "limitation_zh": "全财年合并销售成本；包含全部商品采购与供应链物流成本",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    },
+    {
+      "component": "wmt_average_inventories_fy25",
+      "parent_metric_id": "retail_driver_2",
+      "name_zh": "沃尔玛期初期末同范围平均存货",
+      "binding_role": "formula_input",
+      "limitation_zh": "FY2025期初54892百万美元与期末56711百万美元平均值",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    }
+  ]
+}

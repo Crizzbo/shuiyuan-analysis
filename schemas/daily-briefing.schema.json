@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/daily-briefing.schema.json",
+  "title": "每日金融商业早报结构契约",
+  "description": "规范每日面向用户的跨市场金融早报数据结构，支持自动化渲染 Markdown 与现代 HTML 仪表盘。",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "date",
+    "issue_number",
+    "tactical_status",
+    "macro_pulse",
+    "hot_events",
+    "capital_flows",
+    "sentiment",
+    "conviction_buys",
+    "conviction_avoids",
+    "tactical_checklist",
+    "audit_disclosures"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["1.0.0"]
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "issue_number": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "tactical_status": {
+      "type": "object",
+      "required": ["state", "cash_ratio_pct", "erp_ratio_pct", "instruction"],
+      "properties": {
+        "state": { "type": "string" },
+        "cash_ratio_pct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "erp_ratio_pct": { "type": "number" },
+        "instruction": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "macro_pulse": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "value", "trend", "note"],
+        "properties": {
+          "name": { "type": "string" },
+          "value": { "type": "string" },
+          "trend": { "type": "string" },
+          "note": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "hot_events": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["title", "facts", "transmission"],
+        "properties": {
+          "title": { "type": "string" },
+          "facts": { "type": "string" },
+          "transmission": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "capital_flows": {
+      "type": "object",
+      "required": ["key_signals", "inflows", "outflows"],
+      "properties": {
+        "key_signals": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "inflows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["sector", "ticker", "change_pct", "reason"],
+            "properties": {
+              "sector": { "type": "string" },
+              "ticker": { "type": "string" },
+              "change_pct": { "type": "string" },
+              "reason": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "outflows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["sector", "ticker", "change_pct", "reason"],
+            "properties": {
+              "sector": { "type": "string" },
+              "ticker": { "type": "string" },
+              "change_pct": { "type": "string" },
+              "reason": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "sentiment": {
+      "type": "object",
+      "required": ["score", "status", "retail_profile", "institutional_profile"],
+      "properties": {
+        "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "status": { "type": "string" },
+        "retail_profile": { "type": "string" },
+        "institutional_profile": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "conviction_buys": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["ticker", "name", "market_type", "business_model", "price", "pe", "thesis", "trade_strategy"],
+        "properties": {
+          "ticker": { "type": "string" },
+          "name": { "type": "string" },
+          "market_type": { "type": "string" },
+          "business_model": { "type": "string" },
+          "price": { "type": "string" },
+          "pe": { "type": "string" },
+          "thesis": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["title", "desc"],
+              "properties": {
+                "title": { "type": "string" },
+                "desc": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          },
+          "trade_strategy": {
+            "type": "object",
+            "required": ["entry_range", "stop_loss", "expected_return", "summary"],
+            "properties": {
+              "entry_range": { "type": "string" },
+              "stop_loss": { "type": "string" },
+              "expected_return": { "type": "string" },
+              "summary": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "conviction_avoids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["ticker", "name", "market_type", "business_model", "price", "pe", "fatal_flaws", "exit_guidance"],
+        "properties": {
+          "ticker": { "type": "string" },
+          "name": { "type": "string" },
+          "market_type": { "type": "string" },
+          "business_model": { "type": "string" },
+          "price": { "type": "string" },
+          "pe": { "type": "string" },
+          "fatal_flaws": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["title", "desc"],
+              "properties": {
+                "title": { "type": "string" },
+                "desc": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          },
+          "exit_guidance": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "tactical_checklist": {
+      "type": "object",
+      "required": ["checklist_items", "today_execution_summary"],
+      "properties": {
+        "checklist_items": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "today_execution_summary": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "audit_disclosures": {
+      "type": "object",
+      "required": ["fx_engine_note", "cleansing_note", "japan_adr_note"],
+      "properties": {
+        "fx_engine_note": { "type": "string" },
+        "cleansing_note": { "type": "string" },
+        "japan_adr_note": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

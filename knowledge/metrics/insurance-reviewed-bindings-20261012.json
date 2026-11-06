@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "cb_pc_loss_ratio_q4",
+      "parent_metric_id": "insurance_driver_1",
+      "name_zh": "财险赔付及理赔费用率",
+      "binding_role": "reported_metric",
+      "limitation_zh": "集团财险、剔除寿险；包含大灾、前期准备金发展及作物衍生品已实现损益调整；仅2025Q4报告精度",
+      "raw_unit": "percent",
+      "unit": "ratio"
+    },
+    {
+      "component": "cb_pc_acquisition_ratio_q4",
+      "parent_metric_id": "insurance_driver_1",
+      "name_zh": "财险保单获取成本率",
+      "binding_role": "reported_metric",
+      "limitation_zh": "集团财险、剔除寿险；包含大灾、前期准备金发展及作物衍生品已实现损益调整；仅2025Q4报告精度",
+      "raw_unit": "percent",
+      "unit": "ratio"
+    },
+    {
+      "component": "cb_pc_admin_ratio_q4",
+      "parent_metric_id": "insurance_driver_1",
+      "name_zh": "财险管理费用率",
+      "binding_role": "reported_metric",
+      "limitation_zh": "集团财险、剔除寿险；包含大灾、前期准备金发展及作物衍生品已实现损益调整；仅2025Q4报告精度",
+      "raw_unit": "percent",
+      "unit": "ratio"
+    },
+    {
+      "component": "cb_pc_combined_ratio_q4",
+      "parent_metric_id": "insurance_driver_1",
+      "name_zh": "财险综合成本率",
+      "binding_role": "reported_metric",
+      "limitation_zh": "集团财险、剔除寿险；包含大灾、前期准备金发展及作物衍生品已实现损益调整；仅2025Q4报告精度",
+      "raw_unit": "percent",
+      "unit": "ratio"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "title": "契约版本",
+      "description": "传导矩阵 Schema 版本"
+    },
+    "description_zh": {
+      "type": "string",
+      "minLength": 1,
+      "title": "传导矩阵说明",
+      "description": "宏观变量向 41 行业驱动指标及估值模型传导逻辑"
+    },
+    "transmissions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/transmission"
+      },
+      "minItems": 1,
+      "title": "传导规则列表",
+      "description": "从宏观指标到微观行业指标及估值折现参数的传导映射"
+    }
+  },
+  "required": [
+    "schema_version",
+    "transmissions"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shuiyuan:macro-transmission:1.0.0",
+  "$defs": {
+    "transmission": {
+      "type": "object",
+      "properties": {
+        "macro_indicator_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$",
+          "title": "宏观指标标识",
+          "description": "对应 macro catalog 中的指标标识"
+        },
+        "target_type": {
+          "enum": [
+            "industry_driver",
+            "valuation_parameter",
+            "generic_financial"
+          ],
+          "title": "影响目标类型",
+          "description": "行业专属驱动、估值贴现参数（Rf/ERP/WACC）、或通用财务体检项"
+        },
+        "target_id": {
+          "type": "string",
+          "minLength": 1,
+          "title": "目标标识",
+          "description": "如 banks_driver_1、discount_rate_rf、revenue_growth_fx_bridge"
+        },
+        "affected_industries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "受影响行业列表",
+          "description": "对应的 41 行业 ID 集合"
+        },
+        "transmission_channel_zh": {
+          "type": "string",
+          "minLength": 1,
+          "title": "传导机制说明",
+          "description": "宏观变动如何引起微观业务指标变动的因果传导逻辑"
+        },
+        "sensitivity_direction": {
+          "enum": [
+            "positive",
+            "negative",
+            "curvilinear",
+            "context_dependent"
+          ],
+          "title": "敏感度方向",
+          "description": "正相关、负相关、非线性或视情景而定"
+        },
+        "step_gate": {
+          "enum": [
+            "S3_industry_drivers",
+            "S4_valuation_scenarios",
+            "S5_margin_of_safety"
+          ],
+          "title": "契约门槛步骤",
+          "description": "在六步研究契约中的对应检查门槛"
+        }
+      },
+      "required": [
+        "macro_indicator_id",
+        "target_type",
+        "target_id",
+        "affected_industries",
+        "transmission_channel_zh",
+        "sensitivity_direction",
+        "step_gate"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

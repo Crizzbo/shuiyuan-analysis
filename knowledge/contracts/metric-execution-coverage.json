@@ -1,0 +1,1649 @@
+{
+  "schema_version": "1.0.0",
+  "metrics": [
+    {
+      "metric_id": "revenue_growth",
+      "name_zh": "收入增长",
+      "design_definition_status": "specified",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "operating_margin",
+      "name_zh": "营业利润率",
+      "design_definition_status": "specified",
+      "execution_status": "bound_for_software",
+      "binding": {
+        "operation": "operating_margin",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ],
+        "name_zh": "营业利润率",
+        "formula": "同期间营业利润/同期间收入",
+        "basis": "GAAP",
+        "denominator": "同期间合并收入"
+      },
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "roe",
+      "name_zh": "净资产收益率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "bound_for_software",
+      "binding": {
+        "operation": "roe",
+        "inputs": [
+          "common_net_income",
+          "average_common_equity"
+        ],
+        "name_zh": "普通股权益收益率",
+        "formula": "普通股归属净利润/同期间平均普通股权益",
+        "basis": "GAAP",
+        "denominator": "需已有期初、期末权益平均值的核对依据"
+      },
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "fcf",
+      "name_zh": "自由现金流代理",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "net_debt",
+      "name_zh": "净债务",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "inventory_days",
+      "name_zh": "库存周转天数",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "capex_intensity",
+      "name_zh": "资本开支强度",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "drawdown",
+      "name_zh": "价格回撤",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "realized_vol",
+      "name_zh": "历史波动率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "credit_spread",
+      "name_zh": "信用利差",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "penetration",
+      "name_zh": "渗透率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "capacity_utilization",
+      "name_zh": "产能利用率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "net_retention",
+      "name_zh": "净收入留存率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "take_rate",
+      "name_zh": "交易变现率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "cash_runway",
+      "name_zh": "现金跑道",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "net_interest_margin",
+      "name_zh": "净息差",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "credit_loss_ratio",
+      "name_zh": "贷款净核销率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "insurance_loss_ratio",
+      "name_zh": "保险赔付率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "medical_loss_ratio",
+      "name_zh": "医疗赔付率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "combined_ratio",
+      "name_zh": "综合成本率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "occupancy",
+      "name_zh": "出租率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "noi",
+      "name_zh": "物业净经营收益",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "oil_gas_driver_1",
+      "name_zh": "实现售价",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "oil_gas_driver_2",
+      "name_zh": "单位现金成本",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "oil_gas_driver_3",
+      "name_zh": "储量寿命",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "energy_services_driver_1",
+      "name_zh": "设备利用率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "energy_services_driver_2",
+      "name_zh": "订单收入比",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "energy_services_driver_3",
+      "name_zh": "合同日费率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "midstream_driver_1",
+      "name_zh": "吞吐量",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "midstream_driver_2",
+      "name_zh": "收费合同占比",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "midstream_driver_3",
+      "name_zh": "维持资本开支",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "mining_driver_1",
+      "name_zh": "实现价格",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "mining_driver_2",
+      "name_zh": "单位成本",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "mining_driver_3",
+      "name_zh": "矿石品位",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "chemicals_driver_1",
+      "name_zh": "产品原料价差",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "chemicals_driver_2",
+      "name_zh": "开工率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "chemicals_driver_3",
+      "name_zh": "行业库存",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "packaging_driver_1",
+      "name_zh": "销量",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "packaging_driver_2",
+      "name_zh": "价格传导时滞",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "packaging_driver_3",
+      "name_zh": "回收材料成本",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "capital_goods_driver_1",
+      "name_zh": "订单收入比",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "capital_goods_driver_2",
+      "name_zh": "积压订单",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "capital_goods_driver_3",
+      "name_zh": "交付周期",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "aerospace_defense_driver_1",
+      "name_zh": "订单可执行比例",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "aerospace_defense_driver_2",
+      "name_zh": "项目成本偏差",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "aerospace_defense_driver_3",
+      "name_zh": "交付数量",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "transport_logistics_driver_1",
+      "name_zh": "载运或利用率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "transport_logistics_driver_2",
+      "name_zh": "单位运价",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "transport_logistics_driver_3",
+      "name_zh": "单位燃料成本",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "business_services_driver_1",
+      "name_zh": "人员利用率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "business_services_driver_2",
+      "name_zh": "客户留存率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "business_services_driver_3",
+      "name_zh": "合同单价",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "construction_driver_1",
+      "name_zh": "订单覆盖",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "construction_driver_2",
+      "name_zh": "项目成本偏差",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "construction_driver_3",
+      "name_zh": "合同现金占用",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "autos_driver_1",
+      "name_zh": "终端销量",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "autos_driver_2",
+      "name_zh": "库存天数",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "autos_driver_3",
+      "name_zh": "单车贡献",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "retail_driver_1",
+      "name_zh": "同店销售增长",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "retail_driver_2",
+      "name_zh": "库存周转",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "retail_driver_3",
+      "name_zh": "履约成本率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "restaurants_driver_1",
+      "name_zh": "同店销售增长",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "restaurants_driver_2",
+      "name_zh": "单店经营利润",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "restaurants_driver_3",
+      "name_zh": "加盟商健康",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "travel_leisure_driver_1",
+      "name_zh": "酒店入住率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "travel_leisure_driver_2",
+      "name_zh": "酒店平均房价",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "travel_leisure_driver_3",
+      "name_zh": "预订取消率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "housing_durables_driver_1",
+      "name_zh": "订单取消率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "housing_durables_driver_2",
+      "name_zh": "交付数量",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "housing_durables_driver_3",
+      "name_zh": "土地库存",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "food_beverage_driver_1",
+      "name_zh": "销量增长",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "food_beverage_driver_2",
+      "name_zh": "价格组合贡献",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "food_beverage_driver_3",
+      "name_zh": "渠道库存",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "household_personal_driver_1",
+      "name_zh": "可比销量增长",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "household_personal_driver_2",
+      "name_zh": "市场份额",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "household_personal_driver_3",
+      "name_zh": "营销投入率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "staples_retail_driver_1",
+      "name_zh": "同店销售增长",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "staples_retail_driver_2",
+      "name_zh": "损耗率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "staples_retail_driver_3",
+      "name_zh": "客流增长",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "tobacco_driver_1",
+      "name_zh": "传统产品销量",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "tobacco_driver_2",
+      "name_zh": "净售价",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "tobacco_driver_3",
+      "name_zh": "替代产品盈利",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "pharma_driver_1",
+      "name_zh": "产品净收入",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "pharma_driver_2",
+      "name_zh": "专利到期暴露",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "pharma_driver_3",
+      "name_zh": "研发里程碑",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "biotech_driver_1",
+      "name_zh": "研发里程碑",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "biotech_driver_2",
+      "name_zh": "现金跑道",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "biotech_driver_3",
+      "name_zh": "稀释需求",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "medical_devices_driver_1",
+      "name_zh": "手术或耗材量",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "medical_devices_driver_2",
+      "name_zh": "装机数量",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "medical_devices_driver_3",
+      "name_zh": "耗材附着收入",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "health_services_driver_1",
+      "name_zh": "服务量",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "health_services_driver_2",
+      "name_zh": "单位报销收入",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "health_services_driver_3",
+      "name_zh": "人员成本率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "managed_care_driver_1",
+      "name_zh": "医疗赔付率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "managed_care_driver_2",
+      "name_zh": "会员数量",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "managed_care_driver_3",
+      "name_zh": "费率调整",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "banks_driver_1",
+      "name_zh": "净息差",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "banks_driver_2",
+      "name_zh": "贷款净核销率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "banks_driver_3",
+      "name_zh": "资本与流动性",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "insurance_driver_1",
+      "name_zh": "综合成本率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "insurance_driver_2",
+      "name_zh": "准备金发展",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "insurance_driver_3",
+      "name_zh": "负债资产匹配",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "asset_management_driver_1",
+      "name_zh": "净流入",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "asset_management_driver_2",
+      "name_zh": "收费管理资产",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "asset_management_driver_3",
+      "name_zh": "有效费率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "payments_driver_1",
+      "name_zh": "处理金额",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "payments_driver_2",
+      "name_zh": "净变现率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "payments_driver_3",
+      "name_zh": "欺诈信用损失",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "software_driver_1",
+      "name_zh": "净收入留存率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "software_driver_2",
+      "name_zh": "经常性收入",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "software_driver_3",
+      "name_zh": "股权稀释",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "semiconductors_driver_1",
+      "name_zh": "渠道库存",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "semiconductors_driver_2",
+      "name_zh": "产能利用率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "semiconductors_driver_3",
+      "name_zh": "平均售价",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "semi_equipment_driver_1",
+      "name_zh": "订单收入比",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "semi_equipment_driver_2",
+      "name_zh": "客户资本开支",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "semi_equipment_driver_3",
+      "name_zh": "订单取消",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "hardware_driver_1",
+      "name_zh": "终端出货",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "hardware_driver_2",
+      "name_zh": "渠道库存",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "hardware_driver_3",
+      "name_zh": "产品组合毛利",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "it_services_driver_1",
+      "name_zh": "可计费利用率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "it_services_driver_2",
+      "name_zh": "合同新增额",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "it_services_driver_3",
+      "name_zh": "单位费率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "telecom_driver_1",
+      "name_zh": "ARPU",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "telecom_driver_2",
+      "name_zh": "用户流失率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "telecom_driver_3",
+      "name_zh": "网络资本开支",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "digital_platforms_driver_1",
+      "name_zh": "活跃用户",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "digital_platforms_driver_2",
+      "name_zh": "单位用户变现",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "digital_platforms_driver_3",
+      "name_zh": "交易变现率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "media_entertainment_driver_1",
+      "name_zh": "付费用户",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "media_entertainment_driver_2",
+      "name_zh": "内容现金投入",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "media_entertainment_driver_3",
+      "name_zh": "内容摊销",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "regulated_utilities_driver_1",
+      "name_zh": "费率基数",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "regulated_utilities_driver_2",
+      "name_zh": "准许 ROE",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "regulated_utilities_driver_3",
+      "name_zh": "回收时滞",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "merchant_power_driver_1",
+      "name_zh": "捕获电价",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "merchant_power_driver_2",
+      "name_zh": "燃料价差",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "merchant_power_driver_3",
+      "name_zh": "合同覆盖",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "equity_reit_driver_1",
+      "name_zh": "同物业 NOI 增长",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "equity_reit_driver_2",
+      "name_zh": "出租率",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "equity_reit_driver_3",
+      "name_zh": "AFFO 调节",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "real_estate_services_driver_1",
+      "name_zh": "开发回款",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "real_estate_services_driver_2",
+      "name_zh": "预售取消",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "real_estate_services_driver_3",
+      "name_zh": "服务佣金",
+      "design_definition_status": "needs_definition",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    },
+    {
+      "metric_id": "market_price",
+      "name_zh": "研究基准每股价格",
+      "design_definition_status": "specified",
+      "execution_status": "unbound",
+      "binding": null,
+      "statistical_validation_status": "not_validated"
+    }
+  ],
+  "industries": [
+    {
+      "industry_id": "aerospace_defense",
+      "name_zh": "航空航天与国防",
+      "required_driver_ids": [
+        "aerospace_defense_driver_1",
+        "aerospace_defense_driver_2",
+        "aerospace_defense_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "asset_management",
+      "name_zh": "资产管理与资本市场",
+      "required_driver_ids": [
+        "asset_management_driver_1",
+        "asset_management_driver_2",
+        "asset_management_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "autos",
+      "name_zh": "汽车与零部件",
+      "required_driver_ids": [
+        "autos_driver_1",
+        "autos_driver_2",
+        "autos_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "banks",
+      "name_zh": "银行",
+      "required_driver_ids": [
+        "banks_driver_1",
+        "banks_driver_2",
+        "banks_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "biotech",
+      "name_zh": "研发型生物科技",
+      "required_driver_ids": [
+        "biotech_driver_1",
+        "biotech_driver_2",
+        "biotech_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "business_services",
+      "name_zh": "商业与专业服务",
+      "required_driver_ids": [
+        "business_services_driver_1",
+        "business_services_driver_2",
+        "business_services_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "capital_goods",
+      "name_zh": "工业设备与自动化",
+      "required_driver_ids": [
+        "capital_goods_driver_1",
+        "capital_goods_driver_2",
+        "capital_goods_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "chemicals",
+      "name_zh": "化工",
+      "required_driver_ids": [
+        "chemicals_driver_1",
+        "chemicals_driver_2",
+        "chemicals_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "construction",
+      "name_zh": "建筑与工程",
+      "required_driver_ids": [
+        "construction_driver_1",
+        "construction_driver_2",
+        "construction_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "digital_platforms",
+      "name_zh": "互联网平台",
+      "required_driver_ids": [
+        "digital_platforms_driver_1",
+        "digital_platforms_driver_2",
+        "digital_platforms_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "energy_services",
+      "name_zh": "油服与能源设备",
+      "required_driver_ids": [
+        "energy_services_driver_1",
+        "energy_services_driver_2",
+        "energy_services_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "equity_reit",
+      "name_zh": "权益型 REIT",
+      "required_driver_ids": [
+        "equity_reit_driver_1",
+        "equity_reit_driver_2",
+        "equity_reit_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "food_beverage",
+      "name_zh": "食品饮料",
+      "required_driver_ids": [
+        "food_beverage_driver_1",
+        "food_beverage_driver_2",
+        "food_beverage_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "hardware",
+      "name_zh": "硬件与通信设备",
+      "required_driver_ids": [
+        "hardware_driver_1",
+        "hardware_driver_2",
+        "hardware_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "health_services",
+      "name_zh": "医疗服务与分销",
+      "required_driver_ids": [
+        "health_services_driver_1",
+        "health_services_driver_2",
+        "health_services_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "household_personal",
+      "name_zh": "家庭与个人用品",
+      "required_driver_ids": [
+        "household_personal_driver_1",
+        "household_personal_driver_2",
+        "household_personal_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "housing_durables",
+      "name_zh": "住宅建设与耐用品",
+      "required_driver_ids": [
+        "housing_durables_driver_1",
+        "housing_durables_driver_2",
+        "housing_durables_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "insurance",
+      "name_zh": "保险与再保险",
+      "required_driver_ids": [
+        "insurance_driver_1",
+        "insurance_driver_2",
+        "insurance_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "it_services",
+      "name_zh": "IT 服务与咨询",
+      "required_driver_ids": [
+        "it_services_driver_1",
+        "it_services_driver_2",
+        "it_services_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "managed_care",
+      "name_zh": "医疗保险与管理式医疗",
+      "required_driver_ids": [
+        "managed_care_driver_1",
+        "managed_care_driver_2",
+        "managed_care_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "media_entertainment",
+      "name_zh": "媒体游戏与娱乐",
+      "required_driver_ids": [
+        "media_entertainment_driver_1",
+        "media_entertainment_driver_2",
+        "media_entertainment_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "medical_devices",
+      "name_zh": "医疗器械与生命科学工具",
+      "required_driver_ids": [
+        "medical_devices_driver_1",
+        "medical_devices_driver_2",
+        "medical_devices_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "merchant_power",
+      "name_zh": "市场化发电",
+      "required_driver_ids": [
+        "merchant_power_driver_1",
+        "merchant_power_driver_2",
+        "merchant_power_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "midstream",
+      "name_zh": "能源运输与加工",
+      "required_driver_ids": [
+        "midstream_driver_1",
+        "midstream_driver_2",
+        "midstream_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "mining",
+      "name_zh": "金属与采矿",
+      "required_driver_ids": [
+        "mining_driver_1",
+        "mining_driver_2",
+        "mining_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "oil_gas",
+      "name_zh": "油气勘探与生产",
+      "required_driver_ids": [
+        "oil_gas_driver_1",
+        "oil_gas_driver_2",
+        "oil_gas_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "packaging",
+      "name_zh": "包装与林纸",
+      "required_driver_ids": [
+        "packaging_driver_1",
+        "packaging_driver_2",
+        "packaging_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "payments",
+      "name_zh": "支付与金融基础设施",
+      "required_driver_ids": [
+        "payments_driver_1",
+        "payments_driver_2",
+        "payments_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "pharma",
+      "name_zh": "成熟制药",
+      "required_driver_ids": [
+        "pharma_driver_1",
+        "pharma_driver_2",
+        "pharma_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "real_estate_services",
+      "name_zh": "房地产开发与服务",
+      "required_driver_ids": [
+        "real_estate_services_driver_1",
+        "real_estate_services_driver_2",
+        "real_estate_services_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "regulated_utilities",
+      "name_zh": "受监管公用事业",
+      "required_driver_ids": [
+        "regulated_utilities_driver_1",
+        "regulated_utilities_driver_2",
+        "regulated_utilities_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "restaurants",
+      "name_zh": "餐饮",
+      "required_driver_ids": [
+        "restaurants_driver_1",
+        "restaurants_driver_2",
+        "restaurants_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "retail",
+      "name_zh": "零售与电商",
+      "required_driver_ids": [
+        "retail_driver_1",
+        "retail_driver_2",
+        "retail_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "semi_equipment",
+      "name_zh": "半导体设备",
+      "required_driver_ids": [
+        "semi_equipment_driver_1",
+        "semi_equipment_driver_2",
+        "semi_equipment_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "semiconductors",
+      "name_zh": "半导体设计与制造",
+      "required_driver_ids": [
+        "semiconductors_driver_1",
+        "semiconductors_driver_2",
+        "semiconductors_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "software",
+      "name_zh": "软件与云服务",
+      "required_driver_ids": [
+        "software_driver_1",
+        "software_driver_2",
+        "software_driver_3"
+      ],
+      "shared_binding_ids": [
+        "operating_margin",
+        "roe"
+      ],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "staples_retail",
+      "name_zh": "必需消费零售",
+      "required_driver_ids": [
+        "staples_retail_driver_1",
+        "staples_retail_driver_2",
+        "staples_retail_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "telecom",
+      "name_zh": "电信",
+      "required_driver_ids": [
+        "telecom_driver_1",
+        "telecom_driver_2",
+        "telecom_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "tobacco",
+      "name_zh": "烟草",
+      "required_driver_ids": [
+        "tobacco_driver_1",
+        "tobacco_driver_2",
+        "tobacco_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "transport_logistics",
+      "name_zh": "运输与物流",
+      "required_driver_ids": [
+        "transport_logistics_driver_1",
+        "transport_logistics_driver_2",
+        "transport_logistics_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    },
+    {
+      "industry_id": "travel_leisure",
+      "name_zh": "旅游酒店与休闲",
+      "required_driver_ids": [
+        "travel_leisure_driver_1",
+        "travel_leisure_driver_2",
+        "travel_leisure_driver_3"
+      ],
+      "shared_binding_ids": [],
+      "driver_execution_status": "blocked_pending_definition_and_inputs"
+    }
+  ]
+}

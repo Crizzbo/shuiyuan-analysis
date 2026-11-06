@@ -1,0 +1,320 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "eog_crude_realized_price",
+      "name_zh": "原油凝析油综合实现售价",
+      "parent_metric_id": "oil_gas_driver_1",
+      "raw_unit": "USD_per_Bbl",
+      "unit": "USD_per_Bbl",
+      "binding_role": "reported_metric",
+      "limitation_zh": "按产品单独保存；套保排除规则待完整脚注核对，不代替收入和销售量输入"
+    },
+    {
+      "component": "eog_gas_realized_price",
+      "name_zh": "天然气综合实现售价",
+      "parent_metric_id": "oil_gas_driver_1",
+      "raw_unit": "USD_per_Mcf",
+      "unit": "USD_per_Mcf",
+      "binding_role": "reported_metric",
+      "limitation_zh": "Mcf 不是 MMBtu；套保口径待完整脚注核对"
+    },
+    {
+      "component": "eog_lease_well_cost",
+      "name_zh": "租赁及井运营成本",
+      "parent_metric_id": "oil_gas_driver_2",
+      "raw_unit": "USD_million",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "分别保存成本项目；现金性、生产税归属及开采范围待核，不自动求和为开采现金成本"
+    },
+    {
+      "component": "eog_gather_processing_cost",
+      "name_zh": "集输加工运输成本",
+      "parent_metric_id": "oil_gas_driver_2",
+      "raw_unit": "USD_million",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "分别保存成本项目；现金性、生产税归属及开采范围待核，不自动求和为开采现金成本"
+    },
+    {
+      "component": "eog_gaap_ga_cost",
+      "name_zh": "GAAP 管理费用",
+      "parent_metric_id": "oil_gas_driver_2",
+      "raw_unit": "USD_million",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "分别保存成本项目；现金性、生产税归属及开采范围待核，不自动求和为开采现金成本"
+    },
+    {
+      "component": "eog_production_other_tax",
+      "name_zh": "非所得税税费",
+      "parent_metric_id": "oil_gas_driver_2",
+      "raw_unit": "USD_million",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "分别保存成本项目；现金性、生产税归属及开采范围待核，不自动求和为开采现金成本"
+    },
+    {
+      "component": "eog_sales_equivalent_volume",
+      "name_zh": "成本表油当量销售量",
+      "parent_metric_id": "oil_gas_driver_2",
+      "raw_unit": "million_units",
+      "unit": "Boe",
+      "binding_role": "formula_input",
+      "limitation_zh": "销售量不能替代储量表含实物权益产量；是否匹配开采成本待核"
+    },
+    {
+      "component": "eog_reported_cash_operating_cost",
+      "name_zh": "报告单位现金运营成本",
+      "parent_metric_id": "oil_gas_driver_2",
+      "raw_unit": "USD_per_Boe",
+      "unit": "USD_per_Boe",
+      "binding_role": "scope_mismatch_sample",
+      "limitation_zh": "公司定义包括管理费但排除生产税，与项目单位开采现金成本并非自动等价"
+    },
+    {
+      "component": "lmt_f35_delivered",
+      "name_zh": "F-35 年度交付数量",
+      "parent_metric_id": "aerospace_defense_driver_3",
+      "raw_unit": "aircraft",
+      "unit": "aircraft",
+      "binding_role": "formula_input",
+      "limitation_zh": "具体机型报告交付数；是否全部通过客户验收待核，不拼成跨型号单一产量"
+    },
+    {
+      "component": "lmt_f16_delivered",
+      "name_zh": "F-16 年度交付数量",
+      "parent_metric_id": "aerospace_defense_driver_3",
+      "raw_unit": "aircraft",
+      "unit": "aircraft",
+      "binding_role": "formula_input",
+      "limitation_zh": "具体机型报告交付数；是否全部通过客户验收待核，不拼成跨型号单一产量"
+    },
+    {
+      "component": "lmt_c130j_delivered",
+      "name_zh": "C-130J 年度交付数量",
+      "parent_metric_id": "aerospace_defense_driver_3",
+      "raw_unit": "aircraft",
+      "unit": "aircraft",
+      "binding_role": "formula_input",
+      "limitation_zh": "具体机型报告交付数；是否全部通过客户验收待核，不拼成跨型号单一产量"
+    },
+    {
+      "component": "mar_company_operated_occupancy",
+      "name_zh": "美加可比自营酒店年度入住率",
+      "parent_metric_id": "travel_leisure_driver_1",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "reported_metric",
+      "limitation_zh": "固定可比自营酒店群；不与加盟或全球系统酒店 ADR 混配；原始售出和可售房晚仍缺"
+    },
+    {
+      "component": "mar_company_operated_adr",
+      "name_zh": "美加可比自营酒店年度日均房价",
+      "parent_metric_id": "travel_leisure_driver_2",
+      "raw_unit": "USD_per_room_night",
+      "unit": "USD_per_room_night",
+      "binding_role": "reported_metric",
+      "limitation_zh": "常量美元与可比酒店群口径；原始客房收入及售出房晚仍缺"
+    },
+    {
+      "component": "acn_annual_new_bookings",
+      "name_zh": "年度集团新签合同",
+      "parent_metric_id": "it_services_driver_2",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "保留公司合同估计金额；取消权、汇率及变动范围待核，不等同已确认收入"
+    },
+    {
+      "component": "acn_consulting_new_bookings",
+      "name_zh": "年度咨询新签合同",
+      "parent_metric_id": "it_services_driver_2",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "保留公司合同估计金额；取消权、汇率及变动范围待核，不等同已确认收入"
+    },
+    {
+      "component": "acn_managed_new_bookings",
+      "name_zh": "年度托管服务新签合同",
+      "parent_metric_id": "it_services_driver_2",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "保留公司合同估计金额；取消权、汇率及变动范围待核，不等同已确认收入"
+    },
+    {
+      "component": "ddog_annual_sbc_expense",
+      "name_zh": "年度股权激励费用（扣资本化）",
+      "parent_metric_id": "software_driver_3",
+      "raw_unit": "USD_thousand",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "仅费用部分，资本化股权激励待补；不能独立生成稀释率"
+    },
+    {
+      "component": "ddog_weighted_diluted_eps_shares",
+      "name_zh": "年度 EPS 加权稀释股数",
+      "parent_metric_id": "software_driver_3",
+      "raw_unit": "thousand_shares",
+      "unit": "shares",
+      "binding_role": "context_sample",
+      "limitation_zh": "EPS 加权股数不是期末实际发行股数，禁止用于期初期末稀释计算"
+    },
+    {
+      "component": "unh_reported_premium_revenue",
+      "name_zh": "年度报告保费收入",
+      "parent_metric_id": "managed_care_driver_1",
+      "raw_unit": "USD_million",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "报告口径，禁止与调整后医疗成本混配"
+    },
+    {
+      "component": "unh_reported_medical_cost",
+      "name_zh": "年度报告医疗成本",
+      "parent_metric_id": "managed_care_driver_1",
+      "raw_unit": "USD_million",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "报告口径，包括亏损合同调整影响；不能混配调整后保费"
+    },
+    {
+      "component": "unh_reported_mcr",
+      "name_zh": "年度报告医疗成本率",
+      "parent_metric_id": "managed_care_driver_1",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "reported_metric",
+      "limitation_zh": "报告比例取整；调整后 88.9% 是另一口径"
+    },
+    {
+      "component": "mrna_cash_investments_reported",
+      "name_zh": "期末现金等价物及投资合计",
+      "parent_metric_id": "biotech_driver_2",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "包含投资及借款提款；受限资金、投资可变现性和标准化月度现金消耗尚缺"
+    },
+    {
+      "component": "sony_ps5_fy2025_sellin",
+      "name_zh": "PS5 财年渠道出货量",
+      "parent_metric_id": "hardware_driver_1",
+      "raw_unit": "million_units",
+      "unit": "systems",
+      "binding_role": "formula_input",
+      "limitation_zh": "sell-in 不是终端零售；包含退回和翻新产品，不能代表 Sony 全部硬件出货"
+    },
+    {
+      "component": "nflx_content_asset_additions_cf",
+      "name_zh": "内容资产新增的现金流调节项",
+      "parent_metric_id": "media_entertainment_driver_2",
+      "raw_unit": "USD_thousand",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "按现金流表保留负号；单独该项不是内容现金支付，须结合内容负债变动"
+    },
+    {
+      "component": "nflx_content_liability_change_cf",
+      "name_zh": "内容负债变动现金流项",
+      "parent_metric_id": "media_entertainment_driver_2",
+      "raw_unit": "USD_thousand",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "保留现金流负号，与同期间内容资产新增配对；不是期末负债余额"
+    },
+    {
+      "component": "nflx_content_amortization",
+      "name_zh": "年度内容摊销",
+      "parent_metric_id": "media_entertainment_driver_2",
+      "raw_unit": "USD_thousand",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "非现金费用；不能直接视作内容现金支出"
+    },
+    {
+      "component": "jpm_managed_net_interest_income",
+      "name_zh": "年度税当量管理口径净利息收入",
+      "parent_metric_id": "banks_driver_1",
+      "raw_unit": "USD_million",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "管理税当量口径而非 GAAP 报告口径；分母使用同表生息资产"
+    },
+    {
+      "component": "jpm_average_interest_earning_assets",
+      "name_zh": "年度平均生息资产",
+      "parent_metric_id": "banks_driver_1",
+      "raw_unit": "USD_million",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "不是期末总资产，也不是剔除 Markets 资产"
+    },
+    {
+      "component": "jpm_managed_net_yield",
+      "name_zh": "年度管理口径净息收益率",
+      "parent_metric_id": "banks_driver_1",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "reported_metric",
+      "limitation_zh": "完全税当量口径；取整披露比例"
+    },
+    {
+      "component": "jpm_firm_net_chargeoffs",
+      "name_zh": "年度全集团净核销额",
+      "parent_metric_id": "banks_driver_2",
+      "raw_unit": "USD_million",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "匹配平均留存贷款分母待补；不能使用批发业务单独分母"
+    },
+    {
+      "component": "jpm_firm_net_chargeoff_rate",
+      "name_zh": "年度全集团净核销率",
+      "parent_metric_id": "banks_driver_2",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "reported_metric",
+      "limitation_zh": "报告比例；平均留存贷款原始输入尚缺"
+    },
+    {
+      "component": "jpm_standardized_cet1",
+      "name_zh": "期末集团标准法 CET1 比率",
+      "parent_metric_id": "banks_driver_3",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "reported_metric",
+      "limitation_zh": "标准法集团而非银行子公司或高级法；风险资产及资本分子待补"
+    },
+    {
+      "component": "jpm_q4_average_lcr",
+      "name_zh": "第四季度平均流动性覆盖率",
+      "parent_metric_id": "banks_driver_3",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "reported_metric",
+      "limitation_zh": "脚注限定第四季度平均，不能登记为全年平均；NSFR 实际值仍缺"
+    },
+    {
+      "component": "pg_fy2026_net_sales",
+      "name_zh": "财年集团净销售额",
+      "parent_metric_id": "household_personal_driver_3",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "context_sample",
+      "limitation_zh": "营销费用覆盖范围及金额未取得；净收入不能独立构成营销费用率"
+    },
+    {
+      "component": "vz_annual_total_capex",
+      "name_zh": "年度集团总资本开支",
+      "parent_metric_id": "telecom_driver_3",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "scope_mismatch_sample",
+      "limitation_zh": "集团总额缺网络、维持性与增长性拆分，不能替代网络资本开支强度"
+    }
+  ]
+}

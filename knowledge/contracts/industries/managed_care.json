@@ -1,0 +1,211 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "industry_id": "managed_care",
+  "name_zh": "医疗保险与管理式医疗",
+  "scope": "按项目行业定义研究 医疗保险与管理式医疗；跨行业业务按分部拆分，具体边界须结合分类证据确认。",
+  "required_segmentation": [
+    "商业/政府计划",
+    "保险/服务分部"
+  ],
+  "business_model_ids": [
+    "insurance_underwriting"
+  ],
+  "required_metric_ids": [
+    "managed_care_driver_1",
+    "managed_care_driver_2",
+    "managed_care_driver_3"
+  ],
+  "dimensions": [
+    {
+      "dimension_id": "lifecycle",
+      "name_zh": "长期生命周期",
+      "question": "产品需求、市场边界和渗透率处于何种长期阶段？",
+      "required_metric_ids": [
+        "managed_care_driver_1",
+        "managed_care_driver_2",
+        "managed_care_driver_3"
+      ],
+      "evidence_requirements": [
+        "按 长期生命周期 核对 医疗保险与管理式医疗 的时点可得资料，明确分部及可比口径",
+        "行业指标未覆盖本维度时须补充证据或说明未知，空指标列表不代表无需研究"
+      ],
+      "judgment_criteria": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "counterevidence": [
+        "保费增长落后医疗成本，风险调整或监管引发追溯损失",
+        "验证该维度是否被其他周期或结构变化抵消"
+      ]
+    },
+    {
+      "dimension_id": "supply_demand",
+      "name_zh": "供需与资本周期",
+      "question": "供给扩张、资本开支、库存与需求如何相互影响？",
+      "required_metric_ids": [
+        "managed_care_driver_1",
+        "managed_care_driver_2",
+        "managed_care_driver_3"
+      ],
+      "evidence_requirements": [
+        "按 供需与资本周期 核对 医疗保险与管理式医疗 的时点可得资料，明确分部及可比口径",
+        "行业指标未覆盖本维度时须补充证据或说明未知，空指标列表不代表无需研究"
+      ],
+      "judgment_criteria": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "counterevidence": [
+        "保费增长落后医疗成本，风险调整或监管引发追溯损失",
+        "验证该维度是否被其他周期或结构变化抵消"
+      ]
+    },
+    {
+      "dimension_id": "earnings",
+      "name_zh": "盈利周期",
+      "question": "利润、经营杠杆与正常化现金流处于什么位置？",
+      "required_metric_ids": [
+        "managed_care_driver_1",
+        "managed_care_driver_2",
+        "managed_care_driver_3"
+      ],
+      "evidence_requirements": [
+        "按 盈利周期 核对 医疗保险与管理式医疗 的时点可得资料，明确分部及可比口径",
+        "行业指标未覆盖本维度时须补充证据或说明未知，空指标列表不代表无需研究"
+      ],
+      "judgment_criteria": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "counterevidence": [
+        "保费增长落后医疗成本，风险调整或监管引发追溯损失",
+        "验证该维度是否被其他周期或结构变化抵消"
+      ]
+    },
+    {
+      "dimension_id": "credit",
+      "name_zh": "信贷与融资",
+      "question": "融资成本、契约、债务到期和资本供给是否变化？",
+      "required_metric_ids": [],
+      "evidence_requirements": [
+        "按 信贷与融资 核对 医疗保险与管理式医疗 的时点可得资料，明确分部及可比口径",
+        "行业指标未覆盖本维度时须补充证据或说明未知，空指标列表不代表无需研究"
+      ],
+      "judgment_criteria": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "counterevidence": [
+        "保费增长落后医疗成本，风险调整或监管引发追溯损失",
+        "验证该维度是否被其他周期或结构变化抵消"
+      ]
+    },
+    {
+      "dimension_id": "sentiment",
+      "name_zh": "情绪与风险偏好",
+      "question": "市场风险偏好和预期变化是否有可核对资料？",
+      "required_metric_ids": [],
+      "evidence_requirements": [
+        "按 情绪与风险偏好 核对 医疗保险与管理式医疗 的时点可得资料，明确分部及可比口径",
+        "行业指标未覆盖本维度时须补充证据或说明未知，空指标列表不代表无需研究"
+      ],
+      "judgment_criteria": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "counterevidence": [
+        "保费增长落后医疗成本，风险调整或监管引发追溯损失",
+        "验证该维度是否被其他周期或结构变化抵消"
+      ]
+    },
+    {
+      "dimension_id": "pricing",
+      "name_zh": "定价与预期",
+      "question": "价格包含哪些经营预期，价值情景如何反映风险？",
+      "required_metric_ids": [],
+      "evidence_requirements": [
+        "按 定价与预期 核对 医疗保险与管理式医疗 的时点可得资料，明确分部及可比口径",
+        "行业指标未覆盖本维度时须补充证据或说明未知，空指标列表不代表无需研究"
+      ],
+      "judgment_criteria": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "counterevidence": [
+        "保费增长落后医疗成本，风险调整或监管引发追溯损失",
+        "验证该维度是否被其他周期或结构变化抵消"
+      ]
+    }
+  ],
+  "valuation_routes": [
+    {
+      "business_model_ids": [
+        "insurance_underwriting"
+      ],
+      "method": "资本约束下股权现金流或剩余收益；费用、赔付及监管情景",
+      "applicability": "仅为候选路线；公司研究须按实际业务模式说明采用及不采用理由",
+      "limitations": [
+        "缺实际财务、价格和本地计算结果时不得完成 S4",
+        "该路线未证明适合所有列出的模式"
+      ]
+    }
+  ],
+  "source_refs": [
+    {
+      "source_path": "knowledge/01-philosophy.md",
+      "locator": "行业研究及风险原则；具体应用属于项目设计",
+      "source_kind": "project_design"
+    },
+    {
+      "source_path": "knowledge/02-industry-framework.md",
+      "locator": "行业研究及风险原则；具体应用属于项目设计",
+      "source_kind": "project_design"
+    },
+    {
+      "source_path": "knowledge/03-market-psychology.md",
+      "locator": "行业研究及风险原则；具体应用属于项目设计",
+      "source_kind": "project_design"
+    },
+    {
+      "source_path": "knowledge/framework/cycles.md",
+      "locator": "周期与生命周期研究框架",
+      "source_kind": "project_design"
+    },
+    {
+      "source_path": "knowledge/sources/cat_reference/marks_notes.txt",
+      "locator": "第 8 章 关注周期；第 14 章 认识预测的局限性",
+      "source_kind": "secondary"
+    },
+    {
+      "source_path": "knowledge/sources/cat_reference/industry_cycle_notes.txt",
+      "locator": "第 2 节 纵向；第 3 节 横向",
+      "source_kind": "secondary"
+    }
+  ],
+  "statistical_validation_status": "not_validated",
+  "empirical_validation_plan": "同子行业历史证券，含退市与历史分类；时点可得的复权行情、财报、预测和公司行动；时间分割训练/验证与样本外；避免前视和重复调参；入选覆盖、误判、永久损失、成本后表现及参数稳定性；通过验证并登记样本/版本前禁止自动行动",
+  "thresholds": {
+    "drawdown": null,
+    "valuation": null
+  },
+  "research_gate": {
+    "required_steps": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6"
+    ],
+    "missing_data_action": "insufficient_evidence",
+    "real_case_status": "pending_local_data"
+  },
+  "external_reference_status": "project_copy_reviewed"
+}

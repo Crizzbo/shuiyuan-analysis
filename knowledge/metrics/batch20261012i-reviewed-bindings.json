@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "coca_cola_unit_case_volume_2025",
+      "parent_metric_id": "food_beverage_driver_1",
+      "name_zh": "可口可乐 2025 全年全球系统标准箱销量",
+      "binding_role": "formula_input",
+      "limitation_zh": "2025 全年全球系统标准箱物理销量（33.3 billion unit cases）；与持平增长率（Even）同口径同期间",
+      "raw_unit": "billion_unit_cases",
+      "unit": "unit_cases"
+    },
+    {
+      "component": "cost_comparable_transactions_fy25",
+      "parent_metric_id": "staples_retail_driver_3",
+      "name_zh": "开市客 FY2025 全球可比仓储店交易次数",
+      "binding_role": "formula_input",
+      "limitation_zh": "FY2025 全财年全球可比仓储店交易总笔数（1,581 million transactions）；与 5.4% 频次增速同范围",
+      "raw_unit": "million_transactions",
+      "unit": "transactions"
+    },
+    {
+      "component": "adp_es_client_count_fy24",
+      "parent_metric_id": "business_services_driver_2",
+      "name_zh": "ADP FY2024 雇主服务分部基期客户总数量",
+      "binding_role": "formula_input",
+      "limitation_zh": "FY2024 全财年雇主服务分部基期客户服务总数（1,000,000 客户）；与收入留存率 92% 同财年对齐",
+      "raw_unit": "clients",
+      "unit": "clients"
+    }
+  ]
+}

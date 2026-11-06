@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.1.0",
+  "research_id": "replace_research_id",
+  "revision": 1,
+  "is_fictional": false,
+  "as_of": "2026-10-10T12:00:00Z",
+  "recorded_at": "2026-10-11T00:00:00Z",
+  "market_session_date": "2026-10-09",
+  "investment_horizon_months": 12,
+  "subject": {
+    "company_id": "replace_company_id",
+    "security_ids": [
+      "replace_security_id"
+    ],
+    "segments": [
+      {
+        "id": "segment_software",
+        "name": "待填业务分部",
+        "industry_ids": [
+          "software"
+        ],
+        "business_model_ids": [
+          "subscription"
+        ],
+        "classification_evidence_refs": [],
+        "subindustry_description": "待取证；当前软件分类仅模板占位",
+        "weight_basis": "unknown",
+        "weight": null,
+        "weight_period": null,
+        "weight_evidence_refs": []
+      }
+    ],
+    "is_adr": false,
+    "is_reit": false,
+    "classification_status": "unreviewed",
+    "unallocated_or_elimination_notes": "测试没有真实分部权重"
+  },
+  "evidence": [],
+  "observations": [],
+  "claims": [],
+  "calculations": [],
+  "steps": [
+    {
+      "id": "S1",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "待填；未开始真实分析"
+      ]
+    },
+    {
+      "id": "S2",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "待填；未开始真实分析"
+      ]
+    },
+    {
+      "id": "S3",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "待填；未开始真实分析"
+      ]
+    },
+    {
+      "id": "S4",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "待填；未开始真实分析"
+      ]
+    },
+    {
+      "id": "S5",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "待填；未开始真实分析"
+      ]
+    },
+    {
+      "id": "S6",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "待填；未开始真实分析"
+      ]
+    }
+  ],
+  "invalidation_events": []
+}

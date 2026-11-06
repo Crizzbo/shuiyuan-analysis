@@ -1,0 +1,670 @@
+{
+  "schema_version": "1.1.0",
+  "effective_date": "2026-10-11",
+  "classification_kind": "internal_research_taxonomy",
+  "external_reference": "GICS sector names; not an official GICS mapping",
+  "nodes": [
+    {
+      "id": "energy",
+      "name": "能源",
+      "level": "sector",
+      "parent_id": null,
+      "aliases": [],
+      "status": "draft"
+    },
+    {
+      "id": "oil_gas",
+      "name": "油气勘探与生产",
+      "level": "industry",
+      "parent_id": "energy",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/energy/oil_gas.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "oil_gas",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "energy_services",
+      "name": "油服与能源设备",
+      "level": "industry",
+      "parent_id": "energy",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/energy/energy_services.md",
+      "business_model_ids": [
+        "project_contract"
+      ],
+      "industry_rule_id": "energy_services",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "midstream",
+      "name": "能源运输与加工",
+      "level": "industry",
+      "parent_id": "energy",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/energy/midstream.md",
+      "business_model_ids": [
+        "infrastructure_fee"
+      ],
+      "industry_rule_id": "midstream",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "materials",
+      "name": "原材料",
+      "level": "sector",
+      "parent_id": null,
+      "aliases": [],
+      "status": "draft"
+    },
+    {
+      "id": "mining",
+      "name": "金属与采矿",
+      "level": "industry",
+      "parent_id": "materials",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/materials/mining.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "mining",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "chemicals",
+      "name": "化工",
+      "level": "industry",
+      "parent_id": "materials",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/materials/chemicals.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "chemicals",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "packaging",
+      "name": "包装与林纸",
+      "level": "industry",
+      "parent_id": "materials",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/materials/packaging.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "packaging",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "industrials",
+      "name": "工业",
+      "level": "sector",
+      "parent_id": null,
+      "aliases": [],
+      "status": "draft"
+    },
+    {
+      "id": "capital_goods",
+      "name": "工业设备与自动化",
+      "level": "industry",
+      "parent_id": "industrials",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/industrials/capital_goods.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "capital_goods",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "aerospace_defense",
+      "name": "航空航天与国防",
+      "level": "industry",
+      "parent_id": "industrials",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/industrials/aerospace_defense.md",
+      "business_model_ids": [
+        "project_contract"
+      ],
+      "industry_rule_id": "aerospace_defense",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "transport_logistics",
+      "name": "运输与物流",
+      "level": "industry",
+      "parent_id": "industrials",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/industrials/transport_logistics.md",
+      "business_model_ids": [
+        "infrastructure_fee"
+      ],
+      "industry_rule_id": "transport_logistics",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "business_services",
+      "name": "商业与专业服务",
+      "level": "industry",
+      "parent_id": "industrials",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/industrials/business_services.md",
+      "business_model_ids": [
+        "service_contract"
+      ],
+      "industry_rule_id": "business_services",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "construction",
+      "name": "建筑与工程",
+      "level": "industry",
+      "parent_id": "industrials",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/industrials/construction.md",
+      "business_model_ids": [
+        "project_contract"
+      ],
+      "industry_rule_id": "construction",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "consumer_discretionary",
+      "name": "可选消费",
+      "level": "sector",
+      "parent_id": null,
+      "aliases": [],
+      "status": "draft"
+    },
+    {
+      "id": "autos",
+      "name": "汽车与零部件",
+      "level": "industry",
+      "parent_id": "consumer_discretionary",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/consumer_discretionary/autos.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "autos",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "retail",
+      "name": "零售与电商",
+      "level": "industry",
+      "parent_id": "consumer_discretionary",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/consumer_discretionary/retail.md",
+      "business_model_ids": [
+        "retail_distribution"
+      ],
+      "industry_rule_id": "retail",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "restaurants",
+      "name": "餐饮",
+      "level": "industry",
+      "parent_id": "consumer_discretionary",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/consumer_discretionary/restaurants.md",
+      "business_model_ids": [
+        "franchise"
+      ],
+      "industry_rule_id": "restaurants",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "travel_leisure",
+      "name": "旅游酒店与休闲",
+      "level": "industry",
+      "parent_id": "consumer_discretionary",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/consumer_discretionary/travel_leisure.md",
+      "business_model_ids": [
+        "service_contract"
+      ],
+      "industry_rule_id": "travel_leisure",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "housing_durables",
+      "name": "住宅建设与耐用品",
+      "level": "industry",
+      "parent_id": "consumer_discretionary",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/consumer_discretionary/housing_durables.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "housing_durables",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "consumer_staples",
+      "name": "必需消费",
+      "level": "sector",
+      "parent_id": null,
+      "aliases": [],
+      "status": "draft"
+    },
+    {
+      "id": "food_beverage",
+      "name": "食品饮料",
+      "level": "industry",
+      "parent_id": "consumer_staples",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/consumer_staples/food_beverage.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "food_beverage",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "household_personal",
+      "name": "家庭与个人用品",
+      "level": "industry",
+      "parent_id": "consumer_staples",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/consumer_staples/household_personal.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "household_personal",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "staples_retail",
+      "name": "必需消费零售",
+      "level": "industry",
+      "parent_id": "consumer_staples",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/consumer_staples/staples_retail.md",
+      "business_model_ids": [
+        "retail_distribution"
+      ],
+      "industry_rule_id": "staples_retail",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "tobacco",
+      "name": "烟草",
+      "level": "industry",
+      "parent_id": "consumer_staples",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/consumer_staples/tobacco.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "tobacco",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "health_care",
+      "name": "医疗健康",
+      "level": "sector",
+      "parent_id": null,
+      "aliases": [],
+      "status": "draft"
+    },
+    {
+      "id": "pharma",
+      "name": "成熟制药",
+      "level": "industry",
+      "parent_id": "health_care",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/health_care/pharma.md",
+      "business_model_ids": [
+        "ip_licensing"
+      ],
+      "industry_rule_id": "pharma",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "biotech",
+      "name": "研发型生物科技",
+      "level": "industry",
+      "parent_id": "health_care",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/health_care/biotech.md",
+      "business_model_ids": [
+        "ip_licensing"
+      ],
+      "industry_rule_id": "biotech",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "medical_devices",
+      "name": "医疗器械与生命科学工具",
+      "level": "industry",
+      "parent_id": "health_care",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/health_care/medical_devices.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "medical_devices",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "health_services",
+      "name": "医疗服务与分销",
+      "level": "industry",
+      "parent_id": "health_care",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/health_care/health_services.md",
+      "business_model_ids": [
+        "service_contract"
+      ],
+      "industry_rule_id": "health_services",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "managed_care",
+      "name": "医疗保险与管理式医疗",
+      "level": "industry",
+      "parent_id": "health_care",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/health_care/managed_care.md",
+      "business_model_ids": [
+        "insurance_underwriting"
+      ],
+      "industry_rule_id": "managed_care",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "financials",
+      "name": "金融",
+      "level": "sector",
+      "parent_id": null,
+      "aliases": [],
+      "status": "draft"
+    },
+    {
+      "id": "banks",
+      "name": "银行",
+      "level": "industry",
+      "parent_id": "financials",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/financials/banks.md",
+      "business_model_ids": [
+        "balance_sheet_lending"
+      ],
+      "industry_rule_id": "banks",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "insurance",
+      "name": "保险与再保险",
+      "level": "industry",
+      "parent_id": "financials",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/financials/insurance.md",
+      "business_model_ids": [
+        "insurance_underwriting"
+      ],
+      "industry_rule_id": "insurance",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "asset_management",
+      "name": "资产管理与资本市场",
+      "level": "industry",
+      "parent_id": "financials",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/financials/asset_management.md",
+      "business_model_ids": [
+        "asset_management_fee"
+      ],
+      "industry_rule_id": "asset_management",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "payments",
+      "name": "支付与金融基础设施",
+      "level": "industry",
+      "parent_id": "financials",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/financials/payments.md",
+      "business_model_ids": [
+        "transaction_fee"
+      ],
+      "industry_rule_id": "payments",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "information_technology",
+      "name": "信息技术",
+      "level": "sector",
+      "parent_id": null,
+      "aliases": [],
+      "status": "draft"
+    },
+    {
+      "id": "software",
+      "name": "软件与云服务",
+      "level": "industry",
+      "parent_id": "information_technology",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/information_technology/software.md",
+      "business_model_ids": [
+        "subscription"
+      ],
+      "industry_rule_id": "software",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "semiconductors",
+      "name": "半导体设计与制造",
+      "level": "industry",
+      "parent_id": "information_technology",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/information_technology/semiconductors.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "semiconductors",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "semi_equipment",
+      "name": "半导体设备",
+      "level": "industry",
+      "parent_id": "information_technology",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/information_technology/semi_equipment.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "semi_equipment",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "hardware",
+      "name": "硬件与通信设备",
+      "level": "industry",
+      "parent_id": "information_technology",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/information_technology/hardware.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "hardware",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "it_services",
+      "name": "IT 服务与咨询",
+      "level": "industry",
+      "parent_id": "information_technology",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/information_technology/it_services.md",
+      "business_model_ids": [
+        "service_contract"
+      ],
+      "industry_rule_id": "it_services",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "communication_services",
+      "name": "通信服务",
+      "level": "sector",
+      "parent_id": null,
+      "aliases": [],
+      "status": "draft"
+    },
+    {
+      "id": "telecom",
+      "name": "电信",
+      "level": "industry",
+      "parent_id": "communication_services",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/communication_services/telecom.md",
+      "business_model_ids": [
+        "subscription"
+      ],
+      "industry_rule_id": "telecom",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "digital_platforms",
+      "name": "互联网平台",
+      "level": "industry",
+      "parent_id": "communication_services",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/communication_services/digital_platforms.md",
+      "business_model_ids": [
+        "advertising"
+      ],
+      "industry_rule_id": "digital_platforms",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "media_entertainment",
+      "name": "媒体游戏与娱乐",
+      "level": "industry",
+      "parent_id": "communication_services",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/communication_services/media_entertainment.md",
+      "business_model_ids": [
+        "content_license"
+      ],
+      "industry_rule_id": "media_entertainment",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "utilities",
+      "name": "公用事业",
+      "level": "sector",
+      "parent_id": null,
+      "aliases": [],
+      "status": "draft"
+    },
+    {
+      "id": "regulated_utilities",
+      "name": "受监管公用事业",
+      "level": "industry",
+      "parent_id": "utilities",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/utilities/regulated_utilities.md",
+      "business_model_ids": [
+        "regulated_return"
+      ],
+      "industry_rule_id": "regulated_utilities",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "merchant_power",
+      "name": "市场化发电",
+      "level": "industry",
+      "parent_id": "utilities",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/utilities/merchant_power.md",
+      "business_model_ids": [
+        "product_sales"
+      ],
+      "industry_rule_id": "merchant_power",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "real_estate",
+      "name": "房地产",
+      "level": "sector",
+      "parent_id": null,
+      "aliases": [],
+      "status": "draft"
+    },
+    {
+      "id": "equity_reit",
+      "name": "权益型 REIT",
+      "level": "industry",
+      "parent_id": "real_estate",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/real_estate/equity_reit.md",
+      "business_model_ids": [
+        "asset_rental"
+      ],
+      "industry_rule_id": "equity_reit",
+      "calibration_status": "qualitative_adaptation_only"
+    },
+    {
+      "id": "real_estate_services",
+      "name": "房地产开发与服务",
+      "level": "industry",
+      "parent_id": "real_estate",
+      "aliases": [],
+      "status": "draft",
+      "profile_path": "knowledge/industries/real_estate/real_estate_services.md",
+      "business_model_ids": [
+        "project_contract"
+      ],
+      "industry_rule_id": "real_estate_services",
+      "calibration_status": "qualitative_adaptation_only"
+    }
+  ]
+}

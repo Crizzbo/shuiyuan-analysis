@@ -1,0 +1,542 @@
+{
+  "stages": [
+    {
+      "id": "inputs",
+      "title": "01 证据接入与行情门禁"
+    },
+    {
+      "id": "models",
+      "title": "02 财务归一与模型计算"
+    },
+    {
+      "id": "state",
+      "title": "03 状态、账本与恢复"
+    },
+    {
+      "id": "reports",
+      "title": "04 研报和存量产物"
+    },
+    {
+      "id": "delivery",
+      "title": "05 调度、交付与部署"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "S-E01",
+      "stage": "inputs",
+      "design": "docs/15-研究证据时间契约升级与迁移.md",
+      "scenario": "观测时间、市场时段、时区、陈旧和非法报价",
+      "checks": [
+        "Q01",
+        "Q02",
+        "Q03",
+        "Q04",
+        "Q06",
+        "Q07"
+      ],
+      "evidence": "固定市场时点的接受、降级或拒绝状态"
+    },
+    {
+      "id": "S-E02",
+      "stage": "inputs",
+      "design": "docs/19-每日大盘研报工程化规范与生成程序设计文档.md",
+      "scenario": "历史样本、两卡混合输入和下游行情门禁",
+      "checks": [
+        "Q05",
+        "R01",
+        "R13",
+        "I02"
+      ],
+      "evidence": "旧报价对应的发布文件和预测记录为空"
+    },
+    {
+      "id": "S-E03",
+      "stage": "inputs",
+      "design": "docs/30-数据治理闭环：AI浏览器定向补数中枢与官方归档SOP文档.md",
+      "scenario": "浏览器回执校验、归档摘要、重复导入与未审核状态",
+      "checks": [
+        "B07",
+        "I08"
+      ],
+      "evidence": "原文摘要、官方域名校验和补数回执"
+    },
+    {
+      "id": "S-E04",
+      "stage": "inputs",
+      "design": "docs/04-数据与证据管理.md",
+      "scenario": "引用路径、不可变目录与研究六步顺序",
+      "checks": [
+        "A02",
+        "G01",
+        "G02",
+        "G03"
+      ],
+      "evidence": "越界与错序拒绝，历史资料禁止覆盖"
+    },
+    {
+      "id": "S-E05",
+      "stage": "inputs",
+      "design": "docs/30-数据治理闭环：AI浏览器定向补数中枢与官方归档SOP文档.md",
+      "scenario": "真实浏览器下载、归档后只重算受影响标的",
+      "checks": [],
+      "evidence": "记录实际下载回执、原文哈希和重算任务集合"
+    },
+    {
+      "id": "S-E06",
+      "stage": "inputs",
+      "design": "docs/15-研究证据时间契约升级与迁移.md",
+      "scenario": "真实交易日历中的假日、提前收盘、延迟与补订行情",
+      "checks": [],
+      "evidence": "冻结跨季交易日历，验证美日收盘和盘前的标记"
+    },
+    {
+      "id": "S-M01",
+      "stage": "models",
+      "design": "docs/14-财报解析标准化与计算功能设计.md",
+      "scenario": "非有限数、会计平衡和财报缺项",
+      "checks": [
+        "F01",
+        "F02",
+        "F08"
+      ],
+      "evidence": "财期、币种、原始来源、拒绝原因"
+    },
+    {
+      "id": "S-M02",
+      "stage": "models",
+      "design": "docs/09-金融计算工具功能设计.md",
+      "scenario": "金额单位变换后的负债及每股估值不变",
+      "checks": [
+        "F03",
+        "I01"
+      ],
+      "evidence": "元与百万两组独立输入的净债务和每股结果"
+    },
+    {
+      "id": "S-M03",
+      "stage": "models",
+      "design": "docs/09b-高阶金融定价与风控算法子说明书.md",
+      "scenario": "DCF 闭式、终值限制、固定随机种子、反向 DCF 及不可达目标",
+      "checks": [
+        "F04",
+        "F05",
+        "F07",
+        "F11"
+      ],
+      "evidence": "独立公式基准及固定种子的分位数"
+    },
+    {
+      "id": "S-M04",
+      "stage": "models",
+      "design": "docs/09b-高阶金融定价与风控算法子说明书.md",
+      "scenario": "隐波反解、无套利和无分红美式看涨收敛、三态到期损益与凯利封顶",
+      "checks": [
+        "F06",
+        "F09",
+        "F12"
+      ],
+      "evidence": "市场价格反推、无套利拒绝和树步长误差"
+    },
+    {
+      "id": "S-M05",
+      "stage": "models",
+      "design": "docs/22-核心指数ETF与黄金大宗商品研究体系设计文档.md",
+      "scenario": "ETF 重叠对称性和权重边界、黄金定义域",
+      "checks": [
+        "X01",
+        "X02",
+        "X03",
+        "X04"
+      ],
+      "evidence": "相同权重对的闭式对照和多资产档案契约"
+    },
+    {
+      "id": "S-M06",
+      "stage": "models",
+      "design": "docs/09b-高阶金融定价与风控算法子说明书.md",
+      "scenario": "全曲面蝶式与日历无套利、压力尾部与校准样本",
+      "checks": [],
+      "evidence": "逐期限的模型对照和带可复算来源的样本门槛"
+    },
+    {
+      "id": "S-M07",
+      "stage": "models",
+      "design": "docs/23-微观基础宏观传导与制度风险引擎设计文档.md",
+      "scenario": "宏观、信用与制度冲击跨市场传导及缺样本降级",
+      "checks": [],
+      "evidence": "独立压力矩阵、非对称方向和稳态基准"
+    },
+    {
+      "id": "S-M08",
+      "stage": "models",
+      "design": "docs/33-米奈尔维尼SEPA买入信号与价格时机引擎产品设计与字段契约规范.md",
+      "scenario": "SEPA 趋势阶段、成交量及历史不足时的信号拒绝",
+      "checks": [
+        "F10"
+      ],
+      "evidence": "连续多时段的状态转移和独立价格边界"
+    },
+    {
+      "id": "S-M10",
+      "stage": "models",
+      "design": "docs/33-米奈尔维尼SEPA买入信号与价格时机引擎产品设计与字段契约规范.md",
+      "scenario": "SEPA 跨阶段、复权历史、连续成交量与真实报价回放",
+      "checks": [],
+      "evidence": "经核实的历史价量及跨交易日信号转移记录"
+    },
+    {
+      "id": "S-M09",
+      "stage": "models",
+      "design": "docs/16-正式事实到行业指标观测映射.md",
+      "scenario": "财报事实绑定行业指标的会计期间与观测版本",
+      "checks": [],
+      "evidence": "各行业绑定的单位、财期和缺字段矩阵"
+    },
+    {
+      "id": "S-S01",
+      "stage": "state",
+      "design": "docs/09b-高阶金融定价与风控算法子说明书.md",
+      "scenario": "预测哈希、对账篡改、冲突重试和时序",
+      "checks": [
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "I04"
+      ],
+      "evidence": "真实 SQLite 验签、重复提交和实际结果"
+    },
+    {
+      "id": "S-S08",
+      "stage": "state",
+      "design": "docs/09b-高阶金融定价与风控算法子说明书.md",
+      "scenario": "SPEC-12 账本验签命令按有效位判断",
+      "checks": [],
+      "evidence": "设计文档命令与坏账本负向执行证据，验签失败时进程退出非零"
+    },
+    {
+      "id": "S-S02",
+      "stage": "state",
+      "design": "docs/09b-高阶金融定价与风控算法子说明书.md",
+      "scenario": "并发预测追加保持链连续",
+      "checks": [
+        "L06"
+      ],
+      "evidence": "同时启动独立写入并验证所有记录和链头"
+    },
+    {
+      "id": "S-S03",
+      "stage": "state",
+      "design": "docs/26-千家全量资产池批量平账与流式建档技术设计文档.md",
+      "scenario": "试运行、缺产物恢复、覆盖丢失、跨市场同代码",
+      "checks": [
+        "B01",
+        "B02",
+        "B08",
+        "B09",
+        "R02"
+      ],
+      "evidence": "正式任务状态、产物存在性与恢复动作"
+    },
+    {
+      "id": "S-S04",
+      "stage": "state",
+      "design": "docs/26-千家全量资产池批量平账与流式建档技术设计文档.md",
+      "scenario": "真实原子提交与回归隔离",
+      "checks": [
+        "B06",
+        "T01"
+      ],
+      "evidence": "原子替换回归及越界副作用拦截"
+    },
+    {
+      "id": "S-S05",
+      "stage": "state",
+      "design": "docs/26-千家全量资产池批量平账与流式建档技术设计文档.md",
+      "scenario": "资产池计数与首期覆盖启动后续阶段",
+      "checks": [
+        "B03",
+        "B04",
+        "I07"
+      ],
+      "evidence": "缺首期证据、空扩展目标不能视为完成"
+    },
+    {
+      "id": "S-S06",
+      "stage": "state",
+      "design": "docs/26-千家全量资产池批量平账与流式建档技术设计文档.md",
+      "scenario": "真实锁竞争、崩溃窗口和千家并发吞吐",
+      "checks": [],
+      "evidence": "两进程竞争、强杀恢复、每批吞吐及重试次数"
+    },
+    {
+      "id": "S-S07",
+      "stage": "state",
+      "design": "docs/28-多资产横向拓展流水线与4-Sheet联动工作簿技术文档.md",
+      "scenario": "首期最后一家公司验收后只启动一次扩展",
+      "checks": [],
+      "evidence": "可核验首期收据、触发日志及幂等扩展任务"
+    },
+    {
+      "id": "S-R01",
+      "stage": "reports",
+      "design": "docs/21-公司深度档案全息生成与契约设计文档.md",
+      "scenario": "美日公司档案结构及实际五页工作簿",
+      "checks": [
+        "R11"
+      ],
+      "evidence": "合成输入及可回读的 XLSX 与证据单元格"
+    },
+    {
+      "id": "S-R02",
+      "stage": "reports",
+      "design": "docs/29-AI智能投研代理与深度档案合成器技术与功能设计文档.md",
+      "scenario": "资料不足、图谱限制、评级冲突和缺失债务披露",
+      "checks": [
+        "B05",
+        "R09",
+        "R10",
+        "I03"
+      ],
+      "evidence": "应阻断或明确降级的输入与决策输出"
+    },
+    {
+      "id": "S-R03",
+      "stage": "reports",
+      "design": "docs/19-每日大盘研报工程化规范与生成程序设计文档.md",
+      "scenario": "日报卡片、Schema、投委会入口及文本转义",
+      "checks": [
+        "R04",
+        "R05",
+        "R06",
+        "R08",
+        "R12"
+      ],
+      "evidence": "正向卡片、非法日期、HTML 特殊字符和入口可加载性"
+    },
+    {
+      "id": "S-R04",
+      "stage": "reports",
+      "design": "docs/21-公司深度档案全息生成与契约设计文档.md",
+      "scenario": "全量存量档案发布适用性",
+      "checks": [
+        "D01",
+        "D02"
+      ],
+      "evidence": "逐份 Schema、来源、估值字段和评级异常计数"
+    },
+    {
+      "id": "S-R05",
+      "stage": "reports",
+      "design": "docs/31-千家资产池顶层动态雷达与价值洼地主看板技术文档.md",
+      "scenario": "跨页筛选与链接穿透、5-Sheet 公式结果及字体布局",
+      "checks": [],
+      "evidence": "对照预期筛选结果、真实重算结果和多页视觉证据"
+    },
+    {
+      "id": "S-R06",
+      "stage": "reports",
+      "design": "docs/08-全栈工程命名架构与状态空间规范.md",
+      "scenario": "依赖边界、图谱设计链接与绝对路径约束",
+      "checks": [
+        "A01",
+        "A03"
+      ],
+      "evidence": "明确到文件和入口的静态或运行时证据"
+    },
+    {
+      "id": "S-R07",
+      "stage": "reports",
+      "design": "docs/SPEC_02_多模态视觉呈现与研报Token设计规范.md",
+      "scenario": "新设计书声明的机构级资产池工作簿入口可用",
+      "checks": [
+        "R14"
+      ],
+      "evidence": "正式工作簿入口存在，后续按各页合同执行部署验收"
+    },
+    {
+      "id": "S-D01",
+      "stage": "delivery",
+      "design": "docs/37-云端无头每日行情与研报自动化调度流水线设计书.md",
+      "scenario": "日报坏账本、过期样本、旧 PDF 和归档目录范围",
+      "checks": [
+        "R01",
+        "R03",
+        "R07",
+        "C03"
+      ],
+      "evidence": "验签状态、产物变化、当批收据和范围检查"
+    },
+    {
+      "id": "S-D02",
+      "stage": "delivery",
+      "design": "docs/37-云端无头每日行情与研报自动化调度流水线设计书.md",
+      "scenario": "定时归属、手动参数转义和路径边界",
+      "checks": [
+        "C01",
+        "C02"
+      ],
+      "evidence": "静态工作流配置证据"
+    },
+    {
+      "id": "S-D06",
+      "stage": "delivery",
+      "design": "docs/37-云端无头每日行情与研报自动化调度流水线设计书.md",
+      "scenario": "统一 SPEC-11 与工程约束的调度时点",
+      "checks": [],
+      "evidence": "经确认的美股与日股 JST 执行时点、市场事件绑定和变更记录"
+    },
+    {
+      "id": "S-D03",
+      "stage": "delivery",
+      "design": "docs/26-千家全量资产池批量平账与流式建档技术设计文档.md",
+      "scenario": "逐件上传顺序、失败退出码和有效回执",
+      "checks": [
+        "I05",
+        "I06",
+        "C04"
+      ],
+      "evidence": "模拟传输日志及真实本地批次收据"
+    },
+    {
+      "id": "S-D04",
+      "stage": "delivery",
+      "design": "docs/37-云端无头每日行情与研报自动化调度流水线设计书.md",
+      "scenario": "真实 Actions、浏览器 PDF、Drive 回读和跨 runner 续跑",
+      "checks": [],
+      "evidence": "运行 ID、PDF 视觉证据、远端文件 ID、回读哈希及持久化链头"
+    },
+    {
+      "id": "S-D05",
+      "stage": "delivery",
+      "design": "docs/26-千家全量资产池批量平账与流式建档技术设计文档.md",
+      "scenario": "实际日报先交付、分批上传、限流重试和跨任务恢复",
+      "checks": [],
+      "evidence": "并发交付日志、首个可见文件时间、尾批失败及恢复收据"
+    }
+  ],
+  "specs": [
+    {
+      "id": "SPEC-01",
+      "design": "docs/SPEC_01_系统总体架构与分层工程总纲.md",
+      "scenarios": [
+        "S-R06",
+        "S-S04",
+        "S-R07"
+      ]
+    },
+    {
+      "id": "SPEC-02",
+      "design": "docs/SPEC_02_多模态视觉呈现与研报Token设计规范.md",
+      "scenarios": [
+        "S-R01",
+        "S-R03",
+        "S-R05",
+        "S-D04",
+        "S-R07"
+      ]
+    },
+    {
+      "id": "SPEC-03",
+      "design": "docs/SPEC_03_行业知识中枢与微观商业机器解构规格书.md",
+      "scenarios": [
+        "S-R02",
+        "S-M09",
+        "S-R06"
+      ]
+    },
+    {
+      "id": "SPEC-04",
+      "design": "docs/SPEC_04_六步研究法与官方财报三表契约规范.md",
+      "scenarios": [
+        "S-E04",
+        "S-M01",
+        "S-R04"
+      ]
+    },
+    {
+      "id": "SPEC-05",
+      "design": "docs/SPEC_05_数据采集AI浏览器补数与证据治理规范.md",
+      "scenarios": [
+        "S-E01",
+        "S-E03",
+        "S-E05",
+        "S-E06",
+        "S-M01"
+      ]
+    },
+    {
+      "id": "SPEC-06",
+      "design": "docs/SPEC_06_核心金融计算与多情景DCF估值引擎设计书.md",
+      "scenarios": [
+        "S-M02",
+        "S-M03",
+        "S-R02"
+      ]
+    },
+    {
+      "id": "SPEC-07",
+      "design": "docs/SPEC_07_买方时机决策与技术足迹分析引擎设计书.md",
+      "scenarios": [
+        "S-M08",
+        "S-M10"
+      ]
+    },
+    {
+      "id": "SPEC-08",
+      "design": "docs/SPEC_08_期权全周期因果分析与仓位风控引擎设计书.md",
+      "scenarios": [
+        "S-E02",
+        "S-M04",
+        "S-M06"
+      ]
+    },
+    {
+      "id": "SPEC-09",
+      "design": "docs/SPEC_09_全球宏观流动性与跨资产配置体系设计书.md",
+      "scenarios": [
+        "S-M05",
+        "S-M07"
+      ]
+    },
+    {
+      "id": "SPEC-10",
+      "design": "docs/SPEC_10_千家资产池流式建档与公司深度档案生成流水线.md",
+      "scenarios": [
+        "S-S03",
+        "S-S05",
+        "S-S06",
+        "S-S07",
+        "S-R01",
+        "S-R04",
+        "S-D03",
+        "S-D05"
+      ]
+    },
+    {
+      "id": "SPEC-11",
+      "design": "docs/SPEC_11_云端无头每日行情与研报自动化调度流水线.md",
+      "scenarios": [
+        "S-E02",
+        "S-R03",
+        "S-D01",
+        "S-D02",
+        "S-D04",
+        "S-D06"
+      ]
+    },
+    {
+      "id": "SPEC-12",
+      "design": "docs/SPEC_12_系统质量工程密码学账本与全息测试验收标准.md",
+      "scenarios": [
+        "S-S01",
+        "S-S02",
+        "S-S04",
+        "S-S08",
+        "S-D01"
+      ]
+    }
+  ]
+}

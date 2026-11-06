@@ -1,0 +1,178 @@
+{
+  "type": "object",
+  "title": "宏观经济基准环境契约",
+  "description": "面向用户分析的宏观经济指标与基准环境契约规范",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "title": "契约版本",
+      "description": "宏观基准数据契约版本"
+    },
+    "snapshot_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "数据版本标识",
+      "description": "官方基准数据版本唯一标识"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time",
+      "title": "官方基准时点",
+      "description": "宏观指标官方观测基准时点，必须带时区，不得晚于系统当前时间"
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/observation"
+      },
+      "minItems": 1,
+      "title": "宏观指标数据集合",
+      "description": "已核实的官方宏观时序截面指标数据"
+    }
+  },
+  "required": [
+    "schema_version",
+    "snapshot_id",
+    "as_of",
+    "observations"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shuiyuan:macro-snapshot:1.0.0",
+  "$defs": {
+    "observation": {
+      "type": "object",
+      "properties": {
+        "observation_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "指标记录标识",
+          "description": "基于规范字段生成的唯一记录标识"
+        },
+        "indicator_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$",
+          "title": "宏观指标标识",
+          "description": "对应宏观指标目录中的指标 ID"
+        },
+        "published_date": {
+          "type": "string",
+          "format": "date",
+          "title": "官方正式发布日期",
+          "description": "官方机构公布该数据点的公历日期"
+        },
+        "period_end": {
+          "type": "string",
+          "format": "date",
+          "title": "统计所属期截止日",
+          "description": "如 2025 年 12 月失业率统计期截止日 2025-12-31"
+        },
+        "raw_value": {
+          "type": "string",
+          "minLength": 1,
+          "title": "原始披露值",
+          "description": "保留发行机构披露精度"
+        },
+        "raw_unit": {
+          "type": "string",
+          "minLength": 1,
+          "title": "原始单位",
+          "description": "如 percent、index_points"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^-?[0-9]+(?:\\.[0-9]+)?$",
+          "title": "标准化数值",
+          "description": "高精度十进制字符串"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "title": "标准化单位",
+          "description": "如 ratio、points"
+        },
+        "release_status": {
+          "enum": [
+            "preliminary",
+            "revised",
+            "final"
+          ],
+          "title": "发布状态",
+          "description": "初值、修正值或终值"
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "title": "官方来源地址",
+          "description": "美国财政部、美联储或劳工统计局官方发布页面"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "title": "定位说明",
+          "description": "表格、系列代号（如 FRED 系列 FRED:DGS10）"
+        },
+        "available_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "本地获取时点",
+          "description": "必须早于或等于当前时间，严格防前视"
+        },
+        "excerpt": {
+          "type": "string",
+          "minLength": 1,
+          "title": "官方披露摘录原文",
+          "description": "来自项目内归档摘录的原始文字，必须包含 raw_value"
+        },
+        "interpretation": {
+          "type": "string",
+          "minLength": 1,
+          "title": "数值专业解读",
+          "description": "面向投资决策者的宏观经济与市场影响深度解读"
+        },
+        "source_ref": {
+          "type": "object",
+          "properties": {
+            "source_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "revision": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "required": [
+            "source_id",
+            "revision",
+            "sha256"
+          ],
+          "additionalProperties": false,
+          "title": "数据目录引用",
+          "description": "引用 LocalStore 登记的资料版本与哈希"
+        }
+      },
+      "required": [
+        "observation_id",
+        "indicator_id",
+        "published_date",
+        "period_end",
+        "raw_value",
+        "raw_unit",
+        "value",
+        "unit",
+        "release_status",
+        "source_url",
+        "locator",
+        "available_at",
+        "excerpt",
+        "source_ref"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

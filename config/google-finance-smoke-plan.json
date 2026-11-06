@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "spreadsheet_id": "CONFIGURE_YOUR_OWN_CLOUD_TARGET",
+  "sheet_name": "金融取数测试",
+  "securities": [
+    {
+      "row": 6,
+      "ticker": "NASDAQ:AAPL",
+      "name": "Apple",
+      "industry_id": null,
+      "market": "US"
+    },
+    {
+      "row": 7,
+      "ticker": "NASDAQ:MSFT",
+      "name": "Microsoft",
+      "industry_id": null,
+      "market": "US"
+    },
+    {
+      "row": 8,
+      "ticker": "NASDAQ:INTU",
+      "name": "Intuit",
+      "industry_id": "software",
+      "market": "US"
+    }
+  ]
+}

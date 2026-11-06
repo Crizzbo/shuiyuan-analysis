@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "ceg_annual_operating_revenues_2024",
+      "parent_metric_id": "merchant_power_driver_1",
+      "name_zh": "星座能源 2024 全年合并营业总收入",
+      "binding_role": "formula_input",
+      "limitation_zh": "全财年合并营业收入（含 Mid-Atlantic、Midwest 及 ERCOT 各大区电力销售）；匹配发电量 MWh 待分部细拆",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    },
+    {
+      "component": "hhh_mpc_land_sales_fy24",
+      "parent_metric_id": "real_estate_services_driver_1",
+      "name_zh": "霍华德休斯 2024 全年主要规划社区住宅土地销售额",
+      "binding_role": "formula_input",
+      "limitation_zh": "全财年 MPC 分部住宅土地销售报告金额；实际分期现金回款与预售定金待按项目附注拆分",
+      "raw_unit": "USD_thousand",
+      "unit": "USD"
+    }
+  ]
+}

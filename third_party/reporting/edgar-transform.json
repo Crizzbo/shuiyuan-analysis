@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/Arelle/EDGAR",
+  "commit": "4891c4c9889c77af247428ceff4fa7cc52d534ea",
+  "plugin": ".venv/vendor/EDGAR/transform",
+  "files": {
+    ".venv/vendor/EDGAR/transform/__init__.py": "5a1445ba0c16da405bc20d93be9fa2d26fb2a2b99588b895deaada3f88682ce1",
+    ".venv/vendor/EDGAR/transform/text2num.py": "b06ef8647033055dafdebc7d33eeb99407b9ffcda56c0138ae87afe587bf800c"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "method": "multistage_dcf",
+  "parameters": {
+    "cash_flow": 100,
+    "growth_rates": [0.1, 0.05],
+    "discount_rate": 0.1,
+    "terminal_growth": 0.03,
+    "shares": 10,
+    "scope": "FCFF",
+    "net_debt": 50
+  },
+  "research_mapping": {
+    "calculation_id": "synthetic-dcf-001",
+    "output_specifications": [{"field": "value_per_share", "unit": "currency_per_share", "currency": "USD"}],
+    "observation_refs": [],
+    "assumption_refs": []
+  }
+}

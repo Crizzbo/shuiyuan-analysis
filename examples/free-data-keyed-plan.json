@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "jobs": [
+    {"id": "jp-edinet-day", "provider": "edinet", "dataset": "documents", "params": {"date": "2026-10-09"}},
+    {"id": "jp-delayed-master", "provider": "jquants", "dataset": "master", "params": {"date": "2026-07-01"}},
+    {"id": "jp-delayed-toyota", "provider": "jquants", "dataset": "daily", "params": {"code": "7203", "from": "2026-06-01", "to": "2026-07-01"}},
+    {"id": "intu-secondary-income", "provider": "alpha_vantage", "dataset": "income", "params": {"symbol": "INTU"}},
+    {"id": "us-gdp-vintage", "provider": "fred", "dataset": "observations", "params": {"series_id": "GDP", "realtime_start": "2026-07-01", "realtime_end": "2026-07-01"}},
+    {"id": "jp-cpi-search", "provider": "estat", "dataset": "search", "params": {"query": "consumer price"}}
+  ]
+}

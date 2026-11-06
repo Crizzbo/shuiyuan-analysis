@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.1.0-example",
+  "is_fictional": true,
+  "company_id": "example_company",
+  "security_ids": [],
+  "primary_industry_id": null,
+  "classification_status": "needs_review",
+  "effective_from": null,
+  "effective_to": null,
+  "known_at": null,
+  "evidence_refs": [],
+  "external_classifications": [],
+  "security_attributes": {"is_adr": false, "is_reit": false},
+  "segments": [
+    {"segment_id": "example_subscription", "industry_ids": ["software"], "business_model_ids": ["subscription"], "value_chain_roles": ["end_service"], "theme_tags": [], "weights": [{"basis": "revenue", "period": null, "value": null, "evidence_refs": []}]},
+    {"segment_id": "example_devices", "industry_ids": ["hardware"], "business_model_ids": ["product_sales"], "value_chain_roles": ["manufacturing"], "theme_tags": [], "weights": [{"basis": "revenue", "period": null, "value": null, "evidence_refs": []}]}
+  ],
+  "eliminations": [],
+  "unallocated_items": [],
+  "notes": "结构示例；时间、证据及权重为空，不能作为有效公司分析。"
+}

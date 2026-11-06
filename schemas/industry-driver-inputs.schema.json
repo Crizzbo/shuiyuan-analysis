@@ -1,0 +1,212 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "observation_snapshot_path",
+    "observation_snapshot_sha256",
+    "binding_plan_path",
+    "binding_plan_sha256",
+    "drivers"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "observation_snapshot_path": {
+      "type": "string"
+    },
+    "observation_snapshot_sha256": {
+      "type": "string"
+    },
+    "binding_plan_path": {
+      "type": "string"
+    },
+    "binding_plan_sha256": {
+      "type": "string"
+    },
+    "drivers": {
+      "type": "array",
+      "minItems": 123,
+      "maxItems": 123,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "parent_metric_id",
+          "industry_id",
+          "name_zh",
+          "business_definition_zh",
+          "selected_variant_zh",
+          "period_start",
+          "period_end",
+          "slots",
+          "missing_slot_ids",
+          "input_status",
+          "definition_status",
+          "calculation_ready",
+          "research_gate",
+          "related_observation_ids",
+          "limitations_zh"
+        ],
+        "properties": {
+          "parent_metric_id": {
+            "type": "string"
+          },
+          "industry_id": {
+            "type": "string"
+          },
+          "name_zh": {
+            "type": "string"
+          },
+          "business_definition_zh": {
+            "type": "string"
+          },
+          "selected_variant_zh": {
+            "type": "string"
+          },
+          "period_start": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "period_end": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "slots": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "slot_id",
+                "name_zh",
+                "status",
+                "bindings"
+              ],
+              "properties": {
+                "slot_id": {
+                  "type": "string"
+                },
+                "name_zh": {
+                  "type": "string"
+                },
+                "status": {
+                  "enum": [
+                    "bound",
+                    "missing"
+                  ]
+                },
+                "bindings": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "component",
+                      "kind",
+                      "scope",
+                      "unit",
+                      "observation_id",
+                      "source_ref",
+                      "available_at"
+                    ],
+                    "properties": {
+                      "component": {
+                        "type": "string"
+                      },
+                      "kind": {
+                        "enum": [
+                          "numeric",
+                          "scope_metadata",
+                          "period_metadata"
+                        ]
+                      },
+                      "scope": {
+                        "type": "string"
+                      },
+                      "unit": {
+                        "type": "string"
+                      },
+                      "observation_id": {
+                        "type": "string"
+                      },
+                      "source_ref": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "source_id",
+                          "revision",
+                          "sha256"
+                        ],
+                        "properties": {
+                          "source_id": {
+                            "type": "string"
+                          },
+                          "revision": {
+                            "type": "integer",
+                            "minimum": 1
+                          },
+                          "sha256": {
+                            "type": "string",
+                            "pattern": "^[a-f0-9]{64}$"
+                          }
+                        }
+                      },
+                      "available_at": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "missing_slot_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "input_status": {
+            "enum": [
+              "input_complete",
+              "partial_inputs",
+              "pending_input_binding"
+            ]
+          },
+          "definition_status": {
+            "enum": [
+              "company_variant_reviewed",
+              "definition_review_pending"
+            ]
+          },
+          "calculation_ready": {
+            "type": "boolean"
+          },
+          "research_gate": {
+            "const": "blocked"
+          },
+          "related_observation_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "limitations_zh": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "行业驱动输入台账"
+}

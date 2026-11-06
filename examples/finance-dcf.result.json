@@ -1,0 +1,58 @@
+{
+  "method": "multistage_dcf",
+  "method_version": "1.0.0",
+  "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+  "implementation_path": "finance_tools/valuation.py",
+  "library": null,
+  "library_version": null,
+  "parameters": {
+    "cash_flow": 100,
+    "discount_rate": 0.1,
+    "growth_rates": [
+      0.1,
+      0.05
+    ],
+    "net_debt": 50,
+    "scope": "FCFF",
+    "shares": 10,
+    "terminal_growth": 0.03
+  },
+  "input_sha256": "6e65197335e6370b2cedddd222660eb491e214b81bfc2cf00e3066aa9abe4a08",
+  "result": {
+    "scope": "FCFF",
+    "forecast": [
+      {
+        "year": 1,
+        "cash_flow": 110.00000000000001,
+        "present_value": 100.0
+      },
+      {
+        "year": 2,
+        "cash_flow": 115.50000000000001,
+        "present_value": 95.45454545454545
+      }
+    ],
+    "terminal_value": 1699.5,
+    "terminal_present_value": 1404.5454545454543,
+    "enterprise_value": 1599.9999999999998,
+    "equity_value": 1549.9999999999998,
+    "value_per_share": 154.99999999999997
+  },
+  "research_record": {
+    "id": "synthetic-dcf-001",
+    "method": "multistage_dcf",
+    "method_version": "1.0.0",
+    "implementation_path": "finance_tools/valuation.py",
+    "input_observation_refs": [],
+    "assumption_refs": [],
+    "outputs": [
+      {
+        "value": 154.99999999999997,
+        "unit": "currency_per_share",
+        "currency": "USD"
+      }
+    ],
+    "verification_status": "unchecked",
+    "verification_evidence_refs": []
+  }
+}

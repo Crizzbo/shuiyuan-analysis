@@ -1,0 +1,983 @@
+{
+  "schema_version": "1.0.0",
+  "research_id": "fictional_demo",
+  "revision": 1,
+  "is_fictional": true,
+  "as_of": "2026-10-10T12:00:00Z",
+  "recorded_at": "2026-10-11T00:00:00Z",
+  "market_session_date": "2026-10-09",
+  "investment_horizon_months": 12,
+  "subject": {
+    "company_id": "fictional_company",
+    "security_ids": [
+      "fictional_security"
+    ],
+    "segments": [
+      {
+        "id": "segment_software",
+        "name": "虚构软件分部",
+        "industry_ids": [
+          "software"
+        ],
+        "business_model_ids": [
+          "subscription"
+        ],
+        "classification_evidence_refs": [
+          "e_main"
+        ],
+        "subindustry_description": "虚构订阅业务，仅字段演示",
+        "weight_basis": "unknown",
+        "weight": null,
+        "weight_period": null,
+        "weight_evidence_refs": []
+      }
+    ],
+    "is_adr": false,
+    "is_reit": false,
+    "classification_status": "reviewed",
+    "unallocated_or_elimination_notes": "测试没有真实分部权重"
+  },
+  "evidence": [
+    {
+      "id": "e_main",
+      "source_path": "examples/support/fictional_evidence.md",
+      "locator": "基础信息",
+      "source_kind": "synthetic",
+      "published_at": "2026-10-10T12:00:00Z",
+      "available_at": "2026-10-10T12:00:00Z",
+      "acquired_at": "2026-10-10T12:00:00Z",
+      "excerpt_or_summary": "合成输入，仅验证结构",
+      "limitations": [
+        "不能支持真实交易"
+      ]
+    },
+    {
+      "id": "e_counter",
+      "source_path": "examples/support/fictional_evidence.md",
+      "locator": "反证",
+      "source_kind": "synthetic",
+      "published_at": "2026-10-10T12:00:00Z",
+      "available_at": "2026-10-10T12:00:00Z",
+      "acquired_at": "2026-10-10T12:00:00Z",
+      "excerpt_or_summary": "合成输入，仅验证结构",
+      "limitations": [
+        "不能支持真实交易"
+      ]
+    },
+    {
+      "id": "e_check",
+      "source_path": "examples/support/fictional_evidence.md",
+      "locator": "计算核对",
+      "source_kind": "synthetic",
+      "published_at": "2026-10-10T12:00:00Z",
+      "available_at": "2026-10-10T12:00:00Z",
+      "acquired_at": "2026-10-10T12:00:00Z",
+      "excerpt_or_summary": "合成输入，仅验证结构",
+      "limitations": [
+        "不能支持真实交易"
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "id": "o_price",
+      "metric_id": "market_price",
+      "segment_id": null,
+      "period": {
+        "start": "2026-10-09",
+        "end": "2026-10-09",
+        "basis": "point_in_time"
+      },
+      "available_at": "2026-10-10T12:00:00Z",
+      "value": {
+        "value": 100,
+        "unit": "currency_per_share",
+        "currency": "USD"
+      },
+      "missing_reason": null,
+      "accounting_basis": "不适用；合成收盘价",
+      "comparability_notes": "合成单位，非真实行情",
+      "evidence_refs": [
+        "e_main"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "c_fact",
+      "kind": "fact",
+      "statement": "合成测试判断，不对应真实公司",
+      "evidence_refs": [
+        "e_main"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [
+        "e_counter"
+      ],
+      "assumption_refs": [],
+      "uncertainty": "无真实证据，禁止行动"
+    },
+    {
+      "id": "c_inference",
+      "kind": "inference",
+      "statement": "合成测试判断，不对应真实公司",
+      "evidence_refs": [
+        "e_main"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [
+        "e_counter"
+      ],
+      "assumption_refs": [],
+      "uncertainty": "无真实证据，禁止行动"
+    },
+    {
+      "id": "c_assumption",
+      "kind": "assumption",
+      "statement": "合成测试判断，不对应真实公司",
+      "evidence_refs": [
+        "e_main"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [
+        "e_counter"
+      ],
+      "assumption_refs": [],
+      "uncertainty": "无真实证据，禁止行动"
+    }
+  ],
+  "calculations": [
+    {
+      "id": "calc_bear",
+      "method": "synthetic price times factor",
+      "method_version": "demo-1",
+      "implementation_path": "examples/support/scenario_demo.py",
+      "input_observation_refs": [
+        "o_price"
+      ],
+      "assumption_refs": [
+        "c_assumption"
+      ],
+      "outputs": [
+        {
+          "value": 80.0,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_check"
+      ]
+    },
+    {
+      "id": "calc_base",
+      "method": "synthetic price times factor",
+      "method_version": "demo-1",
+      "implementation_path": "examples/support/scenario_demo.py",
+      "input_observation_refs": [
+        "o_price"
+      ],
+      "assumption_refs": [
+        "c_assumption"
+      ],
+      "outputs": [
+        {
+          "value": 100,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_check"
+      ]
+    },
+    {
+      "id": "calc_bull",
+      "method": "synthetic price times factor",
+      "method_version": "demo-1",
+      "implementation_path": "examples/support/scenario_demo.py",
+      "input_observation_refs": [
+        "o_price"
+      ],
+      "assumption_refs": [
+        "c_assumption"
+      ],
+      "outputs": [
+        {
+          "value": 120.0,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_check"
+      ]
+    },
+    {
+      "id": "calc_cross",
+      "method": "synthetic crosscheck",
+      "method_version": "demo-1",
+      "implementation_path": "examples/support/scenario_demo.py",
+      "input_observation_refs": [
+        "o_price"
+      ],
+      "assumption_refs": [
+        "c_assumption"
+      ],
+      "outputs": [
+        {
+          "value": 100,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_check"
+      ]
+    },
+    {
+      "id": "calc_sensitivity",
+      "method": "synthetic sensitivity",
+      "method_version": "demo-1",
+      "implementation_path": "examples/support/scenario_demo.py",
+      "input_observation_refs": [
+        "o_price"
+      ],
+      "assumption_refs": [
+        "c_assumption"
+      ],
+      "outputs": [
+        {
+          "value": 110,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_check"
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "id": "S1",
+      "version": 1,
+      "status": "completed",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [
+          "e_main"
+        ],
+        "observation_refs": [
+          "o_price"
+        ],
+        "claim_refs": [
+          "c_inference"
+        ]
+      },
+      "gates": [
+        {
+          "id": "classification",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "cycle_dimensions",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "evidence_traceable",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        }
+      ],
+      "output": {
+        "segment_positions": [
+          {
+            "segment_id": "segment_software",
+            "industry_rule_id": "software",
+            "positions": {
+              "lifecycle": {
+                "verdict": "synthetic_test_only",
+                "claim_refs": [
+                  "c_inference"
+                ],
+                "limitations": [
+                  "无真实市场证据"
+                ]
+              },
+              "supply_demand": {
+                "verdict": "synthetic_test_only",
+                "claim_refs": [
+                  "c_inference"
+                ],
+                "limitations": [
+                  "无真实市场证据"
+                ]
+              },
+              "earnings": {
+                "verdict": "synthetic_test_only",
+                "claim_refs": [
+                  "c_inference"
+                ],
+                "limitations": [
+                  "无真实市场证据"
+                ]
+              },
+              "credit": {
+                "verdict": "synthetic_test_only",
+                "claim_refs": [
+                  "c_inference"
+                ],
+                "limitations": [
+                  "无真实市场证据"
+                ]
+              },
+              "sentiment": {
+                "verdict": "synthetic_test_only",
+                "claim_refs": [
+                  "c_inference"
+                ],
+                "limitations": [
+                  "无真实市场证据"
+                ]
+              },
+              "pricing": {
+                "verdict": "synthetic_test_only",
+                "claim_refs": [
+                  "c_inference"
+                ],
+                "limitations": [
+                  "无真实市场证据"
+                ]
+              }
+            }
+          }
+        ],
+        "research_priorities": [
+          "验证真实数据；演示不能用于行动"
+        ],
+        "conclusion_claim_refs": [
+          "c_inference"
+        ]
+      },
+      "notes": [
+        "合成演示禁止交易"
+      ]
+    },
+    {
+      "id": "S2",
+      "version": 1,
+      "status": "completed",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [
+          {
+            "step_id": "S1",
+            "version": 1
+          }
+        ],
+        "evidence_refs": [
+          "e_main"
+        ],
+        "observation_refs": [
+          "o_price"
+        ],
+        "claim_refs": [
+          "c_inference"
+        ]
+      },
+      "gates": [
+        {
+          "id": "mandatory_checks",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "counterevidence",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "financial_comparability",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        }
+      ],
+      "output": {
+        "checks": {
+          "business_model": {
+            "verdict": "synthetic_test_only",
+            "claim_refs": [
+              "c_inference"
+            ],
+            "limitations": [
+              "无真实市场证据"
+            ]
+          },
+          "demand_growth": {
+            "verdict": "synthetic_test_only",
+            "claim_refs": [
+              "c_inference"
+            ],
+            "limitations": [
+              "无真实市场证据"
+            ]
+          },
+          "competition": {
+            "verdict": "synthetic_test_only",
+            "claim_refs": [
+              "c_inference"
+            ],
+            "limitations": [
+              "无真实市场证据"
+            ]
+          },
+          "financial_quality": {
+            "verdict": "synthetic_test_only",
+            "claim_refs": [
+              "c_inference"
+            ],
+            "limitations": [
+              "无真实市场证据"
+            ]
+          },
+          "cash_flow": {
+            "verdict": "synthetic_test_only",
+            "claim_refs": [
+              "c_inference"
+            ],
+            "limitations": [
+              "无真实市场证据"
+            ]
+          },
+          "debt_liquidity": {
+            "verdict": "synthetic_test_only",
+            "claim_refs": [
+              "c_inference"
+            ],
+            "limitations": [
+              "无真实市场证据"
+            ]
+          },
+          "governance": {
+            "verdict": "synthetic_test_only",
+            "claim_refs": [
+              "c_inference"
+            ],
+            "limitations": [
+              "无真实市场证据"
+            ]
+          },
+          "capital_allocation": {
+            "verdict": "synthetic_test_only",
+            "claim_refs": [
+              "c_inference"
+            ],
+            "limitations": [
+              "无真实市场证据"
+            ]
+          }
+        },
+        "thesis_claim_refs": [
+          "c_inference"
+        ],
+        "critical_unknown_claim_refs": []
+      },
+      "notes": [
+        "合成演示禁止交易"
+      ]
+    },
+    {
+      "id": "S3",
+      "version": 1,
+      "status": "completed",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [
+          {
+            "step_id": "S1",
+            "version": 1
+          },
+          {
+            "step_id": "S2",
+            "version": 1
+          }
+        ],
+        "evidence_refs": [
+          "e_main"
+        ],
+        "observation_refs": [
+          "o_price"
+        ],
+        "claim_refs": [
+          "c_inference"
+        ]
+      },
+      "gates": [
+        {
+          "id": "transmission",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "monitoring",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "invalidation_conditions",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        }
+      ],
+      "output": {
+        "catalysts": [],
+        "no_catalyst_reason": "合成例子不含真实催化剂",
+        "monitoring_indicators": [
+          {
+            "metric_id": "software_driver_1",
+            "rationale": "演示软件留存跟踪",
+            "cadence": "quarterly",
+            "baseline_observation_refs": [],
+            "missing_baseline_reason": "没有真实留存数据"
+          }
+        ],
+        "invalidation_triggers": [
+          {
+            "id": "trigger_demo",
+            "description": "合成假设改变",
+            "metric_ids": [
+              "software_driver_1"
+            ],
+            "condition_description": "出现新的可比留存证据",
+            "claim_refs": [
+              "c_inference"
+            ],
+            "target_steps": [
+              "S1"
+            ]
+          }
+        ]
+      },
+      "notes": [
+        "合成演示禁止交易"
+      ]
+    },
+    {
+      "id": "S4",
+      "version": 1,
+      "status": "completed",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [
+          {
+            "step_id": "S1",
+            "version": 1
+          },
+          {
+            "step_id": "S2",
+            "version": 1
+          },
+          {
+            "step_id": "S3",
+            "version": 1
+          }
+        ],
+        "evidence_refs": [
+          "e_main"
+        ],
+        "observation_refs": [
+          "o_price"
+        ],
+        "claim_refs": [
+          "c_inference"
+        ]
+      },
+      "gates": [
+        {
+          "id": "model_applicability",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "scenario_calculations",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "crosscheck",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "sensitivity",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "value_bridge",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        }
+      ],
+      "output": {
+        "valuation_method": "synthetic arithmetic, NOT financial valuation",
+        "applicability_claim_refs": [
+          "c_inference"
+        ],
+        "price_observation_ref": "o_price",
+        "scenarios": [
+          {
+            "name": "bear",
+            "assumption_refs": [
+              "c_assumption"
+            ],
+            "intrinsic_value_per_share": {
+              "value": 80.0,
+              "unit": "currency_per_share",
+              "currency": "USD"
+            },
+            "calculation_refs": [
+              "calc_bear"
+            ],
+            "probability": null
+          },
+          {
+            "name": "base",
+            "assumption_refs": [
+              "c_assumption"
+            ],
+            "intrinsic_value_per_share": {
+              "value": 100,
+              "unit": "currency_per_share",
+              "currency": "USD"
+            },
+            "calculation_refs": [
+              "calc_base"
+            ],
+            "probability": null
+          },
+          {
+            "name": "bull",
+            "assumption_refs": [
+              "c_assumption"
+            ],
+            "intrinsic_value_per_share": {
+              "value": 120.0,
+              "unit": "currency_per_share",
+              "currency": "USD"
+            },
+            "calculation_refs": [
+              "calc_bull"
+            ],
+            "probability": null
+          }
+        ],
+        "probability_basis_claim_refs": [],
+        "crosscheck_calculation_refs": [
+          "calc_cross"
+        ],
+        "sensitivity_calculation_refs": [
+          "calc_sensitivity"
+        ],
+        "market_expectation_claim_refs": [
+          "c_inference"
+        ],
+        "value_bridge_claim_refs": [
+          "c_inference"
+        ],
+        "valuation_horizon": {
+          "start": "2026-10-10",
+          "end": "2027-10-10",
+          "basis": "custom"
+        },
+        "investment_horizon": {
+          "start": "2026-10-10",
+          "end": "2027-10-10",
+          "basis": "custom"
+        },
+        "limitations": [
+          "演示计算，非金融模型"
+        ]
+      },
+      "notes": [
+        "合成演示禁止交易"
+      ]
+    },
+    {
+      "id": "S5",
+      "version": 1,
+      "status": "completed",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [
+          {
+            "step_id": "S1",
+            "version": 1
+          },
+          {
+            "step_id": "S2",
+            "version": 1
+          },
+          {
+            "step_id": "S3",
+            "version": 1
+          },
+          {
+            "step_id": "S4",
+            "version": 1
+          }
+        ],
+        "evidence_refs": [
+          "e_main"
+        ],
+        "observation_refs": [
+          "o_price"
+        ],
+        "claim_refs": [
+          "c_inference"
+        ]
+      },
+      "gates": [
+        {
+          "id": "permanent_loss",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "action_conditions",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "portfolio_scope",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "decision_evidence",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        }
+      ],
+      "output": {
+        "decision": "watch",
+        "company_quality": {
+          "verdict": "synthetic_test_only",
+          "claim_refs": [
+            "c_inference"
+          ],
+          "limitations": [
+            "无真实市场证据"
+          ]
+        },
+        "price_attractiveness": {
+          "verdict": "synthetic_test_only",
+          "claim_refs": [
+            "c_inference"
+          ],
+          "limitations": [
+            "无真实市场证据"
+          ]
+        },
+        "action_suitability": {
+          "verdict": "synthetic_test_only",
+          "claim_refs": [
+            "c_inference"
+          ],
+          "limitations": [
+            "无真实市场证据"
+          ]
+        },
+        "permanent_loss_risks": [
+          {
+            "verdict": "synthetic_test_only",
+            "claim_refs": [
+              "c_inference"
+            ],
+            "limitations": [
+              "无真实市场证据"
+            ]
+          }
+        ],
+        "entry_conditions": [
+          "真实数据与验证规则未具备，不行动"
+        ],
+        "exit_conditions": [
+          "仅示例"
+        ],
+        "portfolio_assessment": "not_assessed",
+        "portfolio_evidence_refs": [],
+        "portfolio_calculation_refs": [],
+        "position_fraction": null,
+        "validated_rule_refs": [],
+        "decision_claim_refs": [
+          "c_inference"
+        ]
+      },
+      "notes": [
+        "合成演示禁止交易"
+      ]
+    },
+    {
+      "id": "S6",
+      "version": 1,
+      "status": "completed",
+      "updated_at": "2026-10-10T12:00:00Z",
+      "inputs": {
+        "dependencies": [
+          {
+            "step_id": "S1",
+            "version": 1
+          },
+          {
+            "step_id": "S2",
+            "version": 1
+          },
+          {
+            "step_id": "S3",
+            "version": 1
+          },
+          {
+            "step_id": "S4",
+            "version": 1
+          },
+          {
+            "step_id": "S5",
+            "version": 1
+          }
+        ],
+        "evidence_refs": [
+          "e_main"
+        ],
+        "observation_refs": [
+          "o_price"
+        ],
+        "claim_refs": [
+          "c_inference"
+        ]
+      },
+      "gates": [
+        {
+          "id": "monitoring_schedule",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "rerun_triggers",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        },
+        {
+          "id": "review_plan",
+          "result": "pass",
+          "reason": "仅合成结构验收，非真实研究通过",
+          "evidence_refs": [
+            "e_check"
+          ]
+        }
+      ],
+      "output": {
+        "monitoring_plan": [
+          {
+            "metric_id": "software_driver_1",
+            "cadence": "quarterly",
+            "owner": "用户",
+            "last_observation_ref": null,
+            "next_due_at": "2026-11-01T00:00:00Z"
+          }
+        ],
+        "triggers": [
+          {
+            "id": "trigger_demo",
+            "description": "合成假设改变",
+            "metric_ids": [
+              "software_driver_1"
+            ],
+            "condition_description": "出现新的可比留存证据",
+            "claim_refs": [
+              "c_inference"
+            ],
+            "target_steps": [
+              "S1"
+            ]
+          }
+        ],
+        "review_records": [],
+        "next_review_at": "2026-11-01T00:00:00Z"
+      },
+      "notes": [
+        "合成演示禁止交易"
+      ]
+    }
+  ],
+  "invalidation_events": []
+}

@@ -1,0 +1,241 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shuiyuan:source-manifest:1.1.0",
+  "title": "项目内资料版本登记",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_id",
+    "revision",
+    "source_path",
+    "source_kind",
+    "dataset_kind",
+    "published_at",
+    "available_at",
+    "acquired_at",
+    "effective_period",
+    "license_notes",
+    "quality_notes",
+    "supersedes_revision"
+  ],
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "1.0.0",
+        "1.1.0"
+      ]
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source_path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z][A-Za-z0-9+.-]*:)(?![/\\\\]).+"
+    },
+    "source_kind": {
+      "enum": [
+        "primary",
+        "secondary",
+        "project_design",
+        "synthetic"
+      ]
+    },
+    "dataset_kind": {
+      "enum": [
+        "financial",
+        "market",
+        "industry",
+        "news",
+        "company_action",
+        "classification",
+        "research_material",
+        "other"
+      ]
+    },
+    "published_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "title": "精确发布时间",
+      "description": "未知时为空，禁止从日期补造午夜时间"
+    },
+    "available_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "acquired_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "effective_period": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "end"
+          ],
+          "properties": {
+            "start": {
+              "type": "string",
+              "format": "date"
+            },
+            "end": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        }
+      ]
+    },
+    "license_notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "quality_notes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "supersedes_revision": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "published_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "title": "发布日期",
+      "description": "仅来自官方页面的日期证据；不替代首次观察时刻"
+    },
+    "publication_precision": {
+      "enum": [
+        "instant",
+        "date",
+        "unknown"
+      ],
+      "title": "发布时间精度",
+      "description": "明确区分精确时刻、日期和未知"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "schema_version": {
+            "const": "1.0.0"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "published_at": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schema_version": {
+            "const": "1.1.0"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "published_date",
+          "publication_precision"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "publication_precision"
+        ],
+        "properties": {
+          "publication_precision": {
+            "const": "instant"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "published_at": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "publication_precision"
+        ],
+        "properties": {
+          "publication_precision": {
+            "const": "date"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "published_at": {
+            "type": "null"
+          },
+          "published_date": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "publication_precision"
+        ],
+        "properties": {
+          "publication_precision": {
+            "const": "unknown"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "published_at": {
+            "type": "null"
+          },
+          "published_date": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,335 @@
+{
+  "schema_version": "1.0.0",
+  "spreadsheet_id": "CONFIGURE_YOUR_OWN_CLOUD_TARGET",
+  "sheet_name": "行业行情验证",
+  "securities": [
+    {
+      "row": 2,
+      "ticker": "NYSE:EOG",
+      "name": "EOG Resources",
+      "industry_id": "oil_gas",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 3,
+      "ticker": "NYSE:RIG",
+      "name": "Transocean",
+      "industry_id": "energy_services",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 4,
+      "ticker": "NYSE:EPD",
+      "name": "Enterprise Products Partners",
+      "industry_id": "midstream",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 5,
+      "ticker": "NYSE:FCX",
+      "name": "Freeport-McMoRan",
+      "industry_id": "mining",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 6,
+      "ticker": "NYSE:DOW",
+      "name": "Dow",
+      "industry_id": "chemicals",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 7,
+      "ticker": "NYSE:PKG",
+      "name": "Packaging Corporation of America",
+      "industry_id": "packaging",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 8,
+      "ticker": "NYSE:GEV",
+      "name": "GE Vernova",
+      "industry_id": "capital_goods",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 9,
+      "ticker": "NYSE:LMT",
+      "name": "Lockheed Martin",
+      "industry_id": "aerospace_defense",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 10,
+      "ticker": "NYSE:DAL",
+      "name": "Delta Air Lines",
+      "industry_id": "transport_logistics",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 11,
+      "ticker": "NASDAQ:ADP",
+      "name": "Automatic Data Processing",
+      "industry_id": "business_services",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 12,
+      "ticker": "NYSE:FLR",
+      "name": "Fluor",
+      "industry_id": "construction",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 13,
+      "ticker": "TYO:7203",
+      "name": "Toyota Motor",
+      "industry_id": "autos",
+      "market": "JP",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 14,
+      "ticker": "NASDAQ:WMT",
+      "name": "Walmart",
+      "industry_id": "retail",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 15,
+      "ticker": "NYSE:MCD",
+      "name": "McDonald’s",
+      "industry_id": "restaurants",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 16,
+      "ticker": "NASDAQ:MAR",
+      "name": "Marriott International",
+      "industry_id": "travel_leisure",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 17,
+      "ticker": "NYSE:DHI",
+      "name": "D.R. Horton",
+      "industry_id": "housing_durables",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 18,
+      "ticker": "NYSE:KO",
+      "name": "Coca-Cola",
+      "industry_id": "food_beverage",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 19,
+      "ticker": "NYSE:PG",
+      "name": "Procter & Gamble",
+      "industry_id": "household_personal",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 20,
+      "ticker": "NASDAQ:COST",
+      "name": "Costco",
+      "industry_id": "staples_retail",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 21,
+      "ticker": "NYSE:PM",
+      "name": "Philip Morris International",
+      "industry_id": "tobacco",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 22,
+      "ticker": "NYSE:PFE",
+      "name": "Pfizer",
+      "industry_id": "pharma",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 23,
+      "ticker": "NASDAQ:MRNA",
+      "name": "Moderna",
+      "industry_id": "biotech",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 24,
+      "ticker": "NASDAQ:ISRG",
+      "name": "Intuitive Surgical",
+      "industry_id": "medical_devices",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 25,
+      "ticker": "NYSE:HCA",
+      "name": "HCA Healthcare",
+      "industry_id": "health_services",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 26,
+      "ticker": "NYSE:UNH",
+      "name": "UnitedHealth Group",
+      "industry_id": "managed_care",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 27,
+      "ticker": "NYSE:JPM",
+      "name": "JPMorgan Chase",
+      "industry_id": "banks",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 28,
+      "ticker": "NYSE:CB",
+      "name": "Chubb",
+      "industry_id": "insurance",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 29,
+      "ticker": "NYSE:BLK",
+      "name": "BlackRock",
+      "industry_id": "asset_management",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 30,
+      "ticker": "NYSE:V",
+      "name": "Visa",
+      "industry_id": "payments",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 31,
+      "ticker": "NASDAQ:DDOG",
+      "name": "Datadog",
+      "industry_id": "software",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 32,
+      "ticker": "NASDAQ:MU",
+      "name": "Micron Technology",
+      "industry_id": "semiconductors",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 33,
+      "ticker": "TYO:8035",
+      "name": "Tokyo Electron",
+      "industry_id": "semi_equipment",
+      "market": "JP",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 34,
+      "ticker": "TYO:6758",
+      "name": "Sony Group",
+      "industry_id": "hardware",
+      "market": "JP",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 35,
+      "ticker": "NYSE:ACN",
+      "name": "Accenture",
+      "industry_id": "it_services",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 36,
+      "ticker": "NYSE:VZ",
+      "name": "Verizon",
+      "industry_id": "telecom",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 37,
+      "ticker": "NASDAQ:META",
+      "name": "Meta Platforms",
+      "industry_id": "digital_platforms",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 38,
+      "ticker": "NASDAQ:NFLX",
+      "name": "Netflix",
+      "industry_id": "media_entertainment",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 39,
+      "ticker": "NYSE:DUK",
+      "name": "Duke Energy",
+      "industry_id": "regulated_utilities",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 40,
+      "ticker": "NASDAQ:CEG",
+      "name": "Constellation Energy",
+      "industry_id": "merchant_power",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 41,
+      "ticker": "NYSE:PLD",
+      "name": "Prologis",
+      "industry_id": "equity_reit",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    },
+    {
+      "row": 42,
+      "ticker": "NYSE:HHH",
+      "name": "Howard Hughes Holdings",
+      "industry_id": "real_estate_services",
+      "market": "US",
+      "exchange_mapping_status": "candidate_requires_identity_review"
+    }
+  ]
+}

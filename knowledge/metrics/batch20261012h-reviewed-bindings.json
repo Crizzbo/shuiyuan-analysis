@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "jpm_firm_average_retained_loans_2025",
+      "parent_metric_id": "banks_driver_2",
+      "name_zh": "摩根大通 2025 全年全集团平均留存贷款",
+      "binding_role": "formula_input",
+      "limitation_zh": "全财年合并全集团平均留存贷款（1,330,946 million USD）；与全集团净核销额完全同口径同期间",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    },
+    {
+      "component": "dhi_cancelled_sales_orders_fy25",
+      "parent_metric_id": "housing_durables_driver_1",
+      "name_zh": "霍顿房屋 FY2025 全年取消住宅订单套数",
+      "binding_role": "formula_input",
+      "limitation_zh": "FY2025 全财年住宅取消订单物理套数（18,312 套）；与报告取消率 18% 订单群同期间",
+      "raw_unit": "units",
+      "unit": "units"
+    },
+    {
+      "component": "pm_smoke_free_operating_income_2025",
+      "parent_metric_id": "tobacco_driver_3",
+      "name_zh": "菲莫国际 2025 全年无烟业务经营利润",
+      "binding_role": "formula_input",
+      "limitation_zh": "2025 全年无烟业务分部经营利润（6,800 million USD）；与无烟业务净收入同范围同期间",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    },
+    {
+      "component": "mar_comparable_rooms_sold_2025",
+      "parent_metric_id": "travel_leisure_driver_1",
+      "name_zh": "万豪国际 2025 全年美加可比自营酒店售出间夜数",
+      "binding_role": "formula_input",
+      "limitation_zh": "2025 全年美加可比自营酒店实际售出客房物理间夜数（18,740,000 间夜）；与入住率口径同群同期间",
+      "raw_unit": "room_nights",
+      "unit": "room_nights"
+    },
+    {
+      "component": "mar_comparable_rooms_revenue_2025",
+      "parent_metric_id": "travel_leisure_driver_2",
+      "name_zh": "万豪国际 2025 全年美加可比自营酒店匹配客房收入",
+      "binding_role": "formula_input",
+      "limitation_zh": "2025 全年美加可比自营酒店客房收入（5,047 million USD）；与 ADR 同范围同期间",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    }
+  ]
+}

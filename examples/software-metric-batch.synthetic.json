@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0.0",
+  "entity_id": "synthetic_software",
+  "scope_id": "consolidated",
+  "industry_id": "software",
+  "currency": "USD",
+  "as_of": "2026-03-01T00:00:00Z",
+  "is_synthetic": true,
+  "facts": [
+    {
+      "id": "raw-operating_income",
+      "field": "operating_income",
+      "entity_id": "synthetic_software",
+      "scope_id": "consolidated",
+      "period": {
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "basis": "annual"
+      },
+      "accounting_basis": "GAAP",
+      "value": 20,
+      "unit": "currency",
+      "currency": "USD",
+      "scale": 1000000,
+      "source": {
+        "path": "examples/support/software-financials.synthetic.txt",
+        "sha256": "85dab32cfecd4486568fa389e26ced663889f3c022ed6362d2456d652a13a502",
+        "locator": "第 2 行",
+        "excerpt": "2025 年营业利润 20，收入 100，普通股净利润 10，平均普通股权益 50；单位百万 USD。",
+        "kind": "synthetic",
+        "published_at": "2026-02-01T00:00:00Z",
+        "available_at": "2026-02-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "raw-revenue",
+      "field": "revenue",
+      "entity_id": "synthetic_software",
+      "scope_id": "consolidated",
+      "period": {
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "basis": "annual"
+      },
+      "accounting_basis": "GAAP",
+      "value": 100,
+      "unit": "currency",
+      "currency": "USD",
+      "scale": 1000000,
+      "source": {
+        "path": "examples/support/software-financials.synthetic.txt",
+        "sha256": "85dab32cfecd4486568fa389e26ced663889f3c022ed6362d2456d652a13a502",
+        "locator": "第 2 行",
+        "excerpt": "2025 年营业利润 20，收入 100，普通股净利润 10，平均普通股权益 50；单位百万 USD。",
+        "kind": "synthetic",
+        "published_at": "2026-02-01T00:00:00Z",
+        "available_at": "2026-02-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "raw-common_net_income",
+      "field": "common_net_income",
+      "entity_id": "synthetic_software",
+      "scope_id": "consolidated",
+      "period": {
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "basis": "annual"
+      },
+      "accounting_basis": "GAAP",
+      "value": 10,
+      "unit": "currency",
+      "currency": "USD",
+      "scale": 1000000,
+      "source": {
+        "path": "examples/support/software-financials.synthetic.txt",
+        "sha256": "85dab32cfecd4486568fa389e26ced663889f3c022ed6362d2456d652a13a502",
+        "locator": "第 2 行",
+        "excerpt": "2025 年营业利润 20，收入 100，普通股净利润 10，平均普通股权益 50；单位百万 USD。",
+        "kind": "synthetic",
+        "published_at": "2026-02-01T00:00:00Z",
+        "available_at": "2026-02-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "raw-average_common_equity",
+      "field": "average_common_equity",
+      "entity_id": "synthetic_software",
+      "scope_id": "consolidated",
+      "period": {
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "basis": "annual"
+      },
+      "accounting_basis": "GAAP",
+      "value": 50,
+      "unit": "currency",
+      "currency": "USD",
+      "scale": 1000000,
+      "source": {
+        "path": "examples/support/software-financials.synthetic.txt",
+        "sha256": "85dab32cfecd4486568fa389e26ced663889f3c022ed6362d2456d652a13a502",
+        "locator": "第 2 行",
+        "excerpt": "2025 年营业利润 20，收入 100，普通股净利润 10，平均普通股权益 50；单位百万 USD。",
+        "kind": "synthetic",
+        "published_at": "2026-02-01T00:00:00Z",
+        "available_at": "2026-02-01T00:00:00Z"
+      }
+    }
+  ],
+  "requests": [
+    "operating_margin",
+    "roe",
+    "software_driver_1",
+    "software_driver_2",
+    "software_driver_3"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "pfe_eliquis_worldwide_revenue_fy24",
+      "parent_metric_id": "pharma_driver_1",
+      "name_zh": "辉瑞 Eliquis 全球年度净销售收入",
+      "binding_role": "formula_input",
+      "limitation_zh": "全球 Eliquis 合并净销售额（含联盟分成与直接销售）；未拆分各国家地区单项净销售额",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    },
+    {
+      "component": "visa_payments_volume_fy24",
+      "parent_metric_id": "payments_driver_1",
+      "name_zh": "Visa 全财年名义支付处理总额",
+      "binding_role": "formula_input",
+      "limitation_zh": "全球 Visa 品牌卡片及支付形态名义支付处理总额（不含现金提现交易与欧洲双标卡剔除口径）",
+      "raw_unit": "USD_trillion",
+      "unit": "USD"
+    },
+    {
+      "component": "visa_net_revenue_fy24",
+      "parent_metric_id": "payments_driver_2",
+      "name_zh": "Visa 全财年合并净营业收入",
+      "binding_role": "formula_input",
+      "limitation_zh": "全财年合并净营业收入（含服务、数据处理、国际交易扣除客户激励后的净额）",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    }
+  ]
+}

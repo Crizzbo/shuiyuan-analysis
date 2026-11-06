@@ -1,0 +1,833 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shuiyuan:market-snapshot:1.0.0",
+  "title": "二级行情快照",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_kind",
+    "source_id",
+    "source_path",
+    "source_sha256",
+    "acquired_at",
+    "spreadsheet_id",
+    "sheet_name",
+    "spreadsheet_timezone",
+    "quotes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "source_kind": {
+      "const": "secondary"
+    },
+    "source_id": {
+      "const": "google_finance_sheets"
+    },
+    "source_path": {
+      "type": "string"
+    },
+    "source_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "acquired_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "spreadsheet_id": {
+      "type": "string"
+    },
+    "sheet_name": {
+      "type": "string"
+    },
+    "spreadsheet_timezone": {
+      "type": "string"
+    },
+    "quotes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ticker",
+          "name",
+          "industry_id",
+          "market",
+          "row",
+          "fields",
+          "quote_status",
+          "freshness_status",
+          "trade_timezone_status"
+        ],
+        "properties": {
+          "ticker": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "industry_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "market": {
+            "enum": [
+              "US",
+              "JP"
+            ]
+          },
+          "row": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "fields": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "price",
+              "currency",
+              "marketcap",
+              "volume",
+              "pe",
+              "eps",
+              "tradetime",
+              "datadelay",
+              "high52",
+              "low52"
+            ],
+            "properties": {
+              "price": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "attribute",
+                  "value",
+                  "unit",
+                  "status",
+                  "formula",
+                  "display_value",
+                  "provider_error"
+                ],
+                "properties": {
+                  "attribute": {
+                    "enum": [
+                      "price",
+                      "currency",
+                      "marketcap",
+                      "volume",
+                      "pe",
+                      "eps",
+                      "tradetime",
+                      "datadelay",
+                      "high52",
+                      "low52"
+                    ]
+                  },
+                  "value": {
+                    "type": [
+                      "number",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "unit": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "enum": [
+                      "ok",
+                      "missing",
+                      "formula_mismatch",
+                      "provider_error",
+                      "invalid_value"
+                    ]
+                  },
+                  "formula": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "display_value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "provider_error": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    ]
+                  }
+                }
+              },
+              "currency": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "attribute",
+                  "value",
+                  "unit",
+                  "status",
+                  "formula",
+                  "display_value",
+                  "provider_error"
+                ],
+                "properties": {
+                  "attribute": {
+                    "enum": [
+                      "price",
+                      "currency",
+                      "marketcap",
+                      "volume",
+                      "pe",
+                      "eps",
+                      "tradetime",
+                      "datadelay",
+                      "high52",
+                      "low52"
+                    ]
+                  },
+                  "value": {
+                    "type": [
+                      "number",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "unit": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "enum": [
+                      "ok",
+                      "missing",
+                      "formula_mismatch",
+                      "provider_error",
+                      "invalid_value"
+                    ]
+                  },
+                  "formula": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "display_value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "provider_error": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    ]
+                  }
+                }
+              },
+              "marketcap": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "attribute",
+                  "value",
+                  "unit",
+                  "status",
+                  "formula",
+                  "display_value",
+                  "provider_error"
+                ],
+                "properties": {
+                  "attribute": {
+                    "enum": [
+                      "price",
+                      "currency",
+                      "marketcap",
+                      "volume",
+                      "pe",
+                      "eps",
+                      "tradetime",
+                      "datadelay",
+                      "high52",
+                      "low52"
+                    ]
+                  },
+                  "value": {
+                    "type": [
+                      "number",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "unit": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "enum": [
+                      "ok",
+                      "missing",
+                      "formula_mismatch",
+                      "provider_error",
+                      "invalid_value"
+                    ]
+                  },
+                  "formula": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "display_value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "provider_error": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    ]
+                  }
+                }
+              },
+              "volume": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "attribute",
+                  "value",
+                  "unit",
+                  "status",
+                  "formula",
+                  "display_value",
+                  "provider_error"
+                ],
+                "properties": {
+                  "attribute": {
+                    "enum": [
+                      "price",
+                      "currency",
+                      "marketcap",
+                      "volume",
+                      "pe",
+                      "eps",
+                      "tradetime",
+                      "datadelay",
+                      "high52",
+                      "low52"
+                    ]
+                  },
+                  "value": {
+                    "type": [
+                      "number",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "unit": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "enum": [
+                      "ok",
+                      "missing",
+                      "formula_mismatch",
+                      "provider_error",
+                      "invalid_value"
+                    ]
+                  },
+                  "formula": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "display_value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "provider_error": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    ]
+                  }
+                }
+              },
+              "pe": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "attribute",
+                  "value",
+                  "unit",
+                  "status",
+                  "formula",
+                  "display_value",
+                  "provider_error"
+                ],
+                "properties": {
+                  "attribute": {
+                    "enum": [
+                      "price",
+                      "currency",
+                      "marketcap",
+                      "volume",
+                      "pe",
+                      "eps",
+                      "tradetime",
+                      "datadelay",
+                      "high52",
+                      "low52"
+                    ]
+                  },
+                  "value": {
+                    "type": [
+                      "number",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "unit": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "enum": [
+                      "ok",
+                      "missing",
+                      "formula_mismatch",
+                      "provider_error",
+                      "invalid_value"
+                    ]
+                  },
+                  "formula": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "display_value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "provider_error": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    ]
+                  }
+                }
+              },
+              "eps": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "attribute",
+                  "value",
+                  "unit",
+                  "status",
+                  "formula",
+                  "display_value",
+                  "provider_error"
+                ],
+                "properties": {
+                  "attribute": {
+                    "enum": [
+                      "price",
+                      "currency",
+                      "marketcap",
+                      "volume",
+                      "pe",
+                      "eps",
+                      "tradetime",
+                      "datadelay",
+                      "high52",
+                      "low52"
+                    ]
+                  },
+                  "value": {
+                    "type": [
+                      "number",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "unit": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "enum": [
+                      "ok",
+                      "missing",
+                      "formula_mismatch",
+                      "provider_error",
+                      "invalid_value"
+                    ]
+                  },
+                  "formula": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "display_value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "provider_error": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    ]
+                  }
+                }
+              },
+              "tradetime": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "attribute",
+                  "value",
+                  "unit",
+                  "status",
+                  "formula",
+                  "display_value",
+                  "provider_error"
+                ],
+                "properties": {
+                  "attribute": {
+                    "enum": [
+                      "price",
+                      "currency",
+                      "marketcap",
+                      "volume",
+                      "pe",
+                      "eps",
+                      "tradetime",
+                      "datadelay",
+                      "high52",
+                      "low52"
+                    ]
+                  },
+                  "value": {
+                    "type": [
+                      "number",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "unit": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "enum": [
+                      "ok",
+                      "missing",
+                      "formula_mismatch",
+                      "provider_error",
+                      "invalid_value"
+                    ]
+                  },
+                  "formula": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "display_value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "provider_error": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    ]
+                  }
+                }
+              },
+              "datadelay": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "attribute",
+                  "value",
+                  "unit",
+                  "status",
+                  "formula",
+                  "display_value",
+                  "provider_error"
+                ],
+                "properties": {
+                  "attribute": {
+                    "enum": [
+                      "price",
+                      "currency",
+                      "marketcap",
+                      "volume",
+                      "pe",
+                      "eps",
+                      "tradetime",
+                      "datadelay",
+                      "high52",
+                      "low52"
+                    ]
+                  },
+                  "value": {
+                    "type": [
+                      "number",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "unit": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "enum": [
+                      "ok",
+                      "missing",
+                      "formula_mismatch",
+                      "provider_error",
+                      "invalid_value"
+                    ]
+                  },
+                  "formula": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "display_value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "provider_error": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    ]
+                  }
+                }
+              },
+              "high52": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "attribute",
+                  "value",
+                  "unit",
+                  "status",
+                  "formula",
+                  "display_value",
+                  "provider_error"
+                ],
+                "properties": {
+                  "attribute": {
+                    "enum": [
+                      "price",
+                      "currency",
+                      "marketcap",
+                      "volume",
+                      "pe",
+                      "eps",
+                      "tradetime",
+                      "datadelay",
+                      "high52",
+                      "low52"
+                    ]
+                  },
+                  "value": {
+                    "type": [
+                      "number",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "unit": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "enum": [
+                      "ok",
+                      "missing",
+                      "formula_mismatch",
+                      "provider_error",
+                      "invalid_value"
+                    ]
+                  },
+                  "formula": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "display_value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "provider_error": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    ]
+                  }
+                }
+              },
+              "low52": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "attribute",
+                  "value",
+                  "unit",
+                  "status",
+                  "formula",
+                  "display_value",
+                  "provider_error"
+                ],
+                "properties": {
+                  "attribute": {
+                    "enum": [
+                      "price",
+                      "currency",
+                      "marketcap",
+                      "volume",
+                      "pe",
+                      "eps",
+                      "tradetime",
+                      "datadelay",
+                      "high52",
+                      "low52"
+                    ]
+                  },
+                  "value": {
+                    "type": [
+                      "number",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "unit": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "enum": [
+                      "ok",
+                      "missing",
+                      "formula_mismatch",
+                      "provider_error",
+                      "invalid_value"
+                    ]
+                  },
+                  "formula": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "display_value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "provider_error": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "quote_status": {
+            "enum": [
+              "available",
+              "unavailable"
+            ]
+          },
+          "freshness_status": {
+            "const": "calendar_review_required"
+          },
+          "trade_timezone_status": {
+            "const": "unverified"
+          }
+        }
+      }
+    }
+  }
+}

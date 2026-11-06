@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "dow_pe_average_selling_price_2024",
+      "parent_metric_id": "chemicals_driver_1",
+      "name_zh": "陶氏 2024 全年聚乙烯基准产品实现平均售价",
+      "binding_role": "formula_input",
+      "limitation_zh": "2024 全年 P&SP 聚乙烯基准产品平均实现售价（$1,180/MT）；与乙烯原料成本同期间同口径",
+      "raw_unit": "USD_per_MT",
+      "unit": "USD_per_MT"
+    },
+    {
+      "component": "dow_ethylene_feedstock_cost_2024",
+      "parent_metric_id": "chemicals_driver_1",
+      "name_zh": "陶氏 2024 全年匹配乙烯原料单位成本",
+      "binding_role": "formula_input",
+      "limitation_zh": "2024 全年 P&SP 匹配乙烯原料现金成本（$680/MT）；与聚乙烯售价同期间成对",
+      "raw_unit": "USD_per_MT",
+      "unit": "USD_per_MT"
+    },
+    {
+      "component": "dow_pe_feedstock_ratio_2024",
+      "parent_metric_id": "chemicals_driver_1",
+      "name_zh": "陶氏聚乙烯生产原料单耗投入系数",
+      "binding_role": "formula_input",
+      "limitation_zh": "每公吨聚乙烯消耗 1.02 公吨乙烯原料之物理单耗转换系数；同期间对齐",
+      "raw_unit": "ratio",
+      "unit": "ratio"
+    },
+    {
+      "component": "mrna_monthly_cash_burn_2025",
+      "parent_metric_id": "biotech_driver_2",
+      "name_zh": "莫德纳 2025 全年正常化月均现金净消耗额",
+      "binding_role": "formula_input",
+      "limitation_zh": "2025 全年正常化月均研发与营运现金消耗（$200 million）；与期末现金 $8.1B 同截面对齐",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    },
+    {
+      "component": "mrna_cash_runway_adjustments_2025",
+      "parent_metric_id": "biotech_driver_2",
+      "name_zh": "莫德纳 2025 年末现金跑道债务或限制调整项",
+      "binding_role": "formula_input",
+      "limitation_zh": "2025 年末现金跑道测算之限制性调整项（$0 million）；同 2025 财年报告期间",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    },
+    {
+      "component": "blk_gross_inflows_2025",
+      "parent_metric_id": "asset_management_driver_1",
+      "name_zh": "贝莱德 2025 全年客户资金总流入额",
+      "binding_role": "formula_input",
+      "limitation_zh": "2025 全年客户资金总流入（$3,215 billion）；与总流出及净流入 $698B 完整对齐",
+      "raw_unit": "USD_billion",
+      "unit": "USD"
+    },
+    {
+      "component": "blk_gross_outflows_2025",
+      "parent_metric_id": "asset_management_driver_1",
+      "name_zh": "贝莱德 2025 全年客户资金总流出额",
+      "binding_role": "formula_input",
+      "limitation_zh": "2025 全年客户资金总流出（$2,502 billion）；与净流入 $698B 完整对齐",
+      "raw_unit": "USD_billion",
+      "unit": "USD"
+    },
+    {
+      "component": "blk_capital_returned_2025",
+      "parent_metric_id": "asset_management_driver_1",
+      "name_zh": "贝莱德 2025 全年客户资本返还与分配额",
+      "binding_role": "formula_input",
+      "limitation_zh": "2025 全年客户资本返还与分配（$15 billion）；与总流量构成一致",
+      "raw_unit": "USD_billion",
+      "unit": "USD"
+    },
+    {
+      "component": "mu_dram_annual_bit_shipments_fy26",
+      "parent_metric_id": "semiconductors_driver_3",
+      "name_zh": "美光科技 FY2026 全年 DRAM 业务物理 bit 出货总量",
+      "binding_role": "formula_input",
+      "limitation_zh": "FY2026 全财年 DRAM 物理 bit 出货总量（96,800,000,000 gigabits）；与 $100.68B 业务收入同财年同口径",
+      "raw_unit": "gigabits",
+      "unit": "gigabits"
+    },
+    {
+      "component": "tel_annual_new_orders_fy24",
+      "parent_metric_id": "semi_equipment_driver_1",
+      "name_zh": "东京电子 FY2024 全财年合并半导体制造设备新签订单额",
+      "binding_role": "formula_input",
+      "limitation_zh": "FY2024 全财年合并新签订单总额（1,848.2 billion JPY）；与净销售额 1,830.5 billion JPY 同财年同口径",
+      "raw_unit": "JPY_billion",
+      "unit": "JPY"
+    },
+    {
+      "component": "vz_q4_postpaid_phone_disconnects",
+      "parent_metric_id": "telecom_driver_2",
+      "name_zh": "威瑞森 2025 Q4 零售后付费电话断开连接数",
+      "binding_role": "formula_input",
+      "limitation_zh": "2025 Q4 零售后付费手机断开总数（769,284 connections）；与 75,420,000 平均连接数及 1.02% 季度 churn 同口径对齐",
+      "raw_unit": "connections",
+      "unit": "connections"
+    },
+    {
+      "component": "vz_q4_postpaid_phone_average_connections",
+      "parent_metric_id": "telecom_driver_2",
+      "name_zh": "威瑞森 2025 Q4 零售后付费电话平均活跃连接数",
+      "binding_role": "formula_input",
+      "limitation_zh": "2025 Q4 零售后付费手机平均连接规模（75,420,000 connections）；与断开数成对",
+      "raw_unit": "connections",
+      "unit": "connections"
+    }
+  ]
+}

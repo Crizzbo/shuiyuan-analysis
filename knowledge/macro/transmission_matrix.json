@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0.0",
+  "description_zh": "宏观变量向微观 41 行业专属驱动指标及估值折现模型的传导矩阵；严禁割裂推断，必须记录因果路径",
+  "transmissions": [
+    {
+      "macro_indicator_id": "us_treasury_10y_yield",
+      "target_type": "valuation_parameter",
+      "target_id": "discount_rate_rf",
+      "affected_industries": [
+        "software",
+        "semiconductors",
+        "digital_platforms",
+        "biotech",
+        "medical_devices",
+        "equity_reit",
+        "regulated_utilities"
+      ],
+      "transmission_channel_zh": "10年期美债收益率直接构成自由现金流折现（DCF）与股利贴现模型（DDM）中的无风险基准利率 Rf；长久期高估值资产对折现率上升具有高负凸性敏感度",
+      "sensitivity_direction": "negative",
+      "step_gate": "S4_valuation_scenarios"
+    },
+    {
+      "macro_indicator_id": "us_treasury_10y_yield",
+      "target_type": "industry_driver",
+      "target_id": "banks_driver_1",
+      "affected_industries": [
+        "banks"
+      ],
+      "transmission_channel_zh": "基准国债收益率中枢上移带动生息资产收益率（贷款与投资组合）重定价速度快于存款成本，在加息周期前中期拉阔银行净息收益率 (NIM)",
+      "sensitivity_direction": "positive",
+      "step_gate": "S3_industry_drivers"
+    },
+    {
+      "macro_indicator_id": "us_treasury_10y_yield",
+      "target_type": "industry_driver",
+      "target_id": "regulated_utilities_driver_2",
+      "affected_industries": [
+        "regulated_utilities"
+      ],
+      "transmission_channel_zh": "公用事业监管委员会在裁定公用事业零售电价与费率基数时，以长期国债收益率加权益风险溢价作为核准法定资本回报率 (allowed ROE) 的基准依据",
+      "sensitivity_direction": "positive",
+      "step_gate": "S3_industry_drivers"
+    },
+    {
+      "macro_indicator_id": "yield_curve_spread_10y_2y",
+      "target_type": "industry_driver",
+      "target_id": "housing_durables_driver_1",
+      "affected_industries": [
+        "housing_durables"
+      ],
+      "transmission_channel_zh": "收益率曲线深度倒挂通常反映短期政策利率过度紧缩，推高 30 年期固定房贷利率，抑制购房者月供支付能力并触发已签购房合同退订率上升",
+      "sensitivity_direction": "negative",
+      "step_gate": "S3_industry_drivers"
+    },
+    {
+      "macro_indicator_id": "yield_curve_spread_10y_2y",
+      "target_type": "industry_driver",
+      "target_id": "banks_driver_2",
+      "affected_industries": [
+        "banks"
+      ],
+      "transmission_channel_zh": "期限利差深度倒挂预示经济周期放缓；倒挂后 12-24 个月通常伴随商业贷款与信用卡借款人偿债能力恶化，滞后推升全集团留存贷款净核销率",
+      "sensitivity_direction": "negative",
+      "step_gate": "S3_industry_drivers"
+    },
+    {
+      "macro_indicator_id": "us_dollar_index_dxy",
+      "target_type": "industry_driver",
+      "target_id": "food_beverage_driver_2",
+      "affected_industries": [
+        "food_beverage",
+        "pharma",
+        "hardware"
+      ],
+      "transmission_channel_zh": "美元指数走强导致跨国消费龙头海外收入换算为美元时产生负向折算损失；企业通常通过价格/产品组合（Price/Mix）的主动提价来对冲汇率不利影响",
+      "sensitivity_direction": "negative",
+      "step_gate": "S3_industry_drivers"
+    },
+    {
+      "macro_indicator_id": "average_hourly_earnings_yoy",
+      "target_type": "industry_driver",
+      "target_id": "health_services_driver_3",
+      "affected_industries": [
+        "health_services",
+        "restaurants",
+        "business_services"
+      ],
+      "transmission_channel_zh": "非农平均时薪增速攀升直接加剧医院急症机构及连锁服务业的护士与合同工薪资成本，提高合并工资福利占净服务收入之比率",
+      "sensitivity_direction": "positive",
+      "step_gate": "S3_industry_drivers"
+    },
+    {
+      "macro_indicator_id": "high_yield_credit_spread",
+      "target_type": "valuation_parameter",
+      "target_id": "equity_risk_premium_erp",
+      "affected_industries": [
+        "capital_goods",
+        "construction",
+        "merchant_power",
+        "energy_services"
+      ],
+      "transmission_channel_zh": "高收益债利差急剧扩大反映流动性收紧与信用违约预期上升；在 Step 5 决策中必须要求更高的投资安全边际与更保守的终值倍数",
+      "sensitivity_direction": "positive",
+      "step_gate": "S5_margin_of_safety"
+    }
+  ]
+}

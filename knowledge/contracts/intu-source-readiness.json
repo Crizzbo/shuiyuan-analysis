@@ -1,0 +1,18 @@
+{
+  "entity_id": "INTU",
+  "source_path": "knowledge/sources/cat_reference/intu_research.txt",
+  "source_sha256": "737809dcfe3b7f51439dc6c9560074acae89b489b7c9d3e90bdd9389b18f421c",
+  "source_kind": "secondary",
+  "status": "insufficient_evidence",
+  "limitations": [
+    "二次分析报告不能替代原始财报",
+    "缺少经核对的普通股净利润、平均权益及同期间营业利润/收入",
+    "报告分析日期不等于财报发布时间或历史可得时间",
+    "在线生态可能与正式分部交叉，不可直接合计"
+  ],
+  "required_next_inputs": [
+    "项目内原始财报或已核对文本",
+    "逐项可得时间、单位尺度与原文定位",
+    "软件订阅/用量及留存驱动口径"
+  ]
+}

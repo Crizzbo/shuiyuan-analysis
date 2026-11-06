@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "fcx_copper_average_realized_price_2024",
+      "parent_metric_id": "mining_driver_1",
+      "name_zh": "自由港麦克莫兰 2024 年度铜平均实现单价",
+      "binding_role": "formula_input",
+      "limitation_zh": "合并口径铜平均实现销售单价；含副产品抵扣前后需结合现金成本附注分析",
+      "raw_unit": "USD_per_pound",
+      "unit": "USD_per_pound"
+    },
+    {
+      "component": "dow_psp_segment_net_sales_2024",
+      "parent_metric_id": "chemicals_driver_1",
+      "name_zh": "陶氏化学 2024 包装与特种塑料分部净销售额",
+      "binding_role": "formula_input",
+      "limitation_zh": "全财年特种塑料分部产品净销售额；匹配原料乙烯单位成本待补充",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    },
+    {
+      "component": "pkg_corrugated_products_shipments_2024",
+      "parent_metric_id": "packaging_driver_1",
+      "name_zh": "包装公司 2024 全年瓦楞制品出货销售面积",
+      "binding_role": "formula_input",
+      "limitation_zh": "全年瓦楞包装制品工厂销售出货量；以十亿平方英尺（BSF）为披露单位",
+      "raw_unit": "billion_square_feet",
+      "unit": "billion_square_feet"
+    }
+  ]
+}

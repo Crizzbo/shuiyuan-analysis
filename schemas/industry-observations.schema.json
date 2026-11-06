@@ -1,0 +1,425 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shuiyuan:industry-observations:1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "title": "映射契约版本",
+      "description": "封套版本",
+      "const": "1.0.0"
+    },
+    "entity_id": {
+      "type": "string",
+      "title": "公司标识",
+      "description": "与正式资料一致"
+    },
+    "industry_id": {
+      "type": "string",
+      "title": "候选行业",
+      "description": "用户指定的适配，不自动确认分部归类"
+    },
+    "classification_status": {
+      "type": "string",
+      "title": "分类审核状态",
+      "description": "指标计算不自动完成行业分类",
+      "const": "unreviewed"
+    },
+    "scope_id": {
+      "type": "string",
+      "title": "事实范围",
+      "description": "合并或持续经营；不得跨范围混算"
+    },
+    "period_end": {
+      "type": "string",
+      "title": "年度截止日",
+      "description": "当前仅审核同报告年度或相邻年度",
+      "format": "date"
+    },
+    "as_of": {
+      "type": "string",
+      "title": "信息截止时点",
+      "description": "正式事实可得时间不晚于此时点",
+      "format": "date-time"
+    },
+    "mapping_results": {
+      "type": "array",
+      "title": "逐指标执行结果",
+      "description": "computed 或 blocked，保留正式登记输入及原因",
+      "items": {
+        "type": "object"
+      }
+    },
+    "observations": {
+      "type": "array",
+      "title": "有效指标观测",
+      "description": "只写入可计算、单位和口径明确的观测",
+      "items": {
+        "$ref": "#/$defs/observation"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "title": "原始证据",
+      "description": "保留发布时间精度和逐字摘录",
+      "items": {
+        "$ref": "#/$defs/evidence"
+      }
+    },
+    "source_map": {
+      "type": "object",
+      "title": "登记来源版本映射",
+      "description": "证据标识对应 sources 修订"
+    },
+    "calculation_refs": {
+      "type": "array",
+      "title": "计算执行材料",
+      "description": "内容寻址 JSON 路径和摘要",
+      "items": {
+        "type": "object"
+      }
+    },
+    "lineage": {
+      "type": "array",
+      "title": "输入血缘",
+      "description": "观测关联正式登记标识及完整报告快照",
+      "items": {
+        "type": "object"
+      }
+    },
+    "missing_required_metric_ids": {
+      "type": "array",
+      "title": "必需行业指标缺口",
+      "description": "不能由财务共享指标替代",
+      "items": {
+        "type": "string"
+      }
+    },
+    "industry_gate_status": {
+      "type": "string",
+      "title": "行业指标门槛状态",
+      "description": "缺必需项为 blocked；无缺口仍须分类审核",
+      "enum": [
+        "blocked",
+        "pending_classification_review"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "entity_id",
+    "industry_id",
+    "classification_status",
+    "scope_id",
+    "period_end",
+    "as_of",
+    "mapping_results",
+    "observations",
+    "evidence",
+    "source_map",
+    "calculation_refs",
+    "lineage",
+    "missing_required_metric_ids",
+    "industry_gate_status"
+  ],
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_path": {
+          "$ref": "#/$defs/local_path"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_kind": {
+          "enum": [
+            "primary",
+            "secondary",
+            "project_design",
+            "synthetic"
+          ]
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "available_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "acquired_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "excerpt_or_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "published_date": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publication_precision": {
+          "enum": [
+            "instant",
+            "date",
+            "unknown"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "source_path",
+        "locator",
+        "source_kind",
+        "published_at",
+        "available_at",
+        "acquired_at",
+        "excerpt_or_summary",
+        "limitations",
+        "published_date",
+        "publication_precision"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "publication_precision"
+            ],
+            "properties": {
+              "publication_precision": {
+                "const": "instant"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "published_at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "publication_precision"
+            ],
+            "properties": {
+              "publication_precision": {
+                "const": "date"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "published_at": {
+                "type": "null"
+              },
+              "published_date": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "publication_precision"
+            ],
+            "properties": {
+              "publication_precision": {
+                "const": "unknown"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "published_at": {
+                "type": "null"
+              },
+              "published_date": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "observation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metric_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "segment_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "period": {
+          "$ref": "#/$defs/period"
+        },
+        "available_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/quantity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "accounting_basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "comparability_notes": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "metric_id",
+        "segment_id",
+        "period",
+        "available_at",
+        "value",
+        "missing_reason",
+        "accounting_basis",
+        "comparability_notes",
+        "evidence_refs"
+      ],
+      "additionalProperties": false
+    },
+    "quantity": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "value",
+        "unit",
+        "currency"
+      ],
+      "additionalProperties": false
+    },
+    "period": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date"
+        },
+        "end": {
+          "type": "string",
+          "format": "date"
+        },
+        "basis": {
+          "enum": [
+            "quarter",
+            "year",
+            "ttm",
+            "point_in_time",
+            "custom"
+          ]
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "basis"
+      ],
+      "additionalProperties": false
+    },
+    "local_path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z][A-Za-z0-9+.-]*:)(?![/\\\\]).+"
+    }
+  }
+}

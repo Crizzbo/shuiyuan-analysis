@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "fcx_consolidated_copper_sales_volume_2024",
+      "parent_metric_id": "mining_driver_1",
+      "name_zh": "自由港麦克莫兰 2024 全年铜实物销售数量",
+      "binding_role": "formula_input",
+      "limitation_zh": "全财年合并口径铜综合销售物理磅数（4.1 billion pounds）；与实现售价完全同范围",
+      "raw_unit": "billion_pounds",
+      "unit": "pounds"
+    },
+    {
+      "component": "ceg_annual_generation_mwh_2024",
+      "parent_metric_id": "merchant_power_driver_1",
+      "name_zh": "星座能源 2024 全年发电总量（MWh口径）",
+      "binding_role": "formula_input",
+      "limitation_zh": "全财年发电总产出（121 TWh 折合 121,000,000 MWh）；与营业收入同报告期间",
+      "raw_unit": "TWh",
+      "unit": "MWh"
+    },
+    {
+      "component": "fluor_ending_backlog_2024",
+      "parent_metric_id": "construction_driver_1",
+      "name_zh": "福陆 2024 年末可执行期末订单总额（Backlog）",
+      "binding_role": "formula_input",
+      "limitation_zh": "截至2024年末合并期末可执行未履约订单总额；与合并收入口径一致",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    },
+    {
+      "component": "fluor_annual_revenue_2024",
+      "parent_metric_id": "construction_driver_1",
+      "name_zh": "福陆 2024 年度合并工程建筑收入",
+      "binding_role": "formula_input",
+      "limitation_zh": "2024 全年合并工程建筑营业收入（16,315 million USD）；与期末订单口径一致",
+      "raw_unit": "USD_million",
+      "unit": "USD"
+    },
+    {
+      "component": "ddog_actual_shares_outstanding_ye24",
+      "parent_metric_id": "software_driver_3",
+      "name_zh": "Datadog 2024 年末实际发行普通股总股数",
+      "binding_role": "formula_input",
+      "limitation_zh": "资产负债表期末实际发行 Class A 与 Class B 普通股合计股数（342,118,782 股）；解决加权股数与实际股数差异",
+      "raw_unit": "shares",
+      "unit": "shares"
+    },
+    {
+      "component": "ddog_annual_sbc_expense_2024",
+      "parent_metric_id": "software_driver_3",
+      "name_zh": "Datadog 2024 年股权激励费用（净额口径）",
+      "binding_role": "formula_input",
+      "limitation_zh": "2024 全年费用化股权激励支出（570,336 thousand USD）；净费用口径",
+      "raw_unit": "USD_thousand",
+      "unit": "USD"
+    },
+    {
+      "component": "ddog_weighted_diluted_eps_shares_2024",
+      "parent_metric_id": "software_driver_3",
+      "name_zh": "Datadog 2024 年 EPS 加权稀释股数",
+      "binding_role": "context_sample",
+      "limitation_zh": "2024 全年 EPS 加权稀释股数（358,636 thousand 股）；同报告期间稀释基数",
+      "raw_unit": "thousand_shares",
+      "unit": "shares"
+    }
+  ]
+}

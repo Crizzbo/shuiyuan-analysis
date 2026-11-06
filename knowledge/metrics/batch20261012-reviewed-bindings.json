@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "tm_retail_vehicle_deliveries_fy25",
+      "parent_metric_id": "autos_driver_1",
+      "name_zh": "丰田全集团全球汽车零售交付总量",
+      "binding_role": "reported_metric",
+      "limitation_zh": "包含丰田雷克萨斯大发日野全品牌全球零售交付数；非合并批发口径",
+      "raw_unit": "vehicles",
+      "unit": "physical_quantity"
+    },
+    {
+      "component": "tm_hev_electrified_retail_sales_fy25",
+      "parent_metric_id": "autos_driver_1",
+      "name_zh": "丰田混动及电动化车辆零售交付量",
+      "binding_role": "reported_metric",
+      "limitation_zh": "全集团电动化车辆零售交付，其中HEV占绝大多数；占零售总量46.1%",
+      "raw_unit": "vehicles",
+      "unit": "physical_quantity"
+    },
+    {
+      "component": "tm_consolidated_wholesale_sales_fy25",
+      "parent_metric_id": "autos_driver_1",
+      "name_zh": "合并报表批发汽车销售量",
+      "binding_role": "reported_metric",
+      "limitation_zh": "丰田汽车合并财务报表批发销量，不含未合并联营经销商零售数",
+      "raw_unit": "vehicles",
+      "unit": "physical_quantity"
+    },
+    {
+      "component": "cost_worldwide_traffic_growth_fy25",
+      "parent_metric_id": "staples_retail_driver_3",
+      "name_zh": "Costco全球可比客流频次增长率",
+      "binding_role": "reported_metric",
+      "limitation_zh": "全集团可比仓储会员店到店客流频次增长率",
+      "raw_unit": "percent",
+      "unit": "ratio"
+    },
+    {
+      "component": "cost_us_traffic_growth_fy25",
+      "parent_metric_id": "staples_retail_driver_3",
+      "name_zh": "Costco美国本土可比客流频次增长率",
+      "binding_role": "reported_metric",
+      "limitation_zh": "仅限美国本土可比仓储会员店客流频次变动",
+      "raw_unit": "percent",
+      "unit": "ratio"
+    }
+  ]
+}

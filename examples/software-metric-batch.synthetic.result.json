@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0.0",
+  "entity_id": "synthetic_software",
+  "industry_id": "software",
+  "as_of": "2026-03-01T00:00:00Z",
+  "is_synthetic": true,
+  "binding_version": "1.0.0",
+  "results": [
+    {
+      "metric_id": "operating_margin",
+      "status": "computed",
+      "unit": "ratio",
+      "currency": null,
+      "period": {
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "basis": "annual"
+      },
+      "value": 0.2,
+      "input_fact_refs": [
+        "raw-operating_income",
+        "raw-revenue"
+      ],
+      "calculation": {
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "implementation_path": "finance_tools/basic.py",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "parameters": {
+          "denominator": 100000000.0,
+          "numerator": 20000000.0,
+          "operation": "operating_margin"
+        },
+        "input_sha256": "594e0bc267132efb8659665a340b5a0698a0a3794dd2fd553ae963fcdfffc7af",
+        "result": {
+          "value": 0.2
+        }
+      }
+    },
+    {
+      "metric_id": "roe",
+      "status": "computed",
+      "unit": "ratio",
+      "currency": null,
+      "period": {
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "basis": "annual"
+      },
+      "value": 0.2,
+      "input_fact_refs": [
+        "raw-common_net_income",
+        "raw-average_common_equity"
+      ],
+      "calculation": {
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "implementation_path": "finance_tools/basic.py",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "parameters": {
+          "denominator": 50000000.0,
+          "numerator": 10000000.0,
+          "operation": "roe"
+        },
+        "input_sha256": "1f0cd3d8d2ee4afeab924935d969806b43c459aa7a0b1d08eee216ac66b2d6eb",
+        "result": {
+          "value": 0.2
+        }
+      }
+    },
+    {
+      "metric_id": "software_driver_1",
+      "status": "blocked",
+      "value": null,
+      "reason": "尚无经明确口径的执行绑定，不能用相似公式替代"
+    },
+    {
+      "metric_id": "software_driver_2",
+      "status": "blocked",
+      "value": null,
+      "reason": "尚无经明确口径的执行绑定，不能用相似公式替代"
+    },
+    {
+      "metric_id": "software_driver_3",
+      "status": "blocked",
+      "value": null,
+      "reason": "尚无经明确口径的执行绑定，不能用相似公式替代"
+    }
+  ],
+  "blocked_metric_ids": [
+    "software_driver_1",
+    "software_driver_2",
+    "software_driver_3"
+  ],
+  "missing_industry_driver_ids": [
+    "software_driver_1",
+    "software_driver_2",
+    "software_driver_3"
+  ],
+  "research_readiness": {
+    "S1": "pending_industry_evidence",
+    "S2": "blocked",
+    "S3": "pending_transmission_evidence",
+    "S4": "pending_valuation_inputs",
+    "S5": "pending_risk_evidence",
+    "S6": "pending_monitoring_plan"
+  },
+  "research_export_status": "staging_only_raw_facts_not_registered_as_research_observations"
+}

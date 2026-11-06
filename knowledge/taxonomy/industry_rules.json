@@ -1,0 +1,1479 @@
+{
+  "schema_version": "1.0.0",
+  "access_policy": "project_local_only",
+  "rules": [
+    {
+      "industry_id": "oil_gas",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "oil_gas_driver_1",
+        "oil_gas_driver_2",
+        "oil_gas_driver_3"
+      ],
+      "required_segmentation": [
+        "油/气",
+        "常规/非常规",
+        "权益/合同产量"
+      ],
+      "valuation_route": "按商品价格、产量和维持性资本开支构建资产 DCF；正常化盈利交叉检查",
+      "counterevidence": "现货上涨但对冲限制收入；储量下修、成本抬升或维持产量需持续高投入",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "energy_services",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "energy_services_driver_1",
+        "energy_services_driver_2",
+        "energy_services_driver_3"
+      ],
+      "required_segmentation": [
+        "钻井/完井/设备销售",
+        "现货/长约"
+      ],
+      "valuation_route": "按服务量、合同费率和客户资本开支做 DCF；订单需扣取消风险",
+      "counterevidence": "订单上涨但取消、回款恶化或设备闲置增加",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "midstream",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "midstream_driver_1",
+        "midstream_driver_2",
+        "midstream_driver_3"
+      ],
+      "required_segmentation": [
+        "运输/储存/加工",
+        "固定费率/商品敞口"
+      ],
+      "valuation_route": "长约收费资产 DCF；含商品风险的加工业务单独情景估值",
+      "counterevidence": "吞吐增长但合同集中、交易对手信用或维护投入恶化",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "mining",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "mining_driver_1",
+        "mining_driver_2",
+        "mining_driver_3"
+      ],
+      "required_segmentation": [
+        "商品种类",
+        "单矿/多矿",
+        "在产/开发"
+      ],
+      "valuation_route": "矿山寿命与成本曲线驱动资产 DCF；正常化商品价格盈利校验",
+      "counterevidence": "价格上涨同时品位下降、剥采或维持投入增加",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "chemicals",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "chemicals_driver_1",
+        "chemicals_driver_2",
+        "chemicals_driver_3"
+      ],
+      "required_segmentation": [
+        "基础/特种",
+        "上游原料路线"
+      ],
+      "valuation_route": "以跨周期价差和产能做 DCF；避免峰值利润 PE",
+      "counterevidence": "价差改善仅来自暂时原料下跌，新增产能或库存仍增加",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "packaging",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "packaging_driver_1",
+        "packaging_driver_2",
+        "packaging_driver_3"
+      ],
+      "required_segmentation": [
+        "纸/塑料/金属/玻璃",
+        "林纸与包装分部"
+      ],
+      "valuation_route": "销量与合同传价驱动 DCF；正常化利润交叉检查",
+      "counterevidence": "售价提高但销量损失、传价不足或客户流失",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "capital_goods",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "capital_goods_driver_1",
+        "capital_goods_driver_2",
+        "capital_goods_driver_3"
+      ],
+      "required_segmentation": [
+        "设备/自动化/售后",
+        "长周期/短周期"
+      ],
+      "valuation_route": "订单转化、售后收入与资本开支驱动 DCF",
+      "counterevidence": "订单增长伴重复下单、取消或库存积压",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "aerospace_defense",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "aerospace_defense_driver_1",
+        "aerospace_defense_driver_2",
+        "aerospace_defense_driver_3"
+      ],
+      "required_segmentation": [
+        "民航/国防",
+        "固定价/成本加成"
+      ],
+      "valuation_route": "合同级情景 DCF；亏损合同和养老金等调整另列",
+      "counterevidence": "订单增加但预算未批准或固定价合同成本失控",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "transport_logistics",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "transport_logistics_driver_1",
+        "transport_logistics_driver_2",
+        "transport_logistics_driver_3"
+      ],
+      "required_segmentation": [
+        "航空/铁路/海运/快递",
+        "必须先选子口径"
+      ],
+      "valuation_route": "运价、运量和运力投资 DCF；租赁及维持投入调整",
+      "counterevidence": "运量增加但降价、燃油或租赁压力侵蚀现金流",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "business_services",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "business_services_driver_1",
+        "business_services_driver_2",
+        "business_services_driver_3"
+      ],
+      "required_segmentation": [
+        "咨询/人力/外包/专业服务"
+      ],
+      "valuation_route": "合同续约与人工成本 DCF；并购增长和有机增长分开",
+      "counterevidence": "收入增长依赖并购或涨价但客户与人员持续流失",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "construction",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "construction_driver_1",
+        "construction_driver_2",
+        "construction_driver_3"
+      ],
+      "required_segmentation": [
+        "工程/建筑",
+        "固定价/成本加成"
+      ],
+      "valuation_route": "项目现金流与回款 DCF；亏损合同单独计提情景",
+      "counterevidence": "订单增长但应收、成本超支和回款压力上升",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "autos",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "autos_driver_1",
+        "autos_driver_2",
+        "autos_driver_3"
+      ],
+      "required_segmentation": [
+        "整车/零部件",
+        "金融业务另分部"
+      ],
+      "valuation_route": "跨周期销量、单车盈利、资本投入 DCF；金融分部单独估值",
+      "counterevidence": "批发销量增加但终端需求弱、折扣或库存上升",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "retail",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "retail_driver_1",
+        "retail_driver_2",
+        "retail_driver_3"
+      ],
+      "required_segmentation": [
+        "自营/平台",
+        "线下/线上"
+      ],
+      "valuation_route": "自营零售与平台佣金分开 DCF；租赁、退货和库存调整",
+      "counterevidence": "销售增长但促销、退货、库存和获客支出吞噬现金",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "restaurants",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "restaurants_driver_1",
+        "restaurants_driver_2",
+        "restaurants_driver_3"
+      ],
+      "required_segmentation": [
+        "自营/加盟",
+        "餐饮业态"
+      ],
+      "valuation_route": "自营与加盟分部 DCF；门店维持投入和租赁分别处理",
+      "counterevidence": "提价带来同店增长但客流或加盟商现金流恶化",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "travel_leisure",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "travel_leisure_driver_1",
+        "travel_leisure_driver_2",
+        "travel_leisure_driver_3"
+      ],
+      "required_segmentation": [
+        "酒店/邮轮/旅游",
+        "资产持有/管理"
+      ],
+      "valuation_route": "酒店资产与管理收费分部 DCF；不同业态分开模型",
+      "counterevidence": "预订改善但取消增加或营销、人工成本超出提价",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "housing_durables",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "housing_durables_driver_1",
+        "housing_durables_driver_2",
+        "housing_durables_driver_3"
+      ],
+      "required_segmentation": [
+        "住宅建设/耐用品",
+        "先细分再判断"
+      ],
+      "valuation_route": "住宅项目现金流/资产价值；耐用品正常化盈利 DCF",
+      "counterevidence": "订单增长伴取消、促销或土地减值上升",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "food_beverage",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "food_beverage_driver_1",
+        "food_beverage_driver_2",
+        "food_beverage_driver_3"
+      ],
+      "required_segmentation": [
+        "食品/饮料",
+        "原料暴露与品牌层级"
+      ],
+      "valuation_route": "销量、定价、原料与品牌投入 DCF",
+      "counterevidence": "收入增长仅靠提价，销量、份额或渠道现金流恶化",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "household_personal",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "household_personal_driver_1",
+        "household_personal_driver_2",
+        "household_personal_driver_3"
+      ],
+      "required_segmentation": [
+        "家庭/个人护理",
+        "自有品牌/代工"
+      ],
+      "valuation_route": "份额、复购与定价驱动 DCF；维持营销投入不可省略",
+      "counterevidence": "毛利改善但广告压缩后份额下降或渠道流失",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "staples_retail",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "staples_retail_driver_1",
+        "staples_retail_driver_2",
+        "staples_retail_driver_3"
+      ],
+      "required_segmentation": [
+        "超市/仓储会员/分销"
+      ],
+      "valuation_route": "低毛利周转与租赁调整 DCF；会员业务分开",
+      "counterevidence": "销售增加但损耗、人员成本和库存拖累现金",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "tobacco",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "tobacco_driver_1",
+        "tobacco_driver_2",
+        "tobacco_driver_3"
+      ],
+      "required_segmentation": [
+        "传统/替代",
+        "监管地区"
+      ],
+      "valuation_route": "传统业务衰减与替代业务分部 DCF；税和诉讼情景",
+      "counterevidence": "提价掩盖销量下降，替代业务不能弥补现金损失",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "pharma",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "pharma_driver_1",
+        "pharma_driver_2",
+        "pharma_driver_3"
+      ],
+      "required_segmentation": [
+        "已上市产品/管线",
+        "地区支付体系"
+      ],
+      "valuation_route": "已上市产品 DCF＋有依据概率的管线 rNPV；专利到期情景",
+      "counterevidence": "历史收入增长但专利悬崖、支付限制或安全性事件改变现金流",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "biotech",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "biotech_driver_1",
+        "biotech_driver_2",
+        "biotech_driver_3"
+      ],
+      "required_segmentation": [
+        "临床前/各期临床/商业化",
+        "单资产/多资产"
+      ],
+      "valuation_route": "项目 rNPV＋可用现金减债务；缺可靠成功概率只做情景",
+      "counterevidence": "股价深跌源自试验失败、现金不足或核心权利丧失",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "medical_devices",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "medical_devices_driver_1",
+        "medical_devices_driver_2",
+        "medical_devices_driver_3"
+      ],
+      "required_segmentation": [
+        "医疗器械/科研工具",
+        "设备/耗材"
+      ],
+      "valuation_route": "设备、耗材和服务分部 DCF；工具业务按科研需求",
+      "counterevidence": "装机增长但耗材使用、医院预算或监管许可恶化",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "health_services",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "health_services_driver_1",
+        "health_services_driver_2",
+        "health_services_driver_3"
+      ],
+      "required_segmentation": [
+        "医院/诊疗/药品分销"
+      ],
+      "valuation_route": "服务和分销业务分开 DCF；报销与坏账情景",
+      "counterevidence": "服务量增长伴报销下降、拒付和人员成本上升",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "managed_care",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "managed_care_driver_1",
+        "managed_care_driver_2",
+        "managed_care_driver_3"
+      ],
+      "required_segmentation": [
+        "商业/政府计划",
+        "保险/服务分部"
+      ],
+      "valuation_route": "资本约束下股权现金流或剩余收益；费用、赔付及监管情景",
+      "counterevidence": "保费增长落后医疗成本，风险调整或监管引发追溯损失",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "banks",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "banks_driver_1",
+        "banks_driver_2",
+        "banks_driver_3"
+      ],
+      "required_segmentation": [
+        "商业/投资银行",
+        "贷款与资金结构"
+      ],
+      "valuation_route": "剩余收益/股息/股权现金流；P/B 与可持续 ROE 配对",
+      "counterevidence": "低 P/B 但资本不足、存款流失、未实现损失或信用恶化",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "insurance",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "insurance_driver_1",
+        "insurance_driver_2",
+        "insurance_driver_3"
+      ],
+      "required_segmentation": [
+        "财产险/寿险/再保险",
+        "必须先区分"
+      ],
+      "valuation_route": "按险种剩余收益/股息；正常化承保和投资收益分开",
+      "counterevidence": "表面低估来自准备金不足、灾损或资产负债错配",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "asset_management",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "asset_management_driver_1",
+        "asset_management_driver_2",
+        "asset_management_driver_3"
+      ],
+      "required_segmentation": [
+        "资管/投行/经纪/自营",
+        "分别路由"
+      ],
+      "valuation_route": "收费业务 DCF；业绩报酬和自营风险另分部",
+      "counterevidence": "资产上涨掩盖赎回、费率下滑或业绩报酬波动",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "payments",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "payments_driver_1",
+        "payments_driver_2",
+        "payments_driver_3"
+      ],
+      "required_segmentation": [
+        "支付网络/收单/处理/金融科技放贷"
+      ],
+      "valuation_route": "网络与处理 DCF；放贷/客户资金业务单独资本约束估值",
+      "counterevidence": "交易额增长但激励、损失、监管或费率侵蚀净收入",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "software",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "software_driver_1",
+        "software_driver_2",
+        "software_driver_3"
+      ],
+      "required_segmentation": [
+        "订阅/用量/授权",
+        "云服务资本强度"
+      ],
+      "valuation_route": "订阅/用量/授权分开 DCF；现金流扣充分稀释或经济成本",
+      "counterevidence": "ARR 增加但留存、回款下降或股权激励掩盖亏损",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "semiconductors",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "semiconductors_driver_1",
+        "semiconductors_driver_2",
+        "semiconductors_driver_3"
+      ],
+      "required_segmentation": [
+        "设计/代工/存储/功率",
+        "终端市场"
+      ],
+      "valuation_route": "设计公司与制造资产分开 DCF；正常化价格利润交叉检查",
+      "counterevidence": "低 PE 来自峰值利润，库存及新增产能仍上升",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "semi_equipment",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "semi_equipment_driver_1",
+        "semi_equipment_driver_2",
+        "semi_equipment_driver_3"
+      ],
+      "required_segmentation": [
+        "前道/后道",
+        "先进制程/成熟制程"
+      ],
+      "valuation_route": "订单转收入与售后 DCF；出口、周期和客户集中情景",
+      "counterevidence": "积压订单高但限制出口或客户延期",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "hardware",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "hardware_driver_1",
+        "hardware_driver_2",
+        "hardware_driver_3"
+      ],
+      "required_segmentation": [
+        "消费/企业/网络",
+        "产品/服务"
+      ],
+      "valuation_route": "产品周期 DCF；资本投入与售后服务分开",
+      "counterevidence": "出货增长为压货，终端销售弱或库存折价风险上升",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "it_services",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "it_services_driver_1",
+        "it_services_driver_2",
+        "it_services_driver_3"
+      ],
+      "required_segmentation": [
+        "咨询/外包/云集成",
+        "固定价/工时"
+      ],
+      "valuation_route": "人工、合同与有机增长 DCF；项目交付风险情景",
+      "counterevidence": "签约增长但利用率、人员留存和回款恶化",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "telecom",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "telecom_driver_1",
+        "telecom_driver_2",
+        "telecom_driver_3"
+      ],
+      "required_segmentation": [
+        "无线/固网/宽带",
+        "零售/批发"
+      ],
+      "valuation_route": "资本密集订阅 DCF；频谱、租赁与维持资本开支计入",
+      "counterevidence": "用户增加靠补贴，ARPU 或现金流下降、债务上升",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "digital_platforms",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "digital_platforms_driver_1",
+        "digital_platforms_driver_2",
+        "digital_platforms_driver_3"
+      ],
+      "required_segmentation": [
+        "广告/交易/订阅",
+        "用户与付款方"
+      ],
+      "valuation_route": "广告/抽佣/订阅分部 DCF；总额与净额收入分开",
+      "counterevidence": "用户增长无变现改善，获客、合规和平台依赖增强",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "media_entertainment",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "media_entertainment_driver_1",
+        "media_entertainment_driver_2",
+        "media_entertainment_driver_3"
+      ],
+      "required_segmentation": [
+        "流媒体/游戏/影视/版权"
+      ],
+      "valuation_route": "内容、订阅和游戏分部 DCF；现金投入与摊销校验",
+      "counterevidence": "会计利润提高但内容现金支出持续超过回收",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "regulated_utilities",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "regulated_utilities_driver_1",
+        "regulated_utilities_driver_2",
+        "regulated_utilities_driver_3"
+      ],
+      "required_segmentation": [
+        "电/气/水",
+        "监管地区"
+      ],
+      "valuation_route": "监管资产、费率与融资驱动 DCF/股息；实际与准许回报分开",
+      "counterevidence": "投资增加但回收被拒、监管延迟或融资稀释",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "merchant_power",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "merchant_power_driver_1",
+        "merchant_power_driver_2",
+        "merchant_power_driver_3"
+      ],
+      "required_segmentation": [
+        "发电类型",
+        "现货/长约"
+      ],
+      "valuation_route": "电厂寿命、燃料、对冲和长约资产 DCF",
+      "counterevidence": "现货上涨但合同锁价、停机或燃料涨价抵消收益",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "equity_reit",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "equity_reit_driver_1",
+        "equity_reit_driver_2",
+        "equity_reit_driver_3"
+      ],
+      "required_segmentation": [
+        "住宅/办公/工业/零售/数据中心等",
+        "不可混比"
+      ],
+      "valuation_route": "物业 NAV/资产 DCF；P/AFFO 交叉检查且调节可比",
+      "counterevidence": "低倍数来自租户信用、维护支出、空置或再融资损害",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    },
+    {
+      "industry_id": "real_estate_services",
+      "status": "industry_adapted",
+      "statistical_validation_status": "not_validated",
+      "metric_ids": [
+        "real_estate_services_driver_1",
+        "real_estate_services_driver_2",
+        "real_estate_services_driver_3"
+      ],
+      "required_segmentation": [
+        "开发/经纪/管理",
+        "分部估值"
+      ],
+      "valuation_route": "开发资产 NAV/项目现金流；经纪管理服务 DCF 分开",
+      "counterevidence": "预售高但回款、土地减值或杠杆风险恶化",
+      "drawdown_threshold": null,
+      "valuation_threshold": null,
+      "evidence_refs": [
+        "knowledge/01-philosophy.md",
+        "knowledge/02-industry-framework.md",
+        "knowledge/03-market-psychology.md"
+      ],
+      "judgment": {
+        "improving": "行业驱动改善并传导至正常化现金流，供给、融资与结构风险没有抵消；保留反证",
+        "deteriorating": "驱动或现金流恶化，或风险及资本需求上升；区分暂时周期与永久损失",
+        "unknown": "证据缺失、冲突、不可比或子行业未确定时不裁决"
+      },
+      "drawdown_policy": "回撤仅生成候选；同子行业和自身历史分位、波动、盈利修正与结构风险共同检查；禁止统一40%规则",
+      "empirical_plan": {
+        "universe": "同子行业历史证券，含退市与历史分类",
+        "inputs": "时点可得的复权行情、财报、预测和公司行动",
+        "split": "时间分割训练/验证与样本外；避免前视和重复调参",
+        "evaluate": "入选覆盖、误判、永久损失、成本后表现及参数稳定性",
+        "activate": "通过验证并登记样本/版本前禁止自动行动"
+      }
+    }
+  ]
+}

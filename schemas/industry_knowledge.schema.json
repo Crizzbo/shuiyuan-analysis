@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IndustryKnowledgeContract",
+  "description": "细分行业买方知识库结构化档案契约规范 (Industry Knowledge Base Schema)",
+  "type": "object",
+  "required": [
+    "meta",
+    "economic_structure",
+    "financial_guardrails",
+    "supply_chain_dynamics",
+    "causal_scenarios",
+    "forensic_audit_rules"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": [
+        "industry_id",
+        "industry_name_zh",
+        "sector_id",
+        "sector_name_zh",
+        "macro_sector_id",
+        "macro_sector_name_zh"
+      ],
+      "properties": {
+        "industry_id": { "type": "string" },
+        "industry_name_zh": { "type": "string" },
+        "sector_id": { "type": "string" },
+        "sector_name_zh": { "type": "string" },
+        "macro_sector_id": { "type": "string" },
+        "macro_sector_name_zh": { "type": "string" },
+        "description_zh": { "type": "string" }
+      }
+    },
+    "economic_structure": {
+      "type": "object",
+      "required": [
+        "typical_cogs_ratio",
+        "typical_markup_ratio",
+        "capex_intensity",
+        "operating_leverage_exposure"
+      ],
+      "properties": {
+        "typical_cogs_ratio": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "typical_markup_ratio": { "type": "number", "minimum": 0.5, "maximum": 5.0 },
+        "capex_intensity": { "type": "string", "enum": ["极高重资产", "中等偏高", "轻资产驱动", "纯轻资产研发"] },
+        "operating_leverage_exposure": { "type": "string", "enum": ["极高经营杠杆", "中等经营杠杆", "弱经营杠杆"] },
+        "typical_gross_margin_range": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    },
+    "financial_guardrails": {
+      "type": "object",
+      "required": [
+        "dio_healthy_days",
+        "dio_warning_days",
+        "rd_capitalization_max_allowed",
+        "top_customer_concentration_redline"
+      ],
+      "properties": {
+        "dio_healthy_days": { "type": "number", "minimum": 0.0 },
+        "dio_warning_days": { "type": "number", "minimum": 0.0 },
+        "rd_capitalization_max_allowed": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "top_customer_concentration_redline": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "debt_covenant_buffer_minimum_ratio": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+      }
+    },
+    "supply_chain_dynamics": {
+      "type": "object",
+      "required": [
+        "upstream_bottlenecks",
+        "downstream_profile",
+        "pricing_power_verdict"
+      ],
+      "properties": {
+        "upstream_bottlenecks": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "downstream_profile": { "type": "string" },
+        "pricing_power_verdict": { "type": "string" },
+        "channel_inversion_sensitivity": { "type": "string" }
+      }
+    },
+    "causal_scenarios": {
+      "type": "object",
+      "required": [
+        "leading_bull_triggers",
+        "leading_bear_defenses",
+        "core_catalyst_dimensions"
+      ],
+      "properties": {
+        "leading_bull_triggers": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "leading_bear_defenses": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "core_catalyst_dimensions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "forensic_audit_rules": {
+      "type": "object",
+      "required": [
+        "red_flag_rules",
+        "channel_and_revenue_checks"
+      ],
+      "properties": {
+        "red_flag_rules": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "channel_and_revenue_checks": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

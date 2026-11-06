@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DailyMarketBriefing",
+  "description": "每日美股/日股大盘总行情研报与深度推荐规范 (Daily Market Briefing Schema)",
+  "type": "object",
+  "required": [
+    "header",
+    "macro_and_liquidity",
+    "market_sentiment_and_options",
+    "market_moving_news",
+    "ai_executive_summary",
+    "recommended_stocks"
+  ],
+  "properties": {
+    "header": {
+      "type": "object",
+      "required": ["report_date", "market", "market_name_zh"],
+      "properties": {
+        "report_date": { "type": "string" },
+        "market": { "type": "string", "enum": ["US", "JP"] },
+        "market_name_zh": { "type": "string" }
+      }
+    },
+    "macro_and_liquidity": {
+      "type": "object",
+      "required": ["us_10y_yield", "us_2y_yield", "yield_spread_10_2", "dxy_index", "usd_jpy_rate"],
+      "properties": {
+        "us_10y_yield": { "type": "string" },
+        "us_2y_yield": { "type": "string" },
+        "yield_spread_10_2": { "type": "string" },
+        "dxy_index": { "type": "string" },
+        "usd_jpy_rate": { "type": "string" },
+        "effr_policy_rate": { "type": "string" }
+      }
+    },
+    "market_sentiment_and_options": {
+      "type": "object",
+      "required": [
+        "vix_index",
+        "fear_greed_gauge",
+        "capital_flow_summary",
+        "options_market_dynamics",
+        "put_call_ratio"
+      ],
+      "properties": {
+        "vix_index": { "type": "string" },
+        "fear_greed_gauge": { "type": "string" },
+        "capital_flow_summary": { "type": "string" },
+        "options_market_dynamics": { "type": "string" },
+        "put_call_ratio": { "type": "string" }
+      }
+    },
+    "market_moving_news": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["headline", "impact_analysis"],
+        "properties": {
+          "headline": { "type": "string" },
+          "impact_analysis": { "type": "string" }
+        }
+      }
+    },
+    "ai_executive_summary": {
+      "type": "string",
+      "description": "AI 顶层决策研判：综合宏观、资金、期权与新闻，在全量更新完后对大盘行情进行的深度总结"
+    },
+    "recommended_stocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "ticker",
+          "company_name",
+          "current_price",
+          "margin_of_safety_trigger",
+          "rating",
+          "business_intro",
+          "pessimistic_deduction",
+          "neutral_deduction",
+          "optimistic_deduction",
+          "tactical_action"
+        ],
+        "properties": {
+          "ticker": { "type": "string" },
+          "company_name": { "type": "string" },
+          "current_price": { "type": "string" },
+          "margin_of_safety_trigger": { "type": "string" },
+          "rating": { "type": "string" },
+          "business_intro": { "type": "string" },
+          "pessimistic_deduction": {
+            "type": "object",
+            "required": ["trigger_event", "implied_price", "downside_gap"],
+            "properties": {
+              "trigger_event": { "type": "string" },
+              "implied_price": { "type": "string" },
+              "downside_gap": { "type": "string" }
+            }
+          },
+          "neutral_deduction": {
+            "type": "object",
+            "required": ["trigger_event", "implied_price", "upside_gap"],
+            "properties": {
+              "trigger_event": { "type": "string" },
+              "implied_price": { "type": "string" },
+              "upside_gap": { "type": "string" }
+            }
+          },
+          "optimistic_deduction": {
+            "type": "object",
+            "required": ["trigger_event", "implied_price", "potential_gain"],
+            "properties": {
+              "trigger_event": { "type": "string" },
+              "implied_price": { "type": "string" },
+              "potential_gain": { "type": "string" }
+            }
+          },
+          "tactical_action": { "type": "string" },
+          "sepa_signal": {
+            "type": ["object", "null"],
+            "description": "米奈尔维尼 SEPA 买方时机决策与技术足迹全息对象"
+          }
+        }
+      }
+    }
+  }
+}

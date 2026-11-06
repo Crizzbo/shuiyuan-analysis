@@ -1,0 +1,596 @@
+{
+  "type": "object",
+  "title": "标准财报记录",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "title": "契约版本",
+      "description": "财报 staging 契约版本",
+      "const": "1.0.0"
+    },
+    "report_id": {
+      "type": "string",
+      "title": "报告版本标识",
+      "description": "解析配置对应的报告标识；新财报及重述建立新标识"
+    },
+    "entity_id": {
+      "type": "string",
+      "title": "公司标识",
+      "description": "与浏览器登记公司身份一致；CIK 核对由解析器完成"
+    },
+    "supersedes_report_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "title": "被替代报告标识",
+      "description": "重述时显式链接旧报告；原历史不更新删除"
+    },
+    "artifact": {
+      "type": "object",
+      "title": "原文归档记录",
+      "description": "沿用接入原文对象，包含 ZIP/PDF 哈希及浏览器日期精度"
+    },
+    "parser": {
+      "type": "object",
+      "title": "解析边界",
+      "description": "成员哈希、准则证据或审核模板；完整 DTS 结果单独在 taxonomy_validation 保存"
+    },
+    "plan_sha256": {
+      "type": "string",
+      "title": "解析配置摘要",
+      "description": "可复现科目映射和列选择",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "implementation_sha256": {
+      "type": "string",
+      "title": "解析实现摘要",
+      "description": "运行时解析模块文件内容哈希",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "facts": {
+      "type": "array",
+      "title": "标准事实列表",
+      "description": "提取后归并的报表科目事实；不是正式研究 observation",
+      "items": {
+        "$ref": "#/$defs/fact"
+      }
+    },
+    "issues": {
+      "type": "array",
+      "title": "解析异常列表",
+      "description": "无法安全转换的原文定位与原因；不填零",
+      "items": {
+        "type": "object"
+      }
+    },
+    "checks": {
+      "type": "array",
+      "title": "勾稽校验列表",
+      "description": "passed/failed/incomplete，残差和容差使用基础货币单位",
+      "items": {
+        "$ref": "#/$defs/check"
+      }
+    },
+    "calculations": {
+      "type": "array",
+      "title": "计算结果列表",
+      "description": "返回公式、开源库、事实引用；缺失或口径不符为 blocked",
+      "items": {
+        "$ref": "#/$defs/calculation"
+      }
+    },
+    "release_status": {
+      "type": "string",
+      "title": "发布状态",
+      "description": "当前只能进入 staging，尚不自动发布研究结论",
+      "const": "staging_pending_review"
+    },
+    "missing_capabilities": {
+      "type": "array",
+      "title": "未执行能力",
+      "description": "尚未执行的校验；不是六步分析完成状态",
+      "items": {
+        "type": "string"
+      }
+    },
+    "taxonomy_validation": {
+      "type": "object",
+      "title": "完整分类标准校验",
+      "description": "passed/blocked/not_run/not_applicable；PDF 不适用 XBRL 校验，详细日志内容寻址归档"
+    }
+  },
+  "required": [
+    "schema_version",
+    "report_id",
+    "entity_id",
+    "supersedes_report_id",
+    "artifact",
+    "parser",
+    "plan_sha256",
+    "implementation_sha256",
+    "facts",
+    "issues",
+    "checks",
+    "calculations",
+    "release_status",
+    "missing_capabilities"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shuiyuan:financial-report:1.0.0",
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "title": "标准财务事实",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "事实标识",
+          "description": "由报告、字段、期间、范围和原文定位生成的 SHA-256",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "field": {
+          "type": "string",
+          "title": "字段代码",
+          "description": "经审核的报表科目映射，未映射科目不以相似名称替代"
+        },
+        "name_zh": {
+          "type": "string",
+          "title": "中文名称",
+          "description": "科目业务中文名称"
+        },
+        "value": {
+          "type": "string",
+          "title": "基础货币金额",
+          "description": "十进制字符串，保留精度和正负号；不是展示用百万金额",
+          "pattern": "^-?[0-9]+(?:\\.[0-9]+)?$"
+        },
+        "period": {
+          "$ref": "#/$defs/period",
+          "title": "财务期间",
+          "description": "原报表期间，流量与存量分开"
+        },
+        "scope_id": {
+          "type": "string",
+          "title": "报表范围",
+          "description": "consolidated 合并总额；consolidated_continuing 合并持续经营；不可混算"
+        },
+        "accounting_basis": {
+          "type": "string",
+          "title": "会计准则",
+          "description": "明确保留准则，不把 IFRS 与 GAAP 等同",
+          "enum": [
+            "GAAP",
+            "IFRS",
+            "J-GAAP"
+          ]
+        },
+        "currency": {
+          "type": "string",
+          "title": "币种",
+          "description": "ISO 三字母币种，不自动换汇",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "unit": {
+          "type": "string",
+          "title": "量纲",
+          "description": "本阶段仅金额",
+          "const": "currency"
+        },
+        "scale": {
+          "type": "integer",
+          "title": "金额尺度",
+          "description": "已转换为基础货币单位，因此恒为 1；原尺度见原文",
+          "const": 1
+        },
+        "concept": {
+          "type": "string",
+          "title": "原始科目",
+          "description": "XBRL 展开 QName 或已核对的 PDF 精确行名"
+        },
+        "source": {
+          "$ref": "#/$defs/source",
+          "title": "原文证据",
+          "description": "项目内原文、哈希、定位和实际可得时点"
+        },
+        "rounding_tolerance": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "金额舍入容差",
+          "description": "基础货币单位；四舍五入取半个最小展示单位，截断取一个单位；未知为空并阻断勾稽",
+          "pattern": "^[0-9]+(?:\\.[0-9]+)?$"
+        },
+        "status": {
+          "type": "string",
+          "title": "事实质量状态",
+          "description": "extracted 表示完成提取，仍待研究审核；冲突和勾稽失败禁止计算",
+          "enum": [
+            "extracted",
+            "conflict",
+            "check_failed"
+          ]
+        },
+        "duplicate_refs": {
+          "type": "array",
+          "title": "同值重复原文引用",
+          "description": "仅同字段、期间、范围、准则、币种且同金额时归并；保留所有证据",
+          "items": {
+            "$ref": "#/$defs/source"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "field",
+        "name_zh",
+        "value",
+        "period",
+        "scope_id",
+        "accounting_basis",
+        "currency",
+        "unit",
+        "scale",
+        "concept",
+        "source",
+        "rounding_tolerance",
+        "status",
+        "duplicate_refs"
+      ],
+      "additionalProperties": false
+    },
+    "period": {
+      "type": "object",
+      "title": "财务期间",
+      "properties": {
+        "start": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "期间起日",
+          "description": "流量统计起日；时点存量必须为空",
+          "format": "date"
+        },
+        "end": {
+          "type": "string",
+          "title": "期间止日",
+          "description": "统计止日或资产负债表时点",
+          "format": "date"
+        },
+        "basis": {
+          "type": "string",
+          "title": "期间类型",
+          "description": "年度、季度、时点或累计/其他；不得自动把半年变成单季度",
+          "enum": [
+            "annual",
+            "quarter",
+            "instant",
+            "ytd_or_other"
+          ]
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "basis"
+      ],
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "title": "输入来源",
+      "properties": {
+        "path": {
+          "type": "string",
+          "title": "来源路径",
+          "description": "项目内 UTF-8 文本相对路径；不能指向项目外"
+        },
+        "sha256": {
+          "type": "string",
+          "title": "来源内容摘要",
+          "description": "原文件字节 SHA-256，运行时比对",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "locator": {
+          "type": "string",
+          "title": "来源定位",
+          "description": "页码、表名或行号，不仅记录文件名",
+          "minLength": 1
+        },
+        "excerpt": {
+          "type": "string",
+          "title": "原文摘录",
+          "description": "需要在本地文本中逐字找到；不自动证明数值含义",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "title": "来源类型",
+          "description": "真实数据仅 primary，合成数据仅 synthetic",
+          "enum": [
+            "primary",
+            "secondary",
+            "synthetic"
+          ]
+        },
+        "published_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "发布时间",
+          "description": "精确来源发布时间；1.1.0 未核实时填 null，不补造时刻",
+          "format": "date-time"
+        },
+        "available_at": {
+          "type": "string",
+          "title": "可得时间",
+          "description": "带时区，不得晚于研究时点",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "locator",
+        "excerpt",
+        "kind",
+        "published_at",
+        "available_at"
+      ],
+      "additionalProperties": false
+    },
+    "check": {
+      "type": "object",
+      "title": "财务勾稽结果",
+      "properties": {
+        "check": {
+          "type": "string",
+          "title": "校验代码",
+          "description": "资产负债平衡、现金流合计或现金存量流量桥接",
+          "enum": [
+            "balance_sheet",
+            "cash_flow_bridge",
+            "cash_stock_bridge"
+          ]
+        },
+        "group": {
+          "type": "array",
+          "title": "同口径分组",
+          "description": "依次为期间 JSON、范围、会计准则和币种",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "status": {
+          "type": "string",
+          "title": "校验状态",
+          "description": "incomplete 不等于通过，failed 阻断涉及事实",
+          "enum": [
+            "passed",
+            "failed",
+            "incomplete"
+          ]
+        },
+        "residual": {
+          "type": "string",
+          "title": "勾稽残差",
+          "description": "有完整输入时的基础币种十进制残差"
+        },
+        "tolerance": {
+          "type": "string",
+          "title": "允许舍入误差",
+          "description": "完整输入各舍入容差合计"
+        },
+        "fact_refs": {
+          "type": "array",
+          "title": "输入事实引用",
+          "description": "完整校验涉及的事实 ID",
+          "items": {
+            "type": "string"
+          }
+        },
+        "missing_fields": {
+          "type": "array",
+          "title": "缺失字段",
+          "description": "不完整校验所缺字段或端点标识",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "check",
+        "group",
+        "status"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "passed",
+                  "failed"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "residual",
+              "tolerance",
+              "fact_refs"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "incomplete"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "missing_fields"
+            ]
+          }
+        }
+      ]
+    },
+    "calculation": {
+      "type": "object",
+      "title": "指标计算结果",
+      "properties": {
+        "metric_id": {
+          "type": "string",
+          "title": "指标代码",
+          "description": "计算绑定代码，不等于已完成行业全部指标"
+        },
+        "name_zh": {
+          "type": "string",
+          "title": "指标中文名称",
+          "description": "明确说明计算口径的显示名称"
+        },
+        "period": {
+          "$ref": "#/$defs/period",
+          "title": "计算期间",
+          "description": "按同一报表期间执行"
+        },
+        "scope_id": {
+          "type": "string",
+          "title": "计算范围",
+          "description": "输入必须同范围"
+        },
+        "accounting_basis": {
+          "type": "string",
+          "title": "计算会计准则",
+          "description": "输入必须同准则"
+        },
+        "currency": {
+          "type": "string",
+          "title": "输入币种",
+          "description": "原始金额币种；比率本身无货币量纲"
+        },
+        "status": {
+          "type": "string",
+          "title": "执行状态",
+          "description": "computed 是口径审核后计算，blocked 是缺失或无效",
+          "enum": [
+            "computed",
+            "blocked"
+          ]
+        },
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "计算值",
+          "description": "成功为有限比率；阻断为空"
+        },
+        "unit": {
+          "type": "string",
+          "title": "结果单位",
+          "description": "当前计算均为比例，百分数展示需乘 100",
+          "const": "ratio"
+        },
+        "input_fact_refs": {
+          "type": "array",
+          "title": "输入事实引用",
+          "description": "报告内事实 ID，公式复核入口",
+          "items": {
+            "type": "string"
+          }
+        },
+        "calculation": {
+          "type": "object",
+          "title": "公式及开源实现",
+          "description": "标准金融服务返回完整调用记录；直接库调用记录 library/function/formula"
+        },
+        "reason": {
+          "type": "string",
+          "title": "阻断原因",
+          "description": "无法执行时的口径或输入原因"
+        },
+        "missing_fields": {
+          "type": "array",
+          "title": "缺少输入字段",
+          "description": "无法执行时的原始字段代码",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "metric_id",
+        "period",
+        "scope_id",
+        "accounting_basis",
+        "currency",
+        "status",
+        "value"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "computed"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "unit",
+              "input_fact_refs",
+              "calculation"
+            ],
+            "properties": {
+              "value": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "blocked"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "null"
+              }
+            },
+            "anyOf": [
+              {
+                "required": [
+                  "reason"
+                ]
+              },
+              {
+                "required": [
+                  "missing_fields"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

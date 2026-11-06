@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CommodityGoldMacroDossier",
+  "description": "黄金与宏观贵金属大宗商品深度研究规范",
+  "type": "object",
+  "required": [
+    "spot_gold_usd",
+    "tips_10y_real_yield",
+    "breakeven_inflation",
+    "dxy_index",
+    "central_bank_net_tonnes",
+    "physical_premium_sge",
+    "valuation_models",
+    "scenarios",
+    "strategic_verdict_zh"
+  ],
+  "properties": {
+    "spot_gold_usd": { "type": "string" },
+    "tips_10y_real_yield": { "type": "string" },
+    "breakeven_inflation": { "type": "string" },
+    "dxy_index": { "type": "number" },
+    "central_bank_net_tonnes": { "type": "string" },
+    "physical_premium_sge": { "type": "string" },
+    "valuation_models": {
+      "type": "object",
+      "required": [
+        "traditional_real_yield_anchor",
+        "central_bank_structural_premium",
+        "macro_fair_value_center",
+        "current_deviation_pct"
+      ],
+      "properties": {
+        "traditional_real_yield_anchor": { "type": "string" },
+        "central_bank_structural_premium": { "type": "string" },
+        "macro_fair_value_center": { "type": "string" },
+        "current_deviation_pct": { "type": "string" }
+      }
+    },
+    "scenarios": {
+      "type": "object",
+      "required": ["bear_case", "base_case", "bull_case"],
+      "properties": {
+        "bear_case": { "type": "string" },
+        "base_case": { "type": "string" },
+        "bull_case": { "type": "string" }
+      }
+    },
+    "strategic_verdict_zh": { "type": "string" }
+  }
+}

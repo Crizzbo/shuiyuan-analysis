@@ -1,0 +1,4256 @@
+{
+  "schema_version": "1.0.0",
+  "specifications": [
+    {
+      "parent_metric_id": "oil_gas_driver_1",
+      "industry_id": "oil_gas",
+      "name_zh": "分产品实现售价",
+      "parent_name_zh": "实现售价",
+      "business_definition_zh": "销售收入/可比销售量",
+      "value_kind": "scalar",
+      "unit": "currency_per_unit",
+      "required_inputs_zh": [
+        "产品销售收入",
+        "产品销售量"
+      ],
+      "comparability_rules_zh": "原油 USD/bbl、天然气 USD/Mcf 分开；套期保值前后分开",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "oil_gas_driver_1__value",
+          "name_zh": "分产品实现售价",
+          "unit_family": "currency_per_unit",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "oil_gas_driver_2",
+      "industry_id": "oil_gas",
+      "name_zh": "单位开采现金成本",
+      "parent_name_zh": "单位现金成本",
+      "business_definition_zh": "可比开采现金成本/产量",
+      "value_kind": "scalar",
+      "unit": "currency_per_unit",
+      "required_inputs_zh": [
+        "现金开采成本",
+        "匹配产量"
+      ],
+      "comparability_rules_zh": "租赁运营费、生产税、运输费逐项定义；折旧和勘探资本支出排除",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "oil_gas_driver_2__value",
+          "name_zh": "单位开采现金成本",
+          "unit_family": "currency_per_unit",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "oil_gas_driver_3",
+      "industry_id": "oil_gas",
+      "name_zh": "已探明储量寿命",
+      "parent_name_zh": "储量寿命",
+      "business_definition_zh": "可比已探明储量/年产量",
+      "value_kind": "scalar",
+      "unit": "years",
+      "required_inputs_zh": [
+        "已探明储量",
+        "同范围年产量"
+      ],
+      "comparability_rules_zh": "储量期末、产量年度；净权益及 BOE 换算一致；开发未开发分别保留",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "oil_gas_driver_3__value",
+          "name_zh": "已探明储量寿命",
+          "unit_family": "years",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "energy_services_driver_1",
+      "industry_id": "energy_services",
+      "name_zh": "设备日利用率",
+      "parent_name_zh": "设备利用率",
+      "business_definition_zh": "实际使用设备/可用设备",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "运营设备天数",
+        "可用设备日历天数"
+      ],
+      "comparability_rules_zh": "钻井船与陆上设备分开；收入效率不能替代利用率",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "energy_services_driver_1__value",
+          "name_zh": "设备日利用率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "energy_services_driver_2",
+      "industry_id": "energy_services",
+      "name_zh": "新增订单收入比",
+      "parent_name_zh": "订单收入比",
+      "business_definition_zh": "同期间新增订单额/确认收入",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "当期新增订单金额",
+        "同期间服务收入"
+      ],
+      "comparability_rules_zh": "新增订单与期末 backlog 不同；新增合同天数按公司定义计价",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "energy_services_driver_2__value",
+          "name_zh": "新增订单收入比",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "energy_services_driver_3",
+      "industry_id": "energy_services",
+      "name_zh": "实际合同日收入",
+      "parent_name_zh": "合同日费率",
+      "business_definition_zh": "可比合同收入/服务天数",
+      "value_kind": "scalar",
+      "unit": "currency_per_day",
+      "required_inputs_zh": [
+        "匹配合同收入",
+        "合同运营天数"
+      ],
+      "comparability_rules_zh": "实际日收入与新签合同日费率分别保存；排除终止补偿及报销按原文",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "energy_services_driver_3__value",
+          "name_zh": "实际合同日收入",
+          "unit_family": "currency_per_day",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "midstream_driver_1",
+      "industry_id": "midstream",
+      "name_zh": "分产品吞吐量",
+      "parent_name_zh": "吞吐量",
+      "business_definition_zh": "按产品与运输单位披露",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "产品吞吐量",
+        "披露单位",
+        "日均或期间总量"
+      ],
+      "comparability_rules_zh": "原油 NGL 天然气分开；Bcf/d 和 bbl/d 不直接相加",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "midstream_driver_1__value",
+          "name_zh": "分产品吞吐量",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "midstream_driver_2",
+      "industry_id": "midstream",
+      "name_zh": "固定收费收入占比",
+      "parent_name_zh": "收费合同占比",
+      "business_definition_zh": "固定收费合同收入/相关收入",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "固定收费合同收入",
+        "匹配相关收入"
+      ],
+      "comparability_rules_zh": "收费处理量占比不能替代收费收入占比；最低量承诺条款另列",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "midstream_driver_2__value",
+          "name_zh": "固定收费收入占比",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "midstream_driver_3",
+      "industry_id": "midstream",
+      "name_zh": "维持资本开支现金额",
+      "parent_name_zh": "维持资本开支",
+      "business_definition_zh": "维持现有资产的现金投入",
+      "value_kind": "scalar",
+      "unit": "currency",
+      "required_inputs_zh": [
+        "公司披露 sustaining capex",
+        "范围说明"
+      ],
+      "comparability_rules_zh": "实际与预算分开；增长资本开支及并购不能混入",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "midstream_driver_3__value",
+          "name_zh": "维持资本开支现金额",
+          "unit_family": "currency",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "mining_driver_1",
+      "industry_id": "mining",
+      "name_zh": "分商品实现售价",
+      "parent_name_zh": "实现价格",
+      "business_definition_zh": "可比商品收入/销量",
+      "value_kind": "scalar",
+      "unit": "currency_per_unit",
+      "required_inputs_zh": [
+        "商品净销售额",
+        "商品销售数量"
+      ],
+      "comparability_rules_zh": "铜 USD/lb、金 USD/oz 分开；临时定价及副产品信用说明",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "mining_driver_1__value",
+          "name_zh": "分商品实现售价",
+          "unit_family": "currency_per_unit",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "mining_driver_2",
+      "industry_id": "mining",
+      "name_zh": "分商品现金单位成本",
+      "parent_name_zh": "单位成本",
+      "business_definition_zh": "可比生产现金成本/商品产量",
+      "value_kind": "scalar",
+      "unit": "currency_per_unit",
+      "required_inputs_zh": [
+        "净现金生产成本",
+        "匹配商品产量"
+      ],
+      "comparability_rules_zh": "副产品抵扣前后分开；不得用全部营业成本代替",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "mining_driver_2__value",
+          "name_zh": "分商品现金单位成本",
+          "unit_family": "currency_per_unit",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "mining_driver_3",
+      "industry_id": "mining",
+      "name_zh": "矿石品位",
+      "parent_name_zh": "矿石品位",
+      "business_definition_zh": "有效成分量/矿石量",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "有效金属含量",
+        "矿石处理量"
+      ],
+      "comparability_rules_zh": "矿区和工艺分开；品位与回收率是两个变量",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "mining_driver_3__value",
+          "name_zh": "矿石品位",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "chemicals_driver_1",
+      "industry_id": "chemicals",
+      "name_zh": "同产品原料价差",
+      "parent_name_zh": "产品原料价差",
+      "business_definition_zh": "单位产品价格减匹配原料成本",
+      "value_kind": "scalar",
+      "unit": "currency_per_unit",
+      "required_inputs_zh": [
+        "产品单位售价",
+        "匹配原料单位成本",
+        "投入系数"
+      ],
+      "comparability_rules_zh": "不同产品链分开；销售价格同比不是绝对价差",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "chemicals_driver_1__value",
+          "name_zh": "同产品原料价差",
+          "unit_family": "currency_per_unit",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "chemicals_driver_2",
+      "industry_id": "chemicals",
+      "name_zh": "有效产能开工率",
+      "parent_name_zh": "开工率",
+      "business_definition_zh": "实际产出/有效产能",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "同产品实际产出",
+        "有效产能"
+      ],
+      "comparability_rules_zh": "检修停机与永久关厂另列；名义产能不替代有效产能",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "chemicals_driver_2__value",
+          "name_zh": "有效产能开工率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "chemicals_driver_3",
+      "industry_id": "chemicals",
+      "name_zh": "指定化工链行业库存",
+      "parent_name_zh": "行业库存",
+      "business_definition_zh": "明确覆盖范围的存量",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "行业库存量",
+        "覆盖企业地区产品"
+      ],
+      "comparability_rules_zh": "公司账面存货不是行业库存；覆盖范围缺失不计算",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "chemicals_driver_3__value",
+          "name_zh": "指定化工链行业库存",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "packaging_driver_1",
+      "industry_id": "packaging",
+      "name_zh": "分品类出货数量",
+      "parent_name_zh": "销量",
+      "business_definition_zh": "按品类与单位披露",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "包装产品出货量",
+        "单位"
+      ],
+      "comparability_rules_zh": "纸箱平方英尺、纸板吨分别保存；增长率作为补充不能当数量",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "packaging_driver_1__value",
+          "name_zh": "分品类出货数量",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "packaging_driver_2",
+      "industry_id": "packaging",
+      "name_zh": "成本传导合同滞后",
+      "parent_name_zh": "价格传导时滞",
+      "business_definition_zh": "成本变化至合同调价的时间",
+      "value_kind": "scalar",
+      "unit": "days",
+      "required_inputs_zh": [
+        "成本变化日期",
+        "合同调价生效日期",
+        "合同机制"
+      ],
+      "comparability_rules_zh": "按同一客户产品合同；季度价格实现不等于滞后天数",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "packaging_driver_2__value",
+          "name_zh": "成本传导合同滞后",
+          "unit_family": "days",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "packaging_driver_3",
+      "industry_id": "packaging",
+      "name_zh": "回收材料单位投入成本",
+      "parent_name_zh": "回收材料成本",
+      "business_definition_zh": "可比单位投入成本",
+      "value_kind": "scalar",
+      "unit": "currency_per_unit",
+      "required_inputs_zh": [
+        "回收原料采购成本",
+        "采购数量"
+      ],
+      "comparability_rules_zh": "OCC 等品类及地区分开；原生浆成本不能替代",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "packaging_driver_3__value",
+          "name_zh": "回收材料单位投入成本",
+          "unit_family": "currency_per_unit",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "capital_goods_driver_1",
+      "industry_id": "capital_goods",
+      "name_zh": "新增订单收入比",
+      "parent_name_zh": "订单收入比",
+      "business_definition_zh": "同期间新增订单额/确认收入",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "新增订单金额",
+        "同期间确认收入"
+      ],
+      "comparability_rules_zh": "按分部同币种；订单含取消和服务多年合同的定义保留",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "capital_goods_driver_1__value",
+          "name_zh": "新增订单收入比",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "capital_goods_driver_2",
+      "industry_id": "capital_goods",
+      "name_zh": "积压订单及取消条款",
+      "parent_name_zh": "积压订单",
+      "business_definition_zh": "未履约订单金额并列取消条款",
+      "value_kind": "components",
+      "unit": "components",
+      "required_inputs_zh": [
+        "期末 backlog",
+        "取消条款",
+        "可执行条件"
+      ],
+      "comparability_rules_zh": "金额与合同条款分别保存；不得全部视作保证收入",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "capital_goods_driver_2__backlog",
+          "name_zh": "积压订单金额",
+          "unit_family": "currency",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "capital_goods_driver_2__cancellation_terms",
+          "name_zh": "取消及履约条件",
+          "unit_family": "text",
+          "period_basis": "event",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "capital_goods_driver_3",
+      "industry_id": "capital_goods",
+      "name_zh": "订单交付周期",
+      "parent_name_zh": "交付周期",
+      "business_definition_zh": "接单到交付的可比时长",
+      "value_kind": "scalar",
+      "unit": "days",
+      "required_inputs_zh": [
+        "接单日期",
+        "交付验收日期",
+        "订单群"
+      ],
+      "comparability_rules_zh": "平均中位数和区间分开；库存周转不能替代",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "capital_goods_driver_3__value",
+          "name_zh": "订单交付周期",
+          "unit_family": "days",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "aerospace_defense_driver_1",
+      "industry_id": "aerospace_defense",
+      "name_zh": "已拨款订单占比",
+      "parent_name_zh": "订单可执行比例",
+      "business_definition_zh": "已获拨款或承诺订单/可比订单",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "已拨款或已承诺可执行订单",
+        "相同范围总订单"
+      ],
+      "comparability_rules_zh": "funded 与 unfunded backlog 分开；总 backlog 不能替代比例",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "aerospace_defense_driver_1__value",
+          "name_zh": "已拨款订单占比",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "aerospace_defense_driver_2",
+      "industry_id": "aerospace_defense",
+      "name_zh": "项目总成本偏差",
+      "parent_name_zh": "项目成本偏差",
+      "business_definition_zh": "预计总成本与基准之差",
+      "value_kind": "scalar",
+      "unit": "currency",
+      "required_inputs_zh": [
+        "最新预计总成本",
+        "原始批准成本基准",
+        "项目标识"
+      ],
+      "comparability_rules_zh": "项目亏损准备仅为相关证据；缺原始基准不能计算偏差",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "aerospace_defense_driver_2__value",
+          "name_zh": "项目总成本偏差",
+          "unit_family": "currency",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "aerospace_defense_driver_3",
+      "industry_id": "aerospace_defense",
+      "name_zh": "分机型验收交付数量",
+      "parent_name_zh": "交付数量",
+      "business_definition_zh": "按产品与验收口径披露",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "验收交付量",
+        "产品标识"
+      ],
+      "comparability_rules_zh": "飞机导弹等不能相加；交付、产出、订单分别保存",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "aerospace_defense_driver_3__value",
+          "name_zh": "分机型验收交付数量",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "transport_logistics_driver_1",
+      "industry_id": "transport_logistics",
+      "name_zh": "运输工作量载运率",
+      "parent_name_zh": "载运或利用率",
+      "business_definition_zh": "已使用运力/可用运力",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "收入客公里或吨公里",
+        "可用座公里或吨公里"
+      ],
+      "comparability_rules_zh": "航空、货运分开；单位距离口径相同",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "transport_logistics_driver_1__value",
+          "name_zh": "运输工作量载运率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "transport_logistics_driver_2",
+      "industry_id": "transport_logistics",
+      "name_zh": "单位运输收入",
+      "parent_name_zh": "单位运价",
+      "business_definition_zh": "可比运输收入/运输工作量",
+      "value_kind": "scalar",
+      "unit": "currency_per_distance_unit",
+      "required_inputs_zh": [
+        "匹配客运或货运收入",
+        "收入运输工作量"
+      ],
+      "comparability_rules_zh": "yield 与含附加业务 PRASM 不同；英里公里不可混合",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "transport_logistics_driver_2__value",
+          "name_zh": "单位运输收入",
+          "unit_family": "currency_per_distance_unit",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "transport_logistics_driver_3",
+      "industry_id": "transport_logistics",
+      "name_zh": "单位运输燃料成本",
+      "parent_name_zh": "单位燃料成本",
+      "business_definition_zh": "燃料支出/可比运输工作量",
+      "value_kind": "scalar",
+      "unit": "currency_per_distance_unit",
+      "required_inputs_zh": [
+        "匹配燃料成本",
+        "运输工作量"
+      ],
+      "comparability_rules_zh": "每加仑油价不是每座英里燃料成本；炼厂及对冲调整另列",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "transport_logistics_driver_3__value",
+          "name_zh": "单位运输燃料成本",
+          "unit_family": "currency_per_distance_unit",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "business_services_driver_1",
+      "industry_id": "business_services",
+      "name_zh": "服务人员计费利用率",
+      "parent_name_zh": "人员利用率",
+      "business_definition_zh": "可计费工时/可用工时",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "可计费工时",
+        "可用工时"
+      ],
+      "comparability_rules_zh": "工资处理平台不必采用人员利用率；培训休假纳入规则保存",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "business_services_driver_1__value",
+          "name_zh": "服务人员计费利用率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "business_services_driver_2",
+      "industry_id": "business_services",
+      "name_zh": "客户数量留存率",
+      "parent_name_zh": "客户留存率",
+      "business_definition_zh": "留存客户/基期客户",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "基期客户中本期留存数量",
+        "基期客户数量"
+      ],
+      "comparability_rules_zh": "客户收入留存率不是客户数量留存率；新增客户排除",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "business_services_driver_2__value",
+          "name_zh": "客户数量留存率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "business_services_driver_3",
+      "industry_id": "business_services",
+      "name_zh": "标准服务合同单价",
+      "parent_name_zh": "合同单价",
+      "business_definition_zh": "可比服务收入/计费单位",
+      "value_kind": "scalar",
+      "unit": "currency_per_unit",
+      "required_inputs_zh": [
+        "可比服务收入",
+        "匹配计费单位"
+      ],
+      "comparability_rules_zh": "客户工资人数、合同数、计费小时分别定义；不混分部",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "business_services_driver_3__value",
+          "name_zh": "标准服务合同单价",
+          "unit_family": "currency_per_unit",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "construction_driver_1",
+      "industry_id": "construction",
+      "name_zh": "可执行积压订单覆盖年数",
+      "parent_name_zh": "订单覆盖",
+      "business_definition_zh": "可执行积压订单/可比年度收入",
+      "value_kind": "scalar",
+      "unit": "years",
+      "required_inputs_zh": [
+        "可执行期末订单额",
+        "同范围年度收入"
+      ],
+      "comparability_rules_zh": "总订单若包括未融资或可取消部分须披露差异",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "construction_driver_1__value",
+          "name_zh": "可执行积压订单覆盖年数",
+          "unit_family": "years",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "construction_driver_2",
+      "industry_id": "construction",
+      "name_zh": "工程项目成本偏差",
+      "parent_name_zh": "项目成本偏差",
+      "business_definition_zh": "预计总成本与合同预算之差",
+      "value_kind": "scalar",
+      "unit": "currency",
+      "required_inputs_zh": [
+        "最新预计总成本",
+        "合同预算",
+        "项目编号"
+      ],
+      "comparability_rules_zh": "亏损准备与预算偏差分别保存；不能从分部利润反推",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "construction_driver_2__value",
+          "name_zh": "工程项目成本偏差",
+          "unit_family": "currency",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "construction_driver_3",
+      "industry_id": "construction",
+      "name_zh": "合同资产及客户预付款",
+      "parent_name_zh": "合同现金占用",
+      "business_definition_zh": "合同资产与预收款分别记录",
+      "value_kind": "components",
+      "unit": "components",
+      "required_inputs_zh": [
+        "合同资产",
+        "现金客户预付款",
+        "合同负债"
+      ],
+      "comparability_rules_zh": "合同负债可能含非现金项；不得直接视作现金预收款",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "construction_driver_3__contract_assets",
+          "name_zh": "合同资产",
+          "unit_family": "currency",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "construction_driver_3__cash_advances",
+          "name_zh": "已收客户预付款",
+          "unit_family": "currency",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "construction_driver_3__contract_liabilities",
+          "name_zh": "合同负债",
+          "unit_family": "currency",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "autos_driver_1",
+      "industry_id": "autos",
+      "name_zh": "终端零售车辆数量",
+      "parent_name_zh": "终端销量",
+      "business_definition_zh": "交付终端客户的车辆数",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "零售终端交付数",
+        "品牌地区"
+      ],
+      "comparability_rules_zh": "批发销量和产量不能代替零售；含合营子公司须注明",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "autos_driver_1__value",
+          "name_zh": "终端零售车辆数量",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "autos_driver_2",
+      "industry_id": "autos",
+      "name_zh": "经销商库存天数",
+      "parent_name_zh": "库存天数",
+      "business_definition_zh": "渠道存量/匹配日销售量",
+      "value_kind": "scalar",
+      "unit": "days",
+      "required_inputs_zh": [
+        "经销商库存车辆",
+        "匹配日均零售数"
+      ],
+      "comparability_rules_zh": "制造商自有账面库存不能代替渠道库存",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "autos_driver_2__value",
+          "name_zh": "经销商库存天数",
+          "unit_family": "days",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "autos_driver_3",
+      "industry_id": "autos",
+      "name_zh": "单车变动成本贡献",
+      "parent_name_zh": "单车贡献",
+      "business_definition_zh": "净收入减明确范围变动成本后除销量",
+      "value_kind": "scalar",
+      "unit": "currency_per_vehicle",
+      "required_inputs_zh": [
+        "车辆净收入",
+        "明确变动成本",
+        "匹配零售数量"
+      ],
+      "comparability_rules_zh": "缺变动成本时留空；营业利润除以销量只能作另一个代理指标",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "autos_driver_3__value",
+          "name_zh": "单车变动成本贡献",
+          "unit_family": "currency_per_vehicle",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "retail_driver_1",
+      "industry_id": "retail",
+      "name_zh": "可比门店销售增长",
+      "parent_name_zh": "同店销售增长",
+      "business_definition_zh": "相同门店范围收入同比",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "公司同店销售披露",
+        "门店纳入规则"
+      ],
+      "comparability_rules_zh": "线上业务、燃油、汇率和 53 周调整明确",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "retail_driver_1__value",
+          "name_zh": "可比门店销售增长",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "retail_driver_2",
+      "industry_id": "retail",
+      "name_zh": "期间存货周转次数",
+      "parent_name_zh": "库存周转",
+      "business_definition_zh": "销售成本/平均库存",
+      "value_kind": "scalar",
+      "unit": "turns",
+      "required_inputs_zh": [
+        "匹配期间销售成本",
+        "期初期末同范围存货"
+      ],
+      "comparability_rules_zh": "平均库存至少期初期末；未年化的季度次数不称年度周转",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "retail_driver_2__value",
+          "name_zh": "期间存货周转次数",
+          "unit_family": "turns",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "retail_driver_3",
+      "industry_id": "retail",
+      "name_zh": "履约成本占相关收入比",
+      "parent_name_zh": "履约成本率",
+      "business_definition_zh": "可比履约成本/相关收入",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "履约配送仓储成本",
+        "相关收入"
+      ],
+      "comparability_rules_zh": "销售管理费用总额不能代替；物流与广告业务分开",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "retail_driver_3__value",
+          "name_zh": "履约成本占相关收入比",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "restaurants_driver_1",
+      "industry_id": "restaurants",
+      "name_zh": "可比餐厅销售增长",
+      "parent_name_zh": "同店销售增长",
+      "business_definition_zh": "相同门店范围收入同比",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "同店销售增长披露",
+        "店群规则"
+      ],
+      "comparability_rules_zh": "直营加盟及地区分开；汇率口径保留",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "restaurants_driver_1__value",
+          "name_zh": "可比餐厅销售增长",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "restaurants_driver_2",
+      "industry_id": "restaurants",
+      "name_zh": "单店经营利润",
+      "parent_name_zh": "单店经营利润",
+      "business_definition_zh": "门店收入减门店成本且排除项明确",
+      "value_kind": "scalar",
+      "unit": "currency_per_store",
+      "required_inputs_zh": [
+        "同范围门店经营利润",
+        "加权平均店数"
+      ],
+      "comparability_rules_zh": "排除总部费、折旧等依原文记录；加盟租金收入不等于加盟店利润",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "restaurants_driver_2__value",
+          "name_zh": "单店经营利润",
+          "unit_family": "currency_per_store",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "restaurants_driver_3",
+      "industry_id": "restaurants",
+      "name_zh": "加盟商闭店与违约记录",
+      "parent_name_zh": "加盟商健康",
+      "business_definition_zh": "闭店及违约记录",
+      "value_kind": "event_records",
+      "unit": "event_records",
+      "required_inputs_zh": [
+        "闭店事件",
+        "违约事件",
+        "加盟商范围"
+      ],
+      "comparability_rules_zh": "净开店数不能证明没有闭店或违约；原因及日期保留",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "restaurants_driver_3__event_id",
+          "name_zh": "事件及项目标识",
+          "unit_family": "text",
+          "period_basis": "event",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "restaurants_driver_3__event_date",
+          "name_zh": "事件实际发生日期",
+          "unit_family": "date",
+          "period_basis": "event",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "restaurants_driver_3__status",
+          "name_zh": "状态或实际结果",
+          "unit_family": "text",
+          "period_basis": "event",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "restaurants_driver_3__conditions",
+          "name_zh": "预设终点及生效条件",
+          "unit_family": "text",
+          "period_basis": "event",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "travel_leisure_driver_1",
+      "industry_id": "travel_leisure",
+      "name_zh": "可比酒店入住率",
+      "parent_name_zh": "酒店入住率",
+      "business_definition_zh": "售出间夜/可售间夜",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "售出间夜",
+        "可售间夜或公司披露入住率"
+      ],
+      "comparability_rules_zh": "同物业群、地区、品牌；管理加盟与自营分开",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "travel_leisure_driver_1__value",
+          "name_zh": "可比酒店入住率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "travel_leisure_driver_2",
+      "industry_id": "travel_leisure",
+      "name_zh": "可比酒店 ADR",
+      "parent_name_zh": "酒店平均房价",
+      "business_definition_zh": "客房收入/售出间夜",
+      "value_kind": "scalar",
+      "unit": "currency_per_room_night",
+      "required_inputs_zh": [
+        "匹配客房收入",
+        "售出间夜或公司 ADR"
+      ],
+      "comparability_rules_zh": "ADR 与 RevPAR 不同；币种和固定汇率口径保留",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "travel_leisure_driver_2__value",
+          "name_zh": "可比酒店 ADR",
+          "unit_family": "currency_per_room_night",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "travel_leisure_driver_3",
+      "industry_id": "travel_leisure",
+      "name_zh": "酒店预订群取消率",
+      "parent_name_zh": "预订取消率",
+      "business_definition_zh": "取消预订/匹配预订群",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "同一预订群取消数",
+        "预订群总数"
+      ],
+      "comparability_rules_zh": "取消日期与入住日期不同；退款金额不是取消数量",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "travel_leisure_driver_3__value",
+          "name_zh": "酒店预订群取消率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "housing_durables_driver_1",
+      "industry_id": "housing_durables",
+      "name_zh": "住宅订单取消率",
+      "parent_name_zh": "订单取消率",
+      "business_definition_zh": "取消订单/明确订单群",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "取消订单数",
+        "公司定义的匹配订单群"
+      ],
+      "comparability_rules_zh": "取消除以毛订单或期初订单分别保留",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "housing_durables_driver_1__value",
+          "name_zh": "住宅订单取消率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "housing_durables_driver_2",
+      "industry_id": "housing_durables",
+      "name_zh": "已结算交付住宅数量",
+      "parent_name_zh": "交付数量",
+      "business_definition_zh": "完成交付的单位数",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "完成 closing 的住宅数"
+      ],
+      "comparability_rules_zh": "签约订单和开工数量不能代替交付",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "housing_durables_driver_2__value",
+          "name_zh": "已结算交付住宅数量",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "housing_durables_driver_3",
+      "industry_id": "housing_durables",
+      "name_zh": "持有与控制土地批次",
+      "parent_name_zh": "土地库存",
+      "business_definition_zh": "持有及承诺土地分开",
+      "value_kind": "components",
+      "unit": "components",
+      "required_inputs_zh": [
+        "持有地块数",
+        "期权或合同控制地块数"
+      ],
+      "comparability_rules_zh": "owned 与 controlled 不相加冒充持有；金额和批次数分开",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "housing_durables_driver_3__owned_lots",
+          "name_zh": "持有地块数",
+          "unit_family": "lots",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "housing_durables_driver_3__controlled_lots",
+          "name_zh": "期权及合同控制地块数",
+          "unit_family": "lots",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "food_beverage_driver_1",
+      "industry_id": "food_beverage",
+      "name_zh": "可比产品销量增长",
+      "parent_name_zh": "销量增长",
+      "business_definition_zh": "可比销量同比",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "本期可比销量",
+        "同期可比销量或披露增长"
+      ],
+      "comparability_rules_zh": "系统销量与母公司浓缩液销售分别保存；日均与实际日历总量区分",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "food_beverage_driver_1__value",
+          "name_zh": "可比产品销量增长",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "food_beverage_driver_2",
+      "industry_id": "food_beverage",
+      "name_zh": "价格与组合增长贡献",
+      "parent_name_zh": "价格组合贡献",
+      "business_definition_zh": "明确方法的价格与产品组合收入变化",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "公司价格组合桥接贡献",
+        "公司桥接定义"
+      ],
+      "comparability_rules_zh": "price/mix 不等于纯价格；销量与汇率贡献分别保存",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "food_beverage_driver_2__value",
+          "name_zh": "价格与组合增长贡献",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "food_beverage_driver_3",
+      "industry_id": "food_beverage",
+      "name_zh": "渠道产品库存数量",
+      "parent_name_zh": "渠道库存",
+      "business_definition_zh": "按渠道覆盖记录存量",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "经销商库存量",
+        "产品渠道覆盖"
+      ],
+      "comparability_rules_zh": "公司存货与渠道库存不同；覆盖不完整不可外推",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "food_beverage_driver_3__value",
+          "name_zh": "渠道产品库存数量",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "household_personal_driver_1",
+      "industry_id": "household_personal",
+      "name_zh": "有机可比销量增长",
+      "parent_name_zh": "可比销量增长",
+      "business_definition_zh": "同范围销量同比",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "公司可比销量披露",
+        "范围调整"
+      ],
+      "comparability_rules_zh": "并购退出与汇率排除方法保留；销售额增速不能替代",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "household_personal_driver_1__value",
+          "name_zh": "有机可比销量增长",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "household_personal_driver_2",
+      "industry_id": "household_personal",
+      "name_zh": "分产品地区市场份额",
+      "parent_name_zh": "市场份额",
+      "business_definition_zh": "销量或收入/明确市场总量",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "品牌销售量或额",
+        "匹配市场总量"
+      ],
+      "comparability_rules_zh": "市场份额变化百分点与份额水平分开；第三方覆盖注明",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "household_personal_driver_2__value",
+          "name_zh": "分产品地区市场份额",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "household_personal_driver_3",
+      "industry_id": "household_personal",
+      "name_zh": "营销费用收入比",
+      "parent_name_zh": "营销投入率",
+      "business_definition_zh": "可比营销费用/收入",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "明确广告或营销费用",
+        "匹配收入"
+      ],
+      "comparability_rules_zh": "广告费用不等于全部营销投入；SG&A 总额不能替代",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "household_personal_driver_3__value",
+          "name_zh": "营销费用收入比",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "staples_retail_driver_1",
+      "industry_id": "staples_retail",
+      "name_zh": "可比零售销售增长",
+      "parent_name_zh": "同店销售增长",
+      "business_definition_zh": "相同门店范围收入同比",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "同店销售披露",
+        "店群规则"
+      ],
+      "comparability_rules_zh": "燃油汇率和线上范围明确；调整前后分别保存",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "staples_retail_driver_1__value",
+          "name_zh": "可比零售销售增长",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "staples_retail_driver_2",
+      "industry_id": "staples_retail",
+      "name_zh": "零售损耗率",
+      "parent_name_zh": "损耗率",
+      "business_definition_zh": "损耗金额/匹配销售或库存基数",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "损耗金额",
+        "明确销售额或存货成本基数"
+      ],
+      "comparability_rules_zh": "报废盗损原因保留；没有损耗金额不能从毛利率倒推",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "staples_retail_driver_2__value",
+          "name_zh": "零售损耗率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "staples_retail_driver_3",
+      "industry_id": "staples_retail",
+      "name_zh": "可比交易或客流增长",
+      "parent_name_zh": "客流增长",
+      "business_definition_zh": "可比到店或交易数同比",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "本期可比交易数",
+        "同期交易数或公司披露增长"
+      ],
+      "comparability_rules_zh": "客流与客单价分开；会员数增长不能替代",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "staples_retail_driver_3__value",
+          "name_zh": "可比交易或客流增长",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "tobacco_driver_1",
+      "industry_id": "tobacco",
+      "name_zh": "传统卷烟出货量",
+      "parent_name_zh": "传统产品销量",
+      "business_definition_zh": "按产品和地区披露",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "传统卷烟数量",
+        "地区产品"
+      ],
+      "comparability_rules_zh": "加热烟与尼古丁袋单独保存；出货不等于终端消费",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "tobacco_driver_1__value",
+          "name_zh": "传统卷烟出货量",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "tobacco_driver_2",
+      "industry_id": "tobacco",
+      "name_zh": "卷烟扣税单位净售价",
+      "parent_name_zh": "净售价",
+      "business_definition_zh": "扣税后的可比收入/销量",
+      "value_kind": "scalar",
+      "unit": "currency_per_unit",
+      "required_inputs_zh": [
+        "扣消费税传统产品收入",
+        "匹配传统产品数量"
+      ],
+      "comparability_rules_zh": "替代产品和渠道补贴排除；货币和单位一致",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "tobacco_driver_2__value",
+          "name_zh": "卷烟扣税单位净售价",
+          "unit_family": "currency_per_unit",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "tobacco_driver_3",
+      "industry_id": "tobacco",
+      "name_zh": "替代产品收入及利润",
+      "parent_name_zh": "替代产品盈利",
+      "business_definition_zh": "替代业务收入与利润分开",
+      "value_kind": "components",
+      "unit": "components",
+      "required_inputs_zh": [
+        "无烟产品净收入",
+        "同范围经营利润"
+      ],
+      "comparability_rules_zh": "收入占比不能作为盈利率；利润未披露保留缺口",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "tobacco_driver_3__smoke_free_revenue",
+          "name_zh": "无烟产品净收入",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "tobacco_driver_3__smoke_free_profit",
+          "name_zh": "同范围无烟业务经营利润",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "pharma_driver_1",
+      "industry_id": "pharma",
+      "name_zh": "单药净销售收入",
+      "parent_name_zh": "产品净收入",
+      "business_definition_zh": "按药品及返利后口径",
+      "value_kind": "scalar",
+      "unit": "currency",
+      "required_inputs_zh": [
+        "产品净收入",
+        "药品与地区标识"
+      ],
+      "comparability_rules_zh": "返利折扣计入方式保留；联合销售和合作分成分开",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "pharma_driver_1__value",
+          "name_zh": "单药净销售收入",
+          "unit_family": "currency",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "pharma_driver_2",
+      "industry_id": "pharma",
+      "name_zh": "指定窗口专利到期收入暴露",
+      "parent_name_zh": "专利到期暴露",
+      "business_definition_zh": "指定时间到期产品收入/匹配收入",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "窗口内到期产品基期净收入",
+        "匹配总产品收入",
+        "期限清单"
+      ],
+      "comparability_rules_zh": "专利与监管独占期及诉讼结果不同；不以 LOE 预测损失替代收入暴露",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "pharma_driver_2__value",
+          "name_zh": "指定窗口专利到期收入暴露",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "pharma_driver_3",
+      "industry_id": "pharma",
+      "name_zh": "药物研发里程碑事件",
+      "parent_name_zh": "研发里程碑",
+      "business_definition_zh": "按项目阶段与终点记录",
+      "value_kind": "event_records",
+      "unit": "event_records",
+      "required_inputs_zh": [
+        "药物项目",
+        "阶段",
+        "主要终点",
+        "结果",
+        "事件日期"
+      ],
+      "comparability_rules_zh": "临床成功和商业审批不同；试验终点及来源版本保留",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "pharma_driver_3__event_id",
+          "name_zh": "事件及项目标识",
+          "unit_family": "text",
+          "period_basis": "event",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "pharma_driver_3__event_date",
+          "name_zh": "事件实际发生日期",
+          "unit_family": "date",
+          "period_basis": "event",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "pharma_driver_3__status",
+          "name_zh": "状态或实际结果",
+          "unit_family": "text",
+          "period_basis": "event",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "pharma_driver_3__conditions",
+          "name_zh": "预设终点及生效条件",
+          "unit_family": "text",
+          "period_basis": "event",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "biotech_driver_1",
+      "industry_id": "biotech",
+      "name_zh": "临床研发里程碑事件",
+      "parent_name_zh": "研发里程碑",
+      "business_definition_zh": "项目阶段及预设终点",
+      "value_kind": "event_records",
+      "unit": "event_records",
+      "required_inputs_zh": [
+        "试验标识",
+        "阶段",
+        "预设终点",
+        "结果",
+        "日期"
+      ],
+      "comparability_rules_zh": "实际读出与预期读出分别保存；公司计划不能当已实现结果",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "biotech_driver_1__event_id",
+          "name_zh": "事件及项目标识",
+          "unit_family": "text",
+          "period_basis": "event",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "biotech_driver_1__event_date",
+          "name_zh": "事件实际发生日期",
+          "unit_family": "date",
+          "period_basis": "event",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "biotech_driver_1__status",
+          "name_zh": "状态或实际结果",
+          "unit_family": "text",
+          "period_basis": "event",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "biotech_driver_1__conditions",
+          "name_zh": "预设终点及生效条件",
+          "unit_family": "text",
+          "period_basis": "event",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "biotech_driver_2",
+      "industry_id": "biotech",
+      "name_zh": "正常化现金跑道",
+      "parent_name_zh": "现金跑道",
+      "business_definition_zh": "可用现金/正常化期现金消耗",
+      "value_kind": "scalar",
+      "unit": "months",
+      "required_inputs_zh": [
+        "可用现金和投资",
+        "正常化月净消耗",
+        "调整项"
+      ],
+      "comparability_rules_zh": "受限现金和不可变现投资排除；正经营现金流时不强算消耗",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "biotech_driver_2__value",
+          "name_zh": "正常化现金跑道",
+          "unit_family": "months",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "biotech_driver_3",
+      "industry_id": "biotech",
+      "name_zh": "融资缺口与稀释情景",
+      "parent_name_zh": "稀释需求",
+      "business_definition_zh": "情景融资需求与可能股数变化",
+      "value_kind": "scenario",
+      "unit": "scenario",
+      "required_inputs_zh": [
+        "研发现金预算",
+        "债务到期",
+        "可用资金",
+        "发行价格",
+        "新增股数"
+      ],
+      "comparability_rules_zh": "情景假设不是原始事实；回购后净股数变化不等于 SBC 造成的稀释",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "biotech_driver_3__scenario_id",
+          "name_zh": "假设情景标识",
+          "unit_family": "text",
+          "period_basis": "forecast",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "biotech_driver_3__funding_gap",
+          "name_zh": "情景融资缺口",
+          "unit_family": "currency",
+          "period_basis": "forecast",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "biotech_driver_3__issue_price",
+          "name_zh": "情景发行价格",
+          "unit_family": "currency_per_share",
+          "period_basis": "forecast",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "biotech_driver_3__new_shares",
+          "name_zh": "情景新增股数",
+          "unit_family": "shares",
+          "period_basis": "forecast",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "biotech_driver_3__dilution_ratio",
+          "name_zh": "情景稀释比例",
+          "unit_family": "ratio",
+          "period_basis": "forecast",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "medical_devices_driver_1",
+      "industry_id": "medical_devices",
+      "name_zh": "分手术产品操作数量",
+      "parent_name_zh": "手术或耗材量",
+      "business_definition_zh": "按产品与临床用途记录",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "实际手术数量",
+        "系统类型"
+      ],
+      "comparability_rules_zh": "da Vinci 与 Ion 分开；增长率不能代替绝对数量",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "medical_devices_driver_1__value",
+          "name_zh": "分手术产品操作数量",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "medical_devices_driver_2",
+      "industry_id": "medical_devices",
+      "name_zh": "新增装机及期末装机量",
+      "parent_name_zh": "装机数量",
+      "business_definition_zh": "新增和存量装机分开",
+      "value_kind": "components",
+      "unit": "components",
+      "required_inputs_zh": [
+        "当期系统 placement",
+        "期末 installed base",
+        "退役调整"
+      ],
+      "comparability_rules_zh": "交付、租赁、装机和退役分别说明",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "medical_devices_driver_2__placements",
+          "name_zh": "当期系统投放数",
+          "unit_family": "systems",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "medical_devices_driver_2__installed_base",
+          "name_zh": "有效装机存量",
+          "unit_family": "systems",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "medical_devices_driver_2__retired_systems",
+          "name_zh": "当期退役系统数",
+          "unit_family": "systems",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "medical_devices_driver_3",
+      "industry_id": "medical_devices",
+      "name_zh": "每匹配系统耗材收入",
+      "parent_name_zh": "耗材附着收入",
+      "business_definition_zh": "可比耗材收入/明确装机基数",
+      "value_kind": "scalar",
+      "unit": "currency_per_system",
+      "required_inputs_zh": [
+        "同系统耗材收入",
+        "匹配平均有效装机基数"
+      ],
+      "comparability_rules_zh": "期末装机不能无说明代替平均基数；服务收入排除",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "medical_devices_driver_3__value",
+          "name_zh": "每匹配系统耗材收入",
+          "unit_family": "currency_per_system",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "health_services_driver_1",
+      "industry_id": "health_services",
+      "name_zh": "同院可比医疗服务量",
+      "parent_name_zh": "服务量",
+      "business_definition_zh": "按就诊或服务单位记录",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "住院或等价住院次数",
+        "院群定义"
+      ],
+      "comparability_rules_zh": "admission 与 equivalent admission 不同；全部医院与同院分开",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "health_services_driver_1__value",
+          "name_zh": "同院可比医疗服务量",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "health_services_driver_2",
+      "industry_id": "health_services",
+      "name_zh": "每等价住院净收入",
+      "parent_name_zh": "单位报销收入",
+      "business_definition_zh": "净服务收入/匹配服务量",
+      "value_kind": "scalar",
+      "unit": "currency_per_admission",
+      "required_inputs_zh": [
+        "匹配净服务收入",
+        "等价住院次数"
+      ],
+      "comparability_rules_zh": "医院收费标价不是净收入；门诊折算规则保留",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "health_services_driver_2__value",
+          "name_zh": "每等价住院净收入",
+          "unit_family": "currency_per_admission",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "health_services_driver_3",
+      "industry_id": "health_services",
+      "name_zh": "医疗人工成本收入比",
+      "parent_name_zh": "人员成本率",
+      "business_definition_zh": "相关人工成本/服务收入",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "工资福利或匹配人工成本",
+        "净服务收入"
+      ],
+      "comparability_rules_zh": "合同工是否含入须明确；人工成本与全部运营成本不同",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "health_services_driver_3__value",
+          "name_zh": "医疗人工成本收入比",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "managed_care_driver_1",
+      "industry_id": "managed_care",
+      "name_zh": "报告医疗成本率",
+      "parent_name_zh": "医疗赔付率",
+      "business_definition_zh": "匹配医疗成本/保费收入",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "匹配医疗成本",
+        "医疗保费或公司 MCR"
+      ],
+      "comparability_rules_zh": "报告与调整后 MCR 分开；监管 MLR 不直接替代",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "managed_care_driver_1__value",
+          "name_zh": "报告医疗成本率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "managed_care_driver_2",
+      "industry_id": "managed_care",
+      "name_zh": "分险种会员数",
+      "parent_name_zh": "会员数量",
+      "business_definition_zh": "按险种与期间记录",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "医疗险会员数量",
+        "险种",
+        "期末或平均"
+      ],
+      "comparability_rules_zh": "Optum 客户及服务人数不能当保险会员；按险种防重叠",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "managed_care_driver_2__value",
+          "name_zh": "分险种会员数",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "managed_care_driver_3",
+      "industry_id": "managed_care",
+      "name_zh": "同险种可比保费费率调整",
+      "parent_name_zh": "费率调整",
+      "business_definition_zh": "同险种可比保费变化",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "同保障客户群保费变化",
+        "险种及保障规则"
+      ],
+      "comparability_rules_zh": "总保费增长含会员结构变化；政府支付削减单列",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "managed_care_driver_3__value",
+          "name_zh": "同险种可比保费费率调整",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "banks_driver_1",
+      "industry_id": "banks",
+      "name_zh": "同口径年化净息差",
+      "parent_name_zh": "净息差",
+      "business_definition_zh": "年化净利息收入/平均生息资产",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "年化净利息收入",
+        "平均生息资产或公司 NIM"
+      ],
+      "comparability_rules_zh": "税等价与 GAAP 分开；年化天数方法保留",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "banks_driver_1__value",
+          "name_zh": "同口径年化净息差",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "banks_driver_2",
+      "industry_id": "banks",
+      "name_zh": "年化贷款净核销率",
+      "parent_name_zh": "贷款净核销率",
+      "business_definition_zh": "年化净核销额/平均贷款",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "扣回收后的净核销额",
+        "平均同范围贷款"
+      ],
+      "comparability_rules_zh": "拨备费用不是净核销；信贷卡与全部贷款分开",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "banks_driver_2__value",
+          "name_zh": "年化贷款净核销率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "banks_driver_3",
+      "industry_id": "banks",
+      "name_zh": "资本与流动性监管比率",
+      "parent_name_zh": "资本与流动性",
+      "business_definition_zh": "记录机构披露口径及适用要求",
+      "value_kind": "components",
+      "unit": "components",
+      "required_inputs_zh": [
+        "CET1 比率",
+        "LCR 比率",
+        "NSFR 比率",
+        "适用规则"
+      ],
+      "comparability_rules_zh": "标准法与高级法分开；现金金额不能替代 LCR；不得平均成评分",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "banks_driver_3__cet1",
+          "name_zh": "普通股一级资本充足率",
+          "unit_family": "ratio",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "banks_driver_3__lcr",
+          "name_zh": "流动性覆盖率",
+          "unit_family": "ratio",
+          "period_basis": "source_defined_average",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "banks_driver_3__nsfr",
+          "name_zh": "净稳定资金比例",
+          "unit_family": "ratio",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "insurance_driver_1",
+      "industry_id": "insurance",
+      "name_zh": "财险报告综合成本率",
+      "parent_name_zh": "综合成本率",
+      "business_definition_zh": "财产险赔付率加匹配费用率",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "同范围赔付率",
+        "费用率或报告 combined ratio"
+      ],
+      "comparability_rules_zh": "事故年度排灾与报告值分开；寿险不能使用",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "insurance_driver_1__value",
+          "name_zh": "财险报告综合成本率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "insurance_driver_2",
+      "industry_id": "insurance",
+      "name_zh": "历史事故准备金发展",
+      "parent_name_zh": "准备金发展",
+      "business_definition_zh": "前期准备金有利或不利变化",
+      "value_kind": "scalar",
+      "unit": "currency",
+      "required_inputs_zh": [
+        "前期事故年度有利或不利发展",
+        "再保险范围"
+      ],
+      "comparability_rules_zh": "有利不利符号明确；当年灾害损失不等于准备金发展",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "insurance_driver_2__value",
+          "name_zh": "历史事故准备金发展",
+          "unit_family": "currency",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "insurance_driver_3",
+      "industry_id": "insurance",
+      "name_zh": "资产负债期限币种匹配",
+      "parent_name_zh": "负债资产匹配",
+      "business_definition_zh": "期限和币种暴露",
+      "value_kind": "components",
+      "unit": "components",
+      "required_inputs_zh": [
+        "资产久期",
+        "负债久期",
+        "币种敞口",
+        "匹配范围"
+      ],
+      "comparability_rules_zh": "投资组合久期不能代替负债久期；缺负债数据不能计算缺口",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "insurance_driver_3__asset_duration",
+          "name_zh": "资产久期",
+          "unit_family": "years",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "insurance_driver_3__liability_duration",
+          "name_zh": "负债久期",
+          "unit_family": "years",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "insurance_driver_3__currency_exposure",
+          "name_zh": "分币种未匹配敞口",
+          "unit_family": "currency",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "asset_management_driver_1",
+      "industry_id": "asset_management",
+      "name_zh": "客户净资金流入",
+      "parent_name_zh": "净流入",
+      "business_definition_zh": "剔除市场变化的客户资金流",
+      "value_kind": "scalar",
+      "unit": "currency",
+      "required_inputs_zh": [
+        "客户流入",
+        "流出",
+        "资本返还",
+        "公司流量定义"
+      ],
+      "comparability_rules_zh": "市场收益外汇并购增加剔除；realizations 是否另列按原文",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "asset_management_driver_1__value",
+          "name_zh": "客户净资金流入",
+          "unit_family": "currency",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "asset_management_driver_2",
+      "industry_id": "asset_management",
+      "name_zh": "匹配收费管理资产",
+      "parent_name_zh": "收费管理资产",
+      "business_definition_zh": "按费率对应资产群",
+      "value_kind": "scalar",
+      "unit": "currency",
+      "required_inputs_zh": [
+        "收费资产余额",
+        "产品和费率范围"
+      ],
+      "comparability_rules_zh": "总 AUM 可能含不收费资产；期末与平均 AUM 分开",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "asset_management_driver_2__value",
+          "name_zh": "匹配收费管理资产",
+          "unit_family": "currency",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "asset_management_driver_3",
+      "industry_id": "asset_management",
+      "name_zh": "基础管理费有效年化率",
+      "parent_name_zh": "有效费率",
+      "business_definition_zh": "管理费/匹配平均收费资产",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "基础管理费",
+        "匹配平均收费资产",
+        "年化方法"
+      ],
+      "comparability_rules_zh": "业绩费和技术服务收入排除；期末总 AUM 不能替代",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "asset_management_driver_3__value",
+          "name_zh": "基础管理费有效年化率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "payments_driver_1",
+      "industry_id": "payments",
+      "name_zh": "定义内支付处理金额",
+      "parent_name_zh": "处理金额",
+      "business_definition_zh": "按支付或交易定义",
+      "value_kind": "scalar",
+      "unit": "currency",
+      "required_inputs_zh": [
+        "支付处理量",
+        "交易类型",
+        "地区币种"
+      ],
+      "comparability_rules_zh": "支付量与含现金提取总量分开；跨境增速不是总处理额",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "payments_driver_1__value",
+          "name_zh": "定义内支付处理金额",
+          "unit_family": "currency",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "payments_driver_2",
+      "industry_id": "payments",
+      "name_zh": "匹配净交易变现率",
+      "parent_name_zh": "净变现率",
+      "business_definition_zh": "匹配交易相关净收入/处理金额",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "同期间净交易相关收入",
+        "匹配处理金额"
+      ],
+      "comparability_rules_zh": "服务收入确认可能基于上季度交易；全部收入不能不经调节直接除",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "payments_driver_2__value",
+          "name_zh": "匹配净交易变现率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "payments_driver_3",
+      "industry_id": "payments",
+      "name_zh": "承担的欺诈与信用损失率",
+      "parent_name_zh": "欺诈信用损失",
+      "business_definition_zh": "损失/匹配处理或信贷基数",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "承担欺诈或贷款损失",
+        "匹配交易量或贷款基数"
+      ],
+      "comparability_rules_zh": "网络品牌通常不承担发卡行全部损失；无承担关系记不适用",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "payments_driver_3__value",
+          "name_zh": "承担的欺诈与信用损失率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "software_driver_1",
+      "industry_id": "software",
+      "name_zh": "同客户群净收入留存率",
+      "parent_name_zh": "净收入留存率",
+      "business_definition_zh": "同群客户经常收入之比",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "公司 NRR",
+        "同群窗口与定义"
+      ],
+      "comparability_rules_zh": "披露约数区间照原文保存；客户收入留存和数量留存不同",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "software_driver_1__value",
+          "name_zh": "同客户群净收入留存率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "software_driver_2",
+      "industry_id": "software",
+      "name_zh": "ARR 与期间订阅收入",
+      "parent_name_zh": "经常性收入",
+      "business_definition_zh": "ARR 或订阅收入分开",
+      "value_kind": "components",
+      "unit": "components",
+      "required_inputs_zh": [
+        "期末 ARR",
+        "期间订阅收入",
+        "订阅定义"
+      ],
+      "comparability_rules_zh": "按量计费收入不能自动改名 ARR；ARR 与收入分开",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "software_driver_2__arr",
+          "name_zh": "期末年化经常性收入",
+          "unit_family": "currency",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "software_driver_2__subscription_revenue",
+          "name_zh": "期间订阅收入",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "software_driver_3",
+      "industry_id": "software",
+      "name_zh": "激励费用及股数变化",
+      "parent_name_zh": "股权稀释",
+      "business_definition_zh": "股数变化与股权激励成本分别记录",
+      "value_kind": "components",
+      "unit": "components",
+      "required_inputs_zh": [
+        "SBC 费用",
+        "期初期末实际发行股数",
+        "加权稀释股数"
+      ],
+      "comparability_rules_zh": "实际股数与 EPS 分母不同；拆股并购回购需调节",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "software_driver_3__sbc",
+          "name_zh": "股权激励费用",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "software_driver_3__shares_start",
+          "name_zh": "期初实际流通股数",
+          "unit_family": "shares",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "software_driver_3__shares_end",
+          "name_zh": "期末实际流通股数",
+          "unit_family": "shares",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "software_driver_3__weighted_diluted_shares",
+          "name_zh": "期间加权稀释股数",
+          "unit_family": "shares",
+          "period_basis": "duration_average",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "semiconductors_driver_1",
+      "industry_id": "semiconductors",
+      "name_zh": "终端渠道库存量或天数",
+      "parent_name_zh": "渠道库存",
+      "business_definition_zh": "按终端与口径记录",
+      "value_kind": "components",
+      "unit": "components",
+      "required_inputs_zh": [
+        "渠道产品库存量",
+        "匹配渠道日销量",
+        "终端类别"
+      ],
+      "comparability_rules_zh": "企业账面存货与渠道库存不同；缺渠道数据留空",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "semiconductors_driver_1__channel_units",
+          "name_zh": "渠道存货数量",
+          "unit_family": "physical_quantity",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "semiconductors_driver_1__channel_days",
+          "name_zh": "渠道库存覆盖天数",
+          "unit_family": "days",
+          "period_basis": "instant",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "semiconductors_driver_2",
+      "industry_id": "semiconductors",
+      "name_zh": "有效晶圆产能利用率",
+      "parent_name_zh": "产能利用率",
+      "business_definition_zh": "产出/可比有效产能",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "实际产出",
+        "同工艺有效产能"
+      ],
+      "comparability_rules_zh": "bit shipment 增长不是利用率；晶圆厂与无厂业务分别适用",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "semiconductors_driver_2__value",
+          "name_zh": "有效晶圆产能利用率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "semiconductors_driver_3",
+      "industry_id": "semiconductors",
+      "name_zh": "同产品单位平均售价",
+      "parent_name_zh": "平均售价",
+      "business_definition_zh": "可比产品收入/销量",
+      "value_kind": "scalar",
+      "unit": "currency_per_unit",
+      "required_inputs_zh": [
+        "产品收入",
+        "匹配 bit 或芯片数量"
+      ],
+      "comparability_rules_zh": "ASP 变化百分数只为补充；产品密度及 DRAM NAND 分开",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "semiconductors_driver_3__value",
+          "name_zh": "同产品单位平均售价",
+          "unit_family": "currency_per_unit",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "semi_equipment_driver_1",
+      "industry_id": "semi_equipment",
+      "name_zh": "半导体设备订单收入比",
+      "parent_name_zh": "订单收入比",
+      "business_definition_zh": "同期间新增订单额/收入",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "新增设备订单",
+        "同期间设备收入"
+      ],
+      "comparability_rules_zh": "设备与服务分开；公司停止披露订单时保留缺口",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "semi_equipment_driver_1__value",
+          "name_zh": "半导体设备订单收入比",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "semi_equipment_driver_2",
+      "industry_id": "semi_equipment",
+      "name_zh": "分客户制程资本开支",
+      "parent_name_zh": "客户资本开支",
+      "business_definition_zh": "按制程和客户记录",
+      "value_kind": "scalar",
+      "unit": "currency",
+      "required_inputs_zh": [
+        "客户实际 capex",
+        "工艺及客户标识"
+      ],
+      "comparability_rules_zh": "必须引用客户财报；设备厂自己的 capex 不能代替",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "semi_equipment_driver_2__value",
+          "name_zh": "分客户制程资本开支",
+          "unit_family": "currency",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "semi_equipment_driver_3",
+      "industry_id": "semi_equipment",
+      "name_zh": "客户取消及延期订单",
+      "parent_name_zh": "订单取消",
+      "business_definition_zh": "取消与延期分别记录",
+      "value_kind": "components",
+      "unit": "components",
+      "required_inputs_zh": [
+        "取消订单金额",
+        "延期订单金额",
+        "合同与日期"
+      ],
+      "comparability_rules_zh": "取消与延期分开；订单净变动不能反推出取消金额",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "semi_equipment_driver_3__cancellations",
+          "name_zh": "订单取消额",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "semi_equipment_driver_3__deferrals",
+          "name_zh": "订单延期额",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "hardware_driver_1",
+      "industry_id": "hardware",
+      "name_zh": "分产品硬件出货数量",
+      "parent_name_zh": "终端出货",
+      "business_definition_zh": "按可比产品单位",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "产品 sell-in 出货量",
+        "地区",
+        "期间"
+      ],
+      "comparability_rules_zh": "sell-in 与 sell-through 分开；游戏主机和传感器不能相加",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "hardware_driver_1__value",
+          "name_zh": "分产品硬件出货数量",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "hardware_driver_2",
+      "industry_id": "hardware",
+      "name_zh": "硬件渠道存量",
+      "parent_name_zh": "渠道库存",
+      "business_definition_zh": "经销渠道存量",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "渠道库存量",
+        "渠道产品覆盖"
+      ],
+      "comparability_rules_zh": "公司 inventory 不能代替经销商库存",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "hardware_driver_2__value",
+          "name_zh": "硬件渠道存量",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "hardware_driver_3",
+      "industry_id": "hardware",
+      "name_zh": "分产品毛利及收入组合",
+      "parent_name_zh": "产品组合毛利",
+      "business_definition_zh": "分产品毛利与占比",
+      "value_kind": "components",
+      "unit": "components",
+      "required_inputs_zh": [
+        "产品毛利",
+        "产品收入",
+        "同范围总收入"
+      ],
+      "comparability_rules_zh": "分部营业利润率不是产品毛利；产品收入份额单列",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "hardware_driver_3__product_gross_profit",
+          "name_zh": "分产品毛利",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "hardware_driver_3__product_revenue_share",
+          "name_zh": "同产品收入占比",
+          "unit_family": "ratio",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "it_services_driver_1",
+      "industry_id": "it_services",
+      "name_zh": "专业人员可计费利用率",
+      "parent_name_zh": "可计费利用率",
+      "business_definition_zh": "计费工时/可用工时",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "计费工时",
+        "可用专业人员工时或公司 utilization"
+      ],
+      "comparability_rules_zh": "培训与交付支持排除按公司定义保留",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "it_services_driver_1__value",
+          "name_zh": "专业人员可计费利用率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "it_services_driver_2",
+      "industry_id": "it_services",
+      "name_zh": "同范围新增合同金额",
+      "parent_name_zh": "合同新增额",
+      "business_definition_zh": "同范围签约金额",
+      "value_kind": "scalar",
+      "unit": "currency",
+      "required_inputs_zh": [
+        "新签合同 bookings",
+        "服务类别"
+      ],
+      "comparability_rules_zh": "咨询与托管服务合同不同年限；合同额不是当期收入",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "it_services_driver_2__value",
+          "name_zh": "同范围新增合同金额",
+          "unit_family": "currency",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "it_services_driver_3",
+      "industry_id": "it_services",
+      "name_zh": "单位计费服务费率",
+      "parent_name_zh": "单位费率",
+      "business_definition_zh": "可比收入/计费单位",
+      "value_kind": "scalar",
+      "unit": "currency_per_hour",
+      "required_inputs_zh": [
+        "同范围服务收入",
+        "实际计费工时"
+      ],
+      "comparability_rules_zh": "人均收入不能替代小时费率；外包转售收入剔除",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "it_services_driver_3__value",
+          "name_zh": "单位计费服务费率",
+          "unit_family": "currency_per_hour",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "telecom_driver_1",
+      "industry_id": "telecom",
+      "name_zh": "单匹配用户服务 ARPU",
+      "parent_name_zh": "ARPU",
+      "business_definition_zh": "可比服务收入/平均匹配用户",
+      "value_kind": "scalar",
+      "unit": "currency_per_subscriber",
+      "required_inputs_zh": [
+        "服务收入",
+        "平均对应用户",
+        "月数"
+      ],
+      "comparability_rules_zh": "ARPA 是账户而非用户；账户收入不能直接改名 ARPU",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "telecom_driver_1__value",
+          "name_zh": "单匹配用户服务 ARPU",
+          "unit_family": "currency_per_subscriber",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "telecom_driver_2",
+      "industry_id": "telecom",
+      "name_zh": "同用户群月均流失率",
+      "parent_name_zh": "用户流失率",
+      "business_definition_zh": "流失用户/明确平均用户基数",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "断开用户数",
+        "平均用户",
+        "月数或披露 churn"
+      ],
+      "comparability_rules_zh": "电话流失与全部设备流失分开；后付费和预付费分开",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "telecom_driver_2__value",
+          "name_zh": "同用户群月均流失率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "telecom_driver_3",
+      "industry_id": "telecom",
+      "name_zh": "网络维持及扩张现金开支",
+      "parent_name_zh": "网络资本开支",
+      "business_definition_zh": "现金投入按维持与扩张分开",
+      "value_kind": "components",
+      "unit": "components",
+      "required_inputs_zh": [
+        "网络现金 capex",
+        "维持部分",
+        "扩张部分"
+      ],
+      "comparability_rules_zh": "频谱购买及融资租赁分开；只披露总额不能填拆分",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "telecom_driver_3__maintenance_capex",
+          "name_zh": "网络维持现金开支",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "telecom_driver_3__growth_capex",
+          "name_zh": "网络扩张现金开支",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "telecom_driver_3__total_network_capex",
+          "name_zh": "网络现金开支总额",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "digital_platforms_driver_1",
+      "industry_id": "digital_platforms",
+      "name_zh": "定义内活跃用户",
+      "parent_name_zh": "活跃用户",
+      "business_definition_zh": "明确活跃标准与频率",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "DAU 或 MAU",
+        "频率",
+        "活跃规则"
+      ],
+      "comparability_rules_zh": "跨产品用户去重；平均月与期末日不能混用",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "digital_platforms_driver_1__value",
+          "name_zh": "定义内活跃用户",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "digital_platforms_driver_2",
+      "industry_id": "digital_platforms",
+      "name_zh": "匹配活跃用户变现收入",
+      "parent_name_zh": "单位用户变现",
+      "business_definition_zh": "匹配收入/平均活跃用户",
+      "value_kind": "scalar",
+      "unit": "currency_per_user",
+      "required_inputs_zh": [
+        "同产品收入",
+        "平均活跃用户或公司 ARPP"
+      ],
+      "comparability_rules_zh": "DAU 与 MAU 分母不同；ARPP 公司方法完整保留",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "digital_platforms_driver_2__value",
+          "name_zh": "匹配活跃用户变现收入",
+          "unit_family": "currency_per_user",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "digital_platforms_driver_3",
+      "industry_id": "digital_platforms",
+      "name_zh": "平台交易净抽佣率",
+      "parent_name_zh": "交易变现率",
+      "business_definition_zh": "净交易收入/匹配交易额",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "净交易收入",
+        "匹配 GMV"
+      ],
+      "comparability_rules_zh": "纯广告平台业务不适用；广告收入不能除虚构 GMV",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "digital_platforms_driver_3__value",
+          "name_zh": "平台交易净抽佣率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "media_entertainment_driver_1",
+      "industry_id": "media_entertainment",
+      "name_zh": "付费订阅用户数量",
+      "parent_name_zh": "付费用户",
+      "business_definition_zh": "明确平均与期末口径",
+      "value_kind": "scalar",
+      "unit": "physical_quantity",
+      "required_inputs_zh": [
+        "paid membership",
+        "平均或期末",
+        "产品地区"
+      ],
+      "comparability_rules_zh": "MAU 及广告受众不能代替付费用户；停披露后旧值不能冒充本期",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "media_entertainment_driver_1__value",
+          "name_zh": "付费订阅用户数量",
+          "unit_family": "physical_quantity",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "media_entertainment_driver_2",
+      "industry_id": "media_entertainment",
+      "name_zh": "内容现金投入",
+      "parent_name_zh": "内容现金投入",
+      "business_definition_zh": "当期内容现金支出",
+      "value_kind": "scalar",
+      "unit": "currency",
+      "required_inputs_zh": [
+        "内容现金支付",
+        "许可自制与预付口径"
+      ],
+      "comparability_rules_zh": "资本化新增额与当期现金支付不同；研发费用不能代替",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "media_entertainment_driver_2__value",
+          "name_zh": "内容现金投入",
+          "unit_family": "currency",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "media_entertainment_driver_3",
+      "industry_id": "media_entertainment",
+      "name_zh": "当期内容摊销",
+      "parent_name_zh": "内容摊销",
+      "business_definition_zh": "当期确认的内容成本",
+      "value_kind": "scalar",
+      "unit": "currency",
+      "required_inputs_zh": [
+        "内容资产摊销或内容成本附注"
+      ],
+      "comparability_rules_zh": "现金购买与摊销分开；公司全部折旧摊销不能替代",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "media_entertainment_driver_3__value",
+          "name_zh": "当期内容摊销",
+          "unit_family": "currency",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "regulated_utilities_driver_1",
+      "industry_id": "regulated_utilities",
+      "name_zh": "监管批准费率资产基数",
+      "parent_name_zh": "费率基数",
+      "business_definition_zh": "经批准的可获回报资产",
+      "value_kind": "scalar",
+      "unit": "currency",
+      "required_inputs_zh": [
+        "监管批准 rate base",
+        "法律主体",
+        "决定日期"
+      ],
+      "comparability_rules_zh": "集团 PP&E 与预测 rate base 不能当获批资产",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "regulated_utilities_driver_1__value",
+          "name_zh": "监管批准费率资产基数",
+          "unit_family": "currency",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "regulated_utilities_driver_2",
+      "industry_id": "regulated_utilities",
+      "name_zh": "监管批准权益回报率",
+      "parent_name_zh": "准许 ROE",
+      "business_definition_zh": "适用监管决定的权益回报",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "allowed ROE",
+        "权益资本结构",
+        "决定生效日"
+      ],
+      "comparability_rules_zh": "申请 ROE 与批准 ROE 分开；实际 ROE 不是 allowed ROE",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "regulated_utilities_driver_2__value",
+          "name_zh": "监管批准权益回报率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "regulated_utilities_driver_3",
+      "industry_id": "regulated_utilities",
+      "name_zh": "监管成本回收滞后",
+      "parent_name_zh": "回收时滞",
+      "business_definition_zh": "支出到获准回收的期间",
+      "value_kind": "scalar",
+      "unit": "days",
+      "required_inputs_zh": [
+        "支出日期",
+        "核准回收生效日期",
+        "监管机制"
+      ],
+      "comparability_rules_zh": "燃料附加条款和一般费率案分开；不从利润猜测时滞",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "regulated_utilities_driver_3__value",
+          "name_zh": "监管成本回收滞后",
+          "unit_family": "days",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "merchant_power_driver_1",
+      "industry_id": "merchant_power",
+      "name_zh": "匹配售电捕获价格",
+      "parent_name_zh": "捕获电价",
+      "business_definition_zh": "售电收入/匹配售电量",
+      "value_kind": "scalar",
+      "unit": "currency_per_mwh",
+      "required_inputs_zh": [
+        "匹配售电净收入",
+        "对应 MWh"
+      ],
+      "comparability_rules_zh": "批发零售和对冲结算分开；集团收入不能直接除总发电量",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "merchant_power_driver_1__value",
+          "name_zh": "匹配售电捕获价格",
+          "unit_family": "currency_per_mwh",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "merchant_power_driver_2",
+      "industry_id": "merchant_power",
+      "name_zh": "效率调整后燃料电价差",
+      "parent_name_zh": "燃料价差",
+      "business_definition_zh": "单位电价减效率调整燃料成本",
+      "value_kind": "scalar",
+      "unit": "currency_per_mwh",
+      "required_inputs_zh": [
+        "同范围电价",
+        "燃料价格",
+        "热耗效率",
+        "单位换算"
+      ],
+      "comparability_rules_zh": "核电与燃气燃煤分别定义；燃料价格需按热耗换算",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "merchant_power_driver_2__value",
+          "name_zh": "效率调整后燃料电价差",
+          "unit_family": "currency_per_mwh",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "merchant_power_driver_3",
+      "industry_id": "merchant_power",
+      "name_zh": "匹配预期发电对冲覆盖率",
+      "parent_name_zh": "合同覆盖",
+      "business_definition_zh": "已对冲或长约电量/匹配预期电量",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "已对冲电量",
+        "同窗口预计售电量"
+      ],
+      "comparability_rules_zh": "资产负债表衍生品公允价值不能替代；风险窗口与概率保留",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "merchant_power_driver_3__value",
+          "name_zh": "匹配预期发电对冲覆盖率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "equity_reit_driver_1",
+      "industry_id": "equity_reit",
+      "name_zh": "可比物业 NOI 增长",
+      "parent_name_zh": "同物业 NOI 增长",
+      "business_definition_zh": "固定可比物业群 NOI 同比",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "same-store 本期 NOI",
+        "同群同期 NOI或披露增长"
+      ],
+      "comparability_rules_zh": "现金与直线法净有效租金分别保存；物业群冻结规则记录",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "equity_reit_driver_1__value",
+          "name_zh": "可比物业 NOI 增长",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "equity_reit_driver_2",
+      "industry_id": "equity_reit",
+      "name_zh": "同物业面积出租率",
+      "parent_name_zh": "出租率",
+      "business_definition_zh": "出租面积/可出租面积",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "已出租面积",
+        "可出租面积或报告 occupancy"
+      ],
+      "comparability_rules_zh": "平均与期末出租率不同；自有与管理组合分开",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "equity_reit_driver_2__value",
+          "name_zh": "同物业面积出租率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "equity_reit_driver_3",
+      "industry_id": "equity_reit",
+      "name_zh": "FFO 至 AFFO 调节明细",
+      "parent_name_zh": "AFFO 调节",
+      "business_definition_zh": "FFO 到 AFFO 的逐项桥接",
+      "value_kind": "components",
+      "unit": "components",
+      "required_inputs_zh": [
+        "起点 FFO",
+        "经常资本支出",
+        "租赁佣金",
+        "非现金租金",
+        "其他调整",
+        "终点 AFFO"
+      ],
+      "comparability_rules_zh": "Core FFO 不是 AFFO；逐项勾稽及公司定义齐备才完成",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "equity_reit_driver_3__ffo",
+          "name_zh": "调节起点 FFO",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "equity_reit_driver_3__maintenance_capex",
+          "name_zh": "经常维持资本开支",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "equity_reit_driver_3__leasing_commissions",
+          "name_zh": "租赁佣金",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "equity_reit_driver_3__noncash_rent_adjustments",
+          "name_zh": "非现金租金调节",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "equity_reit_driver_3__other_adjustments",
+          "name_zh": "逐项其他调节",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        },
+        {
+          "component_id": "equity_reit_driver_3__affo",
+          "name_zh": "调节终点 AFFO",
+          "unit_family": "currency",
+          "period_basis": "duration",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "real_estate_services_driver_1",
+      "industry_id": "real_estate_services",
+      "name_zh": "开发销售现金回款",
+      "parent_name_zh": "开发回款",
+      "business_definition_zh": "实际现金回款与确认收入分开",
+      "value_kind": "scalar",
+      "unit": "currency",
+      "required_inputs_zh": [
+        "开发项目实际现金收款",
+        "项目范围"
+      ],
+      "comparability_rules_zh": "确认收入与销售合同额不能代替现金回款",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "real_estate_services_driver_1__value",
+          "name_zh": "开发销售现金回款",
+          "unit_family": "currency",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "real_estate_services_driver_2",
+      "industry_id": "real_estate_services",
+      "name_zh": "同预售群取消率",
+      "parent_name_zh": "预售取消",
+      "business_definition_zh": "取消/匹配订单群",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "预售取消数量或金额",
+        "匹配同预售群基数"
+      ],
+      "comparability_rules_zh": "开发项目适用；经纪纯服务业务不适用",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "real_estate_services_driver_2__value",
+          "name_zh": "同预售群取消率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    },
+    {
+      "parent_metric_id": "real_estate_services_driver_3",
+      "industry_id": "real_estate_services",
+      "name_zh": "经纪管理服务佣金率",
+      "parent_name_zh": "服务佣金",
+      "business_definition_zh": "服务收入/匹配成交基数",
+      "value_kind": "scalar",
+      "unit": "ratio",
+      "required_inputs_zh": [
+        "匹配佣金服务收入",
+        "实际交易金额或数量"
+      ],
+      "comparability_rules_zh": "开发销售收入不能代替佣金；开发与经纪需分部或第二样本",
+      "source_priority": [
+        "issuer_annual_report",
+        "issuer_operating_supplement",
+        "regulator_original",
+        "official_industry_statistics"
+      ],
+      "collection_method": "ai_browser_original_review",
+      "validation_status": "specification_defined_observation_pending",
+      "numeric_threshold": null,
+      "component_specs": [
+        {
+          "component_id": "real_estate_services_driver_3__value",
+          "name_zh": "经纪管理服务佣金率",
+          "unit_family": "ratio",
+          "period_basis": "source_dependent",
+          "requires_explicit_source_definition": true
+        }
+      ]
+    }
+  ]
+}

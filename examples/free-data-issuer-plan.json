@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "jobs": [
+    {"id": "intu-2026-10k-official-html", "provider": "issuer_ir", "dataset": "document", "params": {"entity_id": "US:INTU:CIK896878", "format": "html", "url": "https://investors.intuit.com/sec-filings/all-sec-filings/content/0000896878-26-000037/intu-20260731.htm"}},
+    {"id": "toyota-fy2027-q1-official", "provider": "issuer_ir", "dataset": "document", "params": {"entity_id": "JP:7203", "format": "pdf", "url": "https://global.toyota/pages/global_toyota/ir/financial-results/2027_1q_summary_en.pdf"}},
+    {"id": "softbank-group-financial-2026", "provider": "issuer_ir", "dataset": "document", "params": {"entity_id": "JP:9984", "format": "pdf", "url": "https://group.softbank/media/Project/sbg/sbg/pdf/ir/financials/annual_reports/financial-report_fy2026_en.pdf"}}
+  ]
+}

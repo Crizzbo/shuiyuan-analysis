@@ -1,0 +1,1171 @@
+{
+  "guide_version": "1.0.0",
+  "fields": [
+    {
+      "field": "industry_knowledge.schema_version",
+      "name_zh": "契约版本",
+      "description": "本数据结构版本，与知识修订和统计验证状态分开。",
+      "schema_pointer": "#/properties/schema_version",
+      "type": "固定值 1.0.0",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "const": "1.0.0",
+        "title": "契约版本",
+        "description": "本数据结构版本，与知识修订和统计验证状态分开。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.revision",
+      "name_zh": "知识修订号",
+      "description": "该知识对象的修订标识；此模块尚无不可变历史登记接口。",
+      "schema_pointer": "#/properties/revision",
+      "type": "integer",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "integer",
+        "minimum": 1,
+        "title": "知识修订号",
+        "description": "该知识对象的修订标识；此模块尚无不可变历史登记接口。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.industry_id",
+      "name_zh": "行业标识",
+      "description": "引用项目行业字典的 industry 节点。",
+      "schema_pointer": "#/properties/industry_id",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "行业标识",
+        "description": "引用项目行业字典的 industry 节点。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.name_zh",
+      "name_zh": "中文名称",
+      "description": "知识对象或指标的中文阅读名称。",
+      "schema_pointer": "#/properties/name_zh",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "中文名称",
+        "description": "知识对象或指标的中文阅读名称。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.scope",
+      "name_zh": "适用边界",
+      "description": "明确包含的业务和排除的业务，不表示证券自动分类完成。",
+      "schema_pointer": "#/properties/scope",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "适用边界",
+        "description": "明确包含的业务和排除的业务，不表示证券自动分类完成。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.required_segmentation",
+      "name_zh": "必需细分项",
+      "description": "研究前须解释的产品、收入模式、地区等细分口径。",
+      "schema_pointer": "#/properties/required_segmentation",
+      "type": "array<string>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 1,
+        "title": "必需细分项",
+        "description": "研究前须解释的产品、收入模式、地区等细分口径。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.business_model_ids",
+      "name_zh": "商业模式标识列表",
+      "description": "候选模式，实际公司分部归类需另有证据。",
+      "schema_pointer": "#/properties/business_model_ids",
+      "type": "array<string>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uniqueItems": true,
+        "title": "商业模式标识列表",
+        "description": "候选模式，实际公司分部归类需另有证据。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.required_metric_ids",
+      "name_zh": "必查指标列表",
+      "description": "须检查适用性和可得性的指标；允许说明不适用，但不能跳过整个维度。",
+      "schema_pointer": "#/properties/required_metric_ids",
+      "type": "array<string>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uniqueItems": true,
+        "title": "必查指标列表",
+        "description": "须检查适用性和可得性的指标；允许说明不适用，但不能跳过整个维度。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.dimensions",
+      "name_zh": "维度要求列表",
+      "description": "恰好六个不同维度，语义检查集合完整性。",
+      "schema_pointer": "#/properties/dimensions",
+      "type": "array<dimension>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/dimension"
+        },
+        "minItems": 6,
+        "title": "维度要求列表",
+        "description": "恰好六个不同维度，语义检查集合完整性。",
+        "maxItems": 6
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.valuation_routes",
+      "name_zh": "估值适配路径列表",
+      "description": "按商业模式选择的方法及适用限制，未执行估值计算。",
+      "schema_pointer": "#/properties/valuation_routes",
+      "type": "array<route>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/route"
+        },
+        "minItems": 1,
+        "title": "估值适配路径列表",
+        "description": "按商业模式选择的方法及适用限制，未执行估值计算。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.source_refs",
+      "name_zh": "项目内设计依据",
+      "description": "引用支持知识设计的文件及原文位置；不得冒充公司事实。",
+      "schema_pointer": "#/properties/source_refs",
+      "type": "array<source>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/source"
+        },
+        "minItems": 1,
+        "title": "项目内设计依据",
+        "description": "引用支持知识设计的文件及原文位置；不得冒充公司事实。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.statistical_validation_status",
+      "name_zh": "统计验证状态",
+      "description": "本版仅登记未验证种子或验证计划，不能切换成已验证。",
+      "schema_pointer": "#/properties/statistical_validation_status",
+      "type": "枚举",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "enum": [
+          "not_validated",
+          "validation_planned"
+        ],
+        "title": "统计验证状态",
+        "description": "本版仅登记未验证种子或验证计划，不能切换成已验证。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.empirical_validation_plan",
+      "name_zh": "经验验证计划",
+      "description": "未来数据、时点控制、时间分割及样本外评估的计划，不是结果。",
+      "schema_pointer": "#/properties/empirical_validation_plan",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "经验验证计划",
+        "description": "未来数据、时点控制、时间分割及样本外评估的计划，不是结果。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.thresholds",
+      "name_zh": "行业阈值状态",
+      "description": "深跌与估值数值尚未验证，当前必须保持 null。",
+      "schema_pointer": "#/properties/thresholds",
+      "type": "object",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "object",
+        "properties": {
+          "drawdown": {
+            "type": "null",
+            "title": "深跌阈值",
+            "description": "当前禁止启用；回撤仅为候选提示。"
+          },
+          "valuation": {
+            "type": "null",
+            "title": "估值阈值",
+            "description": "当前禁止统一估值阈值，按商业模式研究。"
+          }
+        },
+        "required": [
+          "drawdown",
+          "valuation"
+        ],
+        "additionalProperties": false,
+        "title": "行业阈值状态",
+        "description": "深跌与估值数值尚未验证，当前必须保持 null。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.thresholds.drawdown",
+      "name_zh": "深跌阈值",
+      "description": "当前禁止启用；回撤仅为候选提示。",
+      "schema_pointer": "#/properties/thresholds/properties/drawdown",
+      "type": "null",
+      "required": true,
+      "nullable": true,
+      "structural_schema": {
+        "type": "null",
+        "title": "深跌阈值",
+        "description": "当前禁止启用；回撤仅为候选提示。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.thresholds.valuation",
+      "name_zh": "估值阈值",
+      "description": "当前禁止统一估值阈值，按商业模式研究。",
+      "schema_pointer": "#/properties/thresholds/properties/valuation",
+      "type": "null",
+      "required": true,
+      "nullable": true,
+      "structural_schema": {
+        "type": "null",
+        "title": "估值阈值",
+        "description": "当前禁止统一估值阈值，按商业模式研究。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.research_gate",
+      "name_zh": "真实研究验收要求",
+      "description": "明确知识设计完成与真实分析通过是不同条件。",
+      "schema_pointer": "#/properties/research_gate",
+      "type": "object",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "object",
+        "properties": {
+          "required_steps": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "S1",
+                "S2",
+                "S3",
+                "S4",
+                "S5",
+                "S6"
+              ]
+            },
+            "minItems": 6,
+            "title": "要求覆盖步骤",
+            "description": "六步仍按 S1—S6 执行，本契约不替代 research.schema。",
+            "maxItems": 6
+          },
+          "missing_data_action": {
+            "const": "insufficient_evidence",
+            "title": "缺资料处理",
+            "description": "缺本地数据时返回证据不足，不自动访问外部资料或补零。"
+          },
+          "real_case_status": {
+            "const": "pending_local_data",
+            "title": "真实样板状态",
+            "description": "当前没有公司观测和真实结论，样板为知识设计填写示例。"
+          }
+        },
+        "required": [
+          "required_steps",
+          "missing_data_action",
+          "real_case_status"
+        ],
+        "additionalProperties": false,
+        "title": "真实研究验收要求",
+        "description": "明确知识设计完成与真实分析通过是不同条件。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.research_gate.required_steps",
+      "name_zh": "要求覆盖步骤",
+      "description": "六步仍按 S1—S6 执行，本契约不替代 research.schema。",
+      "schema_pointer": "#/properties/research_gate/properties/required_steps",
+      "type": "array<枚举>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "enum": [
+            "S1",
+            "S2",
+            "S3",
+            "S4",
+            "S5",
+            "S6"
+          ]
+        },
+        "minItems": 6,
+        "title": "要求覆盖步骤",
+        "description": "六步仍按 S1—S6 执行，本契约不替代 research.schema。",
+        "maxItems": 6
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.research_gate.missing_data_action",
+      "name_zh": "缺资料处理",
+      "description": "缺本地数据时返回证据不足，不自动访问外部资料或补零。",
+      "schema_pointer": "#/properties/research_gate/properties/missing_data_action",
+      "type": "固定值 insufficient_evidence",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "const": "insufficient_evidence",
+        "title": "缺资料处理",
+        "description": "缺本地数据时返回证据不足，不自动访问外部资料或补零。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.research_gate.real_case_status",
+      "name_zh": "真实样板状态",
+      "description": "当前没有公司观测和真实结论，样板为知识设计填写示例。",
+      "schema_pointer": "#/properties/research_gate/properties/real_case_status",
+      "type": "固定值 pending_local_data",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "const": "pending_local_data",
+        "title": "真实样板状态",
+        "description": "当前没有公司观测和真实结论，样板为知识设计填写示例。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "industry_knowledge.external_reference_status",
+      "name_zh": "猫哥参考资料状态",
+      "description": "记录所请求外部资料是否已在本项目内核对，本版尚未取得。",
+      "schema_pointer": "#/properties/external_reference_status",
+      "type": "枚举",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "enum": [
+          "not_available_in_project",
+          "project_copy_reviewed"
+        ],
+        "title": "猫哥参考资料状态",
+        "description": "记录所请求外部资料是否已在本项目内核对，本版尚未取得。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--industry_knowledge.md"
+    },
+    {
+      "field": "source.source_path",
+      "name_zh": "依据文件路径",
+      "description": "相对项目根目录的已存在文件，真实路径不得越界。",
+      "schema_pointer": "#/$defs/source/properties/source_path",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "依据文件路径",
+        "description": "相对项目根目录的已存在文件，真实路径不得越界。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--source.md"
+    },
+    {
+      "field": "source.locator",
+      "name_zh": "依据定位信息",
+      "description": "章节、条目或 JSON 对象标识；由人工核实内容相关性。",
+      "schema_pointer": "#/$defs/source/properties/locator",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "依据定位信息",
+        "description": "章节、条目或 JSON 对象标识；由人工核实内容相关性。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--source.md"
+    },
+    {
+      "field": "source.source_kind",
+      "name_zh": "依据类型",
+      "description": "project_design 为项目知识设计，primary/secondary 为实际资料，synthetic 为模拟。",
+      "schema_pointer": "#/$defs/source/properties/source_kind",
+      "type": "枚举",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "enum": [
+          "project_design",
+          "primary",
+          "secondary",
+          "synthetic"
+        ],
+        "title": "依据类型",
+        "description": "project_design 为项目知识设计，primary/secondary 为实际资料，synthetic 为模拟。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--source.md"
+    },
+    {
+      "field": "criteria.improving",
+      "name_zh": "改善判断条件",
+      "description": "哪些证据组合支持改善，并须检查相反解释。",
+      "schema_pointer": "#/$defs/criteria/properties/improving",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "改善判断条件",
+        "description": "哪些证据组合支持改善，并须检查相反解释。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--criteria.md"
+    },
+    {
+      "field": "criteria.deteriorating",
+      "name_zh": "恶化判断条件",
+      "description": "哪些证据组合支持恶化，区分周期与结构因素。",
+      "schema_pointer": "#/$defs/criteria/properties/deteriorating",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "恶化判断条件",
+        "description": "哪些证据组合支持恶化，区分周期与结构因素。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--criteria.md"
+    },
+    {
+      "field": "criteria.unknown",
+      "name_zh": "无法判断条件",
+      "description": "缺失、冲突、不可比或边界未定义时应返回 unknown。",
+      "schema_pointer": "#/$defs/criteria/properties/unknown",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "无法判断条件",
+        "description": "缺失、冲突、不可比或边界未定义时应返回 unknown。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--criteria.md"
+    },
+    {
+      "field": "dimension.dimension_id",
+      "name_zh": "研究维度标识",
+      "description": "长期生命周期与供需、盈利、融资、情绪、定价分别登记。",
+      "schema_pointer": "#/$defs/dimension/properties/dimension_id",
+      "type": "枚举",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "enum": [
+          "lifecycle",
+          "supply_demand",
+          "earnings",
+          "credit",
+          "sentiment",
+          "pricing"
+        ],
+        "title": "研究维度标识",
+        "description": "长期生命周期与供需、盈利、融资、情绪、定价分别登记。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--dimension.md"
+    },
+    {
+      "field": "dimension.name_zh",
+      "name_zh": "中文名称",
+      "description": "知识对象或指标的中文阅读名称。",
+      "schema_pointer": "#/$defs/dimension/properties/name_zh",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "中文名称",
+        "description": "知识对象或指标的中文阅读名称。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--dimension.md"
+    },
+    {
+      "field": "dimension.question",
+      "name_zh": "研究问题",
+      "description": "本维度需要回答的问题，而非预设结论。",
+      "schema_pointer": "#/$defs/dimension/properties/question",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "研究问题",
+        "description": "本维度需要回答的问题，而非预设结论。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--dimension.md"
+    },
+    {
+      "field": "dimension.required_metric_ids",
+      "name_zh": "必查指标列表",
+      "description": "须检查适用性和可得性的指标；允许说明不适用，但不能跳过整个维度。",
+      "schema_pointer": "#/$defs/dimension/properties/required_metric_ids",
+      "type": "array<string>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uniqueItems": true,
+        "title": "必查指标列表",
+        "description": "须检查适用性和可得性的指标；允许说明不适用，但不能跳过整个维度。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--dimension.md"
+    },
+    {
+      "field": "dimension.evidence_requirements",
+      "name_zh": "证据要求列表",
+      "description": "拟取证的内容、口径及时间要求，不表示已有该证据。",
+      "schema_pointer": "#/$defs/dimension/properties/evidence_requirements",
+      "type": "array<string>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 1,
+        "title": "证据要求列表",
+        "description": "拟取证的内容、口径及时间要求，不表示已有该证据。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--dimension.md"
+    },
+    {
+      "field": "dimension.judgment_criteria",
+      "name_zh": "判断准则",
+      "description": "定性判断条件，不构成统计验证后的数值阈值。",
+      "schema_pointer": "#/$defs/dimension/properties/judgment_criteria",
+      "type": "criteria",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "$ref": "#/$defs/criteria",
+        "title": "判断准则",
+        "description": "定性判断条件，不构成统计验证后的数值阈值。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--dimension.md"
+    },
+    {
+      "field": "dimension.counterevidence",
+      "name_zh": "反证方向列表",
+      "description": "应主动查找的相反证据；不是已登记的实际反证。",
+      "schema_pointer": "#/$defs/dimension/properties/counterevidence",
+      "type": "array<string>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 1,
+        "title": "反证方向列表",
+        "description": "应主动查找的相反证据；不是已登记的实际反证。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--dimension.md"
+    },
+    {
+      "field": "route.business_model_ids",
+      "name_zh": "商业模式标识列表",
+      "description": "候选模式，实际公司分部归类需另有证据。",
+      "schema_pointer": "#/$defs/route/properties/business_model_ids",
+      "type": "array<string>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uniqueItems": true,
+        "title": "商业模式标识列表",
+        "description": "候选模式，实际公司分部归类需另有证据。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--route.md"
+    },
+    {
+      "field": "route.method",
+      "name_zh": "方法说明",
+      "description": "估值路线或指标计算的具体文字口径。",
+      "schema_pointer": "#/$defs/route/properties/method",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "方法说明",
+        "description": "估值路线或指标计算的具体文字口径。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--route.md"
+    },
+    {
+      "field": "route.applicability",
+      "name_zh": "适用条件",
+      "description": "方法、指标或资料可以使用的业务范围。",
+      "schema_pointer": "#/$defs/route/properties/applicability",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "适用条件",
+        "description": "方法、指标或资料可以使用的业务范围。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--route.md"
+    },
+    {
+      "field": "route.limitations",
+      "name_zh": "局限说明列表",
+      "description": "缺口、失效条件和不可自动检查的事项。",
+      "schema_pointer": "#/$defs/route/properties/limitations",
+      "type": "array<string>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 1,
+        "title": "局限说明列表",
+        "description": "缺口、失效条件和不可自动检查的事项。"
+      },
+      "schema_file": "schemas/industry-knowledge.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/industry_knowledge--route.md"
+    },
+    {
+      "field": "metric_catalog.schema_version",
+      "name_zh": "契约版本",
+      "description": "本数据结构版本，与知识修订和统计验证状态分开。",
+      "schema_pointer": "#/properties/schema_version",
+      "type": "固定值 1.0.0",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "const": "1.0.0",
+        "title": "契约版本",
+        "description": "本数据结构版本，与知识修订和统计验证状态分开。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--metric_catalog.md"
+    },
+    {
+      "field": "metric_catalog.revision",
+      "name_zh": "知识修订号",
+      "description": "该知识对象的修订标识；此模块尚无不可变历史登记接口。",
+      "schema_pointer": "#/properties/revision",
+      "type": "integer",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "integer",
+        "minimum": 1,
+        "title": "知识修订号",
+        "description": "该知识对象的修订标识；此模块尚无不可变历史登记接口。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--metric_catalog.md"
+    },
+    {
+      "field": "metric_catalog.definitions",
+      "name_zh": "指标口径定义列表",
+      "description": "对现有指标定义作可计算性和取数要求登记，非观测数据。",
+      "schema_pointer": "#/properties/definitions",
+      "type": "array<definition>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/definition"
+        },
+        "minItems": 1,
+        "title": "指标口径定义列表",
+        "description": "对现有指标定义作可计算性和取数要求登记，非观测数据。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--metric_catalog.md"
+    },
+    {
+      "field": "source.source_path",
+      "name_zh": "依据文件路径",
+      "description": "相对项目根目录的已存在文件，真实路径不得越界。",
+      "schema_pointer": "#/$defs/source/properties/source_path",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "依据文件路径",
+        "description": "相对项目根目录的已存在文件，真实路径不得越界。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--source.md"
+    },
+    {
+      "field": "source.locator",
+      "name_zh": "依据定位信息",
+      "description": "章节、条目或 JSON 对象标识；由人工核实内容相关性。",
+      "schema_pointer": "#/$defs/source/properties/locator",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "依据定位信息",
+        "description": "章节、条目或 JSON 对象标识；由人工核实内容相关性。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--source.md"
+    },
+    {
+      "field": "source.source_kind",
+      "name_zh": "依据类型",
+      "description": "project_design 为项目知识设计，primary/secondary 为实际资料，synthetic 为模拟。",
+      "schema_pointer": "#/$defs/source/properties/source_kind",
+      "type": "枚举",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "enum": [
+          "project_design",
+          "primary",
+          "secondary",
+          "synthetic"
+        ],
+        "title": "依据类型",
+        "description": "project_design 为项目知识设计，primary/secondary 为实际资料，synthetic 为模拟。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--source.md"
+    },
+    {
+      "field": "definition.metric_id",
+      "name_zh": "指标标识",
+      "description": "引用现有指标字典；细化口径不能冒充不同公司的可比观测。",
+      "schema_pointer": "#/$defs/definition/properties/metric_id",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "指标标识",
+        "description": "引用现有指标字典；细化口径不能冒充不同公司的可比观测。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.name_zh",
+      "name_zh": "中文名称",
+      "description": "知识对象或指标的中文阅读名称。",
+      "schema_pointer": "#/$defs/definition/properties/name_zh",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "中文名称",
+        "description": "知识对象或指标的中文阅读名称。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.definition_status",
+      "name_zh": "口径状态",
+      "description": "specified 是已写明口径，needs_definition 是仍待细化；均不等于统计验证。",
+      "schema_pointer": "#/$defs/definition/properties/definition_status",
+      "type": "枚举",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "enum": [
+          "specified",
+          "needs_definition"
+        ],
+        "title": "口径状态",
+        "description": "specified 是已写明口径，needs_definition 是仍待细化；均不等于统计验证。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.formula",
+      "name_zh": "公式或计算方法",
+      "description": "可计算时明确公式；复合指标未拆分时允许 null 并登记阻断原因。",
+      "schema_pointer": "#/$defs/definition/properties/formula",
+      "type": "string / null",
+      "required": true,
+      "nullable": true,
+      "structural_schema": {
+        "anyOf": [
+          {
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "公式或计算方法",
+        "description": "可计算时明确公式；复合指标未拆分时允许 null 并登记阻断原因。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.inputs",
+      "name_zh": "公式输入项列表",
+      "description": "记录输入名称及来源方向，未来接入时还需绑定具体观测。",
+      "schema_pointer": "#/$defs/definition/properties/inputs",
+      "type": "array<string>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 0,
+        "title": "公式输入项列表",
+        "description": "记录输入名称及来源方向，未来接入时还需绑定具体观测。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.denominator",
+      "name_zh": "分母口径",
+      "description": "比例类明确分母；非比例应写不适用而非随意留空。",
+      "schema_pointer": "#/$defs/definition/properties/denominator",
+      "type": "string / null",
+      "required": true,
+      "nullable": true,
+      "structural_schema": {
+        "anyOf": [
+          {
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "分母口径",
+        "description": "比例类明确分母；非比例应写不适用而非随意留空。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.unit",
+      "name_zh": "计量单位",
+      "description": "必须与指标字典一致；context_defined 表示仍需选择具体单位，不能用于观测值。",
+      "schema_pointer": "#/$defs/definition/properties/unit",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "计量单位",
+        "description": "必须与指标字典一致；context_defined 表示仍需选择具体单位，不能用于观测值。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.period_basis",
+      "name_zh": "统计期间口径",
+      "description": "季度、年度、TTM、单时点或 source_dependent；取值时明确对应日期。",
+      "schema_pointer": "#/$defs/definition/properties/period_basis",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "统计期间口径",
+        "description": "季度、年度、TTM、单时点或 source_dependent；取值时明确对应日期。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.cadence",
+      "name_zh": "更新频率",
+      "description": "按原始资料实际发布频率取值，不表示调度已实现。",
+      "schema_pointer": "#/$defs/definition/properties/cadence",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "更新频率",
+        "description": "按原始资料实际发布频率取值，不表示调度已实现。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.applicability",
+      "name_zh": "适用条件",
+      "description": "方法、指标或资料可以使用的业务范围。",
+      "schema_pointer": "#/$defs/definition/properties/applicability",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "适用条件",
+        "description": "方法、指标或资料可以使用的业务范围。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.comparability_notes",
+      "name_zh": "可比性说明",
+      "description": "统一合并范围、货币、复权、分母和版本等口径后方可比较。",
+      "schema_pointer": "#/$defs/definition/properties/comparability_notes",
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "string",
+        "minLength": 1,
+        "title": "可比性说明",
+        "description": "统一合并范围、货币、复权、分母和版本等口径后方可比较。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.missing_data_policy",
+      "name_zh": "缺失数据策略",
+      "description": "不补零、不猜测；保留缺失原因并限制计算和结论。",
+      "schema_pointer": "#/$defs/definition/properties/missing_data_policy",
+      "type": "固定值 record_null_and_block_calculation",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "const": "record_null_and_block_calculation",
+        "title": "缺失数据策略",
+        "description": "不补零、不猜测；保留缺失原因并限制计算和结论。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.source_requirements",
+      "name_zh": "实际取数证据要求",
+      "description": "需要哪些原始资料支持实际值；设计依据不能代替这些资料。",
+      "schema_pointer": "#/$defs/definition/properties/source_requirements",
+      "type": "array<string>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 1,
+        "title": "实际取数证据要求",
+        "description": "需要哪些原始资料支持实际值；设计依据不能代替这些资料。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.source_refs",
+      "name_zh": "项目内设计依据",
+      "description": "引用支持知识设计的文件及原文位置；不得冒充公司事实。",
+      "schema_pointer": "#/$defs/definition/properties/source_refs",
+      "type": "array<source>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/source"
+        },
+        "minItems": 1,
+        "title": "项目内设计依据",
+        "description": "引用支持知识设计的文件及原文位置；不得冒充公司事实。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.blocking_reasons",
+      "name_zh": "口径阻断原因列表",
+      "description": "阻止指标直接计算、跨公司比较或阈值启用的缺口。",
+      "schema_pointer": "#/$defs/definition/properties/blocking_reasons",
+      "type": "array<string>",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 0,
+        "title": "口径阻断原因列表",
+        "description": "阻止指标直接计算、跨公司比较或阈值启用的缺口。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    },
+    {
+      "field": "definition.validation_status",
+      "name_zh": "口径验证状态",
+      "description": "not_validated 为仅设计；不代表公式和金融适用性已测试。",
+      "schema_pointer": "#/$defs/definition/properties/validation_status",
+      "type": "固定值 not_validated",
+      "required": true,
+      "nullable": false,
+      "structural_schema": {
+        "const": "not_validated",
+        "title": "口径验证状态",
+        "description": "not_validated 为仅设计；不代表公式和金融适用性已测试。"
+      },
+      "schema_file": "schemas/metric-definition.schema.json",
+      "documentation_file": "docs/industry-schema-dictionary/metric_catalog--definition.md"
+    }
+  ]
+}

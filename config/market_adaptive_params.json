@@ -1,0 +1,64 @@
+{
+  "_schema_description": "离线市场自适应参数配置底账 (Market-Adaptive Parameters Offline Baseline)",
+  "_documentation": "本配置文件为金融计算核心层提供宏观、大宗商品与微观企业自适应参数底账。严格基于已披露的历史离线事实（SNA国民经济核算、IMF/WGC官方储备报告、美联储H.4.1、SEC 10-K三表统计），绝不依赖盘中高频数据抓取。",
+  "version": "1.0.0",
+  "last_updated": "2026-10-17T00:00:00Z",
+  "gold_valuation": {
+    "data_source": "World_Gold_Council_Official_Reserve_Statistics_IMF_IFS",
+    "baseline_cb_tonnes": 500.0,
+    "cb_tonnes_step": 500.0,
+    "cb_premium_step_pct": 0.15,
+    "cb_max_premium_cap": 0.30,
+    "tips_sensitivity": 8.5,
+    "tips_pivot_yield": 0.0150,
+    "tips_base_price": 2250.0,
+    "bear_floor_usd": 2150.0,
+    "bull_multiplier": 1.20
+  },
+  "macro_shock": {
+    "data_source": "Federal_Reserve_H41_FRED_US_Treasury_Quarterly",
+    "stampede_power_exponent": 1.2,
+    "base_correlation": 0.40,
+    "max_correlation": 0.95,
+    "debt_leverage_multiplier": 0.5,
+    "rf_benchmark_yield": 0.040,
+    "rf_drift_passthrough": 0.6,
+    "liquidity_drain_base_billion": 50.0,
+    "liquidity_drain_spread_bps": 15.0,
+    "carry_trade_spread_bps_max": 80.0,
+    "carry_trade_trigger_score": 50.0,
+    "vix_baseline": 15.0,
+    "vix_span": 25.0,
+    "fx_jpy_threshold": 0.03,
+    "valuation_terminal_g": 0.02
+  },
+  "firm_value_added": {
+    "data_source": "BEA_SNA_IO_Official_Accounts_SEC_10K",
+    "default_operating_leverage_dol": 1.05,
+    "default_fcf_leverage": 1.10,
+    "default_wage_elasticity": 0.95,
+    "default_tax_elasticity": 1.05,
+    "enable_dynamic_dol_estimation": true,
+    "enforce_accounting_identity_closure": true,
+    "sector_dol_map": {
+      "TECH_SEMI": 1.30,
+      "TECH_HARDWARE": 1.25,
+      "SOFTWARE": 1.35,
+      "LIQUOR_CONSUMER": 1.08,
+      "HEALTH_CARE": 1.15,
+      "ENERGY": 1.20,
+      "UTILITIES": 1.02,
+      "GENERAL": 1.05
+    },
+    "sector_fcf_leverage_map": {
+      "TECH_SEMI": 1.25,
+      "TECH_HARDWARE": 1.18,
+      "SOFTWARE": 1.28,
+      "LIQUOR_CONSUMER": 1.10,
+      "HEALTH_CARE": 1.15,
+      "ENERGY": 1.22,
+      "UTILITIES": 1.05,
+      "GENERAL": 1.10
+    }
+  }
+}

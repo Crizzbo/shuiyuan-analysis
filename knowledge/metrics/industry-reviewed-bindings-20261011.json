@@ -1,0 +1,275 @@
+{
+  "schema_version": "1.0.0",
+  "bindings": [
+    {
+      "component": "annual_revenue_passenger_miles",
+      "name_zh": "年度收入客英里",
+      "parent_metric_id": "transport_logistics_driver_1",
+      "raw_unit": "million_passenger_miles",
+      "unit": "passenger_miles",
+      "binding_role": "formula_input",
+      "limitation_zh": "仍须审核完整公司定义和研究期间适用性"
+    },
+    {
+      "component": "annual_available_seat_miles",
+      "name_zh": "年度可用座英里",
+      "parent_metric_id": "transport_logistics_driver_1",
+      "raw_unit": "million_seat_miles",
+      "unit": "seat_miles",
+      "binding_role": "formula_input",
+      "limitation_zh": "仍须审核完整公司定义和研究期间适用性"
+    },
+    {
+      "component": "annual_passenger_load_factor",
+      "name_zh": "年度客座率",
+      "parent_metric_id": "transport_logistics_driver_1",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "reported_metric",
+      "limitation_zh": "发行人整数百分比；未取整工作量之比不应强制等于取整客座率"
+    },
+    {
+      "component": "annual_passenger_mile_yield",
+      "name_zh": "年度每收入客英里客运收益",
+      "parent_metric_id": "transport_logistics_driver_2",
+      "raw_unit": "US_cents_per_passenger_mile",
+      "unit": "USD_per_passenger_mile",
+      "binding_role": "reported_metric",
+      "limitation_zh": "yield 不是 PRASM 或 TRASM；英里不可直接当公里"
+    },
+    {
+      "component": "same_facility_admissions",
+      "name_zh": "同院年度住院次数",
+      "parent_metric_id": "health_services_driver_1",
+      "raw_unit": "admissions",
+      "unit": "admissions",
+      "binding_role": "reported_metric",
+      "limitation_zh": "同院医院群；不能与 reported 全部医院或等价住院次数混合"
+    },
+    {
+      "component": "same_facility_equivalent_admissions",
+      "name_zh": "同院年度等价住院次数",
+      "parent_metric_id": "health_services_driver_1",
+      "raw_unit": "equivalent_admissions",
+      "unit": "equivalent_admissions",
+      "binding_role": "reported_metric",
+      "limitation_zh": "保留公司门诊折算及同院纳入定义待核；不是实际住院人数"
+    },
+    {
+      "component": "same_facility_revenue_per_equivalent_admission",
+      "name_zh": "同院每等价住院收入",
+      "parent_metric_id": "health_services_driver_2",
+      "raw_unit": "USD_per_equivalent_admission",
+      "unit": "USD_per_equivalent_admission",
+      "binding_role": "reported_metric",
+      "limitation_zh": "不可与集团全部医院收入和服务量拼接；不是医院收费标价"
+    },
+    {
+      "component": "consolidated_salaries_benefits",
+      "name_zh": "集团年度工资及福利费用",
+      "parent_metric_id": "health_services_driver_3",
+      "raw_unit": "USD_million",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "集团范围；未确认合同工是否全部包含，不能视作完整人工成本"
+    },
+    {
+      "component": "consolidated_healthcare_revenue",
+      "name_zh": "集团年度收入",
+      "parent_metric_id": "health_services_driver_3",
+      "raw_unit": "USD_million",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "匹配集团工资福利表，不能与同院服务量计算单位收入"
+    },
+    {
+      "component": "reported_salaries_benefits_revenue_ratio",
+      "name_zh": "报告工资福利收入比",
+      "parent_metric_id": "health_services_driver_3",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "reported_metric",
+      "limitation_zh": "发行人取整百分比；不声称覆盖所有外包人员费用"
+    },
+    {
+      "component": "annual_company_comparable_sales_growth",
+      "name_zh": "全年集团同店销售增长（未调整）",
+      "parent_metric_id": "staples_retail_driver_1",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "reported_metric",
+      "limitation_zh": "52 周期间；含燃油价格及汇率影响；纳入店群规则仍需年度报告核对"
+    },
+    {
+      "component": "annual_adjusted_comparable_sales_growth",
+      "name_zh": "全年集团同店销售增长（剔除燃油汇率）",
+      "parent_metric_id": "staples_retail_driver_1",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "reported_metric",
+      "limitation_zh": "调整增长率与未调整增长率不可混用；不是客流增长"
+    },
+    {
+      "component": "cash_same_store_noi_growth",
+      "name_zh": "权益份额现金同物业 NOI 增长",
+      "parent_metric_id": "equity_reit_driver_1",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "reported_metric",
+      "limitation_zh": "现金口径非 GAAP；物业群冻结与调节定义仍须补充表核验"
+    },
+    {
+      "component": "owned_managed_average_occupancy",
+      "name_zh": "自有及管理组合平均出租率",
+      "parent_metric_id": "equity_reit_driver_2",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "scope_mismatch_sample",
+      "limitation_zh": "整个自有管理组合；不能替代固定同物业群出租率"
+    },
+    {
+      "component": "owned_managed_end_occupancy",
+      "name_zh": "自有及管理组合期末出租率",
+      "parent_metric_id": "equity_reit_driver_2",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "scope_mismatch_sample",
+      "limitation_zh": "期末值不同于季度平均；不能替代同物业群出租率"
+    },
+    {
+      "component": "company_new_orders",
+      "name_zh": "集团全年新增订单",
+      "parent_metric_id": "capital_goods_driver_1",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+    },
+    {
+      "component": "company_order_period_revenue",
+      "name_zh": "集团同期间收入",
+      "parent_metric_id": "capital_goods_driver_1",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+    },
+    {
+      "component": "power_new_orders",
+      "name_zh": "电力分部全年新增订单",
+      "parent_metric_id": "capital_goods_driver_1",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+    },
+    {
+      "component": "power_order_period_revenue",
+      "name_zh": "电力分部同期间收入",
+      "parent_metric_id": "capital_goods_driver_1",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+    },
+    {
+      "component": "wind_new_orders",
+      "name_zh": "风电分部全年新增订单",
+      "parent_metric_id": "capital_goods_driver_1",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+    },
+    {
+      "component": "wind_order_period_revenue",
+      "name_zh": "风电分部同期间收入",
+      "parent_metric_id": "capital_goods_driver_1",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+    },
+    {
+      "component": "electrification_new_orders",
+      "name_zh": "电气化分部全年新增订单",
+      "parent_metric_id": "capital_goods_driver_1",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+    },
+    {
+      "component": "electrification_order_period_revenue",
+      "name_zh": "电气化分部同期间收入",
+      "parent_metric_id": "capital_goods_driver_1",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+    },
+    {
+      "component": "company_backlog_rpo",
+      "name_zh": "集团剩余履约义务口径积压订单",
+      "parent_metric_id": "capital_goods_driver_2",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "RPO 金额不是全部保证收入；缺取消条款及执行条件"
+    },
+    {
+      "component": "reported_total_construction_backlog",
+      "name_zh": "报告集团积压订单总额",
+      "parent_metric_id": "construction_driver_1",
+      "raw_unit": "USD_million",
+      "unit": "USD",
+      "binding_role": "scope_mismatch_sample",
+      "limitation_zh": "尚未取得可执行、已融资和可取消部分划分；不能直接计算可执行订单覆盖年数"
+    },
+    {
+      "component": "construction_annual_revenue",
+      "name_zh": "工程集团全年收入",
+      "parent_metric_id": "construction_driver_1",
+      "raw_unit": "USD_million",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "收入包含 Santos 项目收入冲回；可比范围仍须审核"
+    },
+    {
+      "component": "smoke_free_net_revenue",
+      "name_zh": "无烟业务全年净收入",
+      "parent_metric_id": "tobacco_driver_3",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "formula_input",
+      "limitation_zh": "十亿美元取整披露；保留集团收入与业务收入不同范围"
+    },
+    {
+      "component": "smoke_free_gross_profit",
+      "name_zh": "无烟业务全年毛利润",
+      "parent_metric_id": "tobacco_driver_3",
+      "raw_unit": "USD_billion",
+      "unit": "USD",
+      "binding_role": "profit_basis_variant",
+      "limitation_zh": "毛利润不是营业利润或净利润；不可直接绑定 operating_profit 原子字段"
+    },
+    {
+      "component": "smoke_free_revenue_share",
+      "name_zh": "无烟业务全年净收入占比",
+      "parent_metric_id": "tobacco_driver_3",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "context_sample",
+      "limitation_zh": "发行人报告占比；取整收入之比不应强制等于此占比"
+    },
+    {
+      "component": "walmart_us_comparable_sales_growth",
+      "name_zh": "沃尔玛美国十三周同店销售增长",
+      "parent_metric_id": "retail_driver_1",
+      "raw_unit": "percent",
+      "unit": "ratio",
+      "binding_role": "reported_metric",
+      "limitation_zh": "十三周经营期与财务季度结束日不同；线上范围及店群纳入细则仍需补充表核对"
+    }
+  ]
+}
