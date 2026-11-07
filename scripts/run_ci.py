@@ -17,6 +17,7 @@ PORTABLE_TESTS = (
     "scripts.test_release_audit",
     "scripts.test_sotp_event_penetration",
     "scripts.test_sotp_profiles",
+    "scripts.test_alert_dispatcher",
 )
 
 
