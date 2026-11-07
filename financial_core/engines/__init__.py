@@ -1,7 +1,24 @@
 """金融分析算法与模型引擎层 (Financial Analysis Model & Algorithmic Engines).
 
-聚合底层专业量化算法，包括法证五刀穿透、商业品质与所有者收益、情景DCF、期权二叉树、宏观压力测试等。
+聚合底层专业量化算法，按 7 大业务领域高内聚划分子包，并保持平铺门面 100% 向后兼容：
+1. event_radar (舆情雷达、突发事件事实提纯、信源核验、SOTP因果穿透)
+2. valuation (蒙特卡洛DCF、期权二叉树、波动率曲面、跨资产折现)
+3. macro_liquidity (行情时效门禁、宏观弹性安全边际、外生冲击传导、全球投入产出网络)
+4. risk_forensics (法证五刀手术刀、莫顿信用破产模型、组合尾部风控VaR/CVaR)
+5. industry_knowledge (行业知识图谱、因果策略注册表、商业品质护城河、分类网桥)
+6. filing_accounting (SEC EDGAR披露采集、三表刚性平账映射、全息财务门面、对账互斥锁)
+7. ledger_governance (不可篡改预测账本、四维法证复盘、SEPA买方时机VCP、全盘资产池)
 """
+
+from . import (
+    event_radar,
+    valuation,
+    macro_liquidity,
+    risk_forensics,
+    industry_knowledge,
+    filing_accounting,
+    ledger_governance,
+)
 
 from .forensic_surgical_scalpel import (
     ForensicSurgicalScalpel,
@@ -247,6 +264,15 @@ from .event_radar_engine import (
 )
 
 __all__ = [
+    # 7 大业务领域高内聚子包
+    "event_radar",
+    "valuation",
+    "macro_liquidity",
+    "risk_forensics",
+    "industry_knowledge",
+    "filing_accounting",
+    "ledger_governance",
+    # 核心算法引擎向后兼容门面
     "FinancialStatementFacade",
     "NormalizedFinancialProfile",
     "KnowledgeGraphEngine",

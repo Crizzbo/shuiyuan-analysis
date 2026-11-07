@@ -27,6 +27,18 @@ except Exception:
 
 
 @dataclass(frozen=True)
+class MarketSessionInfo:
+    """动态判定的最新市场交易会话信息 (消除静态硬编码)."""
+    market: str
+    current_system_date: str
+    trading_date: str
+    session_status: str
+    session_label_zh: str
+    timestamp_iso: str
+    formatted_label: str
+
+
+@dataclass(frozen=True)
 class QuoteVerificationResult:
     """行情时效核验结果数据类.
 
@@ -53,6 +65,136 @@ class QuoteFreshnessGateway:
     """买方机构级行情时效性与交易时段门禁网关 (Google Python Style Guide 架构设计)."""
 
     MAX_STALENESS_HOURS: float = 24.0
+
+    @classmethod
+    def get_current_system_date(cls, now_dt: Optional[datetime] = None) -> str:
+        """纯函数动态获取系统权威当前日期 (YYYY-MM-DD)，彻底废除静态硬编码."""
+        if now_dt is None:
+            now_dt = datetime.now(timezone.utc)
+        return now_dt.strftime("%Y-%m-%d")
+
+    @classmethod
+    def resolve_latest_market_session(
+        cls,
+        market: str = "US",
+        now_dt: Optional[datetime] = None,
+    ) -> MarketSessionInfo:
+        """动态解析目标市场（美股 US / 日股 JP）最新交易日时段与有效基准时间戳.
+
+        处理逻辑：
+        1. 动态获取当前时间并转入交易所当地时区；
+        2. 若当前为周末（周六/周日），自动回退至周五有效交易日收盘；
+        3. 若为工作日开盘前，自动以上一工作日收盘价作为基准；
+        4. 统一产出符合买方门禁契约的 ISO 时间戳与去工程符号化中文标签。
+        """
+        if now_dt is None:
+            now_dt = datetime.now(timezone.utc)
+        elif now_dt.tzinfo is None:
+            now_dt = now_dt.replace(tzinfo=timezone.utc)
+
+        current_sys_date = cls.get_current_system_date(now_dt)
+        orig_tz = "EDT" if market == "US" else ("JST" if market == "JP" else "UTC")
+        market_tz = cls._get_market_tz(market, orig_tz)
+        local_now = now_dt.astimezone(market_tz)
+
+        weekday = local_now.weekday()  # 0=Monday, 4=Friday, 5=Saturday, 6=Sunday
+        local_hour = local_now.hour + local_now.minute / 60.0
+
+        if market == "US":
+            # 美股收盘时间为 16:00 EDT
+            if weekday == 5:  # 周六 -> 对应周五收盘
+                days_back = 1
+                trading_dt = local_now - timedelta(days=days_back)
+                trading_dt = trading_dt.replace(hour=16, minute=0, second=0, microsecond=0)
+                session_status = "previous_close_baseline"
+                session_zh = "前收盘基准"
+            elif weekday == 6:  # 周日 -> 对应周五收盘
+                days_back = 2
+                trading_dt = local_now - timedelta(days=days_back)
+                trading_dt = trading_dt.replace(hour=16, minute=0, second=0, microsecond=0)
+                session_status = "previous_close_baseline"
+                session_zh = "前收盘基准"
+            elif local_hour < 9.5:  # 工作日开盘前
+                days_back = 3 if weekday == 0 else 1
+                trading_dt = local_now - timedelta(days=days_back)
+                trading_dt = trading_dt.replace(hour=16, minute=0, second=0, microsecond=0)
+                session_status = "previous_close_baseline"
+                session_zh = "前收盘基准"
+            elif local_hour <= 16.0:  # 盘中
+                trading_dt = local_now
+                session_status = "regular_trading"
+                session_zh = "盘中现价"
+            elif local_hour <= 20.0:  # 盘后
+                trading_dt = local_now
+                session_status = "after_hours"
+                session_zh = "盘后基准"
+            else:  # 当日夜间
+                trading_dt = local_now.replace(hour=16, minute=0, second=0, microsecond=0)
+                session_status = "previous_close_baseline"
+                session_zh = "前收盘基准"
+
+            tz_str = "EDT" if (local_now.dst() and local_now.dst().total_seconds() != 0) else "EST"
+            trading_date_str = trading_dt.strftime("%Y-%m-%d")
+            time_label = f"{trading_date_str} {trading_dt.strftime('%H:%M')} {tz_str} {session_zh}"
+            iso_ts = trading_dt.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+
+        elif market == "JP":
+            # 东京市场收盘时间为 15:30 JST
+            if weekday == 5:  # 周六 -> 对应周五收盘
+                days_back = 1
+                trading_dt = local_now - timedelta(days=days_back)
+                trading_dt = trading_dt.replace(hour=15, minute=30, second=0, microsecond=0)
+                session_status = "previous_close_baseline"
+                session_zh = "收盘基准"
+            elif weekday == 6:  # 周日 -> 对应周五收盘
+                days_back = 2
+                trading_dt = local_now - timedelta(days=days_back)
+                trading_dt = trading_dt.replace(hour=15, minute=30, second=0, microsecond=0)
+                session_status = "previous_close_baseline"
+                session_zh = "收盘基准"
+            elif local_hour < 9.0:  # 工作日开盘前
+                days_back = 3 if weekday == 0 else 1
+                trading_dt = local_now - timedelta(days=days_back)
+                trading_dt = trading_dt.replace(hour=15, minute=30, second=0, microsecond=0)
+                session_status = "previous_close_baseline"
+                session_zh = "收盘基准"
+            elif (9.0 <= local_hour <= 11.5) or (12.5 <= local_hour <= 15.5):
+                trading_dt = local_now
+                session_status = "regular_trading"
+                session_zh = "盘中现价"
+            elif 11.5 < local_hour < 12.5:
+                trading_dt = local_now
+                session_status = "lunch_break"
+                session_zh = "午间休市"
+            elif 15.5 < local_hour <= 17.0:
+                trading_dt = local_now
+                session_status = "after_hours"
+                session_zh = "盘后基准"
+            else:
+                trading_dt = local_now.replace(hour=15, minute=30, second=0, microsecond=0)
+                session_status = "previous_close_baseline"
+                session_zh = "收盘基准"
+
+            trading_date_str = trading_dt.strftime("%Y-%m-%d")
+            time_label = f"{trading_date_str} {trading_dt.strftime('%H:%M')} JST {session_zh}"
+            iso_ts = trading_dt.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+
+        else:
+            trading_date_str = local_now.strftime("%Y-%m-%d")
+            time_label = f"{trading_date_str} {local_now.strftime('%H:%M')} UTC 基准"
+            iso_ts = local_now.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+            session_status = "previous_close_baseline"
+            session_zh = "前收盘基准"
+
+        return MarketSessionInfo(
+            market=market,
+            current_system_date=current_sys_date,
+            trading_date=trading_date_str,
+            session_status=session_status,
+            session_label_zh=session_zh,
+            timestamp_iso=iso_ts,
+            formatted_label=time_label,
+        )
 
     @classmethod
     def parse_iso_or_tz_timestamp(cls, timestamp_str: str) -> Tuple[datetime, str]:

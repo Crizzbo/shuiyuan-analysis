@@ -252,8 +252,27 @@ class MarketQuoteVerifier:
         default_curr = "JPY" if is_jp else "USD"
 
         json_files = sorted(list(self.raw_dir.glob("*.json")), reverse=True)
+        target_dt = None
+        if as_of_iso:
+            try:
+                target_dt = datetime.fromisoformat(as_of_iso.replace("Z", "+00:00"))
+                if target_dt.tzinfo is None:
+                    target_dt = target_dt.replace(tzinfo=timezone.utc)
+            except Exception:
+                target_dt = None
+
         for q_file in json_files:
             try:
+                # 防未来函数与时间点点位回溯 (PIT Guard):
+                # 若文件名以时间戳命名且该时间戳晚于指定查询点位 as_of_iso，跳过未来文件
+                if target_dt:
+                    m_file_ts = re.match(r"^(\d{8}T\d{6})", q_file.stem)
+                    if m_file_ts:
+                        ts_str = m_file_ts.group(1)
+                        file_dt = datetime.strptime(ts_str, "%Y%m%dT%H%M%S").replace(tzinfo=timezone.utc)
+                        if file_dt > target_dt:
+                            continue
+
                 data = json.loads(q_file.read_text(encoding="utf-8"))
                 price: Optional[float] = None
                 currency: str = default_curr
@@ -327,6 +346,10 @@ class MarketQuoteVerifier:
                         current_time_iso=curr_time,
                         max_staleness_hours=72.0,
                     )
+
+                    # 点位回溯与防未来函数：若指定基准点位且该记录处于未来，继续向前检索更早记录
+                    if v_res.session_status == "future_quote_blocked":
+                        continue
 
                     file_sha = hashlib.sha256(q_file.read_bytes()).hexdigest()
 

@@ -44,7 +44,7 @@ class TestQuoteAndMetricPrecision(unittest.TestCase):
         self.ledger_db_path = Path(self.temp_dir) / "test_precision_ledger.db"
         self.ledger = PredictionLedger(db_path=str(self.ledger_db_path))
         self.pipeline = CanyonLinearPipeline(ledger=self.ledger)
-        self.test_as_of = "2026-11-01T00:00:00Z"
+        self.test_as_of = "2026-11-01T17:00:00Z"
 
     def test_01_quote_cent_precision_preservation(self):
         """【UT-PRECISION-01: 股票现价美分级精度保真(Cent-Precision Invariant)与尾零防截断】

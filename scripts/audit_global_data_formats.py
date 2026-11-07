@@ -84,9 +84,15 @@ class GlobalDataFormatAuditor:
                 res.total_inspected += 1
                 item_errors = []
 
-                # 1. 检查 ticker 格式
-                if not isinstance(ticker, str) or not ticker.isupper() or len(ticker.strip()) == 0:
-                    item_errors.append(f"标的代码格式非标准大写字符串: {ticker}")
+                # 1. 检查 ticker 格式 (支持美股大写字母、指数 ^ 前缀及日股纯数字代码)
+                is_valid_ticker = (
+                    isinstance(ticker, str)
+                    and len(ticker.strip()) > 0
+                    and not any(c.islower() for c in ticker)
+                    and bool(re.match(r"^[\^A-Z0-9\.\-]+$", ticker))
+                )
+                if not is_valid_ticker:
+                    item_errors.append(f"标的代码格式非标准大写或数字代码: {ticker}")
 
                 # 2. 检查价格数值与浮点精度
                 p = item.get("current_price")
