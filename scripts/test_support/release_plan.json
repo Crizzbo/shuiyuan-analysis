@@ -213,7 +213,7 @@
       "stage": "state",
       "design": "docs/09b-高阶金融定价与风控算法子说明书.md",
       "scenario": "SPEC-12 账本验签命令按有效位判断",
-      "checks": [],
+      "checks": ["L07"],
       "evidence": "设计文档命令与坏账本负向执行证据，验签失败时进程退出非零"
     },
     {

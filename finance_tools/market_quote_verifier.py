@@ -169,10 +169,12 @@ class MarketQuoteVerifier:
     ) -> VerifiedQuote:
         """核验并增量归档最新行情快照至本地二级来源 (绝不篡改已有历史文件)。"""
         ticker_clean = ticker.strip().upper()
-        formatted_price = self.verify_price_precision(price)
+        formatted_price = self.verify_price_precision(price, currency)
 
         now_utc = datetime.now(timezone.utc)
-        ts_iso = quote_timestamp_iso or now_utc.isoformat()
+        if not quote_timestamp_iso:
+            raise QuoteVerificationError("行情归档必须提供原始采样时间戳")
+        ts_iso = quote_timestamp_iso
         session_type = self.inspect_session(ts_iso)
 
         time_slug = now_utc.strftime("%Y%m%dT%H%M%S_%fZ")
@@ -187,10 +189,10 @@ class MarketQuoteVerifier:
             price=price,
             currency=currency,
             quote_timestamp=ts_iso,
-            market="US",
+            market="JP" if ticker_clean.isdigit() or ticker_clean.startswith("TYO:") else "US",
             current_time_iso=now_utc.isoformat(),
-            max_staleness_hours=72.0,
         )
+        session_type = gateway_res.session_status
 
         record_data = {
             "acquired_at": ts_iso,
@@ -205,8 +207,8 @@ class MarketQuoteVerifier:
                     "timestamp_iso": ts_iso,
                     "timestamp_formatted": gateway_res.formatted_label,
                     "session_type": session_type,
-                    "is_valid": True,
-                    "staleness_status": "FRESH_ARCHIVED",
+                    "is_valid": gateway_res.is_valid,
+                    "staleness_status": gateway_res.session_status,
                     "formatted_price": formatted_price,
                 }
             },
@@ -228,7 +230,7 @@ class MarketQuoteVerifier:
             source_file=str(archive_file.relative_to(self.root_dir)),
             sha256_hash=sha256,
             formatted_price=formatted_price,
-            is_valid=True,
+            is_valid=gateway_res.is_valid,
             is_fresh_today=gateway_res.is_fresh_today,
             freshness_status=gateway_res.session_status,
         )
@@ -322,10 +324,9 @@ class MarketQuoteVerifier:
                     v_res = QuoteFreshnessGateway.verify_quote(
                         price=price,
                         currency=currency,
-                        quote_timestamp=ts_iso or curr_time,
+                        quote_timestamp=ts_iso,
                         market=market,
                         current_time_iso=curr_time,
-                        max_staleness_hours=72.0,
                     )
 
                     file_sha = hashlib.sha256(q_file.read_bytes()).hexdigest()
@@ -335,14 +336,14 @@ class MarketQuoteVerifier:
                         company_name=comp_name,
                         price=price,
                         currency=currency,
-                        timestamp_iso=ts_iso or curr_time,
+                        timestamp_iso=ts_iso,
                         timestamp_formatted=v_res.formatted_label,
-                        session_type=session_type,
+                        session_type=v_res.session_status,
                         source_type=source_label,
                         source_file=str(q_file.relative_to(self.root_dir)),
                         sha256_hash=file_sha,
                         formatted_price=fmt_price,
-                        is_valid=True,
+                        is_valid=v_res.is_valid,
                         is_fresh_today=v_res.is_fresh_today,
                         freshness_status=v_res.session_status,
                     )

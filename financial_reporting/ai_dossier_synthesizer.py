@@ -9,7 +9,6 @@
 
 from datetime import datetime, timezone
 from decimal import Decimal
-import hashlib
 import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -17,6 +16,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from .data_collection_gateway import UnifiedDataCollectionGateway
 from .ai_research_agent import AIResearchAgent, AIEngineAdapter
 from financial_core.engines.knowledge_graph_engine import KnowledgeGraphEngine
+from financial_core.engines.filing_mapper import OfficialFilingMapper
 from financial_core.engines.financial_statement_facade import (
     FinancialStatementFacade,
     NormalizedFinancialProfile,
@@ -266,27 +266,10 @@ class AIDossierSynthesizer:
             "industry_dynamics": industry_dynamics,
             "long_term_outlook": long_term_outlook,
             "micro_macro_metrics": micro,
-            "dcf_model": quote.get("dcf_model") or {
-                "base_case": {
-                    "discount_rate": 0.085,
-                    "terminal_growth": 0.025,
-                    "valuation_model": "FCFF_MULTISTAGE_DCF",
-                }
-            },
-            "evidence_manifest": evidence_manifest or [
-                {
-                    "source_id": f"{market}_{ticker}_OFFICIAL_FILING",
-                    "source": f"Official {market} SEC/EDGAR or JPX/EDINET Audited Annual Report",
-                    "sha256": hashlib.sha256(f"{market}_{ticker}_OFFICIAL_FILING_AUDIT".encode("utf-8")).hexdigest(),
-                }
-            ],
-            "material_events": material_events or [
-                {
-                    "event": f"{ticker} 官方财报与重大经营事项披露",
-                    "date": curr_date,
-                    "impact": "经营现金流与供应链护城河稳健",
-                }
-            ],
+            # 证据摘要必须来自实际原文，模型参数与事件由调用方明确提供。
+            "dcf_model": quote.get("dcf_model") or {},
+            "evidence_manifest": evidence_manifest or [],
+            "material_events": material_events or [],
         }
 
     @classmethod
@@ -377,9 +360,11 @@ class AIDossierSynthesizer:
 
         # 2. 行情时效核验
         quote = raw_quote or {}
-        price = float(quote.get("current_price", 100.0) or 100.0)
+        price = OfficialFilingMapper.parse_optional_financial_number(quote.get("current_price"), "current_price")
+        if price is None or price <= 0 or not quote.get("quote_timestamp"):
+            raise ValueError("研报建档需要有效观测价格和原始行情时间戳")
         currency = str(quote.get("currency", "USD" if market == "US" else "JPY"))
-        quote_ts = str(quote.get("quote_timestamp", datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")))
+        quote_ts = str(quote["quote_timestamp"])
 
         verified_quote = UnifiedDataCollectionGateway.verify_and_prepare_quote(
             ticker=ticker,
@@ -388,6 +373,8 @@ class AIDossierSynthesizer:
             quote_timestamp=quote_ts,
             currency=currency,
         )
+        if not verified_quote["is_valid"]:
+            raise ValueError(f"研报建档行情被阻断 {verified_quote['message']}")
 
         # 3. 获取 AI 质性分析
         ai_analysis = AIEngineAdapter.get_analysis(
@@ -405,9 +392,9 @@ class AIDossierSynthesizer:
         scenario_cards = AIResearchAgent.synthesize_three_state_scenario_cards(
             quote_data={
                 "current_price": price,
-                "pessimistic_floor": quote.get("pessimistic_floor", price * 0.70),
-                "fair_anchor": quote.get("fair_anchor", price * 1.15),
-                "optimistic_target": quote.get("optimistic_target", price * 1.50),
+                "pessimistic_floor": quote.get("pessimistic_floor"),
+                "fair_anchor": quote.get("fair_anchor"),
+                "optimistic_target": quote.get("optimistic_target"),
             },
             ai_analysis=ai_analysis,
             param_adjustments=param_adjustments,
@@ -416,6 +403,8 @@ class AIDossierSynthesizer:
         # 5. 整合 market_quote 走廊
         full_quote = {
             "current_price": price,
+            "quote_timestamp": quote_ts,
+            "market": market,
             "currency": currency,
             "pessimistic_floor": scenario_cards["pessimistic_floor"]["price"],
             "fair_anchor": scenario_cards["neutral_fair"]["price"],

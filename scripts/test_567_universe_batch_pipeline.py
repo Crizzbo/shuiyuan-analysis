@@ -22,7 +22,7 @@ from scripts.run_567_universe_batch_pipeline import (
     UniversePipelineStateManager,
     BatchUniversePipelineRunner,
 )
-from scripts.test_support.fixtures import isolated_facade_ledger, project_temp
+from scripts.test_support.fixtures import isolated_facade_ledger, project_temp, freeze_quote_clock
 from financial_core.engines.prediction_ledger import PredictionLedger
 
 
@@ -33,6 +33,7 @@ class Test567UniverseBatchPipeline(unittest.TestCase):
         self.temp_dir = project_temp(self, "test-567-")
         isolated_facade_ledger(self, PredictionLedger(self.temp_dir / "predictions.sqlite3"))
         self.enter_test_paths()
+        freeze_quote_clock(self)
         self.state_file = self.temp_dir / "test_progress.json"
         self.mock_chunks_dir = self.temp_dir / "chunks"
         self.mock_chunks_dir.mkdir(parents=True, exist_ok=True)
@@ -44,6 +45,7 @@ class Test567UniverseBatchPipeline(unittest.TestCase):
                 "company_name": "NVIDIA Corporation",
                 "market": "US",
                 "industry_id": "semiconductors",
+                "quote_timestamp": "2026-10-16T14:00:00Z",
             },
             "raw_financials_table": {
                 "revenue": "$120,000M",
@@ -51,6 +53,8 @@ class Test567UniverseBatchPipeline(unittest.TestCase):
                 "net_income": "$62,000M",
                 "free_cash_flow": "$65,000M",
                 "total_assets": "$130,000M",
+                "total_liabilities": "$35,000M",
+                "capex": "$10,000M",
                 "equity": "$95,000M",
                 "cash_and_equivalents": "$35,000M",
                 "total_debt": "$11,000M",
@@ -69,6 +73,7 @@ class Test567UniverseBatchPipeline(unittest.TestCase):
                 "company_name": "Apple Inc.",
                 "market": "US",
                 "industry_id": "consumer_hardware",
+                "quote_timestamp": "2026-10-16T14:00:00Z",
             },
             "raw_financials_table": {
                 "revenue": "$383,000M",
@@ -76,6 +81,8 @@ class Test567UniverseBatchPipeline(unittest.TestCase):
                 "net_income": "$97,000M",
                 "free_cash_flow": "$100,000M",
                 "total_assets": "$350,000M",
+                "total_liabilities": "$288,000M",
+                "capex": "$11,000M",
                 "equity": "$62,000M",
                 "cash_and_equivalents": "$30,000M",
                 "total_debt": "$105,000M",
@@ -214,6 +221,16 @@ class Test567UniverseBatchPipeline(unittest.TestCase):
         self.assertEqual(res2["processed_count"], 0)
         self.assertEqual(res2["skipped_count"], 1)
 
+    def test_failed_core_analysis_cannot_generate_dossier(self):
+        """核心明确失败时拒绝生成估值走廊、JSON 或 Excel。"""
+        from types import SimpleNamespace
+        runner = BatchUniversePipelineRunner(chunks_dir=self.mock_chunks_dir, state_file=self.state_file)
+        failure = SimpleNamespace(execution_success=False, decision_card=None, block_reason="合成阻断原因")
+        with patch.object(runner.fin_system, "analyze_equity", return_value=failure):
+            with self.assertRaisesRegex(ValueError, "核心分析未通过"):
+                runner.process_single_company(self.mock_dossier_nvda, "chunk_001")
+        self.assertFalse(list((self.temp_dir / "reports").rglob("*.json")))
+
     def test_dry_run_mode(self):
         """FT-03 试运行可预览，恢复时仍须执行正式任务。"""
         runner = BatchUniversePipelineRunner(
@@ -254,24 +271,7 @@ class Test567UniverseBatchPipeline(unittest.TestCase):
         self.assertIn("AAPL", tickers)
 
     def test_verified_batch_end_to_end_with_excel(self):
-        """【FT-567-06: Batch 1 单标的端到端生成 AI 深度 JSON 档案与 5-Sheet Excel 报告】
-
-        1. 测试功能与测试点:
-           - 验证从真实 Batch 1 执行端到端完整生成管线。
-           - 同步产出符合契约的 AI 深度档案 JSON 与买方机构级 Excel 报告书 (.xlsx)。
-           - 验证物理文件落地且体积真实 (>3KB)。
-
-        2. 正常函数业务边界与参数契约:
-           - output_excel=True, limit=1。
-
-        3. 测试数据与模拟场景说明:
-           - 跑通 Batch 1 中的第 1 家标的 (AAPL)。
-
-        4. 预期断言与结果验证:
-           - processed_count == 1, failed_count == 0。
-           - 状态机中 AAPL 具备合法 json_path 与 excel_path。
-           - 物理 Excel 文件存在且文件大小 > 3000 字节。
-        """
+        """完整合成三表、明确行情与估值输入生成可回读的五页工作簿。"""
         excel_tmp_dir = self.temp_dir / "excel_reports"
         excel_tmp_dir.mkdir(parents=True, exist_ok=True)
 
@@ -280,43 +280,19 @@ class Test567UniverseBatchPipeline(unittest.TestCase):
             output_excel=True,
             excel_output_root=excel_tmp_dir,
         )
-        # 执行 Batch 1 中的 1 家标的
-        res = runner.run_pipeline(batch_id=1, limit=1, resume=False)
+        # 成功交付使用明示完整的合成样本；存量缺证据拒绝由独立回归覆盖。
+        with patch.object(runner, "get_batches", return_value=[("batch_001", [self.mock_dossier_aapl])]):
+            res = runner.run_pipeline(batch_id=1, limit=1, resume=False)
         self.assertEqual(res["processed_count"], 1)
         self.assertEqual(res["failed_count"], 0)
-
-        # 检查首家标的 (AAPL) 状态机记录
-        aapl_rec = runner.state_mgr.data["tickers"].get("AAPL")
-        self.assertIsNotNone(aapl_rec)
-        self.assertEqual(aapl_rec.get("status"), "COMPLETED")
-        self.assertIn("json_path", aapl_rec)
-        self.assertIn("excel_path", aapl_rec)
-
-        # 验证落盘的 Excel 文件存在且尺寸有效
-        excel_path_str = aapl_rec.get("excel_path")
-        self.assertIsNotNone(excel_path_str)
-        excel_file = self.temp_dir / excel_path_str
-        self.assertTrue(excel_file.exists(), f"Excel 档案必须真实落盘: {excel_file}")
+        aapl_rec = runner.state_mgr.data["tickers"]["AAPL"]
+        self.assertEqual(aapl_rec["status"], "COMPLETED")
+        excel_file = self.temp_dir / aapl_rec["excel_path"]
+        self.assertTrue(excel_file.is_file())
         self.assertGreater(excel_file.stat().st_size, 3000)
 
     def test_reconciliation_enrichment_for_deficient_companies(self):
-        """【FT-567-07: 平账底账联动回退机制-官方平账底账无缝修复旧破损档案】
-
-        1. 测试功能与测试点:
-           - 验证当遇到历史遗留的不平账破损财报时，流水线自动联调查验官方平账事实底账。
-           - 自动将破损数字平滑覆盖为经审计的平衡三表事实，解除下游刚性失衡阻断。
-
-        2. 正常函数业务边界与参数契约:
-           - reconciliation_state_path 包含合规的 TMO 记录。
-
-        3. 测试数据与模拟场景说明:
-           - 破损档案 TMO: 资产 1000 亿，负债 900 亿，权益 900 亿 (100 != 90 + 90 严重失衡)。
-           - 官方底账 TMO: 资产 1103.43 亿，负债 568.06 亿，权益 535.37 亿 (严格平账)。
-
-        4. 预期断言与结果验证:
-           - res['ticker'] == 'TMO'，中性公允价 > 0，Excel 导出成功。
-           - 破损档案已被彻底覆写为经审计的平衡数值。
-        """
+        """平账修复保留原始字段，仍缺现金、债务或股数时拒绝发布。"""
         from financial_core.engines.normalized_reconciliation_engine import (
             NormalizedReconciliationStateManager,
             ReconciliationRecord,
@@ -380,14 +356,14 @@ class Test567UniverseBatchPipeline(unittest.TestCase):
             excel_output_root=excel_tmp_dir,
         )
 
-        # 处理该标的，断言平账底账成功补全并顺利通过刚性平账自检与 Excel 导出
-        res = runner.process_single_company(broken_dossier, "chunk_broken")
-        self.assertEqual(res["ticker"], "TMO")
-        self.assertGreater(res["neutral_fair_value"], 0.0)
-        self.assertIsNotNone(res["excel_path"])
+        # 平账修复不等于三表及行情齐备，缺少现金、债务和股数时保持阻断。
+        from financial_core.engines.filing_mapper import IncompleteFilingFactError
+        with self.assertRaises(IncompleteFilingFactError):
+            runner.process_single_company(broken_dossier, "chunk_broken")
         self.assertEqual(broken_dossier["raw_financials_table"]["total_assets"], 110343000000.0)
         self.assertEqual(broken_dossier["raw_financials_table"]["total_liabilities"], 56806000000.0)
-        self.assertEqual(broken_dossier["raw_financials_table"]["stockholders_equity"], 53537000000.0)
+        self.assertFalse(list(excel_tmp_dir.glob("*.xlsx")))
+
 
 
 if __name__ == "__main__":

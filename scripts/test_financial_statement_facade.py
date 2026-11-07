@@ -44,6 +44,7 @@ class TestFinancialStatementFacade(unittest.TestCase):
             "net_income": 200.0,
             "free_cash_flow": 210.0,
             "inventory": 60.0,
+            "average_inventory": 60.0,
             "cogs": 480.0,
             "interest_expense": 20.0,
             "shares_outstanding": 10.0,
@@ -114,6 +115,7 @@ class TestFinancialStatementFacade(unittest.TestCase):
             "operating_income": 0.0,
             "net_income": 0.0,
             "inventory": 0.0,
+            "average_inventory": 0.0,
             "cogs": 0.0,  # 零成本
             "interest_expense": 0.0,
         }

@@ -131,39 +131,20 @@ class UnifiedDataCollectionGateway:
         必须满足：总资产 = 总负债 + 股东权益 (±0.1% 容差)。
         若核心科目缺失或资产负债表破损，立即抛出异常阻断，绝不使用虚假数字填补。
         """
-        revenue = facts.get("revenue") or facts.get("operating_revenue") or 0.0
-        total_assets = facts.get("total_assets") or 0.0
-        total_liabilities = facts.get("total_liabilities") or 0.0
-        equity_val = facts.get("stockholders_equity") if "stockholders_equity" in facts else facts.get("equity")
-        stockholders_equity = equity_val or 0.0
+        # 先检查披露是否存在，真实零值与缺失值必须分开处理。
+        def _required(key: str, *aliases: str) -> float:
+            for name in (key, *aliases):
+                value = OfficialFilingMapper.parse_optional_financial_number(facts.get(name), name)
+                if value is not None:
+                    return value
+            raise IncompleteFilingFactError(f"企业 [{ticker}] 缺失官方财报科目 {key}")
 
-        try:
-            revenue = OfficialFilingMapper.parse_financial_number(revenue)
-            total_assets = OfficialFilingMapper.parse_financial_number(total_assets)
-            total_liabilities = OfficialFilingMapper.parse_financial_number(total_liabilities)
-            stockholders_equity = OfficialFilingMapper.parse_financial_number(stockholders_equity)
-        except Exception:
-            raise IncompleteFilingFactError(
-                f"企业 [{ticker}] 财报关键科目存在无法转换为数值的非标格式，无法入账。"
-            )
-
-        # 若提供了资产与权益但未显式提供负债总计，依会计恒等式补全
-        if total_assets > 0.0 and total_liabilities == 0.0 and stockholders_equity != 0.0:
-            total_liabilities = total_assets - stockholders_equity
-        elif total_assets == 0.0 and total_liabilities > 0.0 and stockholders_equity != 0.0:
-            total_assets = total_liabilities + stockholders_equity
-        elif total_assets > 0.0 and total_liabilities > 0.0 and stockholders_equity == 0.0:
-            stockholders_equity = total_assets - total_liabilities
-
-        if revenue <= 0.0 or total_assets <= 0.0:
-            raise IncompleteFilingFactError(
-                f"企业 [{ticker}] 缺失官方权威财报底账 (营收={revenue}, 资产={total_assets})，严禁生成虚假假账。"
-            )
-
-        if total_liabilities == 0.0 and stockholders_equity == 0.0:
-            raise IncompleteFilingFactError(
-                f"企业 [{ticker}] 缺失官方财报负债与股东权益关键底账，已被安全阻断。"
-            )
+        revenue = _required("revenue", "operating_revenue")
+        total_assets = _required("total_assets")
+        total_liabilities = _required("total_liabilities")
+        stockholders_equity = _required("stockholders_equity", "equity", "total_equity")
+        if total_assets <= 0.0:
+            raise IncompleteFilingFactError(f"企业 [{ticker}] 总资产必须为正数")
 
         # 2. 会计恒等式刚性自检
         is_balanced, abs_diff, rel_ratio = OfficialFilingMapper.verify_balance_sheet_identity(
@@ -180,23 +161,19 @@ class UnifiedDataCollectionGateway:
 
         # 3. 标准化规整 (只读取真实存在的事实，严禁无来源伪造默认值)
         def _parse_optional(key: str) -> Optional[float]:
-            if key in facts and facts[key] is not None:
-                return OfficialFilingMapper.parse_financial_number(facts[key])
-            return None
+            return OfficialFilingMapper.parse_optional_financial_number(facts.get(key), key)
 
         gross_profit = _parse_optional("gross_profit")
         operating_income = _parse_optional("operating_income")
-        net_income = OfficialFilingMapper.parse_financial_number(facts.get("net_income", 0.0))
-        operating_cash_flow = OfficialFilingMapper.parse_financial_number(
-            facts.get("operating_cash_flow", facts.get("free_cash_flow", net_income))
-        )
+        net_income = _parse_optional("net_income")
+        operating_cash_flow = _parse_optional("operating_cash_flow")
         free_cash_flow = _parse_optional("free_cash_flow")
         capex = _parse_optional("capex")
         cash_and_equivalents = _parse_optional("cash_and_equivalents")
         total_debt = _parse_optional("total_debt")
         inventory = _parse_optional("inventory")
         dio = _parse_optional("dio")
-        fiscal_year = facts.get("fiscal_year", 2024)
+        fiscal_year = facts.get("fiscal_year")
         currency = facts.get("currency", "USD" if market == "US" else "JPY")
         source_filing = facts.get("source_filing", None)
 

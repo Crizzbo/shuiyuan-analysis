@@ -21,7 +21,7 @@ from financial_core.pipeline.canyon_linear_pipeline import (
     BalanceSheetInvariantError,
 )
 from financial_core.engines.prediction_ledger import PredictionLedger
-from scripts.test_support.fixtures import isolated_facade_ledger, project_temp
+from scripts.test_support.fixtures import isolated_facade_ledger, project_temp, freeze_quote_clock
 
 
 class TestCanyonLinearPipeline(unittest.TestCase):
@@ -35,7 +35,7 @@ class TestCanyonLinearPipeline(unittest.TestCase):
         self.pipeline = CanyonLinearPipeline(ledger=self.ledger)
 
         edt_tz = timezone(timedelta(hours=-4))
-        self.fresh_ts = (datetime.now(timezone.utc).astimezone(edt_tz) - timedelta(minutes=5)).strftime("%Y-%m-%d %H:%M:%S EDT")
+        self.fresh_ts = (freeze_quote_clock(self).astimezone(edt_tz) - timedelta(minutes=5)).strftime("%Y-%m-%d %H:%M:%S EDT")
 
         # 标准合规输入样本 (以典型蓝筹高通胀测试用例为基准)
         self.valid_input = CanyonStationInput(

@@ -17,7 +17,7 @@ from financial_core.pipeline.canyon_linear_pipeline import (
 )
 from financial_core.engines.prediction_ledger import PredictionLedger
 from financial_core import FinancialAnalysisSystem
-from scripts.test_support.fixtures import isolated_facade_ledger, project_temp
+from scripts.test_support.fixtures import isolated_facade_ledger, project_temp, freeze_quote_clock
 
 
 class TestCanyonMultiAssetPipeline(unittest.TestCase):
@@ -31,7 +31,7 @@ class TestCanyonMultiAssetPipeline(unittest.TestCase):
         self.pipeline = CanyonLinearPipeline(ledger=self.ledger)
 
         edt_tz = timezone(timedelta(hours=-4))
-        self.now_fresh_ts = (datetime.now(timezone.utc).astimezone(edt_tz) - timedelta(minutes=5)).strftime("%Y-%m-%d %H:%M:%S EDT")
+        self.now_fresh_ts = (freeze_quote_clock(self).astimezone(edt_tz) - timedelta(minutes=5)).strftime("%Y-%m-%d %H:%M:%S EDT")
         now_fresh_ts = self.now_fresh_ts
 
         # 1. 标普 500 ETF (SPY) 标准合规输入样本

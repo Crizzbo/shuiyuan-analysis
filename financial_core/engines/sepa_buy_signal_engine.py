@@ -616,6 +616,12 @@ class SepaBuySignalEngine:
         cfg = params or self.adaptive_params
         curr_sym = self._resolve_currency_symbol(facts)
 
+        # 缺少有效均量无法证明放量突破，拒绝用 1 股替代缺失的历史基线。
+        if not math.isfinite(facts.num_avg_volume_50d) or facts.num_avg_volume_50d <= 0:
+            raise ValueError("SEPA 买入研判需要有限正数的历史日均成交量")
+        if not math.isfinite(facts.num_current_volume) or facts.num_current_volume < 0:
+            raise ValueError("SEPA 当前成交量必须为有限非负数")
+
         # 1. 价格边界解耦计算
         boundaries = self.calculate_sepa_price_boundaries(
             val_pivot_price=facts.val_pivot_price,

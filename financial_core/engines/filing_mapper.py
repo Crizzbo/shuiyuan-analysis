@@ -138,12 +138,13 @@ class OfficialFilingMapper:
         facts = raw.get("facts", raw)  # 兼容扁平结构与 facts 嵌套结构
 
         # 现价与对照基准价
-        cur_p = float(facts.get("market_price", facts.get("current_price", 100.0)))
-        base_p = float(facts.get("baseline_reference_price", facts.get("high52", cur_p)))
-        quote_ts = facts.get(
-            "quote_timestamp",
-            f"{facts.get('market_price_date', '2026-10-14')} 16:00:00 EDT",
+        cur_p = cls.parse_optional_financial_number(
+            facts.get("market_price", facts.get("current_price")), "market_price"
         )
+        # 财报映射可独立于报价执行，未提供报价时保留空状态，由估值入口阻断。
+        cur_p = cur_p if cur_p is not None else 0.0
+        quote_ts = facts.get("quote_timestamp") or ""
+        base_p = float(facts.get("baseline_reference_price", facts.get("high52", cur_p)))
         session = facts.get("market_session", "closed")
 
         # 3. 三表核心财务科目提取与单位缩放
@@ -374,6 +375,35 @@ class OfficialFilingMapper:
         return -val_final if is_negative else val_final
 
     @classmethod
+    def parse_optional_financial_number(
+        cls, value: Any, field_name: str
+    ) -> Optional[float]:
+        """保留未披露科目，拒绝把非法格式、布尔值或非有限数写入事实底账。"""
+        if value is None:
+            return None
+        if isinstance(value, str):
+            text = value.strip()
+            if text.upper() in {"", "N/A", "NONE", "NULL", "-", "—", "未披露", "缺失"}:
+                return None
+            if not re.search(r"[0-9]", text):
+                raise IncompleteFilingFactError(f"财报科目 {field_name} 无法解析")
+        if isinstance(value, bool) or not isinstance(value, (str, int, float)):
+            raise IncompleteFilingFactError(f"财报科目 {field_name} 必须为数值或数值文本")
+        # 纯数值文本允许科学计数法，带币种和单位的文本继续复用现有解析器。
+        if isinstance(value, str):
+            try:
+                number = float(value.strip().replace(",", ""))
+            except ValueError:
+                number = cls.parse_financial_number(value)
+        else:
+            number = cls.parse_financial_number(value)
+        if isinstance(value, (int, float)) and not math.isfinite(value):
+            raise IncompleteFilingFactError(f"财报科目 {field_name} 必须为有限数")
+        if not math.isfinite(number):
+            raise IncompleteFilingFactError(f"财报科目 {field_name} 必须为有限数")
+        return number
+
+    @classmethod
     def map_dossier_to_company_input(cls, dossier: Dict[str, Any]) -> SystemicCompanyInput:
         """将全息深度档案字典转换为可运算的 SystemicCompanyInput.
 
@@ -393,20 +423,34 @@ class OfficialFilingMapper:
         sector = overview.get("industry_id", "General")
 
         raw_fin = dossier.get("raw_financials_table", {})
-        rev = cls.parse_financial_number(raw_fin.get("revenue", 0.0))
-        op_inc = cls.parse_financial_number(raw_fin.get("operating_income", 0.0))
-        net_inc = cls.parse_financial_number(raw_fin.get("net_income", 0.0))
-        fcf = cls.parse_financial_number(raw_fin.get("free_cash_flow", 0.0))
-        tot_assets = cls.parse_financial_number(raw_fin.get("total_assets", 0.0))
-        tot_liab = cls.parse_financial_number(raw_fin.get("total_liabilities", 0.0))
-        equity = cls.parse_financial_number(
-            raw_fin.get("equity", raw_fin.get("stockholders_equity", 0.0))
-        )
-        cash = cls.parse_financial_number(raw_fin.get("cash_and_equivalents", 0.0))
-        total_debt = cls.parse_financial_number(raw_fin.get("total_debt", 0.0))
-        shares = cls.parse_financial_number(raw_fin.get("shares", 100_000_000.0))
-        if 0.0 < shares < 1000.0:
-            shares *= 1_000_000.0
+        def _required_fact(name: str, *aliases: str) -> float:
+            for key in (name, *aliases):
+                number = cls.parse_optional_financial_number(raw_fin.get(key), key)
+                if number is not None:
+                    return number
+            raise IncompleteFilingFactError(f"公司 {ticker} 档案缺少财报科目 {name}")
+
+        rev = _required_fact("revenue")
+        op_inc = _required_fact("operating_income")
+        net_inc = _required_fact("net_income")
+        tot_assets = _required_fact("total_assets")
+        tot_liab = _required_fact("total_liabilities")
+        equity = _required_fact("equity", "stockholders_equity", "total_equity")
+        cash = _required_fact("cash_and_equivalents")
+        total_debt = _required_fact("total_debt")
+        shares = _required_fact("shares", "shares_outstanding")
+        if shares <= 0:
+            raise IncompleteFilingFactError("公司档案必须提供有限正数股数，单位为股")
+        capex = abs(_required_fact("capex", "reported_capex"))
+        cfo = cls.parse_optional_financial_number(raw_fin.get("operating_cash_flow"), "operating_cash_flow")
+        fcf = cls.parse_optional_financial_number(raw_fin.get("free_cash_flow"), "free_cash_flow")
+        # 只允许用已披露、同口径科目做现金流恒等变换。
+        if cfo is None:
+            if fcf is None:
+                raise IncompleteFilingFactError("公司档案缺少经营现金流与自由现金流")
+            cfo = fcf + capex
+        if fcf is None:
+            fcf = cfo - capex
 
         restricted_cash = cls.parse_financial_number(
             raw_fin.get("restricted_cash", raw_fin.get("restricted_deposits", 0.0))
@@ -443,20 +487,6 @@ class OfficialFilingMapper:
             cap_rd,
         )
 
-        # 会计平账自检与补全：依会计恒等式 (总资产 = 总负债 + 股东权益)
-        if tot_assets > 0.0 and tot_liab == 0.0 and equity != 0.0:
-            tot_liab = tot_assets - equity
-        elif tot_assets == 0.0 and tot_liab > 0.0 and equity != 0.0:
-            tot_assets = tot_liab + equity
-        elif tot_assets > 0.0 and tot_liab > 0.0 and equity == 0.0:
-            equity = tot_assets - tot_liab
-        elif tot_liab == 0.0 and equity != 0.0:
-            tot_liab = tot_assets - equity
-
-        # 估算资本开支与营运现金流：FCF = OCF - Capex => OCF = FCF + Capex
-        capex = max(abs(fcf) * 0.15, 1_000_000.0)
-        cfo = fcf + capex
-
         # 从估值走廊或文本中提取现价与基准对照价
         cur_p, base_p = cls._extract_price_and_baseline(dossier, overview)
         facts_dict = dossier.get("facts", {})
@@ -464,14 +494,9 @@ class OfficialFilingMapper:
             facts_dict.get("quote_timestamp")
             or overview.get("quote_timestamp")
             or raw_fin.get("quote_timestamp")
-            or ("2026-10-14 16:00:00 EDT" if market == "US" else "2026-10-14 15:00:00 JST")
         )
-
-        # 自适应回退：若 raw_financials_table 缺失，从全息深度档案中穿透提取
-        if rev == 0.0 or tot_assets == 0.0:
-            rev, fcf, cash, total_debt, finished_goods = cls._fallback_from_narrative(
-                overview, deep_dive, rev, fcf, cash, total_debt, finished_goods
-            )
+        if cur_p <= 0.0 or not now_ts:
+            raise IncompleteFilingFactError("公司档案缺少有效观测价格或原始行情时间戳")
 
         # 严格质量门禁：缺少权威财报底账即刻阻断
         if rev <= 0.0 or tot_assets <= 0.0:
@@ -722,7 +747,7 @@ class OfficialFilingMapper:
             if cur_p > 0.0:
                 p = cur_p
             else:
-                p = float(facts.get("market_price", facts.get("current_price", 100.0 if market == "US" else 1000.0)))
+                p = cls.parse_financial_number(facts.get("market_price", facts.get("current_price")))
             mcap_bil = (shares * p) / 1_000_000_000.0
 
         # 股东权益
@@ -1164,7 +1189,7 @@ class OfficialFilingMapper:
                 ),
             )
         )
-        base_p = cur_p * 1.15 if cur_p > 0.0 else 0.0
+        base_p = cur_p
 
         outlook = dossier.get("long_term_outlook", {}) if isinstance(dossier, dict) else {}
         dcf_matrix = outlook.get("dcf_valuation_matrix", {}) if isinstance(outlook, dict) else {}
@@ -1176,18 +1201,7 @@ class OfficialFilingMapper:
         )
         if price_match:
             cur_p = float(price_match.group(1).replace(",", ""))
-            base_p = cur_p * 1.15
-        elif "base_fair_value" in dcf_matrix and cur_p <= 0.0:
-            base_val_str = dcf_matrix.get("base_fair_value", "")
-            m_base = re.search(
-                r"[\$¥￥]?\s*([0-9]{1,3}(?:,[0-9]{3})+(?:\.[0-9]+)?|[0-9]+(?:\.[0-9]+)?)",
-                base_val_str,
-            )
-            if m_base:
-                base_val = float(m_base.group(1).replace(",", ""))
-                if base_val > 0.0:
-                    cur_p = round(base_val * 0.85, 2)
-                    base_p = base_val
+            base_p = cur_p
 
         base_val_str = dcf_matrix.get("base_fair_value", "")
         m_base = re.search(
@@ -1197,10 +1211,8 @@ class OfficialFilingMapper:
         if m_base:
             base_p = float(m_base.group(1).replace(",", ""))
 
-        if cur_p <= 0.0:
-            cur_p = 10.0
         if base_p <= 0.0:
-            base_p = cur_p * 1.15
+            base_p = cur_p
 
         return cur_p, base_p
 
