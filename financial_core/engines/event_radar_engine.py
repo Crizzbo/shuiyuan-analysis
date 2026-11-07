@@ -23,7 +23,7 @@ class EventSeverity(str, Enum):
 
 
 class EventCategory(str, Enum):
-    """突发事件业务全息分类 (8大核心信息收集维度)."""
+    """突发事件业务全息分类 (12大全景信息收集维度)."""
     GEOPOLITICAL = "Geopolitical_CrossStrait"
     STATE_POLICY = "State_Policy_Regulatory"
     PHYSICAL_DISRUPTION = "Physical_Plant_Disruption"
@@ -32,6 +32,10 @@ class EventCategory(str, Enum):
     ANTITRUST_LITIGATION = "Antitrust_Litigation"
     COMMODITY_SQUEEZE = "Commodity_Physical_Squeeze"
     CENTRAL_BANK_LIQUIDITY = "CentralBank_Liquidity_FX_Shock"
+    ENERGY_GRID = "Energy_Grid_Blackout_Rationing"
+    CYBER_INFRASTRUCTURE = "Cyber_Critical_Infrastructure"
+    BIOSECURITY_EMBARGO = "Biosecurity_Export_Embargo"
+    CRITICAL_MINERALS = "Critical_Minerals_Export_Permit"
     OTHER_MACRO = "Other_Macro_Event"
 
 
@@ -155,6 +159,22 @@ class EventRadarEngine:
             "贴现窗口", "常备借贷便利", "srf", "隔夜逆回购", "on rrp", "套息平仓", "carry trade", "日元突涨", "cds飙升", "美元流动性",
             "discount window", "standing repo", "on rrp", "carry trade unwind", "yen spike", "cds spread",
             "liquidity squeeze", "dollar funding"
+        ],
+        "energy_grid": [
+            "工业限电", "电网跳闸", "极端寒潮", "气井冻结", "枯水期", "水库死水位", "莱茵河水位", "kaub", "nerc", "eia", "ercot",
+            "load shedding", "rolling blackout", "grid emergency", "low river gauge", "power rationing", "freeze off"
+        ],
+        "cyber_infrastructure": [
+            "工控瘫痪", "勒索软件", "cisa", "内核驱动蓝屏", "海底光缆断裂", "清算系统故障", "fedwire", "swift",
+            "ics advisory", "ransomware attack", "critical infrastructure cyber", "kernel crash", "backbone outage"
+        ],
+        "biosecurity_embargo": [
+            "生物安全法案", "biosecure act", "cxo", "合同研发受限", "fda进口警报", "import alert", "先导化合物禁运",
+            "原料药口岸查扣", "clinical trial hold", "select agent", "pathogen export"
+        ],
+        "critical_minerals": [
+            "双用途出口许可证", "锗镓出口管制", "锑矿配额", "重稀土许可证", "印尼镍矿rkab", "采矿特许权", "战略矿产",
+            "export license", "dual use export permit", "antimony quota", "rare earth license", "indonesia nickel rkab", "mining concession"
         ]
     }
 
@@ -170,7 +190,7 @@ class EventRadarEngine:
         self.blacklist = filter_rules.get("noise_blacklist", self.DEFAULT_BLACKLIST)
 
     def pre_filter(self, item: RawNewsItem) -> Tuple[bool, List[str], EventCategory]:
-        """第一道防线：零 Token 物理去噪与关键词匹配 (8大信息收集维度).
+        """第一道防线：零 Token 物理去噪与关键词匹配 (12大全景信息收集维度).
 
         返回: (is_matched, matched_tags, likely_category)
         """
@@ -192,9 +212,13 @@ class EventRadarEngine:
             EventCategory.ANTITRUST_LITIGATION: 0,
             EventCategory.COMMODITY_SQUEEZE: 0,
             EventCategory.CENTRAL_BANK_LIQUIDITY: 0,
+            EventCategory.ENERGY_GRID: 0,
+            EventCategory.CYBER_INFRASTRUCTURE: 0,
+            EventCategory.BIOSECURITY_EMBARGO: 0,
+            EventCategory.CRITICAL_MINERALS: 0,
         }
 
-        # 匹配 8 大核心领域词典
+        # 匹配 12 大核心领域词典
         category_mapping = [
             ("geopolitical", EventCategory.GEOPOLITICAL),
             ("state_policy", EventCategory.STATE_POLICY),
@@ -204,6 +228,10 @@ class EventRadarEngine:
             ("antitrust_litigation", EventCategory.ANTITRUST_LITIGATION),
             ("commodity_squeeze", EventCategory.COMMODITY_SQUEEZE),
             ("liquidity_central_bank", EventCategory.CENTRAL_BANK_LIQUIDITY),
+            ("energy_grid", EventCategory.ENERGY_GRID),
+            ("cyber_infrastructure", EventCategory.CYBER_INFRASTRUCTURE),
+            ("biosecurity_embargo", EventCategory.BIOSECURITY_EMBARGO),
+            ("critical_minerals", EventCategory.CRITICAL_MINERALS),
         ]
 
         for dict_key, cat_enum in category_mapping:
@@ -265,7 +293,8 @@ class EventRadarEngine:
             "sec", "edgar", "cpuc", "itc", "usitc", "federal register", "ukmto",
             "boj", "bank of japan", "federal reserve", "fed", "caiso", "boe", "ecb",
             "doj", "ftc", "cma", "regulatory gazette", "official gazette", "court",
-            "legislative", "comptroller", "doe"
+            "legislative", "comptroller", "doe", "cisa", "eia", "nerc", "ercot",
+            "fda", "esdm", "bfg", "stb"
         ]
         if any(sig in s_norm for sig in tier1_signatures):
             return SourceCredibilityTier.TIER_1_OFFICIAL_REGULATORY, 1.0

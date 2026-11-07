@@ -474,6 +474,34 @@ class MockModelSummarizer:
             severity = "P0"
             duration = "不可抗力中长期"
             segments = ["先进制程芯片设计", "全球代工供应链"]
+        elif "限电" in title_lower or "电网" in title_lower or "寒潮" in title_lower or "气井" in title_lower:
+            category = "Energy_Grid_Blackout_Rationing"
+            entities = ["区域电网独立调度中心(NERC/ERCOT)", "工业高耗能产业", "商业算力中心"]
+            impact = "极端气候导致气井冻结与电网跳闸，启动紧急负荷削减及工业限电"
+            severity = "P1"
+            duration = "短期 1~2 周"
+            segments = ["电解铝与基础工业冶炼", "算力基础设施", "电力与燃气公用事业"]
+        elif "工控" in title_lower or "勒索" in title_lower or "cisa" in title_lower or "蓝屏" in title_lower:
+            category = "Cyber_Critical_Infrastructure"
+            entities = ["关键基础设施运营方", "国家网络安全应急机构(CISA)"]
+            impact = "要害工业控制系统或底层驱动发生严重故障瘫痪，交通与物流调度停滞"
+            severity = "P1"
+            duration = "突发短期数天"
+            segments = ["自动化码头与港口", "工业控制与SCADA", "航空调度与金融清算"]
+        elif "生物安全" in title_lower or "biosecure" in title_lower or "cxo" in title_lower or "原料药" in title_lower:
+            category = "Biosecurity_Export_Embargo"
+            entities = ["美国国会立法委员会", "FDA进出口合规司", "跨国CXO企业"]
+            impact = "生物安全法案立法推进或FDA发布进口警报，限制跨国临床研发技术转移与原料药清关"
+            severity = "P1"
+            duration = "中长期 6~18 个月"
+            segments = ["合同研发与生产组织(CXO)", "创新药临床管线", "特色原料药API"]
+        elif "双用途" in title_lower or "锗镓" in title_lower or "锑矿" in title_lower or "矿产" in title_lower or "rkab" in title_lower:
+            category = "Critical_Minerals_Export_Permit"
+            entities = ["商务部海关总署", "印尼能矿部(ESDM)", "战略矿产开采加工企业"]
+            impact = "主管机构收紧两用物项出口许可证审批或海外矿产开采配额延迟，现货升水急剧攀升"
+            severity = "P1"
+            duration = "中长期 3~12 个月"
+            segments = ["半导体衬底材料", "军工与红外光学", "动力电池与储能材料"]
 
         summary_dict = {
             "category": category,

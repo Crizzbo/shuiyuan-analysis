@@ -571,6 +571,30 @@ body {{
   color: #b91c1c;
 }}
 
+.cat-Energy_Grid_Blackout_Rationing {{
+  background: #fffbeb;
+  border-color: #fde68a;
+  color: #b45309;
+}}
+
+.cat-Cyber_Critical_Infrastructure {{
+  background: #f5f3ff;
+  border-color: #ddd6fe;
+  color: #5b21b6;
+}}
+
+.cat-Biosecurity_Export_Embargo {{
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #047857;
+}}
+
+.cat-Critical_Minerals_Export_Permit {{
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #334155;
+}}
+
 @media (prefers-color-scheme: dark) {{
   :root:not([data-theme="light"]) .cat-Geopolitical_CrossStrait {{
     background: #50072433;
@@ -611,6 +635,26 @@ body {{
     background: #450a0a33;
     border-color: #7f1d1d;
     color: #f87171;
+  }}
+  :root:not([data-theme="light"]) .cat-Energy_Grid_Blackout_Rationing {{
+    background: #451a0333;
+    border-color: #78350f;
+    color: #fbbf24;
+  }}
+  :root:not([data-theme="light"]) .cat-Cyber_Critical_Infrastructure {{
+    background: #2e106533;
+    border-color: #4c1d95;
+    color: #a78bfa;
+  }}
+  :root:not([data-theme="light"]) .cat-Biosecurity_Export_Embargo {{
+    background: #064e3b33;
+    border-color: #065f46;
+    color: #34d399;
+  }}
+  :root:not([data-theme="light"]) .cat-Critical_Minerals_Export_Permit {{
+    background: #1e293b33;
+    border-color: #334155;
+    color: #94a3b8;
   }}
 }}
 
@@ -653,6 +697,26 @@ body {{
   background: #450a0a33;
   border-color: #7f1d1d;
   color: #f87171;
+}}
+:root[data-theme="dark"] .cat-Energy_Grid_Blackout_Rationing {{
+  background: #451a0333;
+  border-color: #78350f;
+  color: #fbbf24;
+}}
+:root[data-theme="dark"] .cat-Cyber_Critical_Infrastructure {{
+  background: #2e106533;
+  border-color: #4c1d95;
+  color: #a78bfa;
+}}
+:root[data-theme="dark"] .cat-Biosecurity_Export_Embargo {{
+  background: #064e3b33;
+  border-color: #065f46;
+  color: #34d399;
+}}
+:root[data-theme="dark"] .cat-Critical_Minerals_Export_Permit {{
+  background: #1e293b33;
+  border-color: #334155;
+  color: #94a3b8;
 }}
 
 /* 信源权威度分级徽章样式 */
@@ -1320,6 +1384,10 @@ body {{
           <button class="filter-btn" onclick="setCategoryFilter('Antitrust_Litigation', this)">⚖️ 反垄断/337</button>
           <button class="filter-btn" onclick="setCategoryFilter('Commodity_Physical_Squeeze', this)">🛢️ 大宗逼仓</button>
           <button class="filter-btn" onclick="setCategoryFilter('CentralBank_Liquidity_FX_Shock', this)">🏦 央行流动性</button>
+          <button class="filter-btn" onclick="setCategoryFilter('Energy_Grid_Blackout_Rationing', this)">⚡ 能源电网</button>
+          <button class="filter-btn" onclick="setCategoryFilter('Cyber_Critical_Infrastructure', this)">💻 工控网络</button>
+          <button class="filter-btn" onclick="setCategoryFilter('Biosecurity_Export_Embargo', this)">🧬 生物安全</button>
+          <button class="filter-btn" onclick="setCategoryFilter('Critical_Minerals_Export_Permit', this)">⛏️ 关键矿产</button>
         </div>
         <div class="filter-group" id="credibilityFilterGroup">
           <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-right: 4px;">信源权威:</span>
@@ -1423,6 +1491,10 @@ const CATEGORY_CONFIG = {{
   "Antitrust_Litigation": {{ name: "反垄断诉讼与337专利", icon: "⚖️", cls: "cat-Antitrust_Litigation" }},
   "Commodity_Physical_Squeeze": {{ name: "实物大宗现货逼仓", icon: "🛢️", cls: "cat-Commodity_Physical_Squeeze" }},
   "CentralBank_Liquidity_FX_Shock": {{ name: "央行流动性与套息平仓", icon: "🏦", cls: "cat-CentralBank_Liquidity_FX_Shock" }},
+  "Energy_Grid_Blackout_Rationing": {{ name: "能源电网与限电", icon: "⚡", cls: "cat-Energy_Grid_Blackout_Rationing" }},
+  "Cyber_Critical_Infrastructure": {{ name: "要害工控网络瘫痪", icon: "💻", cls: "cat-Cyber_Critical_Infrastructure" }},
+  "Biosecurity_Export_Embargo": {{ name: "生物安全与原药查扣", icon: "🧬", cls: "cat-Biosecurity_Export_Embargo" }},
+  "Critical_Minerals_Export_Permit": {{ name: "战略矿产出口许可", icon: "⛏️", cls: "cat-Critical_Minerals_Export_Permit" }},
   "Other_Macro_Event": {{ name: "宏观常规参考", icon: "📢", cls: "cat-Other" }},
 }};
 

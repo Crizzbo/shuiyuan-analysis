@@ -226,6 +226,83 @@ class TestEventRadarEngine(unittest.TestCase):
         self.assertEqual(summary.severity_level, "P0")
         self.assertTrue(summary.requires_deep_analysis)
 
+    def test_pre_filter_energy_grid_and_rationing(self):
+        """测试极端寒潮气井冻结与电网跳闸工业限电初筛判定 (维度 9)."""
+        item = RawNewsItem(
+            id="energy_01",
+            title="极端寒潮导致气井冻结与电网跳闸触发大规模工业限电",
+            content="NERC与ERCOT发布3级电网紧急告警，工业大负荷电解铝与商业算力被迫有序用电。",
+            source="EIA_Electric_Monitor",
+            published_at="2026-11-07T04:00:00Z",
+        )
+        matched, tags, cat = self.engine.pre_filter(item)
+        self.assertTrue(matched)
+        self.assertEqual(cat, EventCategory.ENERGY_GRID)
+        self.assertIn("工业限电", tags)
+
+        summarizer = MockModelSummarizer()
+        prompt_payload = self.engine.build_summary_prompt(item, cat)
+        raw_json = summarizer.generate_summary_json(prompt_payload, item)
+        summary = self.engine.parse_and_validate_summary(raw_json, item, cat)
+        self.assertEqual(summary.credibility_tier, "Tier1_Official_Regulatory")
+        self.assertEqual(summary.credibility_score, 1.0)
+        self.assertTrue(summary.requires_deep_analysis)
+
+    def test_pre_filter_cyber_critical_infrastructure(self):
+        """测试要害工控OT系统瘫痪与底层内核蓝屏故障初筛判定 (维度 10)."""
+        item = RawNewsItem(
+            id="cyber_01",
+            title="要害工业控制系统遭遇工控瘫痪与底层内核驱动蓝屏故障",
+            content="自动化集装箱码头吊机系统全面离线，CISA发布紧急指令协调交通网络清算恢复。",
+            source="CISA_Advisory_Direct",
+            published_at="2026-11-07T04:15:00Z",
+        )
+        matched, tags, cat = self.engine.pre_filter(item)
+        self.assertTrue(matched)
+        self.assertEqual(cat, EventCategory.CYBER_INFRASTRUCTURE)
+        self.assertIn("工控瘫痪", tags)
+
+        summarizer = MockModelSummarizer()
+        prompt_payload = self.engine.build_summary_prompt(item, cat)
+        raw_json = summarizer.generate_summary_json(prompt_payload, item)
+        summary = self.engine.parse_and_validate_summary(raw_json, item, cat)
+        self.assertEqual(summary.credibility_tier, "Tier1_Official_Regulatory")
+        self.assertEqual(summary.credibility_score, 1.0)
+
+    def test_pre_filter_biosecurity_export_embargo(self):
+        """测试生物安全法案推进与原料药口岸查扣初筛判定 (维度 11)."""
+        item = RawNewsItem(
+            id="bio_01",
+            title="国会推进生物安全法案biosecure act导致关键CXO合同研发受限与原料药口岸查扣",
+            content="FDA发布进口警报红名单，海外药企跨国临床研究技术包转移受到刚性延宕。",
+            source="FDA_Import_Alert_Regulatory",
+            published_at="2026-11-07T04:30:00Z",
+        )
+        matched, tags, cat = self.engine.pre_filter(item)
+        self.assertTrue(matched)
+        self.assertEqual(cat, EventCategory.BIOSECURITY_EMBARGO)
+        self.assertIn("生物安全法案", tags)
+
+        summarizer = MockModelSummarizer()
+        prompt_payload = self.engine.build_summary_prompt(item, cat)
+        raw_json = summarizer.generate_summary_json(prompt_payload, item)
+        summary = self.engine.parse_and_validate_summary(raw_json, item, cat)
+        self.assertEqual(summary.credibility_tier, "Tier1_Official_Regulatory")
+
+    def test_pre_filter_critical_minerals_permit(self):
+        """测试战略关键矿产双用途出口许可证与海外开采配额初筛判定 (维度 12)."""
+        item = RawNewsItem(
+            id="min_01",
+            title="主管机关强化锗镓出口管制与双用途出口许可证审批放行节奏",
+            content="印尼镍矿RKAB审批进展延宕，全球高纯电子级化合物半导体原材料现货大幅升水。",
+            source="Customs_Dual_Use_Regulatory",
+            published_at="2026-11-07T04:45:00Z",
+        )
+        matched, tags, cat = self.engine.pre_filter(item)
+        self.assertTrue(matched)
+        self.assertEqual(cat, EventCategory.CRITICAL_MINERALS)
+        self.assertIn("双用途出口许可证", tags)
+
     def test_source_credibility_tiering(self):
         """测试买方信源权威度分级判定 (Tier 1 到 Tier 4)."""
         # Tier 1: 官方监管机构与政府公报
@@ -234,6 +311,18 @@ class TestEventRadarEngine(unittest.TestCase):
         self.assertEqual(score, 1.0)
 
         tier, score = self.engine.evaluate_source_credibility("CPUC_Proceedings")
+        self.assertEqual(tier.value, "Tier1_Official_Regulatory")
+        self.assertEqual(score, 1.0)
+
+        tier, score = self.engine.evaluate_source_credibility("CISA_ICS_Advisory")
+        self.assertEqual(tier.value, "Tier1_Official_Regulatory")
+        self.assertEqual(score, 1.0)
+
+        tier, score = self.engine.evaluate_source_credibility("EIA_Electricity_Monitor")
+        self.assertEqual(tier.value, "Tier1_Official_Regulatory")
+        self.assertEqual(score, 1.0)
+
+        tier, score = self.engine.evaluate_source_credibility("FDA_Import_Alert_Portal")
         self.assertEqual(tier.value, "Tier1_Official_Regulatory")
         self.assertEqual(score, 1.0)
 

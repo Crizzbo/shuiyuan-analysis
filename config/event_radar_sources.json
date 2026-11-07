@@ -29,19 +29,64 @@
     "keyword_dictionaries": {
       "geopolitical": [
         "蓝营", "绿营", "台海", "海峡", "出口管制", "实体清单", "制裁", "关税",
-        "sanction", "export control", "entity list", "tariff", "taiwan strait", "geopolitical"
+        "立法院", "大选", "摇摆州", "两党博弈", "军演", "封锁", "禁运",
+        "sanction", "export control", "entity list", "tariff", "taiwan strait", "geopolitical",
+        "blockade", "military drill", "embargo", "election polls", "legislative vote", "sdn list"
       ],
       "state_policy": [
         "法案", "监管", "补贴", "加州", "德州", "反垄断", "碳排放", "电网负荷",
-        "legislation", "regulatory", "subsidy", "california", "texas", "antitrust", "grid fee", "ai bill"
+        "公用事业", "水权配额", "工业电价", "冷却水", "pue", "分区规划",
+        "legislation", "regulatory", "subsidy", "california", "texas", "antitrust",
+        "grid fee", "ai bill", "mandate", "tax credit", "water rights", "environmental permit",
+        "power tariff", "zoning"
       ],
       "physical_disruption": [
-        "爆炸", "火灾", "停产", "受袭", "罢工", "封锁", "断供", "断水", "停电",
-        "explosion", "fire", "outage", "strike", "blockade", "facility attack", "disruption", "force majeure"
+        "爆炸", "火灾", "停产", "受袭", "断供", "断水", "停电", "不可抗力",
+        "光刻胶单体", "电子级氢氟酸", "前驱体特气", "特种化学品", "炼油催化", "变电站故障", "海底光缆",
+        "explosion", "fire", "outage", "facility attack", "disruption", "chemical plant",
+        "force majeure", "pipeline rupture", "blast", "photoresist precursor", "subsea cable"
       ],
       "supply_chain": [
-        "台积电", "ASML", "光刻机", "高纯试剂", "硅片", "晶圆厂", "关键原料", "红海", "苏伊士",
-        "foundry", "semiconductor", "wafer", "raw material", "red sea", "suez canal", "chokepoint"
+        "台积电", "asml", "光刻机", "高纯试剂", "硅片", "晶圆厂", "关键原料", "红海", "苏伊士",
+        "曼德海峡", "霍尔木兹", "马六甲", "巴拿马运河", "吃水限制", "好望角绕航", "baf", "集装箱运价",
+        "foundry", "semiconductor", "wafer", "raw material", "red sea", "suez canal",
+        "bab el-mandeb", "hormuz", "malacca", "panama canal", "draft limit", "chokepoint", "container freight"
+      ],
+      "labor_strikes": [
+        "罢工", "码头工人", "工会", "劳资谈判", "怠工", "铁路停摆", "ila", "ilwu", "港口封锁", "运力瘫痪",
+        "dockworker", "union", "labor strike", "contract negotiation", "railway halt", "port shutdown",
+        "work stoppage", "slowdown"
+      ],
+      "antitrust_litigation": [
+        "反垄断", "司法部", "ftc", "欧盟委员会", "英国cma", "337调查", "itc", "专利侵权", "排除令", "进口禁令",
+        "antitrust", "doj", "ftc", "european commission", "cma", "itc 337", "patent infringement",
+        "exclusion order", "import ban", "breakup"
+      ],
+      "commodity_squeeze": [
+        "战略石油储备", "spr", "现货升水", "倒挂", "仓单注销", "逼仓", "挤兑提货", "稀土配额", "镓锗出口", "实物黄金溢价",
+        "backwardation", "physical premium", "spr release", "warrant cancel", "short squeeze",
+        "rare earth quota", "gallium", "germanium", "delivery default"
+      ],
+      "liquidity_central_bank": [
+        "贴现窗口", "常备借贷便利", "srf", "隔夜逆回购", "on rrp", "套息平仓", "carry trade", "日元突涨", "cds飙升", "美元流动性",
+        "discount window", "standing repo", "on rrp", "carry trade unwind", "yen spike", "cds spread",
+        "liquidity squeeze", "dollar funding"
+      ],
+      "energy_grid": [
+        "工业限电", "电网跳闸", "极端寒潮", "气井冻结", "枯水期", "水库死水位", "莱茵河水位", "kaub", "nerc", "eia", "ercot",
+        "load shedding", "rolling blackout", "grid emergency", "low river gauge", "power rationing", "freeze off"
+      ],
+      "cyber_infrastructure": [
+        "工控瘫痪", "勒索软件", "cisa", "内核驱动蓝屏", "海底光缆断裂", "清算系统故障", "fedwire", "swift",
+        "ics advisory", "ransomware attack", "critical infrastructure cyber", "kernel crash", "backbone outage"
+      ],
+      "biosecurity_embargo": [
+        "生物安全法案", "biosecure act", "cxo", "合同研发受限", "fda进口警报", "import alert", "先导化合物禁运",
+        "原料药口岸查扣", "clinical trial hold", "select agent", "pathogen export"
+      ],
+      "critical_minerals": [
+        "双用途出口许可证", "锗镓出口管制", "锑矿配额", "重稀土许可证", "印尼镍矿rkab", "采矿特许权", "战略矿产",
+        "export license", "dual use export permit", "antimony quota", "rare earth license", "indonesia nickel rkab", "mining concession"
       ]
     },
     "noise_blacklist": [
@@ -75,6 +120,62 @@
       "channel_name": "全球海事与地缘关键咽喉要道突发快讯",
       "type": "public_flash",
       "url": "https://www.ukmto.org/flash-alerts",
+      "priority": "P1"
+    },
+    {
+      "channel_id": "port_railway_labor_alerts",
+      "channel_name": "美东美西港口工会与铁路物流劳资谈判",
+      "type": "labor_logistics",
+      "url": "https://www.stb.gov/news-market-data",
+      "priority": "P1"
+    },
+    {
+      "channel_id": "antitrust_itc_litigation_tracker",
+      "channel_name": "美国司法部/FTC反垄断与ITC 337专利调查排除令",
+      "type": "legal_antitrust",
+      "url": "https://www.usitc.gov/investigations/337.htm",
+      "priority": "P1"
+    },
+    {
+      "channel_id": "physical_commodity_spr_squeeze",
+      "channel_name": "战略石油储备(SPR)招标与实物大宗现货倒挂升水",
+      "type": "commodity_physical",
+      "url": "https://www.energy.gov/ceser/strategic-petroleum-reserve",
+      "priority": "P1"
+    },
+    {
+      "channel_id": "central_bank_liquidity_cross_currency",
+      "channel_name": "美联储贴现窗口/SRF常备借贷便利与日元套息平仓流动性",
+      "type": "central_bank_liquidity",
+      "url": "https://www.federalreserve.gov/monetarypolicy/srf.htm",
+      "priority": "P0"
+    },
+    {
+      "channel_id": "energy_grid_eia_nerc_alerts",
+      "channel_name": "美国EIA/NERC/ERCOT电网负荷与工业限电紧急告警",
+      "type": "energy_grid",
+      "url": "https://www.eia.gov/electricity/gridmonitor",
+      "priority": "P1"
+    },
+    {
+      "channel_id": "cyber_critical_cisa_ics_alerts",
+      "channel_name": "美国CISA工控系统与要害基础设施网络瘫痪通报",
+      "type": "cyber_infrastructure",
+      "url": "https://www.cisa.gov/news-events/cybersecurity-advisories",
+      "priority": "P0"
+    },
+    {
+      "channel_id": "biosecurity_fda_congress_tracker",
+      "channel_name": "美国国会生物安全法案与FDA进出口扣押警报",
+      "type": "biosecurity_embargo",
+      "url": "https://www.fda.gov/drugs/regulatory-science-and-research/import-alerts",
+      "priority": "P1"
+    },
+    {
+      "channel_id": "critical_minerals_customs_quota",
+      "channel_name": "关键战略矿产双用途出口许可证与海外采矿配额",
+      "type": "critical_minerals",
+      "url": "https://www.usgs.gov/centers/national-minerals-information-center",
       "priority": "P1"
     }
   ]
