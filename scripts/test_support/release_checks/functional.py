@@ -98,7 +98,7 @@ def unsupported_rating_cannot_be_published(_):
     except ValueError:
         return "档案明确拒绝缺证据或阻断行情的研判"
     decision = result["decision_summary"]
-    return require("买入" not in str(decision.get("rating")), "行情阻断及负安全边际下仍生成买入评级")
+    return require(decision.get("rating") == "行情时效阻断 (暂停买入)", "行情阻断时未明确暂停买入")
 
 
 @check("R08", "report", "P0", "scripts/cloud_daily_pipeline.py", "FT-01")

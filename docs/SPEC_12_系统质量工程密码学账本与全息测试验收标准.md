@@ -38,7 +38,7 @@
 | **门禁 1** | **架构完整性全息巡检**<br>`python scripts/verify_architecture_integrity.py` | 断言底层 `financial_core` 零外部污染、全量模块导入零循环依赖、门面与底账就绪。 |
 | **门禁 2** | **全量单元测试零失败**<br>`python -m unittest discover -s scripts -p "test_*.py"` | 所有测试用例 100% PASS，测试数量只增不减，断言全部通过。 |
 | **门禁 3** | **四大数据治理回归全绿**<br>`python scripts/test_data_store.py`<br>`python scripts/validate_knowledge_structure.py`<br>`python scripts/test_research_contract.py`<br>`python scripts/test_industry_mapping.py` | 全量数据主账、行业分类映射、研究契约与知识图谱 100% 通过验证。 |
-| **门禁 4** | **密码学账本防伪验签通过**<br>`python -c "from financial_core.engines.prediction_ledger import PredictionLedger; assert PredictionLedger().verify_integrity()"` | 账本 SHA-256 哈希链条 100% 自洽无篡改。 |
+| **门禁 4** | **密码学账本防伪验签通过**<br>`python -c "import sys; from financial_core.engines.prediction_ledger import PredictionLedger; sys.exit(not PredictionLedger().verify_integrity().is_valid)"` | 账本 SHA-256 哈希链条 100% 自洽无篡改。 |
 
 ---
 

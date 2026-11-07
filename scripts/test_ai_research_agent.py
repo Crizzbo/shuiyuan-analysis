@@ -128,7 +128,9 @@ class TestAIResearchAgent(unittest.TestCase):
                 "supply_chain_risk_level": "LOW",
             }
         }
-        params = AIResearchAgent.parameterize_qualitative_factors(high_moat_analysis)
+        params = AIResearchAgent.parameterize_qualitative_factors(
+            high_moat_analysis, allow_uncalibrated_assumptions=True
+        )
         self.assertEqual(params["moat_score"], 9.0)
         # 护城河得分 9.0 分高于中枢 5.0 分，带来贴现率扣减 (负值)
         self.assertLess(params["wacc_spread_bps"], 0.0)
@@ -140,7 +142,9 @@ class TestAIResearchAgent(unittest.TestCase):
                 "supply_chain_risk_level": "CRITICAL",
             }
         }
-        risk_params = AIResearchAgent.parameterize_qualitative_factors(high_risk_analysis)
+        risk_params = AIResearchAgent.parameterize_qualitative_factors(
+            high_risk_analysis, allow_uncalibrated_assumptions=True
+        )
         self.assertGreater(risk_params["wacc_spread_bps"], 0.0)  # 弱护城河增加贴现罚息
         self.assertEqual(risk_params["supply_chain_risk_multiplier"], 1.40)  # 致命风险加乘 1.40x
 
@@ -273,6 +277,8 @@ class TestAIResearchAgent(unittest.TestCase):
            - 全文 EMOJI_PATTERN 匹配结果为 None。
         """
         from financial_reporting.ai_dossier_synthesizer import AIDossierSynthesizer
+        from scripts.test_support.fixtures import freeze_quote_clock
+        freeze_quote_clock(self)
         raw_facts = {
             "revenue": 100000.0,
             "net_income": 20000.0,
@@ -283,7 +289,10 @@ class TestAIResearchAgent(unittest.TestCase):
         }
         raw_quote = {
             "current_price": 150.0,
-            "quote_timestamp": "2026-10-17T12:00:00Z",
+            "quote_timestamp": "2026-10-16T14:00:00Z",
+            "pessimistic_floor": 100,
+            "fair_anchor": 160,
+            "optimistic_target": 190,
         }
         dossier = AIDossierSynthesizer.synthesize_from_raw_pipeline(
             ticker="TEST_CO",

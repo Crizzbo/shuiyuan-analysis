@@ -310,7 +310,10 @@ class TestMarketQuoteVerifier(unittest.TestCase):
 
         self.assertEqual(len(results), 10, "必须完整输出 10 家标的")
         for item in results:
-            self.assertTrue(item.get("is_valid", False), f"标的 {item.get('ticker')} 提取失败: {item.get('error')}")
+            self.assertNotIn("error", item)
+            # 存量底账可能已超期，解析成功不等于具备当日行情资格。
+            expected = self.verifier.__class__(ROOT).get_latest_quote(item["ticker"])
+            self.assertEqual(item["is_valid"], expected.is_valid)
             # 验证价格为有限正数
             self.assertGreater(item["raw_price"], 0.0)
             # 验证格式化字符串符合货币前缀要求 ($ 或 ¥)

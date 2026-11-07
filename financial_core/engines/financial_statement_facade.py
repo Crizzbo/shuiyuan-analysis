@@ -29,28 +29,28 @@ class NormalizedFinancialProfile:
     total_assets: float
     total_liabilities: float
     total_equity: float
-    cash_and_equivalents: float
-    total_debt: float
-    net_cash: float
+    cash_and_equivalents: Optional[float]
+    total_debt: Optional[float]
+    net_cash: Optional[float]
 
     revenue: float
-    gross_profit: float
-    operating_income: float
-    net_income: float
-    free_cash_flow: float
+    gross_profit: Optional[float]
+    operating_income: Optional[float]
+    net_income: Optional[float]
+    free_cash_flow: Optional[float]
 
-    inventory: float
-    cost_of_goods_sold: float
+    inventory: Optional[float]
+    cost_of_goods_sold: Optional[float]
 
     # 关键商业与财务衍生比率 (已防范除零异常)
-    gross_margin: float
-    operating_margin: float
-    net_margin: float
-    roe: float
-    roic: float
-    inventory_turnover_days: float  # DIO
-    debt_to_equity: float
-    interest_coverage_ratio: float
+    gross_margin: Optional[float]
+    operating_margin: Optional[float]
+    net_margin: Optional[float]
+    roe: Optional[float]
+    roic: Optional[float]
+    inventory_turnover_days: Optional[float]  # DIO
+    debt_to_equity: Optional[float]
+    interest_coverage_ratio: Optional[float]
 
     # 平账自检指标
     balance_discrepancy: float
@@ -58,7 +58,7 @@ class NormalizedFinancialProfile:
 
     # 行情时效与交易时段状态
     quote_price: float
-    market_cap: float
+    market_cap: Optional[float]
     quote_timestamp: str
     market_session: str
     is_quote_fresh: bool
@@ -73,9 +73,15 @@ class FinancialStatementFacade:
         self.quote_gateway = quote_gateway or QuoteFreshnessGateway()
 
     @staticmethod
-    def _safe_divide(numerator: float, denominator: float, fallback: float = 0.0) -> float:
-        """除零与除负安全保护函数."""
-        if math.isclose(denominator, 0.0, abs_tol=1e-9) or math.isnan(denominator) or math.isnan(numerator):
+    def _safe_divide(
+        numerator: Optional[float], denominator: Optional[float], fallback: float = 0.0
+    ) -> Optional[float]:
+        """缺失输入保持缺失，已披露的零分母按调用方约定降级。"""
+        if numerator is None or denominator is None:
+            return None
+        if not math.isfinite(numerator) or not math.isfinite(denominator):
+            raise IncompleteFilingFactError("财务比率输入必须为有限数")
+        if denominator <= 1e-9:
             return fallback
         return numerator / denominator
 
@@ -104,95 +110,80 @@ class FinancialStatementFacade:
         currency = str(raw_filing_facts.get("currency", "USD")).upper().strip()
         fiscal_period = str(raw_filing_facts.get("fiscal_period", "FY_LATEST")).strip()
 
-        # 1. 提取基础底账数值并执行标准化科目映射与清洗
-        def _parse_num(val: Any) -> float:
-            if val is None:
-                return 0.0
-            if isinstance(val, (int, float)):
-                return float(val)
-            try:
-                return OfficialFilingMapper.parse_financial_number(val)
-            except Exception:
-                return 0.0
-
-        raw_assets = raw_filing_facts.get("total_assets") if raw_filing_facts.get("total_assets") is not None else raw_filing_facts.get("assets")
-        raw_liabilities = raw_filing_facts.get("total_liabilities") if raw_filing_facts.get("total_liabilities") is not None else raw_filing_facts.get("liabilities")
-        raw_equity = (
-            raw_filing_facts.get("total_equity")
-            if raw_filing_facts.get("total_equity") is not None
-            else (
-                raw_filing_facts.get("stockholders_equity")
-                if raw_filing_facts.get("stockholders_equity") is not None
-                else (
-                    raw_filing_facts.get("equity")
-                    if raw_filing_facts.get("equity") is not None
-                    else raw_filing_facts.get("shareholders_equity")
+        # 所有非标数值统一经过 Mapper，缺失科目保留 None，非法内容立即拒绝。
+        def _number(*names: str) -> Optional[float]:
+            for name in names:
+                value = OfficialFilingMapper.parse_optional_financial_number(
+                    raw_filing_facts.get(name), name
                 )
-            )
-        )
+                if value is not None:
+                    return value
+            return None
 
-        assets = _parse_num(raw_assets)
-        liabilities = _parse_num(raw_liabilities)
-        equity = _parse_num(raw_equity)
-
-        # 会计恒等式智能推导补全 (针对仅披露资产+权益或资产+负债的合法官方底稿)
-        if assets > 0.0 and math.isclose(liabilities, 0.0, abs_tol=1e-5) and not math.isclose(equity, 0.0, abs_tol=1e-5):
-            liabilities = assets - equity
-        elif assets > 0.0 and math.isclose(equity, 0.0, abs_tol=1e-5) and not math.isclose(liabilities, 0.0, abs_tol=1e-5):
-            equity = assets - liabilities
-        elif math.isclose(assets, 0.0, abs_tol=1e-5) and not math.isclose(liabilities, 0.0, abs_tol=1e-5) and not math.isclose(equity, 0.0, abs_tol=1e-5):
-            assets = liabilities + equity
-
-        if math.isclose(assets, 0.0, abs_tol=1e-5):
+        assets = _number("total_assets", "assets")
+        liabilities = _number("total_liabilities", "liabilities")
+        equity = _number("total_equity", "stockholders_equity", "equity", "shareholders_equity")
+        if assets is None or assets <= 0:
             raise IncompleteFilingFactError(f"公司 {ticker} 缺失总资产核心科目，拒绝执行金融计算")
-
-        # 2. 刚性平账自检: Assets = Liabilities + Equity
+        if liabilities is None or equity is None:
+            raise IncompleteFilingFactError(f"公司 {ticker} 缺失负债或权益，无法独立平账")
         balance_discrepancy = abs(assets - (liabilities + equity))
-        discrepancy_ratio = self._safe_divide(balance_discrepancy, assets)
-
-        # 严格执行 0.1% 平账容差硬门禁
+        discrepancy_ratio = balance_discrepancy / assets
         if discrepancy_ratio > OfficialFilingMapper.BALANCE_SHEET_TOLERANCE_RATIO:
             raise BalanceSheetIdentityError(
-                f"公司 {ticker} 资产负债恒等式严重破损: 资产={assets:.2f}, 负债+权益={liabilities + equity:.2f}, "
-                f"偏差={balance_discrepancy:.2f} ({discrepancy_ratio * 100:.3f}% > 0.1% 容差)"
+                f"公司 {ticker} 资产负债恒等式严重破损: 资产={assets:.2f}, "
+                f"负债+权益={liabilities + equity:.2f}, 偏差={discrepancy_ratio:.3%}"
             )
         is_balanced = True
 
-        # 3. 提取利润表与现金流表核心科目
-        revenue = _parse_num(raw_filing_facts.get("revenue", raw_filing_facts.get("operating_revenue", 0.0)))
-        raw_gp = raw_filing_facts.get("gross_profit")
-        gross_profit = _parse_num(raw_gp) if raw_gp is not None else (revenue - _parse_num(raw_filing_facts.get("cogs", 0.0)))
-        raw_cogs = raw_filing_facts.get("cogs", raw_filing_facts.get("cost_of_goods_sold"))
-        cogs = _parse_num(raw_cogs) if raw_cogs is not None else max(0.0, revenue - gross_profit)
-        operating_income = _parse_num(raw_filing_facts.get("operating_income", 0.0))
-        net_income = _parse_num(raw_filing_facts.get("net_income", 0.0))
-        raw_fcf = raw_filing_facts.get("free_cash_flow", raw_filing_facts.get("fcf"))
-        fcf = _parse_num(raw_fcf) if raw_fcf is not None else (operating_income * 0.8)
+        revenue = _number("revenue", "operating_revenue")
+        if revenue is None:
+            raise IncompleteFilingFactError(f"公司 {ticker} 缺失营业收入")
+        gross_profit = _number("gross_profit")
+        cogs = _number("cogs", "cost_of_goods_sold")
+        if gross_profit is None and cogs is not None:
+            gross_profit = revenue - cogs
+        if cogs is None and gross_profit is not None:
+            cogs = revenue - gross_profit
+        operating_income = _number("operating_income")
+        net_income = _number("net_income")
+        fcf = _number("free_cash_flow", "fcf")
+        if fcf is None:
+            operating_cash_flow = _number("operating_cash_flow", "reported_operating_cash_flow")
+            capex = _number("capex", "reported_capex")
+            if operating_cash_flow is not None and capex is not None:
+                fcf = operating_cash_flow - abs(capex)
 
-        # 4. 提取资产负债表细分科目
-        cash = _parse_num(raw_filing_facts.get("cash_and_equivalents", raw_filing_facts.get("cash", 0.0)))
-        raw_debt = raw_filing_facts.get("total_debt", raw_filing_facts.get("debt"))
-        total_debt = _parse_num(raw_debt) if raw_debt is not None else (liabilities * 0.6)
-        net_cash = cash - total_debt
-        inventory = _parse_num(raw_filing_facts.get("inventory", 0.0))
+        cash = _number("cash_and_equivalents", "cash")
+        total_debt = _number("total_debt", "debt")
+        net_cash = cash - total_debt if cash is not None and total_debt is not None else None
+        inventory = _number("inventory")
+        gross_margin = self._safe_divide(gross_profit, revenue)
+        operating_margin = self._safe_divide(operating_income, revenue)
+        net_margin = self._safe_divide(net_income, revenue)
+        roe = self._safe_divide(net_income, equity)
+        roic = None
+        tax_rate = _number("tax_rate")
+        if tax_rate is not None and not 0 <= tax_rate <= 1:
+            raise IncompleteFilingFactError("有效税率必须位于 0 与 1 之间")
+        if operating_income is not None and tax_rate is not None and net_cash is not None:
+            roic = self._safe_divide(operating_income * (1 - tax_rate), equity - net_cash)
 
-        # 5. 商业衍生比率安全计算 (防范除零除负)
-        gross_margin = self._safe_divide(gross_profit, revenue, fallback=0.0)
-        operating_margin = self._safe_divide(operating_income, revenue, fallback=0.0)
-        net_margin = self._safe_divide(net_income, revenue, fallback=0.0)
-        roe = self._safe_divide(net_income, equity, fallback=0.0)
-        invested_capital = (equity + total_debt) - cash
-        roic = self._safe_divide(operating_income * (1.0 - 0.21), invested_capital, fallback=0.0)
-
-        # 存货周转天数 DIO: (Inventory / COGS) * 365
-        inventory_turnover_days = self._safe_divide(inventory * 365.0, cogs, fallback=0.0)
-        debt_to_equity = self._safe_divide(total_debt, equity, fallback=0.0)
-        interest_expense = float(raw_filing_facts.get("interest_expense", 0.0))
-        interest_coverage = self._safe_divide(operating_income, interest_expense, fallback=999.0 if operating_income > 0 else 0.0)
+        # 优先使用已披露平均存货，其次用同口径期初期末均值；期末存货单值不足以计算 DIO。
+        average_inventory = _number("average_inventory")
+        prior_inventory = _number("prior_inventory")
+        if average_inventory is None and inventory is not None and prior_inventory is not None:
+            average_inventory = (inventory + prior_inventory) / 2
+        inventory_turnover_days = self._safe_divide(
+            average_inventory * 365 if average_inventory is not None else None, cogs
+        )
+        debt_to_equity = self._safe_divide(total_debt, equity)
+        interest_expense = _number("interest_expense")
+        interest_coverage = self._safe_divide(operating_income, interest_expense)
 
         # 6. 行情新鲜度与时效门禁处理
         quote_price = 0.0
-        market_cap = 0.0
+        market_cap = None
         quote_timestamp = "N/A"
         market_session = "Unknown"
         is_quote_fresh = False
@@ -204,8 +195,12 @@ class FinancialStatementFacade:
                 or raw_quote_data.get("quote_price")
                 or 0.0
             )
-            shares_outstanding = float(raw_filing_facts.get("shares_outstanding", 1.0))
-            market_cap = float(raw_quote_data.get("market_cap", quote_price * shares_outstanding))
+            shares_outstanding = _number("shares_outstanding")
+            market_cap = OfficialFilingMapper.parse_optional_financial_number(
+                raw_quote_data.get("market_cap"), "market_cap"
+            )
+            if market_cap is None and shares_outstanding is not None:
+                market_cap = quote_price * shares_outstanding
             ts_str = str(raw_quote_data.get("timestamp", raw_quote_data.get("quote_timestamp", "")))
             market_type = str(raw_quote_data.get("market", "US")).upper()
 
@@ -220,11 +215,9 @@ class FinancialStatementFacade:
                 )
                 quote_timestamp = ts_str
                 market_session = verified.session_status
-                is_quote_fresh = verified.is_fresh_today
+                is_quote_fresh = verified.is_valid and verified.is_fresh_today
             else:
-                market_session = str(raw_quote_data.get("session", "Regular Trading"))
-                quote_timestamp = "N/A"
-                is_quote_fresh = True
+                market_session = "invalid_timestamp"
 
         return NormalizedFinancialProfile(
             ticker=ticker,

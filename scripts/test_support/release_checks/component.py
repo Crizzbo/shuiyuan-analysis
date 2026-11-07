@@ -5,6 +5,7 @@ import ast
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import sqlite3
 import sys
@@ -121,6 +122,28 @@ def hashes_protect_payload(work):
         db.execute("UPDATE predictions SET tactical_action = ?", ("篡改",))
     return require(not ledger.verify_integrity().is_valid, "篡改交易行动后账本仍验签通过")
 
+
+
+@check("L07", "ledger", "P0", "docs/SPEC_12_系统质量工程密码学账本与全息测试验收标准.md", "CT-04")
+def documented_ledger_command_rejects_tampering(work):
+    """在隔离账本执行 SPEC-12 的实际命令，防止非空元组掩盖验签失败。"""
+    text = (ROOT / "docs/SPEC_12_系统质量工程密码学账本与全息测试验收标准.md").read_text(encoding="utf-8")
+    match = re.search(r'python -c "([^"]*verify_integrity[^"]*)"', text)
+    require(match is not None, "SPEC-12 缺少可执行验签命令")
+    ledger = new_ledger(work)
+    ledger.record_prediction(prediction())
+    for expected_exit in (0, 1):
+        if expected_exit:
+            with closing(sqlite3.connect(ledger.db_path)) as db, db:
+                db.execute("UPDATE predictions SET tactical_action = ?", ("篡改",))
+        with patch("financial_core.engines.prediction_ledger.PredictionLedger", return_value=ledger):
+            try:
+                exec(match.group(1), {})
+            except SystemExit as result:
+                require(result.code == expected_exit, f"文档验签退出码错误 {result.code}")
+            else:
+                require(False, "文档验签命令未显式返回退出码")
+    return "SPEC-12 文档命令对完整账本返回 0，对篡改账本返回非零"
 
 
 @check("L02", "ledger", "P0", "financial_core/engines/prediction_ledger.py", 'CT-04')

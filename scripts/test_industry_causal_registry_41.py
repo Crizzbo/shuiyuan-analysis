@@ -149,6 +149,7 @@ class TestIndustryCausalRegistry41(unittest.TestCase):
         sample_dossier = {
             "overview": {
                 "ticker": "TEST_TICKER",
+                "quote_timestamp": "2026-10-16 10:00 EDT",
                 "company_name": "测试先进制程科技股份有限公司",
                 "market": "US",
                 "industry_id": "semiconductors",
@@ -171,6 +172,8 @@ class TestIndustryCausalRegistry41(unittest.TestCase):
                 "net_income": "$2,600M",
                 "free_cash_flow": "$2,200M",
                 "total_assets": "$18,000M",
+                "total_liabilities": "$7,000M",
+                "capex": "$500M",
                 "equity": "$11,000M",
                 "cash_and_equivalents": "$4,500M",
                 "total_debt": "$3,000M",
