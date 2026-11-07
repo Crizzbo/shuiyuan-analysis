@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "突发事件雷达与信源鉴真契约规范",
+  "description": "严格定义买方机构级突发事件雷达收集、模型摘要提纯、信源分级、传闻熔断与法定存证结构",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "timestamp",
+    "category",
+    "involved_entities",
+    "micro_physical_impact",
+    "estimated_duration",
+    "affected_business_segments",
+    "severity_level",
+    "requires_deep_analysis",
+    "raw_title",
+    "source_name",
+    "credibility_tier",
+    "credibility_score",
+    "verification_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^EVT_[A-Za-z0-9_]+$",
+      "description": "事件唯一业务识别码"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "事件提纯时间戳 (ISO 8601 UTC 格式)"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Geopolitical_CrossStrait",
+        "State_Policy_Regulatory",
+        "Physical_Plant_Disruption",
+        "Supply_Chain_Chokepoint",
+        "Labor_Strikes_Port_Railways",
+        "Antitrust_Litigation",
+        "Commodity_Physical_Squeeze",
+        "CentralBank_Liquidity_FX_Shock",
+        "Energy_Grid_Blackout_Rationing",
+        "Cyber_Critical_Infrastructure",
+        "Biosecurity_Export_Embargo",
+        "Critical_Minerals_Export_Permit",
+        "Defense_Procurement_Authorization",
+        "Climate_Catastrophe_Insurance",
+        "Maritime_Insurance_Sanctions",
+        "Sovereign_Debt_Liquidity",
+        "Other_Macro_Event"
+      ],
+      "description": "16 大全景微观实体与宏观要害收集维度"
+    },
+    "involved_entities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "涉及的主管机构、跨国企业、关卡枢纽或核心产品"
+    },
+    "micro_physical_impact": {
+      "type": "string",
+      "minLength": 5,
+      "description": "客观物理受损事实或刚性监管影响，不包含情绪涨跌炒作"
+    },
+    "estimated_duration": {
+      "type": "string",
+      "description": "预计物理持续与冲击周期 (如 即日/数周/6-12个月/永久)"
+    },
+    "affected_business_segments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "直接受冲击的业务分部或产业链环节 (用于下游 SOTP 穿透)"
+    },
+    "severity_level": {
+      "type": "string",
+      "enum": ["P0", "P1", "P2", "P3"],
+      "description": "买方决策影响烈度等级 (P0 极度严重/系统性冲击，P1 重大业务阻断)"
+    },
+    "requires_deep_analysis": {
+      "type": "boolean",
+      "description": "是否触发下游 SOTP 深度计算门禁 (传闻熔断时为 false)"
+    },
+    "raw_title": {
+      "type": "string",
+      "description": "原始突发新闻或公报标题"
+    },
+    "source_name": {
+      "type": "string",
+      "description": "发布机构或信源发布渠道"
+    },
+    "credibility_tier": {
+      "type": "string",
+      "enum": [
+        "Tier1_Official_Regulatory",
+        "Tier2_Official_Disclosure",
+        "Tier3_Mainstream_Wire",
+        "Tier4_Public_Flash_Social"
+      ],
+      "description": "买方信源权威度分级 (Tier 1 官方监管权重 1.0，Tier 4 社交快讯 0.45)"
+    },
+    "credibility_score": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "信源权威度信任评分"
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "Confirmed_Fact",
+        "Corroborated_Report",
+        "Unverified_Rumor",
+        "Debunked"
+      ],
+      "description": "事实鉴真核验状态 (Unverified_Rumor 触发熔断保护)"
+    },
+    "verification_note": {
+      "type": "string",
+      "description": "鉴真考证说明与公报核实出处"
+    },
+    "evidence_path": {
+      "type": ["string", "null"],
+      "description": "本地二级官方证据公报文件相对路径"
+    },
+    "evidence_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "官方证据文件的 SHA-256 密码学防篡改指纹"
+    },
+    "verified_at": {
+      "type": ["string", "null"],
+      "description": "官方证据核验平账时间戳 (ISO 8601 UTC 格式)"
+    }
+  }
+}

@@ -10,6 +10,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 import hashlib
 import json
+from pathlib import Path
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -94,9 +95,13 @@ class StructuredEventSummary:
     credibility_score: float = 0.8
     verification_status: str = VerificationStatus.CORROBORATED_REPORT.value
     verification_note: str = "主流财经通讯社通告"
+    evidence_path: Optional[str] = None
+    evidence_sha256: Optional[str] = None
+    verified_at: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "schema_version": "1.0.0",
             "event_id": self.event_id,
             "timestamp": self.timestamp,
             "category": self.category,
@@ -112,7 +117,45 @@ class StructuredEventSummary:
             "credibility_score": self.credibility_score,
             "verification_status": self.verification_status,
             "verification_note": self.verification_note,
+            "evidence_path": self.evidence_path,
+            "evidence_sha256": self.evidence_sha256,
+            "verified_at": self.verified_at,
         }
+
+
+def validate_event_schema(data: Dict[str, Any], schema_path: Optional[str] = None) -> Tuple[bool, Optional[str]]:
+    """依据 schemas/event_radar.schema.json 契约刚性校验事件摘要结构."""
+    try:
+        import jsonschema
+    except ImportError:
+        # 环境缺失 jsonschema 时回退至关键字段基础校验
+        required = [
+            "schema_version", "event_id", "timestamp", "category",
+            "involved_entities", "micro_physical_impact", "severity_level",
+            "requires_deep_analysis", "credibility_tier", "verification_status"
+        ]
+        for field_name in required:
+            if field_name not in data:
+                return False, f"缺少必需字段: {field_name}"
+        return True, None
+
+    if schema_path is None:
+        target_path = Path(__file__).resolve().parent.parent.parent / "schemas" / "event_radar.schema.json"
+    else:
+        target_path = Path(schema_path)
+
+    if not target_path.exists():
+        return False, f"未找到事件雷达契约文件: {target_path}"
+
+    try:
+        with open(target_path, "r", encoding="utf-8") as f:
+            schema_def = json.load(f)
+        jsonschema.validate(instance=data, schema=schema_def)
+        return True, None
+    except jsonschema.ValidationError as e:
+        return False, f"Schema 校验失败: {e.message}"
+    except Exception as e:
+        return False, f"Schema 校验异常: {e}"
 
 
 class EventRadarEngine:

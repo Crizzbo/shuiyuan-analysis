@@ -15,6 +15,7 @@ from financial_core.engines.event_radar_engine import (
     EventCategory,
     RawNewsItem,
     StructuredEventSummary,
+    validate_event_schema,
 )
 from finance_tools.event_radar_collector import (
     NetworkHealthWatchdog,
@@ -37,6 +38,54 @@ class TestEventRadarEngine(unittest.TestCase):
 
     def setUp(self):
         self.engine = EventRadarEngine()
+
+    def test_event_radar_schema_contract(self):
+        """测试依据 schemas/event_radar.schema.json 的刚性契约平账与校验."""
+        valid_summary = StructuredEventSummary(
+            event_id="EVT_SCHEMA_TEST_001",
+            timestamp="2026-11-07T10:00:00Z",
+            category="Defense_Procurement_Authorization",
+            involved_entities=["五角大楼采办总署", "特种钛合金供应商"],
+            micro_physical_impact="NDAA通过紧急增订军规钛合金采购配额并锁定三年产能",
+            estimated_duration="3-5年刚性拨款周期",
+            affected_business_segments=["军工钛合金", "特种航空锻件"],
+            severity_level="P1",
+            requires_deep_analysis=True,
+            raw_title="NDAA通过紧急增订特种军规钛合金采购额度",
+            source_name="DoD_Contracts_Gazette",
+            credibility_tier="Tier1_Official_Regulatory",
+            credibility_score=1.0,
+            verification_status="Confirmed_Fact",
+            verification_note="五角大楼官方合同公告核实",
+            evidence_path="data_sources/official_filings/dod_contract.pdf",
+            evidence_sha256="1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+            verified_at="2026-11-07T10:05:00Z",
+        )
+        d = valid_summary.to_dict()
+        is_valid, err = validate_event_schema(d)
+        self.assertTrue(is_valid, f"合法字典未能通过 Schema 校验: {err}")
+        self.assertIsNone(err)
+
+        # 测试缺少关键字段时被拒绝
+        invalid_d = dict(d)
+        del invalid_d["micro_physical_impact"]
+        is_valid_inv, err_inv = validate_event_schema(invalid_d)
+        self.assertFalse(is_valid_inv)
+        self.assertIsNotNone(err_inv)
+
+        # 测试枚举非法值被拒绝 (如未知的 category)
+        invalid_cat = dict(d)
+        invalid_cat["category"] = "Unknown_Invalid_Category"
+        is_valid_cat, err_cat = validate_event_schema(invalid_cat)
+        self.assertFalse(is_valid_cat)
+        self.assertIsNotNone(err_cat)
+
+        # 测试无效烈度被拒绝
+        invalid_sev = dict(d)
+        invalid_sev["severity_level"] = "P99"
+        is_valid_sev, err_sev = validate_event_schema(invalid_sev)
+        self.assertFalse(is_valid_sev)
+        self.assertIsNotNone(err_sev)
 
     def test_pre_filter_blacklist_noise(self):
         """测试黑名单噪声直接剔除 (0 Token 消耗)."""
