@@ -22,7 +22,7 @@
 - [数据与证据管理](../docs/04-数据与证据管理.md)
 - [免费原始数据与 MCP 来源调查](../docs/11-免费原始数据源与MCP调查.md)
 - [免费数据接入使用说明](../docs/12a-免费数据接入使用说明.md)
-- [实际联网验收记录](../data/ingestion-verification.json)
+- 实际联网验收记录：参见本地数据接入记录 (data/ingestion-verification.json)
 
 目录中的行业内容为初始研究框架，不是当前市场状态或已经校准的交易规则。JSON 中的版本为内部结构版本，不是完整六步分析 Schema。
 

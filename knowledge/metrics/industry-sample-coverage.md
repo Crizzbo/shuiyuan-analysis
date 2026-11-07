@@ -5,7 +5,7 @@
 
 [驱动输入统一目录](driver-inputs/README.md)：逐行业查看必需输入、绑定观测、缺口与口径审核状态。
 
-[快照索引](../../data/financial/industry-specific-verification.json) · [逐驱动待补清单](../../data/browser-search/industry-specific-jobs.json) · [追加字段字典](industry-reviewed-bindings-20261011.md)
+快照索引：参见本地数据台账 (data/financial/industry-specific-verification.json) · 逐驱动待补清单：参见本地数据清单 (data/browser-search/industry-specific-jobs.json) · [追加字段字典](industry-reviewed-bindings-20261011.md)
 
 | 行业标识 | 代表公司 | 观测数 | 驱动 1 | 驱动 2 | 驱动 3 |
 |---|---|---:|---|---|---|
