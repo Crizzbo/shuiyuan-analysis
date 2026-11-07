@@ -22,6 +22,7 @@ from finance_tools.event_radar_collector import (
     RadarDatabaseManager,
     MockModelSummarizer,
     EventRadarCollector,
+    parse_rss_atom_feed,
 )
 from scripts.run_event_radar_collector import EventRadarService
 
@@ -303,6 +304,132 @@ class TestEventRadarEngine(unittest.TestCase):
         self.assertEqual(cat, EventCategory.CRITICAL_MINERALS)
         self.assertIn("双用途出口许可证", tags)
 
+    def test_pre_filter_defense_procurement(self):
+        """测试国防授权法案NDAA增订与对外军售DSCA放行初筛判定 (维度 13)."""
+        item = RawNewsItem(
+            id="def_01",
+            title="国会正式通过NDAA国防授权法案紧急增订特种军规半导体采购额度与军售放行",
+            content="五角大楼采办总署发出直接采购标书，涉及关键军工钛合金配额与制导弹药产能锁定。",
+            source="DoD_Defense_Gov_Contracts",
+            published_at="2026-11-07T05:00:00Z",
+        )
+        matched, tags, cat = self.engine.pre_filter(item)
+        self.assertTrue(matched)
+        self.assertEqual(cat, EventCategory.DEFENSE_PROCUREMENT)
+        self.assertIn("ndaa", tags)
+
+        summarizer = MockModelSummarizer()
+        prompt_payload = self.engine.build_summary_prompt(item, cat)
+        raw_json = summarizer.generate_summary_json(prompt_payload, item)
+        summary = self.engine.parse_and_validate_summary(raw_json, item, cat)
+        self.assertEqual(summary.credibility_tier, "Tier1_Official_Regulatory")
+        self.assertEqual(summary.credibility_score, 1.0)
+        self.assertTrue(summary.requires_deep_analysis)
+
+    def test_pre_filter_climate_catastrophe_insurance(self):
+        """测试四级飓风逼近沿海石化基地与再保险承保挤兑初筛判定 (维度 14)."""
+        item = RawNewsItem(
+            id="clim_01",
+            title="四级强飓风登陆墨西哥湾沿海炼化重镇装置跳车且巨灾保险免赔额拉升",
+            content="NOAA国家飓风中心发布特大风暴潮预警，沿海重化工业基地紧急避险关停。",
+            source="NHC_NOAA_Advisory",
+            published_at="2026-11-07T05:15:00Z",
+        )
+        matched, tags, cat = self.engine.pre_filter(item)
+        self.assertTrue(matched)
+        self.assertEqual(cat, EventCategory.CLIMATE_INSURANCE)
+        self.assertIn("飓风登陆", tags)
+
+        summarizer = MockModelSummarizer()
+        prompt_payload = self.engine.build_summary_prompt(item, cat)
+        raw_json = summarizer.generate_summary_json(prompt_payload, item)
+        summary = self.engine.parse_and_validate_summary(raw_json, item, cat)
+        self.assertEqual(summary.credibility_tier, "Tier1_Official_Regulatory")
+        self.assertTrue(summary.requires_deep_analysis)
+
+    def test_pre_filter_maritime_insurance_sanctions(self):
+        """测试国际保赔协会P&I战险费率飙升与影子船队价格上限扣押初筛判定 (维度 15)."""
+        item = RawNewsItem(
+            id="mar_01",
+            title="国际保赔协会P&I发布战险加费通函且针对影子船队价格上限违规展开扣押",
+            content="主要保赔公会提高单航次战争险附加费率十倍，有效原油运力面临紧缩。",
+            source="IG_P_AND_I_Circular",
+            published_at="2026-11-07T05:30:00Z",
+        )
+        matched, tags, cat = self.engine.pre_filter(item)
+        self.assertTrue(matched)
+        self.assertEqual(cat, EventCategory.MARITIME_SANCTIONS)
+        self.assertIn("保赔协会", tags)
+
+        summarizer = MockModelSummarizer()
+        prompt_payload = self.engine.build_summary_prompt(item, cat)
+        raw_json = summarizer.generate_summary_json(prompt_payload, item)
+        summary = self.engine.parse_and_validate_summary(raw_json, item, cat)
+        self.assertEqual(summary.credibility_tier, "Tier1_Official_Regulatory")
+        self.assertTrue(summary.requires_deep_analysis)
+
+    def test_pre_filter_sovereign_debt_liquidity(self):
+        """测试美国国债债务上限博弈与国债拍卖严重尾部利差初筛判定 (维度 16)."""
+        item = RawNewsItem(
+            id="sov_01",
+            title="美国债务上限debt ceiling博弈导致非常规措施告急且国债拍卖出现严重拍卖尾部",
+            content="财政部TGA账户余额急剧缩水，跨资产质押回购流动性显著收紧。",
+            source="US_Treasury_Refunding_Gazette",
+            published_at="2026-11-07T05:45:00Z",
+        )
+        matched, tags, cat = self.engine.pre_filter(item)
+        self.assertTrue(matched)
+        self.assertEqual(cat, EventCategory.SOVEREIGN_DEBT)
+        self.assertIn("债务上限", tags)
+
+        summarizer = MockModelSummarizer()
+        prompt_payload = self.engine.build_summary_prompt(item, cat)
+        raw_json = summarizer.generate_summary_json(prompt_payload, item)
+        summary = self.engine.parse_and_validate_summary(raw_json, item, cat)
+        self.assertEqual(summary.credibility_tier, "Tier1_Official_Regulatory")
+        self.assertTrue(summary.requires_deep_analysis)
+
+    def test_parse_rss_2_feed(self):
+        """测试轻量解析标准 RSS 2.0 XML 公开公报源."""
+        rss_xml = """<?xml version="1.0" encoding="UTF-8"?>
+        <rss version="2.0">
+          <channel>
+            <title>SEC Press Releases</title>
+            <link>https://www.sec.gov/news/pressreleases</link>
+            <item>
+              <title>SEC Charges Entity with Market Manipulation</title>
+              <link>https://www.sec.gov/news/press-release/2026-101</link>
+              <description>The Securities and Exchange Commission today announced charges.</description>
+              <pubDate>Thu, 07 Nov 2026 12:00:00 GMT</pubDate>
+              <guid>sec_press_2026_101</guid>
+            </item>
+          </channel>
+        </rss>"""
+        items = parse_rss_atom_feed(rss_xml, default_source="SEC_Press")
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0].id, "sec_press_2026_101")
+        self.assertIn("SEC Charges Entity", items[0].title)
+        self.assertEqual(items[0].source, "SEC Press Releases")
+
+    def test_parse_atom_feed(self):
+        """测试轻量解析标准 Atom 1.0 XML 格式公开数据源."""
+        atom_xml = """<?xml version="1.0" encoding="utf-8"?>
+        <feed xmlns="http://www.w3.org/2005/Atom">
+          <title>Federal Register BIS Documents</title>
+          <entry>
+            <id>urn:fedreg:2026-9999</id>
+            <title>Implementation of Additional Export Controls on Advanced Technologies</title>
+            <updated>2026-11-07T10:00:00Z</updated>
+            <link href="https://www.federalregister.gov/d/2026-9999"/>
+            <summary>The Bureau of Industry and Security issues final rule.</summary>
+          </entry>
+        </feed>"""
+        items = parse_rss_atom_feed(atom_xml, default_source="Federal_Register")
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0].id, "urn:fedreg:2026-9999")
+        self.assertIn("Export Controls", items[0].title)
+        self.assertEqual(items[0].source, "Federal Register BIS Documents")
+
     def test_source_credibility_tiering(self):
         """测试买方信源权威度分级判定 (Tier 1 到 Tier 4)."""
         # Tier 1: 官方监管机构与政府公报
@@ -323,6 +450,22 @@ class TestEventRadarEngine(unittest.TestCase):
         self.assertEqual(score, 1.0)
 
         tier, score = self.engine.evaluate_source_credibility("FDA_Import_Alert_Portal")
+        self.assertEqual(tier.value, "Tier1_Official_Regulatory")
+        self.assertEqual(score, 1.0)
+
+        tier, score = self.engine.evaluate_source_credibility("DoD_Defense_Gov_Announcement")
+        self.assertEqual(tier.value, "Tier1_Official_Regulatory")
+        self.assertEqual(score, 1.0)
+
+        tier, score = self.engine.evaluate_source_credibility("NHC_NOAA_Storm_Advisory")
+        self.assertEqual(tier.value, "Tier1_Official_Regulatory")
+        self.assertEqual(score, 1.0)
+
+        tier, score = self.engine.evaluate_source_credibility("Treasury_QRA_Statement")
+        self.assertEqual(tier.value, "Tier1_Official_Regulatory")
+        self.assertEqual(score, 1.0)
+
+        tier, score = self.engine.evaluate_source_credibility("IG_P_AND_I_Sanctions_Circular")
         self.assertEqual(tier.value, "Tier1_Official_Regulatory")
         self.assertEqual(score, 1.0)
 

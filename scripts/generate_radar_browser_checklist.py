@@ -3,7 +3,7 @@
 严格遵循 2026-10-11 最新数据来源策略与合规契约:
 1. 不采用需要 API Key、App ID、账号认证或额外联系身份配置的私有接口;
 2. 本脚本专责从本地事件雷达账本 (data/ledger/event_radar.sqlite3) 中扫描待核查重大事件与社交媒体传闻;
-3. 依据 8 大核心收集维度，自动生成针对官方监管/交易所/发行人权威门户的精准检索式与补数 SOP;
+3. 依据 16 大全景收集维度，自动生成针对官方监管/交易所/发行人权威门户的精准检索式与补数 SOP;
 4. 脚本只生成浏览器补数清单，不扫描无关目录，不发起外部网络连接，由分析师或合法流程导入本地证据.
 """
 
@@ -105,6 +105,34 @@ PORTAL_ROUTING_MAP = {
         "document_type": "海关两用物项出口许可证公告 / 印尼 RKAB 采矿配额批准令 / USGS 关键矿产库存分析",
         "archive_folder": "data_sources/official_filings/minerals",
     },
+    "Defense_Procurement_Authorization": {
+        "authority": "美国国防部 (DoD) / 国防安全合作局 (DSCA) / 国会武装力量委员会",
+        "official_domains": ["defense.gov", "dsca.mil", "armedservices.senate.gov"],
+        "recommended_query": 'site:defense.gov "Contracts" "{entity}" OR site:dsca.mil "Major Arms Sales"',
+        "document_type": "五角大楼大额合同正式公告 (Contracts Announcement) / DSCA 对外军售国会通报",
+        "archive_folder": "data_sources/official_filings/defense",
+    },
+    "Climate_Catastrophe_Insurance": {
+        "authority": "美国国家飓风中心 (NHC/NOAA) / 沿海石化基地 / 联邦紧急事务管理局 (FEMA)",
+        "official_domains": ["nhc.noaa.gov", "noaa.gov", "sec.gov", "fema.gov"],
+        "recommended_query": 'site:nhc.noaa.gov "Advisory" OR site:sec.gov "Item 8.01" "hurricane" "{entity}"',
+        "document_type": "NOAA 正式风暴预警通报 / 上市公司受损停产 8-K 披露 / 巨灾再保险损失评估报告",
+        "archive_folder": "data_sources/official_filings/climate",
+    },
+    "Maritime_Insurance_Sanctions": {
+        "authority": "国际保赔协会集团 (IG P&I) / 联合战争委员会 (JWC) / 美国财政部外国资产控制办公室 (OFAC)",
+        "official_domains": ["igpandi.org", "lmalloyds.com", "treasury.gov/ofac"],
+        "recommended_query": 'site:igpandi.org "Circular" OR site:treasury.gov "Price Cap" "{entity}"',
+        "document_type": "保赔协会战争险与合规通函 (Circular) / OFAC 制裁扣押特别警报",
+        "archive_folder": "data_sources/official_filings/maritime_sanctions",
+    },
+    "Sovereign_Debt_Liquidity": {
+        "authority": "美国财政部债务管理办公室 (US Treasury) / 纽约联储公开市场操作台 (NY Fed) / 评级机构",
+        "official_domains": ["treasury.gov", "newyorkfed.org", "fitchratings.com", "moodys.com"],
+        "recommended_query": 'site:treasury.gov "Quarterly Refunding" OR "Debt Limit" "{entity}"',
+        "document_type": "财政部季度再融资报告 (QRA) / 债务上限非常规措施通告 / 国债拍卖分配表",
+        "archive_folder": "data_sources/official_filings/sovereign_debt",
+    },
     "Other_Macro_Event": {
         "authority": "相关主权监管与权威政府信息公开网站",
         "official_domains": ["govinfo.gov", "sec.gov"],
@@ -158,7 +186,7 @@ def generate_radar_browser_checklist(
         "",
         "---",
         "",
-        "## 二、 8 大维度定向核查任务明细表",
+        "## 二、 16 大全景维度定向核查任务明细表",
         "",
     ]
 

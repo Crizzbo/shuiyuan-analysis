@@ -595,6 +595,30 @@ body {{
   color: #334155;
 }}
 
+.cat-Defense_Procurement_Authorization {{
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1e40af;
+}}
+
+.cat-Climate_Catastrophe_Insurance {{
+  background: #f0fdfa;
+  border-color: #99f6e4;
+  color: #0f766e;
+}}
+
+.cat-Maritime_Insurance_Sanctions {{
+  background: #fdf4ff;
+  border-color: #f0abfc;
+  color: #a21caf;
+}}
+
+.cat-Sovereign_Debt_Liquidity {{
+  background: #fff1f2;
+  border-color: #fecdd3;
+  color: #be123c;
+}}
+
 @media (prefers-color-scheme: dark) {{
   :root:not([data-theme="light"]) .cat-Geopolitical_CrossStrait {{
     background: #50072433;
@@ -655,6 +679,26 @@ body {{
     background: #1e293b33;
     border-color: #334155;
     color: #94a3b8;
+  }}
+  :root:not([data-theme="light"]) .cat-Defense_Procurement_Authorization {{
+    background: #1e3a8a33;
+    border-color: #1d4ed8;
+    color: #60a5fa;
+  }}
+  :root:not([data-theme="light"]) .cat-Climate_Catastrophe_Insurance {{
+    background: #134e4a33;
+    border-color: #0f766e;
+    color: #2dd4bf;
+  }}
+  :root:not([data-theme="light"]) .cat-Maritime_Insurance_Sanctions {{
+    background: #701a7533;
+    border-color: #86198f;
+    color: #e879f9;
+  }}
+  :root:not([data-theme="light"]) .cat-Sovereign_Debt_Liquidity {{
+    background: #4c051933;
+    border-color: #9f1239;
+    color: #fb7185;
   }}
 }}
 
@@ -717,6 +761,26 @@ body {{
   background: #1e293b33;
   border-color: #334155;
   color: #94a3b8;
+}}
+:root[data-theme="dark"] .cat-Defense_Procurement_Authorization {{
+  background: #1e3a8a33;
+  border-color: #1d4ed8;
+  color: #60a5fa;
+}}
+:root[data-theme="dark"] .cat-Climate_Catastrophe_Insurance {{
+  background: #134e4a33;
+  border-color: #0f766e;
+  color: #2dd4bf;
+}}
+:root[data-theme="dark"] .cat-Maritime_Insurance_Sanctions {{
+  background: #701a7533;
+  border-color: #86198f;
+  color: #e879f9;
+}}
+:root[data-theme="dark"] .cat-Sovereign_Debt_Liquidity {{
+  background: #4c051933;
+  border-color: #9f1239;
+  color: #fb7185;
 }}
 
 /* 信源权威度分级徽章样式 */
@@ -1356,7 +1420,7 @@ body {{
     <!-- AI 浏览器定向补数任务指南横幅 -->
     <div class="browser-checklist-banner">
       <div>
-        <span>📋 <strong>AI 浏览器定向补数任务清单已就绪:</strong> 针对未核实传闻与重大事实，已生成 8 大维度官方监管/交易所/发行人定向查验卷宗指南。</span>
+        <span>📋 <strong>AI 浏览器定向补数任务清单已就绪:</strong> 针对未核实传闻与重大事实，已生成 16 大全景维度官方监管/交易所/发行人定向查验卷宗指南。</span>
       </div>
       <a href="reports/radar_browser_checklist.md" target="_blank" class="checklist-link-btn">查看补数清单 SOP ↗</a>
     </div>
@@ -1388,6 +1452,10 @@ body {{
           <button class="filter-btn" onclick="setCategoryFilter('Cyber_Critical_Infrastructure', this)">💻 工控网络</button>
           <button class="filter-btn" onclick="setCategoryFilter('Biosecurity_Export_Embargo', this)">🧬 生物安全</button>
           <button class="filter-btn" onclick="setCategoryFilter('Critical_Minerals_Export_Permit', this)">⛏️ 关键矿产</button>
+          <button class="filter-btn" onclick="setCategoryFilter('Defense_Procurement_Authorization', this)">🛡️ 国防军工</button>
+          <button class="filter-btn" onclick="setCategoryFilter('Climate_Catastrophe_Insurance', this)">🌪️ 极端气象</button>
+          <button class="filter-btn" onclick="setCategoryFilter('Maritime_Insurance_Sanctions', this)">⚓ 海运保赔</button>
+          <button class="filter-btn" onclick="setCategoryFilter('Sovereign_Debt_Liquidity', this)">🏛️ 主权债务</button>
         </div>
         <div class="filter-group" id="credibilityFilterGroup">
           <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-right: 4px;">信源权威:</span>
@@ -1495,6 +1563,10 @@ const CATEGORY_CONFIG = {{
   "Cyber_Critical_Infrastructure": {{ name: "要害工控网络瘫痪", icon: "💻", cls: "cat-Cyber_Critical_Infrastructure" }},
   "Biosecurity_Export_Embargo": {{ name: "生物安全与原药查扣", icon: "🧬", cls: "cat-Biosecurity_Export_Embargo" }},
   "Critical_Minerals_Export_Permit": {{ name: "战略矿产出口许可", icon: "⛏️", cls: "cat-Critical_Minerals_Export_Permit" }},
+  "Defense_Procurement_Authorization": {{ name: "国防军工采购授权", icon: "🛡️", cls: "cat-Defense_Procurement_Authorization" }},
+  "Climate_Catastrophe_Insurance": {{ name: "极端气象与再保险", icon: "🌪️", cls: "cat-Climate_Catastrophe_Insurance" }},
+  "Maritime_Insurance_Sanctions": {{ name: "海运保赔与制裁扣押", icon: "⚓", cls: "cat-Maritime_Insurance_Sanctions" }},
+  "Sovereign_Debt_Liquidity": {{ name: "主权债务与国债流动性", icon: "🏛️", cls: "cat-Sovereign_Debt_Liquidity" }},
   "Other_Macro_Event": {{ name: "宏观常规参考", icon: "📢", cls: "cat-Other" }},
 }};
 

@@ -87,6 +87,22 @@
       "critical_minerals": [
         "双用途出口许可证", "锗镓出口管制", "锑矿配额", "重稀土许可证", "印尼镍矿rkab", "采矿特许权", "战略矿产",
         "export license", "dual use export permit", "antimony quota", "rare earth license", "indonesia nickel rkab", "mining concession"
+      ],
+      "defense_procurement": [
+        "ndaa", "国防授权法案", "五角大楼", "dsca", "军售放行", "军工采购", "特别采购", "军规半导体", "钛合金配额",
+        "defense procurement", "foreign military sales", "pentagon contract", "fms approval", "defense authorization", "munition stockpile"
+      ],
+      "climate_insurance": [
+        "飓风登陆", "墨西哥湾关停", "炼化装置跳车", "巨灾保险", "再保险赔付", "商业航天发射失利", "星箭分离失败", "轨道异常",
+        "hurricane landfall", "gulf of mexico shut in", "refinery shutdown", "catastrophe reinsurance", "launch failure", "satellite loss", "orbit anomaly", "cat loss"
+      ],
+      "maritime_sanctions": [
+        "保赔协会", "p&i club", "战争险", "war risk premium", "价格上限扣押", "price cap violation", "影子船队", "shadow fleet",
+        "海事通告", "波罗的海走廊", "imo脱碳", "imo maritime sanction", "vessel detention", "insurance cancellation"
+      ],
+      "sovereign_debt": [
+        "债务上限", "debt ceiling", "非常规措施", "extraordinary measures", "tga抽水", "国债拍卖尾部", "auction tail",
+        "主权评级降级", "sovereign downgrade", "信用利差走阔", "treasury liquidity", "debt limit standoff"
       ]
     },
     "noise_blacklist": [
@@ -177,6 +193,34 @@
       "type": "critical_minerals",
       "url": "https://www.usgs.gov/centers/national-minerals-information-center",
       "priority": "P1"
+    },
+    {
+      "channel_id": "defense_procurement_authorization",
+      "channel_name": "美国五角大楼NDAA特别军工采购与DSCA对外军售放行",
+      "type": "defense_procurement",
+      "url": "https://www.defense.gov/News/Contracts",
+      "priority": "P1"
+    },
+    {
+      "channel_id": "climate_catastrophe_noaa_alerts",
+      "channel_name": "NOAA国家飓风中心气象灾害与沿海关键工业基础设施跳车",
+      "type": "climate_insurance",
+      "url": "https://www.nhc.noaa.gov",
+      "priority": "P1"
+    },
+    {
+      "channel_id": "maritime_insurance_sanctions_tracker",
+      "channel_name": "国际保赔协会集团(IG P&I)战险跳涨与海事制裁扣押",
+      "type": "maritime_sanctions",
+      "url": "https://www.igpandi.org",
+      "priority": "P1"
+    },
+    {
+      "channel_id": "sovereign_debt_treasury_liquidity",
+      "channel_name": "美国财政部债务上限报告与国债拍卖严重尾部利差",
+      "type": "sovereign_debt",
+      "url": "https://home.treasury.gov/policy-issues/financing-the-government/quarterly-refunding",
+      "priority": "P0"
     }
   ]
 }

@@ -23,7 +23,7 @@ class EventSeverity(str, Enum):
 
 
 class EventCategory(str, Enum):
-    """突发事件业务全息分类 (12大全景信息收集维度)."""
+    """突发事件业务全息分类 (16大全景信息收集维度)."""
     GEOPOLITICAL = "Geopolitical_CrossStrait"
     STATE_POLICY = "State_Policy_Regulatory"
     PHYSICAL_DISRUPTION = "Physical_Plant_Disruption"
@@ -36,6 +36,10 @@ class EventCategory(str, Enum):
     CYBER_INFRASTRUCTURE = "Cyber_Critical_Infrastructure"
     BIOSECURITY_EMBARGO = "Biosecurity_Export_Embargo"
     CRITICAL_MINERALS = "Critical_Minerals_Export_Permit"
+    DEFENSE_PROCUREMENT = "Defense_Procurement_Authorization"
+    CLIMATE_INSURANCE = "Climate_Catastrophe_Insurance"
+    MARITIME_SANCTIONS = "Maritime_Insurance_Sanctions"
+    SOVEREIGN_DEBT = "Sovereign_Debt_Liquidity"
     OTHER_MACRO = "Other_Macro_Event"
 
 
@@ -175,6 +179,22 @@ class EventRadarEngine:
         "critical_minerals": [
             "双用途出口许可证", "锗镓出口管制", "锑矿配额", "重稀土许可证", "印尼镍矿rkab", "采矿特许权", "战略矿产",
             "export license", "dual use export permit", "antimony quota", "rare earth license", "indonesia nickel rkab", "mining concession"
+        ],
+        "defense_procurement": [
+            "ndaa", "国防授权法案", "五角大楼", "dsca", "军售放行", "军工采购", "特别采购", "军规半导体", "钛合金配额",
+            "defense procurement", "foreign military sales", "pentagon contract", "fms approval", "defense authorization", "munition stockpile"
+        ],
+        "climate_insurance": [
+            "飓风登陆", "墨西哥湾关停", "炼化装置跳车", "巨灾保险", "再保险赔付", "商业航天发射失利", "星箭分离失败", "轨道异常",
+            "hurricane landfall", "gulf of mexico shut in", "refinery shutdown", "catastrophe reinsurance", "launch failure", "satellite loss", "orbit anomaly", "cat loss"
+        ],
+        "maritime_sanctions": [
+            "保赔协会", "p&i club", "战争险", "war risk premium", "价格上限扣押", "price cap violation", "影子船队", "shadow fleet",
+            "海事通告", "波罗的海走廊", "imo脱碳", "imo maritime sanction", "vessel detention", "insurance cancellation"
+        ],
+        "sovereign_debt": [
+            "债务上限", "debt ceiling", "非常规措施", "extraordinary measures", "tga抽水", "国债拍卖尾部", "auction tail",
+            "主权评级降级", "sovereign downgrade", "信用利差走阔", "treasury liquidity", "debt limit standoff"
         ]
     }
 
@@ -190,7 +210,7 @@ class EventRadarEngine:
         self.blacklist = filter_rules.get("noise_blacklist", self.DEFAULT_BLACKLIST)
 
     def pre_filter(self, item: RawNewsItem) -> Tuple[bool, List[str], EventCategory]:
-        """第一道防线：零 Token 物理去噪与关键词匹配 (12大全景信息收集维度).
+        """第一道防线：零 Token 物理去噪与关键词匹配 (16大全景信息收集维度).
 
         返回: (is_matched, matched_tags, likely_category)
         """
@@ -216,9 +236,13 @@ class EventRadarEngine:
             EventCategory.CYBER_INFRASTRUCTURE: 0,
             EventCategory.BIOSECURITY_EMBARGO: 0,
             EventCategory.CRITICAL_MINERALS: 0,
+            EventCategory.DEFENSE_PROCUREMENT: 0,
+            EventCategory.CLIMATE_INSURANCE: 0,
+            EventCategory.MARITIME_SANCTIONS: 0,
+            EventCategory.SOVEREIGN_DEBT: 0,
         }
 
-        # 匹配 12 大核心领域词典
+        # 匹配 16 大核心领域词典
         category_mapping = [
             ("geopolitical", EventCategory.GEOPOLITICAL),
             ("state_policy", EventCategory.STATE_POLICY),
@@ -232,6 +256,10 @@ class EventRadarEngine:
             ("cyber_infrastructure", EventCategory.CYBER_INFRASTRUCTURE),
             ("biosecurity_embargo", EventCategory.BIOSECURITY_EMBARGO),
             ("critical_minerals", EventCategory.CRITICAL_MINERALS),
+            ("defense_procurement", EventCategory.DEFENSE_PROCUREMENT),
+            ("climate_insurance", EventCategory.CLIMATE_INSURANCE),
+            ("maritime_sanctions", EventCategory.MARITIME_SANCTIONS),
+            ("sovereign_debt", EventCategory.SOVEREIGN_DEBT),
         ]
 
         for dict_key, cat_enum in category_mapping:
@@ -294,7 +322,8 @@ class EventRadarEngine:
             "boj", "bank of japan", "federal reserve", "fed", "caiso", "boe", "ecb",
             "doj", "ftc", "cma", "regulatory gazette", "official gazette", "court",
             "legislative", "comptroller", "doe", "cisa", "eia", "nerc", "ercot",
-            "fda", "esdm", "bfg", "stb"
+            "fda", "esdm", "bfg", "stb", "defense.gov", "defense gov", "dod", "dsca", "pentagon", "nhc",
+            "noaa", "treasury", "ig p&i", "ig p and i", "p&i", "p and i", "p&i club", "fitch", "moodys", "s&p global", "imo"
         ]
         if any(sig in s_norm for sig in tier1_signatures):
             return SourceCredibilityTier.TIER_1_OFFICIAL_REGULATORY, 1.0

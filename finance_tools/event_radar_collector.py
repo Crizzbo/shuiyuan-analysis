@@ -16,6 +16,7 @@ import socket
 import sqlite3
 import time
 from typing import Any, Callable, Dict, List, Optional, Tuple
+import xml.etree.ElementTree as ET
 
 from financial_core.engines.event_radar_engine import (
     EventRadarEngine,
@@ -502,6 +503,34 @@ class MockModelSummarizer:
             severity = "P1"
             duration = "中长期 3~12 个月"
             segments = ["半导体衬底材料", "军工与红外光学", "动力电池与储能材料"]
+        elif "ndaa" in title_lower or "国防授权" in title_lower or "五角大楼" in title_lower or "军售" in title_lower or "dsca" in title_lower:
+            category = "Defense_Procurement_Authorization"
+            entities = ["美国国防部(DoD)", "国防安全合作局(DSCA)", "主承包防务商"]
+            impact = "国防授权法案增订特别采购额度或重大对外军售批复放行，锁定特种军规产能"
+            severity = "P1"
+            duration = "跨财年长期 2~4 年"
+            segments = ["特种军规芯片", "航空航天与防务", "特种先进复合材料"]
+        elif "飓风" in title_lower or "hurricane" in title_lower or "炼化" in title_lower or "航天" in title_lower or "noaa" in title_lower:
+            category = "Climate_Catastrophe_Insurance"
+            entities = ["美国国家飓风中心(NHC/NOAA)", "沿海石化基地", "商业航天发射场"]
+            impact = "极端气候飓风登陆导致沿海炼油重镇跳车关停，且巨灾再保险免赔额拉升"
+            severity = "P1"
+            duration = "短期物理冲击 2~4 周"
+            segments = ["炼油与裂解化学品", "财产与巨灾再保险", "商业航天遥感与通信"]
+        elif "保赔" in title_lower or "p&i" in title_lower or "战争险" in title_lower or "影子船队" in title_lower or "价格上限" in title_lower:
+            category = "Maritime_Insurance_Sanctions"
+            entities = ["国际保赔协会集团(IG P&I)", "联合战争委员会(JWC)", "远洋油轮合规船东"]
+            impact = "战险附加保费暴涨或违反价格上限遭扣押，航行经济性恶化引发有效运力紧缩"
+            severity = "P1"
+            duration = "中期 1~6 个月"
+            segments = ["合规远洋油运与干散货", "海事特种保险", "跨大洋原油流转"]
+        elif "债务上限" in title_lower or "debt ceiling" in title_lower or "tga" in title_lower or "拍卖尾部" in title_lower or "auction tail" in title_lower:
+            category = "Sovereign_Debt_Liquidity"
+            entities = ["美国财政部(Treasury)", "一级交易商", "银行间回购市场"]
+            impact = "债务上限博弈或国债拍卖尾部拉大，占用交易商负债表并收紧跨资产抵押流动性"
+            severity = "P1"
+            duration = "中期流动性脉冲 1~3 个月"
+            segments = ["银行间质押回购(Repo)", "高贝塔成长股估值", "跨国固定收益流动性"]
 
         summary_dict = {
             "category": category,
@@ -512,6 +541,83 @@ class MockModelSummarizer:
             "severity_level": severity,
         }
         return json.dumps(summary_dict, ensure_ascii=False)
+
+
+def parse_rss_atom_feed(xml_content: str, default_source: str = "Official_Regulatory_RSS") -> List[RawNewsItem]:
+    """轻量解析公开标准 RSS 2.0 / Atom 1.0 XML 格式数据源 (零 Token 消耗、零外部依赖).
+
+    严格遵循《2026-10-11 最新数据来源策略》:
+    仅处理公开无需鉴权的公开公报 feed，提取标题、摘要内容、链接与时间戳，转化为 RawNewsItem。
+    """
+    items: List[RawNewsItem] = []
+    if not xml_content or not xml_content.strip():
+        return items
+
+    try:
+        root = ET.fromstring(xml_content)
+    except Exception as e:
+        logger.warning("解析 XML Feed 失败: %s", e)
+        return items
+
+    # 1. 尝试 RSS 2.0: <rss><channel><item>...
+    channel = root.find("channel")
+    if channel is not None:
+        feed_title = channel.findtext("title") or default_source
+        for idx, item in enumerate(channel.findall("item")):
+            title = item.findtext("title") or ""
+            link = item.findtext("link") or ""
+            description = item.findtext("description") or ""
+            pub_date = item.findtext("pubDate") or datetime.now(timezone.utc).isoformat()
+            guid = item.findtext("guid") or f"rss_{idx}_{int(time.time())}"
+
+            if title:
+                items.append(RawNewsItem(
+                    id=str(guid),
+                    title=title.strip(),
+                    content=description.strip() or title.strip(),
+                    source=feed_title.strip(),
+                    published_at=pub_date.strip(),
+                    url=link.strip(),
+                ))
+        return items
+
+    # 2. 尝试 Atom 1.0: <feed xmlns="http://www.w3.org/2005/Atom"><entry>...
+    # 处理 Atom 命名空间
+    tag = root.tag
+    ns = ""
+    if "}" in tag:
+        ns = tag.split("}")[0] + "}"
+
+    feed_title_elem = root.find(f"{ns}title")
+    feed_title = feed_title_elem.text if feed_title_elem is not None and feed_title_elem.text else default_source
+
+    for idx, entry in enumerate(root.findall(f"{ns}entry")):
+        title_elem = entry.find(f"{ns}title")
+        title = title_elem.text if title_elem is not None and title_elem.text else ""
+
+        id_elem = entry.find(f"{ns}id")
+        entry_id = id_elem.text if id_elem is not None and id_elem.text else f"atom_{idx}_{int(time.time())}"
+
+        updated_elem = entry.find(f"{ns}updated") or entry.find(f"{ns}published")
+        pub_date = updated_elem.text if updated_elem is not None and updated_elem.text else datetime.now(timezone.utc).isoformat()
+
+        link_elem = entry.find(f"{ns}link")
+        link = link_elem.get("href", "") if link_elem is not None else ""
+
+        content_elem = entry.find(f"{ns}content") or entry.find(f"{ns}summary")
+        content = content_elem.text if content_elem is not None and content_elem.text else title
+
+        if title:
+            items.append(RawNewsItem(
+                id=str(entry_id),
+                title=title.strip(),
+                content=(content or title).strip(),
+                source=feed_title.strip(),
+                published_at=pub_date.strip(),
+                url=link.strip(),
+            ))
+
+    return items
 
 
 class EventRadarCollector:
