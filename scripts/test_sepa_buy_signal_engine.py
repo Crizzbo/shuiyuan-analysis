@@ -384,7 +384,7 @@ class TestSepaBuySignalEngine(unittest.TestCase):
 
         一、测试功能与测试点:
             验证当标的 50日均成交量 num_avg_volume_50d <= 0 (如停牌刚复牌或冷门标的) 时，
-            系统不触发 ZeroDivisionError 崩溃，稳健完成研判。
+            系统通过 ValueError 拒绝缺失的成交量基线。
 
         二、正常函数业务边界与参数契约:
             - num_avg_volume_50d: 0.0。
@@ -393,8 +393,7 @@ class TestSepaBuySignalEngine(unittest.TestCase):
             测试日均成交量为 0 的极端边界。
 
         四、预期断言与结果验证:
-            断言 evaluate_buy_signal 正常执行。
-            断言输出状态对象完备。
+            断言 evaluate_buy_signal 明确拒绝生成信号。
         """
         zero_vol_facts = SepaInputFacts(
             **{
@@ -402,9 +401,8 @@ class TestSepaBuySignalEngine(unittest.TestCase):
                 "num_avg_volume_50d": 0.0,
             }
         )
-        res = self.engine.evaluate_buy_signal(zero_vol_facts)
-        self.assertIsNotNone(res)
-        self.assertIsInstance(res.is_breakout_volume_confirmed, bool)
+        with self.assertRaisesRegex(ValueError, "历史日均成交量"):
+            self.engine.evaluate_buy_signal(zero_vol_facts)
 
     def test_ut_sepa_10_buyer_narrative_card_deengineering(self):
         """【UT-SEPA-10: 买方通俗商业直觉全息研报卡片 narrative_zh 去工程符号化断言】

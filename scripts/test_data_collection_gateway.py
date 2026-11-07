@@ -170,19 +170,18 @@ class TestDataCollectionGateway(unittest.TestCase):
         """【UT-GATEWAY-06: 关键三表事实科目残缺刚性阻断抛出(IncompleteFilingFactError)】
 
         1. 测试功能与测试点:
-           - 验证当关键科目（如营收 revenue <= 0）缺失时，网关拒绝放行并抛出 IncompleteFilingFactError。
+           - 验证当关键科目（如未提供 revenue）缺失时，网关拒绝放行并抛出 IncompleteFilingFactError。
 
         2. 正常函数业务边界与参数契约:
-           - revenue 必须为正实数。
+           - revenue 必须有明确披露，真实零值仍是有效披露。
 
         3. 测试数据与模拟场景说明:
-           - 传入 revenue = 0.0。
+           - 省略 revenue 字段。
 
         4. 预期断言与结果验证:
            - 必须抛出 IncompleteFilingFactError 异常。
         """
         facts = {
-            "revenue": 0.0,  # 营收为 0
             "total_assets": 500000.0,
             "total_liabilities": 300000.0,
             "stockholders_equity": 200000.0,

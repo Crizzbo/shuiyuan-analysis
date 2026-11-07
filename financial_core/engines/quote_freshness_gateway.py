@@ -301,7 +301,7 @@ class QuoteFreshnessGateway:
             ValueError: 当价格非法 (<= 0 或 NaN/Inf) 或时间戳无时区时抛出.
         """
         # 1. 严格价格数值校验 (拒绝 <= 0, NaN, Inf)
-        if not isinstance(price, (int, float)) or math.isnan(price) or math.isinf(price) or price <= 0:
+        if isinstance(price, bool) or not isinstance(price, (int, float)) or not math.isfinite(price) or price <= 0:
             raise ValueError(f"非法价格输入: {price}")
 
         limit_hours = (
@@ -309,6 +309,8 @@ class QuoteFreshnessGateway:
             if max_staleness_hours is not None
             else cls.MAX_STALENESS_HOURS
         )
+        if not math.isfinite(limit_hours) or limit_hours <= 0:
+            raise ValueError("行情最大滞后时长必须为有限正数")
         if current_time_iso:
             now_dt = datetime.fromisoformat(current_time_iso.replace("Z", "+00:00"))
         else:
@@ -359,7 +361,8 @@ class QuoteFreshnessGateway:
         market_tz = cls._get_market_tz(market, orig_tz)
         q_local = q_dt_utc.astimezone(market_tz)
         now_local = now_dt.astimezone(market_tz)
-        is_today = (q_local.date() == now_local.date()) and (q_dt_utc.date() == now_dt.date())
+        # 交易日以交易所当地日期为准，纽约盘后可能跨越 UTC 零点。
+        is_today = q_local.date() == now_local.date()
 
         session_status = cls._determine_session_status(
             q_dt_utc=q_dt_utc,
@@ -368,6 +371,9 @@ class QuoteFreshnessGateway:
             orig_tz=orig_tz,
             now_dt_utc=now_dt,
         )
+        # 同一自然日内进入新的交易时段后，旧时段报价只能作为历史基准。
+        if session_status == "previous_close_baseline":
+            is_today = False
 
         status_zh_map = {
             "pre_market": "盘前最新",
@@ -410,6 +416,18 @@ class QuoteFreshnessGateway:
             return "previous_close_baseline"
 
         q_h = q_local.hour + q_local.minute / 60.0
+        if now_dt_utc is not None:
+            now_local = now_dt_utc.astimezone(market_tz)
+            now_h = now_local.hour + now_local.minute / 60.0
+            # 使用与采样时段相同的分类器，避免将盘前或早盘报价标为下一时段现价。
+            now_session = cls._determine_session_status(
+                now_dt_utc, True, market, orig_tz
+            )
+            quote_session = cls._determine_session_status(
+                q_dt_utc, True, market, orig_tz
+            )
+            if now_h > q_h and now_session not in (quote_session, "previous_close_baseline"):
+                return "previous_close_baseline"
 
         if market == "US":
             if 4.0 <= q_h < 9.5:

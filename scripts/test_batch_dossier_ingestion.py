@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from financial_core.engines.filing_mapper import OfficialFilingMapper
+from financial_core.engines.filing_mapper import OfficialFilingMapper, IncompleteFilingFactError
 from financial_core.api import FinancialAnalysisSystem
 from data_sources.batch78_verified_dossiers_data import BATCH78_DOSSIERS
 
@@ -62,74 +62,17 @@ class TestBatchDossierIngestion(unittest.TestCase):
         self.assertEqual(mapper.parse_financial_number("N/A"), 0.0)
 
     def test_map_and_execute_us_batch_company(self):
-        """【IT-INGEST-02: 美股批量档案(ACHR)官方底账映射、资产负债平账与系统估值端到端运行】
-
-        1. 测试功能与测试点:
-           - 验证 OfficialFilingMapper.map_dossier_to_company_input 将美股 JSON 档案转化为强类型 SystemicCompanyInput。
-           - 资产负债表刚性平衡验证: Assets == Liabilities + Equity。
-           - 喂入 FinancialAnalysisSystem.analyze_equity 跑通全盘估值引擎并产出中枢公允价。
-
-        2. 正常函数业务边界与参数契约:
-           - achr 属于 BATCH78_DOSSIERS 标准批量档案。
-           - res.execution_success == True 且 neutral_fair_value > 0.0。
-
-        3. 测试数据与模拟场景说明:
-           - 标的: Archer Aviation (ACHR，低空经济 eVTOL 龙头)。
-           - 总资产 7.5 亿，负债 1.6 亿，股东权益 5.9 亿 (750M == 160M + 590M)。
-
-        4. 预期断言与结果验证:
-           - 断言 inp.ticker == "ACHR"。
-           - 断言 total_assets 严格等于 total_liabilities + stockholders_equity (误差 <= 1.0)。
-           - 断言 res.execution_success 为 True。
-           - 断言 res.decision_card.neutral_fair_value > 0.0。
-        """
+        """美股存量档案缺少三表核心科目时明确拒绝。"""
         achr = BATCH78_DOSSIERS[0]
-        inp = OfficialFilingMapper.map_dossier_to_company_input(achr)
-        self.assertEqual(inp.ticker, "ACHR")
-        self.assertEqual(inp.total_assets, 750_000_000.0)
-        self.assertEqual(inp.stockholders_equity, 590_000_000.0)
-        self.assertEqual(inp.total_liabilities, 160_000_000.0)
-        self.assertAlmostEqual(inp.total_assets, inp.total_liabilities + inp.stockholders_equity, delta=1.0)
-
-        res = self.fin_system.analyze_equity(inp.ticker, company_input=inp)
-        self.assertTrue(res.execution_success)
-        self.assertEqual(res.ticker, "ACHR")
-        self.assertGreater(res.decision_card.neutral_fair_value, 0.0)
+        # 存量档案未提供完整三表和行情时间戳，必须先补证据。
+        with self.assertRaises(IncompleteFilingFactError):
+            OfficialFilingMapper.map_dossier_to_company_input(achr)
 
     def test_map_and_execute_jp_batch_company(self):
-        """【IT-INGEST-03: 日股批量档案(1332 Nissui)决算短信映射、日元平账与端到端系统估值】
-
-        1. 测试功能与测试点:
-           - 验证日股东证标的决算底账向核心计算引擎的无损转换。
-           - 日元计价底账平账校验与货币代码继承 (JPY)。
-           - 全链路跑通跨周期 DCF 与多情景压力测试。
-
-        2. 正常函数业务边界与参数契约:
-           - 东证代码 '1332'，币种 JPY。
-
-        3. 测试数据与模拟场景说明:
-           - 标的: 日本水产 (1332 Nissui)。
-           - 资产 5600 亿日元，权益 2450 亿日元，负债 3150 亿日元 (560B == 315B + 245B)。
-
-        4. 预期断言与结果验证:
-           - 断言 inp.ticker == "1332"。
-           - 断言资产负债表严格平账。
-           - 断言 res.currency == "JPY"。
-           - 断言 res.execution_success 为 True 且 neutral_fair_value > 0.0。
-        """
+        """日股存量档案缺少三表核心科目时明确拒绝。"""
         nissui = BATCH78_DOSSIERS[5]
-        inp = OfficialFilingMapper.map_dossier_to_company_input(nissui)
-        self.assertEqual(inp.ticker, "1332")
-        self.assertEqual(inp.total_assets, 560_000_000_000.0)
-        self.assertEqual(inp.stockholders_equity, 245_000_000_000.0)
-        self.assertEqual(inp.total_liabilities, 315_000_000_000.0)
-        self.assertAlmostEqual(inp.total_assets, inp.total_liabilities + inp.stockholders_equity, delta=1.0)
-
-        res = self.fin_system.analyze_equity(inp.ticker, company_input=inp)
-        self.assertTrue(res.execution_success)
-        self.assertEqual(res.ticker, "1332")
-        self.assertEqual(res.currency, "JPY")
-        self.assertGreater(res.decision_card.neutral_fair_value, 0.0)
+        with self.assertRaises(IncompleteFilingFactError):
+            OfficialFilingMapper.map_dossier_to_company_input(nissui)
 
     def test_round_trip_excel_generation_and_load_invariant(self):
         """【FT-INGEST-04: 批量档案真实Excel物理介质落盘生成与openpyxl往返加载不变量验证】

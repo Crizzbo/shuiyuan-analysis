@@ -301,14 +301,16 @@ class BatchUniversePipelineRunner:
         verifier = MarketQuoteVerifier(ROOT)
         try:
             vq = verifier.get_latest_quote(rec.ticker)
+            if not vq.is_valid:
+                raise ValueError("归档行情已失效")
             price_val = vq.price
-            quote_ts = vq.timestamp_formatted
+            quote_ts = vq.timestamp_iso
             market_session = vq.session_type
             quote_status = "VERIFIED_ACCURATE"
         except Exception:
             # 未归档标的显式声明为 0.0 并打标待补数，绝不硬编码假价格
             price_val = 0.0
-            quote_ts = f"{rec.fiscal_year_end or '2025-12-31'} 16:00:00 EDT"
+            quote_ts = ""
             market_session = "closed_pending_quote"
             quote_status = "UNVERIFIED_PENDING_QUOTE"
 
@@ -504,9 +506,11 @@ class BatchUniversePipelineRunner:
         )
 
         card = analysis_res.decision_card
-        pessimistic_f = card.pessimistic_floor if card else comp_input.current_price * 0.70
-        neutral_fair = card.neutral_fair_value if card else comp_input.current_price * 1.15
-        optimistic_t = card.optimistic_target if card else comp_input.current_price * 1.50
+        if not analysis_res.execution_success or card is None:
+            raise ValueError(f"核心分析未通过，停止建档 {analysis_res.block_reason}")
+        pessimistic_f = card.pessimistic_floor
+        neutral_fair = card.neutral_fair_value
+        optimistic_t = card.optimistic_target
 
         # 3. 蒙特卡洛连续随机折现 (可选 10,000 次模拟)
         mc_summary = None

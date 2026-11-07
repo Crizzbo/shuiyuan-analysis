@@ -9,6 +9,7 @@
 """
 
 import json
+import math
 from pathlib import Path
 import re
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
@@ -145,7 +146,9 @@ class AIResearchAgent:
     def parameterize_qualitative_factors(
         cls,
         ai_analysis: Dict[str, Any],
-    ) -> Dict[str, float]:
+        *,
+        allow_uncalibrated_assumptions: bool = False,
+    ) -> Dict[str, Any]:
         """将 AI 的定性分析结论参数化为量化金融调整系数.
 
         实现买方决策卡片定性推演数学公式化、参数化联动：
@@ -155,17 +158,19 @@ class AIResearchAgent:
         """
         scores = ai_analysis.get("qualitative_scores", {})
         raw_moat = scores.get("moat_score")
-
-        # 若未直接给出数值得分，从文本内容粗评
-        if raw_moat is not None:
-            try:
-                moat_score = float(raw_moat)
-            except (ValueError, TypeError):
-                moat_score = 5.0
-        else:
-            moat_dict = ai_analysis.get("moat_analysis", {})
-            has_moat_text = any("强" in str(v) or "高" in str(v) or "深" in str(v) for v in moat_dict.values())
-            moat_score = 7.5 if has_moat_text else 5.0
+        # 未校准的文字打分不能自动改变估值；仅显式情景演示允许使用旧映射。
+        if not allow_uncalibrated_assumptions:
+            return {
+                "moat_score": raw_moat,
+                "wacc_spread_bps": 0.0,
+                "wacc_spread_decimal": 0.0,
+                "supply_chain_risk_multiplier": 1.0,
+                "growth_decay_factor": 1.0,
+                "calibration_status": "not_calibrated_adjustments_disabled",
+            }
+        if isinstance(raw_moat, bool) or not isinstance(raw_moat, (int, float)) or not math.isfinite(raw_moat):
+            raise ValueError("情景演示必须显式提供有限的护城河分数")
+        moat_score = float(raw_moat)
 
         moat_score = max(0.0, min(10.0, moat_score))
 
@@ -189,6 +194,7 @@ class AIResearchAgent:
         growth_decay_factor = 0.95 if moat_score >= 7.0 else 0.85
 
         return {
+            "calibration_status": "uncalibrated_scenario_assumption",
             "moat_score": round(moat_score, 2),
             "wacc_spread_bps": round(wacc_spread * 10000, 1),
             "wacc_spread_decimal": round(wacc_spread, 4),
@@ -207,13 +213,20 @@ class AIResearchAgent:
 
         严禁机械大表，全部以独立富文本卡片呈现，明确推演导致跌入悲观底价与达成乐观靶心的具体触发事件与买点。
         """
-        cur_price = float(quote_data.get("current_price", 100.0) or 100.0)
-        base_floor = float(quote_data.get("pessimistic_floor", cur_price * 0.70) or cur_price * 0.70)
-        base_fair = float(quote_data.get("fair_anchor", cur_price * 1.15) or cur_price * 1.15)
-        base_target = float(quote_data.get("optimistic_target", cur_price * 1.50) or cur_price * 1.50)
+        values = []
+        for key in ("current_price", "pessimistic_floor", "fair_anchor", "optimistic_target"):
+            value = quote_data.get(key)
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+                raise ValueError(f"三态卡片缺少有限数值 {key}")
+            values.append(float(value))
+        cur_price, base_floor, base_fair, base_target = values
+        if cur_price <= 0 or not 0 <= base_floor <= base_fair <= base_target:
+            raise ValueError("三态卡片需要正现价和有序的非负估值走廊")
 
         # 结合参数化系数进行微调
         sc_mult = param_adjustments.get("supply_chain_risk_multiplier", 1.0)
+        if not isinstance(sc_mult, (int, float)) or not math.isfinite(sc_mult) or sc_mult <= 0:
+            raise ValueError("供应链风险乘数必须为有限正数")
         # 供应链风险高时，悲观底线进一步下移（提供更苛刻的安全保护）
         adjusted_floor = round(base_floor / sc_mult, 2)
         adjusted_fair = round(base_fair, 2)
