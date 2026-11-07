@@ -1,27 +1,5 @@
 .venv/
+.venv-ci/
 .cache/
 __pycache__/
 *.pyc
-
-# Local business data and research output
-/data/
-/data_sources/
-/reports/
-/share-export-*/
-/SHARE_*
-/knowledge/companies/
-/knowledge/sources/cat_reference/
-/examples/financial/
-/examples/browser-*-receipt.json
-/config/google_drive_watchlist.json
-
-# Local credentials and database files
-.env
-.env.*
-!.env.example
-*.pem
-*.key
-*.sqlite
-*.sqlite3
-*.sqlite3-*
-*.db

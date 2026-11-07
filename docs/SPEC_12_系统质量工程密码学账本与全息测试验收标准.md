@@ -38,7 +38,7 @@
 | **门禁 1** | **架构完整性全息巡检**<br>`python scripts/verify_architecture_integrity.py` | 断言底层 `financial_core` 零外部污染、全量模块导入零循环依赖、门面与底账就绪。 |
 | **门禁 2** | **全量单元测试零失败**<br>`python -m unittest discover -s scripts -p "test_*.py"` | 所有测试用例 100% PASS，测试数量只增不减，断言全部通过。 |
 | **门禁 3** | **四大数据治理回归全绿**<br>`python scripts/test_data_store.py`<br>`python scripts/validate_knowledge_structure.py`<br>`python scripts/test_research_contract.py`<br>`python scripts/test_industry_mapping.py` | 全量数据主账、行业分类映射、研究契约与知识图谱 100% 通过验证。 |
-| **门禁 4** | **密码学账本防伪验签通过**<br>`python -c "from financial_core.engines.prediction_ledger import PredictionLedger; assert PredictionLedger().verify_integrity()"` | 账本 SHA-256 哈希链条 100% 自洽无篡改。 |
+| **门禁 4** | **密码学账本防伪验签通过**<br>`python -c "import sys; from financial_core.engines.prediction_ledger import PredictionLedger; sys.exit(not PredictionLedger().verify_integrity().is_valid)"` | 账本 SHA-256 哈希链条 100% 自洽无篡改。 |
 
 ---
 
@@ -48,3 +48,14 @@
 - **用例编号标准**：采用 `【UT-模块-序号】`（单元测试）与 `【IT-模块-序号】`（集成测试）；
 - **Docstring 结构规范**：
   明确写明“测试点功能”、“输入参数的正常边界”以及“模拟何种极端商业或市场情景”。
+
+
+## 五、干净克隆与 PR 便携检查
+
+PR 验证环境固定为 Python 3.10，依赖及其传递依赖全部记录在 requirements-ci.lock.txt。在工程根目录运行 python scripts/bootstrap_ci.py，生成独立的 .venv-ci，安装仅来自公开 PyPI 的固定验证依赖，并执行 pip check。安装器禁用外部 pip 配置，缓存保存在项目 .cache/pip。
+
+Windows 运行 .venv-ci/Scripts/python.exe -X utf8 scripts/run_ci.py，Linux 运行 .venv-ci/bin/python -X utf8 scripts/run_ci.py。入口在独立进程核验核心层依赖及模块导入，再执行不依赖行情、原始财报或正式账本的合成回归。SOTP 测试使用独立的项目内临时原文、档案及 SQLite。
+
+.github/workflows/pull_request_checks.yml 在 PR 与 main 推送时执行 Windows、Linux 两个检查任务。任务权限仅为 contents 只读，不读取业务数据或云端凭据。便携检查通过后，代码交付仍须按本文四道项目门禁执行完整本地验收，真实部署场景另行取证。原 requirements-finance.lock.txt 保留为历史完整依赖记录，当前 PR 验证使用新锁定文件。
+
+每日云端工作流复用同一个 bootstrap_ci.py 和 requirements-ci.lock.txt，使用 .venv-ci/bin/python 执行业务流水线与回归，依赖不再按运行当天解析新版本。实际浏览器、数据接入和云端交付仍需部署验收。

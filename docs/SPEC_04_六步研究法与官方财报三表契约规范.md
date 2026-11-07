@@ -61,3 +61,21 @@ $$\text{资产总计 (Total Assets)} = \text{负债总计 (Total Liabilities)} +
   监测企业破产违约风险，区分安全区、灰色区与困境区；
 - **财报操纵风险排查 (Beneish M-Score)**：
   穿透应收账款与收入比例异动、毛利率异常失真与应计利润膨胀，精准拦截财务粉饰风险。
+
+
+## 四、财务缺失值与推导边界
+
+财报接入与标准化门面均经由 OfficialFilingMapper 解析数值。资产、负债和权益必须分别披露后再独立平账，真实零值不得作为缺失科目重建。非法数值、布尔值和非有限数拒绝进入计算。
+
+可选科目未披露时保留 null，相关衍生指标保持缺失。自由现金流只可由同期间、同币种的经营现金流和资本开支推导。债务不得按总负债比例估算，ROIC 需要显式税率，DIO 需要平均存货或同口径期初期末存货。公司档案映射进入完整估值模型前必须具备三表核心科目、原生单位股数以及真实报价和采样时间戳。
+
+档案合成器只保留调用方提供的证据清单、事件和 DCF 参数。缺少证据时保持空清单，禁止将证券名称的哈希当作原文摘要。回归入口为 scripts/test_research_safety_regressions.py。
+
+
+## 五、SOTP 分部事实接入契约
+
+SOTP 档案入口为 config/sotp_profiles.json，结构由 schemas/sotp_profiles.schema.json 约束，默认资产池为空。每家公司分别登记 facts、fact_evidence、assumptions 和 quote。总营收、合并营业利润、未分配利润、有效税率、稀释股数及每个分部的营收和利润逐项绑定原文相对路径、SHA-256 和定位说明。原文通过数据目录流程归档，加载器只读核对本地字节，不生成来源。
+
+当前分部计算合同使用年度 FYyyyy、usd_million 与 million_shares，资产代码使用大写。纯数值文本经 OfficialFilingMapper 解析，单位由合同明示，禁止在百万口径中混入 B/M 后缀。分部收入与合并收入平账，分部利润加明示的未分配项与合并利润平账。报价必须提供真实采样时间、美元币种及来源，经 QuoteFreshnessGateway 验证后进入模型。
+
+合成档案声明 data_origin 为 synthetic，并要求调用方显式设置 allow_synthetic。未知公司返回缺失，档案加载不会创建事件数据库。正式财报释义仍需研究审核，摘要匹配只证明登记的原文字节一致，evidence_status 保留 local_digest_verified_fact_review_required，正式原文释义审核尚未完成时不得宣称事实已审核。原演示参数仅用于 scripts/test_support/sotp_fixtures.py，不能作为官方已核实事实。

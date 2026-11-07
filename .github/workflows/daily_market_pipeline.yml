@@ -1,0 +1,110 @@
+name: 云端无头每日行情与研报自动化调度流水线 (Cloud Headless Daily Pipeline)
+
+on:
+  schedule:
+    # 1. 美股收盘批次：周一至周五 UTC 22:00 (东京时间 JST 次日 07:00 / 美东时间 18:00)
+    - cron: '0 22 * * 1-5'
+    # 2. 日股收盘批次：周一至周五 UTC 07:00 (东京时间 JST 当日 16:00 / 北京时间 15:00)
+    - cron: '0 7 * * 1-5'
+
+  # 支持在 GitHub 网页上一键手动触发
+  workflow_dispatch:
+    inputs:
+      market:
+        description: '目标市场 (US / JP / ALL)'
+        required: true
+        default: 'ALL'
+        type: choice
+        options:
+          - ALL
+          - US
+          - JP
+      as_of:
+        description: '分析基准日期 (YYYY-MM-DD，留空则自动取当天最新交易日)'
+        required: false
+        default: ''
+        type: string
+      render_pdf:
+        description: '是否编译矢量 PDF 研报'
+        required: true
+        default: true
+        type: boolean
+
+concurrency:
+  group: daily-market-pipeline-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  run-daily-pipeline:
+    name: 运行每日大盘研报与重点个股无头流水线
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: 检出工程代码仓库
+        uses: actions/checkout@v4
+
+      - name: 配置 Python 3.10 环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+          cache-dependency-path: requirements-ci.lock.txt
+
+      - name: 安装工程核心依赖与无头 Chromium 渲染器
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser fonts-noto-cjk fonts-noto-color-emoji
+          python scripts/bootstrap_ci.py
+
+      - name: 验证无头 Chromium 可用性
+        run: |
+          which chromium-browser || which chromium || echo "Chromium path check"
+          chromium-browser --version || true
+
+      - name: 执行买方无头大盘行情与决策流水线
+        env:
+          BROWSER_HEADLESS_PATH: /usr/bin/chromium-browser
+          INPUT_MARKET: ${{ inputs.market }}
+          INPUT_AS_OF: ${{ inputs.as_of }}
+          INPUT_RENDER_PDF: ${{ inputs.render_pdf }}
+          SCHEDULE_TRIGGER: ${{ github.event.schedule }}
+        run: |
+          MARKET_ARG="$INPUT_MARKET"
+          if [ -z "$MARKET_ARG" ]; then
+            if [ "$SCHEDULE_TRIGGER" = "0 22 * * 1-5" ]; then
+              MARKET_ARG="US"
+            elif [ "$SCHEDULE_TRIGGER" = "0 7 * * 1-5" ]; then
+              MARKET_ARG="JP"
+            else
+              MARKET_ARG="ALL"
+            fi
+          fi
+
+          AS_OF_ARG=""
+          if [ -n "$INPUT_AS_OF" ]; then
+            AS_OF_ARG="--as-of $INPUT_AS_OF"
+          fi
+
+          PDF_ARG=""
+          if [ "$INPUT_RENDER_PDF" = "false" ]; then
+            PDF_ARG="--no-pdf"
+          fi
+
+          echo "🚀 启动云端每日行情流水线: Market=$MARKET_ARG $AS_OF_ARG $PDF_ARG"
+          .venv-ci/bin/python scripts/cloud_daily_pipeline.py --market "$MARKET_ARG" $AS_OF_ARG $PDF_ARG
+
+      - name: 执行密码学账本与研报完整性全息校验
+        run: |
+          .venv-ci/bin/python -m unittest scripts/test_cloud_daily_pipeline.py -v
+
+      - name: 归档每日研报交付物至 GitHub Artifacts (云端长效留存)
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-market-briefings-${{ github.run_id }}
+          path: |
+            reports/daily_briefings/*/*_每日大盘总行情与深度推荐.html
+            reports/daily_briefings/*/*_每日大盘总行情与深度推荐.pdf
+            reports/daily_briefings/*/*_每日大盘总行情与深度推荐.json
+            reports/daily_briefings/*/pipeline_execution_receipt.json
+          retention-days: 30

@@ -1,0 +1,244 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SOTP 本地事实与情景假设档案",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profiles"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "profiles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "data_origin",
+          "facts",
+          "fact_evidence",
+          "assumptions",
+          "quote"
+        ],
+        "properties": {
+          "data_origin": {
+            "enum": [
+              "official",
+              "synthetic"
+            ]
+          },
+          "facts": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "company_name",
+              "fiscal_year",
+              "financial_unit",
+              "shares_unit",
+              "total_revenue",
+              "total_operating_income",
+              "unallocated_operating_income",
+              "effective_tax_rate",
+              "diluted_shares",
+              "segments"
+            ],
+            "properties": {
+              "company_name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "fiscal_year": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^FY[0-9]{4}$"
+              },
+              "financial_unit": {
+                "const": "usd_million"
+              },
+              "shares_unit": {
+                "const": "million_shares"
+              },
+              "segments": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "segment_id",
+                    "name_zh",
+                    "name_en",
+                    "revenue",
+                    "operating_income"
+                  ],
+                  "properties": {
+                    "segment_id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "name_zh": {
+                      "type": "string"
+                    },
+                    "name_en": {
+                      "type": "string"
+                    },
+                    "revenue": {
+                      "$ref": "#/$defs/number"
+                    },
+                    "operating_income": {
+                      "$ref": "#/$defs/number"
+                    }
+                  }
+                }
+              },
+              "total_revenue": {
+                "$ref": "#/$defs/number"
+              },
+              "total_operating_income": {
+                "$ref": "#/$defs/number"
+              },
+              "unallocated_operating_income": {
+                "$ref": "#/$defs/number"
+              },
+              "effective_tax_rate": {
+                "$ref": "#/$defs/number"
+              },
+              "diluted_shares": {
+                "$ref": "#/$defs/number"
+              }
+            }
+          },
+          "fact_evidence": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/$defs/source"
+            }
+          },
+          "assumptions": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "assumption_id",
+              "rationale",
+              "calibration_status",
+              "segments"
+            ],
+            "properties": {
+              "assumption_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "rationale": {
+                "type": "string",
+                "minLength": 1
+              },
+              "calibration_status": {
+                "const": "uncalibrated_scenario"
+              },
+              "segments": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "cost_pass_through_power",
+                    "inventory_buffer_days",
+                    "relevant_keywords"
+                  ],
+                  "properties": {
+                    "cost_pass_through_power": {
+                      "$ref": "#/$defs/number"
+                    },
+                    "inventory_buffer_days": {
+                      "$ref": "#/$defs/number"
+                    },
+                    "relevant_keywords": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "quote": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "price",
+              "timestamp",
+              "market",
+              "currency",
+              "source"
+            ],
+            "properties": {
+              "price": {
+                "$ref": "#/$defs/number"
+              },
+              "timestamp": {
+                "type": "string",
+                "minLength": 1
+              },
+              "market": {
+                "enum": [
+                  "US",
+                  "JP"
+                ]
+              },
+              "currency": {
+                "const": "USD"
+              },
+              "source": {
+                "$ref": "#/$defs/source"
+              }
+            }
+          }
+        }
+      },
+      "propertyNames": {
+        "pattern": "^[A-Z0-9][A-Z0-9.:-]*$"
+      }
+    }
+  },
+  "$defs": {
+    "number": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "pattern": "^[+-]?(?:[0-9]+(?:,[0-9]{3})*(?:\\.[0-9]+)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?$"
+        }
+      ]
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "source_path",
+        "sha256",
+        "locator"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "source_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

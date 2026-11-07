@@ -13,6 +13,7 @@ import logging
 import os
 from pathlib import Path
 import socket
+import sqlite3
 import time
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
@@ -188,6 +189,213 @@ class RadarProgressManager:
         return self._state
 
 
+class RadarDatabaseManager:
+    """事件雷达 SQLite 数据库持久化管理器.
+
+    维护两大核心表:
+    1. radar_events: 记录全量收集与提纯的事实条目 (时间戳、信源、分类、物理影响、涉及实体、分部、烈度评级与深研门禁状态).
+    2. collection_cycles: 记录每次定时巡检轮次的历史审计 (时间戳、交易时段、探针延迟、扫描统计与 Token 消耗).
+    """
+
+    def __init__(self, db_path: str = "data/ledger/event_radar.sqlite3"):
+        self.db_path = Path(db_path)
+        self.db_path.parent.mkdir(parents=True, exist_ok=True)
+        self._init_db()
+
+    def _init_db(self) -> None:
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS radar_events (
+                    event_id TEXT PRIMARY KEY,
+                    raw_hash TEXT UNIQUE,
+                    collected_at TEXT NOT NULL,
+                    published_at TEXT NOT NULL,
+                    source_name TEXT NOT NULL,
+                    category TEXT NOT NULL,
+                    title TEXT NOT NULL,
+                    micro_physical_impact TEXT NOT NULL,
+                    involved_entities TEXT NOT NULL,
+                    affected_business_segments TEXT NOT NULL,
+                    estimated_duration TEXT NOT NULL,
+                    severity_level TEXT NOT NULL,
+                    requires_deep_analysis INTEGER NOT NULL,
+                    url TEXT,
+                    raw_content TEXT,
+                    credibility_tier TEXT DEFAULT 'Tier3_Mainstream_Wire',
+                    credibility_score REAL DEFAULT 0.8,
+                    verification_status TEXT DEFAULT 'Corroborated_Report',
+                    verification_note TEXT DEFAULT '主流财经通讯社通告'
+                )
+            """)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS collection_cycles (
+                    cycle_id TEXT PRIMARY KEY,
+                    cycle_timestamp TEXT NOT NULL,
+                    market_session TEXT NOT NULL,
+                    status TEXT NOT NULL,
+                    active_probe_node TEXT NOT NULL,
+                    probe_latency_ms REAL NOT NULL,
+                    scanned_count INTEGER NOT NULL,
+                    filtered_in_count INTEGER NOT NULL,
+                    summarized_count INTEGER NOT NULL,
+                    p0_p1_triggered_count INTEGER NOT NULL,
+                    estimated_tokens_consumed INTEGER NOT NULL
+                )
+            """)
+            # 平滑增量表结构迁移：检查并自动补齐新字段 (必须在创建新列索引前执行)
+            cursor.execute("PRAGMA table_info(radar_events)")
+            existing_cols = {row[1] for row in cursor.fetchall()}
+            new_columns = [
+                ("credibility_tier", "TEXT DEFAULT 'Tier3_Mainstream_Wire'"),
+                ("credibility_score", "REAL DEFAULT 0.8"),
+                ("verification_status", "TEXT DEFAULT 'Corroborated_Report'"),
+                ("verification_note", "TEXT DEFAULT '主流财经通讯社通告'"),
+            ]
+            for col_name, col_def in new_columns:
+                if col_name not in existing_cols:
+                    cursor.execute(f"ALTER TABLE radar_events ADD COLUMN {col_name} {col_def}")
+
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_radar_events_severity ON radar_events (severity_level)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_radar_events_published ON radar_events (published_at)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_radar_events_requires_deep ON radar_events (requires_deep_analysis)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_radar_events_verif_status ON radar_events (verification_status)")
+
+            conn.commit()
+
+    def insert_event(self, summary: StructuredEventSummary, item: RawNewsItem, collected_at: str) -> None:
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT OR REPLACE INTO radar_events (
+                    event_id, raw_hash, collected_at, published_at, source_name,
+                    category, title, micro_physical_impact, involved_entities,
+                    affected_business_segments, estimated_duration, severity_level,
+                    requires_deep_analysis, url, raw_content,
+                    credibility_tier, credibility_score, verification_status, verification_note
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                summary.event_id,
+                item.raw_hash,
+                collected_at,
+                item.published_at,
+                summary.source_name,
+                summary.category,
+                summary.raw_title,
+                summary.micro_physical_impact,
+                json.dumps(summary.involved_entities, ensure_ascii=False),
+                json.dumps(summary.affected_business_segments, ensure_ascii=False),
+                summary.estimated_duration,
+                summary.severity_level,
+                1 if summary.requires_deep_analysis else 0,
+                item.url,
+                item.content[:2000],
+                getattr(summary, "credibility_tier", "Tier3_Mainstream_Wire"),
+                float(getattr(summary, "credibility_score", 0.8)),
+                getattr(summary, "verification_status", "Corroborated_Report"),
+                getattr(summary, "verification_note", "主流财经通讯社通告"),
+            ))
+            conn.commit()
+
+    def insert_cycle(self, cycle_report: Dict[str, Any]) -> None:
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cycle_id = f"CYCLE_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S_%f')[:19]}"
+            cursor.execute("""
+                INSERT OR REPLACE INTO collection_cycles (
+                    cycle_id, cycle_timestamp, market_session, status,
+                    active_probe_node, probe_latency_ms, scanned_count,
+                    filtered_in_count, summarized_count, p0_p1_triggered_count,
+                    estimated_tokens_consumed
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                cycle_id,
+                cycle_report.get("timestamp", datetime.now(timezone.utc).isoformat()),
+                cycle_report.get("market_session", "unknown"),
+                cycle_report.get("status", "SUCCESS"),
+                cycle_report.get("active_probe_node", "UNKNOWN"),
+                float(cycle_report.get("probe_latency_ms", 0.0)),
+                int(cycle_report.get("scanned_count", 0)),
+                int(cycle_report.get("filtered_in_count", 0)),
+                int(cycle_report.get("summarized_count", 0)),
+                int(cycle_report.get("p0_p1_triggered_count", 0)),
+                int(cycle_report.get("estimated_tokens_consumed", 0)),
+            ))
+            conn.commit()
+
+    def query_events(
+        self,
+        severity_filter: Optional[List[str]] = None,
+        category: Optional[str] = None,
+        only_requires_deep: bool = False,
+        limit: int = 100,
+    ) -> List[Dict[str, Any]]:
+        query = "SELECT * FROM radar_events WHERE 1=1"
+        params: List[Any] = []
+        if severity_filter:
+            placeholders = ",".join(["?"] * len(severity_filter))
+            query += f" AND severity_level IN ({placeholders})"
+            params.extend(severity_filter)
+        if category:
+            query += " AND category = ?"
+            params.append(category)
+        if only_requires_deep:
+            query += " AND requires_deep_analysis = 1"
+        query += " ORDER BY published_at DESC LIMIT ?"
+        params.append(limit)
+
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute(query, params)
+            rows = cursor.fetchall()
+            results = []
+            for row in rows:
+                item = dict(row)
+                try:
+                    item["involved_entities"] = json.loads(item.get("involved_entities", "[]"))
+                except Exception:
+                    item["involved_entities"] = []
+                try:
+                    item["affected_business_segments"] = json.loads(item.get("affected_business_segments", "[]"))
+                except Exception:
+                    item["affected_business_segments"] = []
+                item["requires_deep_analysis"] = bool(item.get("requires_deep_analysis", 0))
+                results.append(item)
+            return results
+
+    def query_cycles(self, limit: int = 20) -> List[Dict[str, Any]]:
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM collection_cycles ORDER BY cycle_timestamp DESC LIMIT ?", (limit,))
+            return [dict(row) for row in cursor.fetchall()]
+
+    def query_summary_statistics(self) -> Dict[str, Any]:
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(*), SUM(requires_deep_analysis) FROM radar_events")
+            res_events = cursor.fetchone()
+            total_events = res_events[0] if res_events else 0
+            total_major = res_events[1] if res_events and res_events[1] else 0
+
+            cursor.execute("SELECT COUNT(*), SUM(scanned_count), SUM(summarized_count), SUM(estimated_tokens_consumed) FROM collection_cycles")
+            res_cycles = cursor.fetchone()
+            total_cycles = res_cycles[0] if res_cycles else 0
+            total_scanned = res_cycles[1] if res_cycles and res_cycles[1] else 0
+            total_summarized = res_cycles[2] if res_cycles and res_cycles[2] else 0
+            total_tokens = res_cycles[3] if res_cycles and res_cycles[3] else 0
+
+            return {
+                "total_events_stored": total_events or 0,
+                "total_major_p0_p1": total_major or 0,
+                "total_cycles_executed": total_cycles or 0,
+                "total_scanned_news": total_scanned or 0,
+                "total_summarized": total_summarized or 0,
+                "total_tokens_burned": total_tokens or 0,
+            }
+
+
 class MockModelSummarizer:
     """测试与沙箱环境下的确定性 2-B 结构化摘要生成器 (零成本 Mock)."""
 
@@ -203,7 +411,42 @@ class MockModelSummarizer:
         duration = "短期"
         segments = ["通用产业"]
 
-        if "加州" in title_lower or "california" in title_lower:
+        if "罢工" in title_lower or "码头工人" in title_lower or "strike" in title_lower or "ila" in title_lower or "ilwu" in title_lower:
+            category = "Labor_Strikes_Port_Railways"
+            entities = ["国际码头工人协会(ILA)", "美东各大港口海事联盟", "集装箱航运枢纽"]
+            impact = "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻"
+            severity = "P1"
+            duration = "中期 2~4 周"
+            segments = ["海运物流与货运代理", "港口装卸", "跨国供应链库存"]
+        elif "反垄断" in title_lower or "antitrust" in title_lower or "337调查" in title_lower or "itc" in title_lower or "ftc" in title_lower or "doj" in title_lower:
+            category = "Antitrust_Litigation"
+            entities = ["美国司法部反垄断局", "联邦贸易委员会(FTC)", "国际贸易委员会(ITC)"]
+            impact = "监管机构正式发起反垄断重组调查或针对核心专利侵权启动 337 调查及有限排除令"
+            severity = "P1"
+            duration = "长期司法诉讼 1~2 年"
+            segments = ["数字广告与搜索引擎", "平台应用生态", "知识产权许可"]
+        elif "战略石油储备" in title_lower or "spr" in title_lower or "现货升水" in title_lower or "倒挂" in title_lower or "backwardation" in title_lower or "逼仓" in title_lower:
+            category = "Commodity_Physical_Squeeze"
+            entities = ["美国能源部(DOE)", "LME实物交割仓", "大宗商品贸易商"]
+            impact = "能源部宣布战略石油储备招标轮换或关键大宗实物仓单注销激增，现货期限结构深度倒挂"
+            severity = "P1"
+            duration = "中短期 1~3 个月"
+            segments = ["上游油气开采与炼化", "基础金属冶炼", "大宗商品仓储"]
+        elif "贴现窗口" in title_lower or "srf" in title_lower or "套息平仓" in title_lower or "carry trade" in title_lower or "日元" in title_lower or "流动性" in title_lower:
+            category = "CentralBank_Liquidity_FX_Shock"
+            entities = ["美联储公开市场操作台", "日本央行(BoJ)", "跨国对冲基金"]
+            impact = "央行紧急贴现窗口调用突增或日元非线性暴力升值触发全球跨资产套息交易快速平仓拆解"
+            severity = "P0"
+            duration = "短期高烈度冲击 1~2 周"
+            segments = ["投资银行与经纪业务", "跨国宏观量化基金", "高杠杆成长资产"]
+        elif "红海" in title_lower or "苏伊士" in title_lower or "suez" in title_lower or "曼德海峡" in title_lower or "巴拿马运河" in title_lower or "panama" in title_lower:
+            category = "Supply_Chain_Chokepoint"
+            entities = ["全球航运巨头", "运河管理局", "苏伊士/巴拿马咽喉"]
+            impact = "关键国际海运咽喉因地缘冲突或枯水期吃水限制被迫大面积绕航好望角，远洋航程与燃油附加费飙升"
+            severity = "P1"
+            duration = "中期 2~6 个月"
+            segments = ["远洋集装箱海运", "干散货与油轮运输", "跨国制造业原料库存"]
+        elif "加州" in title_lower or "california" in title_lower:
             category = "State_Policy_Regulatory"
             entities = ["加州能源委员会", "商业算力中心", "公用电网"]
             impact = "加州通过电网负荷新规，对50MW以上商业算力中心加征电网基础设施维护费"
@@ -251,6 +494,7 @@ class EventRadarCollector:
         config_path: str = "config/event_radar_sources.json",
         watchdog: Optional[NetworkHealthWatchdog] = None,
         progress_manager: Optional[RadarProgressManager] = None,
+        database_manager: Optional[RadarDatabaseManager] = None,
         model_client: Optional[Any] = None,
     ):
         self.config_path = Path(config_path)
@@ -274,6 +518,9 @@ class EventRadarCollector:
             checkpoint_path=ckpt_file,
             max_hash_history_size=prog_cfg.get("max_hash_history_size", 10000),
         )
+
+        db_file = prog_cfg.get("database_file", "data/ledger/event_radar.sqlite3")
+        self.db_mgr = database_manager or RadarDatabaseManager(db_path=db_file)
 
         self.model_client = model_client or MockModelSummarizer()
 
@@ -406,6 +653,9 @@ class EventRadarCollector:
             # 刚性校验与事件烈度分类
             summary = self.engine.parse_and_validate_summary(model_raw_json, item, likely_cat)
 
+            # 持久化写入 SQLite 数据库
+            self.db_mgr.insert_event(summary, item, cycle_start_iso)
+
             # 漏斗第 4 级：重大事件触发门禁
             if summary.requires_deep_analysis:
                 cycle_metrics["p0_p1_triggered"] += 1
@@ -421,7 +671,7 @@ class EventRadarCollector:
             new_triggered_events=triggered_events,
         )
 
-        return {
+        cycle_report = {
             "status": "SUCCESS",
             "timestamp": cycle_start_iso,
             "market_session": session_name,
@@ -435,4 +685,33 @@ class EventRadarCollector:
             "triggered_events": triggered_events,
             "estimated_tokens_consumed": cycle_metrics["estimated_tokens"],
             "checkpoint_saved": True,
+            "db_persisted": True,
         }
+
+        # 写入巡检轮次历史底账
+        self.db_mgr.insert_cycle(cycle_report)
+
+        return cycle_report
+
+    def query_stored_events(
+        self,
+        severity_filter: Optional[List[str]] = None,
+        category: Optional[str] = None,
+        only_requires_deep: bool = False,
+        limit: int = 100,
+    ) -> List[Dict[str, Any]]:
+        """从 SQLite 数据库查询历史收集事件."""
+        return self.db_mgr.query_events(
+            severity_filter=severity_filter,
+            category=category,
+            only_requires_deep=only_requires_deep,
+            limit=limit,
+        )
+
+    def query_stored_cycles(self, limit: int = 20) -> List[Dict[str, Any]]:
+        """从 SQLite 数据库查询历史巡检轮次记录."""
+        return self.db_mgr.query_cycles(limit=limit)
+
+    def query_stored_statistics(self) -> Dict[str, Any]:
+        """从 SQLite 数据库查询全量累计统计指标."""
+        return self.db_mgr.query_summary_statistics()

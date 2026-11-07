@@ -77,7 +77,7 @@ def main():
     checked_links = 0
     for p in ROOT.rglob("*.md"):
         parts = p.relative_to(ROOT).parts
-        if any(part in {".git", ".codex", ".agents", ".venv", ".cache", "scratch"} or part.startswith("share-export") for part in parts):
+        if any(part in {".git", ".codex", ".agents", ".cache", "scratch"} or part.startswith((".venv", "share-export")) for part in parts):
             continue
         # 发行包许可证必须原样保留，其书目链接不属于研究运行时引用。
         # 仅豁免专用许可证目录内的许可文本，项目说明文档仍逐条检查。

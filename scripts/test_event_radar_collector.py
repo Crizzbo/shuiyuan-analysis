@@ -16,6 +16,7 @@ from financial_core.engines.event_radar_engine import (
 from finance_tools.event_radar_collector import (
     NetworkHealthWatchdog,
     RadarProgressManager,
+    RadarDatabaseManager,
     MockModelSummarizer,
     EventRadarCollector,
 )
@@ -120,6 +121,159 @@ class TestEventRadarEngine(unittest.TestCase):
         self.assertEqual(summary.severity_level, "P0")
         self.assertTrue(summary.requires_deep_analysis)
 
+    def test_pre_filter_supply_chain_chokepoint(self):
+        """测试红海曼德海峡与苏伊士咽喉绕航初筛判定."""
+        item = RawNewsItem(
+            id="choke_01",
+            title="红海曼德海峡商船避险改道好望角运价指数跳涨",
+            content="集装箱航运枢纽苏伊士运河通行受阻，好望角绕航燃油附加费飙升。",
+            source="Maritime_Flash",
+            published_at="2026-11-07T05:30:00Z",
+        )
+        matched, tags, cat = self.engine.pre_filter(item)
+        self.assertTrue(matched)
+        self.assertEqual(cat, EventCategory.SUPPLY_CHAIN_CHOKEPOINT)
+
+        summarizer = MockModelSummarizer()
+        prompt_payload = self.engine.build_summary_prompt(item, cat)
+        raw_json = summarizer.generate_summary_json(prompt_payload, item)
+        summary = self.engine.parse_and_validate_summary(raw_json, item, cat)
+        self.assertEqual(summary.severity_level, "P1")
+        self.assertTrue(summary.requires_deep_analysis)
+
+    def test_pre_filter_labor_strikes(self):
+        """测试美东码头工人工会大罢工与物流瘫痪初筛判定."""
+        item = RawNewsItem(
+            id="labor_01",
+            title="国际码头工人协会(ILA)劳资谈判破裂美东港口全面罢工运力瘫痪",
+            content="美东各大港口工会工人全线离岗，集装箱装卸业务停摆，运力周转受阻。",
+            source="Journal_Commerce",
+            published_at="2026-11-07T05:00:00Z",
+        )
+        matched, tags, cat = self.engine.pre_filter(item)
+        self.assertTrue(matched)
+        self.assertEqual(cat, EventCategory.LABOR_STRIKES)
+
+        summarizer = MockModelSummarizer()
+        prompt_payload = self.engine.build_summary_prompt(item, cat)
+        raw_json = summarizer.generate_summary_json(prompt_payload, item)
+        summary = self.engine.parse_and_validate_summary(raw_json, item, cat)
+        self.assertEqual(summary.severity_level, "P1")
+        self.assertTrue(summary.requires_deep_analysis)
+        self.assertIn("国际码头工人协会", "".join(summary.involved_entities))
+
+    def test_pre_filter_antitrust_and_itc337(self):
+        """测试美国司法部反垄断诉讼与 ITC 337 调查排除令初筛判定."""
+        item = RawNewsItem(
+            id="at_01",
+            title="美国ITC正式针对先进制程专利侵权启动337调查并动议排除令",
+            content="涉及反垄断诉讼与关键半导体架构专利侵权禁令审查。",
+            source="USITC_Notice",
+            published_at="2026-11-07T04:30:00Z",
+        )
+        matched, tags, cat = self.engine.pre_filter(item)
+        self.assertTrue(matched)
+        self.assertEqual(cat, EventCategory.ANTITRUST_LITIGATION)
+
+        summarizer = MockModelSummarizer()
+        prompt_payload = self.engine.build_summary_prompt(item, cat)
+        raw_json = summarizer.generate_summary_json(prompt_payload, item)
+        summary = self.engine.parse_and_validate_summary(raw_json, item, cat)
+        self.assertEqual(summary.severity_level, "P1")
+        self.assertTrue(summary.requires_deep_analysis)
+
+    def test_pre_filter_commodity_squeeze(self):
+        """测试大宗现货倒挂升水逼仓与战略石油储备(SPR)释出初筛判定."""
+        item = RawNewsItem(
+            id="comm_01",
+            title="战略石油储备SPR招标释出且LME现货升水倒挂逼仓风险骤增",
+            content="仓单注销率飙升，现货期限结构深度倒挂，逼仓挤兑提货风险加剧。",
+            source="Commodity_Wire",
+            published_at="2026-11-07T04:00:00Z",
+        )
+        matched, tags, cat = self.engine.pre_filter(item)
+        self.assertTrue(matched)
+        self.assertEqual(cat, EventCategory.COMMODITY_SQUEEZE)
+
+        summarizer = MockModelSummarizer()
+        prompt_payload = self.engine.build_summary_prompt(item, cat)
+        raw_json = summarizer.generate_summary_json(prompt_payload, item)
+        summary = self.engine.parse_and_validate_summary(raw_json, item, cat)
+        self.assertEqual(summary.severity_level, "P1")
+        self.assertTrue(summary.requires_deep_analysis)
+
+    def test_pre_filter_central_bank_liquidity(self):
+        """测试日元套息平仓流动性冲击与紧急贴现窗口调用初筛判定."""
+        item = RawNewsItem(
+            id="liq_01",
+            title="日元汇率突涨引爆全球跨国套息平仓carry trade流动性挤压贴现窗口",
+            content="日本央行与离岸美元流动性异动，对冲基金遭遇强制平仓潮。",
+            source="FX_Macro_Wire",
+            published_at="2026-11-07T03:30:00Z",
+        )
+        matched, tags, cat = self.engine.pre_filter(item)
+        self.assertTrue(matched)
+        self.assertEqual(cat, EventCategory.CENTRAL_BANK_LIQUIDITY)
+
+        summarizer = MockModelSummarizer()
+        prompt_payload = self.engine.build_summary_prompt(item, cat)
+        raw_json = summarizer.generate_summary_json(prompt_payload, item)
+        summary = self.engine.parse_and_validate_summary(raw_json, item, cat)
+        self.assertEqual(summary.severity_level, "P0")
+        self.assertTrue(summary.requires_deep_analysis)
+
+    def test_source_credibility_tiering(self):
+        """测试买方信源权威度分级判定 (Tier 1 到 Tier 4)."""
+        # Tier 1: 官方监管机构与政府公报
+        tier, score = self.engine.evaluate_source_credibility("USITC_Official_Gazette")
+        self.assertEqual(tier.value, "Tier1_Official_Regulatory")
+        self.assertEqual(score, 1.0)
+
+        tier, score = self.engine.evaluate_source_credibility("CPUC_Proceedings")
+        self.assertEqual(tier.value, "Tier1_Official_Regulatory")
+        self.assertEqual(score, 1.0)
+
+        # Tier 2: 上市公司官方IR与工会公报
+        tier, score = self.engine.evaluate_source_credibility("TSMC_Investor_Relations_PR")
+        self.assertEqual(tier.value, "Tier2_Official_Disclosure")
+        self.assertEqual(score, 0.9)
+
+        tier, score = self.engine.evaluate_source_credibility("ILA_Union_Official")
+        self.assertEqual(tier.value, "Tier2_Official_Disclosure")
+        self.assertEqual(score, 0.9)
+
+        # Tier 3: 主流财经通讯社
+        tier, score = self.engine.evaluate_source_credibility("Reuters_Industrial_Wire")
+        self.assertEqual(tier.value, "Tier3_Mainstream_Wire")
+        self.assertEqual(score, 0.8)
+
+        # Tier 4: 社交媒体网络快讯
+        tier, score = self.engine.evaluate_source_credibility("X_Social_Flash_Anonymous")
+        self.assertEqual(tier.value, "Tier4_Public_Flash_Social")
+        self.assertEqual(score, 0.45)
+
+    def test_rumor_circuit_breaker_blocks_deep_analysis(self):
+        """测试传闻熔断门禁：来自 Tier 4 的小道传闻即使命中高危物理关键词也强制熔断深研."""
+        item = RawNewsItem(
+            id="rumor_test_01",
+            title="据社交媒体传闻某先进制程晶圆厂突发爆炸停产",
+            content="未经核实的小道消息称某晶圆厂停产检修，官方目前未发布任何公告。",
+            source="X_Social_Rumor_Flash",
+            published_at="2026-11-07T09:00:00Z",
+        )
+        matched, tags, cat = self.engine.pre_filter(item)
+        self.assertTrue(matched)
+
+        summarizer = MockModelSummarizer()
+        prompt_payload = self.engine.build_summary_prompt(item, cat)
+        raw_json = summarizer.generate_summary_json(prompt_payload, item)
+        summary = self.engine.parse_and_validate_summary(raw_json, item, cat)
+
+        # 核心断言：命中爆炸停产通常提升为 P1，但因信源为 Tier 4 且含传闻字样，必须被判定为 Unverified_Rumor 且深研门禁被强制熔断
+        self.assertEqual(summary.verification_status, "Unverified_Rumor")
+        self.assertFalse(summary.requires_deep_analysis)
+        self.assertIn("熔断门禁", summary.verification_note)
+
 
 class TestNetworkHealthWatchdog(unittest.TestCase):
     """测试自发断网检测与自治恢复看门狗."""
@@ -201,12 +355,93 @@ class TestRadarProgressManager(unittest.TestCase):
         self.assertEqual(new_mgr.state["cumulative_metrics"]["total_p0_p1_triggered"], 1)
 
 
+class TestRadarDatabaseManager(unittest.TestCase):
+    """测试事件雷达 SQLite 数据库持久化、结构化查询与统计."""
+
+    def setUp(self):
+        self.temp_dir = tempfile.TemporaryDirectory()
+        self.db_path = Path(self.temp_dir.name) / "test_event_radar.sqlite3"
+        self.db_mgr = RadarDatabaseManager(db_path=str(self.db_path))
+
+    def tearDown(self):
+        self.temp_dir.cleanup()
+
+    def test_database_insert_and_query_events(self):
+        """测试事件入库与按烈度等级筛选."""
+        item = RawNewsItem(
+            id="db_item_01",
+            title="加州通过商业算力电网新规",
+            content="加州公用事业委员会签署法案",
+            source="California_Gazette",
+            published_at="2026-11-07T08:00:00Z",
+        )
+        summary = StructuredEventSummary(
+            event_id="EVT_CALIF_001",
+            timestamp="2026-11-07T08:00:00Z",
+            category="State_Policy_Regulatory",
+            involved_entities=["加州能源委员会", "商业算力中心"],
+            micro_physical_impact="加州对50MW以上商业算力中心加征电网负荷费",
+            estimated_duration="长期法定",
+            affected_business_segments=["云计算中心", "电力"],
+            severity_level="P1",
+            requires_deep_analysis=True,
+            raw_title=item.title,
+            source_name=item.source,
+        )
+
+        self.db_mgr.insert_event(summary, item, "2026-11-07T08:05:00Z")
+        events = self.db_mgr.query_events()
+        self.assertEqual(len(events), 1)
+        self.assertEqual(events[0]["event_id"], "EVT_CALIF_001")
+        self.assertEqual(events[0]["severity_level"], "P1")
+        self.assertTrue(events[0]["requires_deep_analysis"])
+        self.assertIn("加州能源委员会", events[0]["involved_entities"])
+        self.assertEqual(events[0]["credibility_tier"], "Tier3_Mainstream_Wire")
+        self.assertEqual(events[0]["credibility_score"], 0.8)
+        self.assertEqual(events[0]["verification_status"], "Corroborated_Report")
+
+        # 测试仅筛选重大 P0/P1 事件
+        major_events = self.db_mgr.query_events(severity_filter=["P0", "P1"], only_requires_deep=True)
+        self.assertEqual(len(major_events), 1)
+
+        # 测试 P3 筛选无结果
+        p3_events = self.db_mgr.query_events(severity_filter=["P3"])
+        self.assertEqual(len(p3_events), 0)
+
+    def test_database_cycle_insert_and_stats(self):
+        """测试巡检轮次审计入库与全量统计指标."""
+        cycle_report = {
+            "timestamp": "2026-11-07T08:10:00Z",
+            "market_session": "pre_market",
+            "status": "SUCCESS",
+            "active_probe_node": "Google_Public_DNS (8.8.8.8:53)",
+            "probe_latency_ms": 1.5,
+            "scanned_count": 20,
+            "filtered_in_count": 5,
+            "summarized_count": 5,
+            "p0_p1_triggered_count": 2,
+            "estimated_tokens_consumed": 550,
+        }
+        self.db_mgr.insert_cycle(cycle_report)
+        cycles = self.db_mgr.query_cycles()
+        self.assertEqual(len(cycles), 1)
+        self.assertEqual(cycles[0]["market_session"], "pre_market")
+        self.assertEqual(cycles[0]["scanned_count"], 20)
+
+        stats = self.db_mgr.query_summary_statistics()
+        self.assertEqual(stats["total_cycles_executed"], 1)
+        self.assertEqual(stats["total_scanned_news"], 20)
+        self.assertEqual(stats["total_summarized"], 5)
+        self.assertEqual(stats["total_tokens_burned"], 550)
+
+
 class TestEventRadarCollectorEndToEnd(unittest.TestCase):
     """测试收集器端到端调度、极低 Token 消耗与门禁触发."""
 
     def setUp(self):
         self.temp_dir = tempfile.TemporaryDirectory()
         self.ckpt_path = Path(self.temp_dir.name) / "test_ckpt.json"
+        self.db_path = Path(self.temp_dir.name) / "test_event_radar.sqlite3"
         self.cfg_path = Path(self.temp_dir.name) / "test_config.json"
 
         # 写入简版配置
@@ -218,6 +453,7 @@ class TestEventRadarCollectorEndToEnd(unittest.TestCase):
             },
             "progress_management": {
                 "checkpoint_file": str(self.ckpt_path),
+                "database_file": str(self.db_path),
                 "max_hash_history_size": 100,
             },
             "scheduler": {
@@ -238,10 +474,12 @@ class TestEventRadarCollectorEndToEnd(unittest.TestCase):
 
         self.watchdog = AlwaysOnlineWatchdog()
         self.progress_mgr = RadarProgressManager(checkpoint_path=str(self.ckpt_path))
+        self.db_mgr = RadarDatabaseManager(db_path=str(self.db_path))
         self.collector = EventRadarCollector(
             config_path=str(self.cfg_path),
             watchdog=self.watchdog,
             progress_manager=self.progress_mgr,
+            database_manager=self.db_mgr,
             model_client=MockModelSummarizer(),
         )
 
@@ -295,6 +533,17 @@ class TestEventRadarCollectorEndToEnd(unittest.TestCase):
         self.assertEqual(result_2["summarized_count"], 0)
         self.assertEqual(result_2["p0_p1_triggered_count"], 0)
         self.assertEqual(result_2["estimated_tokens_consumed"], 0)
+
+        # 验证 SQLite 数据库已落盘 2 条摘要事件与巡检记录
+        db_events = self.collector.query_stored_events()
+        self.assertEqual(len(db_events), 2)
+        major_db_events = self.collector.query_stored_events(only_requires_deep=True)
+        self.assertEqual(len(major_db_events), 2)
+        db_cycles = self.collector.query_stored_cycles()
+        self.assertGreaterEqual(len(db_cycles), 1)
+        stats = self.collector.query_stored_statistics()
+        self.assertEqual(stats["total_events_stored"], 2)
+        self.assertEqual(stats["total_major_p0_p1"], 2)
 
     def test_collector_offline_graceful_hold(self):
         """测试在断网状态下收集器平滑挂起，不抛出任何异常崩溃."""
