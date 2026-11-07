@@ -1082,6 +1082,37 @@ body {{
   color: #b91c1c;
   border: 1px solid #fca5a5;
 }}
+.action-BLOCKED_BY_RUMOR_CIRCUIT_BREAKER {{
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #f87171;
+}}
+
+:root[data-theme="dark"] .action-BUY_ON_OVERSOLD_NOISE {{
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+  border: 1px solid #22c55e;
+}}
+:root[data-theme="dark"] .action-MONITOR_INVENTORY_BUFFER {{
+  background: rgba(234, 179, 8, 0.2);
+  color: #fde047;
+  border: 1px solid #eab308;
+}}
+:root[data-theme="dark"] .action-EXPEDITE_EXPANSION_OVERWEIGHT {{
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+  border: 1px solid #3b82f6;
+}}
+:root[data-theme="dark"] .action-DOWNGRADE_AND_HEDGE {{
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid #ef4444;
+}}
+:root[data-theme="dark"] .action-BLOCKED_BY_RUMOR_CIRCUIT_BREAKER {{
+  background: rgba(239, 68, 68, 0.25);
+  color: #fca5a5;
+  border: 1px solid #ef4444;
+}}
 
 .sotp-narrative-box {{
   font-size: 0.88rem;
@@ -1674,11 +1705,15 @@ function initSotpSelector() {{
 
   if (majorEvents.length === 0) return;
 
-  selector.innerHTML = majorEvents.map((evt, idx) => `
-    <option value="${{evt.event_id}}">
-      [${{evt.severity_level}}] ${{evt.title.substring(0, 32)}}...
-    </option>
-  `).join("");
+  selector.innerHTML = majorEvents.map((evt, idx) => {{
+    const isRumor = evt.verification_status === "Unverified_Rumor";
+    const rumorPrefix = isRumor ? "⚠️[传闻熔断] " : "";
+    return `
+      <option value="${{evt.event_id}}">
+        [${{evt.severity_level}}] ${{rumorPrefix}}${{evt.title.substring(0, 30)}}...
+      </option>
+    `;
+  }}).join("");
 
   // 默认选中第一条重大事件
   selectedSotpEventId = majorEvents[0].event_id;
@@ -1714,15 +1749,17 @@ function renderSotpConsole() {{
     return;
   }}
 
+  const isCircuitBreaker = impactData.recommended_action === "BLOCKED_BY_RUMOR_CIRCUIT_BREAKER";
   const isPositive = impactData.total_operating_income_impact > 0;
   const isZero = Math.abs(impactData.total_operating_income_impact) < 0.01;
-  const ebitClass = isZero ? 'num-neutral' : (isPositive ? 'num-positive' : 'num-negative');
+  const ebitClass = isCircuitBreaker ? 'num-neutral' : (isZero ? 'num-neutral' : (isPositive ? 'num-positive' : 'num-negative'));
 
   const actionTextMap = {{
     "BUY_ON_OVERSOLD_NOISE": "🟢 恐慌错杀买入点 (BUY_ON_OVERSOLD)",
     "MONITOR_INVENTORY_BUFFER": "🟡 监控库存抵御天数 (MONITOR_DIO)",
     "EXPEDITE_EXPANSION_OVERWEIGHT": "🚀 结构性利好增配 (EXPEDITE_EXPANSION)",
     "DOWNGRADE_AND_HEDGE": "🔴 利润承压对冲 (DOWNGRADE_HEDGE)",
+    "BLOCKED_BY_RUMOR_CIRCUIT_BREAKER": "🛑 待核传闻熔断拦截 (CIRCUIT_BREAKER)",
   }};
 
   const actionDisplay = actionTextMap[impactData.recommended_action] || impactData.recommended_action;
@@ -1747,83 +1784,100 @@ function renderSotpConsole() {{
       <div class="sotp-metric-box">
         <span class="sotp-metric-title">全公司营业利润净影响 (ΔEBIT)</span>
         <span class="sotp-metric-num ${{ebitClass}}">
-          ${{isPositive ? '+' : ''}}${{impactData.total_operating_income_impact.toFixed(1)}} M$
+          ${{isCircuitBreaker ? '0.0 M$' : (isPositive ? '+' : '') + impactData.total_operating_income_impact.toFixed(1) + ' M$'}}
         </span>
         <span style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">
-          变动率: ${{impactData.ebit_impact_percentage >= 0 ? '+' : ''}}${{(impactData.ebit_impact_percentage * 100).toFixed(2)}}%
+          ${{isCircuitBreaker ? '变动率: 0.00% (传闻熔断锁止)' : '变动率: ' + (impactData.ebit_impact_percentage >= 0 ? '+' : '') + (impactData.ebit_impact_percentage * 100).toFixed(2) + '%'}}
         </span>
       </div>
 
       <div class="sotp-metric-box">
         <span class="sotp-metric-title">摊薄每股收益影响 (ΔEPS)</span>
         <span class="sotp-metric-num ${{ebitClass}}">
-          ${{isPositive ? '+' : ''}}${{impactData.eps_impact.toFixed(3)}} $/股
+          ${{isCircuitBreaker ? '0.000 $/股' : (isPositive ? '+' : '') + impactData.eps_impact.toFixed(3) + ' $/股'}}
         </span>
         <span style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">
-          扣除 ${{(profile.effective_tax_rate * 100).toFixed(0)}}% 实际所得税
+          ${{isCircuitBreaker ? '已前置阻断计算' : '扣除 ' + (profile.effective_tax_rate * 100).toFixed(0) + '% 实际所得税'}}
         </span>
       </div>
 
       <div class="sotp-metric-box">
         <span class="sotp-metric-title">DCF 估值靶心折让幅度</span>
         <span class="sotp-metric-num ${{ebitClass}}">
-          ${{impactData.valuation_target_discount_pct >= 0 ? '+' : ''}}${{(impactData.valuation_target_discount_pct * 100).toFixed(2)}}%
+          ${{isCircuitBreaker ? '0.00%' : (impactData.valuation_target_discount_pct >= 0 ? '+' : '') + (impactData.valuation_target_discount_pct * 100).toFixed(2) + '%'}}
         </span>
         <span style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">
-          考虑 1.2x 经营杠杆折现敏感度
+          ${{isCircuitBreaker ? '基准情景维持不变' : '考虑 1.2x 经营杠杆折现敏感度'}}
         </span>
       </div>
 
       <div class="sotp-metric-box">
         <span class="sotp-metric-title">业务分部抗压韧性</span>
-        <span class="sotp-metric-num num-positive">
-          ${{impactData.segment_impacts.filter(s => s.exposure_score < 0.1).length}} / ${{impactData.segment_impacts.length}}
+        <span class="sotp-metric-num ${{isCircuitBreaker ? 'num-neutral' : 'num-positive'}}">
+          ${{isCircuitBreaker ? '熔断锁止' : impactData.segment_impacts.filter(s => s.exposure_score < 0.1).length + ' / ' + impactData.segment_impacts.length}}
         </span>
         <span style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">
-          独立未受波及主营分部
+          ${{isCircuitBreaker ? '待法定信源核验' : '独立未受波及主营分部'}}
         </span>
       </div>
     </div>
 
-    <div class="sotp-narrative-box">
+    <div class="sotp-narrative-box" style="${{isCircuitBreaker ? 'border-left-color: #ef4444; background: var(--p0-badge-bg);' : ''}}">
       <strong>买方决策评述：</strong> ${{impactData.focal_summary}}
     </div>
   `;
 
   // 2. 渲染各业务分部细分表格
-  tbody.innerHTML = impactData.segment_impacts.map(s => {{
-    const segEbit = s.operating_income_impact;
-    const isSegPos = segEbit > 0;
-    const isSegZero = Math.abs(segEbit) < 0.01;
-    const colorStyle = isSegZero ? 'color: var(--text-muted);' : (isSegPos ? 'color: var(--success); font-weight: 700;' : 'color: #ef4444; font-weight: 700;');
-
-    // 查找该分部的官方权重
-    const origSeg = profile.segments.find(x => x.segment_id === s.segment_id);
-    const weightStr = origSeg ? `${{(origSeg.revenue_weight * 100).toFixed(1)}}%` : "-";
-    const revStr = origSeg ? `$${{origSeg.revenue.toLocaleString()}}` : "-";
-    const dioStr = origSeg ? `${{origSeg.inventory_buffer_days}} 天` : "-";
-    const passStr = origSeg ? `${{(origSeg.cost_pass_through_power * 100).toFixed(0)}}%` : "-";
-
-    return `
+  if (isCircuitBreaker) {{
+    tbody.innerHTML = `
       <tr>
-        <td class="mono-cell">${{s.segment_id}}</td>
-        <td style="font-weight: 600; color: var(--text-primary);">${{s.segment_name}}</td>
-        <td class="mono-cell">${{revStr}}</td>
-        <td class="mono-cell" style="font-weight: 600;">${{weightStr}}</td>
-        <td class="mono-cell" style="color: ${{s.exposure_score > 0.5 ? 'var(--p0-badge-text)' : 'inherit'}}; font-weight: 600;">
-          ${{(s.exposure_score * 100).toFixed(0)}}%
-        </td>
-        <td class="mono-cell">${{dioStr}}</td>
-        <td class="mono-cell">${{passStr}}</td>
-        <td class="mono-cell" style="${{colorStyle}}">
-          ${{isSegPos ? '+' : ''}}${{segEbit.toFixed(2)}} M$
-        </td>
-        <td style="font-size: 0.78rem; color: var(--text-secondary); max-width: 320px;">
-          ${{s.rationale}}
+        <td colspan="9" class="empty-state" style="padding: 24px 16px; text-align: center; color: #b91c1c;">
+          <div style="font-size: 1.05rem; font-weight: 700; margin-bottom: 6px;">🛑 待核传闻熔断门禁已激活 (Rumor Circuit Breaker Active)</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); max-width: 680px; margin: 0 auto; line-height: 1.5;">
+            当前突发事件来源于未经官方核验的社交网络/公开快讯 (Tier 4)，买方多业务分部 (SOTP) 深度因果计算引擎已坚决启动前置熔断拦截，阻断一切损益折让推演与调仓信号。
+            <br>
+            <strong>处置指引：</strong> 请通过法定信源核验工具 <code>scripts/confirm_event_verification.py</code> 导入监管公报原文并完成 SHA-256 验签后，系统将自动解除熔断并执行深度损益测算。
+          </div>
         </td>
       </tr>
     `;
-  }}).join("");
+  }} else if (!impactData.segment_impacts || impactData.segment_impacts.length === 0) {{
+    tbody.innerHTML = '<tr><td colspan="9" class="empty-state">当前事件对所选标的主营分部无直接暴露影响</td></tr>';
+  }} else {{
+    tbody.innerHTML = impactData.segment_impacts.map(s => {{
+      const segEbit = s.operating_income_impact;
+      const isSegPos = segEbit > 0;
+      const isSegZero = Math.abs(segEbit) < 0.01;
+      const colorStyle = isSegZero ? 'color: var(--text-muted);' : (isSegPos ? 'color: var(--success); font-weight: 700;' : 'color: #ef4444; font-weight: 700;');
+
+      // 查找该分部的官方权重
+      const origSeg = profile.segments.find(x => x.segment_id === s.segment_id);
+      const weightStr = origSeg ? `${{(origSeg.revenue_weight * 100).toFixed(1)}}%` : "-";
+      const revStr = origSeg ? `$${{origSeg.revenue.toLocaleString()}}` : "-";
+      const dioStr = origSeg ? `${{origSeg.inventory_buffer_days}} 天` : "-";
+      const passStr = origSeg ? `${{(origSeg.cost_pass_through_power * 100).toFixed(0)}}%` : "-";
+
+      return `
+        <tr>
+          <td class="mono-cell">${{s.segment_id}}</td>
+          <td style="font-weight: 600; color: var(--text-primary);">${{s.segment_name}}</td>
+          <td class="mono-cell">${{revStr}}</td>
+          <td class="mono-cell" style="font-weight: 600;">${{weightStr}}</td>
+          <td class="mono-cell" style="color: ${{s.exposure_score > 0.5 ? 'var(--p0-badge-text)' : 'inherit'}}; font-weight: 600;">
+            ${{(s.exposure_score * 100).toFixed(0)}}%
+          </td>
+          <td class="mono-cell">${{dioStr}}</td>
+          <td class="mono-cell">${{passStr}}</td>
+          <td class="mono-cell" style="${{colorStyle}}">
+            ${{isSegPos ? '+' : ''}}${{segEbit.toFixed(2)}} M$
+          </td>
+          <td style="font-size: 0.78rem; color: var(--text-secondary); max-width: 320px;">
+            ${{s.rationale}}
+          </td>
+        </tr>
+      `;
+    }}).join("");
+  }}
 }}
 
 // 渲染 SQLite 事件表格
