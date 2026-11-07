@@ -1,0 +1,28 @@
+{
+  "alert_level_threshold": "P0_AND_P1",
+  "cooldown_seconds": 300,
+  "auto_trigger_sotp": true,
+  "max_entities_to_penetrate": 3,
+  "channels": {
+    "console": {
+      "enabled": true,
+      "show_sotp_summary": true,
+      "use_color": true
+    },
+    "desktop_toast": {
+      "enabled": true,
+      "duration_seconds": 5,
+      "sound": true
+    },
+    "file_log": {
+      "enabled": true,
+      "log_path": "reports/alerts/radar_alerts.log"
+    },
+    "webhook": {
+      "enabled": false,
+      "url": "",
+      "token": "",
+      "platform": "generic"
+    }
+  }
+}
