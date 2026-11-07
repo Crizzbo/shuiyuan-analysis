@@ -92,12 +92,23 @@ def generate_dashboard_html(
             except Exception as e:
                 pass
 
+    # 加载密码学防伪收据总账
+    receipts_path = PROJECT_ROOT / "data/ledger/verification_receipts.json"
+    receipts = []
+    if receipts_path.is_file():
+        try:
+            with open(receipts_path, "r", encoding="utf-8") as f:
+                receipts = json.load(f)
+        except Exception:
+            receipts = []
+
     # 序列化为前端 JavaScript 安全的 JSON
     events_json = json.dumps(events, ensure_ascii=False)
     cycles_json = json.dumps(cycles, ensure_ascii=False)
     stats_json = json.dumps(stats, ensure_ascii=False)
     sotp_profiles_json = json.dumps(sotp_profiles, ensure_ascii=False)
     sotp_impacts_json = json.dumps(sotp_impacts, ensure_ascii=False)
+    receipts_json = json.dumps(receipts, ensure_ascii=False)
 
     html_content = f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -313,6 +324,141 @@ body {{
   background: var(--success);
   display: inline-block;
   box-shadow: 0 0 0 2px var(--success-bg);
+}}
+
+@keyframes pulse-dot {{
+  0% {{ transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }}
+  70% {{ transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }}
+  100% {{ transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }}
+}}
+
+.dot.pulsing {{
+  background: var(--success);
+  animation: pulse-dot 2s infinite;
+}}
+
+.dot.offline {{
+  background: var(--text-muted);
+  box-shadow: none;
+}}
+
+/* SOTP 突发事件因果拓扑图组件 */
+.topology-wrapper {{
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 20px;
+}}
+.topology-container {{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}}
+@media (min-width: 900px) {{
+  .topology-container {{
+    display: grid;
+    grid-template-columns: 280px 32px 1fr 32px 260px;
+    align-items: center;
+  }}
+}}
+.topology-arrow {{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 20px;
+  font-weight: 700;
+  opacity: 0.85;
+}}
+.topology-node {{
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}}
+.topology-node.active-event {{
+  border-left: 4px solid var(--p1-border);
+}}
+.topology-node.segments-cluster {{
+  border-left: 4px solid var(--accent);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}}
+.topology-node.outcome-node {{
+  border-left: 4px solid var(--warning);
+}}
+.topology-node-header {{
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}}
+.topology-node-title {{
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}}
+.topology-segment-item {{
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+}}
+.topology-segment-item.exposed {{
+  border-color: var(--p1-border);
+  background: var(--p1-badge-bg);
+  color: var(--p1-badge-text);
+  font-weight: 600;
+}}
+.topology-badge {{
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+}}
+
+/* 法定防伪收据审计账本 */
+.receipt-badge {{
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: var(--accent-subtle);
+  color: var(--accent);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--accent);
+}}
+.receipt-hash {{
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  padding: 2px 5px;
+  border-radius: 3px;
+}}
+.circuit-breaker-lifted {{
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid var(--success);
+  font-size: 0.72rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
 }}
 
 .theme-toggle-btn {{
@@ -1296,9 +1442,12 @@ body {{
       </div>
     </div>
     <div class="header-status-capsules">
+      <div class="capsule" id="liveStreamCapsule">
+        <span class="dot" id="liveStreamDot"></span>
+        <span id="liveStreamText">推流探针待机</span>
+      </div>
       <div class="capsule">
-        <span class="dot"></span>
-        <span>探针: Google DNS (8.8.8.8:53) 1.15ms</span>
+        <span>⚖️ 法定收据: <strong id="headerReceiptsCount">{len(receipts)}</strong> 份</span>
       </div>
       <div class="capsule">
         <span>时段: 美股盘前 (Pre-Market 5m)</span>
@@ -1396,6 +1545,21 @@ body {{
         <select id="sotpEventSelector" class="sotp-event-select" onchange="onSotpEventChange(this.value)">
           <!-- 动态填充重大事件选项 -->
         </select>
+      </div>
+    </div>
+
+    <!-- 突发事件多业务分部因果拓扑链路图 -->
+    <div class="topology-wrapper">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+        <h3 style="margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 6px;">
+          <span>🕸️ 突发事件多业务分部因果拓扑链路 (Causal Chain Topology)</span>
+        </h3>
+        <span style="font-size: 0.75rem; color: var(--text-muted);">
+          微观物理事件源 ➔ 各业务分部因果暴露 ➔ DIO库存与转嫁权双防线 ➔ 财务损益与买方直觉
+        </span>
+      </div>
+      <div id="sotpTopologyContainer" class="topology-container">
+        <!-- 由 JavaScript 动态渲染拓扑节点 -->
       </div>
     </div>
 
@@ -1530,6 +1694,41 @@ body {{
     </div>
   </section>
 
+  <!-- 官方信源法定鉴真与传闻熔断解除收据账本 -->
+  <section class="section-card">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span>⚖️ 官方信源法定鉴真与传闻熔断解除收据账本 (verification_receipts)</span>
+        <span class="badge-count" id="receiptsBadgeCount">{len(receipts)} 份已核验</span>
+      </h2>
+      <div style="font-size: 0.8rem; color: var(--text-muted);">
+        遵循《2026-10-11 最新数据来源策略》· SHA-256 密码学防伪指纹 · 官方公报平账 · 熔断解除可审计留痕
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="event-table" id="receiptsTable">
+        <thead>
+          <tr>
+            <th>收据流水号</th>
+            <th>关联事件 ID</th>
+            <th>事件概要</th>
+            <th>状态跃迁</th>
+            <th>信源提级</th>
+            <th>本地证据文件</th>
+            <th>SHA-256 密码学指纹</th>
+            <th>核验时间戳 (UTC)</th>
+          </tr>
+        </thead>
+        <tbody id="receiptsTableBody">
+          <!-- 动态渲染 -->
+        </tbody>
+      </table>
+      <div id="receiptsEmptyMessage" class="empty-state" style="display: none;">
+        暂未生成官方鉴真收据。在 inbox 投放公报或运行 run_evidence_verification.py 即可自动验签并解除传闻熔断。
+      </div>
+    </div>
+  </section>
+
   <!-- 定时巡检时序与看门狗审计日志 -->
   <section class="section-card cycle-card">
     <div class="section-header">
@@ -1573,6 +1772,7 @@ const RAW_CYCLES = {cycles_json};
 const RAW_STATS = {stats_json};
 const SOTP_PROFILES = {sotp_profiles_json};
 const SOTP_IMPACTS = {sotp_impacts_json};
+let RAW_RECEIPTS = {receipts_json};
 
 let currentSeverityFilter = "ALL";
 let currentCategoryFilter = "ALL";
@@ -1878,6 +2078,142 @@ function renderSotpConsole() {{
       `;
     }}).join("");
   }}
+
+  // 联动渲染 SOTP 微观因果链路拓扑图
+  renderTopologyGraph(selectedSotpEventId, selectedSotpTicker);
+}}
+
+// 渲染 SOTP 微观因果链路拓扑图
+function renderTopologyGraph(eventId, ticker) {{
+  const container = document.getElementById("sotpTopologyContainer");
+  if (!container) return;
+
+  const eventObj = RAW_EVENTS.find(e => e.event_id === eventId);
+  const profile = SOTP_PROFILES[ticker];
+  const impactData = (SOTP_IMPACTS[eventId] && SOTP_IMPACTS[eventId][ticker]) || null;
+
+  if (!eventObj || !profile) {{
+    container.innerHTML = '<div class="empty-state">暂无因果拓扑数据</div>';
+    return;
+  }}
+
+  const isRumor = eventObj.verification_status === "Unverified_Rumor";
+  const sevPill = `<span class="severity-pill ${{eventObj.severity_level}}">${{eventObj.severity_level}}</span>`;
+  const credBadge = renderCredibilityBadge(eventObj);
+
+  // 1. 突发事件源节点
+  const eventNodeHtml = `
+    <div class="topology-node active-event">
+      <div class="topology-node-header">
+        <span>突发物理事件源</span>
+        <span>${{sevPill}}</span>
+      </div>
+      <div class="topology-node-title">${{eventObj.title}}</div>
+      <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">
+        编号: ${{eventObj.event_id}} | 信源: ${{eventObj.source_name}}
+      </div>
+      <div style="font-size: 0.78rem; color: var(--text-secondary); background: var(--bg-subtle); padding: 6px 8px; border-radius: 4px; line-height: 1.4;">
+        ${{eventObj.micro_physical_impact || "微观物理事实提取中..."}}
+      </div>
+      <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
+        ${{credBadge}}
+      </div>
+    </div>
+  `;
+
+  // 2. 业务分部暴露群
+  const segmentsHtml = profile.segments.map(seg => {{
+    const segImpact = impactData && impactData.segment_impacts ? impactData.segment_impacts.find(s => s.segment_id === seg.segment_id) : null;
+    const isExposed = segImpact && segImpact.exposure_score > 0.05;
+    const weightPct = (seg.revenue_weight * 100).toFixed(0);
+    const dio = seg.inventory_buffer_days;
+    const pt = (seg.cost_pass_through_power * 100).toFixed(0);
+
+    return `
+      <div class="topology-segment-item ${{isExposed ? 'exposed' : ''}}">
+        <div>
+          <span style="font-weight: 600;">${{seg.name_zh}}</span>
+          <span style="font-size: 0.7rem; opacity: 0.8; margin-left: 4px;">(${{weightPct}}% 权重)</span>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 0.72rem;">
+          ${{isExposed ? `暴露度 ${{(segImpact.exposure_score * 100).toFixed(0)}}% | DIO ${{dio}}天 | 转嫁权 ${{pt}}%` : '未波及 (安全隔离)'}}
+        </div>
+      </div>
+    `;
+  }}).join("");
+
+  const segmentsNodeHtml = `
+    <div class="topology-node segments-cluster">
+      <div class="topology-node-header">
+        <span>${{profile.company_name}} (${{ticker}}) 业务分部暴露</span>
+        <span>${{profile.segments.length}} 大核心主营</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        ${{segmentsHtml}}
+      </div>
+    </div>
+  `;
+
+  // 3. 财务与决策终点
+  let outcomeHtml = "";
+  if (isRumor) {{
+    outcomeHtml = `
+      <div class="topology-node outcome-node" style="border-left-color: #ef4444; background: var(--p0-badge-bg);">
+        <div class="topology-node-header" style="color: #991b1b;">
+          <span>传闻熔断门禁已锁止</span>
+          <span>🛑 拦截</span>
+        </div>
+        <div style="font-size: 0.82rem; font-weight: 700; color: #991b1b;">
+          未核实小道快讯，前置阻断调仓与估值下调
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">
+          等待官方公报/8-K原文入库并通过 SHA-256 验签后自动解封重算。
+        </div>
+      </div>
+    `;
+  }} else if (impactData) {{
+    const ebitVal = impactData.total_operating_income_impact;
+    const epsVal = impactData.total_eps_impact;
+    const isPos = ebitVal > 0;
+    const isZero = Math.abs(ebitVal) < 0.01;
+    const ebitColor = isZero ? 'var(--text-muted)' : (isPos ? 'var(--success)' : '#ef4444');
+
+    outcomeHtml = `
+      <div class="topology-node outcome-node">
+        <div class="topology-node-header">
+          <span>最终因果落地与决策</span>
+          <span>${{impactData.recommended_action.substring(0, 15)}}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <div style="font-size: 0.8rem; color: var(--text-muted);">
+            营业利润净冲击 (ΔEBIT):
+            <strong style="color: ${{ebitColor}}; font-size: 0.95rem;">${{isPos ? '+' : ''}}${{ebitVal.toFixed(2)}} M$</strong>
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">
+            每股收益冲击 (ΔEPS):
+            <strong style="color: ${{ebitColor}}; font-size: 0.95rem;">${{isPos ? '+' : ''}}${{epsVal.toFixed(4)}} $</strong>
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">
+            DCF 靶心变动:
+            <strong style="color: var(--text-primary); font-size: 0.88rem;">${{(impactData.valuation_target_discount_pct * 100).toFixed(2)}}%</strong>
+          </div>
+        </div>
+        <div style="margin-top: 6px; font-size: 0.75rem; font-weight: 600; padding: 4px 8px; border-radius: 4px; background: var(--bg-subtle);">
+          建议: ${{impactData.recommended_action}}
+        </div>
+      </div>
+    `;
+  }} else {{
+    outcomeHtml = '<div class="topology-node outcome-node"><div class="empty-state">无冲击</div></div>';
+  }}
+
+  container.innerHTML = `
+    ${{eventNodeHtml}}
+    <div class="topology-arrow">➔</div>
+    ${{segmentsNodeHtml}}
+    <div class="topology-arrow">➔</div>
+    ${{outcomeHtml}}
+  `;
 }}
 
 // 渲染 SQLite 事件表格
@@ -2081,12 +2417,98 @@ function toggleTheme() {{
   document.getElementById("themeLabel").innerText = nextTheme === "dark" ? "深色模式" : "浅色模式";
 }}
 
+// 渲染法定鉴真防伪收据审计账本
+function renderReceiptsTable() {{
+  const tbody = document.getElementById("receiptsTableBody");
+  const emptyMsg = document.getElementById("receiptsEmptyMessage");
+  const badgeCount = document.getElementById("receiptsBadgeCount");
+  const headerCount = document.getElementById("headerReceiptsCount");
+
+  if (badgeCount) badgeCount.innerText = `${{RAW_RECEIPTS.length}} 份已核验`;
+  if (headerCount) headerCount.innerText = RAW_RECEIPTS.length;
+
+  if (!RAW_RECEIPTS || RAW_RECEIPTS.length === 0) {{
+    if (tbody) tbody.innerHTML = "";
+    if (emptyMsg) emptyMsg.style.display = "block";
+    return;
+  }}
+  if (emptyMsg) emptyMsg.style.display = "none";
+
+  if (tbody) {{
+    tbody.innerHTML = RAW_RECEIPTS.map(r => `
+      <tr>
+        <td class="mono-cell"><span class="receipt-badge">${{r.receipt_id || "-"}}</span></td>
+        <td class="mono-cell" style="font-weight: 600;">${{r.event_id || "-"}}</td>
+        <td style="max-width: 240px; font-weight: 500;">${{r.title || "-"}}</td>
+        <td>
+          <span style="font-size: 0.72rem; color: var(--text-muted);">${{r.previous_status || "-"}}</span>
+          ➔
+          <span class="circuit-breaker-lifted">已解封 (${{r.new_status || "Confirmed_Fact"}})</span>
+        </td>
+        <td>
+          <span class="cred-badge cred-Tier1_Official_Regulatory">🏛️ ${{r.new_credibility || "Tier1"}}</span>
+        </td>
+        <td class="mono-cell" style="font-size: 0.72rem; max-width: 200px; word-break: break-all;">
+          ${{r.evidence_path || "-"}} (${{r.file_size_bytes || 0}} B)
+        </td>
+        <td class="mono-cell">
+          <span class="receipt-hash" title="${{r.evidence_sha256 || ''}}">
+            ${{(r.evidence_sha256 || '').substring(0, 16)}}...
+          </span>
+        </td>
+        <td class="mono-cell" style="font-size: 0.72rem;">${{formatTime(r.verified_at)}}</td>
+      </tr>
+    `).join("");
+  }}
+}}
+
+// 交易室动态推流探针连接器 (Live Stream Connector)
+function initLiveStreamConnector() {{
+  const dot = document.getElementById("liveStreamDot");
+  const text = document.getElementById("liveStreamText");
+
+  async function probeStream() {{
+    try {{
+      const resp = await fetch("/api/stream", {{ cache: "no-store" }});
+      if (!resp.ok) throw new Error("HTTP " + resp.status);
+      const data = await resp.json();
+
+      if (dot) {{
+        dot.classList.add("pulsing");
+        dot.classList.remove("offline");
+      }}
+      if (text) {{
+        text.innerText = "🟢 交易室实时推流中";
+      }}
+
+      // 若远端收据数量或事件数量发生变动，动态重载更新
+      if (data.receipts && data.receipts.length !== RAW_RECEIPTS.length) {{
+        RAW_RECEIPTS = data.receipts;
+        renderReceiptsTable();
+      }}
+    }} catch (e) {{
+      if (dot) {{
+        dot.classList.remove("pulsing");
+        dot.classList.add("offline");
+      }}
+      if (text) {{
+        text.innerText = "推流探针待机";
+      }}
+    }}
+  }}
+
+  probeStream();
+  setInterval(probeStream, 8000);
+}}
+
 // 页面初始化
 document.addEventListener("DOMContentLoaded", () => {{
   renderCriticalAlerts();
   initSotpSelector();
   renderEventTable();
   renderCycleTable();
+  renderReceiptsTable();
+  initLiveStreamConnector();
 }});
 </script>
 </body>

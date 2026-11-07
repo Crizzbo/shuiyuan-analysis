@@ -18,6 +18,8 @@ PORTABLE_TESTS = (
     "scripts.test_sotp_event_penetration",
     "scripts.test_sotp_profiles",
     "scripts.test_alert_dispatcher",
+    "scripts.test_evidence_verification_pipeline",
+    "scripts.test_radar_dashboard_serve",
 )
 
 
