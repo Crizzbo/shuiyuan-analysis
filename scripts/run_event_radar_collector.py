@@ -143,12 +143,59 @@ class EventRadarService:
         print(f"最近检查点时间戳      : {ckpt.get('last_successful_timestamp', '无')}")
         print("=" * 65 + "\n")
 
+    def print_critical_events(self, limit: int = 15) -> None:
+        """格式化打印重大事件 (P0/P1) 监控清单."""
+        events = self.collector.db_mgr.list_critical_events(limit=limit)
+        print("\n" + "=" * 80)
+        print(f"【突发事件雷达 · 今日重大事件清单 (前 {len(events)} 项)】")
+        print("=" * 80)
+        if not events:
+            print("目前未监测到触发 P0/P1 阈值的重大事件。系统运行平稳。")
+        for idx, ev in enumerate(events, 1):
+            status_text = "🟢 官方已核实" if ev.get("verification_status") == "Confirmed_Fact" else "🔴 待核传闻 (熔断)"
+            print(f"\n{idx:02d}. [{ev.get('severity_level')}] [{ev.get('category')}] {ev.get('title')}")
+            print(f"    - 事件编号: {ev.get('event_id')} | 发布时间: {ev.get('published_at')}")
+            print(f"    - 信源权威: {ev.get('source_name')} ({ev.get('credibility_tier')}) | 状态: {status_text}")
+            print(f"    - 物理影响: {ev.get('micro_physical_impact')}")
+            print(f"    - 波及实体: {', '.join(ev.get('involved_entities', []))} | 业务分部: {', '.join(ev.get('affected_business_segments', []))}")
+        print("\n" + "=" * 80 + "\n")
+
+    def inspect_event(self, event_id: str) -> None:
+        """精确穿透单条事件的因果链条与信源底账."""
+        ev = self.collector.db_mgr.get_event_by_id(event_id)
+        if not ev:
+            print(f"未找到事件记录: {event_id}")
+            return
+
+        print("\n" + "=" * 75)
+        print(f"【事件深度档案穿透】: {event_id}")
+        print("=" * 75)
+        print(f"事件标题        : {ev.get('title')}")
+        print(f"所属业务维度    : {ev.get('category')}")
+        print(f"烈度等级        : {ev.get('severity_level')}")
+        print(f"信源名称与层级  : {ev.get('source_name')} ({ev.get('credibility_tier')}, 得分: {ev.get('credibility_score')})")
+        print(f"核验状态        : {ev.get('verification_status')} (深研门禁开启: {'是' if ev.get('requires_deep_analysis') else '否 (熔断中)'})")
+        print(f"微观物理事实    : {ev.get('micro_physical_impact')}")
+        print(f"涉及机构与标的  : {', '.join(ev.get('involved_entities', []))}")
+        print(f"波及业务分部    : {', '.join(ev.get('affected_business_segments', []))}")
+        print(f"预计持续周期    : {ev.get('estimated_duration')}")
+        print(f"发布时间戳      : {ev.get('published_at')}")
+        print(f"收集入库时间    : {ev.get('collected_at')}")
+        if ev.get("evidence_path"):
+            print(f"法定证据文件    : {ev.get('evidence_path')}")
+            print(f"证据 SHA-256    : {ev.get('evidence_sha256')}")
+            print(f"核验完成时间    : {ev.get('verified_at')}")
+        print(f"鉴真核验备考    : {ev.get('verification_note')}")
+        print("=" * 75 + "\n")
+
 
 def main():
     parser = argparse.ArgumentParser(description="突发事件雷达定时收集与调度服务 CLI")
     parser.add_argument("--once", action="store_true", help="执行单轮次巡检后安全退出")
     parser.add_argument("--daemon", action="store_true", help="作为常驻守护服务持续运行")
     parser.add_argument("--status", action="store_true", help="打印雷达系统账本底账与运行状态")
+    parser.add_argument("--list-critical", action="store_true", help="打印今日P0/P1重大事件监控清单")
+    parser.add_argument("--inspect", type=str, default=None, help="穿透查看指定事件ID的详细因果链与信源底账")
     parser.add_argument("--interval-seconds", type=int, default=None, help="覆盖守护进程休眠间隔秒数(调试用)")
     parser.add_argument("--no-reports", action="store_true", help="禁用巡检完成后自动更新看板与清单")
 
@@ -158,6 +205,10 @@ def main():
 
     if args.status:
         service.print_status()
+    elif args.list_critical:
+        service.print_critical_events()
+    elif args.inspect:
+        service.inspect_event(args.inspect)
     elif args.daemon:
         service.run_daemon(default_sleep_override_seconds=args.interval_seconds)
     else:

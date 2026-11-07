@@ -252,6 +252,9 @@ class RadarDatabaseManager:
                 ("credibility_score", "REAL DEFAULT 0.8"),
                 ("verification_status", "TEXT DEFAULT 'Corroborated_Report'"),
                 ("verification_note", "TEXT DEFAULT '主流财经通讯社通告'"),
+                ("evidence_path", "TEXT DEFAULT NULL"),
+                ("evidence_sha256", "TEXT DEFAULT NULL"),
+                ("verified_at", "TEXT DEFAULT NULL"),
             ]
             for col_name, col_def in new_columns:
                 if col_name not in existing_cols:
@@ -395,6 +398,83 @@ class RadarDatabaseManager:
                 "total_summarized": total_summarized or 0,
                 "total_tokens_burned": total_tokens or 0,
             }
+
+    def confirm_event_verification(
+        self,
+        event_id: str,
+        evidence_path: str,
+        evidence_sha256: str,
+        verified_at: str,
+        note: Optional[str] = None,
+    ) -> bool:
+        """完成官方凭据核验并执行信源提级与传闻熔断解除 (买方闭环)."""
+        actual_note = note or "经官方监管/交易所/当事方公报原文比对核实，解除传闻熔断"
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                UPDATE radar_events
+                SET verification_status = 'Confirmed_Fact',
+                    credibility_tier = 'Tier1_Official_Regulatory',
+                    credibility_score = 1.0,
+                    requires_deep_analysis = 1,
+                    evidence_path = ?,
+                    evidence_sha256 = ?,
+                    verified_at = ?,
+                    verification_note = ?
+                WHERE event_id = ?
+            """, (evidence_path, evidence_sha256, verified_at, actual_note, event_id))
+            conn.commit()
+            return cursor.rowcount > 0
+
+    def get_event_by_id(self, event_id: str) -> Optional[Dict[str, Any]]:
+        """依据事件 ID 精确提取单条事实底账."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM radar_events WHERE event_id = ?", (event_id,))
+            row = cursor.fetchone()
+            if not row:
+                return None
+            item = dict(row)
+            try:
+                item["involved_entities"] = json.loads(item.get("involved_entities", "[]"))
+            except Exception:
+                item["involved_entities"] = []
+            try:
+                item["affected_business_segments"] = json.loads(item.get("affected_business_segments", "[]"))
+            except Exception:
+                item["affected_business_segments"] = []
+            item["requires_deep_analysis"] = bool(item.get("requires_deep_analysis", 0))
+            return item
+
+    def list_critical_events(self, limit: int = 20) -> List[Dict[str, Any]]:
+        """查询已确认的 P0/P1 重大事件 (用于买方实战监控)."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT * FROM radar_events
+                WHERE severity_level IN ('P0', 'P1')
+                ORDER BY
+                    CASE severity_level WHEN 'P0' THEN 1 WHEN 'P1' THEN 2 ELSE 3 END,
+                    published_at DESC
+                LIMIT ?
+            """, (limit,))
+            rows = cursor.fetchall()
+            results = []
+            for row in rows:
+                item = dict(row)
+                try:
+                    item["involved_entities"] = json.loads(item.get("involved_entities", "[]"))
+                except Exception:
+                    item["involved_entities"] = []
+                try:
+                    item["affected_business_segments"] = json.loads(item.get("affected_business_segments", "[]"))
+                except Exception:
+                    item["affected_business_segments"] = []
+                item["requires_deep_analysis"] = bool(item.get("requires_deep_analysis", 0))
+                results.append(item)
+            return results
 
 
 class MockModelSummarizer:

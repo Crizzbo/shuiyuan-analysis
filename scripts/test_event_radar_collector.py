@@ -25,6 +25,11 @@ from finance_tools.event_radar_collector import (
     parse_rss_atom_feed,
 )
 from scripts.run_event_radar_collector import EventRadarService
+from scripts.confirm_event_verification import (
+    confirm_event_verification,
+    validate_evidence_path,
+    compute_file_sha256,
+)
 
 
 class TestEventRadarEngine(unittest.TestCase):
@@ -670,6 +675,61 @@ class TestRadarDatabaseManager(unittest.TestCase):
         self.assertEqual(stats["total_summarized"], 5)
         self.assertEqual(stats["total_tokens_burned"], 550)
 
+    def test_database_event_verification_and_upgrade(self):
+        """测试信源核验确认、信源提级与传闻熔断解除闭环 (RadarDatabaseManager)."""
+        item = RawNewsItem(
+            id="rumor_999",
+            title="据传某要害半导体生产基地遭遇突发断电",
+            content="未经证实的社交媒体快讯称某厂区短暂停电。",
+            source="X_Social_Rumor",
+            published_at="2026-11-07T08:00:00Z",
+        )
+        summary = StructuredEventSummary(
+            event_id="EVT_RUMOR_999",
+            timestamp="2026-11-07T08:01:00Z",
+            category="Energy_Grid_Blackout_Rationing",
+            involved_entities=["某半导体基地"],
+            micro_physical_impact="传闻局部停电，尚待官方核实",
+            estimated_duration="未知",
+            affected_business_segments=["晶圆代工"],
+            severity_level="P0",
+            requires_deep_analysis=False,  # 熔断中
+            raw_title=item.title,
+            source_name=item.source,
+            credibility_tier="Tier4_Public_Flash_Social",
+            credibility_score=0.45,
+            verification_status="Unverified_Rumor",
+            verification_note="社交媒体传闻未核实",
+        )
+
+        self.db_mgr.insert_event(summary, item, "2026-11-07T08:01:00Z")
+        ev_before = self.db_mgr.get_event_by_id("EVT_RUMOR_999")
+        self.assertIsNotNone(ev_before)
+        self.assertEqual(ev_before["verification_status"], "Unverified_Rumor")
+        self.assertFalse(ev_before["requires_deep_analysis"])
+
+        # 执行信源提级与凭据核验
+        success = self.db_mgr.confirm_event_verification(
+            event_id="EVT_RUMOR_999",
+            evidence_path="data_sources/official_filings/eia_official.pdf",
+            evidence_sha256="abc123def456sha256",
+            verified_at="2026-11-07T08:15:00Z",
+            note="EIA官方电网通报确认停产4小时后恢复",
+        )
+        self.assertTrue(success)
+
+        ev_after = self.db_mgr.get_event_by_id("EVT_RUMOR_999")
+        self.assertEqual(ev_after["verification_status"], "Confirmed_Fact")
+        self.assertEqual(ev_after["credibility_tier"], "Tier1_Official_Regulatory")
+        self.assertEqual(ev_after["credibility_score"], 1.0)
+        self.assertTrue(ev_after["requires_deep_analysis"])  # 熔断已解除
+        self.assertEqual(ev_after["evidence_sha256"], "abc123def456sha256")
+        self.assertEqual(ev_after["evidence_path"], "data_sources/official_filings/eia_official.pdf")
+
+        # 测试重大事件清单查询
+        crit_list = self.db_mgr.list_critical_events(limit=10)
+        self.assertTrue(any(e["event_id"] == "EVT_RUMOR_999" for e in crit_list))
+
 
 class TestEventRadarCollectorEndToEnd(unittest.TestCase):
     """测试收集器端到端调度、极低 Token 消耗与门禁触发."""
@@ -889,6 +949,167 @@ class TestEventRadarService(unittest.TestCase):
         self.assertTrue(service._is_running)
         service._handle_shutdown(signal.SIGINT, None)
         self.assertFalse(service._is_running)
+
+    def test_service_print_critical_and_inspect(self):
+        """测试服务重大事件清单与深度事件穿透打印."""
+        class MockOnlineWatchdog(NetworkHealthWatchdog):
+            def check_connectivity(self):
+                return True, "Mock_Online_Test_Node", 1.0
+
+        collector = EventRadarCollector(
+            config_path=str(self.cfg_path),
+            watchdog=MockOnlineWatchdog(),
+            progress_manager=RadarProgressManager(checkpoint_path=str(self.ckpt_path)),
+            database_manager=RadarDatabaseManager(db_path=str(self.db_path)),
+            model_client=MockModelSummarizer(),
+        )
+        service = EventRadarService(
+            config_path=str(self.cfg_path),
+            auto_generate_reports=False,
+            collector=collector,
+        )
+
+        test_feed = [
+            {
+                "id": "crit_test_01",
+                "title": "美东港口ILA谈判破裂启动全线码头大罢工",
+                "content": "集装箱装卸吞吐归零，跨大西洋航线滞港周转严重延误。",
+                "source": "Port_Daily",
+            }
+        ]
+        service.run_single_cycle(raw_feed_items=test_feed)
+
+        # 测试打印重大事件
+        captured_out = io.StringIO()
+        old_stdout = sys.stdout
+        try:
+            sys.stdout = captured_out
+            service.print_critical_events()
+        finally:
+            sys.stdout = old_stdout
+
+        out_crit = captured_out.getvalue()
+        self.assertIn("【突发事件雷达 · 今日重大事件清单", out_crit)
+        self.assertIn("美东港口ILA谈判破裂", out_crit)
+
+        # 提取落盘的事件 ID
+        stored_evs = collector.query_stored_events()
+        self.assertTrue(len(stored_evs) >= 1)
+        ev_id = stored_evs[0]["event_id"]
+
+        # 测试深度穿透查看
+        captured_inspect = io.StringIO()
+        try:
+            sys.stdout = captured_inspect
+            service.inspect_event(ev_id)
+        finally:
+            sys.stdout = old_stdout
+
+        out_inspect = captured_inspect.getvalue()
+        self.assertIn(f"【事件深度档案穿透】: {ev_id}", out_inspect)
+        self.assertIn("微观物理事实", out_inspect)
+
+
+class TestConfirmEventVerificationFlow(unittest.TestCase):
+    """测试法定信源核验脚本、密码学指纹计算与安全路径防御."""
+
+    def setUp(self):
+        self.temp_dir = tempfile.TemporaryDirectory()
+        self.db_path = Path(self.temp_dir.name) / "test_verif_radar.sqlite3"
+        self.db_mgr = RadarDatabaseManager(db_path=str(self.db_path))
+
+        # 在项目内测试目录中创建假拟官方证据文件
+        self.evidence_dir = Path(self.temp_dir.name) / "official_filings"
+        self.evidence_dir.mkdir(parents=True, exist_ok=True)
+        self.evidence_file = self.evidence_dir / "sec_form_8k_disruption.txt"
+        self.evidence_file.write_text("Official Item 8.01 Disclosure: Plant fire under investigation.", encoding="utf-8")
+
+        # 写入一条待核实快讯
+        item = RawNewsItem(
+            id="rumor_flow_01",
+            title="传闻某化工厂爆炸停工",
+            content="社交平台小道消息传闻停工。",
+            source="X_Rumor_Feed",
+            published_at="2026-11-07T09:00:00Z",
+        )
+        summary = StructuredEventSummary(
+            event_id="EVT_RUMOR_FLOW_01",
+            timestamp="2026-11-07T09:01:00Z",
+            category="Physical_Plant_Disruption",
+            involved_entities=["涉事化工厂"],
+            micro_physical_impact="传闻厂区火灾停工",
+            estimated_duration="未知",
+            affected_business_segments=["特种树脂"],
+            severity_level="P1",
+            requires_deep_analysis=False,  # 传闻熔断中
+            raw_title=item.title,
+            source_name=item.source,
+            credibility_tier="Tier4_Public_Flash_Social",
+            credibility_score=0.45,
+            verification_status="Unverified_Rumor",
+            verification_note="小道消息未核实",
+        )
+        self.db_mgr.insert_event(summary, item, "2026-11-07T09:01:00Z")
+
+    def tearDown(self):
+        self.temp_dir.cleanup()
+
+    def test_compute_file_sha256(self):
+        """测试本地证据文件 SHA-256 计算精确度."""
+        h1 = compute_file_sha256(self.evidence_file)
+        self.assertIsInstance(h1, str)
+        self.assertEqual(len(h1), 64)
+        # 验证确定性
+        h2 = compute_file_sha256(self.evidence_file)
+        self.assertEqual(h1, h2)
+
+    def test_validate_evidence_path_boundary_security(self):
+        """测试证据文件路径边界校验：禁止越界到项目根目录外."""
+        # 使用项目根目录外的临时文件测试拒绝越界
+        outside_path = Path(tempfile.gettempdir()) / "outside_unauthorized.pdf"
+        outside_path.write_text("dummy", encoding="utf-8")
+        try:
+            with self.assertRaises(PermissionError):
+                validate_evidence_path(str(outside_path))
+        finally:
+            if outside_path.exists():
+                outside_path.unlink()
+
+        # 验证不存在的文件报错
+        with self.assertRaises(FileNotFoundError):
+            validate_evidence_path("non_existent_folder/missing_file.pdf")
+
+    def test_confirm_event_verification_end_to_end(self):
+        """测试法定信源核验闭环：状态提升、权威度提级、熔断解除与存证入库."""
+        # 在项目根目录内创建一个合法的临时相对测试证据文件
+        test_evidence_rel = Path("data_sources") / "test_official_evidence_sample.txt"
+        test_evidence_abs = Path(__file__).resolve().parent.parent / test_evidence_rel
+        test_evidence_abs.parent.mkdir(parents=True, exist_ok=True)
+        test_evidence_abs.write_text("Official Regulatory Gazette 2026: Confirmed item.", encoding="utf-8")
+
+        try:
+            success = confirm_event_verification(
+                event_id="EVT_RUMOR_FLOW_01",
+                evidence_path=str(test_evidence_rel),
+                note="分析师核验官方监管公报确认属实",
+                db_path=str(self.db_path),
+                auto_refresh_reports=False,
+            )
+            self.assertTrue(success)
+
+            # 验证数据库状态更新
+            ev = self.db_mgr.get_event_by_id("EVT_RUMOR_FLOW_01")
+            self.assertEqual(ev["verification_status"], "Confirmed_Fact")
+            self.assertEqual(ev["credibility_tier"], "Tier1_Official_Regulatory")
+            self.assertEqual(ev["credibility_score"], 1.0)
+            self.assertTrue(ev["requires_deep_analysis"])  # 熔断已彻底解除
+            self.assertEqual(ev["evidence_path"], str(test_evidence_rel).replace("\\", "/"))
+            self.assertIsNotNone(ev["evidence_sha256"])
+            self.assertEqual(len(ev["evidence_sha256"]), 64)
+            self.assertIsNotNone(ev["verified_at"])
+        finally:
+            if test_evidence_abs.exists():
+                test_evidence_abs.unlink()
 
 
 if __name__ == "__main__":
