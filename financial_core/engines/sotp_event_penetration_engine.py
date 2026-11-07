@@ -224,7 +224,10 @@ class SotpEventPenetrationEngine:
             # 检查高频核心产业短语重叠
             for core_phrase in [
                 "先进制程", "晶圆代工", "晶圆制造", "半导体制造", "半导体代工",
-                "算力中心", "数据中心", "云计算", "智能手机", "车规芯片", "动力电池"
+                "算力中心", "数据中心", "云计算", "智能手机", "车规芯片", "动力电池",
+                "远洋海运", "集装箱物流", "港口装卸", "铁路物流", "特种化学品", "光刻胶前驱体",
+                "战略矿产", "双用途出口", "稀土", "航空航天", "国防军工", "工控网络",
+                "生物医药", "原料药", "公用事业电力", "商业电网", "大宗商品", "主权流动性"
             ]:
                 if core_phrase in t_clean and (core_phrase in seg_zh_lower or core_phrase in seg_en_lower):
                     direct_match = True
@@ -346,7 +349,11 @@ class SotpEventPenetrationEngine:
         segment_cogs = segment.revenue * max(0.1, (1.0 - segment.operating_margin))
 
         # 判断事件是利好还是利空 (如德州补贴/便利化通关是利好降低成本，爆炸/加税是利空)
-        is_favorable = any(w in event.raw_title or w in event.micro_physical_impact for w in ["补贴", "减免", "便利", "折抵", "资助"])
+        favorable_keywords = [
+            "补贴", "减免", "便利", "折抵", "资助", "豁免", "放行", "采购授标", "中标", "解禁", "关税减让",
+            "subsidy", "tax credit", "waiver", "awarded", "grant", "clearance"
+        ]
+        is_favorable = any(w in event.raw_title.lower() or w in event.micro_physical_impact.lower() for w in favorable_keywords)
         sign = 1.0 if is_favorable else -1.0
 
         # 分部营业利润变动额 ΔEBIT (百万美元)
@@ -382,6 +389,39 @@ class SotpEventPenetrationEngine:
         is_valid, msg = company_sotp.verify_balance_sheet_invariants()
         if not is_valid:
             raise ValueError(f"【SOTP 平账校验失败】：{company_sotp.ticker} - {msg}")
+
+        # 2. 传闻熔断门禁前置防伪拦截 (Rumor Circuit Breaker)
+        if not event.requires_deep_analysis or event.verification_status == "Unverified_Rumor":
+            return EnterpriseEventImpactResult(
+                ticker=company_sotp.ticker,
+                company_name=company_sotp.company_name,
+                event_id=event.event_id,
+                event_title=event.raw_title,
+                severity_level=event.severity_level,
+                total_operating_income_impact=0.0,
+                ebit_impact_percentage=0.0,
+                net_income_impact=0.0,
+                eps_impact=0.0,
+                valuation_target_discount_pct=0.0,
+                segment_impacts=[],
+                focal_summary=(
+                    f"【传闻熔断触发】信源层级: {event.credibility_tier} (信任评分: {event.credibility_score:.2f})，"
+                    f"当前状态为待核传闻 ({event.verification_status})。"
+                    "已坚决阻断下游 SOTP 深度计算与调仓决策，防范社交网络快讯噪音误导买方研判。"
+                    "待获取官方监管/交易所公报原文并完成 SHA-256 验签核验后，方可解除熔断执行损益穿透。"
+                ),
+                recommended_action="BLOCKED_BY_RUMOR_CIRCUIT_BREAKER",
+                scenario_signal="RUMOR_CIRCUIT_BREAKER_ACTIVE",
+                source_refs=company_sotp.source_refs,
+                assumption_id=company_sotp.assumption_id,
+                assumption_rationale=company_sotp.assumption_rationale,
+                assumption_status=company_sotp.assumption_status,
+                quote_timestamp=company_sotp.quote_timestamp,
+                quote_session=company_sotp.quote_session,
+                data_origin=company_sotp.data_origin,
+                evidence_status=company_sotp.evidence_status,
+                is_actionable=False,
+            )
 
         segment_results: List[SegmentCausalImpact] = []
         total_delta_ebit = 0.0

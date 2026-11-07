@@ -187,7 +187,7 @@ class SotpEventAnalyzer:
             raise KeyError(f"在 SQLite 数据库中未查询到 ID 为 '{event_id}' 的事件")
 
         raw_evt = matched[0]
-        # 组装为 StructuredEventSummary
+        # 组装为 StructuredEventSummary (含完整信源分级、鉴真状态与密码学证据)
         summary = StructuredEventSummary(
             event_id=raw_evt["event_id"],
             timestamp=raw_evt["published_at"],
@@ -200,5 +200,35 @@ class SotpEventAnalyzer:
             requires_deep_analysis=bool(raw_evt["requires_deep_analysis"]),
             raw_title=raw_evt["title"],
             source_name=raw_evt["source_name"],
+            credibility_tier=raw_evt.get("credibility_tier", "Tier3_Mainstream_Wire"),
+            credibility_score=float(raw_evt.get("credibility_score", 0.8)),
+            verification_status=raw_evt.get("verification_status", "Corroborated_Report"),
+            verification_note=raw_evt.get("verification_note", ""),
+            evidence_path=raw_evt.get("evidence_path"),
+            evidence_sha256=raw_evt.get("evidence_sha256"),
+            verified_at=raw_evt.get("verified_at"),
         )
         return self.analyze_event_on_universe(summary, target_tickers)
+
+    def analyze_all_verified_major_events(
+        self,
+        target_tickers: Optional[List[str]] = None,
+        only_confirmed_facts: bool = False,
+    ) -> Dict[str, List[EnterpriseEventImpactResult]]:
+        """全量扫描并穿透所有已就绪的重大事件 (P0/P1 或已核实事实)."""
+        events = self.db_mgr.query_events()
+        results_by_event: Dict[str, List[EnterpriseEventImpactResult]] = {}
+
+        for evt in events:
+            evt_id = evt["event_id"]
+            is_major = evt.get("severity_level") in ("P0", "P1")
+            is_confirmed = evt.get("verification_status") == "Confirmed_Fact"
+            requires_deep = bool(evt.get("requires_deep_analysis", 1))
+
+            if only_confirmed_facts and not is_confirmed:
+                continue
+
+            if is_major or is_confirmed or requires_deep:
+                results_by_event[evt_id] = self.analyze_stored_event_by_id(evt_id, target_tickers)
+
+        return results_by_event

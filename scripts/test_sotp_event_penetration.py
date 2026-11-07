@@ -264,6 +264,96 @@ class TestSotpEventAnalyzerIntegration(unittest.TestCase):
             self.assertIn("segment_impacts", d)
             self.assertIsInstance(d["segment_impacts"], list)
 
+    def test_rumor_circuit_breaker_blocks_downstream_sotp(self):
+        """测试传闻熔断门禁拦截：未核实社交快讯传闻坚决阻断下游 SOTP 深度计算."""
+        analyzer = make_sotp_test_analyzer(self)
+        msft_profile = analyzer.get_company_sotp_profile("MSFT")
+        self.assertIsNotNone(msft_profile)
+
+        rumor_event = StructuredEventSummary(
+            event_id="EVT_RUMOR_001",
+            timestamp="2026-11-07T08:15:00Z",
+            category="State_Policy_Regulatory",
+            involved_entities=["加州算力中心", "传闻政策"],
+            micro_physical_impact="网传加州即将对算力加征 30% 巨额特别电网税",
+            estimated_duration="传闻未知",
+            affected_business_segments=["云基础设施(IaaS)", "生成式AI算力集群"],
+            severity_level="P1",
+            requires_deep_analysis=False,  # 传闻熔断标志
+            raw_title="【传闻】加州或将对算力中心加征巨额电网特别税",
+            source_name="X_Flash_Rumor",
+            credibility_tier="Tier4_Public_Flash_Social",
+            credibility_score=0.45,
+            verification_status="Unverified_Rumor",
+        )
+
+        res = analyzer.engine.analyze_company_impact(msft_profile, rumor_event)
+
+        # 断言已被熔断阻断
+        self.assertEqual(res.recommended_action, "BLOCKED_BY_RUMOR_CIRCUIT_BREAKER")
+        self.assertEqual(res.scenario_signal, "RUMOR_CIRCUIT_BREAKER_ACTIVE")
+        self.assertEqual(res.total_operating_income_impact, 0.0)
+        self.assertEqual(res.ebit_impact_percentage, 0.0)
+        self.assertEqual(res.eps_impact, 0.0)
+        self.assertEqual(res.segment_impacts, [])
+        self.assertFalse(res.is_actionable)
+        self.assertIn("传闻熔断触发", res.focal_summary)
+
+    def test_confirmed_fact_lifts_circuit_breaker(self):
+        """测试官方公报核验后解除传闻熔断，正常放行 SOTP 分部计算."""
+        analyzer = make_sotp_test_analyzer(self)
+        msft_profile = analyzer.get_company_sotp_profile("MSFT")
+
+        confirmed_event = StructuredEventSummary(
+            event_id="EVT_CONFIRMED_001",
+            timestamp="2026-11-07T08:30:00Z",
+            category="State_Policy_Regulatory",
+            involved_entities=["加州公用事业委员会(CPUC)", "加州独立电网(CAISO)"],
+            micro_physical_impact="加州CPUC正式发布第2026-1107号公报：单机柜等效电费增加 8.5%",
+            estimated_duration="长期生效",
+            affected_business_segments=["云基础设施(IaaS)", "生成式AI算力集群"],
+            severity_level="P1",
+            requires_deep_analysis=True,  # 熔断已解除
+            raw_title="加州CPUC正式表决通过超大规模AI算力中心电网附加费新规",
+            source_name="California_Regulatory_Gazette",
+            credibility_tier="Tier1_Official_Regulatory",
+            credibility_score=1.0,
+            verification_status="Confirmed_Fact",
+            evidence_path="data_sources/cpuc_official_ruling.txt",
+            evidence_sha256="a" * 64,
+            verified_at="2026-11-07T08:35:00Z",
+        )
+
+        res = analyzer.engine.analyze_company_impact(msft_profile, confirmed_event)
+
+        # 断言熔断已解除并计算了真实分部冲击
+        self.assertNotEqual(res.recommended_action, "BLOCKED_BY_RUMOR_CIRCUIT_BREAKER")
+        self.assertNotEqual(res.scenario_signal, "RUMOR_CIRCUIT_BREAKER_ACTIVE")
+        self.assertGreater(len(res.segment_impacts), 0)
+        self.assertLess(res.total_operating_income_impact, 0.0)  # 负面冲击
+
+    def test_analyze_all_verified_major_events_method(self):
+        """测试批量穿透所有已就绪重大事件接口."""
+        analyzer = make_sotp_test_analyzer(self)
+        from financial_core.engines.event_radar_engine import RawNewsItem
+
+        item = RawNewsItem(id="major_test_01", title="官方核实重大公报", content="公报内容",
+                           source="official", published_at="2026-11-07T09:00:00Z", url="")
+        event = StructuredEventSummary(
+            event_id="EVT_BATCH_TEST_01", timestamp=item.published_at,
+            category="State_Policy_Regulatory", involved_entities=["云基础设施"],
+            micro_physical_impact="单机柜电费增加 5%", estimated_duration="30天",
+            affected_business_segments=["云基础设施(IaaS)"], severity_level="P1",
+            requires_deep_analysis=True, raw_title=item.title, source_name="official",
+            credibility_tier="Tier1_Official_Regulatory", credibility_score=1.0,
+            verification_status="Confirmed_Fact")
+
+        analyzer.db_mgr.insert_event(event, item, item.published_at)
+
+        results = analyzer.analyze_all_verified_major_events(target_tickers=["MSFT", "TSM"])
+        self.assertIn("EVT_BATCH_TEST_01", results)
+        self.assertEqual(len(results["EVT_BATCH_TEST_01"]), 2)
+
 
 if __name__ == "__main__":
     unittest.main()
