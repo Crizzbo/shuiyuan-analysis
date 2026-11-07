@@ -1,0 +1,81 @@
+{
+  "version": "1.0.0",
+  "name": "event_radar_sources_config",
+  "description": "盘前盘中高敏舆情雷达信源、自发断网检测、进度管理与事件触发门禁配置",
+  "network_watchdog": {
+    "enabled": true,
+    "probe_endpoints": [
+      {"host": "8.8.8.8", "port": 53, "provider": "Google_Public_DNS"},
+      {"host": "1.1.1.1", "port": 53, "provider": "Cloudflare_DNS"}
+    ],
+    "timeout_seconds": 1.5,
+    "max_offline_retries": 5,
+    "backoff_intervals_seconds": [5, 15, 30, 60, 120]
+  },
+  "progress_management": {
+    "checkpoint_file": "data/ledger/event_radar_checkpoint.json",
+    "retention_days": 7,
+    "max_hash_history_size": 10000
+  },
+  "scheduler": {
+    "polling_intervals_minutes": {
+      "pre_market": 5,
+      "regular_market": 15,
+      "after_hours": 30,
+      "market_closed": 60
+    }
+  },
+  "filtering_rules": {
+    "keyword_dictionaries": {
+      "geopolitical": [
+        "蓝营", "绿营", "台海", "海峡", "出口管制", "实体清单", "制裁", "关税",
+        "sanction", "export control", "entity list", "tariff", "taiwan strait", "geopolitical"
+      ],
+      "state_policy": [
+        "法案", "监管", "补贴", "加州", "德州", "反垄断", "碳排放", "电网负荷",
+        "legislation", "regulatory", "subsidy", "california", "texas", "antitrust", "grid fee", "ai bill"
+      ],
+      "physical_disruption": [
+        "爆炸", "火灾", "停产", "受袭", "罢工", "封锁", "断供", "断水", "停电",
+        "explosion", "fire", "outage", "strike", "blockade", "facility attack", "disruption", "force majeure"
+      ],
+      "supply_chain": [
+        "台积电", "ASML", "光刻机", "高纯试剂", "硅片", "晶圆厂", "关键原料", "红海", "苏伊士",
+        "foundry", "semiconductor", "wafer", "raw material", "red sea", "suez canal", "chokepoint"
+      ]
+    },
+    "noise_blacklist": [
+      "盘后点评", "今日收评", "涨停揭秘", "机构看好", "点击查看", "广告", "大涨", "大跌",
+      "stock pick", "sponsored", "ad disclaimer", "bullish sentiment"
+    ]
+  },
+  "summary_mode": {
+    "type": "unified_model_summary",
+    "max_summary_words": 100,
+    "enforce_json_schema": true,
+    "severity_threshold_for_deep_analysis": ["P0", "P1"]
+  },
+  "channels": [
+    {
+      "channel_id": "sec_8k_disclosures",
+      "channel_name": "SEC 8-K 盘前盘中重大突发事件披露",
+      "type": "official_regulatory",
+      "url": "https://www.sec.gov/edgar/searchedgar/companysearch",
+      "priority": "P0"
+    },
+    {
+      "channel_id": "us_federal_and_state_gazette",
+      "channel_name": "美国联邦公报与加州/德州重点产业法案跟踪",
+      "type": "official_legislative",
+      "url": "https://www.federalregister.gov/api/v1/documents.json",
+      "priority": "P1"
+    },
+    {
+      "channel_id": "geopolitical_maritime_flash",
+      "channel_name": "全球海事与地缘关键咽喉要道突发快讯",
+      "type": "public_flash",
+      "url": "https://www.ukmto.org/flash-alerts",
+      "priority": "P1"
+    }
+  ]
+}

@@ -1,0 +1,438 @@
+"""事件雷达高频收集与调度中枢 (Event Radar Collector & Scheduler).
+
+本模块实现第一阶段的核心调度与采集功能:
+1. 自发断网检测与平滑自治恢复 (NetworkHealthWatchdog);
+2. 断点续传、SHA-256 指纹排重与进度管理 (RadarProgressManager);
+3. 选项 2-B 统一微型模型摘要生成与 P0/P1 重大事件触发门禁;
+4. 市场时段自适应调度 (盘前 5 分钟、盘中 15 分钟、休市 60 分钟).
+"""
+
+from datetime import datetime, timezone, timedelta
+import json
+import logging
+import os
+from pathlib import Path
+import socket
+import time
+from typing import Any, Callable, Dict, List, Optional, Tuple
+
+from financial_core.engines.event_radar_engine import (
+    EventRadarEngine,
+    EventSeverity,
+    EventCategory,
+    RawNewsItem,
+    StructuredEventSummary,
+)
+
+logger = logging.getLogger(__name__)
+
+
+class NetworkHealthWatchdog:
+    """自发断网检测与自治恢复看门狗."""
+
+    DEFAULT_PROBES = [
+        {"host": "8.8.8.8", "port": 53, "provider": "Google_Public_DNS"},
+        {"host": "1.1.1.1", "port": 53, "provider": "Cloudflare_DNS"},
+    ]
+
+    def __init__(
+        self,
+        probe_endpoints: Optional[List[Dict[str, Any]]] = None,
+        timeout_sec: float = 1.5,
+        max_offline_retries: int = 5,
+        backoff_intervals: Optional[List[int]] = None,
+    ):
+        self.probe_endpoints = probe_endpoints or self.DEFAULT_PROBES
+        self.timeout_sec = timeout_sec
+        self.max_offline_retries = max_offline_retries
+        self.backoff_intervals = backoff_intervals or [5, 15, 30, 60, 120]
+
+    def check_connectivity(self) -> Tuple[bool, str, float]:
+        """向权威无状态节点发送极轻量 Socket 探测.
+
+        返回: (is_online, connected_node, latency_ms)
+        """
+        for probe in self.probe_endpoints:
+            host = probe.get("host", "8.8.8.8")
+            port = int(probe.get("port", 53))
+            start_t = time.perf_counter()
+            try:
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                    sock.settimeout(self.timeout_sec)
+                    sock.connect((host, port))
+                latency_ms = (time.perf_counter() - start_t) * 1000.0
+                return True, f"{probe.get('provider', host)} ({host}:{port})", round(latency_ms, 2)
+            except Exception:
+                continue
+        return False, "ALL_PROBES_UNREACHABLE", -1.0
+
+    def wait_for_recovery(
+        self,
+        max_retries: Optional[int] = None,
+        sleep_func: Callable[[float], None] = time.sleep,
+        on_status_change: Optional[Callable[[str, str], None]] = None,
+    ) -> bool:
+        """断网时执行指数退避静默挂起，不抛异常崩溃，等待网络自愈."""
+        retries = max_retries if max_retries is not None else self.max_offline_retries
+        for attempt in range(1, retries + 1):
+            interval_idx = min(attempt - 1, len(self.backoff_intervals) - 1)
+            wait_time = self.backoff_intervals[interval_idx]
+
+            msg = (
+                f"[断网自治看门狗] 检测到外部网络连接中断。进入静默等待第 {attempt}/{retries} 次，"
+                f"将在 {wait_time} 秒后自动重试..."
+            )
+            if on_status_change:
+                on_status_change("OFFLINE_HOLD", msg)
+            else:
+                logger.warning(msg)
+
+            sleep_func(wait_time)
+
+            is_online, node, lat = self.check_connectivity()
+            if is_online:
+                recover_msg = f"[断网自治看门狗] 网络已自愈恢复！成功连接至 {node}，延迟 {lat}ms。"
+                if on_status_change:
+                    on_status_change("RECOVERED", recover_msg)
+                else:
+                    logger.info(recover_msg)
+                return True
+
+        fail_msg = f"[断网自治看门狗] 已达到最大重试次数 ({retries}次)，网络未能恢复。"
+        if on_status_change:
+            on_status_change("RETRY_EXHAUSTED", fail_msg)
+        return False
+
+
+class RadarProgressManager:
+    """断点续传、SHA-256 唯一指纹排重与进度账本管理器."""
+
+    def __init__(
+        self,
+        checkpoint_path: str = "data/ledger/event_radar_checkpoint.json",
+        max_hash_history_size: int = 10000,
+    ):
+        self.checkpoint_path = Path(checkpoint_path)
+        self.max_hash_history_size = max_hash_history_size
+        self._state: Dict[str, Any] = {
+            "version": "1.0.0",
+            "last_successful_timestamp": "1970-01-01T00:00:00Z",
+            "processed_hashes": [],
+            "cumulative_metrics": {
+                "total_scanned": 0,
+                "total_filtered_in": 0,
+                "total_summarized": 0,
+                "total_p0_p1_triggered": 0,
+                "total_estimated_tokens": 0,
+            },
+            "recent_triggered_events": [],
+        }
+        self.load_checkpoint()
+
+    def load_checkpoint(self) -> Dict[str, Any]:
+        """读取本地不可篡改状态账本."""
+        if self.checkpoint_path.is_file():
+            try:
+                with open(self.checkpoint_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    if isinstance(data, dict):
+                        self._state.update(data)
+            except Exception as e:
+                logger.warning("读取断点账本异常，使用初始状态: %s", e)
+        return self._state
+
+    def is_hash_processed(self, raw_hash: str) -> bool:
+        """检查文章哈希是否已在历史处理指纹库中 (秒级幂等排重)."""
+        return raw_hash in self._state.get("processed_hashes", [])
+
+    def record_processed_hash(self, raw_hash: str) -> None:
+        """记录新处理的哈希指纹，超出容量上限时自动滑动丢弃最旧项."""
+        hashes = self._state.setdefault("processed_hashes", [])
+        if raw_hash not in hashes:
+            hashes.append(raw_hash)
+            if len(hashes) > self.max_hash_history_size:
+                self._state["processed_hashes"] = hashes[-self.max_hash_history_size:]
+
+    def save_checkpoint(
+        self,
+        current_timestamp: str,
+        cycle_metrics: Dict[str, int],
+        new_triggered_events: Optional[List[Dict[str, Any]]] = None,
+    ) -> None:
+        """原子安全落盘当前状态水位线与累计指标."""
+        self._state["last_successful_timestamp"] = current_timestamp
+
+        cum = self._state.setdefault("cumulative_metrics", {})
+        cum["total_scanned"] = cum.get("total_scanned", 0) + cycle_metrics.get("scanned", 0)
+        cum["total_filtered_in"] = cum.get("total_filtered_in", 0) + cycle_metrics.get("filtered_in", 0)
+        cum["total_summarized"] = cum.get("total_summarized", 0) + cycle_metrics.get("summarized", 0)
+        cum["total_p0_p1_triggered"] = cum.get("total_p0_p1_triggered", 0) + cycle_metrics.get("p0_p1_triggered", 0)
+        cum["total_estimated_tokens"] = cum.get("total_estimated_tokens", 0) + cycle_metrics.get("estimated_tokens", 0)
+
+        if new_triggered_events:
+            history = self._state.setdefault("recent_triggered_events", [])
+            history.extend(new_triggered_events)
+            # 保留最近 50 条触发记录
+            self._state["recent_triggered_events"] = history[-50:]
+
+        # 确保父级目录存在
+        self.checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
+
+        temp_path = self.checkpoint_path.with_suffix(".tmp")
+        with open(temp_path, "w", encoding="utf-8") as f:
+            json.dump(self._state, f, ensure_ascii=False, indent=2)
+        temp_path.replace(self.checkpoint_path)
+
+    @property
+    def state(self) -> Dict[str, Any]:
+        return self._state
+
+
+class MockModelSummarizer:
+    """测试与沙箱环境下的确定性 2-B 结构化摘要生成器 (零成本 Mock)."""
+
+    def generate_summary_json(self, prompt_payload: Dict[str, str], fallback_item: RawNewsItem) -> str:
+        """基于快讯事实确定性构造标准的 2-B JSON 输出."""
+        title_lower = fallback_item.title.lower()
+        content_lower = fallback_item.content.lower()
+
+        entities = ["未知实体"]
+        impact = fallback_item.title
+        category = "Other_Macro_Event"
+        severity = "P2"
+        duration = "短期"
+        segments = ["通用产业"]
+
+        if "加州" in title_lower or "california" in title_lower:
+            category = "State_Policy_Regulatory"
+            entities = ["加州能源委员会", "商业算力中心", "公用电网"]
+            impact = "加州通过电网负荷新规，对50MW以上商业算力中心加征电网基础设施维护费"
+            severity = "P1"
+            duration = "长期法定政策"
+            segments = ["云计算基础设施", "电力与公用事业"]
+        elif "德州" in title_lower or "texas" in title_lower:
+            category = "State_Policy_Regulatory"
+            entities = ["德州立法会", "半导体制造企业"]
+            impact = "德州通过半导体本土晶圆制造税收补贴激励修正案"
+            severity = "P1"
+            duration = "长期税收法案"
+            segments = ["半导体晶圆制造", "先进封测"]
+        elif "爆炸" in title_lower or "explosion" in title_lower or "fire" in title_lower or "火灾" in title_lower:
+            category = "Physical_Plant_Disruption"
+            entities = ["核心化工特种材料厂", "上游原料供应商"]
+            impact = "特种树脂与光刻胶关键前驱体生产车间发生突发火灾，预计全面停产检修"
+            severity = "P1"
+            duration = "中期 1~3 个月"
+            segments = ["特种电子化学品", "先进芯片制造代工"]
+        elif "蓝营" in title_lower or "出口管制" in title_lower or "sanction" in title_lower or "制裁" in title_lower:
+            category = "Geopolitical_CrossStrait"
+            entities = ["商务部出口管制局", "关键芯片设计厂商"]
+            impact = "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查"
+            severity = "P0"
+            duration = "不可抗力中长期"
+            segments = ["先进制程芯片设计", "全球代工供应链"]
+
+        summary_dict = {
+            "category": category,
+            "involved_entities": entities,
+            "micro_physical_impact": impact,
+            "estimated_duration": duration,
+            "affected_business_segments": segments,
+            "severity_level": severity,
+        }
+        return json.dumps(summary_dict, ensure_ascii=False)
+
+
+class EventRadarCollector:
+    """事件雷达高频收集与调度器."""
+
+    def __init__(
+        self,
+        config_path: str = "config/event_radar_sources.json",
+        watchdog: Optional[NetworkHealthWatchdog] = None,
+        progress_manager: Optional[RadarProgressManager] = None,
+        model_client: Optional[Any] = None,
+    ):
+        self.config_path = Path(config_path)
+        self.config: Dict[str, Any] = {}
+        self._load_config()
+
+        self.engine = EventRadarEngine(self.config)
+
+        # 依赖注入或使用默认组件
+        watchdog_cfg = self.config.get("network_watchdog", {})
+        self.watchdog = watchdog or NetworkHealthWatchdog(
+            probe_endpoints=watchdog_cfg.get("probe_endpoints"),
+            timeout_sec=watchdog_cfg.get("timeout_seconds", 1.5),
+            max_offline_retries=watchdog_cfg.get("max_offline_retries", 5),
+            backoff_intervals=watchdog_cfg.get("backoff_intervals_seconds"),
+        )
+
+        prog_cfg = self.config.get("progress_management", {})
+        ckpt_file = prog_cfg.get("checkpoint_file", "data/ledger/event_radar_checkpoint.json")
+        self.progress_mgr = progress_manager or RadarProgressManager(
+            checkpoint_path=ckpt_file,
+            max_hash_history_size=prog_cfg.get("max_hash_history_size", 10000),
+        )
+
+        self.model_client = model_client or MockModelSummarizer()
+
+    def _load_config(self) -> None:
+        if self.config_path.is_file():
+            try:
+                with open(self.config_path, "r", encoding="utf-8") as f:
+                    self.config = json.load(f)
+            except Exception as e:
+                logger.warning("读取配置文件异常: %s", e)
+
+    def determine_trading_session(self, ref_time: Optional[datetime] = None) -> Tuple[str, int]:
+        """依据美东时间与交易日历确定当前交易时段与自适应巡检频次 (分钟)."""
+        now_utc = ref_time or datetime.now(timezone.utc)
+        # 美东时间 (EDT 通常为 UTC-4，EST 为 UTC-5，此处按 UTC-4 近似)
+        edt_hour = (now_utc.hour - 4) % 24
+        edt_minute = now_utc.minute
+        weekday = now_utc.weekday()  # 0=Monday, 6=Sunday
+
+        intervals = self.config.get("scheduler", {}).get("polling_intervals_minutes", {})
+        pre_m = intervals.get("pre_market", 5)
+        reg_m = intervals.get("regular_market", 15)
+        post_m = intervals.get("after_hours", 30)
+        closed_m = intervals.get("market_closed", 60)
+
+        # 周六、周日休市
+        if weekday >= 5:
+            return "market_closed", closed_m
+
+        current_minutes = edt_hour * 60 + edt_minute
+        # 盘前 Pre-Market: 04:00 - 09:30 (240 - 570 分钟)
+        if 240 <= current_minutes < 570:
+            return "pre_market", pre_m
+        # 盘中 Regular Trading: 09:30 - 16:00 (570 - 960 分钟)
+        elif 570 <= current_minutes < 960:
+            return "regular_market", reg_m
+        # 盘后 After-Hours: 16:00 - 20:00 (960 - 1200 分钟)
+        elif 960 <= current_minutes < 1200:
+            return "after_hours", post_m
+        else:
+            return "market_closed", closed_m
+
+    def run_collection_cycle(
+        self,
+        raw_feed_items: Optional[List[Dict[str, Any]]] = None,
+        force_offline_simulation: bool = False,
+    ) -> Dict[str, Any]:
+        """执行单轮次原子信息收集与事件门禁处理循环."""
+        cycle_start_iso = datetime.now(timezone.utc).isoformat()
+        session_name, recommended_interval = self.determine_trading_session()
+
+        # 1. 前置自发断网自检 (Network Health Check)
+        if force_offline_simulation:
+            is_online = False
+            active_node = "SIMULATED_OFFLINE"
+            latency = -1.0
+        else:
+            is_online, active_node, latency = self.watchdog.check_connectivity()
+
+        if not is_online:
+            # 启动断网自治等待重试
+            recovered = self.watchdog.wait_for_recovery()
+            if not recovered:
+                return {
+                    "status": "OFFLINE_HOLD",
+                    "timestamp": cycle_start_iso,
+                    "market_session": session_name,
+                    "message": "网络处于断开状态，看门狗已安全挂起并等待，无抛错闪退。",
+                    "scanned_count": 0,
+                    "filtered_in_count": 0,
+                    "summarized_count": 0,
+                    "p0_p1_triggered_count": 0,
+                    "triggered_events": [],
+                    "estimated_tokens_consumed": 0,
+                }
+
+        # 2. 准备原始资讯流 (若未外部传入则为空列表或测试用例)
+        items_to_scan = raw_feed_items or []
+        cycle_metrics = {
+            "scanned": len(items_to_scan),
+            "filtered_in": 0,
+            "summarized": 0,
+            "p0_p1_triggered": 0,
+            "estimated_tokens": 0,
+        }
+
+        triggered_events: List[Dict[str, Any]] = []
+
+        # 3. 逐条流式穿透四级漏斗
+        for raw_dict in items_to_scan:
+            item = RawNewsItem(
+                id=str(raw_dict.get("id", "")),
+                title=str(raw_dict.get("title", "")),
+                content=str(raw_dict.get("content", "")),
+                source=str(raw_dict.get("source", "Public_Feed")),
+                published_at=str(raw_dict.get("published_at", cycle_start_iso)),
+                url=str(raw_dict.get("url", "")),
+            )
+
+            # 漏斗第 1 级：SHA-256 唯一指纹幂等排重 (0 Token)
+            if self.progress_mgr.is_hash_processed(item.raw_hash):
+                continue
+
+            # 漏斗第 2 级：物理去噪与实体词典命中初筛 (0 Token)
+            matched, tags, likely_cat = self.engine.pre_filter(item)
+            if not matched:
+                # 记录为已处理指纹，防止重复扫描无关新闻
+                self.progress_mgr.record_processed_hash(item.raw_hash)
+                continue
+
+            cycle_metrics["filtered_in"] += 1
+
+            # 漏斗第 3 级：选项 2-B 统一微型模型摘要生成 (约 80~120 Token/条)
+            prompt_payload = self.engine.build_summary_prompt(item, likely_cat)
+            if hasattr(self.model_client, "generate_summary_json"):
+                model_raw_json = self.model_client.generate_summary_json(prompt_payload, item)
+            else:
+                model_raw_json = json.dumps({
+                    "category": likely_cat.value,
+                    "involved_entities": [item.source],
+                    "micro_physical_impact": item.title,
+                    "estimated_duration": "短期",
+                    "affected_business_segments": ["核心业务"],
+                    "severity_level": "P2",
+                })
+
+            cycle_metrics["summarized"] += 1
+            cycle_metrics["estimated_tokens"] += 110  # 选项 2-B 紧凑 JSON 单条预估消耗
+
+            # 刚性校验与事件烈度分类
+            summary = self.engine.parse_and_validate_summary(model_raw_json, item, likely_cat)
+
+            # 漏斗第 4 级：重大事件触发门禁
+            if summary.requires_deep_analysis:
+                cycle_metrics["p0_p1_triggered"] += 1
+                triggered_events.append(summary.to_dict())
+
+            # 记录处理完成的哈希
+            self.progress_mgr.record_processed_hash(item.raw_hash)
+
+        # 4. 原子安全保存断点账本
+        self.progress_mgr.save_checkpoint(
+            current_timestamp=cycle_start_iso,
+            cycle_metrics=cycle_metrics,
+            new_triggered_events=triggered_events,
+        )
+
+        return {
+            "status": "SUCCESS",
+            "timestamp": cycle_start_iso,
+            "market_session": session_name,
+            "active_probe_node": active_node,
+            "probe_latency_ms": latency,
+            "recommended_interval_minutes": recommended_interval,
+            "scanned_count": cycle_metrics["scanned"],
+            "filtered_in_count": cycle_metrics["filtered_in"],
+            "summarized_count": cycle_metrics["summarized"],
+            "p0_p1_triggered_count": cycle_metrics["p0_p1_triggered"],
+            "triggered_events": triggered_events,
+            "estimated_tokens_consumed": cycle_metrics["estimated_tokens"],
+            "checkpoint_saved": True,
+        }

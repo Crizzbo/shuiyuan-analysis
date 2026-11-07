@@ -238,6 +238,13 @@ from .financial_statement_facade import (
     FinancialStatementFacade,
     NormalizedFinancialProfile,
 )
+from .event_radar_engine import (
+    EventRadarEngine,
+    EventSeverity,
+    EventCategory,
+    RawNewsItem,
+    StructuredEventSummary,
+)
 
 __all__ = [
     "FinancialStatementFacade",
@@ -373,4 +380,9 @@ __all__ = [
     "BuySignalTier",
     "SEPA_SIGNAL_STATE_REGISTRY",
     "SepaAdaptiveParams",
+    "EventRadarEngine",
+    "EventSeverity",
+    "EventCategory",
+    "RawNewsItem",
+    "StructuredEventSummary",
 ]
