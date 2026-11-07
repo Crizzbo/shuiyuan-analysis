@@ -1,8 +1,11 @@
 """单元测试：事件雷达收集器、自发断网检测、进度管理与事件触发门禁 (Phase 1)."""
 
+import io
 import json
 import os
 from pathlib import Path
+import signal
+import sys
 import tempfile
 import unittest
 
@@ -20,6 +23,7 @@ from finance_tools.event_radar_collector import (
     MockModelSummarizer,
     EventRadarCollector,
 )
+from scripts.run_event_radar_collector import EventRadarService
 
 
 class TestEventRadarEngine(unittest.TestCase):
@@ -564,6 +568,95 @@ class TestEventRadarCollectorEndToEnd(unittest.TestCase):
         self.assertEqual(res["status"], "OFFLINE_HOLD")
         self.assertEqual(res["scanned_count"], 0)
         self.assertIn("网络处于断开状态", res["message"])
+
+
+class TestEventRadarService(unittest.TestCase):
+    """测试事件雷达 CLI 守护与调度中枢服务."""
+
+    def setUp(self):
+        self.temp_dir = tempfile.TemporaryDirectory()
+        self.ckpt_path = Path(self.temp_dir.name) / "test_service_ckpt.json"
+        self.db_path = Path(self.temp_dir.name) / "test_service_radar.sqlite3"
+        self.cfg_path = Path(self.temp_dir.name) / "test_service_config.json"
+
+        cfg_data = {
+            "network_watchdog": {
+                "timeout_seconds": 0.5,
+                "max_offline_retries": 1,
+                "backoff_intervals_seconds": [0.01],
+            },
+            "progress_management": {
+                "checkpoint_file": str(self.ckpt_path),
+                "database_file": str(self.db_path),
+                "max_hash_history_size": 100,
+            },
+            "scheduler": {
+                "polling_intervals_minutes": {
+                    "pre_market": 5,
+                    "regular_market": 15,
+                    "market_closed": 60,
+                }
+            },
+        }
+        with open(self.cfg_path, "w", encoding="utf-8") as f:
+            json.dump(cfg_data, f)
+
+    def tearDown(self):
+        self.temp_dir.cleanup()
+
+    def test_service_run_single_cycle_and_shutdown(self):
+        """测试服务单次巡检调度与优雅停机信号."""
+        class MockOnlineWatchdog(NetworkHealthWatchdog):
+            def check_connectivity(self):
+                return True, "Mock_Online_Test_Node", 1.0
+
+        collector = EventRadarCollector(
+            config_path=str(self.cfg_path),
+            watchdog=MockOnlineWatchdog(),
+            progress_manager=RadarProgressManager(checkpoint_path=str(self.ckpt_path)),
+            database_manager=RadarDatabaseManager(db_path=str(self.db_path)),
+            model_client=MockModelSummarizer(),
+        )
+
+        service = EventRadarService(
+            config_path=str(self.cfg_path),
+            auto_generate_reports=False,
+            collector=collector,
+        )
+
+        test_feed = [
+            {
+                "id": "svc_test_01",
+                "title": "某关键半导体材料工厂发生突发火灾爆炸停产",
+                "content": "为全球主要晶圆厂供应关键化学品的生产车间停工检修。",
+                "source": "Global_Disruption_Feed",
+            }
+        ]
+
+        # 执行单轮次巡检
+        cycle_result = service.run_single_cycle(raw_feed_items=test_feed)
+        self.assertEqual(cycle_result["status"], "SUCCESS")
+        self.assertEqual(cycle_result["scanned_count"], 1)
+        self.assertEqual(cycle_result["p0_p1_triggered_count"], 1)
+
+        # 验证状态打印输出
+        captured_out = io.StringIO()
+        old_stdout = sys.stdout
+        try:
+            sys.stdout = captured_out
+            service.print_status()
+        finally:
+            sys.stdout = old_stdout
+
+        output_text = captured_out.getvalue()
+        self.assertIn("【突发事件雷达系统 · 运行状态与账本审计】", output_text)
+        self.assertIn("已持久化事件总量", output_text)
+        self.assertIn("P0/P1 重大事件总数", output_text)
+
+        # 测试优雅停机信号触发
+        self.assertTrue(service._is_running)
+        service._handle_shutdown(signal.SIGINT, None)
+        self.assertFalse(service._is_running)
 
 
 if __name__ == "__main__":
