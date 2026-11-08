@@ -1,188 +1,286 @@
 ---
 name: shuiyuan-analysis
-version: 5.0.0
-description: 水源分析——买方机构级股票量化投研与决策辅助 Agent Skill。遵循“程序负责客观数据骨架，AI 负责六维立体升维推演，系统闭环复盘与贝叶斯自我演化”核心原则，已实现金融分析核心 (financial_core) 与 Skill 交互门禁 (skill_gateway) 彻底解耦，拒绝机械清单主义，将微观流动性反身性、跨期因果与索罗斯反身性、资金期限错配、非对称凸性工程、前置证伪红线以及产业链生态位共振深度内化为投研决策体系。
+version: 6.0.0
+description: 水源分析——买方机构级股票量化投研、全市场趋势选股与产业链涟漪因果穿透 Agent Skill。覆盖全市场资产池（美股10,000+/日股4,400+/核心567）SEPA趋势模板选股、行情时效硬核验门禁、官方财报三表平账与多情景DCF估值、SOTP多业务分部损益穿透、多标的产业链上下游因果传导矩阵（DIO缓冲/转嫁权/有限责任下界）、突发事件雷达全天候守护与法定信源防伪鉴真、以及本地买方交易室推流交互大屏。
+license: Proprietary
+metadata:
+  author: Shuiyuan Quant Research Architecture Team
+  version: "6.0.0"
+  domain: quantitative-equity-research-and-supply-chain-ripple
+  triggers: 选股, 股票分析, 研报生成, 突发事件, 产业链涟漪, 产业链分析, SOTP, 业务分部拆解, 事件雷达, 行情时效, 财务估值, 趋势选股, DCF估值, 买点推演, 交易室大屏, shuiyuan-analysis
+  role: buy-side-chief-quant-strategist
+  scope: full-stack-equity-research-and-ripple-dynamics
 ---
 
-# 水源分析 Agent Skill (v5.0.0 买方高维认知与闭环反思版)
+# 水源分析 Agent Skill (v6.0.0 买方全景量化与产业链因果穿透版)
 
-买方机构级股票分析、法证审计、六维升维思考与交易决策协同交互层。
+买方机构级股票量化选股、微观法证审计、SOTP 业务分部穿透、多标的产业链涟漪传导矩阵与全天候事件雷达推流大屏。
 
 > [!IMPORTANT]
-> **程序、AI 与投研闭环核心原则 (The Core Tri-Pillar Principles)**:
-> 1. **程序只负责坚硬的骨架 (Objective Quantitative Skeleton)**：
->    - 官方三表平账核验（Stage 1 门禁）：资产与（负债+权益）不平账或现价/股数非法时刚性阻断，严禁输出假估值；
->    - 交易时段与时效硬门禁：解析交易时区与日历，未来时间戳刚性拦截，旧日缓存自动降级为前收盘价基准；
->    - 确定性量化数学计算：法证五刀穿透、多情景 DCF 独立复算、CRR 美式期权二叉树、跨市场宏观流动性加压；
->    - 结构化数据卡片呈现：以统一、严谨的富文本卡片呈现客观指标、估值矩阵与多币种符号；
->    - **严禁程序越界输出机械武断的定论**：废除硬编码买卖评级与固定 5%/15% 虚假半凯利仓位，无校准概率时严格展示为“待定”。
-> 2. **AI 负责赋予六维立体的思考血肉 (Multi-Dimensional Buy-Side Cognitive Flesh)**：
->    - 彻底破除“机械定清单（Checklist Bureaucracy）”与“一阶线性思维”；
->    - 必须从**微观流动性反身性、跨期因果与索罗斯反身性、资金期限错配、非对称凸性工程、前置证伪红线、产业链生态位**六大高阶认知维度开展推演；
->    - 在决策卡片底部的 `### 📝 【AI 投研日记与定性归纳】` 专区中撰写富有质感的深度买方投研日记。
+> **程序、AI 与投研闭环三大刚性原则 (The Core Tri-Pillar Principles)**:
+> 1. **程序只负责坚硬客观的数据骨架 (Objective Quantitative Skeleton)**：
+>    - **官方三表刚性平账自检**：$Assets = Liabilities + Equity$ 不平账或现价/股数非法时刚性阻断，严禁输出虚假估值；
+>    - **交易时段与时效硬核验门禁**：自动绑定交易所当地时区（美股 EDT/EST、A股 CST、日股 JST）并对齐交易日历，未来时间戳刚性拦截，旧日缓存自动降级为前收盘价基准；
+>    - **确定性量化数学计算**：SEPA 8 大趋势硬指标、VCP 4T 波动收缩、多情景 DCF 估值矩阵、SOTP 分部损益穿透、存货周转天数 (DIO) 吸收周期与产业链涟漪因果传导矩阵；
+>    - **严禁程序越界输出机械武断的定论**：废除硬编码买卖评级与固定虚假仓位，无校准概率时严格展示为“待定”。
+> 2. **AI 负责赋予六维立体的思考血肉 (Multi-Dimensional Cognitive Flesh)**：
+>    - 彻底破除“机械清单主义（Checklist Bureaucracy）”与“一阶线性思维”；
+>    - 必须从**微观流动性反身性、跨期因果与索罗斯反身性、资金期限错配与对手盘画像、非对称凸性工程、前置证伪红线、产业链生态位共振**六大高阶认知维度开展推演；
+>    - 在决策卡片底部的 `### 📝 【AI 投研日记与定性归纳】` 专区中撰写富有商业洞察的买方投研日记。
 > 3. **系统闭环复盘与贝叶斯自我演进 (Retrospective Reflection & Bayesian Evolution)**：
->    - 拒绝简单的对账算术或生硬机械规则；
 >    - 每日对账前期预测走廊与今日真实结算，从流动性踩踏、预期差反转、对手盘被迫平仓等深层机理执行四维法证归因；
 >    - 动态联合校准贝叶斯先验矩阵（更新波动率溢价、安全边际缓冲与仓位分配分布）。
 
 ---
 
-## 1. 触发场景与意图路由
+## 一、 触发场景与意图路由矩阵 (Trigger Matrix)
 
-当用户提出以下需求时，Agent 应激活本技能：
-- **个股系统性投研分析**：“分析 RXRX 是否值得买”、“五粮液现在估值合理吗”、“帮我分析 NVDA”；
-- **法证级财报穿透审计**：“排查某公司有没有财务粉饰”、“看看这家公司存货和现金有没有毒”；
-- **估值走廊与安全边际**：“给个目标价和止损底价”、“中性内在价值公允锚点是多少”；
-- **衍生品与宏观压力测试**：“美式期权二叉树公允价是多少”、“日元套息平仓对该股影响多大”；
-- **全市场低估筛选**：“筛选当前处于低估走廊且通过法证审计的优质标的”；
-- **跨期投研复盘与反思归因**：“复盘前几天的分析结果”、“为什么今天预测出现偏差”、“提取认知盲区与贝叶斯更新”。
+当用户提出以下任一诉求时，Agent 必须主动激活本技能并路由至对应的专业处理流水线：
 
----
-
-## 2. 买方高阶投研认知模型与六维立体推演体系 (Elevated Buy-side Cognitive Framework)
-
-买方投研绝非机械地套用指标或填写静态检查单。市场是复杂自适应系统（Complex Adaptive System），Agent 必须在每一次投研输出中运用以下六大升维认知模型：
-
-### 维度 1: 微观流动性与订单流反身性 (Microstructure & Liquidity Reflexivity)
-- **价格是流动性交易出来的，而非公式计算出来的**。
-- 必须穿透分析做市商（Market Makers）的 Gamma/Delta 敞口状态：
-  - 当股价跌破密集虚值认购期权（OTM Call）行权价时，做市商为维持 Delta 中性被迫在现货市场加速抛售，形成**“现货下跌 $\to$ 做市商抛售 $\to$ 流动性枯竭 $\to$ 现货进一步暴跌”的 Gamma 陷阱（Gamma Trap）**；
-  - 洞察“基本面破位”与“订单簿流动性瞬间抽干导致的假摔踩踏”的本质区别。
-- 识别借券融券成本（Borrow Fee / Utilization Rate）与空头回补挤压（Short Squeeze）动能。
-
-### 维度 2: 跨期因果与索罗斯反身性 (Soros Reflexivity & Multi-Order Causality)
-- **跳出一阶线性思维（“利好=涨，利空=跌”）**：
-  - **二阶思维（预期差 Expectation Gap）**：市场当前一致预期是什么？盘面当前价格已经计入（Priced-in）了多少极端悲观/乐观情景？当所谓的利空（如国会听证会、监管草案）早已在股价暴跌中被过度贴现时，实质利空落地往往成为反转的黄金击球点；
-  - **三阶思维（反身性 Reflexivity）**：股价的大幅波动是否会反向改变企业的实体基本面？
-    - 对于缺钱的轻资产/创新研发企业，股价崩塌会导致增发无门、现金跑道断裂；
-    - 对于坐拥充沛自由现金流的行业巨头（如 UNH、BMY、GOOGL），股价超跌不仅不伤害经营，反而让管理层能够以极低估值大额注销式回购、低成本吞并出清对手，反向加速每股内在价值的膨胀。
-
-### 维度 3: 资金期限错配与对手盘博弈画像 (Capital Horizon Mismatch & Counterparty Profiling)
-- **投研不仅是看公司，更是看牌桌对面的对手是谁**：
-  - 穿透谁在主导抛售：是面临季度排名、VaR 风险预算清盘线、散户赎回压力的公募/杠杆基金（被迫清算者 Forced Sellers），还是具备无限耐心的产业资本？
-  - **时间跨度套利 (Time Horizon Arbitrage)**：买方机构最坚固的护城河是“资金期限的宽容度”。在被迫交易者因短期摩擦抛出带血筹码时，以流动性提供者姿态逆向接盘，获取超额风险溢价。
-
-### 维度 4: 非对称凸性与损益分布工程 (Asymmetric Convexity & Payoff Architecture)
-- **严禁散户化的单点裸赌方向（如单边裸买深度虚值期权，直面 Theta 极速归零与波动率暴跌 Vol Crush）**。
-- 从头寸结构上追求**非对称凸性（Convexity）**：
-  - 运用波动率曲面（IV Skew/Smile）构建跨期日历价差（Calendar Spread）、现货加保护性看跌领子策略（Collar）或合成多头；
-  - 确保“在看错或震荡时，损失被确定性的安全垫严格锁定；而在催化剂爆发兑现时，享有非线性向上暴击收益”。
-
-### 维度 5: 前置证伪承诺与反事实贝叶斯迭代 (Falsification Pre-commitments & Epistemic Humility)
-- **所有投资论点必须前置声明“证伪指标清单（Falsification Triggers）”**：
-  - 明确写出：“如果发生指标 X（如核心管线 III 期终点落空、大客户留存率跌破 80%、自由现金流连续 2 季转负），无条件承认论点错误并执行斩仓，严禁将逻辑证伪辩解为市场非理性”；
-  - 在价格走势偏离预期时，严格区分**“逻辑证伪型偏离”**与**“流动性噪音型偏离”**，依据贝叶斯法则动态校准先验胜率与赔率分布。
-
-### 维度 6: 产业生态位共振与定价权迁移 (Ecosystem Niche & Pricing Power Shift)
-- 将单体标的置于完整产业链拓扑网络中审视：
-  - 追踪瓶颈环节（Chokepoints，如 CoWoS 封装、特种冷却液、电力变压器）与定价权流动；
-  - 评估企业是正在享受产业链的“利润虹吸”，还是正在被上游供应商与下游寡头客户“双向挤压毛利”。
+| 用户核心意图 | 典型自然语言触发词 | 核心调度入口 / 工具 | 输出交付物规范 |
+| :--- | :--- | :--- | :--- |
+| **全市场选股与趋势扫描** | “帮我选股”、“挑几只趋势好的标的”、“扫描纳指/日经优质突破股” | `finance_tools.sepa_buy_signal_engine`<br>`scripts.run_10k_universe_pipeline` | SEPA 趋势筛选卡片、买点价格走廊、VCP 收缩形态、止损保护线 |
+| **个股系统性深度投研** | “分析 NVDA / 7203 / 五粮液”、“测算某公司合理估值”、“排查财务粉饰” | `skill_gateway.default_gateway`<br>`scripts.generate_deep_dossier` | 买方深度研报档案 (Deep Dossier)、官方三表清洗、多情景 DCF 估值矩阵 |
+| **多业务分部 (SOTP) 穿透** | “某公司云业务停机损失多少”、“分部拆解公司估值”、“SOTP 因果穿透” | `finance_tools.sotp_event_analyzer`<br>`scripts.run_sotp_event_penetration` | SOTP 分部加总估值表、微观物理损益穿透报告、净利冲击百分比 |
+| **产业链上下游涟漪效应推演** | “台积电停电影响苹果和ASML多少”、“某代工厂断供上下游如何传导”、“产业链涟漪分析” | `financial_core.engines.supply_chain_ripple_engine`<br>`scripts.run_supply_chain_ripple_analysis` | 产业链非对称涟漪传导矩阵、DIO 吸收周期、议价转嫁冲销、各标的 $\Delta EBIT$ 测算 |
+| **突发事件监控与法定鉴真** | “最近有什么重大消息”、“排查某传闻真伪”、“启动事件雷达” | `finance_tools.event_radar_collector`<br>`finance_tools.evidence_verification_pipeline` | 0-Token 事件初筛底账、AI 浏览器核验清单、SHA-256 法定鉴真防伪收据 |
+| **本地买方交易室推流看板** | “打开监控大屏”、“启动交易室推流服务”、“查看拓扑大屏” | `scripts.serve_radar_dashboard`<br>`scripts.generate_radar_dashboard` | 本地轻量推流 HTTP 服务 (`http://127.0.0.1:8899`)、交互拓扑大屏 |
 
 ---
 
-## 3. 核心执行流程 (SOP 四部曲升级版)
+## 二、 六大核心业务子系统与量化模型架构
 
 ```mermaid
 flowchart TD
-    UserReq["用户意图输入 (标的代码/分析要求)"] --> Stage1["阶段 1: 意图与标的解析 (美股/A股/日股/币种)"]
-    Stage1 --> Stage2["阶段 2: 交易时段与时效新鲜度门禁核验 (QuoteSnapshot)"]
-    Stage2 --> Stage3["阶段 3: 调度 SkillGateway 调用 financial_core 核心"]
-    Stage3 --> CheckSuccess{"平账与时效通过?"}
-    CheckSuccess -- 阻断 --> BlockedCard["输出安全门禁阻断报告 (拒绝虚假计算)"]
-    CheckSuccess -- 通过 --> Stage4["阶段 4: AI 结合六维升维思考撰写【AI 投研日记】并挂载呈现"]
+    subgraph S1["【子系统 1：全市场选股与时效门禁】"]
+        Universe["全市场数千家资产池 (美股10k+ / 日股4.4k+ / 核心567)"] --> FreshnessGate["行情时效与交易时钟核验 (verify_quote_freshness)"]
+        FreshnessGate --> SEPA["SEPA 8 大趋势硬指标 + VCP 4T 形态筛查"]
+        SEPA --> PriceCorridor["四维解耦价格走廊与止损底价"]
+    end
+
+    subgraph S2["【子系统 2：财务法证审计与多情景估值】"]
+        PriceCorridor --> OfficialFilings["官方原始三表底稿 (OfficialFilingMapper)"]
+        OfficialFilings --> BalanceCheck{"刚性平账自检 A=L+E"}
+        BalanceCheck -- 通过 --> Forensic["法证五刀穿透 (受限现金/存货毒性DIO/应收周转)"]
+        Forensic --> DCFMatrix["多阶段自由现金流折现 (悲观底价 / 中性公允 / 乐观靶心)"]
+    end
+
+    subgraph S3["【子系统 3：SOTP 分部因果与产业链涟漪推演】"]
+        DCFMatrix --> SOTP["SOTP 跨业务分部因果穿透 (微观物理损益折算)"]
+        SOTP --> RippleEngine["多标的产业链上下游涟漪效应引擎 (DIO吸收/议价转嫁/有限责任)"]
+    end
+
+    subgraph S4["【子系统 4：事件雷达、法定鉴真与交易室推流】"]
+        NewsFeeds["全天候新闻资讯与监管通告"] --> ZeroToken["0-Token 纯本地高效初筛与分级"]
+        ZeroToken --> BrowserAssistant["AI 浏览器定向核验助手 (官方公报补数清单)"]
+        BrowserAssistant --> LegalVerification["SHA-256 密码学法定防伪鉴真流水线 (解除熔断)"]
+        LegalVerification --> StreamServer["本地轻量推流调度服务 (GET /api/stream)"]
+        StreamServer --> LiveDashboard["交易室交互拓扑大屏 (reports/event_radar_dashboard.html)"]
+    end
+
+    RippleEngine -.-> LiveDashboard
 ```
 
-### 阶段 1: 意图与标的解析
-- 识别目标股票代码与市场归属：美股 (`RXRX`, `NVDA`)、A股 (`000858`, `600519`)、日股 (`7203`)；
-- 明确分析模式：`full_systemic`（默认全流程系统性分析）、`forensic_only`（纯法证体检）、`macro_stress`（宏观冲击测试）。
+### 1. 全市场选股与时效门禁子系统 (Stock Selection & Freshness Gate)
+- **覆盖资产池**：
+  - 美股：纽交所与纳斯达克全市场 10,000+ 家上市企业 (`data/universe/sec_company_tickers.json`)；
+  - 日股：东证全市场 Prime/Standard/Growth 4,400+ 家企业 (`data/universe/jpx_company_tickers.json`)；
+  - 顶层核心池：Tier 0 / Tier 1 核心 567 重点标的。
+- **SEPA 8 大趋势硬指标**：
+  1. $Price > MA50 > MA150 > MA200$
+  2. $MA200$ 处于上升通道至少 1 个月
+  3. $Price \ge 1.25 \times 52W\_Low$
+  4. $Price \ge 0.75 \times 52W\_High$（距离 52 周新高回撤不超过 25%）
+  5. 波动收缩形态 (VCP 4T: 振幅逐级收敛 $20\% \to 10\% \to 5\% \to 2\%$)
+- **交易时段时效硬核验门禁 (`verify_quote_freshness`)**：
+  - 必须绑定交易所当地时区（美股 EDT/EST、A股 CST、日股 JST）并对齐交易日历；
+  - 严格区分盘前 (Pre-Market)、盘中 (Regular)、盘后 (After-Hours) 与前收盘价基准；
+  - 未来时间戳刚性拦截，旧日缓存自动降级并显式告警，严禁旧数据冒充盘中现价。
 
-### 阶段 2: 行情时效与交易时段硬核验 (Freshness Gatekeeper)
-严格遵守 **2026-10-14 行情数据时效性与当日新鲜度强制核验硬约束**：
-- 严禁在未核验时间戳的情况下直接引用行情；
-- 自动绑定交易所当地时区（美股 EDT/EST、A股 CST、日股 JST）并对齐交易日历；
-- 每次输出前必须显式标注准确时间戳与时段状态（实时、延迟、前收盘基准）；严禁把未来时间或历史缓存当作盘中实时现价。
+### 2. 财务法证审计与多情景 DCF 估值子系统 (Forensic Audit & Scenario DCF)
+- **官方三表底稿清洗与刚性平账自检**：
+  - 任何录入主管道的财报底账必须通过 $Assets = Liabilities + Equity$ 刚性平账自检；
+  - 经由 `OfficialFilingMapper` 转换非标字符串，严禁未清洗字符串直传核心。
+- **存货周转天数 (DIO) 与供应链上下游集中度**：
+  - $DIO = \frac{\text{Average Inventory}}{\text{COGS}} \times 365$
+  - 穿透上下游前五大客户与核心供应商采购/销售集中度，识别单一依赖风险。
+- **长短期差异化情景 DCF 估值矩阵**：
+  - 悲观防线 (Pessimistic Floor)：折现率上浮 150-200bps，永续增长率 $g$ 降至 $1.5\%$，测算清算级破产底（NCPS/NCAV）；
+  - 中性公允 (Neutral Anchor)：基准 WACC 与行业公允 $g$；
+  - 乐观靶心 (Optimistic Target)：反映护城河扩张与自由现金流超预期增长。
 
-### 阶段 3: 调度 Skill 网关调用金融核心
-在 Agent 执行环境中，通过 `skill_gateway` 发起分析调用：
-```python
-from skill_gateway import default_gateway
+### 3. SOTP 跨业务分部微观因果损益穿透子系统 (SOTP Segment Penetration)
+- **业务分部画像结构**：依据 `config/sotp_profiles.json`，将综合性巨头拆解为独立分部（如 Alphabet: Google Search, YouTube, Google Cloud, Other Bets）；
+- **微观物理损益折算模型**：
+  $$\Delta EBIT_{total} = \sum_{i} \left( \text{SegmentEBIT}_{i} \times \text{ImpactPct}_{i} \right)$$
+  - 支持突发业务冲击（如“云数据中心断电 3 天导致服务可用性下降”、“核心晶圆厂减产 $15\%$”），精确量化至每股税后收益 (EPS) 与股权公允折现值。
 
-response = default_gateway.handle_equity_analysis(
-    ticker="000858",
-    market_session="closed",
-    quote_timestamp="2026-10-14 15:00:00 CST",
-    mode="full_systemic",
-    allow_demo=True,
-    ai_journal="【AI 投研日记】实地草根调研显示普五批价在 930-940 元企稳，社会库存回落至 1.5 个月良性区间。"
-)
-print(response["markdown_card"])
-```
+### 4. 多标的产业链上下游涟漪效应传导矩阵子系统 (Supply Chain Ripple Effect)
+- **全链拓扑架构**：依据 `config/supply_chain_topologies.json`（严格通过 JSONSchema 验证）：
+  $$\text{上游核心设备/原材料供应商} \longrightarrow \text{核心中枢制造/代工厂} \longrightarrow \text{下游大客户/终端品牌}$$
+- **存货周转天数 (DIO) 吸收周期数学模型**：
+  $$\text{UncoveredDays} = \max(0.0, T_{\text{disrupt}} - DIO)$$
+  $$\text{ExposureRatio} = \frac{\text{UncoveredDays}}{T_{\text{disrupt}}} \quad (\in [0.0, 1.0])$$
+  - 若断供天数小于企业自身存货周转天数 ($T_{\text{disrupt}} \le DIO$)，存货完全吸收物理冲击，敞口比例为 $0.0$；
+- **核心中枢标的损益与议价转嫁冲销**：
+  $$\text{Shock}_{\text{hub}} = \text{BaseShock} \times \text{ExposureRatio}_{\text{hub}}$$
+  $$\Delta EBIT_{\text{hub}} = \text{Shock}_{\text{hub}} \times \left(1.0 - \text{PricingPower}_{\text{hub}} \times 0.5\right)$$
+- **下游大客户二级传导与衰减**：
+  $$\text{EffectiveShock}_{\text{down}} = |\text{Shock}_{\text{hub}}| \times \beta_{\text{down}} \times \frac{\max(0.0, T_{\text{disrupt}} - DIO_{\text{down}})}{T_{\text{disrupt}}}$$
+  $$\Delta EBIT_{\text{down}} = - \text{EffectiveShock}_{\text{down}} \times \left(1.0 - \text{PricingPower}_{\text{down}}\right)$$
+- **有限责任数学边界防御**：
+  - 严禁除零除负，营业利润损益严格被截断在 $[-100.0\%, +50.0\%]$ 的有限责任区间内。
 
-### 阶段 4: AI 撰写六维深度投研日记与卡片交付
-决策卡片结构：
-1. **头部档案与时效凭据**：标的名称、代码、市场/币种、时效徽标与营业钟点状态；
-2. **核心量化指标与客观信号看板**：内生公允锚点、现价安全边际、现金跑道状态、组合建议仓位（无校准胜率时严格为“待定”）；
-3. **多情景估值复算走廊 (Valuation Matrix)**：悲观防线、中性基准、乐观靶心，展示真实的 WACC、g、清算级破产底（NCPS/NCAV）；
-4. **法证级证据穿透体检 (Forensic Dissection)**：红黄牌统计及受限现金、存货毒性等审计明细；
-5. **宏观压力测试与衍生品结构 (Macro & Options)**：日元套息平仓估值下折、CRR 美式期权二叉树公允价与提前行权溢价；
-6. **📝 【AI 投研日记与定性归纳】 (AI Research Journal)**：
-   > [!IMPORTANT]
-   > AI 撰写投研日记时，必须显式穿透并落地以下四大模块，严禁输出泛泛模板：
-   > - **【微观流动性与对手盘博弈透视】**：当前订单簿状态、做市商对冲盘压力、谁在被迫卖出；
-   > - **【二阶预期差与反身性推演】**：市场计入了什么悲观预期、利空落地后企业基本面是否发生恶性反身性；
-   > - **【前置证伪指标与反事实防线】**：明确列出哪 2~3 个具体硬指标触发时承认投资逻辑被证伪；
-   > - **【非对称凸性结构建议】**：头寸配置设计（网格分批、现货底仓搭配对冲、规避临期虚值期权）。
+### 5. 突发事件雷达全天候守护与法定信源防伪鉴真子系统 (Event Radar & Legal Verification)
+- **0-Token 纯本地高效初筛**：
+  - 基于高优先级正则词库对海量盘前/盘中资讯进行本地极速初筛与关键词去噪；
+  - 仅对匹配到实体与关键业务分类的高价值资讯调用大模型结构化提取，节省 $95\%+$ Token 消耗；
+- **AI 浏览器定向核验助手 (`BrowserVerificationAssistant`)**：
+  - 自动为待核验重大传闻生成官方监管（SEC/JPX/EDGAR）、行业协会、公司官网的定向核验补数清单；
+- **法定信源 SHA-256 防伪鉴真流水线 (`EvidenceVerificationPipeline`)**：
+  - 官方公报原文下载落盘后，通过密码学哈希签名生成防伪鉴真收据（Verification Receipt）；
+  - 验签属实后，自动将事件状态从 `Unverified_Rumor` 跃迁为 `Confirmed_Fact`，解除传闻熔断限制。
+
+### 6. 本地买方交易室推流服务与拓扑交互大屏 (Trading Room Live Stream Dashboard)
+- **纯标准库轻量推流调度器**：`scripts/serve_radar_dashboard.py` 基于 `http.server`，零物理第三方重量级网络库依赖；
+- **交易室动态推流 API 清单**：
+  - `GET /api/stream` 或 `/api/live`: 提供探活心跳、未核实传闻熔断计数与增量推流；
+  - `GET /api/events`: 导出全量事件雷达底账与分级状态；
+  - `GET /api/receipts`: 导出官方公报 SHA-256 防伪鉴真收据清单；
+  - `GET /api/supply-chain/topologies`: 导出可用产业链拓扑架构清单；
+  - `GET /api/supply-chain/ripple`: 实时计算并推流特定事件的全产业链穿透推演报告；
+  - `POST /api/verify`: 接收官方证据文件路径，现场执行验签并解除熔断；
+- **交互拓扑大屏**：`reports/event_radar_dashboard.html` 原生支持产业链涟漪效应控制台，动态调整断供天数与冲击强度，即时渲染上下游损益矩阵。
 
 ---
 
-## 4. 投研闭环复盘反思与贝叶斯自我演进协议 (Retrospective Reflection Protocol)
-
-系统内生集成 [`finance_tools/retrospective_review_engine.py`](finance_tools/retrospective_review_engine.py)，在每日早 07:00（美股收盘）与 16:00（日股收盘）自动执行跨期闭环复盘：
+## 三、 标准操作流程 (SOP 五步闭环)
 
 ```mermaid
-flowchart LR
-    PredSnapshot["T-n 历史研判快照 (走廊/证伪点/仓位)"] --> Matcher["盘面真实结算与催化事件对接"]
-    Matcher --> Attribution["四维法证级归因 (Alpha/Beta/走廊/期权)"]
-    Attribution --> Cognitive["六维认知反思 (流动性踩踏 vs 逻辑证伪)"]
-    Cognitive --> Bayesian["贝叶斯先验矩阵动态演进 (安全边际/仓位梯级)"]
-    Bayesian --> MasterLedger["更新主审计底账并生成云端研报"]
+sequenceDiagram
+    autonumber
+    actor Analyst as 买方投研员 / Agent
+    participant Gateway as Skill 适配网关 / CLI
+    participant Core as 金融分析与推演核心
+    participant DB as SQLite 账本 / JSON 底账
+    participant Screen as 交易室大屏推流服务
+
+    Analyst->>Gateway: 输入标的 (如 NVDA) 或突发事件
+    Gateway->>Core: 校验交易时段与行情时效 (verify_quote_freshness)
+    Core->>Core: 官方三表平账 (A=L+E) + DCF多情景复算
+    alt 涉及突发事件或供应链断供
+        Gateway->>Core: 触发 SOTP 分部穿透或产业链涟漪传导
+        Core->>Core: 计算 DIO 吸收周期、转嫁冲销与上下游 ΔEBIT
+    end
+    Core->>DB: 写入预测底账并生成 SHA-256 时间链条
+    DB->>Screen: 触发推流更新 (GET /api/stream)
+    Screen-->>Analyst: 输出富文本卡片 + 交易室大屏实时推流展示
 ```
 
-### 多维认知反思与归因执行法则：
-1. **流动性冲击 vs 逻辑证伪诊断**：
-   - 若股价超预期下跌，首先排查是否遭遇做市商负 Gamma 对冲抛售或被迫平仓踩踏；
-   - 检验前置证伪红线是否被击穿；若证伪红线未破且净现金底座稳固，判定为**流动性错杀**而非基本面恶化；
-2. **预期差吸收进度评估**：
-   - 评估当前实际走势中，市场对利空/利好事件的消化程度（Over-discounted vs Under-appreciated）；
-3. **凸性风险与期权损益审计**：
-   - 严苛核验期权策略是否规避了虚值到期归零风险，量化评估 1/4 凯利现货对冲效果；
-4. **贝叶斯先验矩阵动态演化**：
-   - 绝非机械地硬编码规则，而是以概率分布形式动态调整：
-     - **超跌安全边际冗余系数**：针对遭遇政治监管恐慌但现金流充沛的蓝筹，动态扩宽左侧建仓走廊；
-     - **做市商抛售修正系数**：针对小盘高波动股，在跌破关键行权价后自动冻结期权多头推荐，转为现货保守网格。
+### 步骤一：标的意图解析与行情新鲜度门禁
+在调用任何计算前，必须先通过 `MarketQuoteVerifier` 核验数据时间戳：
+```python
+from financial_reporting.quote_freshness_gateway import verify_quote_freshness
+
+quote_snapshot = verify_quote_freshness(ticker="NVDA", raw_quote_dict=quote_data)
+# 强制断言数据处于合法交易时钟区间内，拒绝未来时间戳
+```
+
+### 步骤二：选股与买点走廊测算
+```python
+from finance_tools.sepa_buy_signal_engine import SEPABuySignalEngine
+
+engine = SEPABuySignalEngine()
+signal_result = engine.evaluate_ticker("NVDA", daily_bars_df)
+# 输出: trend_template_pass (bool), vcp_stage, base_pivot, stop_loss_price
+```
+
+### 步骤三：SOTP 与产业链涟漪效应因果穿透
+```python
+from finance_tools.supply_chain_ripple_analyzer import SupplyChainRippleAnalyzer
+
+analyzer = SupplyChainRippleAnalyzer()
+report = analyzer.analyze_event_ripple(
+    event_id="EVT_20261016_TSMC_FAB18_DISRUPTION",
+    disruption_days=45.0
+)
+print(f"核心中枢影响: {report.core_hub_impact.ebit_impact_pct:.2f}%")
+for down in report.downstream_impacts:
+    print(f"下游客户 {down.entity_name}: 损益 {down.ebit_impact_pct:.2f}% (DIO缓冲: {down.dio_days}天)")
+```
+
+### 步骤四：突发事件雷达鉴真与防伪收据
+```python
+from finance_tools.evidence_verification_pipeline import EvidenceVerificationPipeline
+
+pipeline = EvidenceVerificationPipeline(auto_refresh_reports=True)
+receipt = pipeline.verify_single_event(
+    event_id="EVT_20261016_TSMC_FAB18_DISRUPTION",
+    evidence_file="data/evidence/regulatory_filing.pdf",
+    note="官方公报确认"
+)
+```
+
+### 步骤五：启动交易室推流服务与大屏展示
+```bash
+# 启动本地推流服务 (默认端口 8899)
+python scripts/serve_radar_dashboard.py --port 8899 --open-browser
+```
 
 ---
 
-## 5. 架构分层职责与统一入口清单
+## 四、 核心工具脚本与命令行调度清单 (CLI Registry)
 
-| 层次 | 目录/文件 | 核心职责 | 依赖关系 |
-|:---|:---|:---|:---|
-| **金融分析核心层 (Financial Core)** | `financial_core/` | 纯数学量化模型、法证五刀手术刀、情景 DCF 估值、期权二叉树、破产清算底、宏观压力测试、独立 CLI | **零依赖** Skills 或 Agent，独立买方量化库 |
-| **Skill 适配网关层 (Skill Gateway)** | `skill_gateway/` | 交易时段时效门禁核验、输入校验、调度金融分析核心、AI 六维投研日记挂载、决策卡片渲染 | 依赖 `financial_core` 公开发布的 API 契约 |
-| **投研复盘反思引擎 (Retrospective Engine)** | `finance_tools/retrospective_review_engine.py` | 跨期预测底账追踪、盘面真实结算、六维量化归因、认知盲区剖析、贝叶斯先验校准 | 依赖 `QuoteFreshnessGateway` |
-| **Agent 技能契约层 (Skill Contract)** | `SKILL.md` | 定义技能触发意图、六维高阶认知框架、SOP 四部曲、复盘反思协议、交互规范 | 面向 Agent 与宿主环境的声明性契约 |
-| **批量自动化流水线** | `scripts/run_10k_universe_pipeline.py` | 全盘资产池批处理调度、断点续传、本地渲染与云端上传状态机 (RENDERED_LOCAL -> UPLOADED) | 批处理生产入口 |
-| **复盘反思全景研报生成器** | `scripts/run_retrospective_review_pipeline.py` | 历史预测与当期盘面对账、六维反思白皮书渲染、云端 Drive 自动上传 | 复盘闭环流水线 |
+| 脚本路径 | 业务核心功能 | 常用命令示例 |
+| :--- | :--- | :--- |
+| `scripts/run_supply_chain_ripple_analysis.py` | 产业链上下游涟漪传导推演 CLI | `python scripts/run_supply_chain_ripple_analysis.py --event EVT_001 --days 45` |
+| `scripts/run_sotp_event_penetration.py` | 跨业务分部 (SOTP) 因果穿透 CLI | `python scripts/run_sotp_event_penetration.py --ticker GOOGL --segment cloud --loss 10` |
+| `scripts/serve_radar_dashboard.py` | 交易室轻量推流调度与 API 服务 | `python scripts/serve_radar_dashboard.py --port 8899` |
+| `scripts/generate_radar_dashboard.py` | 静态交互拓扑大屏生成器 | `python scripts/generate_radar_dashboard.py` |
+| `scripts/run_event_radar_daemon.py` | 事件雷达常驻守护监控服务 | `python scripts/run_event_radar_daemon.py --interval 60` |
+| `scripts/generate_deep_dossier.py` | 公司深度投研档案自动化生成 | `python scripts/generate_deep_dossier.py --ticker NVDA` |
+| `scripts/generate_daily_briefing.py` | 美股/日股大盘每日研报生成 | `python scripts/generate_daily_briefing.py --market US` |
+| `scripts/run_10k_universe_pipeline.py` | 全盘资产池批处理调度流水线 | `python scripts/run_10k_universe_pipeline.py --chunk-size 50` |
 
 ---
 
-## 6. CHANGELOG
+## 五、 四道架构防劣变验收硬门禁 (Non-Regression Gates)
 
-- **v5.0.0 (2026-10-15)**: **买方高阶投研认知模型与投研闭环复盘反思体系全面上线**。
-  - **彻底破除机械清单主义**：确立微观流动性反身性、跨期因果与索罗斯反身性、资金期限错配与对手盘画像、非对称凸性工程、前置证伪红线、产业链生态位共振六大升维认知模型；
-  - **投研日记深度升级**：强制要求 Stage 4 AI 投研日记穿透微观流动性、二阶预期差、前置证伪指标与非对称凸性建议四大模块；
-  - **投研闭环复盘引擎重构**：实现预测与结算自动对账、四维法证归因（Alpha/Beta/走廊/期权）、深层认知盲区反思与贝叶斯先验联合更新；
-  - **测试与知识库 100% 回归**：保证全套测试套件、知识库结构、数据仓库治理全部通过。
-- **v4.1.1 (2026-10-15)**: 深度自检五大隐患专项精细修复与官方底账解析器上线。
-- **v4.1.0 (2026-10-15)**: 工程整改与人机协同深化架构（平账刚性门禁、交易时钟区间核验）。
-- **v4.0.0 (2026-10-14)**: 金融分析与 Skills 彻底物理与逻辑解耦。
+任何代码与文档改修完成后，必须按顺序执行并通过以下四道硬门禁方可交付：
+
+1. **架构完整性全息巡检**：
+   ```bash
+   python scripts/verify_architecture_integrity.py
+   ```
+   - 断言底层纯净金融核心零污染、全量模块导入零环路、门面与底账就绪。
+2. **便携 CI 套件与全量单测零失败**：
+   ```bash
+   python scripts/run_ci.py
+   python -m unittest discover -s scripts -p "test_*.py"
+   ```
+   - 所有测试用例 100% PASS，测试数量只增不减。
+3. **四大治理回归全绿**：
+   ```bash
+   python scripts/test_data_store.py
+   python scripts/validate_knowledge_structure.py
+   python scripts/test_research_contract.py
+   python scripts/test_industry_mapping.py
+   ```
+4. **不可篡改密码学账本验签**：
+   ```bash
+   python -c "from financial_core.engines.prediction_ledger import PredictionLedger; assert PredictionLedger().verify_integrity()['tampered'] == False"
+   ```
+
+---
+
+## 六、 版本演进记录 (CHANGELOG)
+
+- **v6.0.0 (2026-11-08)**: **全市场选股、SOTP 因果穿透、多标的产业链涟漪矩阵与交易室推流大屏全面封装合流**。
+  - **SEPA 趋势选股与时效门禁合流**：整合全市场资产池（美股10k+/日股4.4k+/核心567）扫描、SEPA 8 大硬指标、VCP 4T 收缩、价格走廊与 `verify_quote_freshness` 硬核门禁；
+  - **SOTP 多业务分部因果穿透**：上线综合巨头跨业务分部微观物理损益折算模型，告别单一标签粗糙估值；
+  - **多标的产业链上下游涟漪效应传导矩阵**：建立存货周转天数 (DIO) 吸收周期、议价转嫁冲销、下游大客户二级传导与有限责任区间数学边界防御机制；
+  - **突发事件雷达与法定防伪鉴真**：上线 0-Token 本地初筛、AI 浏览器定向核验助手、SHA-256 密码学公报防伪鉴真流水线与传闻熔断解除机制；
+  - **本地买方交易室推流服务**：基于 Python 标准库构建轻量 HTTP 推流服务 (`serve_radar_dashboard.py`)，提供 `/api/stream`、`/api/events`、`/api/supply-chain/ripple` 等 REST 接口与交互拓扑大屏。
+- **v5.0.0 (2026-10-15)**: 买方高阶投研认知模型与投研闭环复盘反思体系全面上线。
+- **v4.1.0 (2026-10-15)**: 官方三表刚性平账自检与交易时钟区间核验上线。
+- **v4.0.0 (2026-10-14)**: 金融分析核心与 Skill 网关彻底物理解耦。
