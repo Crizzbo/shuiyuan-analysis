@@ -10,7 +10,7 @@
       "use_color": true
     },
     "desktop_toast": {
-      "enabled": true,
+      "enabled": false,
       "duration_seconds": 5,
       "sound": true
     },
