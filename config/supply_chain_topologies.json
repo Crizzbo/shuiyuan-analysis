@@ -1,0 +1,162 @@
+{
+  "version": "1.0.0",
+  "topologies": [
+    {
+      "topology_id": "SEMICONDUCTOR_FOUNDRY_LITHOGRAPHY_CHAIN",
+      "name_zh": "全球半导体光刻胶与先进制程晶圆代工产业链",
+      "name_en": "Global Semiconductor Foundry & Lithography Supply Chain",
+      "industry_category": "Physical_Plant_Disruption",
+      "description": "上游关键光刻胶前驱体与特种单体树脂断供，穿透中游台积电(TSM)先进制程代工产能，并向下游英伟达(NVDA)、苹果(AAPL)、微软(MSFT)传导交付延期与硬件采购溢价。",
+      "core_hub": {
+        "ticker": "TSM",
+        "name_zh": "台积电 (Taiwan Semiconductor Manufacturing)",
+        "segment_name": "先进制程晶圆代工 (7nm及以下/N3/N2)",
+        "base_raw_material_dio_days": 45.0,
+        "pricing_power_pt": 0.70,
+        "substitution_latency_months": 12.0
+      },
+      "upstream_nodes": [
+        {
+          "node_id": "UPSTREAM_ROTTERDAM_RESIN",
+          "name_zh": "鹿特丹特种树脂与光刻胶前驱体化工厂",
+          "ticker": null,
+          "category": "光刻胶前驱体与特种单体材料",
+          "transmission_elasticity": 1.0,
+          "buffer_dio_days": 20.0,
+          "substitution_latency_months": 6.0,
+          "description": "全球先进制程光刻胶核心原材料生产基地，产能占全球先进晶圆厂供给份额超 30%。"
+        },
+        {
+          "node_id": "UPSTREAM_TOKYO_ELECTRON",
+          "name_zh": "东京电子 (Tokyo Electron)",
+          "ticker": "8035",
+          "category": "涂胶显影与晶圆制造前道关键设备",
+          "transmission_elasticity": 0.65,
+          "buffer_dio_days": 60.0,
+          "substitution_latency_months": 9.0,
+          "description": "先进制程光刻涂胶显影机全球市占率超 85%，设备交期与备件库存对代工厂产能维保具备决定性影响。"
+        }
+      ],
+      "downstream_nodes": [
+        {
+          "node_id": "DOWNSTREAM_NVIDIA",
+          "name_zh": "英伟达 (NVIDIA)",
+          "ticker": "NVDA",
+          "transmission_elasticity": 0.85,
+          "buffer_dio_days": 55.0,
+          "pricing_power_pt": 0.80,
+          "substitution_latency_months": 6.0,
+          "description": "全球 AI 算力 GPU 主导者，完全依赖台积电 CoWoS 先进封装与 4nm/3nm 制程，存货缓冲较强但交付高度敏感。"
+        },
+        {
+          "node_id": "DOWNSTREAM_APPLE",
+          "name_zh": "苹果公司 (Apple)",
+          "ticker": "AAPL",
+          "transmission_elasticity": 0.60,
+          "buffer_dio_days": 40.0,
+          "pricing_power_pt": 0.85,
+          "substitution_latency_months": 8.0,
+          "description": "A系列与M系列芯片全线首发采购台积电最新制程，具备极强供应链议价与成本转嫁缓冲能力。"
+        },
+        {
+          "node_id": "DOWNSTREAM_MICROSOFT",
+          "name_zh": "微软公司 (Microsoft)",
+          "ticker": "MSFT",
+          "transmission_elasticity": 0.45,
+          "buffer_dio_days": 75.0,
+          "pricing_power_pt": 0.75,
+          "substitution_latency_months": 4.0,
+          "description": "自研 Maia 芯片与大规模 Azure AI 算力集群采购方，通过多供应商与长约储备吸纳代工端价格波动。"
+        }
+      ]
+    },
+    {
+      "topology_id": "AI_HYPERSCALER_DATA_CENTER_GRID_CHAIN",
+      "name_zh": "超大规模 AI 数据中心与算力电网基础设施产业链",
+      "name_en": "Hyperscale AI Data Center & Power Grid Infrastructure Chain",
+      "industry_category": "State_Policy_Regulatory",
+      "description": "地方电网监管政策加征超额负荷费或供电配额削减，穿透微软(MSFT)智能云数据中心，并向上传导至硬件存储及下游企业软件客户。",
+      "core_hub": {
+        "ticker": "MSFT",
+        "name_zh": "微软公司 (Microsoft)",
+        "segment_name": "智能云与数据中心基础设施 (Intelligent Cloud / Azure)",
+        "base_raw_material_dio_days": 60.0,
+        "pricing_power_pt": 0.60,
+        "substitution_latency_months": 6.0
+      },
+      "upstream_nodes": [
+        {
+          "node_id": "UPSTREAM_CALIFORNIA_GRID",
+          "name_zh": "加州公用事业委员会 (CPUC) 与加州独立系统运营商 (CAISO)",
+          "ticker": null,
+          "category": "区域供电网与公用事业输配电基建",
+          "transmission_elasticity": 1.0,
+          "buffer_dio_days": 15.0,
+          "substitution_latency_months": 18.0,
+          "description": "加州区域超大负荷数据中心电力供给核心枢纽，政策加征容量费直接提升云厂商电费营业成本。"
+        },
+        {
+          "node_id": "UPSTREAM_SEAGATE_STORAGE",
+          "name_zh": "希捷科技 (Seagate Technology)",
+          "ticker": "STX",
+          "category": "大容量近线企业级大容量存储硬盘 (HDD)",
+          "transmission_elasticity": 0.50,
+          "buffer_dio_days": 45.0,
+          "substitution_latency_months": 3.0,
+          "description": "云厂商海量训练与冷温数据存储底座，数据中心建设节奏波动向上传导至近线存储采购周期。"
+        }
+      ],
+      "downstream_nodes": [
+        {
+          "node_id": "DOWNSTREAM_ENTERPRISE_AI_USERS",
+          "name_zh": "企业级软件与云原生平台消费群体",
+          "ticker": "GOOGL",
+          "transmission_elasticity": 0.55,
+          "buffer_dio_days": 60.0,
+          "pricing_power_pt": 0.65,
+          "substitution_latency_months": 3.0,
+          "description": "多云部署的跨国互联网与企业软件消费者，云算力加价部分被其软件毛利缓冲消化。"
+        }
+      ]
+    },
+    {
+      "topology_id": "MARITIME_CONTAINER_PORTS_LOGISTICS_CHAIN",
+      "name_zh": "跨大西洋海运集装箱与港口物流产业链",
+      "name_en": "Transatlantic Container Shipping & Ports Logistics Chain",
+      "industry_category": "Labor_Strikes_Port_Railways",
+      "description": "美东及墨西哥湾码头工人大罢工导致港口装卸停摆，运力周转受阻向上传导至集装箱空箱堆积，向下游零售与高端制造业传导断货风险与空运替代成本。",
+      "core_hub": {
+        "ticker": "PORT_OPERATOR_USMX",
+        "name_zh": "美国海运联盟 (USMX) 与美东主要集装箱港务局",
+        "segment_name": "码头装卸与集装箱中转业务",
+        "base_raw_material_dio_days": 10.0,
+        "pricing_power_pt": 0.30,
+        "substitution_latency_months": 2.0
+      },
+      "upstream_nodes": [
+        {
+          "node_id": "UPSTREAM_ILA_LABOR",
+          "name_zh": "国际码头工人协会 (ILA) 劳工工会",
+          "ticker": null,
+          "category": "港口关键装卸劳动力特许垄断供给",
+          "transmission_elasticity": 1.0,
+          "buffer_dio_days": 5.0,
+          "substitution_latency_months": 1.0,
+          "description": "美东及墨西哥湾沿海港口集装箱装卸的唯一步调垄断工会，全面罢工将即时阻断 50% 以上进口物资流。"
+        }
+      ],
+      "downstream_nodes": [
+        {
+          "node_id": "DOWNSTREAM_IMPORT_RETAIL",
+          "name_zh": "跨国高端制造与进口硬件供应链",
+          "ticker": "AAPL",
+          "transmission_elasticity": 0.40,
+          "buffer_dio_days": 35.0,
+          "pricing_power_pt": 0.85,
+          "substitution_latency_months": 1.0,
+          "description": "依靠空运与备用西海岸/加拿大口岸转运对冲断港风险，高单价硬件具有充分运费转嫁空间。"
+        }
+      ]
+    }
+  ]
+}

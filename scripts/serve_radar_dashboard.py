@@ -32,6 +32,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from finance_tools.event_radar_collector import RadarDatabaseManager
 from finance_tools.evidence_verification_pipeline import EvidenceVerificationPipeline
+from finance_tools.supply_chain_ripple_analyzer import SupplyChainRippleAnalyzer
 
 logger = logging.getLogger("RadarDashboardServer")
 
@@ -155,6 +156,49 @@ class RadarDashboardHandler(http.server.BaseHTTPRequestHandler):
                 stats = db_mgr.query_summary_statistics()
                 self._send_json_response(stats, status=200)
             except Exception as e:
+                self._send_json_response({"error": str(e)}, status=500)
+            return
+
+        elif path == "/api/supply-chain/topologies":
+            try:
+                analyzer = SupplyChainRippleAnalyzer(db_path=self.db_path)
+                topos = analyzer.list_topologies()
+                self._send_json_response({"topologies": topos, "count": len(topos)}, status=200)
+            except Exception as e:
+                self._send_json_response({"error": str(e)}, status=500)
+            return
+
+        elif path == "/api/supply-chain/ripple":
+            try:
+                query_params = parse_qs(parsed.query)
+                event_ids = query_params.get("event_id")
+                topology_ids = query_params.get("topology")
+                disruption_days_strs = query_params.get("disruption_days")
+
+                analyzer = SupplyChainRippleAnalyzer(db_path=self.db_path)
+                disruption_days = float(disruption_days_strs[0]) if disruption_days_strs else None
+                topology_id = topology_ids[0] if topology_ids else None
+
+                if event_ids and event_ids[0]:
+                    event_id = event_ids[0]
+                    report = analyzer.analyze_event_ripple(
+                        event_id=event_id,
+                        topology_id=topology_id,
+                        disruption_days=disruption_days,
+                    )
+                    self._send_json_response({"status": "success", "report": report.to_dict()}, status=200)
+                else:
+                    reports = analyzer.analyze_all_major_events()
+                    self._send_json_response(
+                        {
+                            "status": "success",
+                            "reports": [r.to_dict() for r in reports],
+                            "count": len(reports),
+                        },
+                        status=200,
+                    )
+            except Exception as e:
+                logger.error("产业链涟漪计算接口异常: %s", e)
                 self._send_json_response({"error": str(e)}, status=500)
             return
 

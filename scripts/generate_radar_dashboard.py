@@ -23,6 +23,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from finance_tools.event_radar_collector import RadarDatabaseManager
 from finance_tools.sotp_event_analyzer import SotpEventAnalyzer
+from finance_tools.supply_chain_ripple_analyzer import SupplyChainRippleAnalyzer
 
 
 def generate_dashboard_html(
@@ -92,6 +93,11 @@ def generate_dashboard_html(
             except Exception as e:
                 pass
 
+    # Phase 2 产业链上下游涟漪效应传导计算
+    ripple_analyzer = SupplyChainRippleAnalyzer(db_path=db_path)
+    topologies = ripple_analyzer.list_topologies()
+    ripple_reports = [r.to_dict() for r in ripple_analyzer.analyze_all_major_events()]
+
     # 加载密码学防伪收据总账
     receipts_path = PROJECT_ROOT / "data/ledger/verification_receipts.json"
     receipts = []
@@ -109,6 +115,8 @@ def generate_dashboard_html(
     sotp_profiles_json = json.dumps(sotp_profiles, ensure_ascii=False)
     sotp_impacts_json = json.dumps(sotp_impacts, ensure_ascii=False)
     receipts_json = json.dumps(receipts, ensure_ascii=False)
+    topologies_json = json.dumps(topologies, ensure_ascii=False)
+    ripple_reports_json = json.dumps(ripple_reports, ensure_ascii=False)
 
     html_content = f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -554,6 +562,73 @@ body {{
 .section-card.sotp-console-card {{
   border-left: 4px solid #2563eb;
   background: linear-gradient(to bottom, var(--bg-surface), var(--bg-subtle) 95%);
+}}
+
+.section-card.ripple-console-card {{
+  border-left: 4px solid #10b981;
+  background: linear-gradient(to bottom, var(--bg-surface), var(--bg-subtle) 95%);
+}}
+
+.ripple-node-card {{
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}}
+
+.ripple-node-upstream {{
+  border-left: 3px solid #8b5cf6;
+}}
+
+.ripple-node-hub {{
+  border-left: 3px solid #f59e0b;
+}}
+
+.ripple-node-downstream {{
+  border-left: 3px solid #06b6d4;
+}}
+
+.vuln-badge {{
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}}
+
+.vuln-正向受益 {{
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+}}
+
+.vuln-稳健防御 {{
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}}
+
+.vuln-中度承压 {{
+  background: #fef9c3;
+  color: #854d0e;
+  border: 1px solid #fde047;
+}}
+
+.vuln-高度承压 {{
+  background: #ffedd5;
+  color: #9a3412;
+  border: 1px solid #fed7aa;
+}}
+
+.vuln-极高脆弱 {{
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
 }}
 
 .section-header {{
@@ -1601,6 +1676,74 @@ body {{
     </div>
   </section>
 
+  <!-- ========================================================
+       【方向 B 核心】产业链上下游涟漪效应传导矩阵 (Supply Chain Ripple Effect)
+       ======================================================== -->
+  <section class="section-card ripple-console-card">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span>🔗 产业链上下游涟漪效应传导矩阵</span>
+        <span class="badge-count" style="background: #10b981; color: #ffffff;">买方横向穿透</span>
+      </h2>
+      <div style="font-size: 0.8rem; color: var(--text-muted);">
+        穿透“上游原材料与关键设备 ➔ 核心制造中枢 ➔ 下游大客户终端”全链因果 · 存货周转天数 (DIO) 吸收 · 定价转嫁权 (PT) 冲销
+      </div>
+    </div>
+
+    <!-- 交互控制条：产业链选择与突发事件联动 -->
+    <div class="sotp-controls-bar">
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted);">战略产业链:</span>
+        <div id="rippleTopologyButtons" style="display: flex; gap: 6px; flex-wrap: wrap;">
+          <!-- 动态渲染产业链拓扑切换按钮 -->
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted);">驱动事件:</span>
+        <select id="rippleEventSelector" class="sotp-event-select" onchange="onRippleEventChange(this.value)">
+          <!-- 动态填充事件列表 -->
+        </select>
+      </div>
+    </div>
+
+    <!-- 产业链全息涟漪受损与买方评级大卡 -->
+    <div id="rippleChainSummaryCard" class="sotp-summary-card">
+      <!-- 动态渲染 -->
+    </div>
+
+    <!-- 产业链拓扑因果受损矩阵表 -->
+    <div>
+      <div style="margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-primary);">
+          🕸️ 产业链上下游各节点因果受损与防御明细
+        </h3>
+        <span style="font-size: 0.75rem; color: var(--text-muted);">
+          未覆盖敞口天数 = max(0, 物理断供天数 - DIO) · 利润损益严格遵循有限责任防御
+        </span>
+      </div>
+      <div class="table-responsive">
+        <table class="event-table" id="rippleNodeTable">
+          <thead>
+            <tr>
+              <th>生态位</th>
+              <th>实体名称与代码</th>
+              <th>存货缓冲 (DIO)</th>
+              <th>未覆盖敞口</th>
+              <th>定价转嫁权 (PT)</th>
+              <th>营业利润冲击 (ΔEBIT)</th>
+              <th>买方评级</th>
+              <th>商业逻辑与因果推演</th>
+            </tr>
+          </thead>
+          <tbody id="rippleNodeTbody">
+            <!-- 动态渲染 -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <!-- SQLite 数据库实时交互探索器 -->
   <section class="section-card">
     <div class="section-header">
@@ -1773,6 +1916,8 @@ const RAW_STATS = {stats_json};
 const SOTP_PROFILES = {sotp_profiles_json};
 const SOTP_IMPACTS = {sotp_impacts_json};
 let RAW_RECEIPTS = {receipts_json};
+const RAW_TOPOLOGIES = {topologies_json};
+const RAW_RIPPLE_REPORTS = {ripple_reports_json};
 
 let currentSeverityFilter = "ALL";
 let currentCategoryFilter = "ALL";
@@ -2216,6 +2361,154 @@ function renderTopologyGraph(eventId, ticker) {{
   `;
 }}
 
+// ========================================================
+// 产业链上下游涟漪效应传导矩阵 (Supply Chain Ripple Effect)
+// ========================================================
+let selectedRippleTopologyId = RAW_TOPOLOGIES.length > 0 ? RAW_TOPOLOGIES[0].topology_id : "";
+let selectedRippleEventId = "";
+
+function initRippleConsole() {{
+  const btnContainer = document.getElementById("rippleTopologyButtons");
+  const eventSelect = document.getElementById("rippleEventSelector");
+  if (!btnContainer || !eventSelect) return;
+
+  // 1. 渲染产业链拓扑切换按钮
+  btnContainer.innerHTML = RAW_TOPOLOGIES.map((topo, idx) => {{
+    const isActive = topo.topology_id === selectedRippleTopologyId;
+    return `
+      <button class="ticker-btn ${{isActive ? 'active' : ''}}" onclick="selectRippleTopology('${{topo.topology_id}}', this)">
+        <span>${{topo.name_zh.substring(0, 14)}}...</span>
+        <span style="font-size: 0.7rem; opacity: 0.8;">中枢: ${{topo.core_hub}}</span>
+      </button>
+    `;
+  }}).join("");
+
+  // 2. 渲染关联事件下拉列表
+  const candidateEvents = RAW_RIPPLE_REPORTS.length > 0
+    ? RAW_RIPPLE_REPORTS.map(r => ({{ event_id: r.event_id, title: r.event_title }}))
+    : RAW_EVENTS.filter(e => e.severity_level === "P0" || e.severity_level === "P1").map(e => ({{ event_id: e.event_id, title: e.title }}));
+
+  if (candidateEvents.length > 0) {{
+    eventSelect.innerHTML = candidateEvents.map(evt => `
+      <option value="${{evt.event_id}}">
+        [${{evt.event_id}}] ${{evt.title.substring(0, 32)}}...
+      </option>
+    `).join("");
+    selectedRippleEventId = candidateEvents[0].event_id;
+    eventSelect.value = selectedRippleEventId;
+  }}
+
+  renderRippleConsole();
+}}
+
+function selectRippleTopology(topologyId, btn) {{
+  selectedRippleTopologyId = topologyId;
+  document.querySelectorAll("#rippleTopologyButtons .ticker-btn").forEach(b => b.classList.remove("active"));
+  if (btn) btn.classList.add("active");
+  renderRippleConsole();
+}}
+
+function onRippleEventChange(eventId) {{
+  selectedRippleEventId = eventId;
+  renderRippleConsole();
+}}
+
+function renderRippleConsole() {{
+  const summaryContainer = document.getElementById("rippleChainSummaryCard");
+  const tbody = document.getElementById("rippleNodeTbody");
+  if (!summaryContainer || !tbody) return;
+
+  // 查找匹配的报告
+  let report = RAW_RIPPLE_REPORTS.find(r => r.event_id === selectedRippleEventId && r.topology_id === selectedRippleTopologyId);
+  if (!report) {{
+    report = RAW_RIPPLE_REPORTS.find(r => r.topology_id === selectedRippleTopologyId) || RAW_RIPPLE_REPORTS[0];
+  }}
+
+  if (!report) {{
+    summaryContainer.innerHTML = '<div class="empty-state">当前未发现匹配的产业链涟漪传导数据</div>';
+    tbody.innerHTML = '<tr><td colspan="8" class="empty-state">暂无产业链节点冲击明细</td></tr>';
+    return;
+  }}
+
+  // 1. 渲染全链摘要大卡
+  const vulnClass = `vuln-${{report.chain_vulnerability_level || '稳健防御'}}`;
+  summaryContainer.innerHTML = `
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <div style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono);">
+          拓扑编号: ${{report.topology_id}} | 触发事件: ${{report.event_id}}
+        </div>
+        <div style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-top: 2px;">
+          ${{report.topology_name_zh}}
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">
+          ⚡ 物理断供源: <strong>${{report.event_title}}</strong> (预估影响周期: ${{report.disruption_duration_days}} 天)
+        </div>
+      </div>
+      <div>
+        <span class="vuln-badge ${{vulnClass}}">
+          ${{report.chain_vulnerability_level}}
+        </span>
+      </div>
+    </div>
+    <div class="sotp-narrative-box" style="margin-top: 10px; font-size: 0.82rem; line-height: 1.5;">
+      ${{report.chain_summary_zh.replace(/\\n/g, '<br/>')}}
+    </div>
+  `;
+
+  // 2. 渲染各节点明细表
+  const nodes = report.transmission_matrix || [];
+  if (nodes.length === 0) {{
+    tbody.innerHTML = '<tr><td colspan="8" class="empty-state">暂无节点明细</td></tr>';
+    return;
+  }}
+
+  tbody.innerHTML = nodes.map(n => {{
+    let roleName = "核心中枢";
+    if (n.node_role === "upstream") {{
+      roleName = "上游供应";
+    }} else if (n.node_role === "downstream") {{
+      roleName = "下游大客户";
+    }}
+
+    const loss = n.ebit_impact_pct || 0.0;
+    const isLoss = loss < 0;
+    const isZero = Math.abs(loss) < 0.01;
+    const lossColor = isZero ? 'var(--text-muted)' : (isLoss ? '#ef4444' : 'var(--success)');
+    const tickerStr = n.ticker ? `<span class="mono-cell" style="font-weight: 700; margin-left: 4px;">(${{n.ticker}})</span>` : '';
+    const nodeVulnClass = `vuln-${{n.vulnerability_level || '稳健防御'}}`;
+
+    return `
+      <tr>
+        <td>
+          <span style="font-size: 0.75rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: var(--bg-subtle);">
+            ${{roleName}}
+          </span>
+        </td>
+        <td>
+          <span style="font-weight: 600; color: var(--text-primary);">${{n.name_zh}}</span>
+          ${{tickerStr}}
+        </td>
+        <td class="mono-cell">${{n.buffer_dio_days.toFixed(0)}} 天</td>
+        <td class="mono-cell" style="color: ${{n.uncovered_exposure_days > 0 ? 'var(--p0-badge-text)' : 'inherit'}}; font-weight: 600;">
+          ${{n.uncovered_exposure_days.toFixed(0)}} 天
+        </td>
+        <td class="mono-cell">${{(n.pricing_power_pt * 100).toFixed(0)}}%</td>
+        <td class="mono-cell" style="color: ${{lossColor}}; font-weight: 700; font-size: 0.85rem;">
+          ${{loss > 0 ? '+' : ''}}${{loss.toFixed(2)}}%
+        </td>
+        <td>
+          <span class="vuln-badge ${{nodeVulnClass}}">${{n.vulnerability_level}}</span>
+        </td>
+        <td style="font-size: 0.78rem; color: var(--text-secondary); max-width: 320px; line-height: 1.4;">
+          <strong>${{n.buyer_verdict_zh}}</strong><br/>
+          ${{n.rationale_zh}}
+        </td>
+      </tr>
+    `;
+  }}).join("");
+}}
+
 // 渲染 SQLite 事件表格
 function renderEventTable() {{
   const tbody = document.getElementById("eventTableBody");
@@ -2505,6 +2798,7 @@ function initLiveStreamConnector() {{
 document.addEventListener("DOMContentLoaded", () => {{
   renderCriticalAlerts();
   initSotpSelector();
+  initRippleConsole();
   renderEventTable();
   renderCycleTable();
   renderReceiptsTable();

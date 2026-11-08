@@ -21,6 +21,7 @@ PORTABLE_TESTS = (
     "scripts.test_evidence_verification_pipeline",
     "scripts.test_radar_dashboard_serve",
     "scripts.test_browser_verification_assistant",
+    "scripts.test_supply_chain_ripple_engine",
 )
 
 

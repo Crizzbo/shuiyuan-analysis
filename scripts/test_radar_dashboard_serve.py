@@ -171,6 +171,29 @@ class TestRadarDashboardServer(unittest.TestCase):
         data = json.loads(body.decode("utf-8"))
         self.assertIn("error", data)
 
+    def test_get_api_supply_chain_topologies(self):
+        """测试 GET /api/supply-chain/topologies 产业链拓扑列表提取接口."""
+        status, headers, body = self._execute_request("GET", "/api/supply-chain/topologies")
+        self.assertEqual(status, 200)
+        data = json.loads(body.decode("utf-8"))
+        self.assertIn("topologies", data)
+        self.assertGreaterEqual(data.get("count", 0), 3)
+
+    def test_get_api_supply_chain_ripple(self):
+        """测试 GET /api/supply-chain/ripple 突发事件全产业链穿透接口."""
+        # 针对测试事件 EVT_SRV_TEST_9999 请求产业链推演
+        status, headers, body = self._execute_request(
+            "GET", "/api/supply-chain/ripple?event_id=EVT_SRV_TEST_9999&disruption_days=45"
+        )
+        self.assertEqual(status, 200)
+        data = json.loads(body.decode("utf-8"))
+        self.assertEqual(data.get("status"), "success")
+        self.assertIn("report", data)
+        rep = data["report"]
+        self.assertEqual(rep.get("event_id"), "EVT_SRV_TEST_9999")
+        self.assertIn("core_hub_impact", rep)
+        self.assertIn("transmission_matrix", rep)
+
 
 if __name__ == "__main__":
     unittest.main()

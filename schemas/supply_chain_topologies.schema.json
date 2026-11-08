@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SupplyChainTopologiesSchema",
+  "description": "买方投研产业链上下游拓扑图谱与因果传导参数契约规范",
+  "type": "object",
+  "required": ["version", "topologies"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "模式契约版本"
+    },
+    "topologies": {
+      "type": "array",
+      "description": "产业链拓扑定义列表",
+      "items": {
+        "type": "object",
+        "required": [
+          "topology_id",
+          "name_zh",
+          "name_en",
+          "industry_category",
+          "core_hub",
+          "upstream_nodes",
+          "downstream_nodes"
+        ],
+        "properties": {
+          "topology_id": {
+            "type": "string",
+            "description": "产业链拓扑唯一英文标识"
+          },
+          "name_zh": {
+            "type": "string",
+            "description": "产业链中文商业名称"
+          },
+          "name_en": {
+            "type": "string",
+            "description": "产业链英文名称"
+          },
+          "industry_category": {
+            "type": "string",
+            "description": "对应的雷达业务宏观/产业维度"
+          },
+          "description": {
+            "type": "string",
+            "description": "产业链微观商业传导机理说明"
+          },
+          "core_hub": {
+            "type": "object",
+            "required": ["ticker", "name_zh", "segment_name", "base_raw_material_dio_days", "pricing_power_pt"],
+            "properties": {
+              "ticker": { "type": "string" },
+              "name_zh": { "type": "string" },
+              "segment_name": { "type": "string" },
+              "base_raw_material_dio_days": { "type": "number", "minimum": 0 },
+              "pricing_power_pt": { "type": "number", "minimum": 0, "maximum": 1.0 },
+              "substitution_latency_months": { "type": "number", "minimum": 0 }
+            }
+          },
+          "upstream_nodes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["node_id", "name_zh", "category", "transmission_elasticity", "buffer_dio_days"],
+              "properties": {
+                "node_id": { "type": "string" },
+                "name_zh": { "type": "string" },
+                "ticker": { "type": ["string", "null"] },
+                "category": { "type": "string" },
+                "transmission_elasticity": { "type": "number", "minimum": 0, "maximum": 2.0 },
+                "buffer_dio_days": { "type": "number", "minimum": 0 },
+                "substitution_latency_months": { "type": "number", "minimum": 0 },
+                "description": { "type": "string" }
+              }
+            }
+          },
+          "downstream_nodes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["node_id", "name_zh", "ticker", "transmission_elasticity", "buffer_dio_days", "pricing_power_pt"],
+              "properties": {
+                "node_id": { "type": "string" },
+                "name_zh": { "type": "string" },
+                "ticker": { "type": "string" },
+                "transmission_elasticity": { "type": "number", "minimum": 0, "maximum": 2.0 },
+                "buffer_dio_days": { "type": "number", "minimum": 0 },
+                "pricing_power_pt": { "type": "number", "minimum": 0, "maximum": 1.0 },
+                "substitution_latency_months": { "type": "number", "minimum": 0 },
+                "description": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
