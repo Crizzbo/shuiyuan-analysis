@@ -1,24 +1,16 @@
-"""组合在险价值、收缩协方差、风险平价与宏观压力测试引擎 (向下兼容中继门面).
+# -*- coding: utf-8 -*-
+"""向下兼容门面：重定向至 finance_tools.risk_and_derivatives.portfolio_risk_engine。
 
-本模块为向下兼容旧版调用路径的中继层，实际实现全部托管于底层纯净核心:
-`financial_core.engines.portfolio_risk_engine`
-
-遵循《全栈工程命名架构与状态空间规范》与单一事实来源 (SSOT) 铁律，
-杜绝在多处维护重复计算代码与状态判定。
+功能归属：风险管理与衍生品定价引擎
+业务定位：美式期权二叉树定价、期权因果分析、投资组合风险预算、信用违约与极端黑天鹅压力测试
+此门面确保既有脚本、测试用例与历史引用零代码修改平滑过渡。
 """
 
-from financial_core.engines.portfolio_risk_engine import (
-    VaRResult,
-    RiskDecompositionResult,
-    FactorAttributionResult,
-    StressTestScenarioResult,
-    PortfolioRiskAndVaREngine,
-)
+import sys
+from finance_tools.risk_and_derivatives.portfolio_risk_engine import *
+from finance_tools.risk_and_derivatives import portfolio_risk_engine as _impl_module
 
-__all__ = [
-    "VaRResult",
-    "RiskDecompositionResult",
-    "FactorAttributionResult",
-    "StressTestScenarioResult",
-    "PortfolioRiskAndVaREngine",
-]
+# 保持模块元属性与引用透明性
+__doc__ = _impl_module.__doc__
+if hasattr(_impl_module, "__all__"):
+    __all__ = _impl_module.__all__

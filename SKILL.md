@@ -1,20 +1,20 @@
 ---
 name: shuiyuan-analysis
-version: 6.0.0
-description: 水源分析——买方机构级股票量化投研、全市场趋势选股与产业链涟漪因果穿透 Agent Skill。覆盖全市场资产池（美股10,000+/日股4,400+/核心567）SEPA趋势模板选股、行情时效硬核验门禁、官方财报三表平账与多情景DCF估值、SOTP多业务分部损益穿透、多标的产业链上下游因果传导矩阵（DIO缓冲/转嫁权/有限责任下界）、突发事件雷达全天候守护与法定信源防伪鉴真、以及本地买方交易室推流交互大屏。
+version: 6.1.0
+description: 水源分析——买方机构级股票量化投研、全市场趋势选股与产业链涟漪因果穿透 Agent Skill。覆盖全市场资产池（美股10,000+/日股4,400+/核心567）SEPA趋势模板选股、行情时效硬核验门禁、官方财报三表平账与多情景DCF估值、SOTP多业务分部损益穿透、多标的产业链上下游因果传导矩阵（DIO缓冲/转嫁权/有限责任下界）、突发事件雷达全天候守护与法定信源防伪鉴真、本地买方交易室推流交互大屏、以及 finance_tools 6 大高内聚子目录分包架构。
 license: Proprietary
 metadata:
   author: Shuiyuan Quant Research Architecture Team
-  version: "6.0.0"
+  version: "6.1.0"
   domain: quantitative-equity-research-and-supply-chain-ripple
   triggers: 选股, 股票分析, 研报生成, 突发事件, 产业链涟漪, 产业链分析, SOTP, 业务分部拆解, 事件雷达, 行情时效, 财务估值, 趋势选股, DCF估值, 买点推演, 交易室大屏, shuiyuan-analysis
   role: buy-side-chief-quant-strategist
   scope: full-stack-equity-research-and-ripple-dynamics
 ---
 
-# 水源分析 Agent Skill (v6.0.0 买方全景量化与产业链因果穿透版)
+# 水源分析 Agent Skill (v6.1.0 买方全景量化、失效防御与分包架构版)
 
-买方机构级股票量化选股、微观法证审计、SOTP 业务分部穿透、多标的产业链涟漪传导矩阵与全天候事件雷达推流大屏。
+买方机构级股票量化选股、微观法证审计、SOTP 业务分部穿透、多标的产业链涟漪传导矩阵、全天候事件雷达推流大屏与 6 大业务工具子包架构。
 
 > [!IMPORTANT]
 > **程序、AI 与投研闭环三大刚性原则 (The Core Tri-Pillar Principles)**:
@@ -160,6 +160,16 @@ flowchart TD
   - `POST /api/verify`: 接收官方证据文件路径，现场执行验签并解除熔断；
 - **交互拓扑大屏**：`reports/event_radar_dashboard.html` 原生支持产业链涟漪效应控制台，动态调整断供天数与冲击强度，即时渲染上下游损益矩阵。
 
+### 7. 金融工具中继层 6 大高内聚子目录分包架构 (`finance_tools/`)
+为了解决工具层单目录扁平膨胀、查找费劲的问题，`finance_tools/` 全面解耦重构为 6 大专业业务领域子包，并建立 100% 向下兼容门面：
+1. **`finance_tools.screening`**：全市场选股与价格时机引擎（SEPA 8 大趋势硬指标、VCP 4T 波动收缩、万家资产池构建与候选优选排序）；
+2. **`finance_tools.forensics_and_valuation`**：财务法证审计与多情景估值模型（法证手术刀排查受限现金/存货DIO/应收周转、三表平账、DCF估值、单位经济学与护城河）；
+3. **`finance_tools.risk_and_derivatives`**：风险管理与衍生品定价引擎（美式期权二叉树、期权因果分析、投资组合风险预算、信用违约与极端黑天鹅压力测试）；
+4. **`finance_tools.macro_and_ripple`**：宏观冲击与产业链涟漪分析器（宏观传导、SOTP 跨业务分部因果穿透、多标的供应链上下游涟漪效应矩阵与制度风险评级）；
+5. **`finance_tools.events_and_verification`**：突发事件雷达与鉴真监控流水线（0-Token 极速初筛、SHA-256 密码学法定信源防伪鉴真、AI 浏览器定向核验助手与告警调度器）；
+6. **`finance_tools.governance_and_pipeline`**：数据底账、时效门禁与基础设施管道（数据完备度追踪、行情交易时钟时效门禁、指标管道与不可篡改预测账本）。
+- **100% 向下兼容门面保证**：根目录下 42 个历史模块保留完整兼容门面（Facade/Relay），既有脚本与测试用例 `from finance_tools.xxx import yyy` 零破坏直接可用。
+
 ---
 
 ## 三、 标准操作流程 (SOP 五步闭环)
@@ -287,6 +297,10 @@ python scripts/serve_radar_dashboard.py --port 8899 --open-browser
 
 ## 六、 版本演进记录 (CHANGELOG)
 
+- **v6.1.0 (2026-11-08)**: **实测风控评估报告归档、失效场景防御体系设计与 finance_tools 6 大高内聚子目录分包重构**。
+  - **实测风控报告正式归档**：将 10 年 826 标的跨周期对撞回测评估与五大模型实测报告归档入典 (`docs/36-量化交易系统全息评估与风控架构实测报告.md`)；
+  - **失效场景防御与增量中枢设计**：落地 Amihud 流动性门禁、Merton 信用破产距离、Beneish M-Score 法证及央行流动性脉冲等系统化防御体系技术设计 (`docs/37-实测失效场景系统化防御体系与增量信息中枢架构设计文档.md`)；
+  - **金融工具模块分包重组**：将 `finance_tools/` 扁平膨胀的 42 个模块彻底按业务职能解耦为 `screening/`、`forensics_and_valuation/`、`risk_and_derivatives/`、`macro_and_ripple/`、`events_and_verification/`、`governance_and_pipeline/` 六大高内聚子包，并在根目录提供 100% 向下兼容门面，既有导入零破坏直接复用。
 - **v6.0.0 (2026-11-08)**: **全市场选股、SOTP 因果穿透、多标的产业链涟漪矩阵与交易室推流大屏全面封装合流**。
   - **SEPA 趋势选股与时效门禁合流**：整合全市场资产池（美股10k+/日股4.4k+/核心567）扫描、SEPA 8 大硬指标、VCP 4T 收缩、价格走廊与 `verify_quote_freshness` 硬核门禁；
   - **SOTP 多业务分部因果穿透**：上线综合巨头跨业务分部微观物理损益折算模型，告别单一标签粗糙估值；

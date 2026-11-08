@@ -1,20 +1,16 @@
-"""全行业同业横向对标与相对估值分析引擎 (向下兼容中继门面).
+# -*- coding: utf-8 -*-
+"""向下兼容门面：重定向至 finance_tools.forensics_and_valuation.peer_benchmark_engine。
 
-本模块为向下兼容旧版调用路径的中继层，实际实现全部托管于底层纯净核心:
-`financial_core.engines.peer_benchmark_engine`
-
-遵循《全栈工程命名架构与状态空间规范》与单一事实来源 (SSOT) 铁律，
-杜绝在多处维护重复计算代码与状态判定。
+功能归属：财务法证审计与多情景估值模型
+业务定位：财务法证手术刀(受限现金/存货DIO/应收周转)、三表整合刚性平账、多情景DCF折现、单位经济学与护城河评估
+此门面确保既有脚本、测试用例与历史引用零代码修改平滑过渡。
 """
 
-from financial_core.engines.peer_benchmark_engine import (
-    CompanyPeerMetrics,
-    PeerBenchmarkResult,
-    PeerBenchmarkEngine,
-)
+import sys
+from finance_tools.forensics_and_valuation.peer_benchmark_engine import *
+from finance_tools.forensics_and_valuation import peer_benchmark_engine as _impl_module
 
-__all__ = [
-    "CompanyPeerMetrics",
-    "PeerBenchmarkResult",
-    "PeerBenchmarkEngine",
-]
+# 保持模块元属性与引用透明性
+__doc__ = _impl_module.__doc__
+if hasattr(_impl_module, "__all__"):
+    __all__ = _impl_module.__all__

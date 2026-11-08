@@ -1,16 +1,16 @@
-"""向下兼容重导出层：阿吉翁创造性破坏与技术前沿引擎 (Aghion Creative Destruction Engine Compatibility Layer).
+# -*- coding: utf-8 -*-
+"""向下兼容门面：重定向至 finance_tools.macro_and_ripple.aghion_creative_destruction_engine。
 
-本模块由 financial_core.engines.aghion_creative_destruction_engine 承接真实实现。
+功能归属：宏观冲击与产业链涟漪分析器
+业务定位：宏观流动性冲击传导、SOTP跨业务分部因果穿透、多标的供应链上下游涟漪效应矩阵与制度风险评级
+此门面确保既有脚本、测试用例与历史引用零代码修改平滑过渡。
 """
 
-from financial_core.engines.aghion_creative_destruction_engine import (
-    AghionDestructionInput,
-    AghionDestructionResult,
-    AghionCreativeDestructionEngine,
-)
+import sys
+from finance_tools.macro_and_ripple.aghion_creative_destruction_engine import *
+from finance_tools.macro_and_ripple import aghion_creative_destruction_engine as _impl_module
 
-__all__ = [
-    "AghionDestructionInput",
-    "AghionDestructionResult",
-    "AghionCreativeDestructionEngine",
-]
+# 保持模块元属性与引用透明性
+__doc__ = _impl_module.__doc__
+if hasattr(_impl_module, "__all__"):
+    __all__ = _impl_module.__all__

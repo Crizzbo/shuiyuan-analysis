@@ -1,18 +1,16 @@
-"""细分行业买方结构化知识中枢管理器 (向下兼容中继门面).
+# -*- coding: utf-8 -*-
+"""向下兼容门面：重定向至 finance_tools.governance_and_pipeline.industry_knowledge_manager。
 
-本模块为向下兼容旧版调用路径的中继层，实际实现全部托管于底层纯净核心:
-`financial_core.engines.industry_knowledge_manager`
-
-遵循《全栈工程命名架构与状态空间规范》与单一事实来源 (SSOT) 铁律，
-杜绝在多处维护重复计算代码与状态判定。
+功能归属：数据底账、时效门禁与基础设施管道
+业务定位：数据完备度追踪、行情交易时钟时效门禁、指标管道、不可篡改预测账本、复盘演进与微观资金流监测
+此门面确保既有脚本、测试用例与历史引用零代码修改平滑过渡。
 """
 
-from financial_core.engines.industry_knowledge_manager import (
-    IndustryKnowledgeProfile,
-    IndustryKnowledgeManager,
-)
+import sys
+from finance_tools.governance_and_pipeline.industry_knowledge_manager import *
+from finance_tools.governance_and_pipeline import industry_knowledge_manager as _impl_module
 
-__all__ = [
-    "IndustryKnowledgeProfile",
-    "IndustryKnowledgeManager",
-]
+# 保持模块元属性与引用透明性
+__doc__ = _impl_module.__doc__
+if hasattr(_impl_module, "__all__"):
+    __all__ = _impl_module.__all__

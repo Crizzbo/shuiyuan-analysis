@@ -1,4 +1,24 @@
-"""水源金融计算工具：开源基础计算与中文说明的补充估值。"""
+"""finance_tools - 买方机构级金融量化工具库 (v6.0 分包架构版)。
+
+模块架构已全面按 6 大专业业务领域划分高内聚子包：
+  - screening: 全市场选股与价格时机引擎 (SEPA 8大趋势硬指标、VCP 4T、候选排序)
+  - forensics_and_valuation: 财务法证审计与多情景估值模型 (法证手术刀、平账、DCF)
+  - risk_and_derivatives: 风险管理与衍生品定价引擎 (美式期权二叉树、组合风险、违约)
+  - macro_and_ripple: 宏观冲击与产业链涟漪分析器 (宏观传导、SOTP分部穿透、涟漪矩阵)
+  - events_and_verification: 突发事件雷达与鉴真监控流水线 (0-Token初筛、SHA-256鉴真)
+  - governance_and_pipeline: 数据底账、时效门禁与基础设施 (完备度追踪、时钟门禁)
+
+同时根目录保持 100% 向下兼容门面，既有导入语句 `from finance_tools.xxx import yyy` 零破坏直接可用。
+"""
+
+from . import (
+    screening,
+    forensics_and_valuation,
+    risk_and_derivatives,
+    macro_and_ripple,
+    events_and_verification,
+    governance_and_pipeline,
+)
 
 VERSION = "1.0.0"
 
@@ -83,7 +103,11 @@ from .event_radar_collector import (
     EventRadarCollector,
     NetworkHealthWatchdog,
     RadarProgressManager,
+    RadarDatabaseManager,
     MockModelSummarizer,
+)
+from .sotp_event_analyzer import (
+    SotpEventAnalyzer,
 )
 
 __all__ = [
@@ -139,8 +163,7 @@ __all__ = [
     "EventRadarCollector",
     "NetworkHealthWatchdog",
     "RadarProgressManager",
+    "RadarDatabaseManager",
     "MockModelSummarizer",
+    "SotpEventAnalyzer",
 ]
-
-
-

@@ -1,28 +1,16 @@
-"""跨周期正常化估值与中周期盈利中枢引擎 (向下兼容中继门面).
+# -*- coding: utf-8 -*-
+"""向下兼容门面：重定向至 finance_tools.macro_and_ripple.mid_cycle_engine。
 
-本模块为向下兼容旧版调用路径的中继层，实际实现全部托管于底层纯净核心:
-`financial_core.engines.mid_cycle_engine`
-
-遵循《全栈工程命名架构与状态空间规范》与单一事实来源 (SSOT) 铁律，
-杜绝在多处维护重复计算代码与状态判定。
+功能归属：宏观冲击与产业链涟漪分析器
+业务定位：宏观流动性冲击传导、SOTP跨业务分部因果穿透、多标的供应链上下游涟漪效应矩阵与制度风险评级
+此门面确保既有脚本、测试用例与历史引用零代码修改平滑过渡。
 """
 
-from financial_core.engines.mid_cycle_engine import (
-    CYCLE_PHASE_METADATA,
-    MidCycleFCFResult,
-    ShillerCAPEResult,
-    CyclePhaseResult,
-    MidCycleValuationResult,
-    MidCycleNormalizationEngine,
-    MidCycleValuationEngine,
-)
+import sys
+from finance_tools.macro_and_ripple.mid_cycle_engine import *
+from finance_tools.macro_and_ripple import mid_cycle_engine as _impl_module
 
-__all__ = [
-    "CYCLE_PHASE_METADATA",
-    "MidCycleFCFResult",
-    "ShillerCAPEResult",
-    "CyclePhaseResult",
-    "MidCycleValuationResult",
-    "MidCycleNormalizationEngine",
-    "MidCycleValuationEngine",
-]
+# 保持模块元属性与引用透明性
+__doc__ = _impl_module.__doc__
+if hasattr(_impl_module, "__all__"):
+    __all__ = _impl_module.__all__

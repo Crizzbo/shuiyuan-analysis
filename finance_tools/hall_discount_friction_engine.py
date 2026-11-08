@@ -1,16 +1,16 @@
-"""向下兼容重导出层：霍尔微观成本摩擦与加成率引擎 (Hall Discount Friction Engine Compatibility Layer).
+# -*- coding: utf-8 -*-
+"""向下兼容门面：重定向至 finance_tools.macro_and_ripple.hall_discount_friction_engine。
 
-本模块由 financial_core.engines.hall_discount_friction_engine 承接真实实现。
+功能归属：宏观冲击与产业链涟漪分析器
+业务定位：宏观流动性冲击传导、SOTP跨业务分部因果穿透、多标的供应链上下游涟漪效应矩阵与制度风险评级
+此门面确保既有脚本、测试用例与历史引用零代码修改平滑过渡。
 """
 
-from financial_core.engines.hall_discount_friction_engine import (
-    HallFrictionInput,
-    HallFrictionResult,
-    HallDiscountFrictionEngine,
-)
+import sys
+from finance_tools.macro_and_ripple.hall_discount_friction_engine import *
+from finance_tools.macro_and_ripple import hall_discount_friction_engine as _impl_module
 
-__all__ = [
-    "HallFrictionInput",
-    "HallFrictionResult",
-    "HallDiscountFrictionEngine",
-]
+# 保持模块元属性与引用透明性
+__doc__ = _impl_module.__doc__
+if hasattr(_impl_module, "__all__"):
+    __all__ = _impl_module.__all__

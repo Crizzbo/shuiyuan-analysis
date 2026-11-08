@@ -1,24 +1,16 @@
-"""中继门面: 知识库统一加载与中枢中介 (Knowledge Repository Facade).
+# -*- coding: utf-8 -*-
+"""向下兼容门面：重定向至 finance_tools.governance_and_pipeline.knowledge_repository。
 
-物理架构定界 (Layer 2: finance_tools):
-- 向下兼容门面，只单向导入 Layer 1: financial_core 核心实现；
-- 严禁逆向依赖上层业务脚本。
+功能归属：数据底账、时效门禁与基础设施管道
+业务定位：数据完备度追踪、行情交易时钟时效门禁、指标管道、不可篡改预测账本、复盘演进与微观资金流监测
+此门面确保既有脚本、测试用例与历史引用零代码修改平滑过渡。
 """
 
-from financial_core.engines.knowledge_repository import (
-    KnowledgeRepository,
-    BusinessModelProfile,
-    MetricCatalogProfile,
-    IndustryNodeProfile,
-    IndustryRuleProfile,
-    IndustryKnowledgeProfile,
-)
+import sys
+from finance_tools.governance_and_pipeline.knowledge_repository import *
+from finance_tools.governance_and_pipeline import knowledge_repository as _impl_module
 
-__all__ = [
-    "KnowledgeRepository",
-    "BusinessModelProfile",
-    "MetricCatalogProfile",
-    "IndustryNodeProfile",
-    "IndustryRuleProfile",
-    "IndustryKnowledgeProfile",
-]
+# 保持模块元属性与引用透明性
+__doc__ = _impl_module.__doc__
+if hasattr(_impl_module, "__all__"):
+    __all__ = _impl_module.__all__
