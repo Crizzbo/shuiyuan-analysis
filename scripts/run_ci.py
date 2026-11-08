@@ -24,6 +24,7 @@ PORTABLE_TESTS = (
     "scripts.test_supply_chain_ripple_engine",
     "scripts.test_data_readiness_tracker",
     "scripts.test_screening_universe_builder",
+    "scripts.test_screening_universe_batch",
 )
 
 

@@ -241,6 +241,10 @@ python scripts/serve_radar_dashboard.py --port 8899 --open-browser
 
 | 脚本路径 | 业务核心功能 | 常用命令示例 |
 | :--- | :--- | :--- |
+| `scripts/run_screening_universe_batch.py` | 万家企业初筛批处理与流式调度管道 (断点续传/150分块) | `python scripts/run_screening_universe_batch.py --market ALL` |
+| `scripts/export_qualified_screening_candidates.py` | 初筛准入候选池优选排序与导出 CLI (抽干比/收敛度) | `python scripts/export_qualified_screening_candidates.py --top 20` |
+| `scripts/collect_screening_universe_data.py` | 全盘万家初筛资产池数据契约与分块索引构建 | `python scripts/collect_screening_universe_data.py --status` |
+| `scripts/check_data_readiness.py` | 最新日期核心数据拉取完成度与时效底账巡检 | `python scripts/check_data_readiness.py` |
 | `scripts/run_supply_chain_ripple_analysis.py` | 产业链上下游涟漪传导推演 CLI | `python scripts/run_supply_chain_ripple_analysis.py --event EVT_001 --days 45` |
 | `scripts/run_sotp_event_penetration.py` | 跨业务分部 (SOTP) 因果穿透 CLI | `python scripts/run_sotp_event_penetration.py --ticker GOOGL --segment cloud --loss 10` |
 | `scripts/serve_radar_dashboard.py` | 交易室轻量推流调度与 API 服务 | `python scripts/serve_radar_dashboard.py --port 8899` |
