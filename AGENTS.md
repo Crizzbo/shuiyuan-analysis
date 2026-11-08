@@ -77,6 +77,20 @@
   3. 四大治理回归全绿：`python scripts/test_data_store.py`、`python scripts/validate_knowledge_structure.py`、`python scripts/test_research_contract.py`、`python scripts/test_industry_mapping.py` 全部 PASS；
   4. 账本链条不可篡改：任何研判与对账必须由 `PredictionLedger` SHA-256 密码学时间链条承接，严禁代码硬编码对账数据，必须通过 `ledger.verify_integrity()` 验签。
 
+2026-11-08 初步筛选数据准入与最新日期核心数据拉取完成度强制核验硬约束 (Preliminary Screening Data Contract & Freshness Verification Mandate):
+用户明确要求：初筛逻辑与数据依赖必须刚性写入工程规范，且每次向用户输出研报、选股或分析前，必须前置检测并提醒“最新日期有哪些公司的核心数据已拉取完成”。
+- 初筛数据边界与 0-Token 纯本地物理计算铁律：
+  1. 初筛数据仅依赖标的过去 1 年（约 200~250 交易日）的客观日 K 线价量时序 (Daily OHLCV)，由 `financial_core.engines.sepa_buy_signal_engine` 纯本地执行 50/150/200 日移动均线、52 周高低点、成交量萎缩度及 VCP 波动收缩形态收敛计算；
+  2. 初筛阶段严格禁止调用大语言模型 (LLM)，严禁向大模型上下文中注入全量原始财报，实现 0-Token 秒级全市场数千家上市主体初筛；
+  3. 仅在初筛全票通过（进入第二阶段主升浪且形态收敛就绪）后，才允许向深度分析管道准入，调用官方三表底稿、DCF 估值并由大模型撰写深度买方研报日记。
+- 最新日期核心数据拉取完成度强制检测与前置提醒规范：
+  1. 每次向用户输出股票分析、选股或研报前，强制前置调用数据完备度追踪器 (`finance_tools.data_readiness_tracker`) 查验本地落盘底账；
+  2. 强制在回复开头显式声明：
+     - 当前系统探测到的最新基准日期与准确时间戳（如 `2026-11-07 12:41:49 UTC`）；
+     - 哪些公司/指数已完成最新核心数据（最新报价、OHLCV、成交量、三表底账）的拉取与本地落盘；
+     - 哪些标的数据仍处于前收盘价或待补数状态；
+  3. 严禁在未前置查验最新日期拉取底账的情况下给出结论。
+
 
 
 
