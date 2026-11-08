@@ -20,6 +20,7 @@ PORTABLE_TESTS = (
     "scripts.test_alert_dispatcher",
     "scripts.test_evidence_verification_pipeline",
     "scripts.test_radar_dashboard_serve",
+    "scripts.test_browser_verification_assistant",
 )
 
 
