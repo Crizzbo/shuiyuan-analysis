@@ -57,9 +57,14 @@ def calculate(method, parameters):
     # 先固化输入，禁止 NaN/Infinity；摘要不能替代证据引用。
     encoded = json.dumps(parameters, sort_keys=True, ensure_ascii=False, allow_nan=False)
     output = finite_output(function(**parameters))
-    implementation = "finance_tools/basic.py" if library else "finance_tools/valuation.py"
     from pathlib import Path
-    code_bytes = (Path(__file__).resolve().parents[2] / implementation).read_bytes()
+    rel_path = "finance_tools/governance_and_pipeline/basic.py" if library else "finance_tools/forensics_and_valuation/valuation.py"
+    impl_file = Path(__file__).resolve().parents[2] / rel_path
+    if not impl_file.exists():
+        fallback_path = "finance_tools/_legacy_facades/basic.py" if library else "finance_tools/_legacy_facades/valuation.py"
+        impl_file = Path(__file__).resolve().parents[2] / fallback_path
+    code_bytes = impl_file.read_bytes()
+    implementation = rel_path
     return {"method": method, "method_version": VERSION,
             "implementation_sha256": hashlib.sha256(code_bytes).hexdigest(),
             "implementation_path": implementation,
