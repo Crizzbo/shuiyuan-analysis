@@ -1,0 +1,234 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StockScreeningMetricsContract",
+  "description": "全市场数千家上市企业初筛指标与形态足迹契约 (4大核心类别与12项硬指标)",
+  "type": "object",
+  "required": [
+    "ticker",
+    "market",
+    "company_name",
+    "as_of_date",
+    "price_and_moving_averages",
+    "cycle_and_high_low_positions",
+    "volume_and_supply_dryup",
+    "vcp_pattern_footprints",
+    "sepa_qualification"
+  ],
+  "properties": {
+    "ticker": {
+      "type": "string",
+      "description": "股票交易代码 (如 NVDA, AAPL, 8035, TYO:6857)"
+    },
+    "market": {
+      "type": "string",
+      "enum": ["US", "JP"],
+      "description": "市场归属：美股 (US) 或 日股 (JP)"
+    },
+    "company_name": {
+      "type": "string",
+      "description": "公司官方登记全称"
+    },
+    "cik_or_code": {
+      "type": "string",
+      "description": "美股 SEC CIK 编码或日股东证证券代码"
+    },
+    "as_of_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "数据基准日期 (YYYY-MM-DD)"
+    },
+    "price_and_moving_averages": {
+      "type": "object",
+      "description": "① 价格与均线系统 (判断是否大机构主导主升浪)",
+      "required": [
+        "latest_price",
+        "ma50",
+        "ma150",
+        "ma200",
+        "ma200_20d_ago",
+        "is_price_above_all_mas",
+        "is_ma200_trending_up"
+      ],
+      "properties": {
+        "latest_price": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "最新核验收盘现价"
+        },
+        "ma50": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "50 日短期移动均线"
+        },
+        "ma150": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "150 日中期移动均线"
+        },
+        "ma200": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "200 日长期移动均线 (年线)"
+        },
+        "ma200_20d_ago": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "20 个交易日前的 200 日移动均线 (用于判断年线拐头倾斜度)"
+        },
+        "is_price_above_all_mas": {
+          "type": "boolean",
+          "description": "现价是否站上所有移动均线 (Price > MA50 > MA150 > MA200)"
+        },
+        "is_ma200_trending_up": {
+          "type": "boolean",
+          "description": "长期年线是否持续向上倾斜 (MA200 > MA200_20d_ago)"
+        }
+      }
+    },
+    "cycle_and_high_low_positions": {
+      "type": "object",
+      "description": "② 周期位置与高低点 (判断离底部有多远、离新高有多近)",
+      "required": [
+        "high_52w",
+        "low_52w",
+        "gain_from_52w_low_pct",
+        "pullback_from_52w_high_pct",
+        "meets_cycle_thresholds"
+      ],
+      "properties": {
+        "high_52w": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "过去 52 周 (约 250 交易日) 最高价"
+        },
+        "low_52w": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "过去 52 周 (约 250 交易日) 最低价"
+        },
+        "gain_from_52w_low_pct": {
+          "type": "number",
+          "minimum": 0,
+          "description": "现价较 52 周最低价反弹幅度百分比 (要求 >= 30%)"
+        },
+        "pullback_from_52w_high_pct": {
+          "type": "number",
+          "minimum": 0,
+          "description": "现价距离 52 周最高价回撤幅度百分比 (要求 <= 25%)"
+        },
+        "meets_cycle_thresholds": {
+          "type": "boolean",
+          "description": "是否满足周期位置硬指标 (走出底部且贴近新高)"
+        }
+      }
+    },
+    "volume_and_supply_dryup": {
+      "type": "object",
+      "description": "③ 成交量与筹码抽干 (判断浮动筹码是否被彻底清洗出局)",
+      "required": [
+        "volume_today",
+        "volume_50d_avg",
+        "volume_min_consolidation",
+        "dryup_ratio",
+        "is_volume_dryup_confirmed"
+      ],
+      "properties": {
+        "volume_today": {
+          "type": "number",
+          "minimum": 0,
+          "description": "今日成交量 (股)"
+        },
+        "volume_50d_avg": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "过去 50 天日均成交量 (股)"
+        },
+        "volume_min_consolidation": {
+          "type": "number",
+          "minimum": 0,
+          "description": "整理期间单日最低成交量 (地量)"
+        },
+        "dryup_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "description": "地量萎缩比率 (最低量 / 50天均量，要求 <= 0.50)"
+        },
+        "is_volume_dryup_confirmed": {
+          "type": "boolean",
+          "description": "是否确认地量抽干 (无浮动抛压)"
+        }
+      }
+    },
+    "vcp_pattern_footprints": {
+      "type": "object",
+      "description": "④ 形态收敛足迹 VCP (判断多空分歧是否逐级收窄、筹码是否被主力锁仓)",
+      "required": [
+        "base_duration_weeks",
+        "contraction_sequence",
+        "pivot_price",
+        "vcp_code",
+        "vcp_stage"
+      ],
+      "properties": {
+        "base_duration_weeks": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "基底整理持续总周数 (如 8 周)"
+        },
+        "contraction_sequence": {
+          "type": "array",
+          "items": { "type": "number" },
+          "description": "历次回调收缩幅度序列 (如 [28.0, 14.0, 6.0, 2.0])"
+        },
+        "pivot_price": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "枢轴阻力买点价格 (放量突破防线)"
+        },
+        "vcp_code": {
+          "type": "string",
+          "description": "VCP 技术足迹简码 (如 8W 28/2 4T)"
+        },
+        "vcp_stage": {
+          "type": "string",
+          "enum": ["No_Contraction", "Loose_Shaping", "Contracting", "Tight_Pivot_Ready"],
+          "description": "VCP 形态收敛阶段"
+        }
+      }
+    },
+    "sepa_qualification": {
+      "type": "object",
+      "description": "初筛准入综合判定与买方决策走廊",
+      "required": [
+        "stage_2_markup_pass",
+        "vcp_ready_pass",
+        "overall_preliminary_pass",
+        "decision_action",
+        "business_rationale_zh"
+      ],
+      "properties": {
+        "stage_2_markup_pass": {
+          "type": "boolean",
+          "description": "第二阶段主升浪趋势 8 大指标是否全票通过"
+        },
+        "vcp_ready_pass": {
+          "type": "boolean",
+          "description": "形态收敛足迹是否准备就绪 (Tight_Pivot_Ready)"
+        },
+        "overall_preliminary_pass": {
+          "type": "boolean",
+          "description": "全票通过初筛并准入深度财务法证分析管道"
+        },
+        "decision_action": {
+          "type": "string",
+          "enum": ["Stage_2_Pivot_Ready", "Watchlist_Forming", "Trend_Disqualified"],
+          "description": "买方初筛决策指令"
+        },
+        "business_rationale_zh": {
+          "type": "string",
+          "description": "通俗商业直觉与操盘指引阐释"
+        }
+      }
+    }
+  }
+}
