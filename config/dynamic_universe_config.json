@@ -1,0 +1,160 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Full-spectrum dynamic stock selection universe with winners, laggards, and decliners",
+  "period_start": "2015-01-01",
+  "period_end": "2024-12-31",
+  "benchmark_symbol": "SPY",
+  "total_targets": 15,
+  "targets": [
+    {
+      "symbol": "SPY",
+      "name_zh": "标普500指数 ETF",
+      "category": "Benchmark",
+      "is_benchmark": true,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/SPY_bars.json"
+    },
+    {
+      "symbol": "NVDA",
+      "name_zh": "英伟达",
+      "category": "Tech_Growth_Winner",
+      "is_benchmark": false,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/NVDA_bars.json"
+    },
+    {
+      "symbol": "MSFT",
+      "name_zh": "微软公司",
+      "category": "Tech_Growth_Winner",
+      "is_benchmark": false,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/MSFT_bars.json"
+    },
+    {
+      "symbol": "AAPL",
+      "name_zh": "苹果公司",
+      "category": "Tech_Growth_Winner",
+      "is_benchmark": false,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/AAPL_bars.json"
+    },
+    {
+      "symbol": "INTC",
+      "name_zh": "英特尔 (长期跑输与衰退对照)",
+      "category": "Semiconductor_Decliner",
+      "is_benchmark": false,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/INTC_bars.json"
+    },
+    {
+      "symbol": "CSCO",
+      "name_zh": "思科系统 (长期低波动滞涨对照)",
+      "category": "Legacy_Tech_Stagnant",
+      "is_benchmark": false,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/CSCO_bars.json"
+    },
+    {
+      "symbol": "COST",
+      "name_zh": "开市客",
+      "category": "Consumer_Moat_Winner",
+      "is_benchmark": false,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/COST_bars.json"
+    },
+    {
+      "symbol": "PG",
+      "name_zh": "宝洁公司",
+      "category": "Consumer_Staples_Defensive",
+      "is_benchmark": false,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/PG_bars.json"
+    },
+    {
+      "symbol": "KO",
+      "name_zh": "可口可乐 (慢速消费红利对照)",
+      "category": "Consumer_Dividend_Defensive",
+      "is_benchmark": false,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/KO_bars.json"
+    },
+    {
+      "symbol": "WMT",
+      "name_zh": "沃尔玛 (传统零售稳健对照)",
+      "category": "Retail_Mature_Stable",
+      "is_benchmark": false,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/WMT_bars.json"
+    },
+    {
+      "symbol": "LLY",
+      "name_zh": "礼来制药",
+      "category": "Healthcare_Biotech_Winner",
+      "is_benchmark": false,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/LLY_bars.json"
+    },
+    {
+      "symbol": "JNJ",
+      "name_zh": "强生公司",
+      "category": "Healthcare_Diversified",
+      "is_benchmark": false,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/JNJ_bars.json"
+    },
+    {
+      "symbol": "CAT",
+      "name_zh": "卡特彼勒",
+      "category": "Industrial_Cyclical",
+      "is_benchmark": false,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/CAT_bars.json"
+    },
+    {
+      "symbol": "XOM",
+      "name_zh": "埃克森美孚",
+      "category": "Energy_Commodity_Cyclical",
+      "is_benchmark": false,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/XOM_bars.json"
+    },
+    {
+      "symbol": "JPM",
+      "name_zh": "摩根大通",
+      "category": "Financial_Services_Leader",
+      "is_benchmark": false,
+      "bars_count": 2516,
+      "start_date": "2015-01-02",
+      "end_date": "2024-12-31",
+      "file_path": "data/history/dynamic_universe/normalized/JPM_bars.json"
+    }
+  ]
+}

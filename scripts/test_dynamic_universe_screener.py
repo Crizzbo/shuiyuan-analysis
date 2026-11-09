@@ -130,6 +130,86 @@ class TestDynamicUniverseScreener(unittest.TestCase):
         self.assertIn("STAGE4_BEARISH_TREND", score_map["DECLINER"].disqualification_reason)
         self.assertEqual(top_symbols, ["WINNER"])
 
+    def test_beneish_m_score_fraud_rejection(self):
+        """测试 Beneish M-Score 财务舞弊排雷门禁对造假企业的一票否决拦截."""
+        screener = DynamicUniverseScreener(min_lookback_bars=60, enable_forensics_gate=True)
+        dates = [f"2020-{m:02d}-{d:02d}" for m in range(1, 4) for d in range(1, 29)][:80]
+        bench = [{"date": d, "close": 100.0} for d in dates]
+
+        # 构造一只形态看似完美的牛股
+        stock_bars = [{"date": d, "close": 50.0 + (i * 0.3)} for i, d in enumerate(dates)]
+        universe = {"FRAUD_INC": stock_bars}
+
+        # 注入典型造假财务特征 (应收账款暴涨 DSRI 恶化、毛利率暴跌 GMI 恶化、应计利润 TATA 畸高)
+        fraud_fin_profile = {
+            "FRAUD_INC": {
+                "curr_sales": 120.0,
+                "prev_sales": 100.0,
+                "curr_cogs": 90.0,
+                "prev_cogs": 50.0,
+                "curr_receivables": 80.0,  # 严重失常的应收账款
+                "prev_receivables": 20.0,
+                "curr_current_assets": 150.0,
+                "prev_current_assets": 80.0,
+                "curr_ppe_net": 100.0,
+                "prev_ppe_net": 90.0,
+                "curr_securities": 10.0,
+                "prev_securities": 10.0,
+                "curr_total_assets": 300.0,
+                "prev_total_assets": 200.0,
+                "curr_depreciation": 2.0,   # 蓄意放慢折旧
+                "prev_depreciation": 10.0,
+                "curr_sga": 25.0,
+                "prev_sga": 15.0,
+                "curr_long_term_debt": 60.0,
+                "prev_long_term_debt": 30.0,
+                "curr_current_liabilities": 50.0,
+                "prev_current_liabilities": 25.0,
+                "curr_net_income": 30.0,    # 虚构账面利润
+                "curr_cfo": -20.0,          # 现金流深度赤字，TATA 爆表
+            }
+        }
+
+        scores, top_symbols = screener.screen_universe_at_date(
+            as_of_date=dates[-1],
+            historical_universe_bars=universe,
+            historical_benchmark_bars=bench,
+            top_k=1,
+            company_financial_profiles=fraud_fin_profile,
+        )
+
+        s = scores[0]
+        self.assertIsNotNone(s.beneish_m_score)
+        self.assertTrue(s.is_fraud_suspect)
+        self.assertFalse(s.in_strike_zone)
+        self.assertIn("BENEISH_FRAUD_ALERT", s.disqualification_reason)
+        self.assertEqual(len(top_symbols), 0)
+
+    def test_moat_value_kalman_mean_reversion_support(self):
+        """测试护城河价值模型 (MOAT_VALUE) 下卡尔曼滤波与 OU 均值回归指标的生成."""
+        screener = DynamicUniverseScreener(
+            strategy_model="MOAT_VALUE",
+            min_lookback_bars=60,
+            enable_kalman_filter=True,
+        )
+        dates = [f"2020-{m:02d}-{d:02d}" for m in range(1, 4) for d in range(1, 29)][:80]
+        bench = [{"date": d, "close": 100.0} for d in dates]
+
+        # 围绕 100 窄幅震荡具有显著均值回归特征的日线
+        bars = [{"date": d, "close": 100.0 + math.sin(i * 0.5) * 4.0} for i, d in enumerate(dates)]
+        universe = {"R_VALUE": bars}
+
+        scores, _ = screener.screen_universe_at_date(
+            as_of_date=dates[-1],
+            historical_universe_bars=universe,
+            historical_benchmark_bars=bench,
+            top_k=1,
+        )
+
+        s = scores[0]
+        self.assertIsNotNone(s.ou_half_life)
+        self.assertIsNotNone(s.kalman_z_score)
+
 
 if __name__ == "__main__":
     unittest.main()

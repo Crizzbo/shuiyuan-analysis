@@ -18,6 +18,8 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from .amihud_liquidity_engine import AmihudLiquidityEngine
 from .merton_default_engine import MertonStructuralDefaultEngine
+from .forensics_and_trailing_exit_engine import ForensicsAndTrailingExitEngine
+from .mean_reversion_kalman_engine import MeanReversionKalmanEngine
 
 VALID_STRATEGY_MODELS = {
     "FULL_QUANTAMENTAL",
@@ -50,6 +52,10 @@ class StockScreeningScore:
     inter_momentum: float = 0.0    # 中期动量 (12M - 1M)
     ret_1m: float = 0.0            # 近1个月收益率
     is_japan: bool = False         # 是否为日股标的
+    beneish_m_score: Optional[float] = None     # Beneish M-Score 造假排雷分
+    is_fraud_suspect: bool = False             # 是否触发财务造假一票否决
+    kalman_z_score: Optional[float] = None      # 卡尔曼滤波中枢偏离 Z 分数
+    ou_half_life: Optional[float] = None        # OU 均值回归半衰期 (交易日)
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -68,6 +74,8 @@ class DynamicUniverseScreener:
         max_acceptable_vol20: float = 0.55,
         enable_liquidity_gate: bool = True,
         enable_credit_gate: bool = True,
+        enable_forensics_gate: bool = True,
+        enable_kalman_filter: bool = True,
     ):
         if strategy_model not in VALID_STRATEGY_MODELS:
             raise ValueError(f"未知的策略模型类型: {strategy_model}，有效取值: {VALID_STRATEGY_MODELS}")
@@ -82,8 +90,12 @@ class DynamicUniverseScreener:
         self.max_acceptable_vol20 = max_acceptable_vol20
         self.enable_liquidity_gate = enable_liquidity_gate
         self.enable_credit_gate = enable_credit_gate
+        self.enable_forensics_gate = enable_forensics_gate
+        self.enable_kalman_filter = enable_kalman_filter
         self.amihud_engine = AmihudLiquidityEngine(lookback_days=20)
         self.merton_engine = MertonStructuralDefaultEngine()
+        self.forensics_engine = ForensicsAndTrailingExitEngine()
+        self.kalman_engine = MeanReversionKalmanEngine()
 
     @staticmethod
     def _get_pit_bars(bars: List[Dict[str, Any]], as_of_date: str) -> List[Dict[str, Any]]:
@@ -110,6 +122,7 @@ class DynamicUniverseScreener:
         historical_benchmark_bars: List[Dict[str, Any]],
         top_k: int = 12,
         company_debt_profiles: Optional[Dict[str, Dict[str, float]]] = None,
+        company_financial_profiles: Optional[Dict[str, Dict[str, float]]] = None,
     ) -> Tuple[List[StockScreeningScore], List[str]]:
         """在历史任意点时 as_of_date 截面上执行全资产池动态筛选与打分.
 
@@ -119,6 +132,7 @@ class DynamicUniverseScreener:
             historical_benchmark_bars: 大盘基准全部日线序列
             top_k: 选出的击球区标的数量上限 (默认扩容至12)
             company_debt_profiles: 可选的企业债务与资产结构配置 (用于 Merton 信用违约门禁)
+            company_financial_profiles: 可选的企业财报科目底账 (用于 Beneish M-Score 财务舞弊排雷门禁)
 
         Returns:
             Tuple[打分明细列表(按得分降序), 建议入池标的代码列表]
@@ -237,6 +251,10 @@ class DynamicUniverseScreener:
 
             in_strike_zone = True
             disqualify_reason = None
+            ou_half_life_val: Optional[float] = None
+            kalman_z_val: Optional[float] = None
+            beneish_m_val: Optional[float] = None
+            is_fraud_suspect_val: bool = False
 
             if self.strategy_model == "MOMENTUM_SEPA":
                 # 模型 A: 纯动量时机型 (SEPA / VCP + Daniel & Moskowitz 动量崩盘防御)
@@ -310,6 +328,26 @@ class DynamicUniverseScreener:
                     volatility_score = -25.0
                 else:
                     volatility_score = 0.0
+
+                # 卡尔曼滤波与 OU 均值回归副武器自适应支撑 (消除高频噪声与识别真实回归中枢)
+                if self.enable_kalman_filter and n >= 30:
+                    recent_series = closes[-60:] if n >= 60 else closes
+                    try:
+                        ou_res = self.kalman_engine.fit_ou_process(recent_series)
+                        kalman_res = self.kalman_engine.apply_kalman_filter(recent_series)
+                        ou_half_life_val = round(ou_res.half_life_days, 1)
+                        kalman_z_val = round(ou_res.current_zscore, 2)
+
+                        if ou_res.is_mean_reverting:
+                            # 具备快速均值回归动力且偏离均衡中枢，给予强支撑加分
+                            if ou_res.current_zscore < -1.0 and 3.0 <= ou_res.half_life_days <= 45.0:
+                                trend_score += 15.0
+                            elif ou_res.half_life_days > 75.0:
+                                valuation_penalty -= 20.0
+                        if kalman_res.channel_position_pct < 0.15:
+                            trend_score += 10.0
+                    except Exception:
+                        pass
 
                 composite = rs_score + trend_score + valuation_penalty + volatility_score
 
@@ -434,6 +472,45 @@ class DynamicUniverseScreener:
                     in_strike_zone = False
                     disqualify_reason = f"CRITICAL_DEFAULT_RISK (KMV-Merton违约距离DD={merton_res.distance_to_default:.2f}破产预警)"
 
+            # 6. Beneish M-Score 八维法务会计财务防舞弊排雷门禁 (一票否决)
+            if self.enable_forensics_gate and company_financial_profiles and symbol in company_financial_profiles:
+                fin = company_financial_profiles[symbol]
+                try:
+                    m_res = self.forensics_engine.compute_beneish_m_score(
+                        curr_sales=fin.get("curr_sales", 100.0),
+                        curr_cogs=fin.get("curr_cogs", 60.0),
+                        curr_receivables=fin.get("curr_receivables", 20.0),
+                        curr_current_assets=fin.get("curr_current_assets", 80.0),
+                        curr_ppe_net=fin.get("curr_ppe_net", 50.0),
+                        curr_securities=fin.get("curr_securities", 10.0),
+                        curr_total_assets=fin.get("curr_total_assets", 150.0),
+                        curr_depreciation=fin.get("curr_depreciation", 5.0),
+                        curr_sga=fin.get("curr_sga", 15.0),
+                        curr_long_term_debt=fin.get("curr_long_term_debt", 30.0),
+                        curr_current_liabilities=fin.get("curr_current_liabilities", 25.0),
+                        curr_net_income=fin.get("curr_net_income", 15.0),
+                        curr_cfo=fin.get("curr_cfo", 18.0),
+                        prev_sales=fin.get("prev_sales", 90.0),
+                        prev_cogs=fin.get("prev_cogs", 55.0),
+                        prev_receivables=fin.get("prev_receivables", 18.0),
+                        prev_current_assets=fin.get("prev_current_assets", 75.0),
+                        prev_ppe_net=fin.get("prev_ppe_net", 48.0),
+                        prev_securities=fin.get("prev_securities", 10.0),
+                        prev_total_assets=fin.get("prev_total_assets", 140.0),
+                        prev_depreciation=fin.get("prev_depreciation", 4.8),
+                        prev_sga=fin.get("prev_sga", 14.0),
+                        prev_long_term_debt=fin.get("prev_long_term_debt", 28.0),
+                        prev_current_liabilities=fin.get("prev_current_liabilities", 22.0),
+                    )
+                    beneish_m_val = m_res.m_score
+                    is_fraud_suspect_val = m_res.is_manipulation_suspect
+                    if m_res.is_manipulation_suspect:
+                        in_strike_zone = False
+                        flag_txt = ", ".join(m_res.flagged_dimensions[:2]) if m_res.flagged_dimensions else "财务指标异常"
+                        disqualify_reason = f"BENEISH_FRAUD_ALERT (Beneish M-Score={m_res.m_score:.2f} 触发造假一票否决: {flag_txt})"
+                except Exception:
+                    pass
+
             scores.append(StockScreeningScore(
                 symbol=symbol,
                 date=as_of_date,
@@ -455,6 +532,10 @@ class DynamicUniverseScreener:
                 inter_momentum=round(inter_momentum_12_1, 4),
                 ret_1m=round(ret_1m, 4),
                 is_japan=is_japan_stock,
+                beneish_m_score=beneish_m_val,
+                is_fraud_suspect=is_fraud_suspect_val,
+                kalman_z_score=kalman_z_val,
+                ou_half_life=ou_half_life_val,
             ))
 
         # 4. 按综合得分降序排列

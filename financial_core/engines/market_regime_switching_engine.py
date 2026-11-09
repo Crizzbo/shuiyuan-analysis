@@ -16,6 +16,8 @@ from enum import Enum
 import math
 from typing import Any, Dict, List, Optional
 
+from .macro_regime_hmm_valve_engine import MacroRegimeHMMValveEngine, MarketRegimeState
+
 
 class MarketRegime(str, Enum):
     """宏观市场状态枚举."""
@@ -38,6 +40,9 @@ class MarketRegimeVerdict:
     stop_loss_pct: float
     trailing_stop_pct: float
     rationale_zh: str
+    position_ceiling_pct: float = 1.0
+    valve_status: Optional[str] = None
+    hmm_confidence: Optional[float] = None
 
     def to_dict(self) -> Dict[str, Any]:
         d = asdict(self)
@@ -52,7 +57,8 @@ class MarketRegimeSwitchingEngine:
         self,
         vol_crisis_threshold: float = 0.28,    # 年化波动率高于 28% 视为高恐慌危机
         vol_calm_threshold: float = 0.22,      # 年化波动率低于 22% 视为健康牛市
-        min_benchmark_bars: int = 200          # 必须有充足历史计算 EMA200
+        min_benchmark_bars: int = 200,         # 必须有充足历史计算 EMA200
+        enable_hmm_valve: bool = True,         # 是否启用 3 状态高斯 HMM 与大盘 200 日趋势开关
     ):
         if vol_crisis_threshold <= vol_calm_threshold:
             raise ValueError("vol_crisis_threshold 必须大于 vol_calm_threshold")
@@ -62,6 +68,8 @@ class MarketRegimeSwitchingEngine:
         self.vol_crisis_threshold = vol_crisis_threshold
         self.vol_calm_threshold = vol_calm_threshold
         self.min_benchmark_bars = min_benchmark_bars
+        self.enable_hmm_valve = enable_hmm_valve
+        self.hmm_engine = MacroRegimeHMMValveEngine()
 
     def detect_regime(
         self,
@@ -96,7 +104,10 @@ class MarketRegimeSwitchingEngine:
                 selected_strategy_model="FULL_QUANTAMENTAL",
                 stop_loss_pct=-0.07,
                 trailing_stop_pct=0.15,
-                rationale_zh="基准数据不足 200 天，采用默认机构复合稳健配置"
+                rationale_zh="基准数据不足 200 天，采用默认机构复合稳健配置",
+                position_ceiling_pct=0.50,
+                valve_status="CAUTION",
+                hmm_confidence=0.50,
             )
 
         closes = [float(b["close"]) for b in pit_bars]
@@ -114,16 +125,33 @@ class MarketRegimeSwitchingEngine:
         variance = sum((r - mean_ret) ** 2 for r in log_rets) / (len(log_rets) - 1) if len(log_rets) > 1 else 0.0
         vol20 = math.sqrt(variance * 252.0)
 
-        # 4. 状态转移判别逻辑
+        # 4. 状态转移与 HMM 阀门综合判定
+        valve_status_val: Optional[str] = None
+        position_ceiling = 1.0
+        hmm_conf_val: Optional[float] = None
+
+        if self.enable_hmm_valve and len(closes) >= 200:
+            try:
+                valve_res = self.hmm_engine.evaluate_valve(as_of_date, closes)
+                valve_status_val = valve_res.valve_status
+                position_ceiling = valve_res.total_position_ceiling_pct
+                hmm_conf_val = valve_res.hmm_result.confidence_score
+            except Exception:
+                pass
+
         # 条件 1: 危机避险 (CRISIS_DEFENSE)
         # - 大盘跌破 200 日牛熊分界均线 (SPY < EMA200)；
-        # - 或 20 日年化波动率剧烈飙升超过危机阈值 (Vol20 > 28%)。
-        if (curr_c < ema200) or (vol20 > self.vol_crisis_threshold):
+        # - 或 20 日年化波动率剧烈飙升超过危机阈值 (Vol20 > 28%)；
+        # - 或 HMM 总阀门识别为 CLOSED/DEFENSE 紧急熔断。
+        is_crisis = (curr_c < ema200) or (vol20 > self.vol_crisis_threshold) or (valve_status_val in ("CLOSED", "DEFENSE"))
+        if is_crisis:
             reasons = []
             if curr_c < ema200:
                 reasons.append(f"大盘跌破EMA200牛熊分界线(现价${curr_c:.2f} < EMA200 ${ema200:.2f})")
             if vol20 > self.vol_crisis_threshold:
                 reasons.append(f"大盘20日年化波动率飙升达 {vol20*100.0:.1f}%(超过阈值{self.vol_crisis_threshold*100.0:.0f}%)")
+            if valve_status_val in ("CLOSED", "DEFENSE"):
+                reasons.append(f"HMM总阀门处于{valve_status_val}熔断防御态")
 
             rationale = "【危机避险】" + " 且 ".join(reasons) + "，自适应切换至模型 C (动态尾部风控)，收缩仓位并执行 -5% 极紧止损！"
             return MarketRegimeVerdict(
@@ -137,7 +165,10 @@ class MarketRegimeSwitchingEngine:
                 selected_strategy_model="VAR_TAIL_RISK",
                 stop_loss_pct=-0.05,
                 trailing_stop_pct=0.10,
-                rationale_zh=rationale
+                rationale_zh=rationale,
+                position_ceiling_pct=min(position_ceiling, 0.30),
+                valve_status=valve_status_val or "DEFENSE",
+                hmm_confidence=hmm_conf_val,
             )
 
         # 条件 2: 牛市主升浪进攻 (BULL_MOMENTUM)
@@ -156,7 +187,10 @@ class MarketRegimeSwitchingEngine:
                 selected_strategy_model="MOMENTUM_SEPA",
                 stop_loss_pct=-0.07,
                 trailing_stop_pct=0.15,
-                rationale_zh=rationale
+                rationale_zh=rationale,
+                position_ceiling_pct=position_ceiling,
+                valve_status=valve_status_val or "OPEN",
+                hmm_confidence=hmm_conf_val,
             )
 
         # 条件 3: 震荡中性与估值筑底 (RANGE_BOUND_VALUE)
@@ -173,7 +207,10 @@ class MarketRegimeSwitchingEngine:
             selected_strategy_model="MOAT_VALUE",
             stop_loss_pct=-0.10,
             trailing_stop_pct=0.20,
-            rationale_zh=rationale
+            rationale_zh=rationale,
+            position_ceiling_pct=min(position_ceiling, 0.60),
+            valve_status=valve_status_val or "CAUTION",
+            hmm_confidence=hmm_conf_val,
         )
 
     @staticmethod

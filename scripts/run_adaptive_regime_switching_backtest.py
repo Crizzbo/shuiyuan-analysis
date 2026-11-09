@@ -40,6 +40,8 @@ from financial_core.engines.dynamic_universe_screener import (
     DynamicUniverseScreener,
     StockScreeningScore,
 )
+from financial_core.engines.forensics_and_trailing_exit_engine import ForensicsAndTrailingExitEngine
+from financial_core.engines.black_litterman_shrinkage_engine import BlackLittermanShrinkageEngine
 from financial_core.engines.portfolio_backtest_engine import (
     DailySnapshot,
     TradeRecord,
@@ -85,6 +87,8 @@ def execute_adaptive_regime_backtest(
         vol_calm_threshold=0.22,
         min_benchmark_bars=60
     )
+    forensics_engine = ForensicsAndTrailingExitEngine(chandelier_period=22, chandelier_atr_mult=2.8)
+    bl_engine = BlackLittermanShrinkageEngine()
 
     all_trading_dates = sorted(list({b["date"] for bars in universe_bars.values() for b in bars}))
     # 筛选出 2015-2024 年的数据
@@ -201,10 +205,11 @@ def execute_adaptive_regime_backtest(
                                         "entry_date": today,
                                         "entry_day_idx": day_idx,
                                         "highest_price": fill_p,
-                                        "buy_comm": comm
+                                        "buy_comm": comm,
+                                        "chandelier_ratchet": round(fill_p * 0.93, 2),
                                     }
 
-        # 3. 盘中跟踪最高价与动态止损止盈
+        # 3. 盘中跟踪最高价与动态止损止盈 (融合单向棘轮吊灯移动止盈)
         for sym in list(active_positions.keys()):
             pos = active_positions[sym]
             if sym in bar_lookup and today in bar_lookup[sym]:
@@ -219,11 +224,37 @@ def execute_adaptive_regime_backtest(
                 pullback_pct = (c / pos["highest_price"]) - 1.0
 
                 exit_reason = None
-                # 使用当前宏观状态自适应指定的止损止盈阈值
-                if pnl_pct <= current_stop_loss:
-                    exit_reason = f"STOP_LOSS ({current_stop_loss*100.0:.0f}%)"
-                elif pnl_pct > 0.10 and pullback_pct <= -current_trailing_stop:
-                    exit_reason = f"TRAILING_STOP ({current_trailing_stop*100.0:.0f}%)"
+
+                # 吊灯移动止盈 (Chandelier Exit) 棘轮动态更新
+                prior_ratchet = pos.get("chandelier_ratchet", 0.0)
+                if sym in universe_bars:
+                    p_bars = [b for b in universe_bars[sym] if b["date"] <= today]
+                    if len(p_bars) >= 22:
+                        h_series = [float(b.get("high", b["close"])) for b in p_bars[-30:]]
+                        l_series = [float(b.get("low", b["close"])) for b in p_bars[-30:]]
+                        c_series = [float(b["close"]) for b in p_bars[-30:]]
+                        try:
+                            ch_res = forensics_engine.compute_chandelier_exit(
+                                ticker=sym,
+                                as_of_date=today,
+                                high_series=h_series,
+                                low_series=l_series,
+                                close_series=c_series,
+                                prior_ratchet_stop=prior_ratchet,
+                            )
+                            pos["chandelier_ratchet"] = ch_res.ratchet_stop_price
+                            # 若浮盈超过 6% 且收盘价击穿单向棘轮止盈线，锁定利润！
+                            if pnl_pct > 0.06 and ch_res.is_triggered:
+                                exit_reason = f"CHANDELIER_RATCHET_EXIT (+{pnl_pct*100.0:.1f}%)"
+                        except Exception:
+                            pass
+
+                # 自适应宏观止损与硬止盈备用防线
+                if exit_reason is None:
+                    if pnl_pct <= current_stop_loss:
+                        exit_reason = f"STOP_LOSS ({current_stop_loss*100.0:.0f}%)"
+                    elif pnl_pct > 0.10 and pullback_pct <= -current_trailing_stop:
+                        exit_reason = f"TRAILING_STOP ({current_trailing_stop*100.0:.0f}%)"
 
                 if exit_reason:
                     fill_p = c * (1.0 - (slippage_bps / 10000.0))
@@ -440,7 +471,7 @@ def run_adaptive_regime_backtest_suite() -> Dict[str, Any]:
 
     # 6. 不可篡改存证入 HistoryValidationLedger
     print(f"\n[不可篡改存证] 正在将宏观自适应切换回测底账写入 HistoryValidationLedger...")
-    db_path = ROOT / "data/ledger/history_validation_ledger.sqlite3"
+    db_path = ROOT / "data/ledger/history_validation_ledger_v2.sqlite3"
     ledger = HistoryValidationLedger(root=ROOT, db_path=db_path)
     block_hash = ledger.append_validation(
         artifacts=csv_paths,
