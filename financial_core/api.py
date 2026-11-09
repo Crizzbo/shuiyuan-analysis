@@ -81,6 +81,7 @@ from .engines import (
     GARCHVolatilityEngine,
     BlackLittermanShrinkageEngine,
     ForensicsAndTrailingExitEngine,
+    UniversalPhysicalDynamicsEngine,
 )
 
 
@@ -109,6 +110,7 @@ class FinancialAnalysisSystem:
         self.garch_volatility_engine = GARCHVolatilityEngine()
         self.black_litterman_engine = BlackLittermanShrinkageEngine()
         self.forensics_trailing_engine = ForensicsAndTrailingExitEngine()
+        self.universal_dynamics_engine = UniversalPhysicalDynamicsEngine()
 
     def analyze_linear_equity(self, station_input: CanyonStationInput) -> CanyonDecisionCard:
         """执行 Canyon 统一单向 6 工位线性流水线投研分析 (SSOT 单向流动)."""

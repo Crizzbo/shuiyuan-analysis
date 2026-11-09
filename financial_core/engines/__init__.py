@@ -292,6 +292,13 @@ from .forensics_and_trailing_exit_engine import (
     BeneishScoreResult,
     ChandelierExitResult,
 )
+from .universal_physical_dynamics_engine import (
+    UniversalPhysicalDynamicsEngine,
+    PriceDynamicsMetrics,
+    FundamentalSupplyChainMetrics,
+    TerminalValuationDistribution,
+    UniversalDynamicsProfile,
+)
 
 __all__ = [
     # 7 大业务领域高内聚子包
@@ -462,4 +469,9 @@ __all__ = [
     "BeneishMetrics",
     "BeneishScoreResult",
     "ChandelierExitResult",
+    "UniversalPhysicalDynamicsEngine",
+    "PriceDynamicsMetrics",
+    "FundamentalSupplyChainMetrics",
+    "TerminalValuationDistribution",
+    "UniversalDynamicsProfile",
 ]

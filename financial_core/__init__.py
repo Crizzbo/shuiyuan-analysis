@@ -13,6 +13,13 @@ from .contracts import (
     MacroStressResult,
 )
 from .api import FinancialAnalysisSystem
+from .engines import (
+    UniversalPhysicalDynamicsEngine,
+    PriceDynamicsMetrics,
+    FundamentalSupplyChainMetrics,
+    TerminalValuationDistribution,
+    UniversalDynamicsProfile,
+)
 from .pipeline import (
     CanyonStationInput,
     CanyonDecisionCard,
@@ -37,4 +44,9 @@ __all__ = [
     "CanyonLinearPipeline",
     "QuoteFreshnessError",
     "BalanceSheetInvariantError",
+    "UniversalPhysicalDynamicsEngine",
+    "PriceDynamicsMetrics",
+    "FundamentalSupplyChainMetrics",
+    "TerminalValuationDistribution",
+    "UniversalDynamicsProfile",
 ]

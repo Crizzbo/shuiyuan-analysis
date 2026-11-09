@@ -50,6 +50,7 @@ _MODULE_TO_SUBPACKAGE: Dict[str, str] = {
     "integrated_three_statement_engine": "forensics_and_valuation",
     "peer_benchmark_engine": "forensics_and_valuation",
     "unit_economics_engine": "forensics_and_valuation",
+    "universal_physical_dynamics_engine": "forensics_and_valuation",
     "valuation": "forensics_and_valuation",
     # 3. 数据底账、时效门禁与基础设施 (governance_and_pipeline)
     "basic": "governance_and_pipeline",
