@@ -262,6 +262,36 @@ from .event_radar_engine import (
     RawNewsItem,
     StructuredEventSummary,
 )
+from .macro_regime_hmm_valve_engine import (
+    MacroRegimeHMMValveEngine,
+    MarketRegimeState,
+    HMMModelResult,
+    TrendFilterResult,
+    MacroValveDecision,
+)
+from .mean_reversion_kalman_engine import (
+    MeanReversionKalmanEngine,
+    OUProcessResult,
+    KalmanFilterResult,
+    MeanReversionVerdict,
+)
+from .garch_volatility_engine import (
+    GARCHVolatilityEngine,
+    GARCHModelResult,
+    VolatilityForecastResult,
+    GARCHVolatilityVerdict,
+)
+from .black_litterman_shrinkage_engine import (
+    BlackLittermanShrinkageEngine,
+    ShrinkageResult,
+    BlackLittermanResult,
+)
+from .forensics_and_trailing_exit_engine import (
+    ForensicsAndTrailingExitEngine,
+    BeneishMetrics,
+    BeneishScoreResult,
+    ChandelierExitResult,
+)
 
 __all__ = [
     # 7 大业务领域高内聚子包
@@ -411,4 +441,25 @@ __all__ = [
     "EventCategory",
     "RawNewsItem",
     "StructuredEventSummary",
+    # 全天候实战闭环公式群
+    "MacroRegimeHMMValveEngine",
+    "MarketRegimeState",
+    "HMMModelResult",
+    "TrendFilterResult",
+    "MacroValveDecision",
+    "MeanReversionKalmanEngine",
+    "OUProcessResult",
+    "KalmanFilterResult",
+    "MeanReversionVerdict",
+    "GARCHVolatilityEngine",
+    "GARCHModelResult",
+    "VolatilityForecastResult",
+    "GARCHVolatilityVerdict",
+    "BlackLittermanShrinkageEngine",
+    "ShrinkageResult",
+    "BlackLittermanResult",
+    "ForensicsAndTrailingExitEngine",
+    "BeneishMetrics",
+    "BeneishScoreResult",
+    "ChandelierExitResult",
 ]

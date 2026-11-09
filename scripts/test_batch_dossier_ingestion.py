@@ -13,7 +13,64 @@ if str(ROOT) not in sys.path:
 
 from financial_core.engines.filing_mapper import OfficialFilingMapper, IncompleteFilingFactError
 from financial_core.api import FinancialAnalysisSystem
-from data_sources.batch78_verified_dossiers_data import BATCH78_DOSSIERS
+
+# 标杆打样全息档案自包含测试夹具 (解耦外部冗余数据源，确保测试纯净与可复现)
+MOCK_ACHR_DOSSIER = {
+    "file_name": "ACHR_ArcherAviation.pdf",
+    "overview": {
+        "ticker": "ACHR",
+        "company_name": "Archer Aviation",
+        "company_name_zh": "阿彻航空",
+        "market": "US",
+        "industry_id": "low_altitude_economy_evtol",
+        "industry_name_zh": "低空经济与城市空中交通",
+        "business_model": "电动垂直起降飞行器 (eVTOL) 研发与制造",
+        "revenue_mix": "政府防务合同与早期商业预付款",
+    },
+    "financial_statement_deep_dive": {
+        "profitability_quality": "研发阶段",
+        "cash_and_liquidity": {"total_cash_and_equivalents": "$510M"},
+        "inventory_cycle_analysis": {"inventory_scale": "$38M"},
+        "debt_structure_and_solvency": {"short_vs_long_term_debt": "无银行负债"},
+    },
+    "moat_analysis": {
+        "network_effects": "枢纽机场网络",
+        "switching_costs": "Stellantis制造协同",
+        "cost_advantage_and_scale": "自研动力总成",
+        "intangible_assets": "适航认证推进",
+        "reinvestment_efficiency": "聚焦核心试飞",
+    },
+    "supply_chain_analysis": {
+        "upstream_suppliers": {"core_suppliers": "Stellantis, Garmin"},
+        "downstream_customers": {"customer_structure": "美联航"},
+    },
+    "industry_dynamics": {
+        "winner_factor": "适航速度",
+        "market_share_and_crn": "双寡头",
+        "tam_and_cagr": "万亿美元TAM",
+    },
+    "long_term_outlook": {
+        "catalysts": ["适航型号合格证获批"],
+        "kill_switch_risks": ["适航推迟"],
+        "dcf_valuation_matrix": {
+            "base_fair_value": "$8.50",
+            "conservative_fair_value": "$2.10",
+            "margin_of_safety_buy_zone": "$3.20 - $4.50",
+            "optimistic_fair_value": "$18.50",
+        },
+    },
+}
+
+MOCK_NISSUI_DOSSIER = {
+    "overview": {
+        "ticker": "1332",
+        "company_name": "Nissui Corporation",
+        "company_name_zh": "日本水产",
+        "market": "JP",
+        "industry_id": "food_beverage",
+        "industry_name_zh": "水产与食品加工",
+    }
+}
 
 
 class TestBatchDossierIngestion(unittest.TestCase):
@@ -63,14 +120,14 @@ class TestBatchDossierIngestion(unittest.TestCase):
 
     def test_map_and_execute_us_batch_company(self):
         """美股存量档案缺少三表核心科目时明确拒绝。"""
-        achr = BATCH78_DOSSIERS[0]
+        achr = MOCK_ACHR_DOSSIER
         # 存量档案未提供完整三表和行情时间戳，必须先补证据。
         with self.assertRaises(IncompleteFilingFactError):
             OfficialFilingMapper.map_dossier_to_company_input(achr)
 
     def test_map_and_execute_jp_batch_company(self):
         """日股存量档案缺少三表核心科目时明确拒绝。"""
-        nissui = BATCH78_DOSSIERS[5]
+        nissui = MOCK_NISSUI_DOSSIER
         with self.assertRaises(IncompleteFilingFactError):
             OfficialFilingMapper.map_dossier_to_company_input(nissui)
 
@@ -99,7 +156,7 @@ class TestBatchDossierIngestion(unittest.TestCase):
         import openpyxl
         from financial_reporting.excel_dossier_builder import ExcelDossierBuilder
 
-        achr = BATCH78_DOSSIERS[0]
+        achr = MOCK_ACHR_DOSSIER
         with tempfile.TemporaryDirectory() as tmp_dir:
             builder = ExcelDossierBuilder(output_root=Path(tmp_dir))
             out_file = builder.build_workbook(

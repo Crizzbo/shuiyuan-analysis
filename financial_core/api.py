@@ -76,6 +76,11 @@ from .engines import (
     IndustryTaxonomyBridge,
     IndustryPriceShockBridge,
     IndustryCausalStrategyRegistry,
+    MacroRegimeHMMValveEngine,
+    MeanReversionKalmanEngine,
+    GARCHVolatilityEngine,
+    BlackLittermanShrinkageEngine,
+    ForensicsAndTrailingExitEngine,
 )
 
 
@@ -98,6 +103,12 @@ class FinancialAnalysisSystem:
         self.taxonomy_bridge = IndustryTaxonomyBridge()
         self.price_shock_bridge = IndustryPriceShockBridge()
         self.industry_causal_registry = IndustryCausalStrategyRegistry()
+        # 全天候实战闭环公式群引擎挂载
+        self.macro_hmm_valve_engine = MacroRegimeHMMValveEngine()
+        self.mean_reversion_kalman_engine = MeanReversionKalmanEngine()
+        self.garch_volatility_engine = GARCHVolatilityEngine()
+        self.black_litterman_engine = BlackLittermanShrinkageEngine()
+        self.forensics_trailing_engine = ForensicsAndTrailingExitEngine()
 
     def analyze_linear_equity(self, station_input: CanyonStationInput) -> CanyonDecisionCard:
         """执行 Canyon 统一单向 6 工位线性流水线投研分析 (SSOT 单向流动)."""

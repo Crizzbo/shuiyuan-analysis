@@ -46,6 +46,7 @@ _MODULE_TO_SUBPACKAGE: Dict[str, str] = {
     "business_quality_and_moat_engine": "forensics_and_valuation",
     "firm_value_added_bridge_engine": "forensics_and_valuation",
     "forensic_surgical_scalpel": "forensics_and_valuation",
+    "forensics_and_trailing_exit_engine": "forensics_and_valuation",
     "integrated_three_statement_engine": "forensics_and_valuation",
     "peer_benchmark_engine": "forensics_and_valuation",
     "unit_economics_engine": "forensics_and_valuation",
@@ -75,11 +76,15 @@ _MODULE_TO_SUBPACKAGE: Dict[str, str] = {
     "supply_chain_ripple_analyzer": "macro_and_ripple",
     # 5. 风险管理与衍生品定价引擎 (risk_and_derivatives)
     "american_option_tree_engine": "risk_and_derivatives",
+    "black_litterman_shrinkage_engine": "risk_and_derivatives",
     "black_swan_deep_analyzer": "risk_and_derivatives",
     "credit_risk_engine": "risk_and_derivatives",
+    "garch_volatility_engine": "risk_and_derivatives",
     "options_causal_analyzer": "risk_and_derivatives",
     "portfolio_risk_engine": "risk_and_derivatives",
     # 6. 全市场选股与时机引擎 (screening)
+    "macro_regime_hmm_valve_engine": "screening",
+    "mean_reversion_kalman_engine": "screening",
     "screening_candidate_ranker": "screening",
     "screening_universe_builder": "screening",
     "sepa_buy_signal_engine": "screening",
