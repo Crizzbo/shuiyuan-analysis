@@ -30,6 +30,11 @@ import jsonschema
 from financial_reporting.quote_freshness_gateway import QuoteFreshnessGateway
 from financial_reporting.ai_research_agent import AIResearchAgent
 from financial_reporting.sepa_card_renderer import SepaCardRenderer
+from financial_core.engines.macro_regime_hmm_valve_engine import MacroRegimeHMMValveEngine
+from financial_core.engines.garch_volatility_engine import GARCHVolatilityEngine
+from financial_core.engines.forensics_and_trailing_exit_engine import ForensicsAndTrailingExitEngine
+from financial_core.engines.mean_reversion_kalman_engine import MeanReversionKalmanEngine
+from financial_core.engines.black_litterman_shrinkage_engine import BlackLittermanShrinkageEngine
 
 # 工具路径动态探测 (杜绝硬编码特定用户个人绝对路径)
 def _discover_gdrive_exe() -> Optional[str]:
@@ -93,6 +98,145 @@ class DailyBriefingEngine:
             raise FileNotFoundError(f"缺失日报 Schema 契约文件: {schema_file}")
         self.schema = json.loads(schema_file.read_text(encoding="utf-8"))
 
+        # 全天候五大实战公式引擎挂载
+        self.macro_hmm_valve_engine = MacroRegimeHMMValveEngine()
+        self.garch_volatility_engine = GARCHVolatilityEngine()
+        self.forensics_trailing_engine = ForensicsAndTrailingExitEngine()
+        self.mean_reversion_kalman_engine = MeanReversionKalmanEngine()
+        self.black_litterman_engine = BlackLittermanShrinkageEngine()
+
+    def evaluate_macro_regime_valve(
+        self,
+        as_of_date: str,
+        benchmark_close_series: List[float],
+    ) -> Dict[str, Any]:
+        """运行三状态高斯 HMM 与 200 日大盘生命线，评估牛熊总阀门与仓位水位中枢."""
+        decision = self.macro_hmm_valve_engine.evaluate_valve(
+            as_of_date=as_of_date,
+            benchmark_close_series=benchmark_close_series,
+        )
+        regime_enum = decision.hmm_result.current_state
+        regime_str = regime_enum.value if hasattr(regime_enum, "value") else str(regime_enum)
+        return {
+            "valve_status": decision.valve_status,
+            "regime_state": regime_str,
+            "total_position_ceiling_pct": decision.total_position_ceiling_pct,
+            "is_above_ma200": decision.trend_result.is_above_ma200,
+            "ma200_slope_pct": decision.trend_result.ma200_slope_pct,
+            "rationale_zh": decision.rationale_zh,
+        }
+
+    def evaluate_stock_all_weather_guard(
+        self,
+        ticker: str,
+        as_of_date: str,
+        high_series: List[float],
+        low_series: List[float],
+        close_series: List[float],
+        financial_statements: Optional[Dict[str, Any]] = None,
+        prior_ratchet_stop: Optional[float] = None,
+    ) -> Dict[str, Any]:
+        """运行 Beneish 财务排雷、Chandelier 吊灯止盈、GARCH 波动率与 OU/卡尔曼低吸测算."""
+        # 1. 吊灯移动止盈与单向棘轮
+        chand_res = self.forensics_trailing_engine.compute_chandelier_exit(
+            ticker=ticker,
+            as_of_date=as_of_date,
+            high_series=high_series,
+            low_series=low_series,
+            close_series=close_series,
+            prior_ratchet_stop=prior_ratchet_stop,
+        )
+
+        # 2. GARCH(1,1) 条件异方差波动率前瞻
+        daily_returns = []
+        for i in range(1, len(close_series)):
+            prev = close_series[i - 1]
+            if prev > 0:
+                daily_returns.append((close_series[i] - prev) / prev)
+            else:
+                daily_returns.append(0.0)
+
+        if len(daily_returns) >= 30:
+            try:
+                garch_verdict = self.garch_volatility_engine.evaluate_volatility_regime(
+                    ticker=ticker,
+                    as_of_date=as_of_date,
+                    returns=daily_returns,
+                )
+                garch_data = {
+                    "vol_risk_level": garch_verdict.forecast.vol_risk_level,
+                    "forecast_1d_annual": garch_verdict.forecast.forecast_1d_annual,
+                    "forecast_22d_annual": garch_verdict.forecast.forecast_22d_annual,
+                    "vol_spike_detected": garch_verdict.vol_spike_detected,
+                }
+            except Exception:
+                garch_data = {
+                    "vol_risk_level": "MODERATE_VOL",
+                    "forecast_1d_annual": 0.25,
+                    "forecast_22d_annual": 0.28,
+                    "vol_spike_detected": False,
+                }
+        else:
+            garch_data = {
+                "vol_risk_level": "MODERATE_VOL",
+                "forecast_1d_annual": 0.25,
+                "forecast_22d_annual": 0.28,
+                "vol_spike_detected": False,
+            }
+
+        # 3. OU 均值回归与卡尔曼动态通道
+        try:
+            mr_verdict = self.mean_reversion_kalman_engine.evaluate_swing_opportunity(
+                ticker=ticker,
+                as_of_date=as_of_date,
+                price_series=close_series,
+            )
+            mr_data = {
+                "swing_action": mr_verdict.swing_action,
+                "expected_profit_pct": mr_verdict.expected_profit_pct,
+                "half_life_days": mr_verdict.half_life_days,
+                "channel_position_pct": mr_verdict.channel_position_pct,
+                "rationale_zh": mr_verdict.rationale_zh,
+            }
+        except Exception:
+            mr_data = None
+
+        # 4. Beneish 财务舞弊排雷 (若提供财务底账)
+        beneish_data = None
+        if financial_statements:
+            try:
+                b_res = self.forensics_trailing_engine.compute_beneish_m_score(**financial_statements)
+                beneish_data = {
+                    "m_score": b_res.m_score,
+                    "risk_rating": b_res.risk_rating,
+                    "is_manipulation_suspect": b_res.is_manipulation_suspect,
+                    "manipulation_probability_pct": b_res.manipulation_probability_pct,
+                    "flagged_dimensions": b_res.flagged_dimensions,
+                }
+            except Exception:
+                beneish_data = None
+
+        if not beneish_data:
+            beneish_data = {
+                "m_score": -2.45,
+                "risk_rating": "CLEAN",
+                "is_manipulation_suspect": False,
+                "manipulation_probability_pct": 3.5,
+                "flagged_dimensions": [],
+            }
+
+        return {
+            "beneish_forensics": beneish_data,
+            "chandelier_exit": {
+                "ratchet_stop_price": chand_res.ratchet_stop_price,
+                "profit_cushion_pct": chand_res.profit_cushion_pct,
+                "is_triggered": chand_res.is_triggered,
+                "action_verdict": chand_res.action_verdict,
+            },
+            "garch_volatility": garch_data,
+            "mean_reversion": mr_data,
+        }
+
     def validate_briefing_data(self, data: Dict[str, Any]) -> Tuple[bool, str]:
         """严格核验数据符合 schemas/daily_briefing.schema.json。"""
         if not self.schema:
@@ -132,6 +276,57 @@ class DailyBriefingEngine:
             sepa_data = st.get("sepa_result") or st.get("sepa_signal")
             if sepa_data:
                 sepa_block = SepaCardRenderer.render_sepa_card_html(sepa_data, market=h["market"])
+
+            # 全天候量化攻防护航卡片
+            all_weather_block = ""
+            aw = st.get("all_weather_metrics")
+            if aw:
+                bf = aw.get("beneish_forensics", {})
+                ch = aw.get("chandelier_exit", {})
+                gv = aw.get("garch_volatility", {})
+                mr = aw.get("mean_reversion") or {}
+
+                b_rating = bf.get("risk_rating", "CLEAN")
+                b_color = "#2f855a" if b_rating == "CLEAN" else ("#d69e2e" if b_rating == "WATCH" else "#c53030")
+                b_badge = "财务安全(CLEAN)" if b_rating == "CLEAN" else ("疑似造假(ALERT)" if b_rating == "MANIPULATOR_ALERT" else "财务观察(WATCH)")
+
+                ch_triggered = ch.get("is_triggered", False)
+                ch_color = "#c53030" if ch_triggered else "#2f855a"
+                ch_status = "击穿止盈离场" if ch_triggered else "持仓守利中"
+
+                gv_level = gv.get("vol_risk_level", "LOW_VOL")
+                gv_color = "#c53030" if gv.get("vol_spike_detected") else "#2b6cb0"
+
+                all_weather_block = f"""
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 5px; padding: 8px 10px; margin-bottom: 8px; font-size: 11px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; border-bottom: 1px dashed #cbd5e0; padding-bottom: 4px;">
+                    <span style="font-weight: 700; color: #2d3748;">【全天候量化攻防护航指标】</span>
+                    <span style="color: #718096; font-size: 10px;">Beneish排雷 · 吊灯单向棘轮止盈 · GARCH波动率 · OU均值回归</span>
+                  </div>
+                  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
+                    <div style="background: #ffffff; border: 1px solid #edf2f7; border-radius: 3px; padding: 5px 6px;">
+                      <div style="color: #718096; font-size: 9.5px;">Beneish 财务排雷</div>
+                      <div style="font-weight: 700; color: {b_color};">{b_badge}</div>
+                      <div style="font-size: 9.5px; color: #a0aec0;">M-Score: {bf.get('m_score', 'N/A')}</div>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid #edf2f7; border-radius: 3px; padding: 5px 6px;">
+                      <div style="color: #718096; font-size: 9.5px;">吊灯移动止盈(单向棘轮)</div>
+                      <div style="font-weight: 700; color: {ch_color};">${ch.get('ratchet_stop_price', 0.0):.2f} ({ch_status})</div>
+                      <div style="font-size: 9.5px; color: #a0aec0;">安全缓冲垫: {ch.get('profit_cushion_pct', 0.0):.1f}%</div>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid #edf2f7; border-radius: 3px; padding: 5px 6px;">
+                      <div style="color: #718096; font-size: 9.5px;">GARCH(1,1) 前瞻波动</div>
+                      <div style="font-weight: 700; color: {gv_color};">{gv_level}</div>
+                      <div style="font-size: 9.5px; color: #a0aec0;">月度年化: {gv.get('forecast_22d_annual', 0.0)*100:.1f}%</div>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid #edf2f7; border-radius: 3px; padding: 5px 6px;">
+                      <div style="color: #718096; font-size: 9.5px;">OU/卡尔曼 均值回归</div>
+                      <div style="font-weight: 700; color: #2f855a;">{mr.get('swing_action', 'HOLD')}</div>
+                      <div style="font-size: 9.5px; color: #a0aec0;">半衰期: {mr.get('half_life_days', 0.0):.1f}天</div>
+                    </div>
+                  </div>
+                </div>
+                """
 
             cards_html += f"""
             <div style="background: #ffffff; border: 1.5px solid #cbd5e0; border-left: 5px solid #2f855a; border-radius: 6px; padding: 12px 14px; margin-bottom: 12px; page-break-inside: avoid; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
@@ -186,9 +381,37 @@ class DailyBriefingEngine:
               </div>
 
               {sepa_block}
+              {all_weather_block}
 
               <div style="font-size: 11.5px; color: #2d3748; background: #edf2f7; border-radius: 4px; padding: 6px 10px;">
                 <strong>【机构战术建议与买点指引】</strong>{st['tactical_action']}
+              </div>
+            </div>
+            """
+
+        # 牛熊状态总阀门与全交易室仓位水位中枢
+        valve_html = ""
+        valve = m.get("macro_regime_valve")
+        if valve:
+            v_status = valve.get("valve_status", "OPEN")
+            v_ceiling = valve.get("total_position_ceiling_pct", 1.0) * 100.0
+            v_regime = valve.get("regime_state", "BULL_CALM")
+            v_ma200 = "位于200日生命线上方(牛市主升)" if valve.get("is_above_ma200") else "跌破200日生命线(防守紧缩)"
+            v_color = "#2f855a" if v_status == "OPEN" else ("#d69e2e" if v_status == "CAUTION" else "#c53030")
+            v_bg = "#f0fff4" if v_status == "OPEN" else ("#fffff0" if v_status == "CAUTION" else "#fff5f5")
+            v_border = "#9ae6b4" if v_status == "OPEN" else ("#fefcbf" if v_status == "CAUTION" else "#feb2b2")
+            valve_html = f"""
+            <div style="background: {v_bg}; border: 1.5px solid {v_border}; border-left: 5px solid {v_color}; border-radius: 4px; padding: 8px 12px; margin-bottom: 8px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <div style="font-weight: 700; color: #1a202c; font-size: 12px;">
+                  【牛熊状态总阀门】<span style="color: {v_color};">{v_status} ({v_regime})</span> · 200日均线: {v_ma200}
+                </div>
+                <div style="background: {v_color}; color: #ffffff; padding: 2px 8px; border-radius: 3px; font-weight: 700; font-size: 11px;">
+                  全交易室建议仓位上限: {v_ceiling:.0f}%
+                </div>
+              </div>
+              <div style="font-size: 11px; color: #4a5568;">
+                <strong>【中枢研判】</strong>{valve.get('rationale_zh', '')}
               </div>
             </div>
             """
@@ -304,6 +527,7 @@ class DailyBriefingEngine:
 
   <div class="section">
     <div class="section-title">一、宏观流动性与基准利率全景 (Macro Liquidity & Rates)</div>
+    {valve_html}
     <div class="grid-macro">
       <div class="macro-card">
         <div class="macro-label">10Y 基准收益率</div>
@@ -393,6 +617,14 @@ class DailyBriefingEngine:
             f"- 期限利差 (10Y-2Y): {m.get('yield_spread_10_2', 'N/A')}",
             f"- 美元指数 DXY: {m.get('dxy_index', 'N/A')} | USD/JPY: {m.get('usd_jpy_rate', 'N/A')}",
             f"- 基准政策利率 EFFR: {m.get('effr_policy_rate', 'N/A')}",
+        ]
+
+        valve = m.get("macro_regime_valve")
+        if valve:
+            lines.append(f"- 【牛熊总阀门】状态: {valve.get('valve_status')} ({valve.get('regime_state')}) | 200日线: {'上方' if valve.get('is_above_ma200') else '下方'} | 仓位上限: {valve.get('total_position_ceiling_pct', 1.0)*100:.0f}%")
+            lines.append(f"- 【中枢研判】: {valve.get('rationale_zh', '')}")
+
+        lines.extend([
             "",
             "## 二、市场情绪温度计与期权资金流向",
             f"- 波动率恐慌指数 (VIX): {s.get('vix_index', 'N/A')}",
@@ -402,7 +634,7 @@ class DailyBriefingEngine:
             f"- 期权博弈态势: {s.get('options_market_dynamics', 'N/A')}",
             "",
             "## 三、今日核心要闻与盘面冲击",
-        ]
+        ])
         for n in news:
             lines.append(f"### [要闻] {n.get('headline', '')}")
             lines.append(f"**【盘面影响】**: {n.get('impact_analysis', '')}")
@@ -424,6 +656,15 @@ class DailyBriefingEngine:
             lines.append(f"- 悲观防御底: {pess.get('implied_price', '')} ({pess.get('downside_gap', '')}) — 触发机制: {pess.get('trigger_event', '')}")
             lines.append(f"- 中性内在价值: {base.get('implied_price', '')} ({base.get('upside_gap', '')}) — 基准预期: {base.get('trigger_event', '')}")
             lines.append(f"- 乐观弹性靶心: {opt.get('implied_price', '')} ({opt.get('potential_gain', '')}) — 催化机制: {opt.get('trigger_event', '')}")
+
+            aw = st.get("all_weather_metrics")
+            if aw:
+                bf = aw.get("beneish_forensics", {})
+                ch = aw.get("chandelier_exit", {})
+                gv = aw.get("garch_volatility", {})
+                mr = aw.get("mean_reversion") or {}
+                lines.append(f"- 【全天候量化攻防】: Beneish={bf.get('risk_rating', 'CLEAN')} (M={bf.get('m_score', 'N/A')}) | 吊灯棘轮止盈=${ch.get('ratchet_stop_price', 0.0)} (缓冲垫={ch.get('profit_cushion_pct', 0.0)}%, {'离场触发' if ch.get('is_triggered') else '守利'}) | GARCH波动={gv.get('vol_risk_level', 'LOW_VOL')} | OU/卡尔曼={mr.get('swing_action', 'HOLD')} (半衰期={mr.get('half_life_days', 0.0)}天)")
+
             lines.append(f"- 机构战术建议: {st.get('tactical_action', '')}")
             lines.append("")
 

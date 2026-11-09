@@ -30,7 +30,19 @@
         "yield_spread_10_2": { "type": "string" },
         "dxy_index": { "type": "string" },
         "usd_jpy_rate": { "type": "string" },
-        "effr_policy_rate": { "type": "string" }
+        "effr_policy_rate": { "type": "string" },
+        "macro_regime_valve": {
+          "type": ["object", "null"],
+          "description": "牛熊状态总阀门与全交易室仓位水位中枢",
+          "properties": {
+            "valve_status": { "type": "string", "enum": ["OPEN", "CAUTION", "DEFENSE", "CLOSED"] },
+            "regime_state": { "type": "string" },
+            "total_position_ceiling_pct": { "type": "number" },
+            "is_above_ma200": { "type": "boolean" },
+            "ma200_slope_pct": { "type": "number" },
+            "rationale_zh": { "type": "string" }
+          }
+        }
       }
     },
     "market_sentiment_and_options": {
@@ -119,6 +131,50 @@
           "sepa_signal": {
             "type": ["object", "null"],
             "description": "米奈尔维尼 SEPA 买方时机决策与技术足迹全息对象"
+          },
+          "all_weather_metrics": {
+            "type": ["object", "null"],
+            "description": "全天候量化攻防护航测算对象 (Beneish防造假 + 吊灯移动止盈 + GARCH波动率 + OU卡尔曼)",
+            "properties": {
+              "beneish_forensics": {
+                "type": "object",
+                "properties": {
+                  "m_score": { "type": "number" },
+                  "risk_rating": { "type": "string" },
+                  "is_manipulation_suspect": { "type": "boolean" },
+                  "manipulation_probability_pct": { "type": "number" },
+                  "flagged_dimensions": { "type": "array", "items": { "type": "string" } }
+                }
+              },
+              "chandelier_exit": {
+                "type": "object",
+                "properties": {
+                  "ratchet_stop_price": { "type": "number" },
+                  "profit_cushion_pct": { "type": "number" },
+                  "is_triggered": { "type": "boolean" },
+                  "action_verdict": { "type": "string" }
+                }
+              },
+              "garch_volatility": {
+                "type": "object",
+                "properties": {
+                  "vol_risk_level": { "type": "string" },
+                  "forecast_1d_annual": { "type": "number" },
+                  "forecast_22d_annual": { "type": "number" },
+                  "vol_spike_detected": { "type": "boolean" }
+                }
+              },
+              "mean_reversion": {
+                "type": ["object", "null"],
+                "properties": {
+                  "swing_action": { "type": "string" },
+                  "expected_profit_pct": { "type": "number" },
+                  "half_life_days": { "type": "number" },
+                  "channel_position_pct": { "type": "number" },
+                  "rationale_zh": { "type": "string" }
+                }
+              }
+            }
           }
         }
       }

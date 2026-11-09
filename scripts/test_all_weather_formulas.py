@@ -308,6 +308,123 @@ class TestAllWeatherFormulasSuite(unittest.TestCase):
         self.assertTrue(hasattr(self.fin_system, "black_litterman_engine"))
         self.assertTrue(hasattr(self.fin_system, "forensics_trailing_engine"))
 
+    # ==========================================
+    # 7. 主流程接入测试 (DailyBriefingEngine 闭环)
+    # ==========================================
+
+    def test_daily_briefing_all_weather_integration(self):
+        """【IT-BRIEFING-05: 全天候公式群无缝接入每日研报主流程与 Schema 强校验】"""
+        from financial_reporting.daily_briefing_engine import DailyBriefingEngine
+
+        engine = DailyBriefingEngine()
+        self.assertTrue(hasattr(engine, "macro_hmm_valve_engine"))
+        self.assertTrue(hasattr(engine, "forensics_trailing_engine"))
+        self.assertTrue(hasattr(engine, "garch_volatility_engine"))
+        self.assertTrue(hasattr(engine, "mean_reversion_kalman_engine"))
+        self.assertTrue(hasattr(engine, "black_litterman_engine"))
+
+        # 1. 模拟评估牛熊状态总阀门
+        bench_prices = [100.0 * (1.0 + 0.001 * t) for t in range(220)]
+        valve_data = engine.evaluate_macro_regime_valve("2026-11-09", bench_prices)
+        self.assertIn(valve_data["valve_status"], ["OPEN", "CAUTION", "DEFENSE", "CLOSED"])
+        self.assertIsInstance(valve_data["total_position_ceiling_pct"], float)
+        self.assertTrue(valve_data["is_above_ma200"])
+
+        # 2. 模拟评估个股攻防护航指标
+        highs = [120.0 + i * 0.5 for i in range(45)]
+        lows = [115.0 + i * 0.5 for i in range(45)]
+        closes = [118.0 + i * 0.5 for i in range(45)]
+        guard_data = engine.evaluate_stock_all_weather_guard(
+            ticker="NVDA",
+            as_of_date="2026-11-09",
+            high_series=highs,
+            low_series=lows,
+            close_series=closes,
+        )
+        self.assertIn("beneish_forensics", guard_data)
+        self.assertIn("chandelier_exit", guard_data)
+        self.assertIn("garch_volatility", guard_data)
+        self.assertIn("mean_reversion", guard_data)
+        self.assertEqual(guard_data["chandelier_exit"]["action_verdict"], "HOLD_RIDE_TREND")
+
+        # 3. 构造符合 schemas/daily_briefing.schema.json 的全息研报字典
+        briefing_dict = {
+            "header": {
+                "report_date": "2026-11-09",
+                "market": "US",
+                "market_name_zh": "美股",
+            },
+            "macro_and_liquidity": {
+                "us_10y_yield": "4.35%",
+                "us_2y_yield": "4.15%",
+                "yield_spread_10_2": "+20 bps",
+                "dxy_index": "104.2",
+                "usd_jpy_rate": "152.8",
+                "effr_policy_rate": "4.83%",
+                "macro_regime_valve": valve_data,
+            },
+            "market_sentiment_and_options": {
+                "vix_index": "14.5",
+                "fear_greed_gauge": "65 (Greed)",
+                "capital_flow_summary": "ETF 净流入 $1.2B",
+                "options_market_dynamics": "看涨期权占比 58%",
+                "put_call_ratio": "0.72",
+            },
+            "market_moving_news": [
+                {
+                    "headline": "科技巨头资本开支上调",
+                    "impact_analysis": "强化算力供应链业绩能见度",
+                }
+            ],
+            "ai_executive_summary": "大盘处于牛市主升浪，总阀门完全放开，重点关注高成长胜负手标的。",
+            "recommended_stocks": [
+                {
+                    "ticker": "NVDA",
+                    "company_name": "英伟达",
+                    "current_price": "$132.50",
+                    "margin_of_safety_trigger": "$115.00",
+                    "rating": "STRONG_BUY",
+                    "business_intro": "全球 GPU 与 AI 计算全栈护城河领军者。",
+                    "pessimistic_deduction": {
+                        "trigger_event": "AI 资本开支大幅削减",
+                        "implied_price": "$95.00",
+                        "downside_gap": "-28.3%",
+                    },
+                    "neutral_deduction": {
+                        "trigger_event": "Blackwell 芯片如期大规模出货",
+                        "implied_price": "$145.00",
+                        "upside_gap": "+9.4%",
+                    },
+                    "optimistic_deduction": {
+                        "trigger_event": "端侧 AI 全面爆发带来超额算力需求",
+                        "implied_price": "$175.00",
+                        "potential_gain": "+32.1%",
+                    },
+                    "tactical_action": "沿 20 日均线逢低分批建仓。",
+                    "all_weather_metrics": guard_data,
+                }
+            ],
+        }
+
+        # 4. Schema 校验断言
+        is_valid, err_msg = engine.validate_briefing_data(briefing_dict)
+        self.assertTrue(is_valid, f"Schema 强校验失败: {err_msg}")
+
+        # 5. HTML 渲染与卡片断言
+        html_code = engine.render_briefing_html(briefing_dict)
+        self.assertIn("【牛熊状态总阀门】", html_code)
+        self.assertIn("全交易室建议仓位上限", html_code)
+        self.assertIn("【全天候量化攻防护航指标】", html_code)
+        self.assertIn("Beneish 财务排雷", html_code)
+        self.assertIn("吊灯移动止盈(单向棘轮)", html_code)
+        self.assertIn("GARCH(1,1) 前瞻波动", html_code)
+
+        # 6. Markdown 晨报纪要断言
+        memo_md = engine.render_committee_memo_markdown(briefing_dict)
+        self.assertIn("【牛熊总阀门】", memo_md)
+        self.assertIn("【全天候量化攻防】", memo_md)
+        self.assertIn("吊灯棘轮止盈", memo_md)
+
 
 if __name__ == "__main__":
     unittest.main()
