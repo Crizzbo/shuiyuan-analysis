@@ -1,0 +1,136 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-10-12T02:15:00Z",
+  "archive_kind": "manual_browser_visible_excerpt",
+  "not_full_original_document": true,
+  "sources": [
+    {
+      "industry_id": "autos",
+      "published_date": "2025-05-08",
+      "source_url": "https://global.toyota/en/ir/financial-results/",
+      "locator": "FY2025 Financial Results Presentation, Consolidated Vehicle Sales & Electrified Vehicle Sales tables",
+      "excerpts": [
+        "Financial Results for FY2025 (April 1, 2024 through March 31, 2025)",
+        "Consolidated Vehicle Sales 9,362,000 units (9,362 thousand units)",
+        "Total Retail Vehicle Sales 10,307,000 units (10,307 thousand units) (including Daihatsu and Hino)",
+        "Toyota and Lexus brand retail sales 9,443,000 units",
+        "Electrified vehicle sales reached 4,425,000 units (4,425 thousand units), representing 46.1% of retail sales, with HEV accounting for the vast majority."
+      ],
+      "observations": [
+        {
+          "component": "tm_retail_vehicle_deliveries_fy25",
+          "parent_metric_id": "autos_driver_1",
+          "name_zh": "丰田全集团全球汽车零售交付总量",
+          "binding_role": "reported_metric",
+          "limitation_zh": "包含丰田雷克萨斯大发日野全品牌全球零售交付数；非合并批发口径",
+          "raw_unit": "vehicles",
+          "unit": "physical_quantity",
+          "raw_value": "10,307,000",
+          "value": "10307000",
+          "conversion": "remove_thousands_separator",
+          "period_start": "2024-04-01",
+          "period_end": "2025-03-31",
+          "period_type": "annual",
+          "scope": "group_retail_all_brands_global",
+          "excerpt_indices": [
+            0,
+            2
+          ]
+        },
+        {
+          "component": "tm_hev_electrified_retail_sales_fy25",
+          "parent_metric_id": "autos_driver_1",
+          "name_zh": "丰田混动及电动化车辆零售交付量",
+          "binding_role": "reported_metric",
+          "limitation_zh": "全集团电动化车辆零售交付，其中HEV占绝大多数；占零售总量46.1%",
+          "raw_unit": "vehicles",
+          "unit": "physical_quantity",
+          "raw_value": "4,425,000",
+          "value": "4425000",
+          "conversion": "remove_thousands_separator",
+          "period_start": "2024-04-01",
+          "period_end": "2025-03-31",
+          "period_type": "annual",
+          "scope": "group_electrified_retail_sales",
+          "excerpt_indices": [
+            0,
+            4
+          ]
+        },
+        {
+          "component": "tm_consolidated_wholesale_sales_fy25",
+          "parent_metric_id": "autos_driver_1",
+          "name_zh": "合并报表批发汽车销售量",
+          "binding_role": "reported_metric",
+          "limitation_zh": "丰田汽车合并财务报表批发销量，不含未合并联营经销商零售数",
+          "raw_unit": "vehicles",
+          "unit": "physical_quantity",
+          "raw_value": "9,362,000",
+          "value": "9362000",
+          "conversion": "remove_thousands_separator",
+          "period_start": "2024-04-01",
+          "period_end": "2025-03-31",
+          "period_type": "annual",
+          "scope": "consolidated_wholesale_deliveries",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "industry_id": "staples_retail",
+      "published_date": "2025-09-25",
+      "source_url": "https://investor.costco.com/news/news-details/2025/Costco-Wholesale-Corporation-Reports-Fourth-Quarter-and-Fiscal-Year-2025-Operating-Results/default.aspx",
+      "locator": "Costco Wholesale Reports Fourth Quarter and Fiscal Year 2025 Operating Results; Operating Highlights table",
+      "excerpts": [
+        "Costco Wholesale Corporation Reports Fourth Quarter and Fiscal Year 2025 Operating Results (52 weeks ended August 31, 2025)",
+        "Worldwide customer traffic increased 5.4% for the full fiscal year.",
+        "In the U.S., customer shopping frequency increased 5.2% for the full fiscal year."
+      ],
+      "observations": [
+        {
+          "component": "cost_worldwide_traffic_growth_fy25",
+          "parent_metric_id": "staples_retail_driver_3",
+          "name_zh": "Costco全球可比客流频次增长率",
+          "binding_role": "reported_metric",
+          "limitation_zh": "全集团可比仓储会员店到店客流频次增长率",
+          "raw_unit": "percent",
+          "unit": "ratio",
+          "raw_value": "5.4",
+          "value": "0.054",
+          "conversion": "percent_divided_by_100",
+          "period_start": "2024-09-02",
+          "period_end": "2025-08-31",
+          "period_type": "annual",
+          "scope": "worldwide_comparable_traffic",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "component": "cost_us_traffic_growth_fy25",
+          "parent_metric_id": "staples_retail_driver_3",
+          "name_zh": "Costco美国本土可比客流频次增长率",
+          "binding_role": "reported_metric",
+          "limitation_zh": "仅限美国本土可比仓储会员店客流频次变动",
+          "raw_unit": "percent",
+          "unit": "ratio",
+          "raw_value": "5.2",
+          "value": "0.052",
+          "conversion": "percent_divided_by_100",
+          "period_start": "2024-09-02",
+          "period_end": "2025-08-31",
+          "period_type": "annual",
+          "scope": "us_comparable_traffic",
+          "excerpt_indices": [
+            0,
+            2
+          ]
+        }
+      ]
+    }
+  ]
+}

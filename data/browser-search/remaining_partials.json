@@ -1,0 +1,143 @@
+[
+  {
+    "id": "chemicals_driver_1",
+    "industry": "chemicals",
+    "name": "同产品原料价差",
+    "bound": [
+      "产品单位售价"
+    ],
+    "missing": [
+      "匹配原料单位成本",
+      "投入系数"
+    ],
+    "variant": "Dow 2024 全年包装与特种塑料分部净销售额"
+  },
+  {
+    "id": "biotech_driver_2",
+    "industry": "biotech",
+    "name": "正常化现金跑道",
+    "bound": [
+      "可用现金和投资"
+    ],
+    "missing": [
+      "正常化月净消耗",
+      "调整项"
+    ],
+    "variant": "Moderna 2025 年末期末现金及投资合计"
+  },
+  {
+    "id": "medical_devices_driver_2",
+    "industry": "medical_devices",
+    "name": "新增装机及期末装机量",
+    "bound": [
+      "当期系统 placement"
+    ],
+    "missing": [
+      "期末 installed base",
+      "退役调整"
+    ],
+    "variant": "Intuitive Surgical 2025 Q4 达芬奇系统新增投放量"
+  },
+  {
+    "id": "banks_driver_3",
+    "industry": "banks",
+    "name": "资本与流动性监管比率",
+    "bound": [
+      "CET1 比率",
+      "适用规则"
+    ],
+    "missing": [
+      "LCR 比率",
+      "NSFR 比率"
+    ],
+    "variant": "JPMorgan Chase 2025 年末标准化 CET1 资本比率"
+  },
+  {
+    "id": "asset_management_driver_1",
+    "industry": "asset_management",
+    "name": "客户净资金流入",
+    "bound": [
+      "公司流量定义"
+    ],
+    "missing": [
+      "客户流入",
+      "流出",
+      "资本返还"
+    ],
+    "variant": "BlackRock 2025 全年客户净资金流量定义与披露口径"
+  },
+  {
+    "id": "semiconductors_driver_3",
+    "industry": "semiconductors",
+    "name": "同产品单位平均售价",
+    "bound": [
+      "产品收入"
+    ],
+    "missing": [
+      "匹配 bit 或芯片数量"
+    ],
+    "variant": "Micron FY2026 全年 DRAM 业务分部报告收入"
+  },
+  {
+    "id": "semi_equipment_driver_1",
+    "industry": "semi_equipment",
+    "name": "半导体设备订单收入比",
+    "bound": [
+      "同期间设备收入"
+    ],
+    "missing": [
+      "新增设备订单"
+    ],
+    "variant": "Tokyo Electron FY2024 半导体制造设备为主净销售额（18305亿日元）"
+  },
+  {
+    "id": "telecom_driver_2",
+    "industry": "telecom",
+    "name": "同用户群月均流失率",
+    "bound": [
+      "月数或披露 churn"
+    ],
+    "missing": [
+      "断开用户数",
+      "平均用户"
+    ],
+    "variant": "Verizon 2025 Q4 全无线后付费电话报告流失率"
+  },
+  {
+    "id": "media_entertainment_driver_2",
+    "industry": "media_entertainment",
+    "name": "内容现金投入",
+    "bound": [
+      "内容现金支付"
+    ],
+    "missing": [
+      "许可自制与预付口径"
+    ],
+    "variant": "Netflix 2025 内容现金流调节项"
+  },
+  {
+    "id": "regulated_utilities_driver_2",
+    "industry": "regulated_utilities",
+    "name": "监管批准权益回报率",
+    "bound": [
+      "allowed ROE"
+    ],
+    "missing": [
+      "权益资本结构",
+      "决定生效日"
+    ],
+    "variant": "Duke Energy 杜克能源卡罗莱纳零售电力监管批准法定 ROE（9.8%）"
+  },
+  {
+    "id": "equity_reit_driver_1",
+    "industry": "equity_reit",
+    "name": "可比物业 NOI 增长",
+    "bound": [
+      "同群同期 NOI或披露增长"
+    ],
+    "missing": [
+      "same-store 本期 NOI"
+    ],
+    "variant": "Prologis 2025 全年权益份额现金同物业 NOI 增长率"
+  }
+]

@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "restaurants",
+    "industry_name_zh": "大型连锁餐饮与快餐休闲",
+    "sector_id": "consumer_discretionary",
+    "sector_name_zh": "可选消费",
+    "macro_sector_id": "CONS_GOODS",
+    "macro_sector_name_zh": "耐用消费品、纺织服饰与通用轻工业制造",
+    "description_zh": "涵盖全球西式快餐、现制咖啡茶饮、连锁披萨外送及大型中式正餐餐饮连锁企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.62,
+    "typical_markup_ratio": 1.18,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "高经营杠杆",
+    "typical_gross_margin_range": [0.15, 0.35]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 20.0,
+    "dio_warning_days": 40.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.05,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "白羽肉鸡、精选牛肉、优质咖啡生豆及冷链直运新鲜原奶原料供给",
+      "核心城市黄金商圈、枢纽机场高铁站及高密度社区沿街商铺优质铺位租赁点位",
+      "合格合规加盟商资质审核储备及标准化连锁督导巡店运管体系"
+    ],
+    "downstream_profile": "全球广大城镇工薪白领群体、年轻学生客群、家庭就餐群体及即时外卖点餐消费者",
+    "pricing_power_verdict": "拥有全球超级认知母品牌的轻资产特许经营巨头享有极高品牌溢价与抗周期确定性；无品牌单店餐饮缺乏议价权，受制于租金、食材与平台外卖佣金多重挤压",
+    "channel_inversion_sensitivity": "同店销售额增长率 (Same-Store Sales Growth, SSSG) 尤其是同店真实客流量 (Traffic) 相比客单价走势是餐饮品牌健康度与护城河最敏锐的微观先行指标"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "特许加盟模式驱动下沉市场与海外市场加速展店，高毛利加盟特许权使用费与租金纯利分成占比稳步走高",
+      "高性价比引流套餐与应季爆款单品驱动同店客流超预期强劲反弹，单店翻台率与外卖单店坪效持续打破纪录",
+      "数字化自营会员 App 活跃渗透率突破新高，线上点餐自提与会员精准营销降低线下前台人工用工费用率"
+    ],
+    "leading_bear_defenses": [
+      "宏观消费预期转弱导致居民削减外出就餐预算，行业恶性低价内卷引发以价换量侵蚀门店经营利润率",
+      "门店物业刚性租金递增叠加一线员工法定用工成本与小时薪酬上涨，严重吞噬门店微薄利润垫",
+      "门店或中央厨房爆发重大食品变质、异物或卫生违规严重事件，遭遇监管勒令停业整顿与品牌商誉重创"
+    ],
+    "core_catalyst_dimensions": [
+      "季度同店销售额增速 (Same-Store Sales Growth, SSSG) 及其客流量/客单价拆分明细",
+      "全球系统净新增门店数量 (Net New Openings) 与加盟特许店占比结构",
+      "牛肉、鸡肉、咖啡豆及生鲜原奶等大宗食材原材料即期采购成本走势",
+      "线上数字化外卖点餐销售占比 (Digital Sales Mix) 与第三方外卖平台抽成费率变动"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "在与加盟商签署长期特许经营协议时违规一次性全额确认跨年度初始加盟费或系统使用费以粉饰当期营收",
+      "对长期录得严重经营亏损或现金流为负的直营门店推迟进行资产减值测试，蓄意隐瞒闭店清算损失",
+      "对生鲜食材临期腐败损耗未按实际变质报废及时计提存货跌价与盘亏损失"
+    ],
+    "channel_and_revenue_checks": [
+      "直营门店长期租赁合同使用权资产与租赁负债折现计量的会计处理审慎性",
+      "向加盟商销售专用调味包与半成品物料的加价率合理性及关联交易公允性穿透审查"
+    ]
+  }
+}

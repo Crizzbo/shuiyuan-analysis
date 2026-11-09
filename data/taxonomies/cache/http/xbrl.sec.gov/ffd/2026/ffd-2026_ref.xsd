@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This schema was created by staff of the U.S. Securities and Exchange Commission. -->
+<!-- Data and content created by government employees within the scope of their employment -->
+<!-- are not subject to domestic copyright protection. 17 U.S.C. 105. -->
+<xs:schema
+xmlns:ffd-ref="http://xbrl.sec.gov/ffd-ref/2026"
+xmlns:link="http://www.xbrl.org/2003/linkbase"
+xmlns:ref="http://www.xbrl.org/2006/ref"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+targetNamespace="http://xbrl.sec.gov/ffd-ref/2026"
+elementFormDefault="qualified"
+xsi:schemaLocation="http://www.xbrl.org/2006/ref http://www.xbrl.org/2006/ref-2006-02-27.xsd">
+<xs:annotation>
+<xs:appinfo>
+<link:linkbase id="lnk">
+<link:referenceLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_FeeAmt" xlink:label="FeeAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_FeeAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="FeeAmt" xlink:to="reference_FeeAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_FeeRate" xlink:label="FeeRate"/>
+<link:reference xlink:type="resource" xlink:label="reference_FeeRate" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="FeeRate" xlink:to="reference_FeeRate" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OfferingSctyTp" xlink:label="OfferingSctyTp"/>
+<link:reference xlink:type="resource" xlink:label="reference_OfferingSctyTp" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OfferingSctyTp" xlink:to="reference_OfferingSctyTp" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OfferingSctyTitl" xlink:label="OfferingSctyTitl"/>
+<link:reference xlink:type="resource" xlink:label="reference_OfferingSctyTitl" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OfferingSctyTitl" xlink:to="reference_OfferingSctyTitl" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule457oFlg" xlink:label="Rule457oFlg"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule457oFlg" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>o</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule457oFlg" xlink:to="reference_Rule457oFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_AmtSctiesRegd" xlink:label="AmtSctiesRegd"/>
+<link:reference xlink:type="resource" xlink:label="reference_AmtSctiesRegd" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="AmtSctiesRegd" xlink:to="reference_AmtSctiesRegd" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_MaxOfferingPricPerScty" xlink:label="MaxOfferingPricPerScty"/>
+<link:reference xlink:type="resource" xlink:label="reference_MaxOfferingPricPerScty" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="MaxOfferingPricPerScty" xlink:to="reference_MaxOfferingPricPerScty" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_MaxAggtOfferingPric" xlink:label="MaxAggtOfferingPric"/>
+<link:reference xlink:type="resource" xlink:label="reference_MaxAggtOfferingPric" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="MaxAggtOfferingPric" xlink:to="reference_MaxAggtOfferingPric" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule415a6Flg" xlink:label="Rule415a6Flg"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule415a6Flg" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>415</ref:Section>
+<ref:Subsection>a</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule415a6Flg" xlink:to="reference_Rule415a6Flg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CfwdPrrFileNb" xlink:label="CfwdPrrFileNb"/>
+<link:reference xlink:type="resource" xlink:label="reference_CfwdPrrFileNb" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>415</ref:Section>
+<ref:Subsection>a</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CfwdPrrFileNb" xlink:to="reference_CfwdPrrFileNb" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CfwdFormTp" xlink:label="CfwdFormTp"/>
+<link:reference xlink:type="resource" xlink:label="reference_CfwdFormTp" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>415</ref:Section>
+<ref:Subsection>a</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CfwdFormTp" xlink:to="reference_CfwdFormTp" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CfwdPrrFctvDt" xlink:label="CfwdPrrFctvDt"/>
+<link:reference xlink:type="resource" xlink:label="reference_CfwdPrrFctvDt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>415</ref:Section>
+<ref:Subsection>a</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CfwdPrrFctvDt" xlink:to="reference_CfwdPrrFctvDt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CfwdPrevslyPdFee" xlink:label="CfwdPrevslyPdFee"/>
+<link:reference xlink:type="resource" xlink:label="reference_CfwdPrevslyPdFee" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>415</ref:Section>
+<ref:Subsection>a</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CfwdPrevslyPdFee" xlink:to="reference_CfwdPrevslyPdFee" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule457bOffsetFlg" xlink:label="Rule457bOffsetFlg"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule457bOffsetFlg" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>b</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule457bOffsetFlg" xlink:to="reference_Rule457bOffsetFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule457fFlg" xlink:label="Rule457fFlg"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule457fFlg" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>f</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule457fFlg" xlink:to="reference_Rule457fFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_AmtSctiesRcvd" xlink:label="AmtSctiesRcvd"/>
+<link:reference xlink:type="resource" xlink:label="reference_AmtSctiesRcvd" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>f</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="AmtSctiesRcvd" xlink:to="reference_AmtSctiesRcvd" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_ValSctiesRcvdPerShr" xlink:label="ValSctiesRcvdPerShr"/>
+<link:reference xlink:type="resource" xlink:label="reference_ValSctiesRcvdPerShr" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>f</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="ValSctiesRcvdPerShr" xlink:to="reference_ValSctiesRcvdPerShr" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_ValSctiesRcvd" xlink:label="ValSctiesRcvd"/>
+<link:reference xlink:type="resource" xlink:label="reference_ValSctiesRcvd" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>f</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="ValSctiesRcvd" xlink:to="reference_ValSctiesRcvd" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CshPdByRegistrantInTx" xlink:label="CshPdByRegistrantInTx"/>
+<link:reference xlink:type="resource" xlink:label="reference_CshPdByRegistrantInTx" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Subsection>f</ref:Subsection>
+<ref:Section>457</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CshPdByRegistrantInTx" xlink:to="reference_CshPdByRegistrantInTx" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CshRcvdByRegistrantInTx" xlink:label="CshRcvdByRegistrantInTx"/>
+<link:reference xlink:type="resource" xlink:label="reference_CshRcvdByRegistrantInTx" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Subsection>f</ref:Subsection>
+<ref:Section>457</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CshRcvdByRegistrantInTx" xlink:to="reference_CshRcvdByRegistrantInTx" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429CmbndPrspctsFlg" xlink:label="Rule429CmbndPrspctsFlg"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule429CmbndPrspctsFlg" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>429</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule429CmbndPrspctsFlg" xlink:to="reference_Rule429CmbndPrspctsFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429EarlierFileNb" xlink:label="Rule429EarlierFileNb"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule429EarlierFileNb" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>429</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule429EarlierFileNb" xlink:to="reference_Rule429EarlierFileNb" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429EarlierFormTp" xlink:label="Rule429EarlierFormTp"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule429EarlierFormTp" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>429</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule429EarlierFormTp" xlink:to="reference_Rule429EarlierFormTp" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429InitlFctvDt" xlink:label="Rule429InitlFctvDt"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule429InitlFctvDt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>429</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule429InitlFctvDt" xlink:to="reference_Rule429InitlFctvDt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429NbOfUnsoldScties" xlink:label="Rule429NbOfUnsoldScties"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule429NbOfUnsoldScties" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>429</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule429NbOfUnsoldScties" xlink:to="reference_Rule429NbOfUnsoldScties" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429AggtOfferingAmt" xlink:label="Rule429AggtOfferingAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule429AggtOfferingAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>429</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule429AggtOfferingAmt" xlink:to="reference_Rule429AggtOfferingAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_TtlFeeAmt" xlink:label="TtlFeeAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_TtlFeeAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="TtlFeeAmt" xlink:to="reference_TtlFeeAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_NetFeeAmt" xlink:label="NetFeeAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_NetFeeAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NetFeeAmt" xlink:to="reference_NetFeeAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule457aFlg" xlink:label="Rule457aFlg"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule457aFlg" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule457aFlg" xlink:to="reference_Rule457aFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_FeesOthrRuleFlg" xlink:label="FeesOthrRuleFlg"/>
+<link:reference xlink:type="resource" xlink:label="reference_FeesOthrRuleFlg" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="FeesOthrRuleFlg" xlink:to="reference_FeesOthrRuleFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_TtlOffsetAmt" xlink:label="TtlOffsetAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_TtlOffsetAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="TtlOffsetAmt" xlink:to="reference_TtlOffsetAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule457uFlg" xlink:label="Rule457uFlg_2"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule457uFlg_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>u</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule457uFlg_2" xlink:to="reference_Rule457uFlg_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule457rFlg" xlink:label="Rule457rFlg"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule457rFlg" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>r</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule457rFlg" xlink:to="reference_Rule457rFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule457sFlg" xlink:label="Rule457sFlg"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule457sFlg" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>s</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule457sFlg" xlink:to="reference_Rule457sFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_NrrtvDsclsr" xlink:label="NrrtvDsclsr"/>
+<link:reference xlink:type="resource" xlink:label="reference_NrrtvDsclsr" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NrrtvDsclsr" xlink:to="reference_NrrtvDsclsr" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_NrrtvMaxAggtOfferingPric" xlink:label="NrrtvMaxAggtOfferingPric"/>
+<link:reference xlink:type="resource" xlink:label="reference_NrrtvMaxAggtOfferingPric" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NrrtvMaxAggtOfferingPric" xlink:to="reference_NrrtvMaxAggtOfferingPric" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_NrrtvMaxAggtAmt" xlink:label="NrrtvMaxAggtAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_NrrtvMaxAggtAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NrrtvMaxAggtAmt" xlink:to="reference_NrrtvMaxAggtAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_FnlPrspctsFlg" xlink:label="FnlPrspctsFlg"/>
+<link:reference xlink:type="resource" xlink:label="reference_FnlPrspctsFlg" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="FnlPrspctsFlg" xlink:to="reference_FnlPrspctsFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_TtlFeeAndIntrstAmt" xlink:label="TtlFeeAndIntrstAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_TtlFeeAndIntrstAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="TtlFeeAndIntrstAmt" xlink:to="reference_TtlFeeAndIntrstAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429PrspctsNote" xlink:label="Rule429PrspctsNote"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule429PrspctsNote" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule429PrspctsNote" xlink:to="reference_Rule429PrspctsNote" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Scties424iLineItems" xlink:label="Scties424iLineItems"/>
+<link:reference xlink:type="resource" xlink:label="reference_Scties424iLineItems" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Scties424iLineItems" xlink:to="reference_Scties424iLineItems" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Scties424iTable" xlink:label="Scties424iTable"/>
+<link:reference xlink:type="resource" xlink:label="reference_Scties424iTable" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Scties424iTable" xlink:to="reference_Scties424iTable" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Scties424iAxis" xlink:label="Scties424iAxis"/>
+<link:reference xlink:type="resource" xlink:label="reference_Scties424iAxis" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Scties424iAxis" xlink:to="reference_Scties424iAxis" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_AggtSalesPricFsclYr" xlink:label="AggtSalesPricFsclYr"/>
+<link:reference xlink:type="resource" xlink:label="reference_AggtSalesPricFsclYr" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="AggtSalesPricFsclYr" xlink:to="reference_AggtSalesPricFsclYr" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_AggtRedRpPricFsclYr" xlink:label="AggtRedRpPricFsclYr"/>
+<link:reference xlink:type="resource" xlink:label="reference_AggtRedRpPricFsclYr" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="AggtRedRpPricFsclYr" xlink:to="reference_AggtRedRpPricFsclYr" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_AggtRedRpPricPrrFsclYr" xlink:label="AggtRedRpPricPrrFsclYr"/>
+<link:reference xlink:type="resource" xlink:label="reference_AggtRedRpPricPrrFsclYr" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="AggtRedRpPricPrrFsclYr" xlink:to="reference_AggtRedRpPricPrrFsclYr" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_AmtRedCdts" xlink:label="AmtRedCdts"/>
+<link:reference xlink:type="resource" xlink:label="reference_AmtRedCdts" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="AmtRedCdts" xlink:to="reference_AmtRedCdts" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_NetSalesAmt" xlink:label="NetSalesAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_NetSalesAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NetSalesAmt" xlink:to="reference_NetSalesAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_FeeNote" xlink:label="FeeNote"/>
+<link:reference xlink:type="resource" xlink:label="reference_FeeNote" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="FeeNote" xlink:to="reference_FeeNote" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_FeesSummaryLineItems" xlink:label="FeesSummaryLineItems"/>
+<link:reference xlink:type="resource" xlink:label="reference_FeesSummaryLineItems" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="FeesSummaryLineItems" xlink:to="reference_FeesSummaryLineItems" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_FeesSummaryTable" xlink:label="FeesSummaryTable"/>
+<link:reference xlink:type="resource" xlink:label="reference_FeesSummaryTable" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="FeesSummaryTable" xlink:to="reference_FeesSummaryTable" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_TtlOfferingAmt" xlink:label="TtlOfferingAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_TtlOfferingAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="TtlOfferingAmt" xlink:to="reference_TtlOfferingAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_TtlPrevslyPdAmt" xlink:label="TtlPrevslyPdAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_TtlPrevslyPdAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="TtlPrevslyPdAmt" xlink:to="reference_TtlPrevslyPdAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_TtlTxValtn" xlink:label="TtlTxValtn"/>
+<link:reference xlink:type="resource" xlink:label="reference_TtlTxValtn" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="TtlTxValtn" xlink:to="reference_TtlTxValtn" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_FeeIntrstAmt" xlink:label="FeeIntrstAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_FeeIntrstAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="FeeIntrstAmt" xlink:to="reference_FeeIntrstAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetExpltnForClmdAmt" xlink:label="OffsetExpltnForClmdAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetExpltnForClmdAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetExpltnForClmdAmt" xlink:to="reference_OffsetExpltnForClmdAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetNote" xlink:label="OffsetNote"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetNote" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetNote" xlink:to="reference_OffsetNote" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CmbndPrspctsLineItems" xlink:label="CmbndPrspctsLineItems"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmbndPrspctsLineItems" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmbndPrspctsLineItems" xlink:to="reference_CmbndPrspctsLineItems" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CmbndPrspctsTable" xlink:label="CmbndPrspctsTable"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmbndPrspctsTable" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmbndPrspctsTable" xlink:to="reference_CmbndPrspctsTable" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CmbndPrspctsItemAxis" xlink:label="CmbndPrspctsItemAxis"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmbndPrspctsItemAxis" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmbndPrspctsItemAxis" xlink:to="reference_CmbndPrspctsItemAxis" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429SctyTp" xlink:label="Rule429SctyTp"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule429SctyTp" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule429SctyTp" xlink:to="reference_Rule429SctyTp" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429SctyTitl" xlink:label="Rule429SctyTitl"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule429SctyTitl" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule429SctyTitl" xlink:to="reference_Rule429SctyTitl" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_FeeNoteMaxAggtOfferingPric" xlink:label="FeeNoteMaxAggtOfferingPric"/>
+<link:reference xlink:type="resource" xlink:label="reference_FeeNoteMaxAggtOfferingPric" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="FeeNoteMaxAggtOfferingPric" xlink:to="reference_FeeNoteMaxAggtOfferingPric" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OfferingNote" xlink:label="OfferingNote"/>
+<link:reference xlink:type="resource" xlink:label="reference_OfferingNote" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OfferingNote" xlink:to="reference_OfferingNote" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetLineItems" xlink:label="OffsetLineItems"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetLineItems" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetLineItems" xlink:to="reference_OffsetLineItems" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetTable" xlink:label="OffsetTable"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetTable" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetTable" xlink:to="reference_OffsetTable" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetAxis" xlink:label="OffsetAxis"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetAxis" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetAxis" xlink:to="reference_OffsetAxis" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetClmdInd" xlink:label="OffsetClmdInd"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetClmdInd" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetClmdInd" xlink:to="reference_OffsetClmdInd" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule457pOffsetFlg" xlink:label="Rule457pOffsetFlg_2"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule457pOffsetFlg_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>p</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Rule457pOffsetFlg_2" xlink:to="reference_Rule457pOffsetFlg_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrFilerNm" xlink:label="OffsetPrrFilerNm"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrFilerNm" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>p</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrFilerNm" xlink:to="reference_OffsetPrrFilerNm" use="optional" priority="10" order="1.0"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrFilerNm_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>b</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrFilerNm" xlink:to="reference_OffsetPrrFilerNm_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrFormTp" xlink:label="OffsetPrrFormTp"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrFormTp" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>p</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrFormTp" xlink:to="reference_OffsetPrrFormTp" use="optional" priority="10" order="1.0"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrFormTp_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>b</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrFormTp" xlink:to="reference_OffsetPrrFormTp_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrFileNb" xlink:label="OffsetPrrFileNb"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrFileNb" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>p</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrFileNb" xlink:to="reference_OffsetPrrFileNb" use="optional" priority="10" order="1.0"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrFileNb_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>b</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrFileNb" xlink:to="reference_OffsetPrrFileNb_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetClmInitlFilgDt" xlink:label="OffsetClmInitlFilgDt"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetClmInitlFilgDt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>p</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetClmInitlFilgDt" xlink:to="reference_OffsetClmInitlFilgDt" use="optional" priority="10" order="1.0"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetClmInitlFilgDt_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>b</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetClmInitlFilgDt" xlink:to="reference_OffsetClmInitlFilgDt_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetClmdAmt" xlink:label="OffsetClmdAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetClmdAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>p</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetClmdAmt" xlink:to="reference_OffsetClmdAmt" use="optional" priority="10" order="1.0"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetClmdAmt_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>b</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetClmdAmt" xlink:to="reference_OffsetClmdAmt_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrSctyTp" xlink:label="OffsetPrrSctyTp"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrSctyTp" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>p</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrSctyTp" xlink:to="reference_OffsetPrrSctyTp" use="optional" priority="10" order="1.0"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrSctyTp_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>b</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrSctyTp" xlink:to="reference_OffsetPrrSctyTp_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrSctyTitl" xlink:label="OffsetPrrSctyTitl"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrSctyTitl" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>p</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrSctyTitl" xlink:to="reference_OffsetPrrSctyTitl" use="optional" priority="10" order="1.0"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrSctyTitl_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>b</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrSctyTitl" xlink:to="reference_OffsetPrrSctyTitl_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrUnsoldOfferingAmt" xlink:label="OffsetPrrUnsoldOfferingAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrUnsoldOfferingAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>p</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrUnsoldOfferingAmt" xlink:to="reference_OffsetPrrUnsoldOfferingAmt" use="optional" priority="10" order="1.0"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrUnsoldOfferingAmt_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>b</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrUnsoldOfferingAmt" xlink:to="reference_OffsetPrrUnsoldOfferingAmt_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetSrcFilgDt" xlink:label="OffsetSrcFilgDt"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetSrcFilgDt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>p</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetSrcFilgDt" xlink:to="reference_OffsetSrcFilgDt" use="optional" priority="10" order="1.0"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetSrcFilgDt_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>b</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetSrcFilgDt" xlink:to="reference_OffsetSrcFilgDt_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrFeeAmt" xlink:label="OffsetPrrFeeAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrFeeAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>p</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrFeeAmt" xlink:to="reference_OffsetPrrFeeAmt" use="optional" priority="10" order="1.0"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrFeeAmt_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>b</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrFeeAmt" xlink:to="reference_OffsetPrrFeeAmt_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrNbOfUnsoldScties" xlink:label="OffsetPrrNbOfUnsoldScties"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrNbOfUnsoldScties" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>p</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrNbOfUnsoldScties" xlink:to="reference_OffsetPrrNbOfUnsoldScties" use="optional" priority="10" order="1.0"/>
+<link:reference xlink:type="resource" xlink:label="reference_OffsetPrrNbOfUnsoldScties_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>b</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="OffsetPrrNbOfUnsoldScties" xlink:to="reference_OffsetPrrNbOfUnsoldScties_2" use="optional" priority="10" order="1.0"/>
+<link:reference xlink:type="resource" xlink:label="reference_Rule457pOffsetFlg" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>p</ref:Subsection>
+</link:reference>
+<link:reference xlink:type="resource" xlink:label="reference_Rule457uFlg" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Securities Act</ref:Name>
+<ref:Number>230</ref:Number>
+<ref:Section>457</ref:Section>
+<ref:Subsection>u</ref:Subsection>
+</link:reference>
+</link:referenceLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+</xs:schema>

@@ -42,7 +42,8 @@ class MetadataCacheTests(unittest.TestCase):
             self.assertEqual(lookup.call_count,1)
             self.assertNotEqual(a['input_sha256'],b['input_sha256'])
             self.assertNotEqual(a['result'],b['result'])
-            self.assertEqual(a['implementation_sha256'],hashlib.sha256((ROOT / a['implementation_path']).read_bytes()).hexdigest())
+            impl_file = ROOT / a.get('implementation_path', 'finance_tools/basic.py')
+            self.assertEqual(a['implementation_sha256'], hashlib.sha256(impl_file.read_bytes()).hexdigest())
             # 模拟文件内容变化，不改真实源码，确认哈希仍逐笔读取。
             with patch.object(Path,'read_bytes',return_value=b'changed-code'):
                 c=service.calculate('cashflow',dict(operation='npv',cashflows=[-100,110],interest_rate=.1))

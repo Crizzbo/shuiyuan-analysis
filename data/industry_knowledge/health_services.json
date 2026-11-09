@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "health_services",
+    "industry_name_zh": "医疗服务与医药商业分销",
+    "sector_id": "health_care",
+    "sector_name_zh": "医疗保健",
+    "macro_sector_id": "HEALTH_BIO",
+    "macro_sector_name_zh": "医疗保健、专利创新药与生物技术服务",
+    "description_zh": "涵盖跨国管理型医疗健康险企业、全国性现代医药流通商业网络、专科连锁医疗服务及数字特药药房机构。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.82,
+    "typical_markup_ratio": 1.05,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "中等经营杠杆",
+    "typical_gross_margin_range": [0.05, 0.20]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 30.0,
+    "dio_warning_days": 55.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.25,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "全球原研专利药企重磅独家品种的一级分销代理权与直供配额协议",
+      "三甲医院高年资名医专家多点执业资源与高资质医疗护理专业团队",
+      "全温区高标准现代 GSP 智能医药冷链物流运输机队与特药仓储设施"
+    ],
+    "downstream_profile": "全球各级公立与私立医院终端药房、连锁零售药店门店网络、企业雇主健康福利计划及个人投保参保群体",
+    "pricing_power_verdict": "全国性医药分销寡头拥有高壁垒全国分销网络，受制于上下游两头挤压维持微利高周转；综合健康险巨头凭借庞大投保人群享有极强就医控费与支付审核话语权",
+    "channel_inversion_sensitivity": "医疗赔付损失率 (Medical Loss Ratio, MLR) 异动攀升是健康险与管理型医疗承保利润塌陷的最敏感前置预警指针"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "综合健康管理与慢病预防体系成效显著，参保人重大并发症发生率下降驱动医疗赔付率优化并在合规区间释放充沛承保利润",
+      "高密度自动化现代医药流通物流网络运营效率提升，单箱分销履约费用率进一步摊薄增厚微利净利率",
+      "高附加值特药专业输注药房 (Specialty Pharmacy) 与医疗健康大数据信息化技术服务收入占比加速扩大"
+    ],
+    "leading_bear_defenses": [
+      "老年人群就诊率与非必要复杂择期手术量异动反弹导致单季度医疗损失率突破警戒红线吞噬当期营业利润",
+      "监管立法严厉打击药品福利管理 (PBM) 隐性价差返点模式，强制要求将医药采购回扣全额返还终端投保人导致分销商中介利润受损",
+      "公立终端医疗机构回款周期严重恶化拉长，沉淀巨额应收账款导致分销企业现金流承压并产生大额坏账拨备"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度综合医疗损失率 (Medical Care Ratio / MLR) 变动指标",
+      "联邦医疗保险优势计划 (Medicare Advantage) 星级评价认证与官方保费补贴标准",
+      "医药分销应收账款周转天数 (DSO) 与经营性净现金流健康度",
+      "处方药经理人 (PBM) 阳光透明度立法及反垄断听证会监管指引"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "为了平滑当期利润波动，在财年末蓄意低估已发生但未报案 (Incurred But Not Reported, IBNR) 医疗理赔准备金负债",
+      "分销业务中利用过票过桥贸易人为做大主营业务收入体量以虚构业务规模与市场份额",
+      "公立医疗机构长期超期拖欠的庞大应收账款未严格按照真实回收风险足额计提坏账损失准备"
+    ],
+    "channel_and_revenue_checks": [
+      "向制药上游收取的特殊药品返利与保价补贴收益在报告期间内确认的真实性与合规性",
+      "专科医疗并购连锁门店商誉减值测试中未来门诊客流量与人均客单价预测假设审慎性核验"
+    ]
+  }
+}

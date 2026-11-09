@@ -1,0 +1,721 @@
+{
+  "schema_version": "1.0.0",
+  "archive_kind": "manual_archive_of_ai_browser_rendered_page_excerpts",
+  "not_full_original_document": true,
+  "observed_at": "2026-10-11T04:47:45+00:00",
+  "sources": [
+    {
+      "industry_id": "transport_logistics",
+      "published_date": "2026-01-13",
+      "locator": "Statistical Summary; annual 2025 column, not quarterly column",
+      "excerpts": [
+        "Statistical Summary\n(Unaudited)\nThree Months Ended\nYear Ended\nDecember 31,\nDecember 31,\n2025\n2024\nChange\n2025\n2024\nChange",
+        "Revenue passenger miles (millions)\n59,861\n60,387\n(1)\n%\n249,578\n246,145\n1\n%",
+        "Available seat miles (millions)\n72,946\n72,035\n1.3\n%\n298,045\n288,394\n3\n%",
+        "Passenger mile yield (cents)\n21.58\n21.22\n2\n%\n20.74\n20.68\n—\n%",
+        "Passenger load factor\n82 %\n84 %\n(2)\npts\n84 %\n85 %\n(1)\npt"
+      ],
+      "observations": [
+        {
+          "parent_metric_id": "transport_logistics_driver_1",
+          "component": "annual_revenue_passenger_miles",
+          "name_zh": "年度收入客英里",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_airline_passenger_traffic",
+          "raw_value": "249,578",
+          "raw_unit": "million_passenger_miles",
+          "value": "249578000000",
+          "unit": "passenger_miles",
+          "conversion": "million_quantity_times_1000000",
+          "excerpt_indices": [
+            0,
+            1
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "仍须审核完整公司定义和研究期间适用性"
+        },
+        {
+          "parent_metric_id": "transport_logistics_driver_1",
+          "component": "annual_available_seat_miles",
+          "name_zh": "年度可用座英里",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_airline_passenger_capacity",
+          "raw_value": "298,045",
+          "raw_unit": "million_seat_miles",
+          "value": "298045000000",
+          "unit": "seat_miles",
+          "conversion": "million_quantity_times_1000000",
+          "excerpt_indices": [
+            0,
+            2
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "仍须审核完整公司定义和研究期间适用性"
+        },
+        {
+          "parent_metric_id": "transport_logistics_driver_1",
+          "component": "annual_passenger_load_factor",
+          "name_zh": "年度客座率",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_airline_passenger_traffic",
+          "raw_value": "84",
+          "raw_unit": "percent",
+          "value": "0.84",
+          "unit": "ratio",
+          "conversion": "percent_divided_by_100",
+          "excerpt_indices": [
+            0,
+            4
+          ],
+          "binding_role": "reported_metric",
+          "limitation_zh": "发行人整数百分比；未取整工作量之比不应强制等于取整客座率"
+        },
+        {
+          "parent_metric_id": "transport_logistics_driver_2",
+          "component": "annual_passenger_mile_yield",
+          "name_zh": "年度每收入客英里客运收益",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_airline_passenger_revenue_yield",
+          "raw_value": "20.74",
+          "raw_unit": "US_cents_per_passenger_mile",
+          "value": "0.2074",
+          "unit": "USD_per_passenger_mile",
+          "conversion": "cents_divided_by_100",
+          "excerpt_indices": [
+            0,
+            3
+          ],
+          "binding_role": "reported_metric",
+          "limitation_zh": "yield 不是 PRASM 或 TRASM；英里不可直接当公里"
+        }
+      ]
+    },
+    {
+      "industry_id": "health_services",
+      "published_date": "2026-01-27",
+      "locator": "Operating Statistics / Same Facility, annual 2025 column; annual consolidated income statement",
+      "excerpts": [
+        "Operating Statistics\nFourth Quarter\nFor the Year\nEnded December 31,\n2025\n2024\n2025\n2024",
+        "Same Facility:\nAdmissions\n566,249\n553,200\n2,254,279\n2,203,778",
+        "Equivalent Admissions\n1,008,489\n984,143\n3,987,820\n3,894,076",
+        "Revenue per Equivalent Admission\n$\n18,708\n$\n18,175\n$\n18,314\n$\n17,587",
+        "Condensed Consolidated Comprehensive Income Statements\nFor the Years Ended December 31, 2025 and 2024\nUnaudited\n(Dollars in millions, except per share amounts)\n2025\n2024\nAmount\nRatio\nAmount\nRatio",
+        "Revenues\n$\n75,600\n100.0\n%\n$\n70,603\n100.0\n%",
+        "Salaries and benefits\n32,859\n43.5\n31,170\n44.1"
+      ],
+      "observations": [
+        {
+          "parent_metric_id": "health_services_driver_1",
+          "component": "same_facility_admissions",
+          "name_zh": "同院年度住院次数",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "same_facility",
+          "raw_value": "2,254,279",
+          "raw_unit": "admissions",
+          "value": "2254279",
+          "unit": "admissions",
+          "conversion": "remove_thousands_separator",
+          "excerpt_indices": [
+            0,
+            1
+          ],
+          "binding_role": "reported_metric",
+          "limitation_zh": "同院医院群；不能与 reported 全部医院或等价住院次数混合"
+        },
+        {
+          "parent_metric_id": "health_services_driver_1",
+          "component": "same_facility_equivalent_admissions",
+          "name_zh": "同院年度等价住院次数",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "same_facility",
+          "raw_value": "3,987,820",
+          "raw_unit": "equivalent_admissions",
+          "value": "3987820",
+          "unit": "equivalent_admissions",
+          "conversion": "remove_thousands_separator",
+          "excerpt_indices": [
+            0,
+            1,
+            2
+          ],
+          "binding_role": "reported_metric",
+          "limitation_zh": "保留公司门诊折算及同院纳入定义待核；不是实际住院人数"
+        },
+        {
+          "parent_metric_id": "health_services_driver_2",
+          "component": "same_facility_revenue_per_equivalent_admission",
+          "name_zh": "同院每等价住院收入",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "same_facility",
+          "raw_value": "18,314",
+          "raw_unit": "USD_per_equivalent_admission",
+          "value": "18314",
+          "unit": "USD_per_equivalent_admission",
+          "conversion": "remove_thousands_separator",
+          "excerpt_indices": [
+            0,
+            1,
+            3
+          ],
+          "binding_role": "reported_metric",
+          "limitation_zh": "不可与集团全部医院收入和服务量拼接；不是医院收费标价"
+        },
+        {
+          "parent_metric_id": "health_services_driver_3",
+          "component": "consolidated_salaries_benefits",
+          "name_zh": "集团年度工资及福利费用",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_all_facilities",
+          "raw_value": "32,859",
+          "raw_unit": "USD_million",
+          "value": "32859000000",
+          "unit": "USD",
+          "conversion": "million_times_1000000",
+          "excerpt_indices": [
+            4,
+            6
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "集团范围；未确认合同工是否全部包含，不能视作完整人工成本"
+        },
+        {
+          "parent_metric_id": "health_services_driver_3",
+          "component": "consolidated_healthcare_revenue",
+          "name_zh": "集团年度收入",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_all_facilities",
+          "raw_value": "75,600",
+          "raw_unit": "USD_million",
+          "value": "75600000000",
+          "unit": "USD",
+          "conversion": "million_times_1000000",
+          "excerpt_indices": [
+            4,
+            5
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "匹配集团工资福利表，不能与同院服务量计算单位收入"
+        },
+        {
+          "parent_metric_id": "health_services_driver_3",
+          "component": "reported_salaries_benefits_revenue_ratio",
+          "name_zh": "报告工资福利收入比",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_all_facilities",
+          "raw_value": "43.5",
+          "raw_unit": "percent",
+          "value": "0.435",
+          "unit": "ratio",
+          "conversion": "percent_divided_by_100",
+          "excerpt_indices": [
+            4,
+            5,
+            6
+          ],
+          "binding_role": "reported_metric",
+          "limitation_zh": "发行人取整百分比；不声称覆盖所有外包人员费用"
+        }
+      ]
+    },
+    {
+      "industry_id": "staples_retail",
+      "published_date": "2025-09-25",
+      "locator": "Comparable sales, total company, 52-week fiscal year column",
+      "excerpts": [
+        "today announced its operating results for the 16-week fourth quarter and the 52-week fiscal year ended August 31, 2025.",
+        "Comparable sales for the fourth quarter and fiscal year were as follows:",
+        "16 Weeks\n16 Weeks\n52 Weeks\n52 Weeks\nAdjusted*\nAdjusted*",
+        "Total Company\n5.7%\n6.4%\n5.9%\n7.6%",
+        "*Excluding the impacts from changes in gasoline prices and foreign exchange."
+      ],
+      "observations": [
+        {
+          "parent_metric_id": "staples_retail_driver_1",
+          "component": "annual_company_comparable_sales_growth",
+          "name_zh": "全年集团同店销售增长（未调整）",
+          "period_start": "2024-09-02",
+          "period_end": "2025-08-31",
+          "period_type": "annual",
+          "scope": "total_company_reported_including_gasoline_and_fx",
+          "raw_value": "5.9",
+          "raw_unit": "percent",
+          "value": "0.059",
+          "unit": "ratio",
+          "conversion": "percent_divided_by_100",
+          "excerpt_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "binding_role": "reported_metric",
+          "limitation_zh": "52 周期间；含燃油价格及汇率影响；纳入店群规则仍需年度报告核对"
+        },
+        {
+          "parent_metric_id": "staples_retail_driver_1",
+          "component": "annual_adjusted_comparable_sales_growth",
+          "name_zh": "全年集团同店销售增长（剔除燃油汇率）",
+          "period_start": "2024-09-02",
+          "period_end": "2025-08-31",
+          "period_type": "annual",
+          "scope": "total_company_excluding_gasoline_price_and_fx",
+          "raw_value": "7.6",
+          "raw_unit": "percent",
+          "value": "0.076",
+          "unit": "ratio",
+          "conversion": "percent_divided_by_100",
+          "excerpt_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "binding_role": "reported_metric",
+          "limitation_zh": "调整增长率与未调整增长率不可混用；不是客流增长"
+        }
+      ]
+    },
+    {
+      "industry_id": "equity_reit",
+      "published_date": null,
+      "locator": "OPERATING PERFORMANCE, 4Q25; Owned & Managed versus Prologis Share",
+      "excerpts": [
+        "OPERATING PERFORMANCE",
+        "Owned & Managed\n4Q25\nAverage Occupancy\n95.3%\nPeriod End Occupancy\n95.8%",
+        "Prologis Share\n4Q25\nAverage Occupancy\n95.2%\nCash Same Store NOI*\n5.7%",
+        "This is a non-GAAP financial measure. See the Notes and Definitions in our supplemental information for further explanation and a reconciliation to the most directly comparable GAAP measure."
+      ],
+      "observations": [
+        {
+          "parent_metric_id": "equity_reit_driver_1",
+          "component": "cash_same_store_noi_growth",
+          "name_zh": "权益份额现金同物业 NOI 增长",
+          "period_start": "2025-10-01",
+          "period_end": "2025-12-31",
+          "period_type": "quarterly",
+          "scope": "prologis_share_cash_same_store_noi",
+          "raw_value": "5.7",
+          "raw_unit": "percent",
+          "value": "0.057",
+          "unit": "ratio",
+          "conversion": "percent_divided_by_100",
+          "excerpt_indices": [
+            0,
+            2,
+            3
+          ],
+          "binding_role": "reported_metric",
+          "limitation_zh": "现金口径非 GAAP；物业群冻结与调节定义仍须补充表核验"
+        },
+        {
+          "parent_metric_id": "equity_reit_driver_2",
+          "component": "owned_managed_average_occupancy",
+          "name_zh": "自有及管理组合平均出租率",
+          "period_start": "2025-10-01",
+          "period_end": "2025-12-31",
+          "period_type": "quarterly",
+          "scope": "owned_and_managed_operating_portfolio_average",
+          "raw_value": "95.3",
+          "raw_unit": "percent",
+          "value": "0.953",
+          "unit": "ratio",
+          "conversion": "percent_divided_by_100",
+          "excerpt_indices": [
+            0,
+            1
+          ],
+          "binding_role": "scope_mismatch_sample",
+          "limitation_zh": "整个自有管理组合；不能替代固定同物业群出租率"
+        },
+        {
+          "parent_metric_id": "equity_reit_driver_2",
+          "component": "owned_managed_end_occupancy",
+          "name_zh": "自有及管理组合期末出租率",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "period_type": "instant",
+          "scope": "owned_and_managed_operating_portfolio_period_end",
+          "raw_value": "95.8",
+          "raw_unit": "percent",
+          "value": "0.958",
+          "unit": "ratio",
+          "conversion": "percent_divided_by_100",
+          "excerpt_indices": [
+            0,
+            1
+          ],
+          "binding_role": "scope_mismatch_sample",
+          "limitation_zh": "期末值不同于季度平均；不能替代同物业群出租率"
+        }
+      ]
+    },
+    {
+      "industry_id": "capital_goods",
+      "published_date": "2026-01-28",
+      "locator": "Full Year 2025 Highlights and segment descriptions; rounded billion USD",
+      "excerpts": [
+        "Full Year\n2025\n Highlights:\nOrders of \n$59.3\nB",
+        "Revenue of \n$38.1\nB",
+        "Defined as remaining performance obligation (RPO)",
+        "We increased our backlog\n to $150 billion",
+        "Power\nOrders\n of \n$32.8\n billion",
+        "revenues\n of \n$19.8\n billion",
+        "Wind\nOrders of \n$7.7\n billion",
+        "Revenues of \n$9.1\n billion",
+        "Electrification\nOrders of \n$19.3\n billion",
+        "Revenues of \n$9.6\nbillion"
+      ],
+      "observations": [
+        {
+          "parent_metric_id": "capital_goods_driver_1",
+          "component": "company_new_orders",
+          "name_zh": "集团全年新增订单",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated",
+          "raw_value": "59.3",
+          "raw_unit": "USD_billion",
+          "value": "59300000000.0",
+          "unit": "USD",
+          "conversion": "billion_times_1000000000",
+          "excerpt_indices": [
+            0
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+        },
+        {
+          "parent_metric_id": "capital_goods_driver_1",
+          "component": "company_order_period_revenue",
+          "name_zh": "集团同期间收入",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated",
+          "raw_value": "38.1",
+          "raw_unit": "USD_billion",
+          "value": "38100000000.0",
+          "unit": "USD",
+          "conversion": "billion_times_1000000000",
+          "excerpt_indices": [
+            1
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+        },
+        {
+          "parent_metric_id": "capital_goods_driver_1",
+          "component": "power_new_orders",
+          "name_zh": "电力分部全年新增订单",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "power_segment",
+          "raw_value": "32.8",
+          "raw_unit": "USD_billion",
+          "value": "32800000000.0",
+          "unit": "USD",
+          "conversion": "billion_times_1000000000",
+          "excerpt_indices": [
+            4
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+        },
+        {
+          "parent_metric_id": "capital_goods_driver_1",
+          "component": "power_order_period_revenue",
+          "name_zh": "电力分部同期间收入",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "power_segment",
+          "raw_value": "19.8",
+          "raw_unit": "USD_billion",
+          "value": "19800000000.0",
+          "unit": "USD",
+          "conversion": "billion_times_1000000000",
+          "excerpt_indices": [
+            5
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+        },
+        {
+          "parent_metric_id": "capital_goods_driver_1",
+          "component": "wind_new_orders",
+          "name_zh": "风电分部全年新增订单",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "wind_segment",
+          "raw_value": "7.7",
+          "raw_unit": "USD_billion",
+          "value": "7700000000.0",
+          "unit": "USD",
+          "conversion": "billion_times_1000000000",
+          "excerpt_indices": [
+            6
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+        },
+        {
+          "parent_metric_id": "capital_goods_driver_1",
+          "component": "wind_order_period_revenue",
+          "name_zh": "风电分部同期间收入",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "wind_segment",
+          "raw_value": "9.1",
+          "raw_unit": "USD_billion",
+          "value": "9100000000.0",
+          "unit": "USD",
+          "conversion": "billion_times_1000000000",
+          "excerpt_indices": [
+            7
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+        },
+        {
+          "parent_metric_id": "capital_goods_driver_1",
+          "component": "electrification_new_orders",
+          "name_zh": "电气化分部全年新增订单",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "electrification_segment",
+          "raw_value": "19.3",
+          "raw_unit": "USD_billion",
+          "value": "19300000000.0",
+          "unit": "USD",
+          "conversion": "billion_times_1000000000",
+          "excerpt_indices": [
+            8
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+        },
+        {
+          "parent_metric_id": "capital_goods_driver_1",
+          "component": "electrification_order_period_revenue",
+          "name_zh": "电气化分部同期间收入",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "electrification_segment",
+          "raw_value": "9.6",
+          "raw_unit": "USD_billion",
+          "value": "9600000000.0",
+          "unit": "USD",
+          "conversion": "billion_times_1000000000",
+          "excerpt_indices": [
+            9
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "十亿美元取整披露；订单取消处理与多年服务合同定义仍须年报核对；禁止跨分部拼接"
+        },
+        {
+          "parent_metric_id": "capital_goods_driver_2",
+          "component": "company_backlog_rpo",
+          "name_zh": "集团剩余履约义务口径积压订单",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "period_type": "instant",
+          "scope": "consolidated_rpo",
+          "raw_value": "150",
+          "raw_unit": "USD_billion",
+          "value": "150000000000",
+          "unit": "USD",
+          "conversion": "billion_times_1000000000",
+          "excerpt_indices": [
+            2,
+            3
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "RPO 金额不是全部保证收入；缺取消条款及执行条件"
+        }
+      ]
+    },
+    {
+      "industry_id": "construction",
+      "published_date": "2026-02-17",
+      "locator": "Backlog and annual revenue tables, USD millions, 2025 columns",
+      "excerpts": [
+        "(in millions)\nDecember 31,\n2025\nDecember 31,\n2024",
+        "Total backlog\n$\n25,536\n$\n28,484",
+        "SUMMARY OF FINANCIALS AND U.S. GAAP RECONCILIATION OF CONSOLIDATED SEGMENT PROFIT (LOSS)\nThree Months Ended\nDecember 31,\nYear Ended\nDecember 31,\n(in millions)\n2025\n2024\n2025\n2024",
+        "Total revenue\n$\n4,175\n$\n4,260\n$\n15,503\n$\n16,315",
+        "Backlog:  $25.5 billion at 81% reimbursable; includes positive backlog adjustments of $941 million"
+      ],
+      "observations": [
+        {
+          "parent_metric_id": "construction_driver_1",
+          "component": "reported_total_construction_backlog",
+          "name_zh": "报告集团积压订单总额",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "period_type": "instant",
+          "scope": "consolidated_reported_total_backlog",
+          "raw_value": "25,536",
+          "raw_unit": "USD_million",
+          "value": "25536000000",
+          "unit": "USD",
+          "conversion": "million_times_1000000",
+          "excerpt_indices": [
+            0,
+            1,
+            4
+          ],
+          "binding_role": "scope_mismatch_sample",
+          "limitation_zh": "尚未取得可执行、已融资和可取消部分划分；不能直接计算可执行订单覆盖年数"
+        },
+        {
+          "parent_metric_id": "construction_driver_1",
+          "component": "construction_annual_revenue",
+          "name_zh": "工程集团全年收入",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated",
+          "raw_value": "15,503",
+          "raw_unit": "USD_million",
+          "value": "15503000000",
+          "unit": "USD",
+          "conversion": "million_times_1000000",
+          "excerpt_indices": [
+            2,
+            3
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "收入包含 Santos 项目收入冲回；可比范围仍须审核"
+        }
+      ]
+    },
+    {
+      "industry_id": "tobacco",
+      "published_date": "2026-02-06",
+      "locator": "Full-year 2025 PMI / Smoke-Free Business / Combustibles table",
+      "excerpts": [
+        "PMI\nSmoke-Free\nBusiness\nCombustibles\nNet Revenues ($ bn)\n$40.6\n$16.9\n$23.8",
+        "Gross Profit ($ bn)\n$27.3\n$11.7\n$15.6",
+        "Our smoke-free business accounted for 41.5% of our total net revenues"
+      ],
+      "observations": [
+        {
+          "parent_metric_id": "tobacco_driver_3",
+          "component": "smoke_free_net_revenue",
+          "name_zh": "无烟业务全年净收入",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "smoke_free_business",
+          "raw_value": "16.9",
+          "raw_unit": "USD_billion",
+          "value": "16900000000.0",
+          "unit": "USD",
+          "conversion": "billion_times_1000000000",
+          "excerpt_indices": [
+            0
+          ],
+          "binding_role": "formula_input",
+          "limitation_zh": "十亿美元取整披露；保留集团收入与业务收入不同范围"
+        },
+        {
+          "parent_metric_id": "tobacco_driver_3",
+          "component": "smoke_free_gross_profit",
+          "name_zh": "无烟业务全年毛利润",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "smoke_free_business",
+          "raw_value": "11.7",
+          "raw_unit": "USD_billion",
+          "value": "11700000000.0",
+          "unit": "USD",
+          "conversion": "billion_times_1000000000",
+          "excerpt_indices": [
+            0,
+            1
+          ],
+          "binding_role": "profit_basis_variant",
+          "limitation_zh": "毛利润不是营业利润或净利润；不可直接绑定 operating_profit 原子字段"
+        },
+        {
+          "parent_metric_id": "tobacco_driver_3",
+          "component": "smoke_free_revenue_share",
+          "name_zh": "无烟业务全年净收入占比",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "smoke_free_share_of_company_net_revenue",
+          "raw_value": "41.5",
+          "raw_unit": "percent",
+          "value": "0.415",
+          "unit": "ratio",
+          "conversion": "percent_divided_by_100",
+          "excerpt_indices": [
+            2
+          ],
+          "binding_role": "context_sample",
+          "limitation_zh": "发行人报告占比；取整收入之比不应强制等于此占比"
+        }
+      ]
+    },
+    {
+      "industry_id": "retail",
+      "published_date": "2026-02-19",
+      "locator": "Walmart U.S. comp sales and footnote 2; 13-week period ended January 30, 2026",
+      "excerpts": [
+        "Walmart U.S. comp sales2 grew 4.6%.",
+        "Comp sales for the 13-week period ended January 30, 2026 compared to the 13-week period ended January 31, 2025 and excludes fuel. See Supplemental Financial Information for additional information."
+      ],
+      "observations": [
+        {
+          "parent_metric_id": "retail_driver_1",
+          "component": "walmart_us_comparable_sales_growth",
+          "name_zh": "沃尔玛美国十三周同店销售增长",
+          "period_start": "2025-11-01",
+          "period_end": "2026-01-30",
+          "period_type": "13_weeks",
+          "scope": "walmart_us_excluding_fuel",
+          "raw_value": "4.6",
+          "raw_unit": "percent",
+          "value": "0.046",
+          "unit": "ratio",
+          "conversion": "percent_divided_by_100",
+          "excerpt_indices": [
+            0,
+            1
+          ],
+          "binding_role": "reported_metric",
+          "limitation_zh": "十三周经营期与财务季度结束日不同；线上范围及店群纳入细则仍需补充表核对"
+        }
+      ]
+    }
+  ]
+}

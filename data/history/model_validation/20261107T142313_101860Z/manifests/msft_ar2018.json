@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.1.0",
+  "source_id": "histval-msft_ar2018-20261107T142313_101860Z",
+  "revision": 1,
+  "source_path": "data/history/model_validation/20261107T142313_101860Z/raw/msft_ar2018.html",
+  "source_kind": "primary",
+  "dataset_kind": "financial",
+  "published_at": null,
+  "available_at": "2026-11-07T14:23:27.628818+00:00",
+  "acquired_at": "2026-11-07T14:23:27.628818+00:00",
+  "effective_period": null,
+  "license_notes": "Microsoft issuer annual report; original public disclosure archived for local research only; not redistributed.",
+  "quality_notes": [
+    "发行人原始年报；只提取当年现金流量表CFO及现金资本开支，单位百万美元；不冒充已平账的完整三表或严格历史可用版本。",
+    "来源URL：https://www.microsoft.com/investor/reports/ar18/index.html",
+    "本次归档时间不等于历史首次可用时间；不用于证明严格point-in-time回测。"
+  ],
+  "supersedes_revision": null,
+  "published_date": null,
+  "publication_precision": "unknown"
+}

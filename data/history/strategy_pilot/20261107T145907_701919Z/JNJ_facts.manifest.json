@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.1.0",
+  "source_id": "strategy-pilot-JNJ-facts-20261107T145907_701919Z",
+  "revision": 1,
+  "source_path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/JNJ_facts.json",
+  "source_kind": "primary",
+  "dataset_kind": "financial",
+  "published_at": null,
+  "available_at": "2026-11-07T14:59:22.776251+00:00",
+  "acquired_at": "2026-11-07T14:59:22.776251+00:00",
+  "effective_period": null,
+  "license_notes": "Public provider original response, archived for local research only; not redistributed.",
+  "quality_notes": [
+    "Source identity: https://data.sec.gov/api/xbrl/companyfacts/CIK0000200406.json",
+    "Capture timestamp is not historical availability; SEC filed/accession metadata is checked separately in reconstruction.",
+    "Pilot convenience universe chosen now; survival/selection bias limits interpretation."
+  ],
+  "supersedes_revision": null,
+  "published_date": null,
+  "publication_precision": "unknown"
+}

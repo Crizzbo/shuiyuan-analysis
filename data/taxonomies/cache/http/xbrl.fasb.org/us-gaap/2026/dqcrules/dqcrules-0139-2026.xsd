@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+2010-2026 Financial Accounting Foundation; (c) 2007-2010 XBRL US, Inc.; (c) 2020-2026 XBRL US, Inc. All Rights Reserved.
+Notice: Authorized Uses are Set Forth at https://xbrl.fasb.org/terms/TaxonomiesTermsConditions.html
+-->
+<xs:schema targetNamespace='http://fasb.org/dqcrules-0139/2026' elementFormDefault='qualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:dqcrules-0139='http://fasb.org/dqcrules-0139/2026' xmlns:dqcrules='http://fasb.org/dqcrules/2026' xmlns:us-gaap='http://fasb.org/us-gaap/2026' xmlns:link='http://www.xbrl.org/2003/linkbase' xmlns:ref='http://www.xbrl.org/2006/ref' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xbrli='http://www.xbrl.org/2003/instance' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:xbrldt='http://xbrl.org/2005/xbrldt' xmlns='http://www.xbrl.org/2003/linkbase' xsi:schemaLocation='http://www.xbrl.org/2006/ref http://www.xbrl.org/2006/ref-2006-02-27.xsd http://fasb.org/dqcrules/2026 dqcrules-2026.xsd'>
+<xs:import namespace='http://www.xbrl.org/2003/instance' schemaLocation='http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd'/>
+<xs:import namespace='http://www.xbrl.org/2003/linkbase' schemaLocation='http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd'/>
+<xs:import namespace='http://www.xbrl.org/2006/ref' schemaLocation='http://www.xbrl.org/2006/ref-2006-02-27.xsd'/>
+<xs:import namespace='http://xbrl.org/2005/xbrldt' schemaLocation='http://www.xbrl.org/2005/xbrldt-2005.xsd'/>
+<xs:import namespace='http://fasb.org/dqcrules/2026' schemaLocation='dqcrules-2026.xsd'/>
+<xs:import namespace='http://fasb.org/us-roles/2026' schemaLocation='../elts/us-roles-2026.xsd'/>
+<xs:import namespace='http://fasb.org/us-gaap/2026' schemaLocation='../elts/us-gaap-2026.xsd'/>
+<xs:annotation>
+<xs:appinfo>
+<link:roleType roleURI='http://fasb.org/us-gaap/role/dqc/0139' id='dqc_0139'>
+<link:definition>DQC.US.0139</link:definition>
+<link:usedOn>link:definitionLink</link:usedOn>
+<link:usedOn>link:referenceLink</link:usedOn>
+<link:usedOn>link:labelLink</link:usedOn>
+</link:roleType>
+<link:linkbase id='lnk'>
+<link:roleRef roleURI='http://fasb.org/us-gaap/role/dqc/0139' xlink:type='simple' xlink:href='#dqc_0139'/>
+<link:roleRef roleURI='http://fasb.org/us-gaap/role/dqc/dqcNote' xlink:href='dqcrules-2026.xsd#dqcn' xlink:type='simple'/>
+<link:arcroleRef arcroleURI='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:href='dqcrules-2026.xsd#rule-concept' xlink:type='simple'/>
+<link:roleRef roleURI='http://fasb.org/us-gaap/role/dqc/ruleExclusions' xlink:href='dqcrules-2026.xsd#dqcre' xlink:type='simple'/>
+<link:roleRef roleURI='http://fasb.org/us-gaap/role/dqc/ruleID' xlink:href='dqcrules-2026.xsd#dqcrid' xlink:type='simple'/>
+<link:labelLink xlink:type='extended' xlink:role='http://fasb.org/us-gaap/role/dqc/0139'>
+<link:loc xlink:href='#dqcrules-0139_Dqc_0139' xlink:label='loc_dqcrules_Dqc_0139' xlink:type='locator'/>
+<link:loc xlink:href='#dqcrules-0139_Dqc_0139_BankRatiosScaleIssues' xlink:label='loc_dqcrules_Dqc_0139_BankRatiosScaleIssues' xlink:type='locator'/>
+<link:label xlink:type='resource' xlink:role='http://www.xbrl.org/2003/role/label' xlink:label='lbl_dqcrules_Dqc_0139' xml:lang='en-US'>DQC.US.0139 [Abstract]</link:label>
+<link:label xlink:type='resource' xlink:role='http://www.xbrl.org/2003/role/label' xlink:label='lbl_dqcrules_Dqc_0139_BankRatiosScaleIssues' xml:lang='en-US'>DQC.US.0139.Bank Ratios - Scale Issues [Abstract]</link:label>
+<link:labelArc xlink:type='arc' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-label' xlink:from='loc_dqcrules_Dqc_0139' xlink:to='lbl_dqcrules_Dqc_0139'/>
+<link:labelArc xlink:type='arc' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-label' xlink:from='loc_dqcrules_Dqc_0139_BankRatiosScaleIssues' xlink:to='lbl_dqcrules_Dqc_0139_BankRatiosScaleIssues'/>
+</link:labelLink>
+<link:definitionLink xlink:type='extended' xlink:role='http://fasb.org/us-gaap/role/dqc/0139'>
+<link:loc xlink:href='#dqcrules-0139_Dqc_0139' xlink:label='loc_Dqc_0139' xlink:type='locator'/>
+<link:loc xlink:href='#dqcrules-0139_Dqc_0139_BankRatiosScaleIssues' xlink:label='loc_Dqc_0139_BankRatiosScaleIssues' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_RiskWeightedAssets' xlink:label='loc_RiskWeightedAssets' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_TierOneRiskBasedCapitalRequiredForCapitalAdequacy' xlink:label='loc_TierOneRiskBasedCapitalRequiredForCapitalAdequacy' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_TierOneRiskBasedCapitalRequiredForCapitalAdequacyToRiskWeightedAssets' xlink:label='loc_TierOneRiskBasedCapitalRequiredForCapitalAdequacyToRiskWeightedAssets' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_TierOneRiskBasedCapitalRequiredToBeWellCapitalized' xlink:label='loc_TierOneRiskBasedCapitalRequiredToBeWellCapitalized' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_TierOneRiskBasedCapitalToRiskWeightedAssets' xlink:label='loc_TierOneRiskBasedCapitalToRiskWeightedAssets' xlink:type='locator'/>
+<link:definitionArc order='1.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0139' xlink:to='loc_Dqc_0139_BankRatiosScaleIssues' xlink:type='arc'/>
+<link:definitionArc order='1.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0139_BankRatiosScaleIssues' xlink:to='loc_TierOneRiskBasedCapitalRequiredForCapitalAdequacy' xlink:type='arc'/>
+<link:definitionArc order='2.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0139_BankRatiosScaleIssues' xlink:to='loc_RiskWeightedAssets' xlink:type='arc'/>
+<link:definitionArc order='3.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0139_BankRatiosScaleIssues' xlink:to='loc_TierOneRiskBasedCapitalRequiredForCapitalAdequacyToRiskWeightedAssets' xlink:type='arc'/>
+<link:definitionArc order='4.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0139_BankRatiosScaleIssues' xlink:to='loc_TierOneRiskBasedCapitalRequiredToBeWellCapitalized' xlink:type='arc'/>
+<link:definitionArc order='5.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0139_BankRatiosScaleIssues' xlink:to='loc_TierOneRiskBasedCapitalToRiskWeightedAssets' xlink:type='arc'/>
+</link:definitionLink>
+<link:referenceLink xlink:role='http://fasb.org/us-gaap/role/dqc/0139' xlink:type='extended'>
+<link:loc xlink:href='#dqcrules-0139_Dqc_0139' xlink:label='loc_Dqc_0139' xlink:type='locator'/>
+<link:loc xlink:href='#dqcrules-0139_Dqc_0139_BankRatiosScaleIssues' xlink:label='loc_Dqc_0139_BankRatiosScaleIssues' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_RiskWeightedAssets' xlink:label='loc_RiskWeightedAssets' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_TierOneRiskBasedCapitalRequiredForCapitalAdequacy' xlink:label='loc_TierOneRiskBasedCapitalRequiredForCapitalAdequacy' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_TierOneRiskBasedCapitalRequiredForCapitalAdequacyToRiskWeightedAssets' xlink:label='loc_TierOneRiskBasedCapitalRequiredForCapitalAdequacyToRiskWeightedAssets' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_TierOneRiskBasedCapitalRequiredToBeWellCapitalized' xlink:label='loc_TierOneRiskBasedCapitalRequiredToBeWellCapitalized' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_TierOneRiskBasedCapitalToRiskWeightedAssets' xlink:label='loc_TierOneRiskBasedCapitalToRiskWeightedAssets' xlink:type='locator'/>
+<link:reference xlink:label='dqc_0139' xlink:role='http://fasb.org/us-gaap/role/dqc/dqcNote' xlink:type='resource'>
+<ref:Publisher>XBRL US</ref:Publisher>
+<dqcrules:ruleId>DQC.0139</dqcrules:ruleId>
+<dqcrules:ruleName>Bank Ratios - Scale Issues</dqcrules:ruleName>
+<dqcrules:ruleDocumentation>This rule ensures that capital adequacy ratios are reported with the correct scale. It also ensures that the appropriate elements have been used to report capital adequacy ratios.</dqcrules:ruleDocumentation>
+<ref:URI>https://xbrl.us/data-rule/dqc_0139/</ref:URI>
+</link:reference>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_Dqc_0139' xlink:to='dqc_0139' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_Dqc_0139_BankRatiosScaleIssues' xlink:to='dqc_0139' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_TierOneRiskBasedCapitalRequiredForCapitalAdequacy' xlink:to='dqc_0139' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_RiskWeightedAssets' xlink:to='dqc_0139' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_TierOneRiskBasedCapitalRequiredForCapitalAdequacyToRiskWeightedAssets' xlink:to='dqc_0139' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_TierOneRiskBasedCapitalRequiredToBeWellCapitalized' xlink:to='dqc_0139' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_TierOneRiskBasedCapitalToRiskWeightedAssets' xlink:to='dqc_0139' xlink:type='arc'/>
+<link:reference xlink:type='resource' xlink:label='DQC_US_0139_9856' xlink:role='http://fasb.org/us-gaap/role/dqc/ruleID'><dqcrules:ruleElementId>DQC.US.0139.9856</dqcrules:ruleElementId></link:reference>
+<link:reference xlink:type='resource' xlink:label='DQC_US_0139_9857' xlink:role='http://fasb.org/us-gaap/role/dqc/ruleID'><dqcrules:ruleElementId>DQC.US.0139.9857</dqcrules:ruleElementId></link:reference>
+<link:reference xlink:type='resource' xlink:label='DQC_US_0139_9858' xlink:role='http://fasb.org/us-gaap/role/dqc/ruleID'><dqcrules:ruleElementId>DQC.US.0139.9858</dqcrules:ruleElementId></link:reference>
+<link:reference xlink:type='resource' xlink:label='DQC_US_0139_9859' xlink:role='http://fasb.org/us-gaap/role/dqc/ruleID'><dqcrules:ruleElementId>DQC.US.0139.9859</dqcrules:ruleElementId></link:reference>
+<link:reference xlink:type='resource' xlink:label='DQC_US_0139_9860' xlink:role='http://fasb.org/us-gaap/role/dqc/ruleID'><dqcrules:ruleElementId>DQC.US.0139.9860</dqcrules:ruleElementId></link:reference>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_TierOneRiskBasedCapitalRequiredForCapitalAdequacy' xlink:to='DQC_US_0139_9856' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_RiskWeightedAssets' xlink:to='DQC_US_0139_9857' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_TierOneRiskBasedCapitalRequiredForCapitalAdequacyToRiskWeightedAssets' xlink:to='DQC_US_0139_9858' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_TierOneRiskBasedCapitalRequiredToBeWellCapitalized' xlink:to='DQC_US_0139_9859' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_TierOneRiskBasedCapitalToRiskWeightedAssets' xlink:to='DQC_US_0139_9860' xlink:type='arc'/>
+</link:referenceLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+<xs:element name='Dqc_0139' id='dqcrules-0139_Dqc_0139' type='xbrli:stringItemType' substitutionGroup='xbrli:item' abstract='true' nillable='true' xbrli:periodType='duration'/>
+<xs:element name='Dqc_0139_BankRatiosScaleIssues' id='dqcrules-0139_Dqc_0139_BankRatiosScaleIssues' type='xbrli:stringItemType' substitutionGroup='xbrli:item' abstract='true' nillable='true' xbrli:periodType='duration'/>
+</xs:schema>

@@ -1,0 +1,212 @@
+{
+  "as_of": "2026-11-09T13:08:08+00:00",
+  "calculation_refs": [
+    {
+      "observation_id": "26b75e71e82fc516cff5d137b1a27b7c4266315253d2a5e5204bec2b9c8d320d",
+      "path": "data/financial/objects/3b/3be206578d59de214bb2869c73f7e247c03222c89e527a6b3b9072ed69e3c65d.json",
+      "sha256": "3be206578d59de214bb2869c73f7e247c03222c89e527a6b3b9072ed69e3c65d"
+    },
+    {
+      "observation_id": "d1fcf97980636d39912467948b6f72f6e4570cc7838394ba6f69c0d86ef1d109",
+      "path": "data/financial/objects/8e/8e1390e48ec13c224b066447bd7ebf36457abb185ca51a4ce869cf377f230a0c.json",
+      "sha256": "8e1390e48ec13c224b066447bd7ebf36457abb185ca51a4ce869cf377f230a0c"
+    }
+  ],
+  "classification_status": "unreviewed",
+  "entity_id": "JP:7974",
+  "evidence": [
+    {
+      "acquired_at": "2026-10-11T02:01:15+00:00",
+      "available_at": "2026-10-11T02:01:15+00:00",
+      "excerpt_or_summary": "Operating profit \n \n282,553 \n \n360,117 \n2,264 ",
+      "id": "financial-cebc0b4d6573034dc838363afe00a4f663e80ede78cffeb3bc8fbba20e88ed5d",
+      "limitations": [
+        "正式原文与解析版本见指标 lineage；比较年度按当前报告可得时点，不能用于早期回测。"
+      ],
+      "locator": "PDF page 61, row Operating profit, year 2026",
+      "publication_precision": "date",
+      "published_at": null,
+      "published_date": "2026-07-06",
+      "source_kind": "primary",
+      "source_path": "data/financial/objects/80/80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b.txt"
+    },
+    {
+      "acquired_at": "2026-10-11T02:01:15+00:00",
+      "available_at": "2026-10-11T02:01:15+00:00",
+      "excerpt_or_summary": "Net sales \n \n1,164,922 \n \n2,313,051 \n14,547 ",
+      "id": "financial-c2e680a33a5b3e012dee02a097efe319d5e8a8e195fa324015a7adca7357667e",
+      "limitations": [
+        "正式原文与解析版本见指标 lineage；比较年度按当前报告可得时点，不能用于早期回测。"
+      ],
+      "locator": "PDF page 61, row Net sales, year 2026",
+      "publication_precision": "date",
+      "published_at": null,
+      "published_date": "2026-07-06",
+      "source_kind": "primary",
+      "source_path": "data/financial/objects/80/80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b.txt"
+    },
+    {
+      "acquired_at": "2026-10-11T02:01:15+00:00",
+      "available_at": "2026-10-11T02:01:15+00:00",
+      "excerpt_or_summary": "Net sales \n \n1,164,922 \n \n2,313,051 \n14,547 ",
+      "id": "financial-d854af8f633bd9effbe479c87e71e7a7420f9b0fee20278c63173f63d1e59d5a",
+      "limitations": [
+        "正式原文与解析版本见指标 lineage；比较年度按当前报告可得时点，不能用于早期回测。"
+      ],
+      "locator": "PDF page 61, row Net sales, year 2025",
+      "publication_precision": "date",
+      "published_at": null,
+      "published_date": "2026-07-06",
+      "source_kind": "primary",
+      "source_path": "data/financial/objects/80/80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b.txt"
+    }
+  ],
+  "industry_gate_status": "blocked",
+  "industry_id": "media_entertainment",
+  "lineage": [
+    {
+      "observation_id": "26b75e71e82fc516cff5d137b1a27b7c4266315253d2a5e5204bec2b9c8d320d",
+      "registration_ids": [
+        "80694083808f6693e2c3b15375f4b93af134c7eaab3290b3851b8c4484eb0d0c",
+        "cd58c3f49cc9b9544b9453b5c4eda5cc11693852fe9f421b24ae435449691276"
+      ],
+      "report_refs": [
+        {
+          "path": "data/financial/objects/e2/e293cd7a10eed60a0bec47f6bfc6873e6083adc243d58156c090e5e3f5413e13.json",
+          "sha256": "e293cd7a10eed60a0bec47f6bfc6873e6083adc243d58156c090e5e3f5413e13"
+        },
+        {
+          "path": "data/financial/objects/e2/e293cd7a10eed60a0bec47f6bfc6873e6083adc243d58156c090e5e3f5413e13.json",
+          "sha256": "e293cd7a10eed60a0bec47f6bfc6873e6083adc243d58156c090e5e3f5413e13"
+        }
+      ],
+      "scope_id": "consolidated"
+    },
+    {
+      "observation_id": "d1fcf97980636d39912467948b6f72f6e4570cc7838394ba6f69c0d86ef1d109",
+      "registration_ids": [
+        "cd58c3f49cc9b9544b9453b5c4eda5cc11693852fe9f421b24ae435449691276",
+        "4dd69fc35088f3f7056a22c45f3fd9251ffc941a2353e0c754b664fa118f5b36"
+      ],
+      "report_refs": [
+        {
+          "path": "data/financial/objects/e2/e293cd7a10eed60a0bec47f6bfc6873e6083adc243d58156c090e5e3f5413e13.json",
+          "sha256": "e293cd7a10eed60a0bec47f6bfc6873e6083adc243d58156c090e5e3f5413e13"
+        },
+        {
+          "path": "data/financial/objects/e2/e293cd7a10eed60a0bec47f6bfc6873e6083adc243d58156c090e5e3f5413e13.json",
+          "sha256": "e293cd7a10eed60a0bec47f6bfc6873e6083adc243d58156c090e5e3f5413e13"
+        }
+      ],
+      "scope_id": "consolidated"
+    }
+  ],
+  "mapping_results": [
+    {
+      "input_registration_ids": [
+        "80694083808f6693e2c3b15375f4b93af134c7eaab3290b3851b8c4484eb0d0c",
+        "cd58c3f49cc9b9544b9453b5c4eda5cc11693852fe9f421b24ae435449691276"
+      ],
+      "metric_id": "operating_margin",
+      "reason": null,
+      "status": "computed"
+    },
+    {
+      "input_registration_ids": [
+        "cd58c3f49cc9b9544b9453b5c4eda5cc11693852fe9f421b24ae435449691276",
+        "4dd69fc35088f3f7056a22c45f3fd9251ffc941a2353e0c754b664fa118f5b36"
+      ],
+      "metric_id": "revenue_growth",
+      "reason": null,
+      "status": "computed"
+    },
+    {
+      "input_registration_ids": [],
+      "metric_id": "media_entertainment_driver_1",
+      "reason": "行业专属指标缺审核字段绑定与原始输入；总收入不能替代 ARR、留存或其他驱动指标",
+      "status": "blocked"
+    },
+    {
+      "input_registration_ids": [],
+      "metric_id": "media_entertainment_driver_2",
+      "reason": "行业专属指标缺审核字段绑定与原始输入；总收入不能替代 ARR、留存或其他驱动指标",
+      "status": "blocked"
+    },
+    {
+      "input_registration_ids": [],
+      "metric_id": "media_entertainment_driver_3",
+      "reason": "行业专属指标缺审核字段绑定与原始输入；总收入不能替代 ARR、留存或其他驱动指标",
+      "status": "blocked"
+    }
+  ],
+  "missing_required_metric_ids": [
+    "media_entertainment_driver_1",
+    "media_entertainment_driver_2",
+    "media_entertainment_driver_3"
+  ],
+  "observations": [
+    {
+      "accounting_basis": "J-GAAP",
+      "available_at": "2026-10-11T02:01:15+00:00",
+      "comparability_notes": "consolidated；同报告可比列；同期间、同范围营业利润 / 收入；行业 media_entertainment 为待审核候选，不代替真实分部分类。",
+      "evidence_refs": [
+        "financial-cebc0b4d6573034dc838363afe00a4f663e80ede78cffeb3bc8fbba20e88ed5d",
+        "financial-c2e680a33a5b3e012dee02a097efe319d5e8a8e195fa324015a7adca7357667e"
+      ],
+      "id": "26b75e71e82fc516cff5d137b1a27b7c4266315253d2a5e5204bec2b9c8d320d",
+      "metric_id": "operating_margin",
+      "missing_reason": null,
+      "period": {
+        "basis": "year",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "segment_id": null,
+      "value": {
+        "currency": null,
+        "unit": "ratio",
+        "value": 0.15568917416866296
+      }
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "available_at": "2026-10-11T02:01:15+00:00",
+      "comparability_notes": "consolidated；同报告可比列；同报告相邻年度、同范围收入 / 上年收入 - 1；行业 media_entertainment 为待审核候选，不代替真实分部分类。",
+      "evidence_refs": [
+        "financial-c2e680a33a5b3e012dee02a097efe319d5e8a8e195fa324015a7adca7357667e",
+        "financial-d854af8f633bd9effbe479c87e71e7a7420f9b0fee20278c63173f63d1e59d5a"
+      ],
+      "id": "d1fcf97980636d39912467948b6f72f6e4570cc7838394ba6f69c0d86ef1d109",
+      "metric_id": "revenue_growth",
+      "missing_reason": null,
+      "period": {
+        "basis": "year",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "segment_id": null,
+      "value": {
+        "currency": null,
+        "unit": "ratio",
+        "value": 0.9855844425635365
+      }
+    }
+  ],
+  "period_end": "2026-03-31",
+  "schema_version": "1.0.0",
+  "scope_id": "consolidated",
+  "source_map": {
+    "financial-c2e680a33a5b3e012dee02a097efe319d5e8a8e195fa324015a7adca7357667e": {
+      "revision": 1,
+      "source_id": "financial:nintendo-2026-annual-v1:80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b"
+    },
+    "financial-cebc0b4d6573034dc838363afe00a4f663e80ede78cffeb3bc8fbba20e88ed5d": {
+      "revision": 1,
+      "source_id": "financial:nintendo-2026-annual-v1:80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b"
+    },
+    "financial-d854af8f633bd9effbe479c87e71e7a7420f9b0fee20278c63173f63d1e59d5a": {
+      "revision": 1,
+      "source_id": "financial:nintendo-2026-annual-v1:80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b"
+    }
+  }
+}

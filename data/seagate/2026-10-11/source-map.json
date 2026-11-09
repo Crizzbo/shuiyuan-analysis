@@ -1,0 +1,22 @@
+{
+  "e_results": {
+    "source_id": "seagate_20261011_results",
+    "revision": 1
+  },
+  "e_10k": {
+    "source_id": "seagate_20261011_10k",
+    "revision": 1
+  },
+  "e_quote": {
+    "source_id": "seagate_20261011_quote",
+    "revision": 1
+  },
+  "e_inputs": {
+    "source_id": "seagate_20261011_inputs",
+    "revision": 1
+  },
+  "e_checks": {
+    "source_id": "seagate_20261011_checks",
+    "revision": 1
+  }
+}

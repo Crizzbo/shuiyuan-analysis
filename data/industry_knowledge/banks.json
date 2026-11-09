@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "banks",
+    "industry_name_zh": "商业银行与多元化金融",
+    "sector_id": "financials",
+    "sector_name_zh": "金融",
+    "macro_sector_id": "FIN_INS",
+    "macro_sector_name_zh": "银行信贷、保险保障、证券资管与房地产金融",
+    "description_zh": "涵盖大型跨国全能银行、区域性商业银行及数字化借贷零售银行机构。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.45,
+    "typical_markup_ratio": 1.25,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "中等经营杠杆",
+    "typical_gross_margin_range": [0.40, 0.65]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 0.0,
+    "dio_warning_days": 0.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.05,
+    "debt_covenant_buffer_minimum_ratio": 0.12
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "央行基准利率走廊与贴现窗口流动性供给约束",
+      "零售居民端与企业端低成本核心活期存款 (CASA) 留存稳定性",
+      "同业拆借批发融资市场 (Fed Funds/SOFR) 资金拆借利率成本波动"
+    ],
+    "downstream_profile": "实体企业工商业贷款客户、按揭房贷个人购房者与零售消费信用卡用户",
+    "pricing_power_verdict": "拥有庞大零售存款网络的大行掌握资金成本绝对优势与存贷利差定价主动权，依赖同业负债的中小行利差高度承压",
+    "channel_inversion_sensitivity": "国债收益率曲线倒挂与存量贷款重定价周期错配是银行净息差 (NIM) 塌陷的核心先行指针"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "低成本零售活期存款沉淀稳固，净息差 (NIM) 逆市扩张且财富管理非息中收收入强劲增长",
+      "信贷资产质量稳健，不良贷款生成率持续处于低位，超额拨备覆盖率提供坚实安全垫",
+      "核心一级资本充足率 (CET1) 远超巴塞尔监管要求，大额分红与股票回购增厚有形普通股权益回报率 (ROTCE)"
+    ],
+    "leading_bear_defenses": [
+      "收益率曲线长周期深度倒挂致使借短贷长模式严重失血，存款向货币基金搬家迫使高息揽储压缩利差",
+      "商业地产 (CRE) 或重点领域贷款爆发集中违约，信贷减值拨备大幅激增吞噬当期主营利润",
+      "未实现债券投资账面巨额浮亏遭流动性挤兑强行变现，导致资本充足率击穿监管红线"
+    ],
+    "core_catalyst_dimensions": [
+      "季度净息差 (Net Interest Margin, NIM) 与生息资产平均收益率变动",
+      "不良贷款率 (NPL Ratio) 与信贷拨备覆盖率 (Provision Coverage Ratio) 披露",
+      "央行/监管机构年度银行全面资本分析与审查压力测试决议",
+      "核心一级资本充足率 (CET1 Ratio) 与净坏账冲销率 (Net Charge-off Rate)"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "关注类贷款 (Special Mention Loans) 占比异动飙升但不良贷款率表面保持平稳，存在掩盖实质性违约借新还旧",
+      "信贷资产减值损失计提不足，拨备计提力度显著落后于新增逾期借款规模",
+      "持有至到期投资 (HTM) 存在严重未确认账面浮亏严重侵蚀真实有形股东净资产"
+    ],
+    "channel_and_revenue_checks": [
+      "大额结构性存款与同业存单集中度异常上升以掩盖核心存款流失",
+      "表外理财与信托通道资产信用风险穿透回表敞口"
+    ]
+  }
+}

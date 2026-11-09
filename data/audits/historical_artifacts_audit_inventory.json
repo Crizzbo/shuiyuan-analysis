@@ -1,0 +1,37 @@
+{
+  "audit_timestamp": "2026-10-31T17:29:49.475148+00:00",
+  "quarantined_synthetic_artifacts": [
+    {
+      "path": "data/universe/chunks/",
+      "total_files": 100,
+      "provenance": "scripts/generate_10k_universe_dossiers.py",
+      "classification": "SYNTHETIC_MOCK_QUARANTINED",
+      "action": "标记为合成演示分块，严禁作为正式投研底账"
+    }
+  ],
+  "pending_audit_artifacts": [],
+  "verified_official_artifacts": [
+    {
+      "path": "data/universe/sec_company_tickers.json",
+      "size_bytes": 799583,
+      "sha256": "a9595d33a34615553ee706c95458fff0bb9fec9642a9d61710f3e5dbd45ca23e",
+      "classification": "OFFICIAL_REGULATORY_IDENTITY_INDEX",
+      "authority": "SEC EDGAR / JPX Exchange",
+      "action": "可信官方代码索引底账，准予消费"
+    },
+    {
+      "path": "data/universe/jpx_company_tickers.json",
+      "size_bytes": 1196864,
+      "sha256": "0c4897077031482b3b2070623c4626f4a5606871eee4900ec8164ee3612099d6",
+      "classification": "OFFICIAL_REGULATORY_IDENTITY_INDEX",
+      "authority": "SEC EDGAR / JPX Exchange",
+      "action": "可信官方代码索引底账，准予消费"
+    }
+  ],
+  "summary": {
+    "total_quarantined_artifacts": 1,
+    "total_verified_indexes": 2,
+    "total_pending_review_reports": 0,
+    "policy": "所有合成产物均已打标隔离，正式发布必须提供官方三表证据与时间戳验真。"
+  }
+}

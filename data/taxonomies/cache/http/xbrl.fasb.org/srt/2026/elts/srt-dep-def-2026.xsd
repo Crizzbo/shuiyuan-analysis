@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+(c) 2010-2026 Financial Accounting Foundation; (c) 2007-2010 XBRL US, Inc.  All Rights Reserved.
+Notice: Authorized Uses are Set Forth at https://xbrl.fasb.org/terms/SRT_TermsConditions.html
+  -->
+<xs:schema elementFormDefault='qualified' targetNamespace='http://www.fasb.org/srt-dep/2026' xmlns:link='http://www.xbrl.org/2003/linkbase' xmlns:srt-dep='http://www.fasb.org/srt-dep/2026' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+  <xs:annotation>
+    <xs:documentation>This file is an entry point for mapping the elements that moved from the 2025 US GAAP Taxonomy to the SRT (srt).</xs:documentation>
+    <xs:appinfo>
+      <link:linkbase id='lnk'>
+        <link:roleRef roleURI='http://fasb.org/srt/role/deprecated/deprecated' xlink:href='srt-roles-2026.xsd#srt-depcon' xlink:type='simple' />
+        <link:arcroleRef arcroleURI='http://www.xbrl.org/2009/arcrole/dep-concept-deprecatedConcept' xlink:href='http://www.xbrl.org/lrr/arcrole/deprecated-2009-12-16.xsd#dep-concept-deprecatedConcept' xlink:type='simple' />
+        <link:definitionLink xlink:role='http://fasb.org/srt/role/deprecated/deprecated' xlink:type='extended'>
+          <link:loc xlink:href='srt-2026.xsd#srt_DeprecatedItems' xlink:label='loc_srt_DeprecatedItems' xlink:type='locator' />
+          <link:loc xlink:href='https://xbrl.fasb.org/us-gaap/2025/elts/us-gaap-2025.xsd#us-gaap_DeprecatedItems' xlink:label='loc_DeprecatedItems' xlink:type='locator' />
+          <link:definitionArc order='10.0' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-concept-deprecatedConcept' xlink:from='loc_srt_DeprecatedItems' xlink:to='loc_DeprecatedItems' xlink:type='arc' />
+        </link:definitionLink>
+      </link:linkbase>
+    </xs:appinfo>
+  </xs:annotation>
+</xs:schema>

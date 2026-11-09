@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "food_beverage",
+    "industry_name_zh": "食品饮料与高端白酒消费",
+    "sector_id": "consumer_staples",
+    "sector_name_zh": "必需消费",
+    "macro_sector_id": "AGR",
+    "macro_sector_name_zh": "农业、食品加工与林业资源",
+    "description_zh": "涵盖高端烈酒与白酒、啤酒乳品、包装饮用水、软饮料及调味发酵品制造企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.52,
+    "typical_markup_ratio": 1.35,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "中等经营杠杆",
+    "typical_gross_margin_range": [0.45, 0.90]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 180.0,
+    "dio_warning_days": 320.0,
+    "rd_capitalization_max_allowed": 0.02,
+    "top_customer_concentration_redline": 0.15,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "优质酿造原粮农产品、大麦麦芽与核心生态产区纯净天然水源地保护",
+      "高端老熟基酒产能储备规模与陈酿窖池微生物菌群微生态成熟度",
+      "食品级包装耗材 (精密玻璃瓶、铝制易拉罐、无菌纸铝复合包材) 大宗价格周期"
+    ],
+    "downstream_profile": "全国各级分销批发商、餐饮终端、大型连锁商超便利店与即时电商零售平台",
+    "pricing_power_verdict": "拥有强社交礼品属性与文化心智壁垒的高端白酒具备跨周期自主提价权，通用大众食品面临激烈同质化价格战",
+    "channel_inversion_sensitivity": "二级批发市场一批价、现货倒挂低于官方标称出厂价是经销商抛货与退网崩盘的最致命先行警报"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "核心超级大单品渠道一批价坚挺上行，真实批发价显著高于出厂价形成良性顺价扩利闭环",
+      "合同负债 (经销商预付货款) 蓄水池充沛且单季环比净增长，为后续业绩提供极高确定性",
+      "产品矩阵高端化结构升级顺利，带动综合毛利率与经营性净现金流创历史新高"
+    ],
+    "leading_bear_defenses": [
+      "真实外场批发价低于出厂价引发严重价格倒挂，渠道商利差转负导致降价抛货套现与大面积退网",
+      "合同负债预收款蓄水池单季环比断崖下滑超过 20%，渠道打款进货信心严重瓦解",
+      "重大食品安全舆情危机或宏观商务政务消费场景降级，导致高端单品动销严重受阻滞销"
+    ],
+    "core_catalyst_dimensions": [
+      "第三方独立监测白酒核心单品批发参考价与现货批价走势",
+      "季度财报附注中合同负债 (预收账款) 规模与单季净变动趋势",
+      "中秋、国庆、春节消费旺季渠道动销备货调研与经销商去库进度",
+      "农产品原材料 (高粱、大麦、白糖、包材) 大宗现货期货价格指数"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "真实微观批发价与出厂价已发生倒挂，但管理层仍向经销商强行压货以粉饰表观营收",
+      "产成品库存增速超越主营营收增速 20 个百分点以上且合同负债骤降",
+      "存货跌价准备计提严重不足，对滞销长库龄临期包装食品未做充分减值"
+    ],
+    "channel_and_revenue_checks": [
+      "经销商应收账款异常激增，背离食品饮料行业传统的先款后货商业惯例",
+      "关联方经销商或大股东体外空壳公司代垫销售与返利费用以虚增上市公司营业利润"
+    ]
+  }
+}

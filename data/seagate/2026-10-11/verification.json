@@ -1,0 +1,92 @@
+{
+  "verified_at": "2026-10-11T10:06:39Z",
+  "scope": "输入桥及数值实现；不是假设真实性或证券买入验证",
+  "checks": [
+    {
+      "id": "calc_bear",
+      "check": "numpy-financial NPV与股权价值核对",
+      "absolute_difference_usd": 0.0,
+      "passed": true
+    },
+    {
+      "id": "calc_base",
+      "check": "numpy-financial NPV与股权价值核对",
+      "absolute_difference_usd": 0.0,
+      "passed": true
+    },
+    {
+      "id": "calc_bull",
+      "check": "numpy-financial NPV与股权价值核对",
+      "absolute_difference_usd": 0.0,
+      "passed": true
+    },
+    {
+      "id": "calc_reverse",
+      "check": "求根增速正向重算报价",
+      "price_error_usd": 2.957222022814676e-09,
+      "passed": true
+    },
+    {
+      "id": "calc_sensitivity_1",
+      "check": "独立NPV折现核对",
+      "passed": true
+    },
+    {
+      "id": "calc_sensitivity_2",
+      "check": "独立NPV折现核对",
+      "passed": true
+    },
+    {
+      "id": "calc_sensitivity_3",
+      "check": "独立NPV折现核对",
+      "passed": true
+    },
+    {
+      "id": "calc_sensitivity_4",
+      "check": "独立NPV折现核对",
+      "passed": true
+    },
+    {
+      "id": "calc_sensitivity_5",
+      "check": "独立NPV折现核对",
+      "passed": true
+    },
+    {
+      "id": "calc_sensitivity_6",
+      "check": "独立NPV折现核对",
+      "passed": true
+    },
+    {
+      "id": "calc_sensitivity_7",
+      "check": "独立NPV折现核对",
+      "passed": true
+    },
+    {
+      "id": "calc_sensitivity_8",
+      "check": "独立NPV折现核对",
+      "passed": true
+    },
+    {
+      "id": "calc_sensitivity_9",
+      "check": "独立NPV折现核对",
+      "passed": true
+    },
+    {
+      "id": "calc_pe",
+      "check": "FinanceToolkit与转录数值除法核对",
+      "passed": true
+    },
+    {
+      "id": "calc_margin",
+      "check": "FinanceToolkit与转录数值除法核对",
+      "passed": true
+    },
+    {
+      "id": "calc_liquidity",
+      "check": "FinanceToolkit与转录数值除法核对",
+      "passed": true
+    }
+  ],
+  "fcf_bridge_check": true,
+  "all_passed": true
+}

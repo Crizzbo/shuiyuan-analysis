@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This schema was created by staff of the U.S. Securities and Exchange Commission. -->
+<!-- Data and content created by government employees within the scope of their employment -->
+<!-- are not subject to domestic copyright protection. 17 U.S.C. 105. -->
+<xs:schema
+xmlns:dtr-types="http://www.xbrl.org/dtr/type/2024-01-31"
+xmlns:link="http://www.xbrl.org/2003/linkbase"
+xmlns:ref="http://www.xbrl.org/2006/ref"
+xmlns:sro="http://xbrl.sec.gov/sro/2026"
+xmlns:xbrldt="http://xbrl.org/2005/xbrldt"
+xmlns:xbrli="http://www.xbrl.org/2003/instance"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+targetNamespace="http://xbrl.sec.gov/sro/2026"
+elementFormDefault="qualified"
+xsi:schemaLocation="http://www.xbrl.org/2006/ref http://www.xbrl.org/2006/ref-2006-02-27.xsd">
+<xs:import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+<xs:import namespace="http://xbrl.org/2005/xbrldt" schemaLocation="http://www.xbrl.org/2005/xbrldt-2005.xsd"/>
+<xs:import namespace="http://www.xbrl.org/dtr/type/2024-01-31" schemaLocation="https://www.xbrl.org/dtr/type/2024-01-31/types.xsd"/>
+<xs:import namespace="http://xbrl.sec.gov/dei/2026" schemaLocation="https://xbrl.sec.gov/dei/2026/dei-2026.xsd"/>
+<xs:import namespace="http://www.xbrl.org/2006/ref" schemaLocation="http://www.xbrl.org/2006/ref-2006-02-27.xsd"/>
+<xs:annotation>
+<xs:appinfo>
+<link:roleType roleURI="http://xbrl.sec.gov/17ad27/role/CmspReportTable" id="CmspReportTable">
+<link:definition>001 - Disclosure - CMSP Report</link:definition>
+<link:usedOn>link:presentationLink</link:usedOn>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/17ad27/role/SubmissionsTable" id="SubmissionsTable">
+<link:definition>002 - Disclosure - Submissions</link:definition>
+<link:usedOn>link:presentationLink</link:usedOn>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/17ad27/role/CancellationsTable" id="CancellationsTable">
+<link:definition>003 - Disclosure - Cancellations</link:definition>
+<link:usedOn>link:presentationLink</link:usedOn>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/17ad27/role/AffirmationsTable" id="AffirmationsTable">
+<link:definition>004 - Disclosure - Affirmations</link:definition>
+<link:usedOn>link:presentationLink</link:usedOn>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/17ad27/role/ProgressTable" id="ProgressTable">
+<link:definition>005 - Disclosure - Progress</link:definition>
+<link:usedOn>link:presentationLink</link:usedOn>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/17ad27/role/ServiceTypesOnly" id="ServiceTypesOnly">
+<link:definition>006 - Document - Service Types Only</link:definition>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/17ad27/role/UserTypesOnly" id="UserTypesOnly">
+<link:definition>007 - Document - User Types Only</link:definition>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/17ad27/role/AssetClassesOnly" id="AssetClassesOnly">
+<link:definition>008 - Document - Asset Classes Only</link:definition>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/17ad27/role/SubmittedHoursOnly" id="SubmittedHoursOnly">
+<link:definition>009 - Document - Submitted Hours Only</link:definition>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/17ad27/role/AffirmedHoursOnly" id="AffirmedHoursOnly">
+<link:definition>010 - Document - Affirmed Hours Only</link:definition>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/sro/role/Defaults" id="Defaults">
+<link:definition>011 - Document - Defaults</link:definition>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:linkbase id="lnk">
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/all" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#all"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/domain-member" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#domain-member"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#hypercube-dimension"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/dimension-default" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#dimension-default"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/dimension-domain" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#dimension-domain"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/sro/role/Defaults" xlink:type="simple" xlink:href="#Defaults"/>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sro/role/Defaults">
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSvcTypAxis" xlink:label="CmspSvcTypAxis"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSvcTypDomain" xlink:label="CmspSvcTypDomain"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/dimension-default" xlink:from="CmspSvcTypAxis" xlink:to="CmspSvcTypDomain" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspUsrTypAxis" xlink:label="CmspUsrTypAxis"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspUsrTypDomain" xlink:label="CmspUsrTypDomain"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/dimension-default" xlink:from="CmspUsrTypAxis" xlink:to="CmspUsrTypDomain" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAsstClsAxis" xlink:label="CmspAsstClsAxis"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAsstClsDomain" xlink:label="CmspAsstClsDomain"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/dimension-default" xlink:from="CmspAsstClsAxis" xlink:to="CmspAsstClsDomain" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSubmHrsAxis" xlink:label="CmspSubmHrsAxis"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSubmHrsDomain" xlink:label="CmspSubmHrsDomain"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/dimension-default" xlink:from="CmspSubmHrsAxis" xlink:to="CmspSubmHrsDomain" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAffrmHrsAxis" xlink:label="CmspAffrmHrsAxis"/>
+<link:loc xlink:type="locator" xlink:href="#sro_ClrAgncyAffrmHoursDomain" xlink:label="ClrAgncyAffrmHoursDomain"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/dimension-default" xlink:from="CmspAffrmHrsAxis" xlink:to="ClrAgncyAffrmHoursDomain" order="1.0" priority="10"/>
+</link:definitionLink>
+<link:labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+<link:loc xlink:type="locator" xlink:href="#sro_CmspReportTable" xlink:label="CmspReportTable"/>
+<link:label xlink:type="resource" xlink:label="label_CmspReportTable" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Report [Table]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspReportTable" xlink:to="label_CmspReportTable" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspReportTable_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Report</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspReportTable" xlink:to="label_CmspReportTable_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSvcTypAxis" xlink:label="CmspSvcTypAxis"/>
+<link:label xlink:type="resource" xlink:label="label_CmspSvcTypAxis" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Service Type [Axis]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspSvcTypAxis" xlink:to="label_CmspSvcTypAxis" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspSvcTypAxis_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Service Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspSvcTypAxis" xlink:to="label_CmspSvcTypAxis_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspReportLineItems" xlink:label="CmspReportLineItems"/>
+<link:label xlink:type="resource" xlink:label="label_CmspReportLineItems" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Report [Line Items]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspReportLineItems" xlink:to="label_CmspReportLineItems" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspReportLineItems_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">CMSP Report</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspReportLineItems" xlink:to="label_CmspReportLineItems_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspUsrTypAxis" xlink:label="CmspUsrTypAxis"/>
+<link:label xlink:type="resource" xlink:label="label_CmspUsrTypAxis" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP User Types [Axis]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspUsrTypAxis" xlink:to="label_CmspUsrTypAxis" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspUsrTypAxis_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">User Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspUsrTypAxis" xlink:to="label_CmspUsrTypAxis_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSubmissionAbstract" xlink:label="CmspSubmissionAbstract"/>
+<link:label xlink:type="resource" xlink:label="label_CmspSubmissionAbstract" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Submissions [Abstract]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspSubmissionAbstract" xlink:to="label_CmspSubmissionAbstract" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSubmissionsTable" xlink:label="CmspSubmissionsTable"/>
+<link:label xlink:type="resource" xlink:label="label_CmspSubmissionsTable" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Submissions [Table]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspSubmissionsTable" xlink:to="label_CmspSubmissionsTable" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspSubmissionsTable_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">CMSP Submissions Data</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspSubmissionsTable" xlink:to="label_CmspSubmissionsTable_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAsstClsAxis" xlink:label="CmspAsstClsAxis"/>
+<link:label xlink:type="resource" xlink:label="label_CmspAsstClsAxis" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Asset Class [Axis]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspAsstClsAxis" xlink:to="label_CmspAsstClsAxis" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspAsstClsAxis_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Asset Class</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspAsstClsAxis" xlink:to="label_CmspAsstClsAxis_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSubmissionsLineItems" xlink:label="CmspSubmissionsLineItems"/>
+<link:label xlink:type="resource" xlink:label="label_CmspSubmissionsLineItems" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Submissions [Line Items]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspSubmissionsLineItems" xlink:to="label_CmspSubmissionsLineItems" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspSubmissionsLineItems_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Submissions</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspSubmissionsLineItems" xlink:to="label_CmspSubmissionsLineItems_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspTrdsSubmittdAmt" xlink:label="CmspTrdsSubmittdAmt"/>
+<link:label xlink:type="resource" xlink:label="label_CmspTrdsSubmittdAmt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Trades Submitted</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspTrdsSubmittdAmt" xlink:to="label_CmspTrdsSubmittdAmt" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspTrdsSubmittdAmt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Trades Submitted</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspTrdsSubmittdAmt" xlink:to="label_CmspTrdsSubmittdAmt_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAllcnsSubmittdAmt" xlink:label="CmspAllcnsSubmittdAmt"/>
+<link:label xlink:type="resource" xlink:label="label_CmspAllcnsSubmittdAmt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Allocations Submitted</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspAllcnsSubmittdAmt" xlink:to="label_CmspAllcnsSubmittdAmt" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspAllcnsSubmittdAmt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Allocations Submitted</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspAllcnsSubmittdAmt" xlink:to="label_CmspAllcnsSubmittdAmt_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspConfsSubmittdAmt" xlink:label="CmspConfsSubmittdAmt"/>
+<link:label xlink:type="resource" xlink:label="label_CmspConfsSubmittdAmt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Confirmations Submitted</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspConfsSubmittdAmt" xlink:to="label_CmspConfsSubmittdAmt" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspConfsSubmittdAmt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Confirmations Submitted</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspConfsSubmittdAmt" xlink:to="label_CmspConfsSubmittdAmt_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspConfsCancAmt" xlink:label="CmspConfsCancAmt"/>
+<link:label xlink:type="resource" xlink:label="label_CmspConfsCancAmt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Confirmations Cancelled</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspConfsCancAmt" xlink:to="label_CmspConfsCancAmt" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspConfsCancAmt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Confirmations Cancelled</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspConfsCancAmt" xlink:to="label_CmspConfsCancAmt_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspConfsAffrmdTradDtPct" xlink:label="CmspConfsAffrmdTradDtPct"/>
+<link:label xlink:type="resource" xlink:label="label_CmspConfsAffrmdTradDtPct" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Confirmations Affirmed Trade Date Percent</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspConfsAffrmdTradDtPct" xlink:to="label_CmspConfsAffrmdTradDtPct" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspConfsAffrmdTradDtPct_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Confirmations Affirmed Trade Date Percent</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspConfsAffrmdTradDtPct" xlink:to="label_CmspConfsAffrmdTradDtPct_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspPctAllcnsAndConfsMtchdAndConfdPct" xlink:label="CmspPctAllcnsAndConfsMtchdAndConfdPct"/>
+<link:label xlink:type="resource" xlink:label="label_CmspPctAllcnsAndConfsMtchdAndConfdPct" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Percent Allocations And Confirmations Matched And Confd Percent</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspPctAllcnsAndConfsMtchdAndConfdPct" xlink:to="label_CmspPctAllcnsAndConfsMtchdAndConfdPct" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspPctAllcnsAndConfsMtchdAndConfdPct_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Allocations and Confirmations Matched and Confirmed Percent</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspPctAllcnsAndConfsMtchdAndConfdPct" xlink:to="label_CmspPctAllcnsAndConfsMtchdAndConfdPct_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspReportAbstract" xlink:label="CmspReportAbstract"/>
+<link:label xlink:type="resource" xlink:label="label_CmspReportAbstract" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Report [Abstract]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspReportAbstract" xlink:to="label_CmspReportAbstract" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspStpPlcyPrcdrSmryTextBlock" xlink:label="CmspStpPlcyPrcdrSmryTextBlock"/>
+<link:label xlink:type="resource" xlink:label="label_CmspStpPlcyPrcdrSmryTextBlock" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP STP Policies and Procedures Summary [Text block]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspStpPlcyPrcdrSmryTextBlock" xlink:to="label_CmspStpPlcyPrcdrSmryTextBlock" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspStpPlcyPrcdrSmryTextBlock_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">STP Policies and Procedures Summary</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspStpPlcyPrcdrSmryTextBlock" xlink:to="label_CmspStpPlcyPrcdrSmryTextBlock_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspStpPrgrsTextBlock" xlink:label="CmspStpPrgrsTextBlock"/>
+<link:label xlink:type="resource" xlink:label="label_CmspStpPrgrsTextBlock" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP STP Progress [Text block]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspStpPrgrsTextBlock" xlink:to="label_CmspStpPrgrsTextBlock" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspStpPrgrsTextBlock_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">STP Progress</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspStpPrgrsTextBlock" xlink:to="label_CmspStpPrgrsTextBlock_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspActnIntdsToTakeForStpTextBlock" xlink:label="CmspActnIntdsToTakeForStpTextBlock"/>
+<link:label xlink:type="resource" xlink:label="label_CmspActnIntdsToTakeForStpTextBlock" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Actions CMSP Intends to Take for STP [Text block]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspActnIntdsToTakeForStpTextBlock" xlink:to="label_CmspActnIntdsToTakeForStpTextBlock" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspActnIntdsToTakeForStpTextBlock_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Actions CMSP Intends to Take for STP</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspActnIntdsToTakeForStpTextBlock" xlink:to="label_CmspActnIntdsToTakeForStpTextBlock_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSubmHrsAxis" xlink:label="CmspSubmHrsAxis"/>
+<link:label xlink:type="resource" xlink:label="label_CmspSubmHrsAxis" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Submitted Hours [Axis]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspSubmHrsAxis" xlink:to="label_CmspSubmHrsAxis" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspSubmHrsAxis_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Submitted Hours:</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspSubmHrsAxis" xlink:to="label_CmspSubmHrsAxis_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspCancellationsTable" xlink:label="CmspCancellationsTable"/>
+<link:label xlink:type="resource" xlink:label="label_CmspCancellationsTable_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Cancellations [Table]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspCancellationsTable" xlink:to="label_CmspCancellationsTable_2" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspCancellationsTable" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Cancellations</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspCancellationsTable" xlink:to="label_CmspCancellationsTable" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAffirmationsTable" xlink:label="CmspAffirmationsTable"/>
+<link:label xlink:type="resource" xlink:label="label_CmspAffirmationsTable" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Affirmations [Table]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspAffirmationsTable" xlink:to="label_CmspAffirmationsTable" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspAffirmationsTable_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Affirmations</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspAffirmationsTable" xlink:to="label_CmspAffirmationsTable_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspProgressTable" xlink:label="CmspProgressTable"/>
+<link:label xlink:type="resource" xlink:label="label_CmspProgressTable" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Progress [Table]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspProgressTable" xlink:to="label_CmspProgressTable" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspProgressTable_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Progress</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspProgressTable" xlink:to="label_CmspProgressTable_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspProgressLineItems" xlink:label="CmspProgressLineItems"/>
+<link:label xlink:type="resource" xlink:label="label_CmspProgressLineItems" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Progress [Line Items]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspProgressLineItems" xlink:to="label_CmspProgressLineItems" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspProgressLineItems_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Progress</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspProgressLineItems" xlink:to="label_CmspProgressLineItems_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspProgressAbstract" xlink:label="CmspProgressAbstract"/>
+<link:label xlink:type="resource" xlink:label="label_CmspProgressAbstract" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Progress [Abstract]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspProgressAbstract" xlink:to="label_CmspProgressAbstract" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspProgressAbstract_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Progress</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspProgressAbstract" xlink:to="label_CmspProgressAbstract_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAffirmationsAbstract" xlink:label="CmspAffirmationsAbstract"/>
+<link:label xlink:type="resource" xlink:label="label_CmspAffirmationsAbstract" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Affirmations [Abstract]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspAffirmationsAbstract" xlink:to="label_CmspAffirmationsAbstract" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspAffirmationsAbstract_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Affirmations</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspAffirmationsAbstract" xlink:to="label_CmspAffirmationsAbstract_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAffirmationsLineItems" xlink:label="CmspAffirmationsLineItems"/>
+<link:label xlink:type="resource" xlink:label="label_CmspAffirmationsLineItems" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Affirmations [Line Items]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspAffirmationsLineItems" xlink:to="label_CmspAffirmationsLineItems" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspAffirmationsLineItems_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Affirmations</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspAffirmationsLineItems" xlink:to="label_CmspAffirmationsLineItems_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspCancellationsAbstract" xlink:label="CmspCancellationsAbstract"/>
+<link:label xlink:type="resource" xlink:label="label_CmspCancellationsAbstract" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Cancellations [Abstract]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspCancellationsAbstract" xlink:to="label_CmspCancellationsAbstract" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspCancellationsAbstract_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Cancellations</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspCancellationsAbstract" xlink:to="label_CmspCancellationsAbstract_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspCancellationsLineItems" xlink:label="CmspCancellationsLineItems"/>
+<link:label xlink:type="resource" xlink:label="label_CmspCancellationsLineItems" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Cancellations [Line Items]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspCancellationsLineItems" xlink:to="label_CmspCancellationsLineItems" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspCancellationsLineItems_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Cancellations</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspCancellationsLineItems" xlink:to="label_CmspCancellationsLineItems_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAffrmHrsAxis" xlink:label="CmspAffrmHrsAxis"/>
+<link:label xlink:type="resource" xlink:label="label_CmspAffrmHrsAxis" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Affirmed Hours [Axis]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspAffrmHrsAxis" xlink:to="label_CmspAffrmHrsAxis" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspAffrmHrsAxis_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Affirmed Hours</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspAffrmHrsAxis" xlink:to="label_CmspAffrmHrsAxis_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSubmHrsDomain" xlink:label="CmspSubmHrsDomain"/>
+<link:label xlink:type="resource" xlink:label="label_CmspSubmHrsDomain" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Submitted Hours [Domain]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspSubmHrsDomain" xlink:to="label_CmspSubmHrsDomain" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspSubmHrsDomain_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Submitted Hours</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspSubmHrsDomain" xlink:to="label_CmspSubmHrsDomain_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CentralMatchingMember" xlink:label="CentralMatchingMember"/>
+<link:label xlink:type="resource" xlink:label="label_CentralMatchingMember" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Central Matching [Member]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CentralMatchingMember" xlink:to="label_CentralMatchingMember" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CentralMatchingMember_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">CM</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CentralMatchingMember" xlink:to="label_CentralMatchingMember_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_ElectronicTradeConfirmationMember" xlink:label="ElectronicTradeConfirmationMember"/>
+<link:label xlink:type="resource" xlink:label="label_ElectronicTradeConfirmationMember" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Eletronic Trade Conformation [Member]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ElectronicTradeConfirmationMember" xlink:to="label_ElectronicTradeConfirmationMember" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_ElectronicTradeConfirmationMember_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">ETC</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ElectronicTradeConfirmationMember" xlink:to="label_ElectronicTradeConfirmationMember_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_ClrAgncyAffrmHoursDomain" xlink:label="ClrAgncyAffrmHoursDomain"/>
+<link:label xlink:type="resource" xlink:label="label_ClrAgncyAffrmHoursDomain" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Affirmed Hours [Domain]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ClrAgncyAffrmHoursDomain" xlink:to="label_ClrAgncyAffrmHoursDomain" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_ClrAgncyAffrmHoursDomain_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Affirmed Hours</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ClrAgncyAffrmHoursDomain" xlink:to="label_ClrAgncyAffrmHoursDomain_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAsstClsDomain" xlink:label="CmspAsstClsDomain"/>
+<link:label xlink:type="resource" xlink:label="label_CmspAsstClsDomain" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Asset Class [Domain]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspAsstClsDomain" xlink:to="label_CmspAsstClsDomain" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspAsstClsDomain_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Asset Class</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspAsstClsDomain" xlink:to="label_CmspAsstClsDomain_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspUsrTypDomain" xlink:label="CmspUsrTypDomain"/>
+<link:label xlink:type="resource" xlink:label="label_CmspUsrTypDomain" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP User Types [Domain]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspUsrTypDomain" xlink:to="label_CmspUsrTypDomain" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspUsrTypDomain_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">User Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspUsrTypDomain" xlink:to="label_CmspUsrTypDomain_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSvcTypDomain" xlink:label="CmspSvcTypDomain"/>
+<link:label xlink:type="resource" xlink:label="label_CmspSvcTypDomain" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">CMSP Service Type [Domain]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspSvcTypDomain" xlink:to="label_CmspSvcTypDomain" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CmspSvcTypDomain_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Service Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmspSvcTypDomain" xlink:to="label_CmspSvcTypDomain_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_DocumentType" xlink:label="DocumentType"/>
+<link:label xlink:type="resource" xlink:label="label_DocumentType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Document Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentType" xlink:to="label_DocumentType" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_DocumentType_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">EDGAR Document Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentType" xlink:to="label_DocumentType_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_AmendmentFlag" xlink:label="AmendmentFlag"/>
+<link:label xlink:type="resource" xlink:label="label_AmendmentFlag" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Amendment [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AmendmentFlag" xlink:to="label_AmendmentFlag" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_AmendmentFlag_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Amended Tagging</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AmendmentFlag" xlink:to="label_AmendmentFlag_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_AmendmentDescription" xlink:label="AmendmentDescription"/>
+<link:label xlink:type="resource" xlink:label="label_AmendmentDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Amendment Description</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AmendmentDescription" xlink:to="label_AmendmentDescription" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_AmendmentDescription_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Amended Tagging Description</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AmendmentDescription" xlink:to="label_AmendmentDescription_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_EntityRegistrantName" xlink:label="EntityRegistrantName"/>
+<link:label xlink:type="resource" xlink:label="label_EntityRegistrantName" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Entity Registrant Name</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="EntityRegistrantName" xlink:to="label_EntityRegistrantName" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_EntityRegistrantName_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Conformed Name</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="EntityRegistrantName" xlink:to="label_EntityRegistrantName_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_EntityCentralIndexKey" xlink:label="EntityCentralIndexKey"/>
+<link:label xlink:type="resource" xlink:label="label_EntityCentralIndexKey" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Entity Central Index Key</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="EntityCentralIndexKey" xlink:to="label_EntityCentralIndexKey" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_EntityCentralIndexKey_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">CIK</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="EntityCentralIndexKey" xlink:to="label_EntityCentralIndexKey_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_DocumentPeriodEndDate" xlink:label="DocumentPeriodEndDate"/>
+<link:label xlink:type="resource" xlink:label="label_DocumentPeriodEndDate" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Period End Date</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentPeriodEndDate" xlink:to="label_DocumentPeriodEndDate" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_DocumentPeriodEndDate_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Document Period End Date</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentPeriodEndDate" xlink:to="label_DocumentPeriodEndDate_2" priority="10"/>
+</link:labelLink>
+<link:referenceLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+<link:loc xlink:type="locator" xlink:href="#sro_CmspReportAbstract" xlink:label="CmspReportAbstract"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspReportAbstract" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspReportAbstract" xlink:to="reference_CmspReportAbstract" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspReportTable" xlink:label="CmspReportTable"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspReportTable" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspReportTable" xlink:to="reference_CmspReportTable" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspReportLineItems" xlink:label="CmspReportLineItems"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspReportLineItems" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspReportLineItems" xlink:to="reference_CmspReportLineItems" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSubmissionAbstract" xlink:label="CmspSubmissionAbstract"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspSubmissionAbstract" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspSubmissionAbstract" xlink:to="reference_CmspSubmissionAbstract" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSubmissionsTable" xlink:label="CmspSubmissionsTable"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspSubmissionsTable" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspSubmissionsTable" xlink:to="reference_CmspSubmissionsTable" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSvcTypAxis" xlink:label="CmspSvcTypAxis"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspSvcTypAxis" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>4</ref:Subsection>
+<ref:Paragraph>ii</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspSvcTypAxis" xlink:to="reference_CmspSvcTypAxis" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspUsrTypAxis" xlink:label="CmspUsrTypAxis"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspUsrTypAxis" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>4</ref:Subsection>
+<ref:Paragraph>iii</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspUsrTypAxis" xlink:to="reference_CmspUsrTypAxis" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAsstClsAxis" xlink:label="CmspAsstClsAxis"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspAsstClsAxis" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>4</ref:Subsection>
+<ref:Paragraph>iv</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspAsstClsAxis" xlink:to="reference_CmspAsstClsAxis" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspStpPlcyPrcdrSmryTextBlock" xlink:label="CmspStpPlcyPrcdrSmryTextBlock"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspStpPlcyPrcdrSmryTextBlock" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>1</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspStpPlcyPrcdrSmryTextBlock" xlink:to="reference_CmspStpPlcyPrcdrSmryTextBlock" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspStpPrgrsTextBlock" xlink:label="CmspStpPrgrsTextBlock"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspStpPrgrsTextBlock" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>2</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspStpPrgrsTextBlock" xlink:to="reference_CmspStpPrgrsTextBlock" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspActnIntdsToTakeForStpTextBlock" xlink:label="CmspActnIntdsToTakeForStpTextBlock"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspActnIntdsToTakeForStpTextBlock" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>5</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspActnIntdsToTakeForStpTextBlock" xlink:to="reference_CmspActnIntdsToTakeForStpTextBlock" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSubmissionsLineItems" xlink:label="CmspSubmissionsLineItems"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspSubmissionsLineItems" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspSubmissionsLineItems" xlink:to="reference_CmspSubmissionsLineItems" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspTrdsSubmittdAmt" xlink:label="CmspTrdsSubmittdAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspTrdsSubmittdAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>i</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspTrdsSubmittdAmt" xlink:to="reference_CmspTrdsSubmittdAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAllcnsSubmittdAmt" xlink:label="CmspAllcnsSubmittdAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspAllcnsSubmittdAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>ii</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspAllcnsSubmittdAmt" xlink:to="reference_CmspAllcnsSubmittdAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspConfsSubmittdAmt" xlink:label="CmspConfsSubmittdAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspConfsSubmittdAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>iii</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspConfsSubmittdAmt" xlink:to="reference_CmspConfsSubmittdAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspConfsCancAmt" xlink:label="CmspConfsCancAmt"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspConfsCancAmt" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>iii</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspConfsCancAmt" xlink:to="reference_CmspConfsCancAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspConfsAffrmdTradDtPct" xlink:label="CmspConfsAffrmdTradDtPct"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspConfsAffrmdTradDtPct" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>iv</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspConfsAffrmdTradDtPct" xlink:to="reference_CmspConfsAffrmdTradDtPct" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspPctAllcnsAndConfsMtchdAndConfdPct" xlink:label="CmspPctAllcnsAndConfsMtchdAndConfdPct"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspPctAllcnsAndConfsMtchdAndConfdPct" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>v</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspPctAllcnsAndConfsMtchdAndConfdPct" xlink:to="reference_CmspPctAllcnsAndConfsMtchdAndConfdPct" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSvcTypDomain" xlink:label="CmspSvcTypDomain"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspSvcTypDomain" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>4</ref:Subsection>
+<ref:Paragraph>ii</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspSvcTypDomain" xlink:to="reference_CmspSvcTypDomain" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspUsrTypDomain" xlink:label="CmspUsrTypDomain"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspUsrTypDomain" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>4</ref:Subsection>
+<ref:Paragraph>iii</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspUsrTypDomain" xlink:to="reference_CmspUsrTypDomain" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAsstClsDomain" xlink:label="CmspAsstClsDomain"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspAsstClsDomain" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>4</ref:Subsection>
+<ref:Paragraph>iv</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspAsstClsDomain" xlink:to="reference_CmspAsstClsDomain" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspCancellationsAbstract" xlink:label="CmspCancellationsAbstract"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspCancellationsAbstract" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>iii</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspCancellationsAbstract" xlink:to="reference_CmspCancellationsAbstract" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspCancellationsTable" xlink:label="CmspCancellationsTable"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspCancellationsTable" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>iii</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspCancellationsTable" xlink:to="reference_CmspCancellationsTable" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspCancellationsLineItems" xlink:label="CmspCancellationsLineItems"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspCancellationsLineItems" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>iii</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspCancellationsLineItems" xlink:to="reference_CmspCancellationsLineItems" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAffirmationsAbstract" xlink:label="CmspAffirmationsAbstract"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspAffirmationsAbstract" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>iv</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspAffirmationsAbstract" xlink:to="reference_CmspAffirmationsAbstract" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAffirmationsTable" xlink:label="CmspAffirmationsTable"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspAffirmationsTable" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>iv</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspAffirmationsTable" xlink:to="reference_CmspAffirmationsTable" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAffirmationsLineItems" xlink:label="CmspAffirmationsLineItems"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspAffirmationsLineItems" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>iv</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspAffirmationsLineItems" xlink:to="reference_CmspAffirmationsLineItems" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspProgressAbstract" xlink:label="CmspProgressAbstract"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspProgressAbstract" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>vi</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspProgressAbstract" xlink:to="reference_CmspProgressAbstract" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspProgressTable" xlink:label="CmspProgressTable"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspProgressTable" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>vi</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspProgressTable" xlink:to="reference_CmspProgressTable" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspProgressLineItems" xlink:label="CmspProgressLineItems"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspProgressLineItems" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+<ref:Paragraph>vi</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspProgressLineItems" xlink:to="reference_CmspProgressLineItems" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSubmHrsAxis" xlink:label="CmspSubmHrsAxis"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspSubmHrsAxis" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspSubmHrsAxis" xlink:to="reference_CmspSubmHrsAxis" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspSubmHrsDomain" xlink:label="CmspSubmHrsDomain"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspSubmHrsDomain" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspSubmHrsDomain" xlink:to="reference_CmspSubmHrsDomain" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CmspAffrmHrsAxis" xlink:label="CmspAffrmHrsAxis"/>
+<link:reference xlink:type="resource" xlink:label="reference_CmspAffrmHrsAxis" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CmspAffrmHrsAxis" xlink:to="reference_CmspAffrmHrsAxis" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_ClrAgncyAffrmHoursDomain" xlink:label="ClrAgncyAffrmHoursDomain"/>
+<link:reference xlink:type="resource" xlink:label="reference_ClrAgncyAffrmHoursDomain" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Chapter>17Ad-27</ref:Chapter>
+<ref:Section>b</ref:Section>
+<ref:Subsection>3</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="ClrAgncyAffrmHoursDomain" xlink:to="reference_ClrAgncyAffrmHoursDomain" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_CentralMatchingMember" xlink:label="CentralMatchingMember"/>
+<link:reference xlink:type="resource" xlink:label="reference_CentralMatchingMember" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Section>b</ref:Section>
+<ref:Subsection>4</ref:Subsection>
+<ref:Paragraph>ii</ref:Paragraph>
+<ref:Chapter>17Ad-27</ref:Chapter>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CentralMatchingMember" xlink:to="reference_CentralMatchingMember" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#sro_ElectronicTradeConfirmationMember" xlink:label="ElectronicTradeConfirmationMember"/>
+<link:reference xlink:type="resource" xlink:label="reference_ElectronicTradeConfirmationMember" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Exchange Act</ref:Name>
+<ref:Number>240</ref:Number>
+<ref:Section>b</ref:Section>
+<ref:Subsection>4</ref:Subsection>
+<ref:Paragraph>ii</ref:Paragraph>
+<ref:Chapter>17Ad-27</ref:Chapter>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="ElectronicTradeConfirmationMember" xlink:to="reference_ElectronicTradeConfirmationMember" priority="10"/>
+</link:referenceLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+<xs:element name="CmspReportAbstract" id="sro_CmspReportAbstract" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspReportTable" id="sro_CmspReportTable" type="xbrli:stringItemType" substitutionGroup="xbrldt:hypercubeItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspReportLineItems" id="sro_CmspReportLineItems" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspStpPlcyPrcdrSmryTextBlock" id="sro_CmspStpPlcyPrcdrSmryTextBlock" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspStpPrgrsTextBlock" id="sro_CmspStpPrgrsTextBlock" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspActnIntdsToTakeForStpTextBlock" id="sro_CmspActnIntdsToTakeForStpTextBlock" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspSubmissionAbstract" id="sro_CmspSubmissionAbstract" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspSubmissionsTable" id="sro_CmspSubmissionsTable" type="xbrli:stringItemType" substitutionGroup="xbrldt:hypercubeItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspSvcTypAxis" id="sro_CmspSvcTypAxis" type="xbrli:stringItemType" substitutionGroup="xbrldt:dimensionItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspSvcTypDomain" id="sro_CmspSvcTypDomain" type="dtr-types:domainItemType" substitutionGroup="xbrli:item" abstract="true" xbrli:periodType="duration"/>
+<xs:element name="CentralMatchingMember" id="sro_CentralMatchingMember" type="dtr-types:domainItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="ElectronicTradeConfirmationMember" id="sro_ElectronicTradeConfirmationMember" type="dtr-types:domainItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspUsrTypAxis" id="sro_CmspUsrTypAxis" type="xbrli:stringItemType" substitutionGroup="xbrldt:dimensionItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspUsrTypDomain" id="sro_CmspUsrTypDomain" type="dtr-types:domainItemType" substitutionGroup="xbrli:item" abstract="true" xbrli:periodType="duration"/>
+<xs:element name="CmspAsstClsAxis" id="sro_CmspAsstClsAxis" type="xbrli:stringItemType" substitutionGroup="xbrldt:dimensionItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspAsstClsDomain" id="sro_CmspAsstClsDomain" type="dtr-types:domainItemType" substitutionGroup="xbrli:item" abstract="true" xbrli:periodType="duration"/>
+<xs:element name="CmspSubmHrsAxis" id="sro_CmspSubmHrsAxis" type="xbrli:stringItemType" substitutionGroup="xbrldt:dimensionItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspSubmHrsDomain" id="sro_CmspSubmHrsDomain" type="dtr-types:domainItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspAffrmHrsAxis" id="sro_CmspAffrmHrsAxis" type="xbrli:stringItemType" substitutionGroup="xbrldt:dimensionItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="ClrAgncyAffrmHoursDomain" id="sro_ClrAgncyAffrmHoursDomain" type="dtr-types:domainItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspSubmissionsLineItems" id="sro_CmspSubmissionsLineItems" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspTrdsSubmittdAmt" id="sro_CmspTrdsSubmittdAmt" type="xbrli:nonNegativeIntegerItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspAllcnsSubmittdAmt" id="sro_CmspAllcnsSubmittdAmt" type="xbrli:nonNegativeIntegerItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspConfsSubmittdAmt" id="sro_CmspConfsSubmittdAmt" type="xbrli:nonNegativeIntegerItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspCancellationsAbstract" id="sro_CmspCancellationsAbstract" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspCancellationsTable" id="sro_CmspCancellationsTable" type="xbrli:stringItemType" substitutionGroup="xbrldt:hypercubeItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspCancellationsLineItems" id="sro_CmspCancellationsLineItems" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspConfsCancAmt" id="sro_CmspConfsCancAmt" type="xbrli:nonNegativeIntegerItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspAffirmationsAbstract" id="sro_CmspAffirmationsAbstract" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspAffirmationsTable" id="sro_CmspAffirmationsTable" type="xbrli:stringItemType" substitutionGroup="xbrldt:hypercubeItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspAffirmationsLineItems" id="sro_CmspAffirmationsLineItems" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspConfsAffrmdTradDtPct" id="sro_CmspConfsAffrmdTradDtPct" type="dtr-types:percentItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspPctAllcnsAndConfsMtchdAndConfdPct" id="sro_CmspPctAllcnsAndConfsMtchdAndConfdPct" type="dtr-types:percentItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspProgressAbstract" id="sro_CmspProgressAbstract" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspProgressTable" id="sro_CmspProgressTable" type="xbrli:stringItemType" substitutionGroup="xbrldt:hypercubeItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmspProgressLineItems" id="sro_CmspProgressLineItems" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+</xs:schema>

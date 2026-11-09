@@ -1,0 +1,1448 @@
+{
+  "title": "官方财报底账缺失企业 AI 浏览器补数任务清单",
+  "created_at": "2026-11-06T05:18:22.535523+00:00",
+  "policy": "坚决执行真实数据准则。未取得官方权威财务三表原文前严禁生成伪造报表。本清单供 AI 浏览器专项补数使用。",
+  "total_pending_companies": 72,
+  "tasks": [
+    {
+      "ticker": "UNKNOWN_CO",
+      "market": "US",
+      "company_name": "UNKNOWN_CO",
+      "cik": "",
+      "jpx_code": "",
+      "official_search_url": "https://www.sec.gov/edgar/searchedgar/companysearch?company=UNKNOWN_CO",
+      "target_filing": "SEC EDGAR Form 10-K / Form 10-Q 官方原始披露原文 (PDF/XBRL)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "HONA",
+      "market": "US",
+      "company_name": "霍尼韦尔宇航航天 (Honeywell Aerospace Inc.)",
+      "cik": "",
+      "jpx_code": "",
+      "official_search_url": "https://www.sec.gov/edgar/searchedgar/companysearch?company=HONA",
+      "target_filing": "SEC EDGAR Form 10-K / Form 10-Q 官方原始披露原文 (PDF/XBRL)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "8001",
+      "market": "JP",
+      "company_name": "伊藤忠商事株式会社 (ITOCHU Corporation)",
+      "cik": "",
+      "jpx_code": "8001",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "BRKB",
+      "market": "US",
+      "company_name": "伯克希尔·哈撒韦公司 (Berkshire Hathaway Inc.)",
+      "cik": "",
+      "jpx_code": "",
+      "official_search_url": "https://www.sec.gov/edgar/searchedgar/companysearch?company=BRKB",
+      "target_filing": "SEC EDGAR Form 10-K / Form 10-Q 官方原始披露原文 (PDF/XBRL)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "EA",
+      "market": "US",
+      "company_name": "艺电公司 (Electronic Arts Inc.)",
+      "cik": "",
+      "jpx_code": "",
+      "official_search_url": "https://www.sec.gov/edgar/searchedgar/companysearch?company=EA",
+      "target_filing": "SEC EDGAR Form 10-K / Form 10-Q 官方原始披露原文 (PDF/XBRL)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "4755",
+      "market": "JP",
+      "company_name": "乐天集团株式会社 (Rakuten Group, Inc.)",
+      "cik": "",
+      "jpx_code": "4755",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "6963",
+      "market": "JP",
+      "company_name": "罗姆半导体株式会社 (ROHM Co., Ltd.)",
+      "cik": "",
+      "jpx_code": "6963",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "6526",
+      "market": "JP",
+      "company_name": "索喜科技株式会社 (Socionext Inc.)",
+      "cik": "",
+      "jpx_code": "6526",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "6869",
+      "market": "JP",
+      "company_name": "希森美康株式会社 (Sysmex Corporation)",
+      "cik": "",
+      "jpx_code": "6869",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "6594",
+      "market": "JP",
+      "company_name": "日本电产株式会社 (Nidec Corporation)",
+      "cik": "",
+      "jpx_code": "6594",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "7012",
+      "market": "JP",
+      "company_name": "川崎重工业株式会社 (Kawasaki Heavy Industries, Ltd.)",
+      "cik": "",
+      "jpx_code": "7012",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "7013",
+      "market": "JP",
+      "company_name": "株式会社IHI (IHI Corporation)",
+      "cik": "",
+      "jpx_code": "7013",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "4523",
+      "market": "JP",
+      "company_name": "卫材株式会社 (Eisai Co., Ltd.)",
+      "cik": "",
+      "jpx_code": "4523",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "6988",
+      "market": "JP",
+      "company_name": "日东电工株式会社 (Nitto Denko Corporation)",
+      "cik": "",
+      "jpx_code": "6988",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "7752",
+      "market": "JP",
+      "company_name": "株式会社理光 (Ricoh Company, Ltd.)",
+      "cik": "",
+      "jpx_code": "7752",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "9107",
+      "market": "JP",
+      "company_name": "川崎汽船株式会社 (Kawasaki Kisen Kaisha, Ltd. / K Line)",
+      "cik": "",
+      "jpx_code": "9107",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "9201",
+      "market": "JP",
+      "company_name": "日本航空株式会社 (Japan Airlines Co., Ltd. / JAL)",
+      "cik": "",
+      "jpx_code": "9201",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "4911",
+      "market": "JP",
+      "company_name": "株式会社资生堂 (Shiseido Company, Limited)",
+      "cik": "",
+      "jpx_code": "4911",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "9501",
+      "market": "JP",
+      "company_name": "东京电力控股株式会社 (Tokyo Electric Power Company Holdings / TEPCO)",
+      "cik": "",
+      "jpx_code": "9501",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "9502",
+      "market": "JP",
+      "company_name": "中部电力株式会社 (Chubu Electric Power Co., Inc.)",
+      "cik": "",
+      "jpx_code": "9502",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "9503",
+      "market": "JP",
+      "company_name": "关西电力株式会社 (Kansai Electric Power Co., Inc. / KEPCO)",
+      "cik": "",
+      "jpx_code": "9503",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "2801",
+      "market": "JP",
+      "company_name": "龟甲万株式会社 (Kikkoman Corporation)",
+      "cik": "",
+      "jpx_code": "2801",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "7201",
+      "market": "JP",
+      "company_name": "日产汽车株式会社 (Nissan Motor Co., Ltd.)",
+      "cik": "",
+      "jpx_code": "7201",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "5411",
+      "market": "JP",
+      "company_name": "JFE控股株式会社 (JFE Holdings, Inc.)",
+      "cik": "",
+      "jpx_code": "5411",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "8601",
+      "market": "JP",
+      "company_name": "大和证券集团本社 (Daiwa Securities Group Inc.)",
+      "cik": "",
+      "jpx_code": "8601",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "8795",
+      "market": "JP",
+      "company_name": "T&D控股株式会社 (T&D Holdings, Inc.)",
+      "cik": "",
+      "jpx_code": "8795",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "4528",
+      "market": "JP",
+      "company_name": "小野药品工业株式会社 (Ono Pharmaceutical Co., Ltd.)",
+      "cik": "",
+      "jpx_code": "4528",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "3402",
+      "market": "JP",
+      "company_name": "东丽株式会社 (Toray Industries, Inc.)",
+      "cik": "",
+      "jpx_code": "3402",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "3401",
+      "market": "JP",
+      "company_name": "帝人株式会社 (Teijin Limited)",
+      "cik": "",
+      "jpx_code": "3401",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "2413",
+      "market": "JP",
+      "company_name": "M3株式会社 (M3, Inc.)",
+      "cik": "",
+      "jpx_code": "2413",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "3659",
+      "market": "JP",
+      "company_name": "株式会社NEXON (Nexon Co., Ltd.)",
+      "cik": "",
+      "jpx_code": "3659",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "9766",
+      "market": "JP",
+      "company_name": "科乐美控股株式会社 (Konami Group Corporation)",
+      "cik": "",
+      "jpx_code": "9766",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "9684",
+      "market": "JP",
+      "company_name": "史克威尔艾尼克斯控股株式会社 (Square Enix Holdings Co., Ltd.)",
+      "cik": "",
+      "jpx_code": "9684",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "4385",
+      "market": "JP",
+      "company_name": "株式会社メルカリ (Mercari, Inc.)",
+      "cik": "",
+      "jpx_code": "4385",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "2121",
+      "market": "JP",
+      "company_name": "株式会社MIXI (MIXI, Inc.)",
+      "cik": "",
+      "jpx_code": "2121",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "4751",
+      "market": "JP",
+      "company_name": "株式会社サイバーエージェント (CyberAgent, Inc.)",
+      "cik": "",
+      "jpx_code": "4751",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "6753",
+      "market": "JP",
+      "company_name": "シャープ株式会社 (Sharp Corporation)",
+      "cik": "",
+      "jpx_code": "6753",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "6506",
+      "market": "JP",
+      "company_name": "株式会社安川电机 (Yaskawa Electric Corporation)",
+      "cik": "",
+      "jpx_code": "6506",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "7735",
+      "market": "JP",
+      "company_name": "株式会社SCREENホールディングス (SCREEN Holdings Co., Ltd.)",
+      "cik": "",
+      "jpx_code": "7735",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "7731",
+      "market": "JP",
+      "company_name": "株式会社ニコン (Nikon Corporation)",
+      "cik": "",
+      "jpx_code": "7731",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "6504",
+      "market": "JP",
+      "company_name": "富士电机株式会社 (Fuji Electric Co., Ltd.)",
+      "cik": "",
+      "jpx_code": "6504",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "4912",
+      "market": "JP",
+      "company_name": "ライオン株式会社 (Lion Corporation)",
+      "cik": "",
+      "jpx_code": "4912",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "7261",
+      "market": "JP",
+      "company_name": "マツダ株式会社 (Mazda Motor Corporation)",
+      "cik": "",
+      "jpx_code": "7261",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "6471",
+      "market": "JP",
+      "company_name": "日本精工株式会社 (NSK Ltd.)",
+      "cik": "",
+      "jpx_code": "6471",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "6473",
+      "market": "JP",
+      "company_name": "株式会社ジェイテクト (JTEKT Corporation)",
+      "cik": "",
+      "jpx_code": "6473",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "6383",
+      "market": "JP",
+      "company_name": "株式会社ダイフク (Daifuku Co., Ltd.)",
+      "cik": "",
+      "jpx_code": "6383",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "7701",
+      "market": "JP",
+      "company_name": "株式会社岛津制作所 (Shimadzu Corporation)",
+      "cik": "",
+      "jpx_code": "7701",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "6361",
+      "market": "JP",
+      "company_name": "株式会社荏原制作所 (Ebara Corporation)",
+      "cik": "",
+      "jpx_code": "6361",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "6841",
+      "market": "JP",
+      "company_name": "横河电机株式会社 (Yokogawa Electric Corporation)",
+      "cik": "",
+      "jpx_code": "6841",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "CFLT",
+      "market": "US",
+      "company_name": "Confluent 实时数据流平台公司 (Confluent, Inc.)",
+      "cik": "",
+      "jpx_code": "",
+      "official_search_url": "https://www.sec.gov/edgar/searchedgar/companysearch?company=CFLT",
+      "target_filing": "SEC EDGAR Form 10-K / Form 10-Q 官方原始披露原文 (PDF/XBRL)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "1605",
+      "market": "JP",
+      "company_name": "株式会社INPEX (INPEX CORPORATION)",
+      "cik": "",
+      "jpx_code": "1605",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "1969",
+      "market": "JP",
+      "company_name": "高砂热学工业株式会社 (Takasago Thermal Engineering Co., Ltd.)",
+      "cik": "",
+      "jpx_code": "1969",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "1812",
+      "market": "JP",
+      "company_name": "鹿岛建设株式会社 (Kajima Corporation)",
+      "cik": "",
+      "jpx_code": "1812",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "1802",
+      "market": "JP",
+      "company_name": "株式会社大林组 (Obayashi Corporation)",
+      "cik": "",
+      "jpx_code": "1802",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "EXAS",
+      "market": "US",
+      "company_name": "Exact Sciences 癌症早筛与精准诊断公司 (Exact Sciences Corporation)",
+      "cik": "",
+      "jpx_code": "",
+      "official_search_url": "https://www.sec.gov/edgar/searchedgar/companysearch?company=EXAS",
+      "target_filing": "SEC EDGAR Form 10-K / Form 10-Q 官方原始披露原文 (PDF/XBRL)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "1801",
+      "market": "JP",
+      "company_name": "大成建设株式会社 (Taisei Corporation)",
+      "cik": "",
+      "jpx_code": "1801",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "1803",
+      "market": "JP",
+      "company_name": "清水建设株式会社 (Shimizu Corporation)",
+      "cik": "",
+      "jpx_code": "1803",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "1963",
+      "market": "JP",
+      "company_name": "日挥控股株式会社 (JGC HOLDINGS CORPORATION)",
+      "cik": "",
+      "jpx_code": "1963",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "3092",
+      "market": "JP",
+      "company_name": "株式会社ZOZO (ZOZO, Inc.)",
+      "cik": "",
+      "jpx_code": "3092",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "2002",
+      "market": "JP",
+      "company_name": "日清制粉集团本社 (Nisshin Seifun Group Inc.)",
+      "cik": "",
+      "jpx_code": "2002",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "2206",
+      "market": "JP",
+      "company_name": "江崎格力高株式会社 (Ezaki Glico Co., Ltd.)",
+      "cik": "",
+      "jpx_code": "2206",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "2212",
+      "market": "JP",
+      "company_name": "山崎面包株式会社 (Yamazaki Baking Co., Ltd.)",
+      "cik": "",
+      "jpx_code": "2212",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "2501",
+      "market": "JP",
+      "company_name": "札幌控股株式会社 (Sapporo Holdings Limited)",
+      "cik": "",
+      "jpx_code": "2501",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "2897",
+      "market": "JP",
+      "company_name": "日清食品控股株式会社 (Nissin Foods Holdings Co., Ltd.)",
+      "cik": "",
+      "jpx_code": "2897",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "2871",
+      "market": "JP",
+      "company_name": "株式会社日冷 (Nichirei Corporation)",
+      "cik": "",
+      "jpx_code": "2871",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "3086",
+      "market": "JP",
+      "company_name": "J.フロント リテイリング株式会社 (J. Front Retailing Co., Ltd.)",
+      "cik": "",
+      "jpx_code": "3086",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "3099",
+      "market": "JP",
+      "company_name": "株式会社三越伊势丹控股 (Isetan Mitsukoshi Holdings Ltd.)",
+      "cik": "",
+      "jpx_code": "3099",
+      "official_search_url": "https://www.release.tdnet.info/inbs/I_main_00.html",
+      "target_filing": "东证 TDnet 決算短信 / EDINET 有価証券報告書官方原文 (PDF)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "CYATY",
+      "market": "US",
+      "company_name": "Contemporary Amperex Technology Co., Limited/ADR",
+      "cik": "0002070829",
+      "jpx_code": "",
+      "official_search_url": "https://www.sec.gov/edgar/browse/?CIK=0002070829",
+      "target_filing": "SEC EDGAR Form 10-K / Form 10-Q 官方原始披露原文 (PDF/XBRL)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "RTNTF",
+      "market": "US",
+      "company_name": "RIO TINTO LTD",
+      "cik": "0000887028",
+      "jpx_code": "",
+      "official_search_url": "https://www.sec.gov/edgar/browse/?CIK=0000887028",
+      "target_filing": "SEC EDGAR Form 10-K / Form 10-Q 官方原始披露原文 (PDF/XBRL)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "DTEGY",
+      "market": "US",
+      "company_name": "DEUTSCHE TELEKOM AG",
+      "cik": "0000946770",
+      "jpx_code": "",
+      "official_search_url": "https://www.sec.gov/edgar/browse/?CIK=0000946770",
+      "target_filing": "SEC EDGAR Form 10-K / Form 10-Q 官方原始披露原文 (PDF/XBRL)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "SMERY",
+      "market": "US",
+      "company_name": "Siemens Energy AG/ADR",
+      "cik": "0001830056",
+      "jpx_code": "",
+      "official_search_url": "https://www.sec.gov/edgar/browse/?CIK=0001830056",
+      "target_filing": "SEC EDGAR Form 10-K / Form 10-Q 官方原始披露原文 (PDF/XBRL)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    },
+    {
+      "ticker": "IBN",
+      "market": "US",
+      "company_name": "ICICI BANK LTD",
+      "cik": "0001103838",
+      "jpx_code": "",
+      "official_search_url": "https://www.sec.gov/edgar/browse/?CIK=0001103838",
+      "target_filing": "SEC EDGAR Form 10-K / Form 10-Q 官方原始披露原文 (PDF/XBRL)",
+      "required_line_items": [
+        "营业收入 (Revenue / Operating Revenue)",
+        "营业利润 (Operating Income / Operating Profit)",
+        "净利润 (Net Income)",
+        "资产总计 (Total Assets)",
+        "负债合计 (Total Liabilities)",
+        "股东权益合计 (Total Stockholders' Equity)",
+        "经营现金流量净额 (Operating Cash Flow)",
+        "存货与周转天数 (Inventory & DIO)"
+      ],
+      "replenishment_action": "由 AI 浏览器打开官方监管页面，核对后下载原版财报并调用 scripts/import_browser_source.py 登记入库"
+    }
+  ]
+}

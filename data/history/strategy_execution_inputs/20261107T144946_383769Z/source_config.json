@@ -1,0 +1,26 @@
+{
+  "sources": [
+    {
+      "id": "MSFT",
+      "symbol": "MSFT",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?period1=1262304000&period2=1735689600&interval=1d&events=div%2Csplits&includeAdjustedClose=true"
+    },
+    {
+      "id": "SPY",
+      "symbol": "SPY",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?period1=1262304000&period2=1735689600&interval=1d&events=div%2Csplits&includeAdjustedClose=true"
+    },
+    {
+      "id": "7203_T",
+      "symbol": "7203.T",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/7203.T?period1=1262304000&period2=1735689600&interval=1d&events=div%2Csplits&includeAdjustedClose=true"
+    },
+    {
+      "id": "1306_T",
+      "symbol": "1306.T",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/1306.T?period1=1262304000&period2=1735689600&interval=1d&events=div%2Csplits&includeAdjustedClose=true"
+    }
+  ],
+  "purpose": "stock and benchmark OHLC/actions prerequisites only; not a strategy backtest",
+  "adjustment_basis": "requires confirmation before valuation-price or execution use"
+}

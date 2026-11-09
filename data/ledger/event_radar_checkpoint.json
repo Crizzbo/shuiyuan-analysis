@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "last_successful_timestamp": "2026-11-07T08:42:54.735495+00:00",
+  "processed_hashes": [],
+  "cumulative_metrics": {
+    "total_scanned": 0,
+    "total_filtered_in": 0,
+    "total_summarized": 0,
+    "total_p0_p1_triggered": 0,
+    "total_estimated_tokens": 0
+  },
+  "recent_triggered_events": []
+}

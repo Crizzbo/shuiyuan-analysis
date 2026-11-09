@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "travel_leisure",
+    "industry_name_zh": "跨国酒店度假村、邮轮与在线旅游",
+    "sector_id": "consumer_discretionary",
+    "sector_name_zh": "可选消费",
+    "macro_sector_id": "CONS_GOODS",
+    "macro_sector_name_zh": "耐用消费品、纺织服饰与通用轻工业制造",
+    "description_zh": "涵盖轻资产特许经营跨国酒店集团、全球豪华邮轮航线船队、综合主题度假乐园及在线旅游预订企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.58,
+    "typical_markup_ratio": 1.16,
+    "capex_intensity": "轻重混合",
+    "operating_leverage_exposure": "高经营杠杆",
+    "typical_gross_margin_range": [0.35, 0.60]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 0.0,
+    "dio_warning_days": 0.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.10,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "全球超大型豪华邮轮专用大型造船厂船坞排期 (欧洲头部船坞排期通常长达 4 至 6 年)",
+      "全球一线枢纽商圈地标性优质物业业主签约意愿与特许加盟协议锁定期限",
+      "低硫船用保税燃料油价格波动与跨国专业邮轮海员乘务服务团队稳定供给"
+    ],
+    "downstream_profile": "全球跨国企业商务差旅常旅客、中产家庭度假休闲客群、银发邮轮度假人群及年轻旅行消费者",
+    "pricing_power_verdict": "拥有上亿常旅客会员生态的特许经营酒店龙头享有极强自主直销定价溢价；普通单体独立酒店受制于在线旅游平台高昂佣金抽成",
+    "channel_inversion_sensitivity": "平均每间可售房收益 (RevPAR) 与邮轮客票净收益率 (Net Cruise Yield) 是全球可选休闲服务消费强弱最核心的晴雨表"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "全球商务差旅与出境度假消费共振复苏，酒店平均可售房收益 (RevPAR) 与平均每日房价 (ADR) 双双打破历史纪录",
+      "新型超级豪华邮轮首航预订爆发式售罄，高附加值船上二次消费 (特色餐饮/免税零售/岸上短途游) 利润占比大幅激增",
+      "轻资产特许经营模式加速展店拓店，客房储备管道 (Pipeline) 净房间数保持双位数高增推动加盟费纯利快速攀升"
+    ],
+    "leading_bear_defenses": [
+      "宏观经济波动引发跨国企业大幅削减差旅与差旅预算，个人休闲旅游降级导致酒店入住率与平均房价双双受挫",
+      "突发地缘海峡封锁或恶劣风暴迫使邮轮大范围取消热门航线港口，导致退票率攀升并承担巨额违约与燃油损耗",
+      "重资产高负债邮轮船队在长期高息宏观周期下面临沉重借贷财务利息负担侵蚀现金流"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度全系统平均每间可售房收益 (RevPAR) 与期末综合入住率 (Occupancy Rate)",
+      "全系统有效净房间规模增长率 (Net Room Growth) 与在建未开业酒店储备数量 (Pipeline)",
+      "豪华邮轮单日平均客票净收益率 (Net Cruise Yield) 与未来财年前瞻订舱预售进度 (Advance Bookings)",
+      "直营渠道预订占比与常旅客会员计划活跃有效会员规模"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "为了做大单季度收入，在与加盟商签署初始合作协议时违规一次性全额确认跨年度初始加盟费与软件接入费",
+      "对长期出租率低迷、客房单价持续下滑且连续录得经营亏损的直营酒店资产推迟计提使用权与固定资产减值",
+      "对高账面价值的新造邮轮船队交付后人为随意拉长折旧使用年限以减少当期固定资产折旧费用"
+    ],
+    "channel_and_revenue_checks": [
+      "常旅客积分奖励计划 (Loyalty Program) 递延收入与积分逾期失效沉淀收入 (Breakage) 会计处理审验",
+      "客户提前预付定金与不可退改预售房费形成的合同负债在资产负债表日的权责发生制核销审查"
+    ]
+  }
+}

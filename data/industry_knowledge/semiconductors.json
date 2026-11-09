@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "semiconductors",
+    "industry_name_zh": "前沿半导体与芯片硬件",
+    "sector_id": "information_technology",
+    "sector_name_zh": "信息技术",
+    "macro_sector_id": "TECH_SEMI",
+    "macro_sector_name_zh": "高精尖半导体、通信电子与精密光学",
+    "description_zh": "覆盖先进制程逻辑芯片、存储芯片、模拟芯片、功率半导体及无晶圆厂 Fabless 芯片设计企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.48,
+    "typical_markup_ratio": 1.35,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "极高经营杠杆",
+    "typical_gross_margin_range": [0.45, 0.65]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 95.0,
+    "dio_warning_days": 160.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.25,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "台积电等顶级晶圆代工厂先进封装 (CoWoS) 与先进制程 (3nm/2nm) 产能配额争夺",
+      "高带宽存储器 (HBM3e/HBM4) 颗粒供给紧俏度与良率瓶颈",
+      "光刻机 (EUV/High-NA EUV) 及关键半导体前驱体/特种气体供应链地缘政治出口管制"
+    ],
+    "downstream_profile": "大型超算云厂商 (CSP)、主权 AI 算力中心、智能手机与智能电动车 Tier 1 客户，议价能力高度依赖制程代际领先幅度",
+    "pricing_power_verdict": "先进制程与顶尖架构享受绝对垄断溢价，成熟制程与通用模拟芯片面临激烈价格战",
+    "channel_inversion_sensitivity": "二手现货市场高阶 GPU/算力卡批价倒挂是下游需求见顶的核心领先指标"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "先进制程良率突破并锁定头部云厂商下一代大模型训练算力集群长单",
+      "存货周转天数回落至 90 天以内，晶圆代工产能利用率攀升至 90% 以上引发毛利率非线性扩张",
+      "架构升级实现算力能耗比翻倍，推高下游数据中心整体 TCO 投资回报率"
+    ],
+    "leading_bear_defenses": [
+      "主要云厂商削减 AI CapEx 资本开支或大模型推理端商业化变现不及预期",
+      "存货周转天数飙升超过 160 天，渠道塞货滞销导致老代际产品计提巨额跌价准备",
+      "地缘政治管制升级导致关键区域市场销售完全阻断，且大客户加速推进自研 ASIC 芯片替代"
+    ],
+    "core_catalyst_dimensions": [
+      "台积电月度营收与产能利用率披露",
+      "云巨头 (Microsoft, Google, Meta, Amazon) 季度资本开支指引",
+      "二手 GPU 算力卡现货市场批价走势",
+      "半导体行业协会 (SIA) 全球芯片月度销售额走势"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "产成品库存增速超越营收增速 20 个百分点以上 (渠道塞货滞销与存货跌价高危)",
+      "研发支出资本化比例超过 5.0% 企图掩盖实质性研发投入并粉饰经营利润",
+      "第一大单一客户营收占比超过 25.0% 且存在自研 ASIC 替代或砍单风险敞口"
+    ],
+    "channel_and_revenue_checks": [
+      "现货批发价低于官方标称出厂价出现倒挂",
+      "季度合同负债骤降 20% 以上表明渠道客户预付款订购意愿瓦解"
+    ]
+  }
+}

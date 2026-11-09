@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+(c) 2010-2026 Financial Accounting Foundation; (c) 2007-2010 XBRL US, Inc.  All Rights Reserved.
+Notice: Authorized Uses are Set Forth at https://xbrl.fasb.org/terms/SRT_TermsConditions.html
+  -->
+<link:linkbase xmlns:link='http://www.xbrl.org/2003/linkbase' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.xbrl.org/2003/linkbase http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd'>
+  <link:roleRef roleURI='http://fasb.org/srt/role/deprecated/deprecated' xlink:href='srt-roles-2026.xsd#srt-depcon' xlink:type='simple' />
+  <link:presentationLink xlink:role='http://fasb.org/srt/role/deprecated/deprecated' xlink:type='extended'>
+    <link:loc xlink:href='srt-2026.xsd#srt_DeprecatedItems' xlink:label='loc_DeprecatedItems' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_A300Member' xlink:label='loc_A300Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_A312Member' xlink:label='loc_A312Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_B737820Member' xlink:label='loc_B737820Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_B757200Member' xlink:label='loc_B757200Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_B757223Member' xlink:label='loc_B757223Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_B767323Member' xlink:label='loc_B767323Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_B777223Member' xlink:label='loc_B777223Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_CRJMember' xlink:label='loc_CRJMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_EMBMember' xlink:label='loc_EMBMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_EMB120Member' xlink:label='loc_EMB120Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_EMB135Member' xlink:label='loc_EMB135Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_EMB145Member' xlink:label='loc_EMB145Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveGasWellsNumberOfWellsGross' xlink:label='loc_ProductiveGasWellsNumberOfWellsGross' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveGasWellsNumberOfWellsNet' xlink:label='loc_ProductiveGasWellsNumberOfWellsNet' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveOilWellsNumberOfWellsWithMultipleCompletionsGross' xlink:label='loc_ProductiveOilWellsNumberOfWellsWithMultipleCompletionsGross' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveOilWellsNumberOfWellsWithMultipleCompletionsNet' xlink:label='loc_ProductiveOilWellsNumberOfWellsWithMultipleCompletionsNet' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SignificantEconomicInterestInStandardizedMeasureOfDiscountedFutureNetCashFlowsAttributableToConsolidatedSubsidiaryIesWithSignificantMinorityInterests' xlink:label='loc_SignificantEconomicInterestInStandardizedMeasureOfDiscountedFutureNetCashFlowsAttributableToConsolidatedSubsidiaryIesWithSignificantMinorityInterests' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveOilWellsNumberOfWellsGross' xlink:label='loc_ProductiveOilWellsNumberOfWellsGross' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveOilWellsNumberOfWellsNet' xlink:label='loc_ProductiveOilWellsNumberOfWellsNet' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetAbstract' xlink:label='loc_PlatformOperatorCryptoAssetAbstract' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetExtensibleEnumeration' xlink:label='loc_PlatformOperatorCryptoAssetExtensibleEnumeration' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetLineItems' xlink:label='loc_PlatformOperatorCryptoAssetLineItems' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetPolicyTextBlock' xlink:label='loc_PlatformOperatorCryptoAssetPolicyTextBlock' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetTableTextBlock' xlink:label='loc_PlatformOperatorCryptoAssetTableTextBlock' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetTable' xlink:label='loc_PlatformOperatorCryptoAssetTable' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetTextBlock' xlink:label='loc_PlatformOperatorCryptoAssetTextBlock' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetAgentMember' xlink:label='loc_PlatformOperatorCryptoAssetAgentMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetCryptographicKeyInformationExtensibleEnumeration' xlink:label='loc_PlatformOperatorCryptoAssetCryptographicKeyInformationExtensibleEnumeration' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetEntityMember' xlink:label='loc_PlatformOperatorCryptoAssetEntityMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetHeldForUser' xlink:label='loc_PlatformOperatorCryptoAssetHeldForUser' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetInternalRecordkeepingExtensibleEnumeration' xlink:label='loc_PlatformOperatorCryptoAssetInternalRecordkeepingExtensibleEnumeration' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetPlatformUserMember' xlink:label='loc_PlatformOperatorCryptoAssetPlatformUserMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetResponsiblePartyDomain' xlink:label='loc_PlatformOperatorCryptoAssetResponsiblePartyDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetSecureAndProtectFromLossExtensibleEnumeration' xlink:label='loc_PlatformOperatorCryptoAssetSecureAndProtectFromLossExtensibleEnumeration' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetThirdPartyMember' xlink:label='loc_PlatformOperatorCryptoAssetThirdPartyMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ReservesShareOfEquityMethodInvesteesNetProvedOilAndGasReserves' xlink:label='loc_ReservesShareOfEquityMethodInvesteesNetProvedOilAndGasReserves' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SafeguardingAssetPlatformOperatorCryptoAsset' xlink:label='loc_SafeguardingAssetPlatformOperatorCryptoAsset' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SafeguardingLiabilityPlatformOperatorCryptoAsset' xlink:label='loc_SafeguardingLiabilityPlatformOperatorCryptoAsset' xlink:type='locator' />
+    <link:presentationArc order='10' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_A300Member' xlink:type='arc' />
+    <link:presentationArc order='20' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_A312Member' xlink:type='arc' />
+    <link:presentationArc order='30' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_B737820Member' xlink:type='arc' />
+    <link:presentationArc order='40' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_B757200Member' xlink:type='arc' />
+    <link:presentationArc order='50' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_B757223Member' xlink:type='arc' />
+    <link:presentationArc order='60' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_B767323Member' xlink:type='arc' />
+    <link:presentationArc order='70' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_B777223Member' xlink:type='arc' />
+    <link:presentationArc order='80' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_CRJMember' xlink:type='arc' />
+    <link:presentationArc order='120' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_EMBMember' xlink:type='arc' />
+    <link:presentationArc order='90' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_EMB120Member' xlink:type='arc' />
+    <link:presentationArc order='100' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_EMB135Member' xlink:type='arc' />
+    <link:presentationArc order='110' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_EMB145Member' xlink:type='arc' />
+    <link:presentationArc order='290' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_ProductiveGasWellsNumberOfWellsGross' xlink:type='arc' />
+    <link:presentationArc order='300' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_ProductiveGasWellsNumberOfWellsNet' xlink:type='arc' />
+    <link:presentationArc order='330' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_ProductiveOilWellsNumberOfWellsWithMultipleCompletionsGross' xlink:type='arc' />
+    <link:presentationArc order='340' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_ProductiveOilWellsNumberOfWellsWithMultipleCompletionsNet' xlink:type='arc' />
+    <link:presentationArc order='380' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_SignificantEconomicInterestInStandardizedMeasureOfDiscountedFutureNetCashFlowsAttributableToConsolidatedSubsidiaryIesWithSignificantMinorityInterests' xlink:type='arc' />
+    <link:presentationArc order='310' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_ProductiveOilWellsNumberOfWellsGross' xlink:type='arc' />
+    <link:presentationArc order='320' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_ProductiveOilWellsNumberOfWellsNet' xlink:type='arc' />
+    <link:presentationArc order='130' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetAbstract' xlink:type='arc' />
+    <link:presentationArc order='170' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetExtensibleEnumeration' xlink:type='arc' />
+    <link:presentationArc order='200' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetLineItems' xlink:type='arc' />
+    <link:presentationArc order='220' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetPolicyTextBlock' xlink:type='arc' />
+    <link:presentationArc order='260' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetTableTextBlock' xlink:type='arc' />
+    <link:presentationArc order='250' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetTable' xlink:type='arc' />
+    <link:presentationArc order='270' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetTextBlock' xlink:type='arc' />
+    <link:presentationArc order='140' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetAgentMember' xlink:type='arc' />
+    <link:presentationArc order='150' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetCryptographicKeyInformationExtensibleEnumeration' xlink:type='arc' />
+    <link:presentationArc order='160' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetEntityMember' xlink:type='arc' />
+    <link:presentationArc order='180' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetHeldForUser' xlink:type='arc' />
+    <link:presentationArc order='190' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetInternalRecordkeepingExtensibleEnumeration' xlink:type='arc' />
+    <link:presentationArc order='210' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetPlatformUserMember' xlink:type='arc' />
+    <link:presentationArc order='230' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetResponsiblePartyDomain' xlink:type='arc' />
+    <link:presentationArc order='240' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetSecureAndProtectFromLossExtensibleEnumeration' xlink:type='arc' />
+    <link:presentationArc order='280' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_PlatformOperatorCryptoAssetThirdPartyMember' xlink:type='arc' />
+    <link:presentationArc order='350' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_ReservesShareOfEquityMethodInvesteesNetProvedOilAndGasReserves' xlink:type='arc' />
+    <link:presentationArc order='360' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_SafeguardingAssetPlatformOperatorCryptoAsset' xlink:type='arc' />
+    <link:presentationArc order='370' xlink:arcrole='http://www.xbrl.org/2003/arcrole/parent-child' xlink:from='loc_DeprecatedItems' xlink:to='loc_SafeguardingLiabilityPlatformOperatorCryptoAsset' xlink:type='arc' />
+  </link:presentationLink>
+</link:linkbase>

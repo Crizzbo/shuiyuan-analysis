@@ -1,0 +1,212 @@
+{
+  "as_of": "2026-10-15T13:02:54+00:00",
+  "calculation_refs": [
+    {
+      "observation_id": "154163a7dfac344f3f8669ef620ebe4dacd0b0fcf8bcac148ac4623d7f0b5170",
+      "path": "data/financial/objects/56/56cb7d36f7914a28243905767d29cfca6ce576c4b5ac9a579f505099c891c8d6.json",
+      "sha256": "56cb7d36f7914a28243905767d29cfca6ce576c4b5ac9a579f505099c891c8d6"
+    },
+    {
+      "observation_id": "b0b02a899f9e80c5fe12f5d48970afc9832c5658f16722a6e989f21335703f7b",
+      "path": "data/financial/objects/16/166bf0ca000feae6bb31b02c684f7caa73c15a0e6255f50f94933eb87d78bd0c.json",
+      "sha256": "166bf0ca000feae6bb31b02c684f7caa73c15a0e6255f50f94933eb87d78bd0c"
+    }
+  ],
+  "classification_status": "unreviewed",
+  "entity_id": "JP:6758:CIK313838",
+  "evidence": [
+    {
+      "acquired_at": "2026-10-11T01:45:05+00:00",
+      "available_at": "2026-10-11T01:45:05+00:00",
+      "excerpt_or_summary": "Operating income\n1,035,255\n1,276,635\n1,447,507",
+      "id": "financial-bd92fe7e422f056be1a084088c9021bb99817d2e2bac9e24b5e05520f05889e2",
+      "limitations": [
+        "正式原文与解析版本见指标 lineage；比较年度按当前报告可得时点，不能用于早期回测。"
+      ],
+      "locator": "PDF page 128, row Operating income, year 2026",
+      "publication_precision": "unknown",
+      "published_at": null,
+      "published_date": null,
+      "source_kind": "primary",
+      "source_path": "data/financial/objects/7a/7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1.txt"
+    },
+    {
+      "acquired_at": "2026-10-11T01:45:05+00:00",
+      "available_at": "2026-10-11T01:45:05+00:00",
+      "excerpt_or_summary": "Sales\n22\n11,260,037\n12,034,917\n12,479,620",
+      "id": "financial-6e7506f21f69136a695ab76785c42b3e83146e39319798ae210b256d421ad15c",
+      "limitations": [
+        "正式原文与解析版本见指标 lineage；比较年度按当前报告可得时点，不能用于早期回测。"
+      ],
+      "locator": "PDF page 128, row Sales, year 2026",
+      "publication_precision": "unknown",
+      "published_at": null,
+      "published_date": null,
+      "source_kind": "primary",
+      "source_path": "data/financial/objects/7a/7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1.txt"
+    },
+    {
+      "acquired_at": "2026-10-11T01:45:05+00:00",
+      "available_at": "2026-10-11T01:45:05+00:00",
+      "excerpt_or_summary": "Sales\n22\n11,260,037\n12,034,917\n12,479,620",
+      "id": "financial-0777fc17c5e84c51fd998a96fb3e34539fb0936f309e31f3bd853eb01265524d",
+      "limitations": [
+        "正式原文与解析版本见指标 lineage；比较年度按当前报告可得时点，不能用于早期回测。"
+      ],
+      "locator": "PDF page 128, row Sales, year 2025",
+      "publication_precision": "unknown",
+      "published_at": null,
+      "published_date": null,
+      "source_kind": "primary",
+      "source_path": "data/financial/objects/7a/7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1.txt"
+    }
+  ],
+  "industry_gate_status": "blocked",
+  "industry_id": "hardware",
+  "lineage": [
+    {
+      "observation_id": "154163a7dfac344f3f8669ef620ebe4dacd0b0fcf8bcac148ac4623d7f0b5170",
+      "registration_ids": [
+        "cc1f01f19264b4c765ca4e4efee86e5ca7d44c204b3d0437bdc02d22ba2a88dc",
+        "f8f5736cecee7560957ff6129cac13fc75bb7546e340d56beb389769810b0f81"
+      ],
+      "report_refs": [
+        {
+          "path": "data/financial/objects/03/0358e9adb359f92f28049d68093d7c871da7afc544580c6b487b19b1050bfce8.json",
+          "sha256": "0358e9adb359f92f28049d68093d7c871da7afc544580c6b487b19b1050bfce8"
+        },
+        {
+          "path": "data/financial/objects/03/0358e9adb359f92f28049d68093d7c871da7afc544580c6b487b19b1050bfce8.json",
+          "sha256": "0358e9adb359f92f28049d68093d7c871da7afc544580c6b487b19b1050bfce8"
+        }
+      ],
+      "scope_id": "consolidated_continuing"
+    },
+    {
+      "observation_id": "b0b02a899f9e80c5fe12f5d48970afc9832c5658f16722a6e989f21335703f7b",
+      "registration_ids": [
+        "f8f5736cecee7560957ff6129cac13fc75bb7546e340d56beb389769810b0f81",
+        "2e81f503256f54cf396b831af6c15dee72a92e7df4c24e4a6cb44148cba81161"
+      ],
+      "report_refs": [
+        {
+          "path": "data/financial/objects/03/0358e9adb359f92f28049d68093d7c871da7afc544580c6b487b19b1050bfce8.json",
+          "sha256": "0358e9adb359f92f28049d68093d7c871da7afc544580c6b487b19b1050bfce8"
+        },
+        {
+          "path": "data/financial/objects/03/0358e9adb359f92f28049d68093d7c871da7afc544580c6b487b19b1050bfce8.json",
+          "sha256": "0358e9adb359f92f28049d68093d7c871da7afc544580c6b487b19b1050bfce8"
+        }
+      ],
+      "scope_id": "consolidated_continuing"
+    }
+  ],
+  "mapping_results": [
+    {
+      "input_registration_ids": [
+        "cc1f01f19264b4c765ca4e4efee86e5ca7d44c204b3d0437bdc02d22ba2a88dc",
+        "f8f5736cecee7560957ff6129cac13fc75bb7546e340d56beb389769810b0f81"
+      ],
+      "metric_id": "operating_margin",
+      "reason": null,
+      "status": "computed"
+    },
+    {
+      "input_registration_ids": [
+        "f8f5736cecee7560957ff6129cac13fc75bb7546e340d56beb389769810b0f81",
+        "2e81f503256f54cf396b831af6c15dee72a92e7df4c24e4a6cb44148cba81161"
+      ],
+      "metric_id": "revenue_growth",
+      "reason": null,
+      "status": "computed"
+    },
+    {
+      "input_registration_ids": [],
+      "metric_id": "hardware_driver_1",
+      "reason": "行业专属指标缺审核字段绑定与原始输入；总收入不能替代 ARR、留存或其他驱动指标",
+      "status": "blocked"
+    },
+    {
+      "input_registration_ids": [],
+      "metric_id": "hardware_driver_2",
+      "reason": "行业专属指标缺审核字段绑定与原始输入；总收入不能替代 ARR、留存或其他驱动指标",
+      "status": "blocked"
+    },
+    {
+      "input_registration_ids": [],
+      "metric_id": "hardware_driver_3",
+      "reason": "行业专属指标缺审核字段绑定与原始输入；总收入不能替代 ARR、留存或其他驱动指标",
+      "status": "blocked"
+    }
+  ],
+  "missing_required_metric_ids": [
+    "hardware_driver_1",
+    "hardware_driver_2",
+    "hardware_driver_3"
+  ],
+  "observations": [
+    {
+      "accounting_basis": "IFRS",
+      "available_at": "2026-10-11T01:45:05+00:00",
+      "comparability_notes": "consolidated_continuing；同报告可比列；同期间、同范围营业利润 / 收入；行业 hardware 为待审核候选，不代替真实分部分类。",
+      "evidence_refs": [
+        "financial-bd92fe7e422f056be1a084088c9021bb99817d2e2bac9e24b5e05520f05889e2",
+        "financial-6e7506f21f69136a695ab76785c42b3e83146e39319798ae210b256d421ad15c"
+      ],
+      "id": "154163a7dfac344f3f8669ef620ebe4dacd0b0fcf8bcac148ac4623d7f0b5170",
+      "metric_id": "operating_margin",
+      "missing_reason": null,
+      "period": {
+        "basis": "year",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "segment_id": null,
+      "value": {
+        "currency": null,
+        "unit": "ratio",
+        "value": 0.11598966955724613
+      }
+    },
+    {
+      "accounting_basis": "IFRS",
+      "available_at": "2026-10-11T01:45:05+00:00",
+      "comparability_notes": "consolidated_continuing；同报告可比列；同报告相邻年度、同范围收入 / 上年收入 - 1；行业 hardware 为待审核候选，不代替真实分部分类。",
+      "evidence_refs": [
+        "financial-6e7506f21f69136a695ab76785c42b3e83146e39319798ae210b256d421ad15c",
+        "financial-0777fc17c5e84c51fd998a96fb3e34539fb0936f309e31f3bd853eb01265524d"
+      ],
+      "id": "b0b02a899f9e80c5fe12f5d48970afc9832c5658f16722a6e989f21335703f7b",
+      "metric_id": "revenue_growth",
+      "missing_reason": null,
+      "period": {
+        "basis": "year",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "segment_id": null,
+      "value": {
+        "currency": null,
+        "unit": "ratio",
+        "value": 0.036951064972031045
+      }
+    }
+  ],
+  "period_end": "2026-03-31",
+  "schema_version": "1.0.0",
+  "scope_id": "consolidated_continuing",
+  "source_map": {
+    "financial-0777fc17c5e84c51fd998a96fb3e34539fb0936f309e31f3bd853eb01265524d": {
+      "revision": 1,
+      "source_id": "financial:sony-2026-20f-v1:7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1"
+    },
+    "financial-6e7506f21f69136a695ab76785c42b3e83146e39319798ae210b256d421ad15c": {
+      "revision": 1,
+      "source_id": "financial:sony-2026-20f-v1:7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1"
+    },
+    "financial-bd92fe7e422f056be1a084088c9021bb99817d2e2bac9e24b5e05520f05889e2": {
+      "revision": 1,
+      "source_id": "financial:sony-2026-20f-v1:7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1"
+    }
+  }
+}

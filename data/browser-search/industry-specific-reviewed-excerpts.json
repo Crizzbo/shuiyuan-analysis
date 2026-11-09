@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "archive_kind": "manual_archive_of_ai_browser_rendered_page_excerpts",
+  "not_full_original_document": true,
+  "observed_at": "2026-10-11T04:17:03+00:00",
+  "sources": [
+    {
+      "industry_id": "energy_services",
+      "source_url": "https://investor.deepwater.com/news-releases/news-release-details/transocean-ltd-reports-fourth-quarter-and-full-year-2025-results",
+      "published_date": "2026-02-19",
+      "locator": "FLEET OPERATING STATISTICS; Three months ended December 31, 2025, September 30, 2025, December 31, 2024; first column",
+      "excerpts": ["Total fleet average daily revenue", "461,300", "Total fleet average rig utilization", "85.8", "Rig utilization is defined as the total number of operating days divided by the total number of rig calendar days in the measurement period, expressed as a percentage.", "Average daily revenue is defined as operating revenues, excluding revenues for contract terminations, reimbursements and contract intangible amortization, earned per operating day."],
+      "observations": [
+        {"parent_metric_id":"energy_services_driver_1","component":"rig_day_utilization","name_zh":"全船队设备日利用率","period_start":"2025-10-01","period_end":"2025-12-31","period_type":"quarterly","scope":"total_fleet","raw_value":"85.8","raw_unit":"percent","value":"0.858","unit":"ratio","conversion":"percent_divided_by_100","excerpt_indices":[2,3,4]},
+        {"parent_metric_id":"energy_services_driver_3","component":"actual_daily_revenue","name_zh":"全船队实际平均日收入","period_start":"2025-10-01","period_end":"2025-12-31","period_type":"quarterly","scope":"total_fleet_excludes_termination_reimbursements_contract_intangible_amortization","raw_value":"461,300","raw_unit":"USD_per_operating_day","value":"461300","unit":"USD_per_operating_day","conversion":"remove_thousands_separator","excerpt_indices":[0,1,5]}
+      ]
+    },
+    {
+      "industry_id": "midstream",
+      "source_url": "https://ir.enterpriseproducts.com/news-releases/news-release-details/enterprise-reports-fourth-quarter-2025-earnings",
+      "published_date": null,
+      "locator": "fourth quarter 2025 capital investments and natural gas processing discussion",
+      "excerpts": ["Total capital investments, net of proceeds from asset sales, were $1.3 billion in the fourth quarter of 2025, which included $1.1 billion for growth capital projects, $203 million of sustaining capital expenditures, and $49 million of cash used for asset acquisitions, less $61 million of proceeds from asset sales.", "Natural gas processing plant inlet volumes were a record 8.1 Bcf/d in the fourth quarter of 2025, a 399 MMcf/d, or 5 percent, increase compared to the fourth quarter of 2024.", "Sustaining capital expenditures are capital expenditures (as defined by GAAP) resulting from improvements to and major renewals of existing assets. Such expenditures serve to maintain existing operations but do not generate additional revenues."],
+      "observations": [
+        {"parent_metric_id":"midstream_driver_1","component":"gas_processing_inlet_daily_volume","name_zh":"天然气处理入口日均气量","period_start":"2025-10-01","period_end":"2025-12-31","period_type":"quarterly","scope":"natural_gas_processing_plant_inlet","raw_value":"8.1","raw_unit":"Bcf_per_day","value":"8.1","unit":"Bcf_per_day","conversion":"identity","excerpt_indices":[1]},
+        {"parent_metric_id":"midstream_driver_3","component":"sustaining_capex","name_zh":"维持资本开支实际现金额","period_start":"2025-10-01","period_end":"2025-12-31","period_type":"quarterly","scope":"partnership_existing_assets","raw_value":"203","raw_unit":"USD_million","value":"203000000","unit":"USD","conversion":"million_times_1000000","excerpt_indices":[0,2]}
+      ]
+    },
+    {
+      "industry_id": "housing_durables",
+      "source_url": "https://investor.drhorton.com/news-and-events/press-releases/2025/10-28-2025-103117295",
+      "published_date": null,
+      "locator": "Fiscal 2025 operating results; fiscal year ended September 30, 2025",
+      "excerpts": ["Homebuilding revenue for the fiscal year decreased 7% to $31.5 billion, and homes closed decreased 5% to 84,863 homes. Homebuilding pre-tax income decreased 24% to $4.1 billion, and pre-tax profit margin was 13.1%. Net sales orders decreased 4% to 83,423 homes and 6% in value to $30.8 billion. The cancellation rate was 18% in both fiscal 2025 and 2024.", "The Company’s cancellation rate (cancelled sales orders divided by gross sales orders) was 20% compared to 21% in the prior year quarter."],
+      "observations": [
+        {"parent_metric_id":"housing_durables_driver_1","component":"home_order_cancellation_rate","name_zh":"全年住宅毛销售订单取消率","period_start":"2024-10-01","period_end":"2025-09-30","period_type":"annual","scope":"homebuilding_cancelled_sales_orders_over_gross_sales_orders","raw_value":"18","raw_unit":"percent","value":"0.18","unit":"ratio","conversion":"percent_divided_by_100","excerpt_indices":[0,1]},
+        {"parent_metric_id":"housing_durables_driver_2","component":"homes_closed","name_zh":"全年完成结算交付住宅数","period_start":"2024-10-01","period_end":"2025-09-30","period_type":"annual","scope":"homebuilding","raw_value":"84,863","raw_unit":"homes","value":"84863","unit":"homes","conversion":"remove_thousands_separator","excerpt_indices":[0]}
+      ]
+    },
+    {
+      "industry_id": "medical_devices",
+      "source_url": "https://isrg.intuitive.com/news-releases/news-release-details/intuitive-announces-fourth-quarter-earnings-5",
+      "published_date": "2026-01-22",
+      "locator": "Fourth quarter 2025 business highlights; system placements and December 31 installed base",
+      "excerpts": ["The Company placed 532 da Vinci surgical systems, compared with 493 in the fourth quarter of 2024.", "The Company grew its da Vinci surgical system installed base to 11,106 systems as of December 31, 2025, an increase of 12% compared with 9,902 as of December 31, 2024."],
+      "observations": [
+        {"parent_metric_id":"medical_devices_driver_2","component":"da_vinci_placements","name_zh":"季度达芬奇系统投放量","period_start":"2025-10-01","period_end":"2025-12-31","period_type":"quarterly","scope":"worldwide_da_vinci_including_leases","raw_value":"532","raw_unit":"systems","value":"532","unit":"systems","conversion":"identity","excerpt_indices":[0]},
+        {"parent_metric_id":"medical_devices_driver_2","component":"da_vinci_installed_base","name_zh":"期末达芬奇系统装机存量","period_start":null,"period_end":"2025-12-31","period_type":"instant","scope":"worldwide_da_vinci","raw_value":"11,106","raw_unit":"systems","value":"11106","unit":"systems","conversion":"remove_thousands_separator","excerpt_indices":[1]}
+      ]
+    }
+  ]
+}

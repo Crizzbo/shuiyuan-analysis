@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-10-12T01:37:06Z",
+  "archive_kind": "manual_browser_visible_excerpt_with_optional_original_pdf",
+  "sources": [
+    {
+      "industry_id": "telecom",
+      "published_date": "2026-01-30",
+      "source_url": "https://www.verizon.com/about/file/77271/download?token=r9Yg9nOj",
+      "locator": "官方4Q25财务补充表第10页，Total Wireless Operating and Financial Statistics，3 Mos. Ended 12/31/25列；完整PDF已下载",
+      "excerpts": [
+        "Unaudited 12/31/25 12/31/24",
+        "Unaudited",
+        "3 Mos. Ended ",
+        "12/31/25",
+        "3 Mos. Ended ",
+        "12/31/25",
+        "Retail core prepaid ARPU(4) $ 32.90 $ 32.34 1.7 $ 32.52 $ 32.37 0.5",
+        "Retail postpaid phone  1.02 %  0.92 %  0.98 %  0.88 %",
+        "(4)  Wireless retail core prepaid ARPU - average service revenue per unit from retail prepaid connections excluding our SafeLink brand."
+      ],
+      "observations": [
+        {
+          "component": "vz_total_postpaid_phone_churn_q4",
+          "parent_metric_id": "telecom_driver_2",
+          "name_zh": "全无线后付费电话季度报告流失率",
+          "binding_role": "reported_metric",
+          "limitation_zh": "消费者和企业无线合计后付费电话；不是全设备或预付费流失率；断开数和平均连接数未取得",
+          "raw_unit": "percent",
+          "unit": "ratio",
+          "raw_value": "1.02",
+          "value": "0.0102",
+          "conversion": "percent_divided_by_100",
+          "period_start": "2025-10-01",
+          "period_end": "2025-12-31",
+          "period_type": "quarterly",
+          "scope": "total_wireless_retail_postpaid_phone",
+          "excerpt_indices": [
+            7
+          ]
+        },
+        {
+          "component": "vz_core_prepaid_arpu_q4",
+          "parent_metric_id": "telecom_driver_1",
+          "name_zh": "核心预付费每连接报告服务收入",
+          "binding_role": "context_sample",
+          "limitation_zh": "剔除SafeLink的预付费ARPU；不是后付费ARPA，服务收入及平均同群连接数未拆出，不能充当公式分子分母",
+          "raw_unit": "USD_per_connection",
+          "unit": "USD_per_connection",
+          "raw_value": "32.90",
+          "value": "32.90",
+          "conversion": "identity",
+          "period_start": "2025-10-01",
+          "period_end": "2025-12-31",
+          "period_type": "quarterly",
+          "scope": "core_prepaid_excludes_safelink",
+          "excerpt_indices": [
+            6
+          ]
+        }
+      ],
+      "original_document": {
+        "path": "data/browser-search/originals/vz_4q25_fs_013026.pdf",
+        "sha256": "ef545516b9d292b23bd3fc4169d615dc97885528e652bfcc375d6812cbdb198f",
+        "source_url": "https://www.verizon.com/about/file/77271/download?token=r9Yg9nOj",
+        "excerpt_pages": [
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10
+        ]
+      }
+    }
+  ]
+}

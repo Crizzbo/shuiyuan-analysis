@@ -1,0 +1,274 @@
+{
+  "schema_version": "1.0.0",
+  "query_as_of": "2026-10-11T02:15:03+00:00",
+  "reports": [
+    {
+      "entity_id": "US:INTU:CIK896878",
+      "fact_count": 42,
+      "report_refs": [
+        {
+          "path": "data/financial/objects/7a/7a58e699ad77d85b320820656a89d6253407f0cd5f1a99e18778a7112077e02e.json",
+          "sha256": "7a58e699ad77d85b320820656a89d6253407f0cd5f1a99e18778a7112077e02e"
+        }
+      ],
+      "registration_ids": [
+        "d13b2e9706e7fb998dd40c319e83ddc987a1b9cc810d64082eaf87645bc574ac",
+        "d6944f99d4fcef7aa1d0165342966f40fa9dffe4cd4bb9caa021a7b8d02773bd",
+        "ae83494b5c4226d408976419d8c1c9a813dd3ec2b91d4b8013842afea380616f",
+        "b28972d2c3cdfc8119d7a8a67ed34a26b64da5211eeb04c88a9342b810993336",
+        "122f764e7bd48da3fd6021788d47fa42f9d9eaaf9dcf93f7258b9b11fbcd23f8",
+        "15f07724a96b86a91a056196b41b9c12d9e903eb688576dbc01f715f56ca5704",
+        "b4a732a7a139428260b6157beed464fea1e62c81ef3afd811ade4583ce32281d",
+        "3f868523566d2b4eecf0ee30c1ff36a9065051c3dbc088d5ef297f83cbc94893",
+        "1088b80cd13dc3c03263fffe0c40712d9ac01ac84a4831f74a8a7a118b39ac65",
+        "f643be8665b40f924ea9abb784b4c58d8ce71f5e952c3c7ec1dbacfd3f1267bd",
+        "5d57a08bda101ce757ef44524ced3801d413ff708df0ec06cbb9098d589863ce",
+        "f726b5e5dc5b1afe717a05f3cf6ef5b982bf1a22559665cd214748156a961393",
+        "223fa20c80f1b0f13969cd45f64a846210bd1cbfbef2f195238a612aba0e3d66",
+        "5afa22f4c163808b639817fdb8f35149b1217a665cc41c762bf484ef156223df",
+        "66801b1b3b79932f906f7ecf8e9990067a13cd2927c09b5e7cb85af5440f7bc0",
+        "b2068993399d729c30a795deaea6a766fe842d45a78204ef68287f6c3dd640bd",
+        "d04728fa576e8fdecce140002a5cb6da246b96ea9d908305f3325ab2644a901c",
+        "0f6c39005feee1e4ce5d2a16339151abbb49955a6304d5c0c37ba1e1a826021b",
+        "d7b29ff81e7de46ad83cbce777fc59af846a786736dbb3c0060464fc50b3ed51",
+        "29b023e70c15bb4df88577fb3e474ff634312e40321d5d1faaaa988caad040a0",
+        "4d0c973941704a6b6e43ca51bc8e3fc9b88d67e0bbd00ae171c8625928a4abd3",
+        "c4e5226b97cee5c9fee80523c8895b27cbb2e02cff8c56094f4021b386320d94",
+        "0c04f1dc7f75188fe7a10aa50349a962de70cb03682129df33b7ed0b84c541a4",
+        "54384de23387eefa4d019a784c6334f8039722ecedab6039d9d2d1d63855d548",
+        "abe44a11a7847f119f08b0e2ddeab486a1f85b33b6cab9423ef00b6666aae8fc",
+        "ad5a40bbbf1db2553b07f855713e07beafe32e0f1cb20b41bf56267a5a4c4b16",
+        "5864f5e1658556d6e6fde07903c2cb83119305a9bdf7b96aef15e7e7dccae1bf",
+        "020d34b5118d0a7ee10193e24cbb2e3b8a1c6045c80cf191dfcdbdf57b61383e",
+        "013f0ecba72cda544d8627bc57785248158eb19535cd24a16015562db6c0ecef",
+        "33ae662b2fd6c33c1b74eff8039e36fe5bf650f3876977f81e109ff6d5afa290",
+        "1f7f57d9357a2512d06f21c18ec852a5114d7c6f0490703213ee9275cef17c73",
+        "04e992dec5dd2a13d5615c06c875be9e911bfc4a0fb85a6e6e970d282222a520",
+        "6f7bd8792d5af0f6ade51bb656a7c5052666331e3095f8a05c9b1a1b182f7149",
+        "fb70f29daf2e8bae64aec561b245b9888fca1628d998b027def2cabb6cdfa9fd",
+        "9db7472a390a876330e45e380ad62c11a65f6a70f310b0b56c02db59a7e903de",
+        "e0fd01a538a9c8d12dde9c842ffd7e8124f3d2cf26dae84eced7139b25e83be7",
+        "68ce277a9f2f5bbc87d37ce2dba83a71a13c827e45582bb0da4bc20528bff1d9",
+        "6cc1668477c5e0ac2d3d3113020eeb20d8aaa73c84c01e4c8de12aeec0a66ca5",
+        "4d192054f9f0f57da73079e8b3071861c96d2ddd7ee400916fc0d9cfc959152f",
+        "458c732d488248f659dffa75192ce342ec87c8511c2d3916cbdf128a11eb654f",
+        "b201f7a4a2b87c46dc2ae2d1ccd196ae4842b0bafb03fcf6c21928f827017722",
+        "3d69d0de757dc22b552d5ab941a56cf3a3877437f24d612c941f74d1e380046a"
+      ]
+    },
+    {
+      "entity_id": "JP:6758:CIK313838",
+      "fact_count": 44,
+      "report_refs": [
+        {
+          "path": "data/financial/objects/03/0358e9adb359f92f28049d68093d7c871da7afc544580c6b487b19b1050bfce8.json",
+          "sha256": "0358e9adb359f92f28049d68093d7c871da7afc544580c6b487b19b1050bfce8"
+        }
+      ],
+      "registration_ids": [
+        "ee05526b00b249d348ba73a429d24d2a394b8356692791eadb266823a2edade8",
+        "63dbbbcd2ffd5757895967aa933acdfab6aea0663833d9a0423e38b25a37992f",
+        "4ae16288e054cdb563d9572d1ba6ed2a14ceb1917b9a0af3dbece82bde93effb",
+        "8bf641c335db909f2fbc2618d2192520d3393169583a2965ae0071c1ac8334ad",
+        "39b2802f2179d33fcd56951a3c808728774df94d28f12b243aae942ab6fddf05",
+        "7572a2f6c70b073d6f12ba7a0199cb673cc363f47daece968170305f4fb49cc9",
+        "6840adf592ea492d7a7b7371ea5a188bfcedf8617a88af37343340170e289716",
+        "9f272ce3a0e0312b8c10ac46f818d954f4d04c7b05aee1924e116cb99cff7d0b",
+        "705869683a48306804a08fc8f26fa959c17ac8e1a9346cca76d3ed5dfb98ae09",
+        "2e81f503256f54cf396b831af6c15dee72a92e7df4c24e4a6cb44148cba81161",
+        "f8f5736cecee7560957ff6129cac13fc75bb7546e340d56beb389769810b0f81",
+        "61fbf1e1be469a377c2d8470404331ecd959f52c50fddcb39dd668fd74a4dd5a",
+        "19055fa7bc5ce169b0cf7cb7af73bd8be733a1ee7fb23263e22f260609e9b2e2",
+        "cc1f01f19264b4c765ca4e4efee86e5ca7d44c204b3d0437bdc02d22ba2a88dc",
+        "eafa9955751d84696e7f3fb131cf84ce4e6fccf2d02ccacf3e3a5f4b0eb2141d",
+        "584e417817dc63966f078ae62590323a3759c52c1887023db2bae1604494e212",
+        "d16d495b4fe64b30f17650f8f0749263dfb3e6c4d6ff34e9fa4340e94167cefa",
+        "ef77ac2967372e45bdbc7d7ae70fc82dca2a926d1802b59aeb82228158e4e6e4",
+        "089feaeb960f6d95e4b73197da2a8bea3d3e8d643b919395b4eaf89fc4d6b4c2",
+        "abc01aeac23011b6004add9ec8255e5464175f52c1894ab95a6adddbe2d82bc0",
+        "ec4a173b2071cc9b00706e761ddf21a659de1a1f26b5b6b48ad013e1b541c556",
+        "a86208a1a9f895eec733f2ec1b2a5a52538920631c257681e992dcbdc2815bc9",
+        "330741c8356182d8e7730f00a1a5d824f1e8bfd040fc44e01dad086d8852ee81",
+        "e30f9ea592d218a40594ac8b733ef3ff969d1bc73c60db563a35f8fe55739ed7",
+        "56f61024c1ecb7937817d8041b7534f976721ac00c19e7f42c8c861f91133bc9",
+        "fa26851d704afcaa4a2ec645677674f710cd6cfb28a9bc39f1cd1557850f500a",
+        "5efc3006e72b670ac31da74a644df50a45516aebe918e38fd20234fd6ab76aaa",
+        "eb8e3cfe4530827684f7e2ae95872bbef69925e23d8ea861b0c9995041ce8383",
+        "26094cc2240a15e0be580d4d28a1e670e36e433b15d6cf96131f69b1acfce50b",
+        "857f77701b2d398d6e058f492b51c1610c5e538bda5f3939494e7672ed7630ce",
+        "82776efa964af972ae00051ddabdb6867fab38caeb9e3dff6f01af530886c896",
+        "477fdea89dc94a661f1393654cc7ca9e8498e9b6eef5cd36601605ca779d1b37",
+        "595917141163d4ca96ec663b975ef06179308221bcc60f97adb79dbc3ccec93e",
+        "42e5518d4e1cfe96f7f1c1c92189f3e24c2ff6af8fc8d4290b78c5c1c0b30547",
+        "4fb68c7705a7dd8bbd5bf45459022c83ba115ab2375c793fff3dd23b06c489f4",
+        "2a476967ecf2415beca2be45bc134e718713c77f0e97a69b38a45852621aa6eb",
+        "54a5dc18c65864c49f45fa7ce6feff791a25dc801b89201c306c6d27adc322e2",
+        "66e4224a828db93d95d963842243f45fd1c3dd76dc469ea21645b81b10bb4dfc",
+        "62f8a0f0336fea51e0a2327aa33ccdd2d0a0cdf8dda794f26b7e713bc76156af",
+        "bfe5b2a10b821b897212e219b05bb560f49f0636a56d72bbe0c38c0417c9006d",
+        "e4fdc477c18ba1e58d6f88b39631e92eaf2e158c8509a4bedb89165a77859e98",
+        "955186fa786398de26fccc0f273c73a6783311541e552972e66488acfbf25318",
+        "b6074ace107219a3933bd65fca7e20b8ac12472d5ed071f95d66b1d82ae28f8f",
+        "58d6bc3c2ff7d21c8132534edcb49f27e95d42e0bc876b845d4b1d5b89c098e2"
+      ]
+    },
+    {
+      "entity_id": "JP:7974",
+      "fact_count": 30,
+      "report_refs": [
+        {
+          "path": "data/financial/objects/4e/4e2b78575f14295da8dcddf84ca9f51abc4d83b3765c109703f984b5c6b1d3d2.json",
+          "sha256": "4e2b78575f14295da8dcddf84ca9f51abc4d83b3765c109703f984b5c6b1d3d2"
+        }
+      ],
+      "registration_ids": [
+        "dc83819dce7a97596020f749b5577c6010f544c8a93cc7387ee7847084f8f504",
+        "13705c139d5d4871aff52ec99e533f476a7c3470a76dfe97d902c39ede658c6a",
+        "034d9516cfdcf93c4e12b015114cbeced342ff5b0e7c3f0f08563f9bfd916cb5",
+        "8ddb8cfece54664af0d400003abda6cb54110cfcaacb8ae8e766043f9cffd26f",
+        "fbc9894507e2a8923d17f942df2504d9f408ab7c7e2ed0c30cce297219fdac1c",
+        "694c9758caf3d458e3261e9cfcee2c5a5920165d2b504a5caf42f0880ceb7836",
+        "0418f4eab335afc4403b486c82b575f1fa09e594bdc9c15bfbd0cdfcced254a1",
+        "be4e1a9a8e87a28a17799b633cc9a72079e37c8c81a46e7b21ef2a67ad3937e5",
+        "3fddfe5fd244405b0e2d61e7a63de3b007f2852de8b11a8ab8d360dcf0e96832",
+        "9746dd498ac0362af19266058836bfb2b5a53f74e4788b42d5519e682d0796da",
+        "b91def5178ff920dca807b4b3fde5a052ecce21672d3c968cb5565e7d2755040",
+        "c386694d1749acc47c7cc78770d2bb849b33fb7ac46e2789954525c5c751feae",
+        "f6ffe2f7944f08b4f356d101a12af07b75e0ab5eef0e8c43d07f89029ac52d9b",
+        "7d281f5e2f88f50e3bf046f23ac2aa89efd454e6e8854442fb20bce0242a52c5",
+        "5f501cf8785579f0250c5e09b0ec2584e193281962b75747c1fd759d56ec8647",
+        "82dd481efa19750fe7ee18cd800c65e6f4d7eaa0d3647ec4300d5444bf32dab4",
+        "c5ede256b733e6bcc4c58623b21df87982946995bd3feea79e356891d67d89e3",
+        "2deb195da366d1c9925305b770cd64366ccd5b9284c1d48cd59aa9c43ea297bf",
+        "e1b69be87721bc75a7ee8739e72b842ee511e3fe9950316fc4df23f8f9fb136e",
+        "28ec1f5f69305e87b32df049f766454475087e948bbece5e20e4fcdd3143a598",
+        "ba102d144dedce02aa8e97717dfbe48404c36f4d983970741adfb14d6c92a3d5",
+        "bba85278543c189813045075c035d702d2cc4f94dbbafd290e75316361b3bc83",
+        "fa10c0058885fc253c17799411be7b0c9e63491c9a3e56b61193bfb1e5cbab56",
+        "268c55716d12b5f607cb1fb99a26aa2f6ba0d2b069f584069c4f3b35b495af67",
+        "4f0bb724735fb842fd80ed3585b8918f031adfd2022371318988cf57b5091b3d",
+        "ca9b1eb6b96d84ac663318fc6c6ce218216e5dd2a49c26060aa266c8eef66397",
+        "8251575c171b7c6e664f2162316528df266249bddbd71c6efbc32d971f874a3f",
+        "9a5920504365b2d8c9142468d3ddc1423c93dc3fca8ea08c9c1282406971b0be",
+        "86664c28b25e9134578cded68e03bf694d6e966c7b2e3cabba1be71b7c2f725d",
+        "aba02c55d6aee55a1fc140c2649178767c315d371b3ae09a0c5eac1869019bfd"
+      ]
+    }
+  ],
+  "active_fact_count": 116,
+  "before_first_observation_count": 0,
+  "registered_calculation": {
+    "schema_version": "1.0.0",
+    "entity_id": "US:INTU:CIK896878",
+    "industry_id": "software",
+    "as_of": "2026-10-11T02:15:03+00:00",
+    "is_synthetic": false,
+    "binding_version": "1.0.0",
+    "input_batch_sha256": "def850ceb4dbf0a1cdc4150f38ca10bf718fa65d287dfde37c3e8f8d77f2fadb",
+    "binding_implementation_path": "finance_tools/metric_pipeline.py",
+    "binding_implementation_sha256": "b5b657458ee32e1df4592b8e5346b1c223b91a1c6f21375e983fd49fd0f0faf9",
+    "results": [
+      {
+        "metric_id": "operating_margin",
+        "status": "computed",
+        "unit": "ratio",
+        "currency": null,
+        "period": {
+          "basis": "annual",
+          "end": "2026-07-31",
+          "start": "2025-08-01"
+        },
+        "value": 0.2743379336068631,
+        "input_fact_refs": [
+          "7ce8a85c76eb1ad5e122bab85315c8c3ac8d047e6ee3b027277514c562218b8b",
+          "5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f"
+        ],
+        "input_facts": [
+          {
+            "id": "7ce8a85c76eb1ad5e122bab85315c8c3ac8d047e6ee3b027277514c562218b8b",
+            "field": "operating_income",
+            "scope_id": "consolidated",
+            "period": {
+              "basis": "annual",
+              "end": "2026-07-31",
+              "start": "2025-08-01"
+            },
+            "accounting_basis": "GAAP",
+            "unit": "currency",
+            "currency": "USD",
+            "scale": 1,
+            "source": {
+              "available_at": "2026-10-11T01:37:03+00:00",
+              "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:OperatingIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-90\">5,884</ix:nonFraction>",
+              "kind": "primary",
+              "locator": "intu-20260731.htm#f-90 context=c-1",
+              "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+              "published_at": null,
+              "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+            },
+            "entity_id": "US:INTU:CIK896878",
+            "value": 5884000000.0
+          },
+          {
+            "id": "5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f",
+            "field": "revenue",
+            "scope_id": "consolidated",
+            "period": {
+              "basis": "annual",
+              "end": "2026-07-31",
+              "start": "2025-08-01"
+            },
+            "accounting_basis": "GAAP",
+            "unit": "currency",
+            "currency": "USD",
+            "scale": 1,
+            "source": {
+              "available_at": "2026-10-11T01:37:03+00:00",
+              "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:Revenues\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-60\">21,448</ix:nonFraction>",
+              "kind": "primary",
+              "locator": "intu-20260731.htm#f-60 context=c-1",
+              "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+              "published_at": null,
+              "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+            },
+            "entity_id": "US:INTU:CIK896878",
+            "value": 21448000000.0
+          }
+        ],
+        "calculation": {
+          "method": "financial_ratio",
+          "method_version": "1.0.0",
+          "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+          "implementation_path": "finance_tools/basic.py",
+          "library": "financetoolkit",
+          "library_version": "2.2.1",
+          "parameters": {
+            "denominator": 21448000000.0,
+            "numerator": 5884000000.0,
+            "operation": "operating_margin"
+          },
+          "input_sha256": "d32f19a0b932dce10357c2724a8aae0d91168c963a74b241303c95dd7316ac1b",
+          "result": {
+            "value": 0.2743379336068631
+          }
+        }
+      }
+    ],
+    "blocked_metric_ids": [],
+    "missing_industry_driver_ids": [
+      "software_driver_1",
+      "software_driver_2",
+      "software_driver_3"
+    ],
+    "research_readiness": {
+      "S1": "pending_industry_evidence",
+      "S2": "blocked",
+      "S3": "pending_transmission_evidence",
+      "S4": "pending_valuation_inputs",
+      "S5": "pending_risk_evidence",
+      "S6": "pending_monitoring_plan"
+    },
+    "research_export_status": "staging_only_raw_facts_not_registered_as_research_observations"
+  },
+  "boundary": "正式报表事实 source_verified；不等于六步判断、行业指标全覆盖或审计意见"
+}

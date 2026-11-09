@@ -1,0 +1,1503 @@
+{
+  "acquired_evidence_cutoff": "2026-10-11T10:06:39Z",
+  "inputs_path": "data/seagate/2026-10-11/inputs.json",
+  "cash_proxy_usd": 2892000000.0,
+  "shares_proxy": 232000000.0,
+  "runs": {
+    "calc_bear": {
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+      "implementation_path": "finance_tools/valuation.py",
+      "library": null,
+      "library_version": null,
+      "parameters": {
+        "cash_flow": 2892000000.0,
+        "discount_rate": 0.12,
+        "growth_rates": [
+          -0.2,
+          0.0,
+          0.03,
+          0.03,
+          0.03
+        ],
+        "net_debt": 0,
+        "scope": "FCFE",
+        "shares": 232000000.0,
+        "terminal_growth": 0.02
+      },
+      "input_sha256": "fdc7f05be3dd29437558341a6eea20b5b6d8d4e7b0ca990c30a11723a22025d4",
+      "result": {
+        "scope": "FCFE",
+        "forecast": [
+          {
+            "year": 1,
+            "cash_flow": 2313600000.0,
+            "present_value": 2065714285.7142856
+          },
+          {
+            "year": 2,
+            "cash_flow": 2313600000.0,
+            "present_value": 1844387755.1020405
+          },
+          {
+            "year": 3,
+            "cash_flow": 2383008000.0,
+            "present_value": 1696178024.7813406
+          },
+          {
+            "year": 4,
+            "cash_flow": 2454498240.0,
+            "present_value": 1559878004.9328399
+          },
+          {
+            "year": 5,
+            "cash_flow": 2528133187.2000003,
+            "present_value": 1434530665.2507367
+          }
+        ],
+        "terminal_value": 25786958509.440006,
+        "terminal_present_value": 14632212785.557518,
+        "enterprise_value": null,
+        "equity_value": 23232901521.33876,
+        "value_per_share": 100.14181690232225
+      }
+    },
+    "npv_bear": {
+      "method": "cashflow",
+      "method_version": "1.0.0",
+      "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+      "implementation_path": "finance_tools/basic.py",
+      "library": "numpy-financial",
+      "library_version": "1.1.0",
+      "parameters": {
+        "cashflows": [
+          0,
+          2313600000.0,
+          2313600000.0,
+          2383008000.0,
+          2454498240.0,
+          28315091696.640007
+        ],
+        "interest_rate": 0.12,
+        "operation": "npv"
+      },
+      "input_sha256": "53ffe11eed0ae178f4a352573bcafc44d34fac69868c56beb5ed8c7b53489b06",
+      "result": {
+        "value": 23232901521.33876
+      }
+    },
+    "calc_base": {
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+      "implementation_path": "finance_tools/valuation.py",
+      "library": null,
+      "library_version": null,
+      "parameters": {
+        "cash_flow": 2892000000.0,
+        "discount_rate": 0.1,
+        "growth_rates": [
+          0.15,
+          0.1,
+          0.08,
+          0.06,
+          0.04
+        ],
+        "net_debt": 0,
+        "scope": "FCFE",
+        "shares": 232000000.0,
+        "terminal_growth": 0.03
+      },
+      "input_sha256": "b069a89dccd0baa6377ebfa5603a1e4835aa1413f2cef0c44d3e230ff26aab51",
+      "result": {
+        "scope": "FCFE",
+        "forecast": [
+          {
+            "year": 1,
+            "cash_flow": 3325799999.9999995,
+            "present_value": 3023454545.4545445
+          },
+          {
+            "year": 2,
+            "cash_flow": 3658380000.0,
+            "present_value": 3023454545.454545
+          },
+          {
+            "year": 3,
+            "cash_flow": 3951050400.0000005,
+            "present_value": 2968482644.6280985
+          },
+          {
+            "year": 4,
+            "cash_flow": 4188113424.000001,
+            "present_value": 2860537821.187077
+          },
+          {
+            "year": 5,
+            "cash_flow": 4355637960.960001,
+            "present_value": 2704508485.485964
+          }
+        ],
+        "terminal_value": 64090101425.5543,
+        "terminal_present_value": 39794910572.15061,
+        "enterprise_value": null,
+        "equity_value": 54375348614.36084,
+        "value_per_share": 234.37650264810708
+      }
+    },
+    "npv_base": {
+      "method": "cashflow",
+      "method_version": "1.0.0",
+      "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+      "implementation_path": "finance_tools/basic.py",
+      "library": "numpy-financial",
+      "library_version": "1.1.0",
+      "parameters": {
+        "cashflows": [
+          0,
+          3325799999.9999995,
+          3658380000.0,
+          3951050400.0000005,
+          4188113424.000001,
+          68445739386.5143
+        ],
+        "interest_rate": 0.1,
+        "operation": "npv"
+      },
+      "input_sha256": "fd23b1f2bdcaa729f0bb25ec41e1bd580409c0afb00780002f5c0250175df1cb",
+      "result": {
+        "value": 54375348614.36084
+      }
+    },
+    "calc_bull": {
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+      "implementation_path": "finance_tools/valuation.py",
+      "library": null,
+      "library_version": null,
+      "parameters": {
+        "cash_flow": 2892000000.0,
+        "discount_rate": 0.09,
+        "growth_rates": [
+          0.35,
+          0.3,
+          0.25,
+          0.2,
+          0.15
+        ],
+        "net_debt": 0,
+        "scope": "FCFE",
+        "shares": 232000000.0,
+        "terminal_growth": 0.035
+      },
+      "input_sha256": "c3a88c1915dd72173af5159d6ada2a0973ed501d41d960ea49b2153953b15a15",
+      "result": {
+        "scope": "FCFE",
+        "forecast": [
+          {
+            "year": 1,
+            "cash_flow": 3904200000.0000005,
+            "present_value": 3581834862.385321
+          },
+          {
+            "year": 2,
+            "cash_flow": 5075460000.000001,
+            "present_value": 4271913138.6246953
+          },
+          {
+            "year": 3,
+            "cash_flow": 6344325000.000001,
+            "present_value": 4898982957.1384115
+          },
+          {
+            "year": 4,
+            "cash_flow": 7613190000.000001,
+            "present_value": 5393375732.629443
+          },
+          {
+            "year": 5,
+            "cash_flow": 8755168500.0,
+            "present_value": 5690258800.480604
+          }
+        ],
+        "terminal_value": 164756352681.8182,
+        "terminal_present_value": 107080324699.9532,
+        "enterprise_value": null,
+        "equity_value": 130916690191.21167,
+        "value_per_share": 564.2960784103951
+      }
+    },
+    "npv_bull": {
+      "method": "cashflow",
+      "method_version": "1.0.0",
+      "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+      "implementation_path": "finance_tools/basic.py",
+      "library": "numpy-financial",
+      "library_version": "1.1.0",
+      "parameters": {
+        "cashflows": [
+          0,
+          3904200000.0000005,
+          5075460000.000001,
+          6344325000.000001,
+          7613190000.000001,
+          173511521181.8182
+        ],
+        "interest_rate": 0.09,
+        "operation": "npv"
+      },
+      "input_sha256": "f7875c730f3d66f807e6d30088619b1c19d3543e9662ac38e5756c2170114911",
+      "result": {
+        "value": 130916690191.21167
+      }
+    },
+    "calc_reverse": {
+      "method": "reverse_dcf",
+      "method_version": "1.0.0",
+      "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+      "implementation_path": "finance_tools/valuation.py",
+      "library": null,
+      "library_version": null,
+      "parameters": {
+        "cash_flow": 2892000000.0,
+        "discount_rate": 0.1,
+        "net_debt": 0,
+        "scope": "FCFE",
+        "shares": 232000000.0,
+        "target_price": 783.0,
+        "terminal_growth": 0.03,
+        "years": 5
+      },
+      "input_sha256": "71d6d39e1bc4762b8ac62b7fb2ac359eee20681c730c26a4217185dbec0aa358",
+      "result": {
+        "status": "converged",
+        "implied_growth": 0.4133666442576214,
+        "modeled_price": 783.0000000029572,
+        "iterations": 37
+      }
+    },
+    "reverse_forward_check": {
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+      "implementation_path": "finance_tools/valuation.py",
+      "library": null,
+      "library_version": null,
+      "parameters": {
+        "cash_flow": 2892000000.0,
+        "discount_rate": 0.1,
+        "growth_rates": [
+          0.4133666442576214,
+          0.4133666442576214,
+          0.4133666442576214,
+          0.4133666442576214,
+          0.4133666442576214
+        ],
+        "net_debt": 0,
+        "scope": "FCFE",
+        "shares": 232000000.0,
+        "terminal_growth": 0.03
+      },
+      "input_sha256": "4fbdd45bddc7d7f101fab429be1d3048c86c8f1c93a18c3934b1fef33f912c12",
+      "result": {
+        "scope": "FCFE",
+        "forecast": [
+          {
+            "year": 1,
+            "cash_flow": 4087456335.193041,
+            "present_value": 3715869395.630037
+          },
+          {
+            "year": 2,
+            "cash_flow": 5777074444.021343,
+            "present_value": 4774441689.273837
+          },
+          {
+            "year": 3,
+            "cash_flow": 8165124320.572909,
+            "present_value": 6134578753.247864
+          },
+          {
+            "year": 4,
+            "cash_flow": 11540314360.914423,
+            "present_value": 7882189987.6473055
+          },
+          {
+            "year": 5,
+            "cash_flow": 16310695381.963654,
+            "present_value": 10127658556.583721
+          }
+        ],
+        "terminal_value": 240000232048.89374,
+        "terminal_present_value": 149021261618.3033,
+        "enterprise_value": null,
+        "equity_value": 181656000000.68607,
+        "value_per_share": 783.0000000029572
+      }
+    },
+    "calc_sensitivity_1": {
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+      "implementation_path": "finance_tools/valuation.py",
+      "library": null,
+      "library_version": null,
+      "parameters": {
+        "cash_flow": 2892000000.0,
+        "discount_rate": 0.08,
+        "growth_rates": [
+          0.15,
+          0.1,
+          0.08,
+          0.06,
+          0.04
+        ],
+        "net_debt": 0,
+        "scope": "FCFE",
+        "shares": 232000000.0,
+        "terminal_growth": 0.02
+      },
+      "input_sha256": "80b1989c613d55ff62de699c03bca78f80c81600b5bc41aae4ad17e6c44a2fd5",
+      "result": {
+        "scope": "FCFE",
+        "forecast": [
+          {
+            "year": 1,
+            "cash_flow": 3325799999.9999995,
+            "present_value": 3079444444.4444437
+          },
+          {
+            "year": 2,
+            "cash_flow": 3658380000.0,
+            "present_value": 3136471193.4156375
+          },
+          {
+            "year": 3,
+            "cash_flow": 3951050400.0000005,
+            "present_value": 3136471193.415638
+          },
+          {
+            "year": 4,
+            "cash_flow": 4188113424.000001,
+            "present_value": 3078388393.5375705
+          },
+          {
+            "year": 5,
+            "cash_flow": 4355637960.960001,
+            "present_value": 2964374008.591734
+          }
+        ],
+        "terminal_value": 74045845336.32002,
+        "terminal_present_value": 50394358146.05949,
+        "enterprise_value": null,
+        "equity_value": 65789507379.46451,
+        "value_per_share": 283.5754628425194
+      }
+    },
+    "calc_sensitivity_2": {
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+      "implementation_path": "finance_tools/valuation.py",
+      "library": null,
+      "library_version": null,
+      "parameters": {
+        "cash_flow": 2892000000.0,
+        "discount_rate": 0.08,
+        "growth_rates": [
+          0.15,
+          0.1,
+          0.08,
+          0.06,
+          0.04
+        ],
+        "net_debt": 0,
+        "scope": "FCFE",
+        "shares": 232000000.0,
+        "terminal_growth": 0.03
+      },
+      "input_sha256": "428a8ad466e8aa7dd243021b1e56e061de43968c54094aa555c3f573a20e92b7",
+      "result": {
+        "scope": "FCFE",
+        "forecast": [
+          {
+            "year": 1,
+            "cash_flow": 3325799999.9999995,
+            "present_value": 3079444444.4444437
+          },
+          {
+            "year": 2,
+            "cash_flow": 3658380000.0,
+            "present_value": 3136471193.4156375
+          },
+          {
+            "year": 3,
+            "cash_flow": 3951050400.0000005,
+            "present_value": 3136471193.415638
+          },
+          {
+            "year": 4,
+            "cash_flow": 4188113424.000001,
+            "present_value": 3078388393.5375705
+          },
+          {
+            "year": 5,
+            "cash_flow": 4355637960.960001,
+            "present_value": 2964374008.591734
+          }
+        ],
+        "terminal_value": 89726141995.77602,
+        "terminal_present_value": 61066104576.98972,
+        "enterprise_value": null,
+        "equity_value": 76461253810.39474,
+        "value_per_share": 329.5743698723911
+      }
+    },
+    "calc_sensitivity_3": {
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+      "implementation_path": "finance_tools/valuation.py",
+      "library": null,
+      "library_version": null,
+      "parameters": {
+        "cash_flow": 2892000000.0,
+        "discount_rate": 0.08,
+        "growth_rates": [
+          0.15,
+          0.1,
+          0.08,
+          0.06,
+          0.04
+        ],
+        "net_debt": 0,
+        "scope": "FCFE",
+        "shares": 232000000.0,
+        "terminal_growth": 0.04
+      },
+      "input_sha256": "f3ffed0203c2496017284836bd8314dba2bb56eaaae134a18b12b875196191ca",
+      "result": {
+        "scope": "FCFE",
+        "forecast": [
+          {
+            "year": 1,
+            "cash_flow": 3325799999.9999995,
+            "present_value": 3079444444.4444437
+          },
+          {
+            "year": 2,
+            "cash_flow": 3658380000.0,
+            "present_value": 3136471193.4156375
+          },
+          {
+            "year": 3,
+            "cash_flow": 3951050400.0000005,
+            "present_value": 3136471193.415638
+          },
+          {
+            "year": 4,
+            "cash_flow": 4188113424.000001,
+            "present_value": 3078388393.5375705
+          },
+          {
+            "year": 5,
+            "cash_flow": 4355637960.960001,
+            "present_value": 2964374008.591734
+          }
+        ],
+        "terminal_value": 113246586984.96002,
+        "terminal_present_value": 77073724223.38509,
+        "enterprise_value": null,
+        "equity_value": 92468873456.79012,
+        "value_per_share": 398.5727304171988
+      }
+    },
+    "calc_sensitivity_4": {
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+      "implementation_path": "finance_tools/valuation.py",
+      "library": null,
+      "library_version": null,
+      "parameters": {
+        "cash_flow": 2892000000.0,
+        "discount_rate": 0.1,
+        "growth_rates": [
+          0.15,
+          0.1,
+          0.08,
+          0.06,
+          0.04
+        ],
+        "net_debt": 0,
+        "scope": "FCFE",
+        "shares": 232000000.0,
+        "terminal_growth": 0.02
+      },
+      "input_sha256": "486bac00a9ab78e476483764633ff7f36d1c83b159fab7e91c7a3f6c089b0d3f",
+      "result": {
+        "scope": "FCFE",
+        "forecast": [
+          {
+            "year": 1,
+            "cash_flow": 3325799999.9999995,
+            "present_value": 3023454545.4545445
+          },
+          {
+            "year": 2,
+            "cash_flow": 3658380000.0,
+            "present_value": 3023454545.454545
+          },
+          {
+            "year": 3,
+            "cash_flow": 3951050400.0000005,
+            "present_value": 2968482644.6280985
+          },
+          {
+            "year": 4,
+            "cash_flow": 4188113424.000001,
+            "present_value": 2860537821.187077
+          },
+          {
+            "year": 5,
+            "cash_flow": 4355637960.960001,
+            "present_value": 2704508485.485964
+          }
+        ],
+        "terminal_value": 55534384002.24001,
+        "terminal_present_value": 34482483189.94604,
+        "enterprise_value": null,
+        "equity_value": 49062921232.156265,
+        "value_per_share": 211.47810875929426
+      }
+    },
+    "calc_sensitivity_5": {
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+      "implementation_path": "finance_tools/valuation.py",
+      "library": null,
+      "library_version": null,
+      "parameters": {
+        "cash_flow": 2892000000.0,
+        "discount_rate": 0.1,
+        "growth_rates": [
+          0.15,
+          0.1,
+          0.08,
+          0.06,
+          0.04
+        ],
+        "net_debt": 0,
+        "scope": "FCFE",
+        "shares": 232000000.0,
+        "terminal_growth": 0.03
+      },
+      "input_sha256": "b069a89dccd0baa6377ebfa5603a1e4835aa1413f2cef0c44d3e230ff26aab51",
+      "result": {
+        "scope": "FCFE",
+        "forecast": [
+          {
+            "year": 1,
+            "cash_flow": 3325799999.9999995,
+            "present_value": 3023454545.4545445
+          },
+          {
+            "year": 2,
+            "cash_flow": 3658380000.0,
+            "present_value": 3023454545.454545
+          },
+          {
+            "year": 3,
+            "cash_flow": 3951050400.0000005,
+            "present_value": 2968482644.6280985
+          },
+          {
+            "year": 4,
+            "cash_flow": 4188113424.000001,
+            "present_value": 2860537821.187077
+          },
+          {
+            "year": 5,
+            "cash_flow": 4355637960.960001,
+            "present_value": 2704508485.485964
+          }
+        ],
+        "terminal_value": 64090101425.5543,
+        "terminal_present_value": 39794910572.15061,
+        "enterprise_value": null,
+        "equity_value": 54375348614.36084,
+        "value_per_share": 234.37650264810708
+      }
+    },
+    "calc_sensitivity_6": {
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+      "implementation_path": "finance_tools/valuation.py",
+      "library": null,
+      "library_version": null,
+      "parameters": {
+        "cash_flow": 2892000000.0,
+        "discount_rate": 0.1,
+        "growth_rates": [
+          0.15,
+          0.1,
+          0.08,
+          0.06,
+          0.04
+        ],
+        "net_debt": 0,
+        "scope": "FCFE",
+        "shares": 232000000.0,
+        "terminal_growth": 0.04
+      },
+      "input_sha256": "42cd8beb1ca0dcfa7005e7a8bbc2926d8d2ebcf489d2236a57018226cfb6ced4",
+      "result": {
+        "scope": "FCFE",
+        "forecast": [
+          {
+            "year": 1,
+            "cash_flow": 3325799999.9999995,
+            "present_value": 3023454545.4545445
+          },
+          {
+            "year": 2,
+            "cash_flow": 3658380000.0,
+            "present_value": 3023454545.454545
+          },
+          {
+            "year": 3,
+            "cash_flow": 3951050400.0000005,
+            "present_value": 2968482644.6280985
+          },
+          {
+            "year": 4,
+            "cash_flow": 4188113424.000001,
+            "present_value": 2860537821.187077
+          },
+          {
+            "year": 5,
+            "cash_flow": 4355637960.960001,
+            "present_value": 2704508485.485964
+          }
+        ],
+        "terminal_value": 75497724656.64001,
+        "terminal_present_value": 46878147081.75671,
+        "enterprise_value": null,
+        "equity_value": 61458585123.966934,
+        "value_per_share": 264.9076944998575
+      }
+    },
+    "calc_sensitivity_7": {
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+      "implementation_path": "finance_tools/valuation.py",
+      "library": null,
+      "library_version": null,
+      "parameters": {
+        "cash_flow": 2892000000.0,
+        "discount_rate": 0.12,
+        "growth_rates": [
+          0.15,
+          0.1,
+          0.08,
+          0.06,
+          0.04
+        ],
+        "net_debt": 0,
+        "scope": "FCFE",
+        "shares": 232000000.0,
+        "terminal_growth": 0.02
+      },
+      "input_sha256": "1d4bd0466b664f33ba82514a529c9a03f4c0ee7ff737096579747138b965ed24",
+      "result": {
+        "scope": "FCFE",
+        "forecast": [
+          {
+            "year": 1,
+            "cash_flow": 3325799999.9999995,
+            "present_value": 2969464285.714285
+          },
+          {
+            "year": 2,
+            "cash_flow": 3658380000.0,
+            "present_value": 2916438137.7551017
+          },
+          {
+            "year": 3,
+            "cash_flow": 3951050400.0000005,
+            "present_value": 2812279632.8352766
+          },
+          {
+            "year": 4,
+            "cash_flow": 4188113424.000001,
+            "present_value": 2661621795.361958
+          },
+          {
+            "year": 5,
+            "cash_flow": 4355637960.960001,
+            "present_value": 2471505952.836104
+          }
+        ],
+        "terminal_value": 44427507201.792015,
+        "terminal_present_value": 25209360718.928265,
+        "enterprise_value": null,
+        "equity_value": 39040670523.43099,
+        "value_per_share": 168.27875225616808
+      }
+    },
+    "calc_sensitivity_8": {
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+      "implementation_path": "finance_tools/valuation.py",
+      "library": null,
+      "library_version": null,
+      "parameters": {
+        "cash_flow": 2892000000.0,
+        "discount_rate": 0.12,
+        "growth_rates": [
+          0.15,
+          0.1,
+          0.08,
+          0.06,
+          0.04
+        ],
+        "net_debt": 0,
+        "scope": "FCFE",
+        "shares": 232000000.0,
+        "terminal_growth": 0.03
+      },
+      "input_sha256": "0cc9487745f9545f160c18832a5a65d91fa8b10b86d50595302464e3c1049aca",
+      "result": {
+        "scope": "FCFE",
+        "forecast": [
+          {
+            "year": 1,
+            "cash_flow": 3325799999.9999995,
+            "present_value": 2969464285.714285
+          },
+          {
+            "year": 2,
+            "cash_flow": 3658380000.0,
+            "present_value": 2916438137.7551017
+          },
+          {
+            "year": 3,
+            "cash_flow": 3951050400.0000005,
+            "present_value": 2812279632.8352766
+          },
+          {
+            "year": 4,
+            "cash_flow": 4188113424.000001,
+            "present_value": 2661621795.361958
+          },
+          {
+            "year": 5,
+            "cash_flow": 4355637960.960001,
+            "present_value": 2471505952.836104
+          }
+        ],
+        "terminal_value": 49847856664.320015,
+        "terminal_present_value": 28285012571.346523,
+        "enterprise_value": null,
+        "equity_value": 42116322375.84925,
+        "value_per_share": 181.53587230969504
+      }
+    },
+    "calc_sensitivity_9": {
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+      "implementation_path": "finance_tools/valuation.py",
+      "library": null,
+      "library_version": null,
+      "parameters": {
+        "cash_flow": 2892000000.0,
+        "discount_rate": 0.12,
+        "growth_rates": [
+          0.15,
+          0.1,
+          0.08,
+          0.06,
+          0.04
+        ],
+        "net_debt": 0,
+        "scope": "FCFE",
+        "shares": 232000000.0,
+        "terminal_growth": 0.04
+      },
+      "input_sha256": "5823a8307ef3866ca4b80ef60f1e19510a38b8e5a1a6245780dc893f6d4151ab",
+      "result": {
+        "scope": "FCFE",
+        "forecast": [
+          {
+            "year": 1,
+            "cash_flow": 3325799999.9999995,
+            "present_value": 2969464285.714285
+          },
+          {
+            "year": 2,
+            "cash_flow": 3658380000.0,
+            "present_value": 2916438137.7551017
+          },
+          {
+            "year": 3,
+            "cash_flow": 3951050400.0000005,
+            "present_value": 2812279632.8352766
+          },
+          {
+            "year": 4,
+            "cash_flow": 4188113424.000001,
+            "present_value": 2661621795.361958
+          },
+          {
+            "year": 5,
+            "cash_flow": 4355637960.960001,
+            "present_value": 2471505952.836104
+          }
+        ],
+        "terminal_value": 56623293492.48003,
+        "terminal_present_value": 32129577386.869358,
+        "enterprise_value": null,
+        "equity_value": 45960887191.372086,
+        "value_per_share": 198.10727237660382
+      }
+    },
+    "calc_pe": {
+      "method": "financial_ratio",
+      "method_version": "1.0.0",
+      "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+      "implementation_path": "finance_tools/basic.py",
+      "library": "financetoolkit",
+      "library_version": "2.2.1",
+      "parameters": {
+        "denominator": 13.9,
+        "numerator": 783.0,
+        "operation": "pe"
+      },
+      "input_sha256": "7c49d50679db075376080549c2779c6eef34dad9fe3d96932365e2909ebc2f60",
+      "result": {
+        "value": 56.33093525179856
+      }
+    },
+    "calc_margin": {
+      "method": "financial_ratio",
+      "method_version": "1.0.0",
+      "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+      "implementation_path": "finance_tools/basic.py",
+      "library": "financetoolkit",
+      "library_version": "2.2.1",
+      "parameters": {
+        "denominator": 12195,
+        "numerator": 4094,
+        "operation": "operating_margin"
+      },
+      "input_sha256": "418700014b3f605495ae14ffd503fccf1e3411983ec564801ea984a160723ae1",
+      "result": {
+        "value": 0.33571135711357114
+      }
+    },
+    "calc_liquidity": {
+      "method": "financial_ratio",
+      "method_version": "1.0.0",
+      "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+      "implementation_path": "finance_tools/basic.py",
+      "library": "financetoolkit",
+      "library_version": "2.2.1",
+      "parameters": {
+        "denominator": 3127,
+        "numerator": 5221,
+        "operation": "current_ratio"
+      },
+      "input_sha256": "19a49b020aa16d91ecec3d58ec8ce0f84b15f7fae8b19a114f47759a3b9e5929",
+      "result": {
+        "value": 1.669651423089223
+      }
+    }
+  },
+  "sensitivity": [
+    {
+      "discount_rate": 0.08,
+      "terminal_growth": 0.02,
+      "calculation": {
+        "method": "multistage_dcf",
+        "method_version": "1.0.0",
+        "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+        "implementation_path": "finance_tools/valuation.py",
+        "library": null,
+        "library_version": null,
+        "parameters": {
+          "cash_flow": 2892000000.0,
+          "discount_rate": 0.08,
+          "growth_rates": [
+            0.15,
+            0.1,
+            0.08,
+            0.06,
+            0.04
+          ],
+          "net_debt": 0,
+          "scope": "FCFE",
+          "shares": 232000000.0,
+          "terminal_growth": 0.02
+        },
+        "input_sha256": "80b1989c613d55ff62de699c03bca78f80c81600b5bc41aae4ad17e6c44a2fd5",
+        "result": {
+          "scope": "FCFE",
+          "forecast": [
+            {
+              "year": 1,
+              "cash_flow": 3325799999.9999995,
+              "present_value": 3079444444.4444437
+            },
+            {
+              "year": 2,
+              "cash_flow": 3658380000.0,
+              "present_value": 3136471193.4156375
+            },
+            {
+              "year": 3,
+              "cash_flow": 3951050400.0000005,
+              "present_value": 3136471193.415638
+            },
+            {
+              "year": 4,
+              "cash_flow": 4188113424.000001,
+              "present_value": 3078388393.5375705
+            },
+            {
+              "year": 5,
+              "cash_flow": 4355637960.960001,
+              "present_value": 2964374008.591734
+            }
+          ],
+          "terminal_value": 74045845336.32002,
+          "terminal_present_value": 50394358146.05949,
+          "enterprise_value": null,
+          "equity_value": 65789507379.46451,
+          "value_per_share": 283.5754628425194
+        }
+      }
+    },
+    {
+      "discount_rate": 0.08,
+      "terminal_growth": 0.03,
+      "calculation": {
+        "method": "multistage_dcf",
+        "method_version": "1.0.0",
+        "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+        "implementation_path": "finance_tools/valuation.py",
+        "library": null,
+        "library_version": null,
+        "parameters": {
+          "cash_flow": 2892000000.0,
+          "discount_rate": 0.08,
+          "growth_rates": [
+            0.15,
+            0.1,
+            0.08,
+            0.06,
+            0.04
+          ],
+          "net_debt": 0,
+          "scope": "FCFE",
+          "shares": 232000000.0,
+          "terminal_growth": 0.03
+        },
+        "input_sha256": "428a8ad466e8aa7dd243021b1e56e061de43968c54094aa555c3f573a20e92b7",
+        "result": {
+          "scope": "FCFE",
+          "forecast": [
+            {
+              "year": 1,
+              "cash_flow": 3325799999.9999995,
+              "present_value": 3079444444.4444437
+            },
+            {
+              "year": 2,
+              "cash_flow": 3658380000.0,
+              "present_value": 3136471193.4156375
+            },
+            {
+              "year": 3,
+              "cash_flow": 3951050400.0000005,
+              "present_value": 3136471193.415638
+            },
+            {
+              "year": 4,
+              "cash_flow": 4188113424.000001,
+              "present_value": 3078388393.5375705
+            },
+            {
+              "year": 5,
+              "cash_flow": 4355637960.960001,
+              "present_value": 2964374008.591734
+            }
+          ],
+          "terminal_value": 89726141995.77602,
+          "terminal_present_value": 61066104576.98972,
+          "enterprise_value": null,
+          "equity_value": 76461253810.39474,
+          "value_per_share": 329.5743698723911
+        }
+      }
+    },
+    {
+      "discount_rate": 0.08,
+      "terminal_growth": 0.04,
+      "calculation": {
+        "method": "multistage_dcf",
+        "method_version": "1.0.0",
+        "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+        "implementation_path": "finance_tools/valuation.py",
+        "library": null,
+        "library_version": null,
+        "parameters": {
+          "cash_flow": 2892000000.0,
+          "discount_rate": 0.08,
+          "growth_rates": [
+            0.15,
+            0.1,
+            0.08,
+            0.06,
+            0.04
+          ],
+          "net_debt": 0,
+          "scope": "FCFE",
+          "shares": 232000000.0,
+          "terminal_growth": 0.04
+        },
+        "input_sha256": "f3ffed0203c2496017284836bd8314dba2bb56eaaae134a18b12b875196191ca",
+        "result": {
+          "scope": "FCFE",
+          "forecast": [
+            {
+              "year": 1,
+              "cash_flow": 3325799999.9999995,
+              "present_value": 3079444444.4444437
+            },
+            {
+              "year": 2,
+              "cash_flow": 3658380000.0,
+              "present_value": 3136471193.4156375
+            },
+            {
+              "year": 3,
+              "cash_flow": 3951050400.0000005,
+              "present_value": 3136471193.415638
+            },
+            {
+              "year": 4,
+              "cash_flow": 4188113424.000001,
+              "present_value": 3078388393.5375705
+            },
+            {
+              "year": 5,
+              "cash_flow": 4355637960.960001,
+              "present_value": 2964374008.591734
+            }
+          ],
+          "terminal_value": 113246586984.96002,
+          "terminal_present_value": 77073724223.38509,
+          "enterprise_value": null,
+          "equity_value": 92468873456.79012,
+          "value_per_share": 398.5727304171988
+        }
+      }
+    },
+    {
+      "discount_rate": 0.1,
+      "terminal_growth": 0.02,
+      "calculation": {
+        "method": "multistage_dcf",
+        "method_version": "1.0.0",
+        "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+        "implementation_path": "finance_tools/valuation.py",
+        "library": null,
+        "library_version": null,
+        "parameters": {
+          "cash_flow": 2892000000.0,
+          "discount_rate": 0.1,
+          "growth_rates": [
+            0.15,
+            0.1,
+            0.08,
+            0.06,
+            0.04
+          ],
+          "net_debt": 0,
+          "scope": "FCFE",
+          "shares": 232000000.0,
+          "terminal_growth": 0.02
+        },
+        "input_sha256": "486bac00a9ab78e476483764633ff7f36d1c83b159fab7e91c7a3f6c089b0d3f",
+        "result": {
+          "scope": "FCFE",
+          "forecast": [
+            {
+              "year": 1,
+              "cash_flow": 3325799999.9999995,
+              "present_value": 3023454545.4545445
+            },
+            {
+              "year": 2,
+              "cash_flow": 3658380000.0,
+              "present_value": 3023454545.454545
+            },
+            {
+              "year": 3,
+              "cash_flow": 3951050400.0000005,
+              "present_value": 2968482644.6280985
+            },
+            {
+              "year": 4,
+              "cash_flow": 4188113424.000001,
+              "present_value": 2860537821.187077
+            },
+            {
+              "year": 5,
+              "cash_flow": 4355637960.960001,
+              "present_value": 2704508485.485964
+            }
+          ],
+          "terminal_value": 55534384002.24001,
+          "terminal_present_value": 34482483189.94604,
+          "enterprise_value": null,
+          "equity_value": 49062921232.156265,
+          "value_per_share": 211.47810875929426
+        }
+      }
+    },
+    {
+      "discount_rate": 0.1,
+      "terminal_growth": 0.03,
+      "calculation": {
+        "method": "multistage_dcf",
+        "method_version": "1.0.0",
+        "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+        "implementation_path": "finance_tools/valuation.py",
+        "library": null,
+        "library_version": null,
+        "parameters": {
+          "cash_flow": 2892000000.0,
+          "discount_rate": 0.1,
+          "growth_rates": [
+            0.15,
+            0.1,
+            0.08,
+            0.06,
+            0.04
+          ],
+          "net_debt": 0,
+          "scope": "FCFE",
+          "shares": 232000000.0,
+          "terminal_growth": 0.03
+        },
+        "input_sha256": "b069a89dccd0baa6377ebfa5603a1e4835aa1413f2cef0c44d3e230ff26aab51",
+        "result": {
+          "scope": "FCFE",
+          "forecast": [
+            {
+              "year": 1,
+              "cash_flow": 3325799999.9999995,
+              "present_value": 3023454545.4545445
+            },
+            {
+              "year": 2,
+              "cash_flow": 3658380000.0,
+              "present_value": 3023454545.454545
+            },
+            {
+              "year": 3,
+              "cash_flow": 3951050400.0000005,
+              "present_value": 2968482644.6280985
+            },
+            {
+              "year": 4,
+              "cash_flow": 4188113424.000001,
+              "present_value": 2860537821.187077
+            },
+            {
+              "year": 5,
+              "cash_flow": 4355637960.960001,
+              "present_value": 2704508485.485964
+            }
+          ],
+          "terminal_value": 64090101425.5543,
+          "terminal_present_value": 39794910572.15061,
+          "enterprise_value": null,
+          "equity_value": 54375348614.36084,
+          "value_per_share": 234.37650264810708
+        }
+      }
+    },
+    {
+      "discount_rate": 0.1,
+      "terminal_growth": 0.04,
+      "calculation": {
+        "method": "multistage_dcf",
+        "method_version": "1.0.0",
+        "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+        "implementation_path": "finance_tools/valuation.py",
+        "library": null,
+        "library_version": null,
+        "parameters": {
+          "cash_flow": 2892000000.0,
+          "discount_rate": 0.1,
+          "growth_rates": [
+            0.15,
+            0.1,
+            0.08,
+            0.06,
+            0.04
+          ],
+          "net_debt": 0,
+          "scope": "FCFE",
+          "shares": 232000000.0,
+          "terminal_growth": 0.04
+        },
+        "input_sha256": "42cd8beb1ca0dcfa7005e7a8bbc2926d8d2ebcf489d2236a57018226cfb6ced4",
+        "result": {
+          "scope": "FCFE",
+          "forecast": [
+            {
+              "year": 1,
+              "cash_flow": 3325799999.9999995,
+              "present_value": 3023454545.4545445
+            },
+            {
+              "year": 2,
+              "cash_flow": 3658380000.0,
+              "present_value": 3023454545.454545
+            },
+            {
+              "year": 3,
+              "cash_flow": 3951050400.0000005,
+              "present_value": 2968482644.6280985
+            },
+            {
+              "year": 4,
+              "cash_flow": 4188113424.000001,
+              "present_value": 2860537821.187077
+            },
+            {
+              "year": 5,
+              "cash_flow": 4355637960.960001,
+              "present_value": 2704508485.485964
+            }
+          ],
+          "terminal_value": 75497724656.64001,
+          "terminal_present_value": 46878147081.75671,
+          "enterprise_value": null,
+          "equity_value": 61458585123.966934,
+          "value_per_share": 264.9076944998575
+        }
+      }
+    },
+    {
+      "discount_rate": 0.12,
+      "terminal_growth": 0.02,
+      "calculation": {
+        "method": "multistage_dcf",
+        "method_version": "1.0.0",
+        "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+        "implementation_path": "finance_tools/valuation.py",
+        "library": null,
+        "library_version": null,
+        "parameters": {
+          "cash_flow": 2892000000.0,
+          "discount_rate": 0.12,
+          "growth_rates": [
+            0.15,
+            0.1,
+            0.08,
+            0.06,
+            0.04
+          ],
+          "net_debt": 0,
+          "scope": "FCFE",
+          "shares": 232000000.0,
+          "terminal_growth": 0.02
+        },
+        "input_sha256": "1d4bd0466b664f33ba82514a529c9a03f4c0ee7ff737096579747138b965ed24",
+        "result": {
+          "scope": "FCFE",
+          "forecast": [
+            {
+              "year": 1,
+              "cash_flow": 3325799999.9999995,
+              "present_value": 2969464285.714285
+            },
+            {
+              "year": 2,
+              "cash_flow": 3658380000.0,
+              "present_value": 2916438137.7551017
+            },
+            {
+              "year": 3,
+              "cash_flow": 3951050400.0000005,
+              "present_value": 2812279632.8352766
+            },
+            {
+              "year": 4,
+              "cash_flow": 4188113424.000001,
+              "present_value": 2661621795.361958
+            },
+            {
+              "year": 5,
+              "cash_flow": 4355637960.960001,
+              "present_value": 2471505952.836104
+            }
+          ],
+          "terminal_value": 44427507201.792015,
+          "terminal_present_value": 25209360718.928265,
+          "enterprise_value": null,
+          "equity_value": 39040670523.43099,
+          "value_per_share": 168.27875225616808
+        }
+      }
+    },
+    {
+      "discount_rate": 0.12,
+      "terminal_growth": 0.03,
+      "calculation": {
+        "method": "multistage_dcf",
+        "method_version": "1.0.0",
+        "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+        "implementation_path": "finance_tools/valuation.py",
+        "library": null,
+        "library_version": null,
+        "parameters": {
+          "cash_flow": 2892000000.0,
+          "discount_rate": 0.12,
+          "growth_rates": [
+            0.15,
+            0.1,
+            0.08,
+            0.06,
+            0.04
+          ],
+          "net_debt": 0,
+          "scope": "FCFE",
+          "shares": 232000000.0,
+          "terminal_growth": 0.03
+        },
+        "input_sha256": "0cc9487745f9545f160c18832a5a65d91fa8b10b86d50595302464e3c1049aca",
+        "result": {
+          "scope": "FCFE",
+          "forecast": [
+            {
+              "year": 1,
+              "cash_flow": 3325799999.9999995,
+              "present_value": 2969464285.714285
+            },
+            {
+              "year": 2,
+              "cash_flow": 3658380000.0,
+              "present_value": 2916438137.7551017
+            },
+            {
+              "year": 3,
+              "cash_flow": 3951050400.0000005,
+              "present_value": 2812279632.8352766
+            },
+            {
+              "year": 4,
+              "cash_flow": 4188113424.000001,
+              "present_value": 2661621795.361958
+            },
+            {
+              "year": 5,
+              "cash_flow": 4355637960.960001,
+              "present_value": 2471505952.836104
+            }
+          ],
+          "terminal_value": 49847856664.320015,
+          "terminal_present_value": 28285012571.346523,
+          "enterprise_value": null,
+          "equity_value": 42116322375.84925,
+          "value_per_share": 181.53587230969504
+        }
+      }
+    },
+    {
+      "discount_rate": 0.12,
+      "terminal_growth": 0.04,
+      "calculation": {
+        "method": "multistage_dcf",
+        "method_version": "1.0.0",
+        "implementation_sha256": "81ed45abf24a232ed01f6cefd959e968a0a7afcb3cc39bf0098666f51bdde65d",
+        "implementation_path": "finance_tools/valuation.py",
+        "library": null,
+        "library_version": null,
+        "parameters": {
+          "cash_flow": 2892000000.0,
+          "discount_rate": 0.12,
+          "growth_rates": [
+            0.15,
+            0.1,
+            0.08,
+            0.06,
+            0.04
+          ],
+          "net_debt": 0,
+          "scope": "FCFE",
+          "shares": 232000000.0,
+          "terminal_growth": 0.04
+        },
+        "input_sha256": "5823a8307ef3866ca4b80ef60f1e19510a38b8e5a1a6245780dc893f6d4151ab",
+        "result": {
+          "scope": "FCFE",
+          "forecast": [
+            {
+              "year": 1,
+              "cash_flow": 3325799999.9999995,
+              "present_value": 2969464285.714285
+            },
+            {
+              "year": 2,
+              "cash_flow": 3658380000.0,
+              "present_value": 2916438137.7551017
+            },
+            {
+              "year": 3,
+              "cash_flow": 3951050400.0000005,
+              "present_value": 2812279632.8352766
+            },
+            {
+              "year": 4,
+              "cash_flow": 4188113424.000001,
+              "present_value": 2661621795.361958
+            },
+            {
+              "year": 5,
+              "cash_flow": 4355637960.960001,
+              "present_value": 2471505952.836104
+            }
+          ],
+          "terminal_value": 56623293492.48003,
+          "terminal_present_value": 32129577386.869358,
+          "enterprise_value": null,
+          "equity_value": 45960887191.372086,
+          "value_per_share": 198.10727237660382
+        }
+      }
+    }
+  ],
+  "descriptive_arithmetic": {
+    "revenue_growth": 0.3405518302737167,
+    "nearline_capacity_growth": 0.39839034205231383,
+    "hdd_capacity_growth": 0.3260504201680672,
+    "decline_from_52w_high": 0.31615720524017465,
+    "position_in_52w_range": 0.6132478632478633,
+    "fcf_yield": 0.017313579310690927,
+    "owner_cash_proxy_yield": 0.016125884498073482,
+    "net_debt_usd": 1861000000.0
+  },
+  "formulas": "增长=本期/上期-1；距高点=1-price/high52；区间=(price-low)/(high-low)；收益率=现金/市值；净债务=账面有息债务-现金"
+}

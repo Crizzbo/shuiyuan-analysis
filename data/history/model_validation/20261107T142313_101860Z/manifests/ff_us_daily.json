@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.1.0",
+  "source_id": "histval-ff_us_daily-20261107T142313_101860Z",
+  "revision": 1,
+  "source_path": "data/history/model_validation/20261107T142313_101860Z/raw/ff_us_daily.zip",
+  "source_kind": "secondary",
+  "dataset_kind": "market",
+  "published_at": null,
+  "available_at": "2026-11-07T14:23:19.303874+00:00",
+  "acquired_at": "2026-11-07T14:23:19.303874+00:00",
+  "effective_period": null,
+  "license_notes": "Copyright Eugene F. Fama and Kenneth R. French; publisher's publicly downloadable research files, retained for local research only; no redistribution license asserted.",
+  "quality_notes": [
+    "发布者提供的研究组合资料；Mkt-RF加RF还原总收益，百分数单位；可能有历史修订；JP为美元口径，不是TOPIX日元行情。",
+    "来源URL：https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_daily_CSV.zip",
+    "本次归档时间不等于历史首次可用时间；不用于证明严格point-in-time回测。"
+  ],
+  "supersedes_revision": null,
+  "published_date": null,
+  "publication_precision": "unknown"
+}

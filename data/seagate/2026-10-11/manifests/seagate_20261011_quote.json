@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.1.0",
+  "source_id": "seagate_20261011_quote",
+  "revision": 1,
+  "source_path": "data/seagate/2026-10-11/google-finance-browser-excerpt.md",
+  "source_kind": "secondary",
+  "dataset_kind": "market",
+  "published_at": null,
+  "published_date": null,
+  "publication_precision": "unknown",
+  "available_at": "2026-10-11T10:06:39Z",
+  "acquired_at": "2026-10-11T10:06:39Z",
+  "effective_period": null,
+  "license_notes": "项目内研究使用；不代表再分发授权",
+  "quality_notes": [
+    "浏览器常规交易报价；MCP本次失败"
+  ],
+  "supersedes_revision": null
+}

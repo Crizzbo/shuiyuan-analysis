@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.1.0",
+  "source_id": "seagate_20261011_checks",
+  "revision": 1,
+  "source_path": "data/seagate/2026-10-11/verification.json",
+  "source_kind": "project_design",
+  "dataset_kind": "research_material",
+  "published_at": null,
+  "published_date": null,
+  "publication_precision": "unknown",
+  "available_at": "2026-10-11T10:06:39Z",
+  "acquired_at": "2026-10-11T10:06:39Z",
+  "effective_period": null,
+  "license_notes": "项目内研究使用；不代表再分发授权",
+  "quality_notes": [
+    "开源NPV交叉核对与反向DCF重算"
+  ],
+  "supersedes_revision": null
+}

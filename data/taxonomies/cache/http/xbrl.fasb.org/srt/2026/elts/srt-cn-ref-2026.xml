@@ -1,0 +1,560 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+(c) 2010-2026 Financial Accounting Foundation; (c) 2007-2010 XBRL US, Inc.  All Rights Reserved.
+Notice: Authorized Uses are Set Forth at https://xbrl.fasb.org/terms/SRT_TermsConditions.html
+  -->
+<link:linkbase xmlns:cn-part='http://fasb.org/cn-part/2026' xmlns:link='http://www.xbrl.org/2003/linkbase' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.xbrl.org/2003/linkbase http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd http://fasb.org/cn-part/2026 ./srt-parts-cn-2026.xsd'>
+  <link:roleRef roleURI='http://fasb.org/srt/role/deprecationNote/deprecationNote' xlink:href='./srt-roles-2026.xsd#deprecationNote' xlink:type='simple' />
+  <link:roleRef roleURI='http://fasb.org/srt/role/changeNote/changeNote' xlink:href='srt-roles-2026.xsd#changeNote' xlink:type='simple' />
+  <link:referenceLink xlink:role='http://www.xbrl.org/2003/role/link' xlink:type='extended'>
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveGasWellsNumberOfWellsGross' xlink:label='loc_ProductiveGasWellsNumberOfWellsGross' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveGasWellsNumberOfWellsNet' xlink:label='loc_ProductiveGasWellsNumberOfWellsNet' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveOilWellsNumberOfWellsGross' xlink:label='loc_ProductiveOilWellsNumberOfWellsGross' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveOilWellsNumberOfWellsNet' xlink:label='loc_ProductiveOilWellsNumberOfWellsNet' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ReservesShareOfEquityMethodInvesteesNetProvedOilAndGasReserves' xlink:label='loc_ReservesShareOfEquityMethodInvesteesNetProvedOilAndGasReserves' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SignificantEconomicInterestInStandardizedMeasureOfDiscountedFutureNetCashFlowsAttributableToConsolidatedSubsidiaryIesWithSignificantMinorityInterests' xlink:label='loc_SignificantEconomicInterestInStandardizedMeasureOfDiscountedFutureNetCashFlowsAttributableToConsolidatedSubsidiaryIesWithSignificantMinorityInterests' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ScheduleOfCondensedFinancialStatementsTable' xlink:label='loc_ScheduleOfCondensedFinancialStatementsTable' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_CryptoAssetAxis' xlink:label='loc_CryptoAssetAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_CryptoAssetDomain' xlink:label='loc_CryptoAssetDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_CryptoAssetOtherMember' xlink:label='loc_CryptoAssetOtherMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_FinancialInstrumentGlobalIdentifierFigi' xlink:label='loc_FinancialInstrumentGlobalIdentifierFigi' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_A300Member' xlink:label='loc_A300Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_A312Member' xlink:label='loc_A312Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_B737820Member' xlink:label='loc_B737820Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_B757200Member' xlink:label='loc_B757200Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_B757223Member' xlink:label='loc_B757223Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_B767323Member' xlink:label='loc_B767323Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_B777223Member' xlink:label='loc_B777223Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_CRJMember' xlink:label='loc_CRJMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_EMB120Member' xlink:label='loc_EMB120Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_EMB135Member' xlink:label='loc_EMB135Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_EMB145Member' xlink:label='loc_EMB145Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_EMBMember' xlink:label='loc_EMBMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveOilWellsNumberOfWellsWithMultipleCompletionsNet' xlink:label='loc_ProductiveOilWellsNumberOfWellsWithMultipleCompletionsNet' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveOilWellsNumberOfWellsWithMultipleCompletionsGross' xlink:label='loc_ProductiveOilWellsNumberOfWellsWithMultipleCompletionsGross' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetAbstract' xlink:label='loc_PlatformOperatorCryptoAssetAbstract' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetAgentMember' xlink:label='loc_PlatformOperatorCryptoAssetAgentMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetCryptographicKeyInformationExtensibleEnumeration' xlink:label='loc_PlatformOperatorCryptoAssetCryptographicKeyInformationExtensibleEnumeration' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetEntityMember' xlink:label='loc_PlatformOperatorCryptoAssetEntityMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetExtensibleEnumeration' xlink:label='loc_PlatformOperatorCryptoAssetExtensibleEnumeration' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetHeldForUser' xlink:label='loc_PlatformOperatorCryptoAssetHeldForUser' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetInternalRecordkeepingExtensibleEnumeration' xlink:label='loc_PlatformOperatorCryptoAssetInternalRecordkeepingExtensibleEnumeration' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetLineItems' xlink:label='loc_PlatformOperatorCryptoAssetLineItems' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetPlatformUserMember' xlink:label='loc_PlatformOperatorCryptoAssetPlatformUserMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetPolicyTextBlock' xlink:label='loc_PlatformOperatorCryptoAssetPolicyTextBlock' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetResponsiblePartyDomain' xlink:label='loc_PlatformOperatorCryptoAssetResponsiblePartyDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetSecureAndProtectFromLossExtensibleEnumeration' xlink:label='loc_PlatformOperatorCryptoAssetSecureAndProtectFromLossExtensibleEnumeration' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetTable' xlink:label='loc_PlatformOperatorCryptoAssetTable' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetTableTextBlock' xlink:label='loc_PlatformOperatorCryptoAssetTableTextBlock' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetTextBlock' xlink:label='loc_PlatformOperatorCryptoAssetTextBlock' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PlatformOperatorCryptoAssetThirdPartyMember' xlink:label='loc_PlatformOperatorCryptoAssetThirdPartyMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SafeguardingAssetPlatformOperatorCryptoAsset' xlink:label='loc_SafeguardingAssetPlatformOperatorCryptoAsset' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SafeguardingLiabilityPlatformOperatorCryptoAsset' xlink:label='loc_SafeguardingLiabilityPlatformOperatorCryptoAsset' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasProductiveWellGrossNumber' xlink:label='loc_OilAndGasProductiveWellGrossNumber' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasProductiveWellNetNumber' xlink:label='loc_OilAndGasProductiveWellNetNumber' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_DeprecatedItems' xlink:label='loc_DeprecatedItems' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_CumulativeEffectPeriodOfAdoptionAdjustedBalanceMember' xlink:label='loc_CumulativeEffectPeriodOfAdoptionAdjustedBalanceMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_CumulativeEffectPeriodOfAdoptionAdjustmentMember' xlink:label='loc_CumulativeEffectPeriodOfAdoptionAdjustmentMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_CumulativeEffectPeriodOfAdoptionAxis' xlink:label='loc_CumulativeEffectPeriodOfAdoptionAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_CumulativeEffectPeriodOfAdoptionDomain' xlink:label='loc_CumulativeEffectPeriodOfAdoptionDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_AfricaMember' xlink:label='loc_AfricaMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_AmericasMember' xlink:label='loc_AmericasMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_AsiaMember' xlink:label='loc_AsiaMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_AsiaPacificMember' xlink:label='loc_AsiaPacificMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_CentralAmericaMember' xlink:label='loc_CentralAmericaMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ConsolidatedEntitiesAxis' xlink:label='loc_ConsolidatedEntitiesAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ConsolidatedEntitiesDomain' xlink:label='loc_ConsolidatedEntitiesDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ConsolidationItemsAxis' xlink:label='loc_ConsolidationItemsAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ConsolidationItemsDomain' xlink:label='loc_ConsolidationItemsDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_CounterpartyNameAxis' xlink:label='loc_CounterpartyNameAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_DirectorMember' xlink:label='loc_DirectorMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_EuropeMember' xlink:label='loc_EuropeMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_FinancingReceivableBeforeAllowanceForCreditLossAverageYield' xlink:label='loc_FinancingReceivableBeforeAllowanceForCreditLossAverageYield' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_FinancingReceivableBeforeAllowanceForCreditLossMaturityTextBlock' xlink:label='loc_FinancingReceivableBeforeAllowanceForCreditLossMaturityTextBlock' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_InterestBearingDepositsInBanksAverageYield' xlink:label='loc_InterestBearingDepositsInBanksAverageYield' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_LatinAmericaMember' xlink:label='loc_LatinAmericaMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_LongTermDebtAverageRatePaid' xlink:label='loc_LongTermDebtAverageRatePaid' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MaximumMember' xlink:label='loc_MaximumMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MinimumMember' xlink:label='loc_MinimumMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_NontaxableInvestmentSecuritiesAverageYield' xlink:label='loc_NontaxableInvestmentSecuritiesAverageYield' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_NorthAmericaMember' xlink:label='loc_NorthAmericaMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OfficerMember' xlink:label='loc_OfficerMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ParentCompanyMember' xlink:label='loc_ParentCompanyMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProFormaMember' xlink:label='loc_ProFormaMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductOrServiceAxis' xlink:label='loc_ProductOrServiceAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductionBarrelsOfOilEquivalents1' xlink:label='loc_ProductionBarrelsOfOilEquivalents1' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductsAndServicesDomain' xlink:label='loc_ProductsAndServicesDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_RangeAxis' xlink:label='loc_RangeAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_RangeMember' xlink:label='loc_RangeMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_RealEstateAndAccumulatedDepreciationDescriptionOfPropertyAxis' xlink:label='loc_RealEstateAndAccumulatedDepreciationDescriptionOfPropertyAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_RealEstateAndAccumulatedDepreciationNameOfPropertyDomain' xlink:label='loc_RealEstateAndAccumulatedDepreciationNameOfPropertyDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ReportableLegalEntitiesMember' xlink:label='loc_ReportableLegalEntitiesMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_RepurchaseAgreementCounterpartyNameDomain' xlink:label='loc_RepurchaseAgreementCounterpartyNameDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_RestatementAxis' xlink:label='loc_RestatementAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_RestatementDomain' xlink:label='loc_RestatementDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_RevisionOfPriorPeriodAccountingStandardsUpdateAdjustmentMember' xlink:label='loc_RevisionOfPriorPeriodAccountingStandardsUpdateAdjustmentMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SavingsDepositLiabilitiesAverageRatePaid' xlink:label='loc_SavingsDepositLiabilitiesAverageRatePaid' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ScenarioUnspecifiedDomain' xlink:label='loc_ScenarioUnspecifiedDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ScheduleOfSupplementalInformationForPropertyCasualtyInsuranceUnderwritersTextBlock' xlink:label='loc_ScheduleOfSupplementalInformationForPropertyCasualtyInsuranceUnderwritersTextBlock' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SecuritiesPurchasedUnderAgreementsToResellAverageYield' xlink:label='loc_SecuritiesPurchasedUnderAgreementsToResellAverageYield' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SecuritiesSoldUnderAgreementsToRepurchaseAverageRatePaid' xlink:label='loc_SecuritiesSoldUnderAgreementsToRepurchaseAverageRatePaid' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SegmentGeographicalDomain' xlink:label='loc_SegmentGeographicalDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ShortTermDebtOtherAverageRatePaid' xlink:label='loc_ShortTermDebtOtherAverageRatePaid' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ShortTermInvestmentsOtherAverageYield' xlink:label='loc_ShortTermInvestmentsOtherAverageYield' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SouthAmericaMember' xlink:label='loc_SouthAmericaMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_StatementScenarioAxis' xlink:label='loc_StatementScenarioAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SupplementaryInsuranceInformationBySegmentLineItems' xlink:label='loc_SupplementaryInsuranceInformationBySegmentLineItems' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SupplementaryInsuranceInformationBySegmentTable' xlink:label='loc_SupplementaryInsuranceInformationBySegmentTable' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SupplementaryInsuranceInformationForInsuranceCompaniesDisclosureTextBlock' xlink:label='loc_SupplementaryInsuranceInformationForInsuranceCompaniesDisclosureTextBlock' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_TaxableInvestmentSecuritiesAverageYield' xlink:label='loc_TaxableInvestmentSecuritiesAverageYield' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_TimeDepositLiabilitiesAverageRatePaid' xlink:label='loc_TimeDepositLiabilitiesAverageRatePaid' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ApartmentBuildingMember' xlink:label='loc_ApartmentBuildingMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_AverageSalesPriceAndProductionCostsPerUnitOfProductionTable' xlink:label='loc_AverageSalesPriceAndProductionCostsPerUnitOfProductionTable' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ConsolidatedOilAndGasProductionAbstract' xlink:label='loc_ConsolidatedOilAndGasProductionAbstract' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_CrudeOilAndNGLPerBarrelMember' xlink:label='loc_CrudeOilAndNGLPerBarrelMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_CrudeOilMember' xlink:label='loc_CrudeOilMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_EnergyAxis' xlink:label='loc_EnergyAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_FuelMember' xlink:label='loc_FuelMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_GasAndOilAcreageLineItems' xlink:label='loc_GasAndOilAcreageLineItems' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_GasAndOilAcreageTable' xlink:label='loc_GasAndOilAcreageTable' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_HeatingOilMember' xlink:label='loc_HeatingOilMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_HotelMember' xlink:label='loc_HotelMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_IndustrialPropertyMember' xlink:label='loc_IndustrialPropertyMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansBetween250000And499999Member' xlink:label='loc_MortgageLoansBetween250000And499999Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansBetween500000And749999Member' xlink:label='loc_MortgageLoansBetween500000And749999Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansBetween750000And999999Member' xlink:label='loc_MortgageLoansBetween750000And999999Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOnRealEstateByLoanDisclosureTextBlock' xlink:label='loc_MortgageLoansOnRealEstateByLoanDisclosureTextBlock' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOnRealEstateDescriptionLoanCategoryAxis' xlink:label='loc_MortgageLoansOnRealEstateDescriptionLoanCategoryAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOnRealEstateDescriptionTypeOfPropertyAxis' xlink:label='loc_MortgageLoansOnRealEstateDescriptionTypeOfPropertyAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOnRealEstateLineItems' xlink:label='loc_MortgageLoansOnRealEstateLineItems' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOnRealEstateLoanCategoryDomain' xlink:label='loc_MortgageLoansOnRealEstateLoanCategoryDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOnRealEstateLoanTypeAxis' xlink:label='loc_MortgageLoansOnRealEstateLoanTypeAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOnRealEstateLoanTypeDomain' xlink:label='loc_MortgageLoansOnRealEstateLoanTypeDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOnRealEstateNamePropertyTypeDomain' xlink:label='loc_MortgageLoansOnRealEstateNamePropertyTypeDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOnRealEstateNumberOfLoans' xlink:label='loc_MortgageLoansOnRealEstateNumberOfLoans' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOnRealEstateOriginalLoanAmountAxis' xlink:label='loc_MortgageLoansOnRealEstateOriginalLoanAmountAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOnRealEstateOriginalLoanAmountDomain' xlink:label='loc_MortgageLoansOnRealEstateOriginalLoanAmountDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOnRealEstatePeriodicPaymentTerms' xlink:label='loc_MortgageLoansOnRealEstatePeriodicPaymentTerms' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOnRealEstateScheduleTable' xlink:label='loc_MortgageLoansOnRealEstateScheduleTable' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOnRealEstateWriteDownOrReserveLoanDomain' xlink:label='loc_MortgageLoansOnRealEstateWriteDownOrReserveLoanDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansOver1000000Member' xlink:label='loc_MortgageLoansOver1000000Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MortgageLoansUnder250000Member' xlink:label='loc_MortgageLoansUnder250000Member' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_MultifamilyMember' xlink:label='loc_MultifamilyMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_NaturalGasLiquidsReservesMember' xlink:label='loc_NaturalGasLiquidsReservesMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_NaturalGasPerThousandCubicFeetMember' xlink:label='loc_NaturalGasPerThousandCubicFeetMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_NaturalGasReservesMember' xlink:label='loc_NaturalGasReservesMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OfficeBuildingMember' xlink:label='loc_OfficeBuildingMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasDeliveryCommitmentsAndContractsLineItems' xlink:label='loc_OilAndGasDeliveryCommitmentsAndContractsLineItems' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasDeliveryCommitmentsAndContractsTable' xlink:label='loc_OilAndGasDeliveryCommitmentsAndContractsTable' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasInProcessActivitiesLineItems' xlink:label='loc_OilAndGasInProcessActivitiesLineItems' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasInProcessActivitiesTable' xlink:label='loc_OilAndGasInProcessActivitiesTable' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OtherNonrenewableNaturalResourcesMember' xlink:label='loc_OtherNonrenewableNaturalResourcesMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OtherPropertyMember' xlink:label='loc_OtherPropertyMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ReserveQuantitiesByTypeOfReserveAxis' xlink:label='loc_ReserveQuantitiesByTypeOfReserveAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_RetailSiteMember' xlink:label='loc_RetailSiteMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ScheduleOfExploratoryWellsDrilledTextBlock' xlink:label='loc_ScheduleOfExploratoryWellsDrilledTextBlock' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ScheduleOfGasAndOilAcreageTextBlock' xlink:label='loc_ScheduleOfGasAndOilAcreageTextBlock' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SecSchedule1229InvestmentInMortgageLoansOnRealEstateLocationOfPropertyExtensibleList' xlink:label='loc_SecSchedule1229InvestmentInMortgageLoansOnRealEstateLocationOfPropertyExtensibleList' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SingleFamilyMember' xlink:label='loc_SingleFamilyMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_StatementGeographicalAxis' xlink:label='loc_StatementGeographicalAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SyntheticGasMember' xlink:label='loc_SyntheticGasMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SyntheticOilMember' xlink:label='loc_SyntheticOilMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_TypeOfReserveDomain' xlink:label='loc_TypeOfReserveDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_WarehouseMember' xlink:label='loc_WarehouseMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasChangeInStandardizedMeasureDiscountedFutureNetCashFlowTable' xlink:label='loc_OilAndGasChangeInStandardizedMeasureDiscountedFutureNetCashFlowTable' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasProvedReserveQuantityGovernmentRequirementInclusionOfReserveOtherThanProved' xlink:label='loc_OilAndGasProvedReserveQuantityGovernmentRequirementInclusionOfReserveOtherThanProved' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasProvedReserveQuantityGovernmentRequirementInclusionOfReserveOtherThanProvedNameOfCountryExtensibleEnumeration' xlink:label='loc_OilAndGasProvedReserveQuantityGovernmentRequirementInclusionOfReserveOtherThanProvedNameOfCountryExtensibleEnumeration' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasProvedReserveQuantityGovernmentRestrictionExclusionFromDisclosedQuantity' xlink:label='loc_OilAndGasProvedReserveQuantityGovernmentRestrictionExclusionFromDisclosedQuantity' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasProvedReserveQuantityGovernmentRestrictionExclusionFromDisclosedQuantityNameOfCountryExtensibleEnumeration' xlink:label='loc_OilAndGasProvedReserveQuantityGovernmentRestrictionExclusionFromDisclosedQuantityNameOfCountryExtensibleEnumeration' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasProvedReserveQuantityRoyaltyInterestOwnedNotAvailable' xlink:label='loc_OilAndGasProvedReserveQuantityRoyaltyInterestOwnedNotAvailable' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasProvedReserveQuantityRoyaltyInterestOwnedNotAvailableOwnershipPercentage' xlink:label='loc_OilAndGasProvedReserveQuantityRoyaltyInterestOwnedNotAvailableOwnershipPercentage' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowConsolidatedSubsidiaryWithNoncontrollingInterest' xlink:label='loc_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowConsolidatedSubsidiaryWithNoncontrollingInterest' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowConsolidatedSubsidiaryWithNoncontrollingInterestAmount' xlink:label='loc_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowConsolidatedSubsidiaryWithNoncontrollingInterestAmount' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowDevelopmentAndProductionCosts' xlink:label='loc_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowDevelopmentAndProductionCosts' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowDevelopmentAndProductionCostsAbstract' xlink:label='loc_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowDevelopmentAndProductionCostsAbstract' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowMineralInPlaceSalePurchase' xlink:label='loc_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowMineralInPlaceSalePurchase' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowMineralInPlaceSalePurchaseAbstract' xlink:label='loc_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowMineralInPlaceSalePurchaseAbstract' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SecSchedule1229RealEstateCompanyInvestmentInMortgageLoanOnRealEstatePaymentTermsDomain' xlink:label='loc_SecSchedule1229RealEstateCompanyInvestmentInMortgageLoanOnRealEstatePaymentTermsDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SecSchedule1229RealEstateCompanyInvestmentInMortgageLoanOnRealEstatePaymentTermsLevelMember' xlink:label='loc_SecSchedule1229RealEstateCompanyInvestmentInMortgageLoanOnRealEstatePaymentTermsLevelMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SecSchedule1229RealEstateCompanyInvestmentInMortgageLoanOnRealEstatePaymentTermsVaryingMember' xlink:label='loc_SecSchedule1229RealEstateCompanyInvestmentInMortgageLoanOnRealEstatePaymentTermsVaryingMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SecSchedule1229RealEstateCompanyInvestmentInMortgageLoanOnRealEstatePeriodicPaymentTermsExtensibleEnumeration' xlink:label='loc_SecSchedule1229RealEstateCompanyInvestmentInMortgageLoanOnRealEstatePeriodicPaymentTermsExtensibleEnumeration' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasDeliveryCommitmentsAndContractsAvailableAmountsToBeReceived' xlink:label='loc_OilAndGasDeliveryCommitmentsAndContractsAvailableAmountsToBeReceived' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasDeliveryCommitmentsAndContractsRemainingContractualVolume' xlink:label='loc_OilAndGasDeliveryCommitmentsAndContractsRemainingContractualVolume' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilReservesMember' xlink:label='loc_OilReservesMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_PrincipalSourcesOfChangeInStandardizedMeasureOfDiscountedFutureNetCashFlowRelatingToProvedOilAndGasReservesAbstract' xlink:label='loc_PrincipalSourcesOfChangeInStandardizedMeasureOfDiscountedFutureNetCashFlowRelatingToProvedOilAndGasReservesAbstract' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SecSchedule1217InsuranceCompaniesReinsuranceAndCoinsuranceIncomeNettedAgainstPremiumCeded' xlink:label='loc_SecSchedule1217InsuranceCompaniesReinsuranceAndCoinsuranceIncomeNettedAgainstPremiumCeded' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantNameDomain' xlink:label='loc_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantNameDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantNameExtensibleEnumeration' xlink:label='loc_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantNameExtensibleEnumeration' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantOmittedInformation' xlink:label='loc_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantOmittedInformation' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantOtherMember' xlink:label='loc_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantOtherMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantSeparateFiling' xlink:label='loc_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantSeparateFiling' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ShareRepurchaseProgramAbstract' xlink:label='loc_ShareRepurchaseProgramAbstract' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ShareRepurchaseProgramAxis' xlink:label='loc_ShareRepurchaseProgramAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ShareRepurchaseProgramDomain' xlink:label='loc_ShareRepurchaseProgramDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ShareRepurchaseProgramLineItems' xlink:label='loc_ShareRepurchaseProgramLineItems' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ShareRepurchaseProgramTable' xlink:label='loc_ShareRepurchaseProgramTable' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_StockRepurchaseProgramAuthorizedAmount1' xlink:label='loc_StockRepurchaseProgramAuthorizedAmount1' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_StockRepurchaseProgramExpirationDate' xlink:label='loc_StockRepurchaseProgramExpirationDate' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_StockRepurchaseProgramNumberOfSharesAuthorizedToBeRepurchased' xlink:label='loc_StockRepurchaseProgramNumberOfSharesAuthorizedToBeRepurchased' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_TitleOfIndividualAxis' xlink:label='loc_TitleOfIndividualAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_TitleOfIndividualWithRelationshipToEntityDomain' xlink:label='loc_TitleOfIndividualWithRelationshipToEntityDomain' xlink:type='locator' />
+    <link:reference xlink:label='ref_1' xlink:role='http://fasb.org/srt/role/deprecationNote/deprecationNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:DeprecatedLabel>Element was deprecated because the financial reporting concept can be conveyed dimensionally.</cn-part:DeprecatedLabel>
+      <cn-part:DeprecationReplacement>OilAndGasProductiveWellGrossNumber ReserveQuantitiesByTypeOfReserveAxis TypeOfReserveDomain NaturalGasReservesMember</cn-part:DeprecationReplacement>
+    </link:reference>
+    <link:reference xlink:label='ref_2' xlink:role='http://fasb.org/srt/role/deprecationNote/deprecationNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:DeprecatedLabel>Element was deprecated because the financial reporting concept can be conveyed dimensionally.</cn-part:DeprecatedLabel>
+      <cn-part:DeprecationReplacement>OilAndGasProductiveWellNetNumber ReserveQuantitiesByTypeOfReserveAxis TypeOfReserveDomain NaturalGasReservesMember</cn-part:DeprecationReplacement>
+    </link:reference>
+    <link:reference xlink:label='ref_3' xlink:role='http://fasb.org/srt/role/deprecationNote/deprecationNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:DeprecatedLabel>Element was deprecated because the financial reporting concept can be conveyed dimensionally.</cn-part:DeprecatedLabel>
+      <cn-part:DeprecationReplacement>OilAndGasProductiveWellGrossNumber ReserveQuantitiesByTypeOfReserveAxis TypeOfReserveDomain CrudeOilMember</cn-part:DeprecationReplacement>
+    </link:reference>
+    <link:reference xlink:label='ref_4' xlink:role='http://fasb.org/srt/role/deprecationNote/deprecationNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:DeprecatedLabel>Element was deprecated because the financial reporting concept can be conveyed dimensionally.</cn-part:DeprecatedLabel>
+      <cn-part:DeprecationReplacement>OilAndGasProductiveWellNetNumber ReserveQuantitiesByTypeOfReserveAxis TypeOfReserveDomain CrudeOilMember</cn-part:DeprecationReplacement>
+    </link:reference>
+    <link:reference xlink:label='ref_5' xlink:role='http://fasb.org/srt/role/deprecationNote/deprecationNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:DeprecatedLabel>Element was deprecated because the financial reporting concept can be conveyed dimensionally.</cn-part:DeprecatedLabel>
+    </link:reference>
+    <link:reference xlink:label='ref_6' xlink:role='http://fasb.org/srt/role/deprecationNote/deprecationNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:DeprecatedLabel>Element was deprecated because it has a stringItemType attribute.</cn-part:DeprecatedLabel>
+      <cn-part:DeprecationReplacement>OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowConsolidatedSubsidiaryWithNoncontrollingInterest</cn-part:DeprecationReplacement>
+    </link:reference>
+    <link:reference xlink:label='ref_7' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:ModifiedReferences>true</cn-part:ModifiedReferences>
+    </link:reference>
+    <link:reference xlink:label='ref_8' xlink:role='http://fasb.org/srt/role/deprecationNote/deprecationNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:DeprecatedLabel>Element was deprecated because of low usage.</cn-part:DeprecatedLabel>
+    </link:reference>
+    <link:reference xlink:label='ref_9' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:ElementDeprecated>true</cn-part:ElementDeprecated>
+    </link:reference>
+    <link:reference xlink:label='ref_10' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:NewElement>true</cn-part:NewElement>
+    </link:reference>
+    <link:reference xlink:label='ref_11' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:ModifiedDocumentation>true</cn-part:ModifiedDocumentation>
+      <cn-part:PreviousDocumentation>Represents amount after cumulative-effect adjustment to financial statements in period of adoption of amendment to accounting standards.</cn-part:PreviousDocumentation>
+    </link:reference>
+    <link:reference xlink:label='ref_12' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:ModifiedDocumentation>true</cn-part:ModifiedDocumentation>
+      <cn-part:PreviousDocumentation>Increase (decrease) to financial statements for cumulative-effect adjustment in period of adoption of amendment to accounting standards.</cn-part:PreviousDocumentation>
+    </link:reference>
+    <link:reference xlink:label='ref_13' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:ModifiedDocumentation>true</cn-part:ModifiedDocumentation>
+      <cn-part:PreviousDocumentation>Information by cumulative-effect adjustment to financial statements in period of adoption of amendment to accounting standards.</cn-part:PreviousDocumentation>
+    </link:reference>
+    <link:reference xlink:label='ref_14' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:ModifiedDocumentation>true</cn-part:ModifiedDocumentation>
+      <cn-part:PreviousDocumentation>Cumulative-effect adjustment to financial statements in period of adoption of amendment to accounting standards.</cn-part:PreviousDocumentation>
+    </link:reference>
+    <link:reference xlink:label='ref_15' xlink:role='http://fasb.org/srt/role/deprecationNote/deprecationNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:DeprecatedLabel>Element was deprecated because it was no longer needed for organization.</cn-part:DeprecatedLabel>
+    </link:reference>
+    <link:reference xlink:label='ref_16' xlink:role='http://fasb.org/srt/role/deprecationNote/deprecationNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2026</cn-part:TaxonomyVersion>
+      <cn-part:DeprecatedLabel>Element was deprecated because the guidance from which this element is derived is no longer applicable.</cn-part:DeprecatedLabel>
+    </link:reference>
+    <link:reference xlink:label='ref_17' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2024</cn-part:TaxonomyVersion>
+      <cn-part:ModifiedReferences>true</cn-part:ModifiedReferences>
+    </link:reference>
+    <link:reference xlink:label='ref_18' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2025</cn-part:TaxonomyVersion>
+      <cn-part:ModifiedReferences>true</cn-part:ModifiedReferences>
+    </link:reference>
+    <link:reference xlink:label='ref_19' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2025</cn-part:TaxonomyVersion>
+      <cn-part:NewElement>true</cn-part:NewElement>
+    </link:reference>
+    <link:reference xlink:label='ref_20' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2025</cn-part:TaxonomyVersion>
+      <cn-part:ModifiedLabels>true</cn-part:ModifiedLabels>
+      <cn-part:ModifiedDocumentation>true</cn-part:ModifiedDocumentation>
+      <cn-part:PreviousDocumentation>Quantity expected to be received from oil and gas producing properties.</cn-part:PreviousDocumentation>
+    </link:reference>
+    <link:reference xlink:label='ref_21' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2025</cn-part:TaxonomyVersion>
+      <cn-part:ModifiedLabels>true</cn-part:ModifiedLabels>
+      <cn-part:ModifiedDocumentation>true</cn-part:ModifiedDocumentation>
+      <cn-part:PreviousDocumentation>Quantity of oil and gas subject to delivery commitment.</cn-part:PreviousDocumentation>
+    </link:reference>
+    <link:reference xlink:label='ref_22' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2025</cn-part:TaxonomyVersion>
+      <cn-part:ModifiedReferences>true</cn-part:ModifiedReferences>
+      <cn-part:ModifiedLabels>true</cn-part:ModifiedLabels>
+    </link:reference>
+    <link:reference xlink:label='ref_23' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2024</cn-part:TaxonomyVersion>
+      <cn-part:NewElement>true</cn-part:NewElement>
+    </link:reference>
+    <link:reference xlink:label='ref_24' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2024</cn-part:TaxonomyVersion>
+      <cn-part:ModifiedLabels>true</cn-part:ModifiedLabels>
+      <cn-part:ModifiedDocumentation>true</cn-part:ModifiedDocumentation>
+      <cn-part:PreviousDocumentation>Information by title of individual or nature of relationship to individual or group of individuals.</cn-part:PreviousDocumentation>
+    </link:reference>
+    <link:reference xlink:label='ref_25' xlink:role='http://fasb.org/srt/role/changeNote/changeNote' xlink:type='resource'>
+      <cn-part:TaxonomyVersion>2024</cn-part:TaxonomyVersion>
+      <cn-part:ModifiedLabels>true</cn-part:ModifiedLabels>
+      <cn-part:ModifiedDocumentation>true</cn-part:ModifiedDocumentation>
+      <cn-part:PreviousDocumentation>Title of individual, or nature of relationship to individual or group of individuals.</cn-part:PreviousDocumentation>
+    </link:reference>
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductiveGasWellsNumberOfWellsGross' xlink:to='ref_1' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductiveGasWellsNumberOfWellsGross' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductiveGasWellsNumberOfWellsNet' xlink:to='ref_2' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductiveGasWellsNumberOfWellsNet' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductiveOilWellsNumberOfWellsGross' xlink:to='ref_3' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductiveOilWellsNumberOfWellsGross' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductiveOilWellsNumberOfWellsNet' xlink:to='ref_4' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductiveOilWellsNumberOfWellsNet' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ReservesShareOfEquityMethodInvesteesNetProvedOilAndGasReserves' xlink:to='ref_5' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ReservesShareOfEquityMethodInvesteesNetProvedOilAndGasReserves' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SignificantEconomicInterestInStandardizedMeasureOfDiscountedFutureNetCashFlowsAttributableToConsolidatedSubsidiaryIesWithSignificantMinorityInterests' xlink:to='ref_6' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SignificantEconomicInterestInStandardizedMeasureOfDiscountedFutureNetCashFlowsAttributableToConsolidatedSubsidiaryIesWithSignificantMinorityInterests' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ScheduleOfCondensedFinancialStatementsTable' xlink:to='ref_7' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ScheduleOfCondensedFinancialStatementsTable' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CryptoAssetAxis' xlink:to='ref_7' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CryptoAssetDomain' xlink:to='ref_7' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CryptoAssetOtherMember' xlink:to='ref_7' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_FinancialInstrumentGlobalIdentifierFigi' xlink:to='ref_7' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_A300Member' xlink:to='ref_8' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_A300Member' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_A312Member' xlink:to='ref_8' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_A312Member' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_B737820Member' xlink:to='ref_8' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_B737820Member' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_B757200Member' xlink:to='ref_8' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_B757200Member' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_B757223Member' xlink:to='ref_8' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_B757223Member' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_B767323Member' xlink:to='ref_8' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_B767323Member' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_B777223Member' xlink:to='ref_8' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_B777223Member' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CRJMember' xlink:to='ref_8' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CRJMember' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EMB120Member' xlink:to='ref_8' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EMB120Member' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EMB135Member' xlink:to='ref_8' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EMB135Member' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EMB145Member' xlink:to='ref_8' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EMB145Member' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EMBMember' xlink:to='ref_8' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EMBMember' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductiveOilWellsNumberOfWellsWithMultipleCompletionsNet' xlink:to='ref_8' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductiveOilWellsNumberOfWellsWithMultipleCompletionsNet' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductiveOilWellsNumberOfWellsWithMultipleCompletionsGross' xlink:to='ref_8' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductiveOilWellsNumberOfWellsWithMultipleCompletionsGross' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetAbstract' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetAbstract' xlink:to='ref_15' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetAgentMember' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetAgentMember' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetCryptographicKeyInformationExtensibleEnumeration' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetCryptographicKeyInformationExtensibleEnumeration' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetEntityMember' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetEntityMember' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetExtensibleEnumeration' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetExtensibleEnumeration' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetHeldForUser' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetHeldForUser' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetInternalRecordkeepingExtensibleEnumeration' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetInternalRecordkeepingExtensibleEnumeration' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetLineItems' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetLineItems' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetPlatformUserMember' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetPlatformUserMember' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetPolicyTextBlock' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetPolicyTextBlock' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetResponsiblePartyDomain' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetResponsiblePartyDomain' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetSecureAndProtectFromLossExtensibleEnumeration' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetSecureAndProtectFromLossExtensibleEnumeration' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetTable' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetTable' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetTableTextBlock' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetTableTextBlock' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetTextBlock' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetTextBlock' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetThirdPartyMember' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PlatformOperatorCryptoAssetThirdPartyMember' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SafeguardingAssetPlatformOperatorCryptoAsset' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SafeguardingAssetPlatformOperatorCryptoAsset' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SafeguardingLiabilityPlatformOperatorCryptoAsset' xlink:to='ref_9' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SafeguardingLiabilityPlatformOperatorCryptoAsset' xlink:to='ref_16' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasProductiveWellGrossNumber' xlink:to='ref_10' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasProductiveWellNetNumber' xlink:to='ref_10' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_DeprecatedItems' xlink:to='ref_10' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CumulativeEffectPeriodOfAdoptionAdjustedBalanceMember' xlink:to='ref_11' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CumulativeEffectPeriodOfAdoptionAdjustmentMember' xlink:to='ref_12' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CumulativeEffectPeriodOfAdoptionAdjustmentMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CumulativeEffectPeriodOfAdoptionAxis' xlink:to='ref_13' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CumulativeEffectPeriodOfAdoptionAxis' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CumulativeEffectPeriodOfAdoptionDomain' xlink:to='ref_14' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CumulativeEffectPeriodOfAdoptionDomain' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_AfricaMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_AmericasMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_AsiaMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_AsiaPacificMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CentralAmericaMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ConsolidatedEntitiesAxis' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ConsolidatedEntitiesDomain' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ConsolidationItemsAxis' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ConsolidationItemsDomain' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CounterpartyNameAxis' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_DirectorMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EuropeMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_FinancingReceivableBeforeAllowanceForCreditLossAverageYield' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_FinancingReceivableBeforeAllowanceForCreditLossMaturityTextBlock' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_InterestBearingDepositsInBanksAverageYield' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_LatinAmericaMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_LongTermDebtAverageRatePaid' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MaximumMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MaximumMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MinimumMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MinimumMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_NontaxableInvestmentSecuritiesAverageYield' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_NorthAmericaMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OfficerMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ParentCompanyMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProFormaMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductOrServiceAxis' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductionBarrelsOfOilEquivalents1' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductionBarrelsOfOilEquivalents1' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ProductsAndServicesDomain' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_RangeAxis' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_RangeAxis' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_RangeMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_RangeMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_RealEstateAndAccumulatedDepreciationDescriptionOfPropertyAxis' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_RealEstateAndAccumulatedDepreciationNameOfPropertyDomain' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ReportableLegalEntitiesMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_RepurchaseAgreementCounterpartyNameDomain' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_RestatementAxis' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_RestatementDomain' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_RevisionOfPriorPeriodAccountingStandardsUpdateAdjustmentMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SavingsDepositLiabilitiesAverageRatePaid' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ScenarioUnspecifiedDomain' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ScheduleOfSupplementalInformationForPropertyCasualtyInsuranceUnderwritersTextBlock' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SecuritiesPurchasedUnderAgreementsToResellAverageYield' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SecuritiesSoldUnderAgreementsToRepurchaseAverageRatePaid' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SegmentGeographicalDomain' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SegmentGeographicalDomain' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ShortTermDebtOtherAverageRatePaid' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ShortTermInvestmentsOtherAverageYield' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SouthAmericaMember' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_StatementScenarioAxis' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SupplementaryInsuranceInformationBySegmentLineItems' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SupplementaryInsuranceInformationBySegmentTable' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SupplementaryInsuranceInformationForInsuranceCompaniesDisclosureTextBlock' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_TaxableInvestmentSecuritiesAverageYield' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_TimeDepositLiabilitiesAverageRatePaid' xlink:to='ref_17' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ApartmentBuildingMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_AverageSalesPriceAndProductionCostsPerUnitOfProductionTable' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ConsolidatedOilAndGasProductionAbstract' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CrudeOilAndNGLPerBarrelMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_CrudeOilMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EnergyAxis' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_FuelMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_GasAndOilAcreageLineItems' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_GasAndOilAcreageTable' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_HeatingOilMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_HotelMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_IndustrialPropertyMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansBetween250000And499999Member' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansBetween500000And749999Member' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansBetween750000And999999Member' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOnRealEstateByLoanDisclosureTextBlock' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOnRealEstateDescriptionLoanCategoryAxis' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOnRealEstateDescriptionTypeOfPropertyAxis' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOnRealEstateLineItems' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOnRealEstateLoanCategoryDomain' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOnRealEstateLoanTypeAxis' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOnRealEstateLoanTypeDomain' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOnRealEstateNamePropertyTypeDomain' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOnRealEstateNumberOfLoans' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOnRealEstateOriginalLoanAmountAxis' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOnRealEstateOriginalLoanAmountDomain' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOnRealEstatePeriodicPaymentTerms' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOnRealEstateScheduleTable' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOnRealEstateWriteDownOrReserveLoanDomain' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansOver1000000Member' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MortgageLoansUnder250000Member' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_MultifamilyMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_NaturalGasLiquidsReservesMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_NaturalGasPerThousandCubicFeetMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_NaturalGasReservesMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OfficeBuildingMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasDeliveryCommitmentsAndContractsLineItems' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasDeliveryCommitmentsAndContractsTable' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasInProcessActivitiesLineItems' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasInProcessActivitiesTable' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OtherNonrenewableNaturalResourcesMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OtherPropertyMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ReserveQuantitiesByTypeOfReserveAxis' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_RetailSiteMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ScheduleOfExploratoryWellsDrilledTextBlock' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ScheduleOfGasAndOilAcreageTextBlock' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SecSchedule1229InvestmentInMortgageLoansOnRealEstateLocationOfPropertyExtensibleList' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SingleFamilyMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_StatementGeographicalAxis' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SyntheticGasMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SyntheticOilMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_TypeOfReserveDomain' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_WarehouseMember' xlink:to='ref_18' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasChangeInStandardizedMeasureDiscountedFutureNetCashFlowTable' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasProvedReserveQuantityGovernmentRequirementInclusionOfReserveOtherThanProved' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasProvedReserveQuantityGovernmentRequirementInclusionOfReserveOtherThanProvedNameOfCountryExtensibleEnumeration' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasProvedReserveQuantityGovernmentRestrictionExclusionFromDisclosedQuantity' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasProvedReserveQuantityGovernmentRestrictionExclusionFromDisclosedQuantityNameOfCountryExtensibleEnumeration' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasProvedReserveQuantityRoyaltyInterestOwnedNotAvailable' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasProvedReserveQuantityRoyaltyInterestOwnedNotAvailableOwnershipPercentage' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowConsolidatedSubsidiaryWithNoncontrollingInterest' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowConsolidatedSubsidiaryWithNoncontrollingInterestAmount' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowDevelopmentAndProductionCosts' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowDevelopmentAndProductionCostsAbstract' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowMineralInPlaceSalePurchase' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowMineralInPlaceSalePurchaseAbstract' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SecSchedule1229RealEstateCompanyInvestmentInMortgageLoanOnRealEstatePaymentTermsDomain' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SecSchedule1229RealEstateCompanyInvestmentInMortgageLoanOnRealEstatePaymentTermsLevelMember' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SecSchedule1229RealEstateCompanyInvestmentInMortgageLoanOnRealEstatePaymentTermsVaryingMember' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SecSchedule1229RealEstateCompanyInvestmentInMortgageLoanOnRealEstatePeriodicPaymentTermsExtensibleEnumeration' xlink:to='ref_19' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasDeliveryCommitmentsAndContractsAvailableAmountsToBeReceived' xlink:to='ref_20' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilAndGasDeliveryCommitmentsAndContractsRemainingContractualVolume' xlink:to='ref_21' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_OilReservesMember' xlink:to='ref_22' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_PrincipalSourcesOfChangeInStandardizedMeasureOfDiscountedFutureNetCashFlowRelatingToProvedOilAndGasReservesAbstract' xlink:to='ref_22' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SecSchedule1217InsuranceCompaniesReinsuranceAndCoinsuranceIncomeNettedAgainstPremiumCeded' xlink:to='ref_23' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantNameDomain' xlink:to='ref_23' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantNameExtensibleEnumeration' xlink:to='ref_23' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantOmittedInformation' xlink:to='ref_23' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantOtherMember' xlink:to='ref_23' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_SecSchedule1218SupplementalInformationPropertyCasualtyInsuranceUnderwritersAffiliatedRegistrantSeparateFiling' xlink:to='ref_23' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ShareRepurchaseProgramAbstract' xlink:to='ref_23' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ShareRepurchaseProgramAxis' xlink:to='ref_23' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ShareRepurchaseProgramDomain' xlink:to='ref_23' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ShareRepurchaseProgramLineItems' xlink:to='ref_23' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_ShareRepurchaseProgramTable' xlink:to='ref_23' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_StockRepurchaseProgramAuthorizedAmount1' xlink:to='ref_23' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_StockRepurchaseProgramExpirationDate' xlink:to='ref_23' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_StockRepurchaseProgramNumberOfSharesAuthorizedToBeRepurchased' xlink:to='ref_23' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_TitleOfIndividualAxis' xlink:to='ref_24' xlink:type='arc' />
+    <link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_TitleOfIndividualWithRelationshipToEntityDomain' xlink:to='ref_25' xlink:type='arc' />
+  </link:referenceLink>
+</link:linkbase>

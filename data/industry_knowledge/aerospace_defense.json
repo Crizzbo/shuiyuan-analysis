@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "aerospace_defense",
+    "industry_name_zh": "航空航天与国防军工",
+    "sector_id": "industrials",
+    "sector_name_zh": "工业",
+    "macro_sector_id": "CAP_GOODS",
+    "macro_sector_name_zh": "工业母机、智能制造装备与汽车交通设备",
+    "description_zh": "涵盖军用战机、导弹防空系统、军用舰船、民用干线客机、航空发动机与军工电子企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.75,
+    "typical_markup_ratio": 1.12,
+    "capex_intensity": "极高重资产",
+    "operating_leverage_exposure": "中等经营杠杆",
+    "typical_gross_margin_range": [0.12, 0.22]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 90.0,
+    "dio_warning_days": 150.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.65,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "航空级特种钛合金、单晶高温镍基合金铸件与碳纤维高性能复材",
+      "军规级抗辐射电子元器件、高精度激光陀螺仪与相控阵雷达核心模组",
+      "航空发动机热端部件精密单晶叶片与大型机身整体结构锻件"
+    ],
+    "downstream_profile": "主权国家国防采购部门、全球大型商业航空公司与干线民航飞机机队租赁商",
+    "pricing_power_verdict": "国防列装型号拥有排他性独家供应地位，民用客机呈双头寡头垄断，享有极高粘性售后备件服务垄断溢价",
+    "channel_inversion_sensitivity": "未交付在手订单储备 (Backlog) 与新签订单出货比 (Book-to-Bill Ratio) 是业绩能见度唯一核心指针"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "主权国防采购预算与特种装备订单持续超预期，未交付在手订单储备创历史新高提供数年业绩能见度",
+      "民用大飞机供应链瓶颈有效缓解，单月交付速率稳步爬坡，高毛利售后航材维保进入加速放量期",
+      "长期固定总价研制合同成本控制严密，重点战略型号顺利完成试飞节点并迈入规模化量产阶段"
+    ],
+    "leading_bear_defenses": [
+      "复杂军工研发项目进度严重脱节造成巨额成本超支，固定总价合同被迫计提大额前瞻亏损拨备",
+      "关键机型发生重大飞行安全隐患或系统缺陷引发全球大范围停飞整顿与客户巨额索赔",
+      "特种航材或发动机核心零部件供应链单点断供，导致总装厂缺件无法如期交付造成巨额现金流失血"
+    ],
+    "core_catalyst_dimensions": [
+      "主权国家年度国防授权法案 (NDAA) 军购预算决议细则",
+      "民航客机单季度实际新机交付量与全球商业航司净订单增速",
+      "未交付在手订单总规模 (Total Backlog) 与订单出货比 (Book-to-Bill Ratio)",
+      "重点固定总价武器型号项目单季度成本超支准备计提动态"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "采用完工百分比法 (Percentage-of-Completion) 确认收入时激进高估实际完工进度以提前透支收入",
+      "未开票应收账款 (Unbilled Receivables) 与合同资产恶性攀升，表明项目验收遭遇军方实质性阻滞",
+      "管理层选择性隐瞒固定总价研发合同潜在的巨额成本超支，推迟确认项目亏损计提"
+    ],
+    "channel_and_revenue_checks": [
+      "重大退役与报废武器系统拆解再制造业务中账面价值与实物存在严重脱节",
+      "商业干线客机延期交付违约索赔预计负债是否在附注中被充分计提"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+ "schema_version":"1.0.0",
+ "archive_kind":"manual_archive_of_ai_browser_rendered_page_excerpts",
+ "not_full_original_document":true,
+ "observed_at":"2026-10-11T04:24:56+00:00",
+ "sources":[
+  {"industry_id":"food_beverage","published_date":"2026-02-10","locator":"Full year 2025 revenue and operating highlights","excerpts":["Global Unit Case Volume Grew 1% for the Quarter and was Even for the Full Year","For the full year, net revenues grew 2% to $47.9 billion, and organic revenues (non-GAAP) grew 5%, driven by 4% growth in price/mix and a 1% increase in concentrate sales.","Unit case volume is computed based on average daily sales."],"observations":[
+   {"parent_metric_id":"food_beverage_driver_1","component":"system_unit_case_volume_growth","name_zh":"系统标准箱日均销量全年增长率","period_start":"2025-01-01","period_end":"2025-12-31","period_type":"annual","scope":"global_system_average_daily_unit_case_volume","raw_value":"Even","raw_unit":"qualitative_zero_growth","value":"0","unit":"ratio","conversion":"issuer_even_means_zero_growth","excerpt_indices":[0,2]},
+   {"parent_metric_id":"food_beverage_driver_2","component":"price_mix_contribution","name_zh":"全年价格及产品组合贡献","period_start":"2025-01-01","period_end":"2025-12-31","period_type":"annual","scope":"global_company_organic_revenue_growth_bridge","raw_value":"4","raw_unit":"percent","value":"0.04","unit":"ratio","conversion":"percent_divided_by_100","excerpt_indices":[1]}
+  ]},
+  {"industry_id":"digital_platforms","published_date":"2026-01-28","locator":"Fourth Quarter and Full Year 2025 Operational and Other Financial Highlights","excerpts":["Family daily active people (DAP) – DAP was 3.58 billion on average for December 2025, an increase of 7% year-over-year."],"observations":[
+   {"parent_metric_id":"digital_platforms_driver_1","component":"family_daily_active_people","name_zh":"十二月平均每日活跃人数","period_start":"2025-12-01","period_end":"2025-12-31","period_type":"monthly_average","scope":"family_of_apps_deduplicated_people","raw_value":"3.58","raw_unit":"billion_people","value":"3580000000","unit":"people","conversion":"billion_times_1000000000","excerpt_indices":[0]}
+  ]},
+  {"industry_id":"asset_management","published_date":"2026-01-15","locator":"Full year 2025 financial highlights","excerpts":["$14 trillion in AUM following record $698 billion of full year net inflows, including $342 billion in the fourth quarter"],"observations":[
+   {"parent_metric_id":"asset_management_driver_1","component":"net_client_flows","name_zh":"全年客户净资金流入","period_start":"2025-01-01","period_end":"2025-12-31","period_type":"annual","scope":"company_reported_net_flows_including_cash_management","raw_value":"698","raw_unit":"USD_billion","value":"698000000000","unit":"USD","conversion":"billion_times_1000000000","excerpt_indices":[0]}
+  ]},
+  {"industry_id":"insurance","published_date":"2026-02-03","locator":"Fourth quarter 2025 results highlights","excerpts":["P&C underwriting income was $2.20 billion , up 39.6%, with a record low combined ratio of 81.2%.","Total pre-tax favorable prior period development was $268 million compared with $213 million last year."],"observations":[
+   {"parent_metric_id":"insurance_driver_1","component":"reported_pc_combined_ratio","name_zh":"报告财险综合成本率","period_start":"2025-10-01","period_end":"2025-12-31","period_type":"quarterly","scope":"company_property_and_casualty_reported_includes_cats_and_prior_development","raw_value":"81.2","raw_unit":"percent","value":"0.812","unit":"ratio","conversion":"percent_divided_by_100","excerpt_indices":[0]},
+   {"parent_metric_id":"insurance_driver_2","component":"favorable_prior_period_reserve_development","name_zh":"税前有利前期准备金发展","period_start":"2025-10-01","period_end":"2025-12-31","period_type":"quarterly","scope":"issuer_reported_favorable_prior_period_development_positive_is_favorable","raw_value":"268","raw_unit":"USD_million","value":"268000000","unit":"USD","conversion":"million_times_1000000","excerpt_indices":[1]}
+  ]},
+  {"industry_id":"restaurants","published_date":"2026-02-11","locator":"Fourth quarter global comparable sales highlights","excerpts":["Global comparable sales in the fourth quarter increased 5.7%, with positive global comparable guest counts and strong comparable sales growth across all segments"],"observations":[
+   {"parent_metric_id":"restaurants_driver_1","component":"global_comparable_sales_growth","name_zh":"全球第四季度同店销售增长","period_start":"2025-10-01","period_end":"2025-12-31","period_type":"quarterly","scope":"global_company_reported_comparable_restaurants","raw_value":"5.7","raw_unit":"percent","value":"0.057","unit":"ratio","conversion":"percent_divided_by_100","excerpt_indices":[0]}
+  ]}
+ ]
+}

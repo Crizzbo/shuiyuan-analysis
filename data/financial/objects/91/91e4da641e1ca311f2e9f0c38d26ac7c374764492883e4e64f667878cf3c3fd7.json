@@ -1,0 +1,212 @@
+{
+  "as_of": "2026-10-11T23:59:59+09:00",
+  "calculation_refs": [
+    {
+      "observation_id": "ad8d089fc0d3078456487cbb9b8e057b78fd5c60e66e43185fc1b26155801d0e",
+      "path": "data/financial/objects/7b/7b6abe49c377863ea1b0df1a38b5dbea76a9f24f6c571eff8f6785d0d74b741a.json",
+      "sha256": "7b6abe49c377863ea1b0df1a38b5dbea76a9f24f6c571eff8f6785d0d74b741a"
+    },
+    {
+      "observation_id": "18095fc7f87bda8db2b66c01e99b905d9e039f60d055cd6a3d8913cb72c988d1",
+      "path": "data/financial/objects/f1/f145c160972156ec61b04b84f1a7b65da81bbe6936ba3fee6e9743c2c3fd5fe7.json",
+      "sha256": "f145c160972156ec61b04b84f1a7b65da81bbe6936ba3fee6e9743c2c3fd5fe7"
+    }
+  ],
+  "classification_status": "unreviewed",
+  "entity_id": "US:INTU:CIK896878",
+  "evidence": [
+    {
+      "acquired_at": "2026-10-11T01:37:03+00:00",
+      "available_at": "2026-10-11T01:37:03+00:00",
+      "excerpt_or_summary": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:OperatingIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-90\">5,884</ix:nonFraction>",
+      "id": "financial-7ce8a85c76eb1ad5e122bab85315c8c3ac8d047e6ee3b027277514c562218b8b",
+      "limitations": [
+        "正式原文与解析版本见指标 lineage；比较年度按当前报告可得时点，不能用于早期回测。"
+      ],
+      "locator": "intu-20260731.htm#f-90 context=c-1",
+      "publication_precision": "date",
+      "published_at": null,
+      "published_date": "2026-09-09",
+      "source_kind": "primary",
+      "source_path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt"
+    },
+    {
+      "acquired_at": "2026-10-11T01:37:03+00:00",
+      "available_at": "2026-10-11T01:37:03+00:00",
+      "excerpt_or_summary": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:Revenues\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-60\">21,448</ix:nonFraction>",
+      "id": "financial-5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f",
+      "limitations": [
+        "正式原文与解析版本见指标 lineage；比较年度按当前报告可得时点，不能用于早期回测。"
+      ],
+      "locator": "intu-20260731.htm#f-60 context=c-1",
+      "publication_precision": "date",
+      "published_at": null,
+      "published_date": "2026-09-09",
+      "source_kind": "primary",
+      "source_path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt"
+    },
+    {
+      "acquired_at": "2026-10-11T01:37:03+00:00",
+      "available_at": "2026-10-11T01:37:03+00:00",
+      "excerpt_or_summary": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-10\" decimals=\"-6\" name=\"us-gaap:Revenues\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-61\">18,831</ix:nonFraction>",
+      "id": "financial-651c3903d462dce36b6bb8a577e93b19f3ab681a2e6f622b37996453660bb021",
+      "limitations": [
+        "正式原文与解析版本见指标 lineage；比较年度按当前报告可得时点，不能用于早期回测。"
+      ],
+      "locator": "intu-20260731.htm#f-61 context=c-10",
+      "publication_precision": "date",
+      "published_at": null,
+      "published_date": "2026-09-09",
+      "source_kind": "primary",
+      "source_path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt"
+    }
+  ],
+  "industry_gate_status": "blocked",
+  "industry_id": "software",
+  "lineage": [
+    {
+      "observation_id": "ad8d089fc0d3078456487cbb9b8e057b78fd5c60e66e43185fc1b26155801d0e",
+      "registration_ids": [
+        "b28972d2c3cdfc8119d7a8a67ed34a26b64da5211eeb04c88a9342b810993336",
+        "d13b2e9706e7fb998dd40c319e83ddc987a1b9cc810d64082eaf87645bc574ac"
+      ],
+      "report_refs": [
+        {
+          "path": "data/financial/objects/7a/7a58e699ad77d85b320820656a89d6253407f0cd5f1a99e18778a7112077e02e.json",
+          "sha256": "7a58e699ad77d85b320820656a89d6253407f0cd5f1a99e18778a7112077e02e"
+        },
+        {
+          "path": "data/financial/objects/7a/7a58e699ad77d85b320820656a89d6253407f0cd5f1a99e18778a7112077e02e.json",
+          "sha256": "7a58e699ad77d85b320820656a89d6253407f0cd5f1a99e18778a7112077e02e"
+        }
+      ],
+      "scope_id": "consolidated"
+    },
+    {
+      "observation_id": "18095fc7f87bda8db2b66c01e99b905d9e039f60d055cd6a3d8913cb72c988d1",
+      "registration_ids": [
+        "d13b2e9706e7fb998dd40c319e83ddc987a1b9cc810d64082eaf87645bc574ac",
+        "d6944f99d4fcef7aa1d0165342966f40fa9dffe4cd4bb9caa021a7b8d02773bd"
+      ],
+      "report_refs": [
+        {
+          "path": "data/financial/objects/7a/7a58e699ad77d85b320820656a89d6253407f0cd5f1a99e18778a7112077e02e.json",
+          "sha256": "7a58e699ad77d85b320820656a89d6253407f0cd5f1a99e18778a7112077e02e"
+        },
+        {
+          "path": "data/financial/objects/7a/7a58e699ad77d85b320820656a89d6253407f0cd5f1a99e18778a7112077e02e.json",
+          "sha256": "7a58e699ad77d85b320820656a89d6253407f0cd5f1a99e18778a7112077e02e"
+        }
+      ],
+      "scope_id": "consolidated"
+    }
+  ],
+  "mapping_results": [
+    {
+      "input_registration_ids": [
+        "b28972d2c3cdfc8119d7a8a67ed34a26b64da5211eeb04c88a9342b810993336",
+        "d13b2e9706e7fb998dd40c319e83ddc987a1b9cc810d64082eaf87645bc574ac"
+      ],
+      "metric_id": "operating_margin",
+      "reason": null,
+      "status": "computed"
+    },
+    {
+      "input_registration_ids": [
+        "d13b2e9706e7fb998dd40c319e83ddc987a1b9cc810d64082eaf87645bc574ac",
+        "d6944f99d4fcef7aa1d0165342966f40fa9dffe4cd4bb9caa021a7b8d02773bd"
+      ],
+      "metric_id": "revenue_growth",
+      "reason": null,
+      "status": "computed"
+    },
+    {
+      "input_registration_ids": [],
+      "metric_id": "software_driver_1",
+      "reason": "行业专属指标缺审核字段绑定与原始输入；总收入不能替代 ARR、留存或其他驱动指标",
+      "status": "blocked"
+    },
+    {
+      "input_registration_ids": [],
+      "metric_id": "software_driver_2",
+      "reason": "行业专属指标缺审核字段绑定与原始输入；总收入不能替代 ARR、留存或其他驱动指标",
+      "status": "blocked"
+    },
+    {
+      "input_registration_ids": [],
+      "metric_id": "software_driver_3",
+      "reason": "行业专属指标缺审核字段绑定与原始输入；总收入不能替代 ARR、留存或其他驱动指标",
+      "status": "blocked"
+    }
+  ],
+  "missing_required_metric_ids": [
+    "software_driver_1",
+    "software_driver_2",
+    "software_driver_3"
+  ],
+  "observations": [
+    {
+      "accounting_basis": "GAAP",
+      "available_at": "2026-10-11T01:37:03+00:00",
+      "comparability_notes": "consolidated；同报告可比列；同期间、同范围营业利润 / 收入；行业 software 为待审核候选，不代替真实分部分类。",
+      "evidence_refs": [
+        "financial-7ce8a85c76eb1ad5e122bab85315c8c3ac8d047e6ee3b027277514c562218b8b",
+        "financial-5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f"
+      ],
+      "id": "ad8d089fc0d3078456487cbb9b8e057b78fd5c60e66e43185fc1b26155801d0e",
+      "metric_id": "operating_margin",
+      "missing_reason": null,
+      "period": {
+        "basis": "year",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "segment_id": null,
+      "value": {
+        "currency": null,
+        "unit": "ratio",
+        "value": 0.2743379336068631
+      }
+    },
+    {
+      "accounting_basis": "GAAP",
+      "available_at": "2026-10-11T01:37:03+00:00",
+      "comparability_notes": "consolidated；同报告可比列；同报告相邻年度、同范围收入 / 上年收入 - 1；行业 software 为待审核候选，不代替真实分部分类。",
+      "evidence_refs": [
+        "financial-5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f",
+        "financial-651c3903d462dce36b6bb8a577e93b19f3ab681a2e6f622b37996453660bb021"
+      ],
+      "id": "18095fc7f87bda8db2b66c01e99b905d9e039f60d055cd6a3d8913cb72c988d1",
+      "metric_id": "revenue_growth",
+      "missing_reason": null,
+      "period": {
+        "basis": "year",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "segment_id": null,
+      "value": {
+        "currency": null,
+        "unit": "ratio",
+        "value": 0.13897297010249066
+      }
+    }
+  ],
+  "period_end": "2026-07-31",
+  "schema_version": "1.0.0",
+  "scope_id": "consolidated",
+  "source_map": {
+    "financial-5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f": {
+      "revision": 1,
+      "source_id": "financial:intu-2026-10k-v1:b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+    },
+    "financial-651c3903d462dce36b6bb8a577e93b19f3ab681a2e6f622b37996453660bb021": {
+      "revision": 1,
+      "source_id": "financial:intu-2026-10k-v1:b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+    },
+    "financial-7ce8a85c76eb1ad5e122bab85315c8c3ac8d047e6ee3b027277514c562218b8b": {
+      "revision": 1,
+      "source_id": "financial:intu-2026-10k-v1:b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+    }
+  }
+}

@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--XBRL Document Created with the Workiva Platform-->
+<!--Copyright 2026 Workiva-->
+<!--r:019eacfc-308e-7265-b00d-0ac0a54beebd,g:9a9ede10-13bf-4dfb-bac1-49f286b00267-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:intu="http://www.intuit.com/20260731" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:dtr-types="http://www.xbrl.org/dtr/type/2024-01-31" xmlns:xbrldt="http://xbrl.org/2005/xbrldt" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.intuit.com/20260731">
+  <xs:import namespace="http://fasb.org/srt/2026" schemaLocation="https://xbrl.fasb.org/srt/2026/elts/srt-2026.xsd"/>
+  <xs:import namespace="http://fasb.org/us-gaap/2026" schemaLocation="https://xbrl.fasb.org/us-gaap/2026/elts/us-gaap-2026.xsd"/>
+  <xs:import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <xs:import namespace="http://www.xbrl.org/2003/linkbase" schemaLocation="http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd"/>
+  <xs:import namespace="http://www.xbrl.org/dtr/type/2024-01-31" schemaLocation="https://www.xbrl.org/dtr/type/2024-01-31/types.xsd"/>
+  <xs:import namespace="http://xbrl.org/2005/xbrldt" schemaLocation="http://www.xbrl.org/2005/xbrldt-2005.xsd"/>
+  <xs:import namespace="http://xbrl.sec.gov/country/2026" schemaLocation="https://xbrl.sec.gov/country/2026/country-2026.xsd"/>
+  <xs:import namespace="http://xbrl.sec.gov/cyd-af-sub/2026" schemaLocation="https://xbrl.sec.gov/cyd/2026/cyd-af-sub-2026.xsd"/>
+  <xs:import namespace="http://xbrl.sec.gov/dei/2026" schemaLocation="https://xbrl.sec.gov/dei/2026/dei-2026.xsd"/>
+  <xs:import namespace="http://xbrl.sec.gov/ecd/2026" schemaLocation="https://xbrl.sec.gov/ecd/2026/ecd-2026.xsd"/>
+  <xs:import namespace="http://xbrl.sec.gov/stpr/2026" schemaLocation="https://xbrl.sec.gov/stpr/2026/stpr-2026.xsd"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <link:linkbaseRef xmlns:xlink="http://www.w3.org/1999/xlink" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="intu-20260731_pre.xml" xlink:role="http://www.xbrl.org/2003/role/presentationLinkbaseRef" xlink:type="simple"/>
+      <link:linkbaseRef xmlns:xlink="http://www.w3.org/1999/xlink" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="intu-20260731_def.xml" xlink:role="http://www.xbrl.org/2003/role/definitionLinkbaseRef" xlink:type="simple"/>
+      <link:linkbaseRef xmlns:xlink="http://www.w3.org/1999/xlink" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="intu-20260731_lab.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:type="simple"/>
+      <link:linkbaseRef xmlns:xlink="http://www.w3.org/1999/xlink" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="intu-20260731_cal.xml" xlink:role="http://www.xbrl.org/2003/role/calculationLinkbaseRef" xlink:type="simple"/>
+      <link:roleType id="CoverPage" roleURI="http://www.intuit.com/role/CoverPage">
+        <link:definition>0000001 - Document - Cover Page</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="AuditInformation" roleURI="http://www.intuit.com/role/AuditInformation">
+        <link:definition>0000002 - Document - Audit Information</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="ConsolidatedStatementsofOperations" roleURI="http://www.intuit.com/role/ConsolidatedStatementsofOperations">
+        <link:definition>9952151 - Statement - Consolidated Statements of Operations</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="ConsolidatedStatementsofComprehensiveIncome" roleURI="http://www.intuit.com/role/ConsolidatedStatementsofComprehensiveIncome">
+        <link:definition>9952152 - Statement - Consolidated Statements of Comprehensive Income</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="ConsolidatedBalanceSheets" roleURI="http://www.intuit.com/role/ConsolidatedBalanceSheets">
+        <link:definition>9952153 - Statement - Consolidated Balance Sheets</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="ConsolidatedBalanceSheetsParenthetical" roleURI="http://www.intuit.com/role/ConsolidatedBalanceSheetsParenthetical">
+        <link:definition>9952154 - Statement - Consolidated Balance Sheets (Parenthetical)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="ConsolidatedStatementsofStockholdersEquity" roleURI="http://www.intuit.com/role/ConsolidatedStatementsofStockholdersEquity">
+        <link:definition>9952155 - Statement - Consolidated Statements of Stockholders' Equity</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="ConsolidatedStatementsofStockholdersEquityParenthetical" roleURI="http://www.intuit.com/role/ConsolidatedStatementsofStockholdersEquityParenthetical">
+        <link:definition>9952156 - Statement - Consolidated Statements of Stockholders' Equity (Parenthetical)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="ConsolidatedStatementsofCashFlows" roleURI="http://www.intuit.com/role/ConsolidatedStatementsofCashFlows">
+        <link:definition>9952157 - Statement - Consolidated Statements of Cash Flows</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="DescriptionofBusinessandSummaryofSignificantAccountingPolicies" roleURI="http://www.intuit.com/role/DescriptionofBusinessandSummaryofSignificantAccountingPolicies">
+        <link:definition>9952158 - Disclosure - Description of Business and Summary of Significant Accounting Policies</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="FairValueMeasurements" roleURI="http://www.intuit.com/role/FairValueMeasurements">
+        <link:definition>9952159 - Disclosure - Fair Value Measurements</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="CashandCashEquivalentsInvestmentsandFundsReceivableandAmountsHeldforCustomers" roleURI="http://www.intuit.com/role/CashandCashEquivalentsInvestmentsandFundsReceivableandAmountsHeldforCustomers">
+        <link:definition>9952160 - Disclosure - Cash and Cash Equivalents, Investments, and Funds Receivable and Amounts Held for Customers</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="NotesReceivableandAllowancesforCreditLosses" roleURI="http://www.intuit.com/role/NotesReceivableandAllowancesforCreditLosses">
+        <link:definition>9952161 - Disclosure - Notes Receivable and Allowances for Credit Losses</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="PropertyandEquipment" roleURI="http://www.intuit.com/role/PropertyandEquipment">
+        <link:definition>9952162 - Disclosure - Property and Equipment</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="GoodwillandAcquiredIntangibleAssets" roleURI="http://www.intuit.com/role/GoodwillandAcquiredIntangibleAssets">
+        <link:definition>9952163 - Disclosure - Goodwill and Acquired Intangible Assets</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="Debt" roleURI="http://www.intuit.com/role/Debt">
+        <link:definition>9952164 - Disclosure - Debt</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="OtherLiabilitiesandCommitments" roleURI="http://www.intuit.com/role/OtherLiabilitiesandCommitments">
+        <link:definition>9952165 - Disclosure - Other Liabilities and Commitments</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="Leases" roleURI="http://www.intuit.com/role/Leases">
+        <link:definition>9952166 - Disclosure - Leases</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="IncomeTaxes" roleURI="http://www.intuit.com/role/IncomeTaxes">
+        <link:definition>9952167 - Disclosure - Income Taxes</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StockholdersEquity" roleURI="http://www.intuit.com/role/StockholdersEquity">
+        <link:definition>9952168 - Disclosure - Stockholders' Equity</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="BenefitPlans" roleURI="http://www.intuit.com/role/BenefitPlans">
+        <link:definition>9952169 - Disclosure - Benefit Plans</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="LegalProceedings" roleURI="http://www.intuit.com/role/LegalProceedings">
+        <link:definition>9952170 - Disclosure - Legal Proceedings</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="SegmentInformation" roleURI="http://www.intuit.com/role/SegmentInformation">
+        <link:definition>9952171 - Disclosure - Segment Information</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="Restructuring" roleURI="http://www.intuit.com/role/Restructuring">
+        <link:definition>9952172 - Disclosure - Restructuring</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="ScheduleIIValuationandQualifyingAccounts" roleURI="http://www.intuit.com/role/ScheduleIIValuationandQualifyingAccounts">
+        <link:definition>9952173 - Disclosure - Schedule II - Valuation and Qualifying Accounts</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="DescriptionofBusinessandSummaryofSignificantAccountingPoliciesPolicies" roleURI="http://www.intuit.com/role/DescriptionofBusinessandSummaryofSignificantAccountingPoliciesPolicies">
+        <link:definition>9955511 - Disclosure - Description of Business and Summary of Significant Accounting Policies (Policies)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="DescriptionofBusinessandSummaryofSignificantAccountingPoliciesTables" roleURI="http://www.intuit.com/role/DescriptionofBusinessandSummaryofSignificantAccountingPoliciesTables">
+        <link:definition>9955512 - Disclosure - Description of Business and Summary of Significant Accounting Policies (Tables)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="FairValueMeasurementsTables" roleURI="http://www.intuit.com/role/FairValueMeasurementsTables">
+        <link:definition>9955513 - Disclosure - Fair Value Measurements (Tables)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="CashandCashEquivalentsInvestmentsandFundsReceivableandAmountsHeldforCustomersTables" roleURI="http://www.intuit.com/role/CashandCashEquivalentsInvestmentsandFundsReceivableandAmountsHeldforCustomersTables">
+        <link:definition>9955514 - Disclosure - Cash and Cash Equivalents, Investments, and Funds Receivable and Amounts Held for Customers (Tables)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="NotesReceivableandAllowancesforCreditLossesTables" roleURI="http://www.intuit.com/role/NotesReceivableandAllowancesforCreditLossesTables">
+        <link:definition>9955515 - Disclosure - Notes Receivable and Allowances for Credit Losses (Tables)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="PropertyandEquipmentTables" roleURI="http://www.intuit.com/role/PropertyandEquipmentTables">
+        <link:definition>9955516 - Disclosure - Property and Equipment (Tables)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="GoodwillandAcquiredIntangibleAssetsTables" roleURI="http://www.intuit.com/role/GoodwillandAcquiredIntangibleAssetsTables">
+        <link:definition>9955517 - Disclosure - Goodwill and Acquired Intangible Assets (Tables)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="DebtTables" roleURI="http://www.intuit.com/role/DebtTables">
+        <link:definition>9955518 - Disclosure - Debt (Tables)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="OtherLiabilitiesandCommitmentsTables" roleURI="http://www.intuit.com/role/OtherLiabilitiesandCommitmentsTables">
+        <link:definition>9955519 - Disclosure - Other Liabilities and Commitments (Tables)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="LeasesTables" roleURI="http://www.intuit.com/role/LeasesTables">
+        <link:definition>9955520 - Disclosure - Leases (Tables)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="IncomeTaxesTables" roleURI="http://www.intuit.com/role/IncomeTaxesTables">
+        <link:definition>9955521 - Disclosure - Income Taxes (Tables)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StockholdersEquityTables" roleURI="http://www.intuit.com/role/StockholdersEquityTables">
+        <link:definition>9955522 - Disclosure - Stockholders' Equity (Tables)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="SegmentInformationTables" roleURI="http://www.intuit.com/role/SegmentInformationTables">
+        <link:definition>9955523 - Disclosure - Segment Information (Tables)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="RestructuringTables" roleURI="http://www.intuit.com/role/RestructuringTables">
+        <link:definition>9955524 - Disclosure - Restructuring (Tables)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="DescriptionofBusinessandSummaryofSignificantAccountingPoliciesAdditionalinformationDetails" roleURI="http://www.intuit.com/role/DescriptionofBusinessandSummaryofSignificantAccountingPoliciesAdditionalinformationDetails">
+        <link:definition>9955525 - Disclosure - Description of Business and Summary of Significant Accounting Policies - Additional information (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="DescriptionofBusinessandSummaryofSignificantAccountingPoliciesScheduleofsharesusedinthecomputationofbasicanddilutednetincomepershareDetails" roleURI="http://www.intuit.com/role/DescriptionofBusinessandSummaryofSignificantAccountingPoliciesScheduleofsharesusedinthecomputationofbasicanddilutednetincomepershareDetails">
+        <link:definition>9955526 - Disclosure - Description of Business and Summary of Significant Accounting Policies - Schedule of shares used in the computation of basic and diluted net income per share (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="FairValueMeasurementsScheduleoffinancialassetsandliabilitiesmeasuredatfairvalueDetails" roleURI="http://www.intuit.com/role/FairValueMeasurementsScheduleoffinancialassetsandliabilitiesmeasuredatfairvalueDetails">
+        <link:definition>9955527 - Disclosure - Fair Value Measurements - Schedule of financial assets and liabilities measured at fair value (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="FairValueMeasurementsScheduleofcashequivalentsandavailableforsaledebtsecuritiesbybalancesheetclassificationDetails" roleURI="http://www.intuit.com/role/FairValueMeasurementsScheduleofcashequivalentsandavailableforsaledebtsecuritiesbybalancesheetclassificationDetails">
+        <link:definition>9955528 - Disclosure - Fair Value Measurements - Schedule of cash equivalents and available-for-sale debt securities by balance sheet classification (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="FairValueMeasurementsScheduleofcashequivalentsandavailableforsaledebtsecuritiesbybalancesheetclassificationDetails_1" roleURI="http://www.intuit.com/role/FairValueMeasurementsScheduleofcashequivalentsandavailableforsaledebtsecuritiesbybalancesheetclassificationDetails_1">
+        <link:definition>9955528 - Disclosure - Fair Value Measurements - Schedule of cash equivalents and available-for-sale debt securities by balance sheet classification (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="FairValueMeasurementsAdditionalinformationDetails" roleURI="http://www.intuit.com/role/FairValueMeasurementsAdditionalinformationDetails">
+        <link:definition>9955529 - Disclosure - Fair Value Measurements - Additional information (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="FairValueMeasurementsScheduleofcarryingvalueofourlongterminvestmentsDetails" roleURI="http://www.intuit.com/role/FairValueMeasurementsScheduleofcarryingvalueofourlongterminvestmentsDetails">
+        <link:definition>9955530 - Disclosure - Fair Value Measurements - Schedule of carrying value of our long-term investments (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="CashandCashEquivalentsInvestmentsandFundsReceivableandAmountsHeldforCustomersTableofcashandcashequivalentsinvestmentsandfundsreceivableandamountsheldforcustomersbybalancesheetclassificationDetails" roleURI="http://www.intuit.com/role/CashandCashEquivalentsInvestmentsandFundsReceivableandAmountsHeldforCustomersTableofcashandcashequivalentsinvestmentsandfundsreceivableandamountsheldforcustomersbybalancesheetclassificationDetails">
+        <link:definition>9955531 - Disclosure - Cash and Cash Equivalents, Investments, and Funds Receivable and Amounts Held for Customers - Table of cash and cash equivalents, investments, and funds receivable and amounts held for customers by balance sheet classification (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="CashandCashEquivalentsInvestmentsandFundsReceivableandAmountsHeldforCustomersTableofcashandcashequivalentsinvestmentsandrelevantportionoffundsreceivableandamountsheldforcustomersbyinvestmenttypeDetails" roleURI="http://www.intuit.com/role/CashandCashEquivalentsInvestmentsandFundsReceivableandAmountsHeldforCustomersTableofcashandcashequivalentsinvestmentsandrelevantportionoffundsreceivableandamountsheldforcustomersbyinvestmenttypeDetails">
+        <link:definition>9955532 - Disclosure - Cash and Cash Equivalents, Investments, and Funds Receivable and Amounts Held for Customers - Table of cash and cash equivalents, investments, and relevant portion of funds receivable and amounts held for customers by investment type (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="CashandCashEquivalentsInvestmentsandFundsReceivableandAmountsHeldforCustomersNarrativeDetails" roleURI="http://www.intuit.com/role/CashandCashEquivalentsInvestmentsandFundsReceivableandAmountsHeldforCustomersNarrativeDetails">
+        <link:definition>9955533 - Disclosure - Cash and Cash Equivalents, Investments, and Funds Receivable and Amounts Held for Customers - Narrative (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="CashandCashEquivalentsInvestmentsandFundsReceivableandAmountsHeldforCustomersTableofavailableforsaledebtsecuritiesclassifiedbymaturitydateDetails" roleURI="http://www.intuit.com/role/CashandCashEquivalentsInvestmentsandFundsReceivableandAmountsHeldforCustomersTableofavailableforsaledebtsecuritiesclassifiedbymaturitydateDetails">
+        <link:definition>9955534 - Disclosure - Cash and Cash Equivalents, Investments, and Funds Receivable and Amounts Held for Customers - Table of available-for-sale debt securities classified by maturity date (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="CashandCashEquivalentsInvestmentsandFundsReceivableandAmountsHeldforCustomersInvestmentsinfundsreceivableandamountsheldforcustomersDetails" roleURI="http://www.intuit.com/role/CashandCashEquivalentsInvestmentsandFundsReceivableandAmountsHeldforCustomersInvestmentsinfundsreceivableandamountsheldforcustomersDetails">
+        <link:definition>9955535 - Disclosure - Cash and Cash Equivalents, Investments, and Funds Receivable and Amounts Held for Customers - Investments in funds receivable and amounts held for customers (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="NotesReceivableandAllowancesforCreditLossesDetails" roleURI="http://www.intuit.com/role/NotesReceivableandAllowancesforCreditLossesDetails">
+        <link:definition>9955536 - Disclosure - Notes Receivable and Allowances for Credit Losses (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="NotesReceivableandAllowancesforCreditLossesScheduleOfAllowanceForCreditLossesDetails" roleURI="http://www.intuit.com/role/NotesReceivableandAllowancesforCreditLossesScheduleOfAllowanceForCreditLossesDetails">
+        <link:definition>9955537 - Disclosure - Notes Receivable and Allowances for Credit Losses - Schedule Of Allowance For Credit Losses (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="PropertyandEquipmentScheduleofpropertyandequipmentDetails" roleURI="http://www.intuit.com/role/PropertyandEquipmentScheduleofpropertyandequipmentDetails">
+        <link:definition>9955538 - Disclosure - Property and Equipment - Schedule of property and equipment (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="PropertyandEquipmentAdditionalinformationDetails" roleURI="http://www.intuit.com/role/PropertyandEquipmentAdditionalinformationDetails">
+        <link:definition>9955539 - Disclosure - Property and Equipment - Additional information (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="GoodwillandAcquiredIntangibleAssetsScheduleofGoodwillDetails" roleURI="http://www.intuit.com/role/GoodwillandAcquiredIntangibleAssetsScheduleofGoodwillDetails">
+        <link:definition>9955540 - Disclosure - Goodwill and Acquired Intangible Assets - Schedule of Goodwill (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="GoodwillandAcquiredIntangibleAssetsScheduleofIntangibleAssetsAcquiredDetails" roleURI="http://www.intuit.com/role/GoodwillandAcquiredIntangibleAssetsScheduleofIntangibleAssetsAcquiredDetails">
+        <link:definition>9955541 - Disclosure - Goodwill and Acquired Intangible Assets - Schedule of Intangible Assets Acquired (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="GoodwillandAcquiredIntangibleAssetsScheduleofFutureAmortizationExpenseDetails" roleURI="http://www.intuit.com/role/GoodwillandAcquiredIntangibleAssetsScheduleofFutureAmortizationExpenseDetails">
+        <link:definition>9955542 - Disclosure - Goodwill and Acquired Intangible Assets - Schedule of Future Amortization Expense (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="DebtSummaryofseniorunsecureddebtDetails" roleURI="http://www.intuit.com/role/DebtSummaryofseniorunsecureddebtDetails">
+        <link:definition>9955543 - Disclosure - Debt - Summary of senior unsecured debt (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="DebtFutureprincipalpaymentsDetails" roleURI="http://www.intuit.com/role/DebtFutureprincipalpaymentsDetails">
+        <link:definition>9955544 - Disclosure - Debt - Future principal payments (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="DebtAdditionalinformationDetails" roleURI="http://www.intuit.com/role/DebtAdditionalinformationDetails">
+        <link:definition>9955545 - Disclosure - Debt - Additional information (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="DebtSecuredRevolvingCreditFacilitiesDetails" roleURI="http://www.intuit.com/role/DebtSecuredRevolvingCreditFacilitiesDetails">
+        <link:definition>9955546 - Disclosure - Debt - Secured Revolving Credit Facilities (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="DebtOutstandingBalancesOfTheSecuredRevolvingCreditFacilitiesDetails" roleURI="http://www.intuit.com/role/DebtOutstandingBalancesOfTheSecuredRevolvingCreditFacilitiesDetails">
+        <link:definition>9955547 - Disclosure - Debt - Outstanding Balances Of The Secured Revolving Credit Facilities (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="OtherLiabilitiesandCommitmentsOthercurrentliabilitiesDetails" roleURI="http://www.intuit.com/role/OtherLiabilitiesandCommitmentsOthercurrentliabilitiesDetails">
+        <link:definition>9955548 - Disclosure - Other Liabilities and Commitments - Other current liabilities (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="OtherLiabilitiesandCommitmentsOtherlongtermobligationsDetails" roleURI="http://www.intuit.com/role/OtherLiabilitiesandCommitmentsOtherlongtermobligationsDetails">
+        <link:definition>9955549 - Disclosure - Other Liabilities and Commitments - Other long-term obligations (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="OtherLiabilitiesandCommitmentsAnnualminimumcommitmentsunderpurchaseobligationsDetails" roleURI="http://www.intuit.com/role/OtherLiabilitiesandCommitmentsAnnualminimumcommitmentsunderpurchaseobligationsDetails">
+        <link:definition>9955550 - Disclosure - Other Liabilities and Commitments - Annual minimum commitments under purchase obligations (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="LeasesAdditionalinformationDetails" roleURI="http://www.intuit.com/role/LeasesAdditionalinformationDetails">
+        <link:definition>9955551 - Disclosure - Leases - Additional information (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="LeasesLeasecostDetails" roleURI="http://www.intuit.com/role/LeasesLeasecostDetails">
+        <link:definition>9955552 - Disclosure - Leases - Lease cost (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="LeasesSupplementalcashflowsDetails" roleURI="http://www.intuit.com/role/LeasesSupplementalcashflowsDetails">
+        <link:definition>9955553 - Disclosure - Leases - Supplemental cash flows (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="LeasesOtherleaseinformationDetails" roleURI="http://www.intuit.com/role/LeasesOtherleaseinformationDetails">
+        <link:definition>9955554 - Disclosure - Leases - Other lease information (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="LeasesScheduleoffuturepaymentsDetails" roleURI="http://www.intuit.com/role/LeasesScheduleoffuturepaymentsDetails">
+        <link:definition>9955555 - Disclosure - Leases - Schedule of future payments (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="LeasesScheduleoffuturepaymentsDetails_1" roleURI="http://www.intuit.com/role/LeasesScheduleoffuturepaymentsDetails_1">
+        <link:definition>9955555 - Disclosure - Leases - Schedule of future payments (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="LeasesSupplementalbalancesheetDetails" roleURI="http://www.intuit.com/role/LeasesSupplementalbalancesheetDetails">
+        <link:definition>9955556 - Disclosure - Leases - Supplemental balance sheet (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="IncomeTaxesProvisionforincometaxesfromcontinuingoperationsDetails" roleURI="http://www.intuit.com/role/IncomeTaxesProvisionforincometaxesfromcontinuingoperationsDetails">
+        <link:definition>9955557 - Disclosure - Income Taxes - Provision for income taxes from continuing operations (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="IncomeTaxesAdditionalinformationDetails" roleURI="http://www.intuit.com/role/IncomeTaxesAdditionalinformationDetails">
+        <link:definition>9955558 - Disclosure - Income Taxes - Additional information (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="IncomeTaxesSourcesofincomefromcontinuingoperationsDetails" roleURI="http://www.intuit.com/role/IncomeTaxesSourcesofincomefromcontinuingoperationsDetails">
+        <link:definition>9955559 - Disclosure - Income Taxes - Sources of income from continuing operations (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="IncomeTaxesDifferencesbetweenincometaxescalculatedusingthefederalstatutoryincometaxrateandtheprovisionforincometaxesfromcontinuingoperationsDetails" roleURI="http://www.intuit.com/role/IncomeTaxesDifferencesbetweenincometaxescalculatedusingthefederalstatutoryincometaxrateandtheprovisionforincometaxesfromcontinuingoperationsDetails">
+        <link:definition>9955560 - Disclosure - Income Taxes - Differences between income taxes calculated using the federal statutory income tax rate and the provision for income taxes from continuing operations (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="IncomeTaxesCashIncomeTaxesPaidDetails" roleURI="http://www.intuit.com/role/IncomeTaxesCashIncomeTaxesPaidDetails">
+        <link:definition>9955561 - Disclosure - Income Taxes - Cash Income Taxes Paid (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="IncomeTaxesComponentsofdeferredtaxassetsandliabilitiesDetails" roleURI="http://www.intuit.com/role/IncomeTaxesComponentsofdeferredtaxassetsandliabilitiesDetails">
+        <link:definition>9955562 - Disclosure - Income Taxes - Components of deferred tax assets and liabilities (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="IncomeTaxesComponentsofdeferredtaxassetsandliabilitiesDetails_1" roleURI="http://www.intuit.com/role/IncomeTaxesComponentsofdeferredtaxassetsandliabilitiesDetails_1">
+        <link:definition>9955562 - Disclosure - Income Taxes - Components of deferred tax assets and liabilities (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="IncomeTaxesUnrecognizedtaxbenefitsDetails" roleURI="http://www.intuit.com/role/IncomeTaxesUnrecognizedtaxbenefitsDetails">
+        <link:definition>9955563 - Disclosure - Income Taxes - Unrecognized tax benefits (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StockholdersEquityAdditionalinformationDetails" roleURI="http://www.intuit.com/role/StockholdersEquityAdditionalinformationDetails">
+        <link:definition>9955564 - Disclosure - Stockholders' Equity - Additional information (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StockholdersEquitySharebasedcompensationexpenseDetails" roleURI="http://www.intuit.com/role/StockholdersEquitySharebasedcompensationexpenseDetails">
+        <link:definition>9955565 - Disclosure - Stockholders' Equity - Share-based compensation expense (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StockholdersEquitySharebasedcompensationexpenseDetails_1" roleURI="http://www.intuit.com/role/StockholdersEquitySharebasedcompensationexpenseDetails_1">
+        <link:definition>9955565 - Disclosure - Stockholders' Equity - Share-based compensation expense (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StockholdersEquityDeterminingfairvalueDetails" roleURI="http://www.intuit.com/role/StockholdersEquityDeterminingfairvalueDetails">
+        <link:definition>9955566 - Disclosure - Stockholders' Equity - Determining fair value (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StockholdersEquitySharebasedawardsavailableforgrantDetails" roleURI="http://www.intuit.com/role/StockholdersEquitySharebasedawardsavailableforgrantDetails">
+        <link:definition>9955567 - Disclosure - Stockholders' Equity - Share-based awards available for grant (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StockholdersEquityRestrictedstockunitactivityandrelatedsharebasedcompensationexpenseDetails" roleURI="http://www.intuit.com/role/StockholdersEquityRestrictedstockunitactivityandrelatedsharebasedcompensationexpenseDetails">
+        <link:definition>9955568 - Disclosure - Stockholders' Equity - Restricted stock unit activity and related share-based compensation expense (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StockholdersEquityStockoptionactivityandrelatedsharebasedcompensationexpenseDetails" roleURI="http://www.intuit.com/role/StockholdersEquityStockoptionactivityandrelatedsharebasedcompensationexpenseDetails">
+        <link:definition>9955569 - Disclosure - Stockholders' Equity - Stock option activity and related share-based compensation expense (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StockholdersEquityAccumulatedothercomprehensivelossDetails" roleURI="http://www.intuit.com/role/StockholdersEquityAccumulatedothercomprehensivelossDetails">
+        <link:definition>9955570 - Disclosure - Stockholders' Equity - Accumulated other comprehensive loss (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="BenefitPlansDetails" roleURI="http://www.intuit.com/role/BenefitPlansDetails">
+        <link:definition>9955571 - Disclosure - Benefit Plans (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="LegalProceedingsDetails" roleURI="http://www.intuit.com/role/LegalProceedingsDetails">
+        <link:definition>9955572 - Disclosure - Legal Proceedings (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="SegmentInformationAdditionalinformationDetails" roleURI="http://www.intuit.com/role/SegmentInformationAdditionalinformationDetails">
+        <link:definition>9955573 - Disclosure - Segment Information - Additional information (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="SegmentInformationResultsbysegmentDetails" roleURI="http://www.intuit.com/role/SegmentInformationResultsbysegmentDetails">
+        <link:definition>9955574 - Disclosure - Segment Information - Results by segment (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="SegmentInformationReconciliationofRevenuefromSegmentsDetails" roleURI="http://www.intuit.com/role/SegmentInformationReconciliationofRevenuefromSegmentsDetails">
+        <link:definition>9955575 - Disclosure - Segment Information - Reconciliation of Revenue from Segments (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="RestructuringAdditionalinformationDetails" roleURI="http://www.intuit.com/role/RestructuringAdditionalinformationDetails">
+        <link:definition>9955576 - Disclosure - Restructuring - Additional information (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="RestructuringScheduleofactivityfortheplanbysegmentDetails" roleURI="http://www.intuit.com/role/RestructuringScheduleofactivityfortheplanbysegmentDetails">
+        <link:definition>9955577 - Disclosure - Restructuring - Schedule of activity for the plan by segment (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="ScheduleIIValuationandQualifyingAccountsDetails" roleURI="http://www.intuit.com/role/ScheduleIIValuationandQualifyingAccountsDetails">
+        <link:definition>9955578 - Disclosure - Schedule II - Valuation and Qualifying Accounts (Details)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element id="intu_AuditInformationAbstract" abstract="true" name="AuditInformationAbstract" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:stringItemType"/>
+  <xs:element id="intu_ProductAndOtherMember" abstract="true" name="ProductAndOtherMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_CurrentAssetsBeforeFundsReceivableAndAmountsHeldForCustomers" abstract="false" name="CurrentAssetsBeforeFundsReceivableAndAmountsHeldForCustomers" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_FundsReceivableAndAmountsHeldForCustomers" abstract="false" name="FundsReceivableAndAmountsHeldForCustomers" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_CurrentLiabilitiesBeforeCustomerFundDeposits" abstract="false" name="CurrentLiabilitiesBeforeCustomerFundDeposits" nillable="true" xbrli:periodType="instant" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_FundsPayableAndAmountsDueToCustomers" abstract="false" name="FundsPayableAndAmountsDueToCustomers" nillable="true" xbrli:periodType="instant" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_OperatingLeaseCostNoncash" abstract="false" name="OperatingLeaseCostNoncash" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_PaymentsForOriginationsOfLoansHeldForSale" abstract="false" name="PaymentsForOriginationsOfLoansHeldForSale" nillable="true" xbrli:periodType="duration" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_ProceedsFromSaleAndPrincipalPaymentsOfLoansHeldForSale" abstract="false" name="ProceedsFromSaleAndPrincipalPaymentsOfLoansHeldForSale" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_RepaymentsOfUnsecuredLineOfCredit" abstract="false" name="RepaymentsOfUnsecuredLineOfCredit" nillable="true" xbrli:periodType="duration" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_PaymentsForProceedsFromFundsReceivableAndFundsPayableAndAmountsDueToCustomers" abstract="false" name="PaymentsForProceedsFromFundsReceivableAndFundsPayableAndAmountsDueToCustomers" nillable="true" xbrli:periodType="duration" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_CashAndCashEquivalentsInvestmentsAndFundsReceivableAndAmountsHeldForCustomersAbstract" abstract="true" name="CashAndCashEquivalentsInvestmentsAndFundsReceivableAndAmountsHeldForCustomersAbstract" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:stringItemType"/>
+  <xs:element id="intu_CashAndCashEquivalentsInvestmentsAndFundsHeldForCustomersTextBlock" abstract="false" name="CashAndCashEquivalentsInvestmentsAndFundsHeldForCustomersTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_OtherLiabilitiesAndCommitmentsTextBlock" abstract="false" name="OtherLiabilitiesAndCommitmentsTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_CashEquivalentsAndInvestmentsPolicyTextBlock" abstract="false" name="CashEquivalentsAndInvestmentsPolicyTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_FundsReceivableAndAmountsHeldForCustomersAndFundsPayableAndAmountsDueToCustomersPolicyTextBlock" abstract="false" name="FundsReceivableAndAmountsHeldForCustomersAndFundsPayableAndAmountsDueToCustomersPolicyTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_ShareBasedCompensationPlansPolicyTextBlockPolicyTextBlock" abstract="false" name="ShareBasedCompensationPlansPolicyTextBlockPolicyTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_CashAndCashEquivalentsInvestmentsAndFundsHeldForCustomersTableTextBlock" abstract="false" name="CashAndCashEquivalentsInvestmentsAndFundsHeldForCustomersTableTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_CashAndCashEquivalentsInvestmentsAndFundsHeldForCustomersByInvestmentCategoryTableTextBlock" abstract="false" name="CashAndCashEquivalentsInvestmentsAndFundsHeldForCustomersByInvestmentCategoryTableTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_AvailableForSaleDebtSecuritiesClassifiedByStatedMaturityDateOfSecurityTableTextBlock" abstract="false" name="AvailableForSaleDebtSecuritiesClassifiedByStatedMaturityDateOfSecurityTableTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_ScheduleOfFundsHeldForCustomersTableTextBlock" abstract="false" name="ScheduleOfFundsHeldForCustomersTableTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_OtherLongTermObligationsTableTextBlock" abstract="false" name="OtherLongTermObligationsTableTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_ProvisionForIncomeTaxesFromContinuingOperationsTableTextBlock" abstract="false" name="ProvisionForIncomeTaxesFromContinuingOperationsTableTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_IncomeFromContinuingOperationsBeforeTheProvisionForIncomeTaxesTableTextBlock" abstract="false" name="IncomeFromContinuingOperationsBeforeTheProvisionForIncomeTaxesTableTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_DifferencesBetweenIncomeTaxesCalculatedUsingTheFederalStatutoryIncomeTaxRateAndTheProvisionForIncomeTaxesFromContinuingOperationsTableTextBlock" abstract="false" name="DifferencesBetweenIncomeTaxesCalculatedUsingTheFederalStatutoryIncomeTaxRateAndTheProvisionForIncomeTaxesFromContinuingOperationsTableTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_ComponentsOfDeferredTaxAssetsAndLiabilitiesTableTextBlock" abstract="false" name="ComponentsOfDeferredTaxAssetsAndLiabilitiesTableTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_AssumptionsusedtoestimatethefairvalueofstockoptionsgrantedandsharespurchasedunderEmployeeStockPurchasePlanTableTextBlock" abstract="false" name="AssumptionsusedtoestimatethefairvalueofstockoptionsgrantedandsharespurchasedunderEmployeeStockPurchasePlanTableTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_AdditionalInformationRegardingRestrictedStockUnitsTableTextBlock" abstract="false" name="AdditionalInformationRegardingRestrictedStockUnitsTableTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_ActivityUnderAllShareBasedCompensationPlansTableTextBlock" abstract="false" name="ActivityUnderAllShareBasedCompensationPlansTableTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_OptionsOutstandingExercisableAndExpectedToVestAndExercisableTableTextBlock" abstract="false" name="OptionsOutstandingExercisableAndExpectedToVestAndExercisableTableTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_AdditionalInformationRegardingStockOptionsRestrictedStockAndEsppTableTextBlock" abstract="false" name="AdditionalInformationRegardingStockOptionsRestrictedStockAndEsppTableTextBlock" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:textBlockItemType"/>
+  <xs:element id="intu_ReorganizationOfCertainWorkplaceAndRealEstateFunctionsMember" abstract="true" name="ReorganizationOfCertainWorkplaceAndRealEstateFunctionsMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_ReorganizationOneOfCertainTechnologyFunctionsMember" abstract="true" name="ReorganizationOneOfCertainTechnologyFunctionsMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_GlobalBusinessSolutionsSegmentMember" abstract="true" name="GlobalBusinessSolutionsSegmentMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_ConsumerSegmentMember" abstract="true" name="ConsumerSegmentMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_SpecialPurposeVehiclesMember" abstract="true" name="SpecialPurposeVehiclesMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_BusinessCombinationMeasurementPeriod" abstract="false" name="BusinessCombinationMeasurementPeriod" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:durationItemType"/>
+  <xs:element id="intu_NumberOfVendors" abstract="false" name="NumberOfVendors" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:integerItemType"/>
+  <xs:element id="intu_CompositionOfSharesUsedInComputationOfBasicAndDilutedNetIncomePerShareAbstract" abstract="true" name="CompositionOfSharesUsedInComputationOfBasicAndDilutedNetIncomePerShareAbstract" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:stringItemType"/>
+  <xs:element id="intu_NumeratorAbstract" abstract="true" name="NumeratorAbstract" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:stringItemType"/>
+  <xs:element id="intu_DenominatorAbstract" abstract="true" name="DenominatorAbstract" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:stringItemType"/>
+  <xs:element id="intu_FinancialAssetsAndLiabilitiesMeasuredAtFairValueOnRecurringBasisAbstract" abstract="true" name="FinancialAssetsAndLiabilitiesMeasuredAtFairValueOnRecurringBasisAbstract" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:stringItemType"/>
+  <xs:element id="intu_FairValueAssetMeasuredOnRecurringBasisTable" abstract="true" name="FairValueAssetMeasuredOnRecurringBasisTable" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType"/>
+  <xs:element id="intu_FairValueAssetMeasuredOnRecurringBasisLineItems" abstract="true" name="FairValueAssetMeasuredOnRecurringBasisLineItems" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:stringItemType"/>
+  <xs:element id="intu_SeniorUnsecuredNotesMember" abstract="true" name="SeniorUnsecuredNotesMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_EquitySecuritiesWithoutReadilyDeterminableFairValueDownwardPriceAdjustmentAndImpairmentLossAnnualAmount" abstract="false" name="EquitySecuritiesWithoutReadilyDeterminableFairValueDownwardPriceAdjustmentAndImpairmentLossAnnualAmount" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_EquitySecuritiesWithoutReadilyDeterminableFairValueUpwardAndDownwardPriceAdjustmentsAndImpairmentLossNetAnnualAmount" abstract="false" name="EquitySecuritiesWithoutReadilyDeterminableFairValueUpwardAndDownwardPriceAdjustmentsAndImpairmentLossNetAnnualAmount" nillable="true" xbrli:periodType="duration" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_FundsReceivableAndAmountsHeldForCustomersAmortizedCost" abstract="false" name="FundsReceivableAndAmountsHeldForCustomersAmortizedCost" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_CashAndCashEquivalentsAndAvailableForSaleSecuritiesAmortizedCostBasis" abstract="false" name="CashAndCashEquivalentsAndAvailableForSaleSecuritiesAmortizedCostBasis" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_CashAndCashEquivalentsAndAvailableForSaleSecuritiesFairValueDisclosure" abstract="false" name="CashAndCashEquivalentsAndAvailableForSaleSecuritiesFairValueDisclosure" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_CashAndCashEquivalentsIncludingFundsHeldForCustomersMember" abstract="true" name="CashAndCashEquivalentsIncludingFundsHeldForCustomersMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_FundsReceivableAndFundsHeldForCustomersNotMeasuredOrRecordedAtFairValue" abstract="false" name="FundsReceivableAndFundsHeldForCustomersNotMeasuredOrRecordedAtFairValue" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_CashCashEquivalentsRestrictedCashandRestrictedCashEquivalentsFairValueDisclosure" abstract="false" name="CashCashEquivalentsRestrictedCashandRestrictedCashEquivalentsFairValueDisclosure" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_CashAndCashEquivalentsAndAvailableForSaleSecuritiesAmortizedCostBasisExcludingAmountsHeldForCustomersNotMeasuredAndRecordedAtFairValue" abstract="false" name="CashAndCashEquivalentsAndAvailableForSaleSecuritiesAmortizedCostBasisExcludingAmountsHeldForCustomersNotMeasuredAndRecordedAtFairValue" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_CashAndCashEquivalentsAndAvailableForSaleSecuritiesExcludingFundsReceivableAndAmountsHeldForCustomersNotMeasuredAndRecordedAtFairValueFairValueDisclosure" abstract="false" name="CashAndCashEquivalentsAndAvailableForSaleSecuritiesExcludingFundsReceivableAndAmountsHeldForCustomersNotMeasuredAndRecordedAtFairValueFairValueDisclosure" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_DebtSecuritiesAvailableForSaleAmortizedCostMaturityAllocatedAndSingleMaturityDateYearTwo" abstract="false" name="DebtSecuritiesAvailableForSaleAmortizedCostMaturityAllocatedAndSingleMaturityDateYearTwo" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_DebtSecuritiesAvailableForSaleAmortizedCostMaturityAllocatedAndSingleMaturityDateYearThree" abstract="false" name="DebtSecuritiesAvailableForSaleAmortizedCostMaturityAllocatedAndSingleMaturityDateYearThree" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_DebtSecuritiesAvailableForSaleFairValueMaturityAllocatedAndSingleMaturityDateYearTwo" abstract="false" name="DebtSecuritiesAvailableForSaleFairValueMaturityAllocatedAndSingleMaturityDateYearTwo" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_DebtSecuritiesAvailableForSaleFairValueMaturityAllocatedAndSingleMaturityDateYearThree" abstract="false" name="DebtSecuritiesAvailableForSaleFairValueMaturityAllocatedAndSingleMaturityDateYearThree" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_RestrictedFundsReceivable" abstract="false" name="RestrictedFundsReceivable" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_FinancingReceivableExcludingAccruedInterestLoansOriginatedBeforePeriodEndCommitmentToPurchase" abstract="false" name="FinancingReceivableExcludingAccruedInterestLoansOriginatedBeforePeriodEndCommitmentToPurchase" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_CapitalizedLaborCosts" abstract="false" name="CapitalizedLaborCosts" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_GoodwillAcquiredDuringPeriodAndPurchaseAccountingAdjustments" abstract="false" name="GoodwillAcquiredDuringPeriodAndPurchaseAccountingAdjustments" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_CustomerListsAndUserRelationshipsMember" abstract="true" name="CustomerListsAndUserRelationshipsMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_PurchasedTechnologyMember" abstract="true" name="PurchasedTechnologyMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_FivePointTwoFiveZeroPercentNotesDueSeptember2026Member" abstract="true" name="FivePointTwoFiveZeroPercentNotesDueSeptember2026Member" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_OnePointThreeFiveZeroPercentNotesDueJuly2027Member" abstract="true" name="OnePointThreeFiveZeroPercentNotesDueJuly2027Member" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_FivePointOneTwoFivePercentNotesDueSeptember2028Member" abstract="true" name="FivePointOneTwoFivePercentNotesDueSeptember2028Member" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_OnePointSixFiveZeroPercentNotesDueJuly2030Member" abstract="true" name="OnePointSixFiveZeroPercentNotesDueJuly2030Member" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_FourPointNineFiveZeroPercentNotesDueJune2031Member" abstract="true" name="FourPointNineFiveZeroPercentNotesDueJune2031Member" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_FivePointTwoZeroZeroPercentNotesDueSeptember2033Member" abstract="true" name="FivePointTwoZeroZeroPercentNotesDueSeptember2033Member" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_FivePointFiveZeroZeroPercentNotesDueJune2026Member" abstract="true" name="FivePointFiveZeroZeroPercentNotesDueJune2026Member" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_FivePointFiveZeroZeroPercentNotesDueSeptember2053Member" abstract="true" name="FivePointFiveZeroZeroPercentNotesDueSeptember2053Member" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_SubsidiaryMember" abstract="true" name="SubsidiaryMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_TheSeniorUnsecuredNotesMember" abstract="true" name="TheSeniorUnsecuredNotesMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_The2026SeniorUnsecuredNotesMember" abstract="true" name="The2026SeniorUnsecuredNotesMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_SeptemberTwoThousandTwentySixNotesMember" abstract="true" name="SeptemberTwoThousandTwentySixNotesMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_ShortTermRevolvingCreditFacilityMember" abstract="true" name="ShortTermRevolvingCreditFacilityMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_CommercialPaperProgramMember" abstract="true" name="CommercialPaperProgramMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_SwinglineLoansMember" abstract="true" name="SwinglineLoansMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_InterestBenchmarkForRelevantCurrencyMember" abstract="true" name="InterestBenchmarkForRelevantCurrencyMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_DebtInstrumentOptionToIncreaseLineOfCreditFacilityAmount" abstract="false" name="DebtInstrumentOptionToIncreaseLineOfCreditFacilityAmount" nillable="true" xbrli:periodType="duration" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_DebtInstrumentTermOfOptionToExtendLineOfCreditFacility" abstract="false" name="DebtInstrumentTermOfOptionToExtendLineOfCreditFacility" nillable="true" xbrli:periodType="instant" substitutionGroup="xbrli:item" type="xbrli:durationItemType"/>
+  <xs:element id="intu_DebtInstrumentRestrictiveCovenantRatioTotalGrossDebtToEBIDTA" abstract="false" name="DebtInstrumentRestrictiveCovenantRatioTotalGrossDebtToEBIDTA" nillable="true" xbrli:periodType="instant" substitutionGroup="xbrli:item" type="xbrli:pureItemType"/>
+  <xs:element id="intu_LineOfCreditFacilityTemporaryMaximumBorrowingCapacity" abstract="false" name="LineOfCreditFacilityTemporaryMaximumBorrowingCapacity" nillable="true" xbrli:periodType="instant" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_SecuredRevolvingCreditFacility2019Member" abstract="true" name="SecuredRevolvingCreditFacility2019Member" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_SecuredRevolvingCreditFacility2022Member" abstract="true" name="SecuredRevolvingCreditFacility2022Member" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_SecuredRevolvingCreditFacility2024Member" abstract="true" name="SecuredRevolvingCreditFacility2024Member" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_LineOfCreditFacilityUncommittedFacilityLimit" abstract="false" name="LineOfCreditFacilityUncommittedFacilityLimit" nillable="true" xbrli:periodType="instant" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_LineOfCreditFacilityCommittedFacilityLimit" abstract="false" name="LineOfCreditFacilityCommittedFacilityLimit" nillable="true" xbrli:periodType="instant" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_TaxesPayableCurrentExcludingIncomeTaxes" abstract="false" name="TaxesPayableCurrentExcludingIncomeTaxes" nillable="true" xbrli:periodType="instant" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_ReserveForReturnsCreditsAndPromotionalDiscounts" abstract="false" name="ReserveForReturnsCreditsAndPromotionalDiscounts" nillable="true" xbrli:periodType="instant" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_AmountsDueForShareRepurchases" abstract="false" name="AmountsDueForShareRepurchases" nillable="true" xbrli:periodType="instant" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_TotalLongTermObligations" abstract="false" name="TotalLongTermObligations" nillable="true" xbrli:periodType="instant" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_LesseeOperatingLeaseNumberOfOptionsToExtend" abstract="false" name="LesseeOperatingLeaseNumberOfOptionsToExtend" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:integerItemType"/>
+  <xs:element id="intu_LesseeOperatingSubleaseTermOfContract" abstract="false" name="LesseeOperatingSubleaseTermOfContract" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:durationItemType"/>
+  <xs:element id="intu_LesseeSubleaseOptionToExtendExtensionPeriod" abstract="false" name="LesseeSubleaseOptionToExtendExtensionPeriod" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:durationItemType"/>
+  <xs:element id="intu_LessorOperatingLeasePaymentToBeReceivedYearsOneThroughFive" abstract="false" name="LessorOperatingLeasePaymentToBeReceivedYearsOneThroughFive" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_TotalDeferredProvisionForIncomeTaxesFromContinuingOperations" abstract="false" name="TotalDeferredProvisionForIncomeTaxesFromContinuingOperations" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_AllIncomeTaxJurisdictionsMember" abstract="true" name="AllIncomeTaxJurisdictionsMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_DeferredTaxAssetsOperatingLeaseLiabilities" abstract="false" name="DeferredTaxAssetsOperatingLeaseLiabilities" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_DeferredTaxAssetsAccruedAndDeferredCompensation" abstract="false" name="DeferredTaxAssetsAccruedAndDeferredCompensation" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_DeferredTaxAssetsLossAndTaxCreditCarryforwards" abstract="false" name="DeferredTaxAssetsLossAndTaxCreditCarryforwards" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_StockRepurchaseProgramAxis" abstract="true" name="StockRepurchaseProgramAxis" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType"/>
+  <xs:element id="intu_StockRepurchaseProgramDomain" abstract="true" name="StockRepurchaseProgramDomain" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_CurrentProgramMember" abstract="true" name="CurrentProgramMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_Restated2005PlanMember" abstract="true" name="Restated2005PlanMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_StockRepurchaseProgramAdditionalAuthorizedAmount" abstract="false" name="StockRepurchaseProgramAdditionalAuthorizedAmount" nillable="true" xbrli:periodType="instant" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_PoolSharesReducedForEachShareGranted" abstract="false" name="PoolSharesReducedForEachShareGranted" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:sharesItemType"/>
+  <xs:element id="intu_NumberOfSharesAddedBackToPlanWhenGrantsAreForfeited" abstract="false" name="NumberOfSharesAddedBackToPlanWhenGrantsAreForfeited" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:sharesItemType"/>
+  <xs:element id="intu_PoolSharesIncreasedForEachShareForfeited" abstract="false" name="PoolSharesIncreasedForEachShareForfeited" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:sharesItemType"/>
+  <xs:element id="intu_ShareBasedCompensationArrangementByShareBasedPaymentAwardYearsOfTerm" abstract="false" name="ShareBasedCompensationArrangementByShareBasedPaymentAwardYearsOfTerm" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:durationItemType"/>
+  <xs:element id="intu_StockOfferingPeriodMonthsEmployeeStockPurchasePlans" abstract="false" name="StockOfferingPeriodMonthsEmployeeStockPurchasePlans" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:durationItemType"/>
+  <xs:element id="intu_StockAccrualPeriodEmployeeStockPurchasePlansNumberOfAccrualPeriods" abstract="false" name="StockAccrualPeriodEmployeeStockPurchasePlansNumberOfAccrualPeriods" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:integerItemType"/>
+  <xs:element id="intu_StockOfferingPeriodNumberOfMonthsInAccrualPeriod" abstract="false" name="StockOfferingPeriodNumberOfMonthsInAccrualPeriod" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:durationItemType"/>
+  <xs:element id="intu_ShareBasedCompensationArrangementByShareBasedPaymentAwardPercentageOfLowerOfFairMarketValueOnFirstOrLastDayOfOfferingPeriod" abstract="false" name="ShareBasedCompensationArrangementByShareBasedPaymentAwardPercentageOfLowerOfFairMarketValueOnFirstOrLastDayOfOfferingPeriod" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:percentItemType"/>
+  <xs:element id="intu_SharesAvailableForIssuanceUnderEmployeeStockPurchasePlan" abstract="false" name="SharesAvailableForIssuanceUnderEmployeeStockPurchasePlan" nillable="true" xbrli:periodType="instant" substitutionGroup="xbrli:item" type="xbrli:sharesItemType"/>
+  <xs:element id="intu_ShareBasedPaymentArrangementExpensePercentage" abstract="false" name="ShareBasedPaymentArrangementExpensePercentage" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:percentItemType"/>
+  <xs:element id="intu_MarketPriceOfCommonStockUsedToDefineInMoneyOptionsExercisePrice" abstract="false" name="MarketPriceOfCommonStockUsedToDefineInMoneyOptionsExercisePrice" nillable="true" xbrli:periodType="instant" substitutionGroup="xbrli:item" type="dtr-types:perShareItemType"/>
+  <xs:element id="intu_RestrictedStockUnitsGrantedShares" abstract="false" name="RestrictedStockUnitsGrantedShares" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:sharesItemType"/>
+  <xs:element id="intu_ShareBasedAwardsCanceledForfeitedInPeriod" abstract="false" name="ShareBasedAwardsCanceledForfeitedInPeriod" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:sharesItemType"/>
+  <xs:element id="intu_ActualTaxBenefitsRealizedForTaxDeductionsForRestrictedStockUnits" abstract="false" name="ActualTaxBenefitsRealizedForTaxDeductionsForRestrictedStockUnits" nillable="true" xbrli:periodType="duration" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_StockOptionsAndEsppMember" abstract="true" name="StockOptionsAndEsppMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_TotalFairValueOfOptionsVested" abstract="false" name="TotalFairValueOfOptionsVested" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_ActualTaxBenefitsRealizedRelatedToTaxDeductionsForNonqualifiedOptionExercisesAndDisqualifyingDispositionsUnderAllSharebasedPaymentArrangements" abstract="false" name="ActualTaxBenefitsRealizedRelatedToTaxDeductionsForNonqualifiedOptionExercisesAndDisqualifyingDispositionsUnderAllSharebasedPaymentArrangements" nillable="true" xbrli:periodType="duration" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_AOCIOtherMember" abstract="true" name="AOCIOtherMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_IntuitInc401kPlanMember" abstract="true" name="IntuitInc401kPlanMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_CreditKarma401KPlanMember" abstract="true" name="CreditKarma401KPlanMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_MaximumPercentOfSalaryBonusAndCommissionEligibleForExecutiveDeferredCompensationPlan" abstract="false" name="MaximumPercentOfSalaryBonusAndCommissionEligibleForExecutiveDeferredCompensationPlan" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:percentItemType"/>
+  <xs:element id="intu_GlobalBusinessSolutionsMember" abstract="true" name="GlobalBusinessSolutionsMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_A2024RestructuringPlanMember" abstract="true" name="A2024RestructuringPlanMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_QuickBooksOnlineAccountingMember" abstract="true" name="QuickBooksOnlineAccountingMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_OnlineServicesMember" abstract="true" name="OnlineServicesMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_OnlineEcosystemMember" abstract="true" name="OnlineEcosystemMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_QuickBooksDesktopAccountingMember" abstract="true" name="QuickBooksDesktopAccountingMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_DesktopServicesandSuppliesMember" abstract="true" name="DesktopServicesandSuppliesMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_DesktopEcosystemMember" abstract="true" name="DesktopEcosystemMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_TurboTaxMember" abstract="true" name="TurboTaxMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_CreditKarmaMember" abstract="true" name="CreditKarmaMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_ProTaxMember" abstract="true" name="ProTaxMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_UnallocatedCorporateItemsAbstract" abstract="true" name="UnallocatedCorporateItemsAbstract" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:stringItemType"/>
+  <xs:element id="intu_UnallocatedCorporateItemsTotal" abstract="false" name="UnallocatedCorporateItemsTotal" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="intu_A2026RestructuringPlanMember" abstract="true" name="A2026RestructuringPlanMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_SECSchedule1209AllowanceDoubtfulAccountsMember" abstract="true" name="SECSchedule1209AllowanceDoubtfulAccountsMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="intu_SECSchedule1209ReserveForReturnsCreditsAndPromotionalDiscountsMember" abstract="true" name="SECSchedule1209ReserveForReturnsCreditsAndPromotionalDiscountsMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+</xs:schema>

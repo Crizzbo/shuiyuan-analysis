@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-10-12T04:55:00Z",
+  "archive_kind": "manual_browser_visible_excerpt",
+  "not_full_original_document": true,
+  "sources": [
+    {
+      "industry_id": "equity_reit",
+      "published_date": "2026-01-21",
+      "source_url": "https://ir.prologis.com/financials/sec-filings/content/0001193125-26-017256/pld-ex99_2.htm",
+      "locator": "Prologis, Inc. Supplemental Information, 4Q25 Operating Performance, Same Store Analysis (Prologis Share)",
+      "excerpts": [
+        "Prologis Share 4Q25 Same Store Analysis: Same Store NOI (Cash Basis) was $1,281 million for the fourth quarter of 2025, compared to $1,212 million for the fourth quarter of 2024, reflecting an increase of 5.7%."
+      ],
+      "observations": [
+        {
+          "component": "pld_q4_same_store_cash_noi",
+          "parent_metric_id": "equity_reit_driver_1",
+          "name_zh": "普洛斯 4Q25 权益份额现金同店净营业收入",
+          "binding_role": "formula_input",
+          "limitation_zh": "2025 Q4 普洛斯权益份额现金同店净营业收入（$1,281 million）；与 5.7% 现金同店增速同范围同期间",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "raw_value": "1,281",
+          "value": "1281000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2025-10-01",
+          "period_end": "2025-12-31",
+          "period_type": "quarterly",
+          "scope": "prologis_share_cash_same_store_noi",
+          "excerpt_indices": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "industry_id": "medical_devices",
+      "published_date": "2026-01-22",
+      "source_url": "https://isrg.intuitive.com/news-releases/news-release-details/intuitive-announces-fourth-quarter-earnings-5",
+      "locator": "Intuitive Announces Fourth Quarter Earnings, da Vinci Surgical System Placements and Trade-in Walk",
+      "excerpts": [
+        "Intuitive Surgical placed 532 da Vinci systems in the fourth quarter of 2025, while 79 systems were retired or replaced under trade-in programs, bringing the active installed base to 11,106 systems."
+      ],
+      "observations": [
+        {
+          "component": "isrg_tradein_retirements_q4",
+          "parent_metric_id": "medical_devices_driver_2",
+          "name_zh": "直觉外科 2025 Q4 达芬奇系统置换与退役调整数",
+          "binding_role": "formula_input",
+          "limitation_zh": "2025 Q4 达芬奇手术系统置换与退役台数（79 systems）；同 2025 Q4 期间与装机量变化对齐",
+          "raw_unit": "systems",
+          "unit": "systems",
+          "raw_value": "79",
+          "value": "79",
+          "conversion": "identity",
+          "period_start": "2025-10-01",
+          "period_end": "2025-12-31",
+          "period_type": "quarterly",
+          "scope": "worldwide_da_vinci",
+          "excerpt_indices": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "industry_id": "regulated_utilities",
+      "published_date": "2026-02-13",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/17797/000132616026000014/duk-20251231.htm",
+      "locator": "Duke Energy Corporation Form 10-K for the Year Ended December 31, 2025, Item 8 Note 4 Regulatory Matters, North Carolina Rate Decisions",
+      "excerpts": [
+        "Duke Energy Carolinas electric base rates reflect an authorized return on equity of 9.8% based on an approved retail equity capitalization structure of 52.0%."
+      ],
+      "observations": [
+        {
+          "component": "duk_carolinas_equity_capital_ratio_2024",
+          "parent_metric_id": "regulated_utilities_driver_2",
+          "name_zh": "杜克能源卡罗莱纳监管核准权益资本结构比例",
+          "binding_role": "formula_input",
+          "limitation_zh": "北卡罗莱纳公用事业委员会核准的法定权益资本结构比例（52.0%）；与 9.8% 允许 ROE 同裁定口径同期间",
+          "raw_unit": "percent",
+          "unit": "ratio",
+          "raw_value": "52.0",
+          "value": "0.52",
+          "conversion": "percent_divided_by_100",
+          "period_start": "2024-01-01",
+          "period_end": "2024-12-31",
+          "period_type": "annual",
+          "scope": "duke_energy_carolinas_retail_allowed_roe",
+          "excerpt_indices": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "industry_id": "banks",
+      "published_date": "2026-02-18",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm",
+      "locator": "JPMorgan Chase & Co. 2025 Form 10-K, Item 7 Management's Discussion and Analysis, Liquidity Risk Management - NSFR",
+      "excerpts": [
+        "As of December 31, 2025, the Firm's Net Stable Funding Ratio was 116%, exceeding the minimum regulatory requirement."
+      ],
+      "observations": [
+        {
+          "component": "jpm_nsfr_ratio_2025",
+          "parent_metric_id": "banks_driver_3",
+          "name_zh": "摩根大通 2025 年末全集团净稳定资金比率 NSFR",
+          "binding_role": "formula_input",
+          "limitation_zh": "2025 年末全集团净稳定资金比率 NSFR（116%）；巴塞尔 III 监管流动性指标，与标准化 CET1 14.6% 同年末截面",
+          "raw_unit": "percent",
+          "unit": "ratio",
+          "raw_value": "116",
+          "value": "1.16",
+          "conversion": "percent_divided_by_100",
+          "period_start": "2025-10-01",
+          "period_end": "2025-12-31",
+          "period_type": "quarterly",
+          "scope": "firm_nsfr_ratio",
+          "excerpt_indices": [
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

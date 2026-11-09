@@ -1,0 +1,252 @@
+{
+  "schema_version": "1.0.0",
+  "policy": {
+    "free_only": true,
+    "automatic_paid_fallback": false,
+    "reviewed_on": "2026-10-11",
+    "runtime": "explicit_jobs_only",
+    "no_credentials_required": true,
+    "missing_data_fallback": "ai_browser_search"
+  },
+  "sources": {
+    "sec": {
+      "hosts": [
+        "www.sec.gov",
+        "data.sec.gov"
+      ],
+      "source_kind": "primary",
+      "dataset_kind": "financial",
+      "interval_seconds": 1,
+      "daily_limit": 500,
+      "ttl_seconds": 86400,
+      "env": "SEC_USER_AGENT",
+      "docs": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+      "notes": "官方免费，无 API Key；需真实应用名称及联系邮箱 User-Agent。1 请求/秒为项目保守限制。",
+      "enabled": false,
+      "disabled_reason": "user_rejected_configuration"
+    },
+    "edinet": {
+      "hosts": [
+        "api.edinet-fsa.go.jp"
+      ],
+      "source_kind": "primary",
+      "dataset_kind": "financial",
+      "interval_seconds": 2,
+      "daily_limit": 500,
+      "ttl_seconds": 3600,
+      "env": "EDINET_API_KEY",
+      "docs": "https://disclosure2dl.edinet-fsa.go.jp/guide/static/disclosure/download/ESE140206.pdf",
+      "notes": "官方免费注册 Key；原文 ZIP/PDF/CSV，限流为本项目自设，不冒称官方额度。",
+      "enabled": false,
+      "disabled_reason": "user_rejected_configuration"
+    },
+    "jquants": {
+      "hosts": [
+        "api.jquants.com"
+      ],
+      "source_kind": "secondary",
+      "dataset_kind": "market",
+      "interval_seconds": 15,
+      "daily_limit": 100,
+      "ttl_seconds": 86400,
+      "env": "JQUANTS_API_KEY",
+      "docs": "https://jpx-jquants.com/en",
+      "notes": "只按 Free 套餐使用；12 周延迟，摘要不是完整三表，不调用 Premium 或付费附加端点。",
+      "enabled": false,
+      "disabled_reason": "user_rejected_configuration"
+    },
+    "alpha_vantage": {
+      "hosts": [
+        "www.alphavantage.co"
+      ],
+      "source_kind": "secondary",
+      "dataset_kind": "financial",
+      "interval_seconds": 15,
+      "daily_limit": 25,
+      "ttl_seconds": 86400,
+      "env": "ALPHA_VANTAGE_API_KEY",
+      "docs": "https://www.alphavantage.co/support/",
+      "notes": "25 请求/日；免费 Key，个别端点是否获准以实际响应为准。",
+      "enabled": false,
+      "disabled_reason": "user_rejected_configuration"
+    },
+    "fred_csv": {
+      "hosts": [
+        "fred.stlouisfed.org"
+      ],
+      "source_kind": "primary",
+      "dataset_kind": "industry",
+      "interval_seconds": 2,
+      "daily_limit": 100,
+      "ttl_seconds": 86400,
+      "env": null,
+      "docs": "https://fred.stlouisfed.org/",
+      "notes": "公开 CSV，无 Key；当前修订值，不用于历史时点回测。FRED 部分序列转载第三方，须核对原始来源与使用条款。",
+      "enabled": true,
+      "disabled_reason": null
+    },
+    "fred": {
+      "hosts": [
+        "api.stlouisfed.org"
+      ],
+      "source_kind": "primary",
+      "dataset_kind": "industry",
+      "interval_seconds": 2,
+      "daily_limit": 100,
+      "ttl_seconds": 86400,
+      "env": "FRED_API_KEY",
+      "docs": "https://fred.stlouisfed.org/docs/api/fred/realtime_period.html",
+      "notes": "免费注册；使用 realtime_start/end 访问 ALFRED 历史版本，频率和单位从 metadata 取。",
+      "enabled": false,
+      "disabled_reason": "user_rejected_configuration"
+    },
+    "bls": {
+      "hosts": [
+        "api.bls.gov"
+      ],
+      "source_kind": "primary",
+      "dataset_kind": "industry",
+      "interval_seconds": 3,
+      "daily_limit": 25,
+      "ttl_seconds": 86400,
+      "env": null,
+      "docs": "https://www.bls.gov/developers/api_faqs.htm",
+      "notes": "免注册 V1 每天 25 次、每批最多 25 序列和 10 年；先使用免注册入口。",
+      "enabled": true,
+      "disabled_reason": null
+    },
+    "boj": {
+      "hosts": [
+        "www.stat-search.boj.or.jp"
+      ],
+      "source_kind": "primary",
+      "dataset_kind": "industry",
+      "interval_seconds": 3,
+      "daily_limit": 100,
+      "ttl_seconds": 86400,
+      "env": null,
+      "docs": "https://www.stat-search.boj.or.jp/info/api_manual_en.pdf",
+      "notes": "日本银行 2026 年发布官方 API；JSON/CSV、数据库元数据和序列。",
+      "enabled": true,
+      "disabled_reason": null
+    },
+    "estat": {
+      "hosts": [
+        "api.e-stat.go.jp"
+      ],
+      "source_kind": "primary",
+      "dataset_kind": "industry",
+      "interval_seconds": 3,
+      "daily_limit": 100,
+      "ttl_seconds": 86400,
+      "env": "ESTAT_APP_ID",
+      "docs": "https://www.e-stat.go.jp/api/api/index.php/en/api-dev/how_to_use",
+      "notes": "日本官方统计，免费 App ID；统计分类和基准必须核对。",
+      "enabled": false,
+      "disabled_reason": "user_rejected_configuration"
+    },
+    "gdelt": {
+      "hosts": [
+        "api.gdeltproject.org"
+      ],
+      "source_kind": "secondary",
+      "dataset_kind": "news",
+      "interval_seconds": 6,
+      "daily_limit": 50,
+      "ttl_seconds": 3600,
+      "env": null,
+      "docs": "https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/",
+      "notes": "公开新闻索引，未保证正文版权或事件已核实。",
+      "enabled": true,
+      "disabled_reason": null
+    },
+    "rss": {
+      "hosts": [
+        "www.federalreserve.gov",
+        "www.boj.or.jp",
+        "blogs.nvidia.com",
+        "feeds.a.dj.com"
+      ],
+      "source_kind": "secondary",
+      "dataset_kind": "news",
+      "interval_seconds": 3,
+      "daily_limit": 100,
+      "ttl_seconds": 3600,
+      "env": null,
+      "docs": "https://www.federalreserve.gov/feeds/feeds.htm",
+      "feeds": [
+        {
+          "name": "美联储新闻稿",
+          "url": "https://www.federalreserve.gov/feeds/press_all.xml",
+          "authority": "official",
+          "status": "candidate"
+        },
+        {
+          "name": "NVIDIA 公司博客",
+          "url": "https://blogs.nvidia.com/feed/",
+          "authority": "issuer",
+          "status": "candidate"
+        },
+        {
+          "name": "WSJ 市场标题",
+          "url": "https://feeds.a.dj.com/rss/RSSMarketsMain.xml",
+          "authority": "media",
+          "status": "candidate"
+        }
+      ],
+      "notes": "按单篇来源分类；只用 RSS 公开条目，不绕过新闻正文付费墙。候选 feed 未经联网成功测试不能标为稳定。",
+      "enabled": true,
+      "disabled_reason": null
+    },
+    "tdnet": {
+      "hosts": [
+        "www.release.tdnet.info",
+        "www2.jpx.co.jp"
+      ],
+      "source_kind": "primary",
+      "dataset_kind": "company_action",
+      "interval_seconds": 3,
+      "daily_limit": 100,
+      "ttl_seconds": 3600,
+      "env": null,
+      "docs": "https://www.jpx.co.jp/english/equities/listing/disclosure/tdnet/",
+      "notes": "公共网页 31 天、指定索引页与 PDF/ZIP；没有使用收费 TDnet API，需持续归档与页面健康检查。",
+      "enabled": true,
+      "disabled_reason": null
+    },
+    "yfinance": {
+      "hosts": [
+        "finance.yahoo.com"
+      ],
+      "source_kind": "secondary",
+      "dataset_kind": "market",
+      "interval_seconds": 3,
+      "daily_limit": 100,
+      "ttl_seconds": 86400,
+      "env": null,
+      "docs": "https://github.com/ranaroussi/yfinance",
+      "notes": "既有 yfinance 1.7.0，个人研究，美股和日股候选；库内部请求不受本模块 HTTP 单次额度控制，按查询任务保守限速。",
+      "enabled": true,
+      "disabled_reason": null
+    },
+    "issuer_ir": {
+      "hosts": [
+        "investors.intuit.com",
+        "global.toyota",
+        "group.softbank",
+        "www.sony.com",
+        "www.nintendo.co.jp"
+      ],
+      "source_kind": "primary",
+      "dataset_kind": "financial",
+      "interval_seconds": 3,
+      "daily_limit": 100,
+      "ttl_seconds": 86400,
+      "env": null,
+      "docs": "https://investors.intuit.com/financial-information",
+      "notes": "免费发行人官方 IR 原文。软银集团 9984 与软银公司 9434 分开，不混用财报。",
+      "enabled": true,
+      "disabled_reason": null
+    }
+  }
+}

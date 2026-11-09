@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "semi_equipment",
+    "industry_name_zh": "半导体先进制程设备与量测",
+    "sector_id": "information_technology",
+    "sector_name_zh": "信息技术",
+    "macro_sector_id": "TECH_SEMI",
+    "macro_sector_name_zh": "高精尖半导体、通信电子与精密光学",
+    "description_zh": "涵盖光刻机、等离子体刻蚀机、薄膜沉积 (CVD/ALD)、CMP 抛光、离子注入及半导体量测检测设备企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.50,
+    "typical_markup_ratio": 1.30,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "极高经营杠杆",
+    "typical_gross_margin_range": [0.45, 0.58]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 120.0,
+    "dio_warning_days": 180.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.35,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "超高精度工业级深紫外与极紫外光学反射镜系统及激光光源模组",
+      "真空射频电源发生器 (RF Generator)、高纯精密气路控制流量计与耐腐蚀结构陶瓷构件",
+      "高真空分子泵与纳米级精密多轴运动工作台控制系统"
+    ],
+    "downstream_profile": "全球头部晶圆代工厂 (Foundry)、存储芯片 IDM 巨头 (DRAM/NAND) 与化合物半导体晶圆制造厂",
+    "pricing_power_verdict": "先进制程核心设备呈现全球绝对寡头垄断格局，特定高端细分设备享有排他性独家溢价与定价权",
+    "channel_inversion_sensitivity": "未交付在手设备积压订单 (Equipment Backlog) 与订单出货比 (Book-to-Bill Ratio) 是晶圆厂资本开支拐点的唯一核心指针"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "全球先进制程与先进封装晶圆厂扩产投资共振，新签设备订单出货比 (Book-to-Bill) 突破 1.20 驱动业绩超预期爆发",
+      "刻蚀、薄膜沉积核心设备在存储芯片高层数 3D NAND 及新一代晶体管架构实现突破性工艺替换与市占率攀升",
+      "存量装机基数持续扩大带动高毛利备件、耗材与工艺升级售后服务收入占比突破 30% 构筑高能见度现金流底盘"
+    ],
+    "leading_bear_defenses": [
+      "跨国多边半导体设备出口管制升级，导致关键区域市场高毛利先进制程设备出货全面受阻造成营收失血",
+      "下游芯片行业周期下行导致晶圆厂推迟新厂土建投产节奏，已下单设备面临客户延迟交货与推迟确收",
+      "核心精密光学或真空系统供应商交期拉长，导致总装下线停滞与设备装配延期交付违约"
+    ],
+    "core_catalyst_dimensions": [
+      "国际半导体产业协会 (SEMI) 全球半导体设备月度出货额与年度资本开支预测",
+      "台积电、三星、美光等晶圆制造巨头季度资本开支 (CapEx) 指引动态",
+      "单季度新签设备订单总额 (Net Order Intake) 与在手积压订单 (Backlog) 规模",
+      "多边半导体高端设备出口管制法案与行业实体清单修订动向"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "在设备尚未获得客户晶圆厂现场终验收 (Site Acceptance Test, SAT) 时违规提前确认全额收入",
+      "发出商品 (Goods in Transit / Shipped to Customers) 异常积压不结转，表明客户拒绝签署终验收报告",
+      "对存在出口禁运制裁或客户砍单风险的在途定制化专用机台未及时计提存货跌价准备"
+    ],
+    "channel_and_revenue_checks": [
+      "设备质保期保修维护费用计提比例是否与历史实际返修索赔成本匹配",
+      "附带回购承诺或无条件退货条款的特殊销售合同穿透"
+    ]
+  }
+}

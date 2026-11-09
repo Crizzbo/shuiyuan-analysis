@@ -1,0 +1,19 @@
+{
+  "acquired_at": "2026-11-01T16:51:41.097402+00:00",
+  "source": "verified_market_quote_ingestion",
+  "session_type": "regular_trading",
+  "quotes": {
+    "NVDA": {
+      "ticker": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "current_price": 204.64,
+      "currency": "USD",
+      "timestamp_iso": "2026-11-01T16:51:41.097402+00:00",
+      "timestamp_formatted": "USD204.64 [2026-11-01T16:51:41.097402+00:00 前收盘基准]",
+      "session_type": "regular_trading",
+      "is_valid": true,
+      "staleness_status": "FRESH_ARCHIVED",
+      "formatted_price": "$204.64"
+    }
+  }
+}

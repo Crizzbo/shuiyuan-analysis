@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.1.0",
+  "entity_id": "US:INTU:CIK896878",
+  "scope_id": "consolidated",
+  "industry_id": "software",
+  "currency": "USD",
+  "as_of": "2026-10-11T01:53:26.814621+00:00",
+  "is_synthetic": false,
+  "facts": [
+    {
+      "id": "5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f",
+      "field": "revenue",
+      "scope_id": "consolidated",
+      "period": {
+        "start": "2025-08-01",
+        "end": "2026-07-31",
+        "basis": "annual"
+      },
+      "accounting_basis": "GAAP",
+      "unit": "currency",
+      "currency": "USD",
+      "scale": 1,
+      "source": {
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34",
+        "locator": "intu-20260731.htm#f-60 context=c-1",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:Revenues\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-60\">21,448</ix:nonFraction>",
+        "kind": "primary",
+        "published_at": null,
+        "available_at": "2026-10-11T01:37:03+00:00"
+      },
+      "entity_id": "US:INTU:CIK896878",
+      "value": 21448000000.0
+    },
+    {
+      "id": "7ce8a85c76eb1ad5e122bab85315c8c3ac8d047e6ee3b027277514c562218b8b",
+      "field": "operating_income",
+      "scope_id": "consolidated",
+      "period": {
+        "start": "2025-08-01",
+        "end": "2026-07-31",
+        "basis": "annual"
+      },
+      "accounting_basis": "GAAP",
+      "unit": "currency",
+      "currency": "USD",
+      "scale": 1,
+      "source": {
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34",
+        "locator": "intu-20260731.htm#f-90 context=c-1",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:OperatingIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-90\">5,884</ix:nonFraction>",
+        "kind": "primary",
+        "published_at": null,
+        "available_at": "2026-10-11T01:37:03+00:00"
+      },
+      "entity_id": "US:INTU:CIK896878",
+      "value": 5884000000.0
+    }
+  ],
+  "requests": [
+    "operating_margin"
+  ]
+}

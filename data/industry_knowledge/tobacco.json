@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "tobacco",
+    "industry_name_zh": "传统烟草与新型减害尼古丁",
+    "sector_id": "consumer_staples",
+    "sector_name_zh": "必需消费",
+    "macro_sector_id": "AGR",
+    "macro_sector_name_zh": "农业、食品加工与林业资源",
+    "description_zh": "涵盖传统可燃卷烟、加热不燃烧 (HNB) 烟弹与设备、现代口含尼古丁袋及雾化减害烟草制造企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.35,
+    "typical_markup_ratio": 1.45,
+    "capex_intensity": "中等偏低",
+    "operating_leverage_exposure": "中等经营杠杆",
+    "typical_gross_margin_range": [0.60, 0.75]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 160.0,
+    "dio_warning_days": 260.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.20,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "优质烤烟与香料烟产地收购特许配额与多年自然醇化陈化周期",
+      "高工艺稠浆法再造烟草薄片制造专利与微米级低温电磁加热芯片壁垒",
+      "监管机构烟草制品上市前申请 (PMTA) 与减害烟草制品 (MRTP) 极严苛准入认证"
+    ],
+    "downstream_profile": "全球具有成瘾性依赖特征的成年吸烟客群、特许烟草专卖零售商、加油站便利店连锁及机场免税专柜",
+    "pricing_power_verdict": "拥有经久不衰超级跨国品牌的烟草寡头享有全球日用消费品中最顶级的提价定价权，可完全跨周期转嫁高额消费税通胀；受制于严苛控烟法案约束",
+    "channel_inversion_sensitivity": "无烟减害业务 (Smoke-Free Products) 出货量占比攀升速率与传统卷烟销量自然下滑速度的剪刀差是决定长期估值中枢的核心指针"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "现代口含无烟尼古丁袋与新型加热不燃烧烟弹全球出货量超预期井喷，无烟业务营收占比加速突破 40% 关口",
+      "新一代加热不燃烧旗舰设备在欧美主流消费市场获批上市并快速渗透，减害品类综合毛利率超越传统传统卷烟",
+      "传统可燃卷烟直接提价策略执行坚决顺畅，单包价格上涨幅度完全弥补销量自然缩减，支撑充沛自由现金流与高股息回购"
+    ],
+    "leading_bear_defenses": [
+      "主要消费国监管部门出台全面禁止薄荷醇等加味调味烟草严苛禁令，导致核心畅销产品遭遇强制下架停售",
+      "监管机构否决新型减害产品的上市营销申请或出台强制大幅降低卷烟尼古丁含量的极端控烟规则草案",
+      "核心烟叶种植产区爆发严重自然气候干旱导致高等级烟叶严重歉收减产，推高陈化烟叶采购成本"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度无烟减害产品 (Smoke-Free Products) 实际出货量与占总净营业收入比例",
+      "传统可燃卷烟实际出货量变动 (Combustible Volume) 与直接提价贡献率 (Price Variance)",
+      "监管机构关于重点减害烟草产品 PMTA 上市许可申请裁决进展",
+      "主要国家政府烟草消费税 (Excise Tax) 法定税率上调方案与公共场所禁烟立法推进"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "为粉饰无烟减害业务转型速度，在季度末向海外渠道分销商违规提供非正常信用额度提前大额压库塞货",
+      "对未获得上市审批准入或面临禁售政策风险的老旧设备与耗材库存推迟计提存货跌价与报废损失",
+      "对重大人身健康损害集体诉讼与未决公共医疗赔偿纠纷未按照审慎性原则足额计提预计负债准备金"
+    ],
+    "channel_and_revenue_checks": [
+      "代收代付的巨额国家烟草消费税与营业收入会计核算总额法与净额法划分合规性审验",
+      "烟叶多年醇化储存发酵过程中自然损耗、挥发折干与期末实物盘点真实性审查"
+    ]
+  }
+}

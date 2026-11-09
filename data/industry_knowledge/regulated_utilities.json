@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "regulated_utilities",
+    "industry_name_zh": "受监管特许电网与公用事业",
+    "sector_id": "utilities",
+    "sector_name_zh": "公用事业",
+    "macro_sector_id": "INFRA_UTIL",
+    "macro_sector_name_zh": "电网公用事业、清洁电力与能源基础设施",
+    "description_zh": "涵盖受政府公用事业委员会费率监管的电网输配电、城市燃气管网、自来水净化输配及核能基荷电力企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.65,
+    "typical_markup_ratio": 1.10,
+    "capex_intensity": "极高重资产",
+    "operating_leverage_exposure": "中等偏低经营杠杆",
+    "typical_gross_margin_range": [0.25, 0.40]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 25.0,
+    "dio_warning_days": 50.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.05,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "地方政府公用事业监管委员会费率听证会批准的准许股本净资产收益率 (Allowed ROE)",
+      "大型电力主变压器、高压直流换流阀与高压地下电缆长期交货排期",
+      "跨区域清洁电力输送通道土地征地与特许经营电网线路走廊批文"
+    ],
+    "downstream_profile": "特许区域内全体城镇居民家庭用电用气、工业制造企业高压用电及新型超大规模 AI 算力中心数据中心",
+    "pricing_power_verdict": "拥有法定属地排他性特许经营垄断地位，受制于公用事业监管委员会统一定价与顺价保护机制，缺乏自主调价权但现金流具备极强确定性",
+    "channel_inversion_sensitivity": "核定有效费率基数复合增长率 (Rate Base Growth) 与公用事业委员会裁定的准许回报率 (Authorized ROE) 是公用事业净利增长的绝对核心锚"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "AI 超算中心高功率用电负荷超预期集中接入，拉动特许区域电网资本开支与有效费率资产基数加速扩容",
+      "监管委员会全额支持并批准重大电网更新改造投资方案与准许回报率，及时全额顺价消除公用事业顺价滞后",
+      "可再生能源与先进核电享受主权清洁电力生产投资税收抵免红利，增厚长期充沛自由现金流"
+    ],
+    "leading_bear_defenses": [
+      "电网老旧设备或高压输电走廊在极端干旱大风天气引发灾难性特大森林火灾，面临天价过失赔偿索赔与破产风险",
+      "属地监管机构出于民生通胀考虑否决电网提价申请或强制压降准许回报率，导致庞大基建资本开支无法足额收回",
+      "宏观长端利率持续大幅走高，重资产高负债模式下利息财务费用激增且类债高股息吸引力遭遇严重折价"
+    ],
+    "core_catalyst_dimensions": [
+      "公共事业监管委员会 (PUC) 最终费率诉讼裁决 (Rate Case Orders) 与核准 ROE 水平",
+      "未来多年度有效费率资产基数 (Rate Base) 预期复合增长率",
+      "电网更新改造资本投资预算执行进度与电网供电可靠性指标",
+      "特许供电区域内大型科技 AI 数据中心高压供电专线合同签约容量 (GW)"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "为了平抑短期利润波动，将未经监管委员会明确裁决批准补偿的燃料成本超支或灾后抢修支出违规挂账确认为监管资产 (Regulatory Assets)",
+      "对涉及重大山火责任或安全事故诉讼的重大潜在民事赔偿责任推迟足额计提预计负债",
+      "将常规设备日常巡检、树木清障修剪等维护费用违规予以资本化计入在建固定资产以减少当期营业成本"
+    ],
+    "channel_and_revenue_checks": [
+      "监管性资产与负债 (Regulatory Assets & Liabilities) 在费率听证会后的最终可收回性持续减值审验",
+      "针对居民用户超期未结欠费应收账款的预期信用损失准备计提充分性审查"
+    ]
+  }
+}

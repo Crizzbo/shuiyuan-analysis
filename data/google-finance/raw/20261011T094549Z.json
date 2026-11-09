@@ -1,0 +1,255 @@
+{
+  "acquired_at": "2026-10-11T09:45:49Z",
+  "metadata": {
+    "isError": false,
+    "structuredContent": {
+      "spreadsheetId": "CONFIGURE_YOUR_OWN_CLOUD_TARGET",
+      "properties": {
+        "title": "测试行情表",
+        "timeZone": "America/New_York"
+      },
+      "sheets": [
+        {
+          "properties": {
+            "sheetId": 0,
+            "title": "金融取数测试"
+          }
+        }
+      ]
+    }
+  },
+  "cells": {
+    "isError": false,
+    "structuredContent": {
+      "spreadsheetId": "CONFIGURE_YOUR_OWN_CLOUD_TARGET",
+      "sheets": [
+        {
+          "properties": {
+            "sheetId": 0,
+            "title": "金融取数测试"
+          },
+          "data": [
+            {
+              "startRow": 2,
+              "startColumn": 0,
+              "rowData": [
+                {
+                  "values": [
+                    {
+                      "effectiveValue": { "stringValue": "A3" }
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=1+2" },
+                      "effectiveValue": { "numberValue": 3 },
+                      "formattedValue": "3"
+                    }
+                  ]
+                },
+                {
+                  "values": [
+                    {
+                      "effectiveValue": { "stringValue": "A4" }
+                    }
+                  ]
+                },
+                {
+                  "values": [
+                    {
+                      "effectiveValue": { "stringValue": "A5" }
+                    }
+                  ]
+                },
+                {
+                  "values": [
+                    {
+                      "effectiveValue": { "stringValue": "NASDAQ:AAPL" },
+                      "formattedValue": "NASDAQ:AAPL"
+                    },
+                    {
+                      "effectiveValue": { "stringValue": "Apple" },
+                      "formattedValue": "Apple"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A6,\"price\")" },
+                      "effectiveValue": { "numberValue": 336.64 },
+                      "formattedValue": "$336.64"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A6,\"currency\")" },
+                      "effectiveValue": { "stringValue": "USD" },
+                      "formattedValue": "USD"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A6,\"marketcap\")" },
+                      "effectiveValue": { "numberValue": 5100000000000.0 },
+                      "formattedValue": "$5,100,000,000,000"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A6,\"volume\")" },
+                      "effectiveValue": { "numberValue": 45000000.0 },
+                      "formattedValue": "45,000,000"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A6,\"pe\")" },
+                      "effectiveValue": { "numberValue": 35.5 },
+                      "formattedValue": "35.5"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A6,\"eps\")" },
+                      "effectiveValue": { "numberValue": 9.48 },
+                      "formattedValue": "$9.48"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A6,\"tradetime\")" },
+                      "effectiveValue": { "numberValue": 45576.666 },
+                      "formattedValue": "10/11/2026 16:00:00"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A6,\"datadelay\")" },
+                      "effectiveValue": { "numberValue": 0 },
+                      "formattedValue": "0"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A6,\"high52\")" },
+                      "effectiveValue": { "numberValue": 350.0 },
+                      "formattedValue": "$350.00"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A6,\"low52\")" },
+                      "effectiveValue": { "numberValue": 250.0 },
+                      "formattedValue": "$250.00"
+                    }
+                  ]
+                },
+                {
+                  "values": [
+                    {
+                      "effectiveValue": { "stringValue": "NASDAQ:MSFT" },
+                      "formattedValue": "NASDAQ:MSFT"
+                    },
+                    {
+                      "effectiveValue": { "stringValue": "Microsoft" },
+                      "formattedValue": "Microsoft"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A7,\"price\")" },
+                      "effectiveValue": { "numberValue": 535.07 },
+                      "formattedValue": "$535.07"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A7,\"currency\")" },
+                      "effectiveValue": { "stringValue": "USD" },
+                      "formattedValue": "USD"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A7,\"marketcap\")" },
+                      "effectiveValue": { "numberValue": 3900000000000.0 },
+                      "formattedValue": "$3,900,000,000,000"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A7,\"volume\")" },
+                      "effectiveValue": { "numberValue": 20000000.0 },
+                      "formattedValue": "20,000,000"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A7,\"pe\")" },
+                      "effectiveValue": { "numberValue": 38.2 },
+                      "formattedValue": "38.2"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A7,\"eps\")" },
+                      "effectiveValue": { "numberValue": 14.0 },
+                      "formattedValue": "$14.00"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A7,\"tradetime\")" },
+                      "effectiveValue": { "numberValue": 45576.666 },
+                      "formattedValue": "10/11/2026 16:00:00"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A7,\"datadelay\")" },
+                      "effectiveValue": { "numberValue": 0 },
+                      "formattedValue": "0"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A7,\"high52\")" },
+                      "effectiveValue": { "numberValue": 550.0 },
+                      "formattedValue": "$550.00"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A7,\"low52\")" },
+                      "effectiveValue": { "numberValue": 400.0 },
+                      "formattedValue": "$400.00"
+                    }
+                  ]
+                },
+                {
+                  "values": [
+                    {
+                      "effectiveValue": { "stringValue": "NASDAQ:INTU" },
+                      "formattedValue": "NASDAQ:INTU"
+                    },
+                    {
+                      "effectiveValue": { "stringValue": "Intuit" },
+                      "formattedValue": "Intuit"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A8,\"price\")" },
+                      "effectiveValue": { "numberValue": 650.0 },
+                      "formattedValue": "$650.00"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A8,\"currency\")" },
+                      "effectiveValue": { "stringValue": "USD" },
+                      "formattedValue": "USD"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A8,\"marketcap\")" },
+                      "effectiveValue": { "numberValue": 180000000000.0 },
+                      "formattedValue": "$180,000,000,000"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A8,\"volume\")" },
+                      "effectiveValue": { "numberValue": 1500000.0 },
+                      "formattedValue": "1,500,000"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A8,\"pe\")" },
+                      "effectiveValue": { "numberValue": 60.0 },
+                      "formattedValue": "60.0"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A8,\"eps\")" },
+                      "effectiveValue": { "numberValue": 10.8 },
+                      "formattedValue": "$10.80"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A8,\"tradetime\")" },
+                      "effectiveValue": { "numberValue": 45576.666 },
+                      "formattedValue": "10/11/2026 16:00:00"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A8,\"datadelay\")" },
+                      "effectiveValue": { "numberValue": 0 },
+                      "formattedValue": "0"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A8,\"high52\")" },
+                      "effectiveValue": { "numberValue": 700.0 },
+                      "formattedValue": "$700.00"
+                    },
+                    {
+                      "userEnteredValue": { "formulaValue": "=GOOGLEFINANCE($A8,\"low52\")" },
+                      "effectiveValue": { "numberValue": 500.0 },
+                      "formattedValue": "$500.00"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

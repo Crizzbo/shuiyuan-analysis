@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "business_services",
+    "industry_name_zh": "综合商业服务、环保固废与检验检测",
+    "sector_id": "industrials",
+    "sector_name_zh": "工业",
+    "macro_sector_id": "PROF_SERV",
+    "macro_sector_name_zh": "专业科技研发、法律财税与企业综合服务",
+    "description_zh": "涵盖市政与工商业固废特许清运与现代填埋场、第三方质量检验认证 (TIC)、人力资源外包及综合征信数据服务企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.55,
+    "typical_markup_ratio": 1.15,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "中等经营杠杆",
+    "typical_gross_margin_range": [0.30, 0.45]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 0.0,
+    "dio_warning_days": 0.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.15,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "属地极度严苛的现代化卫生填埋场新建与改扩建环保行政特许审批批文与稀缺填埋库容",
+      "特种重型液压垃圾清运压缩车辆、纯电重卡及大型沼气提纯制可再生天然气核心机组",
+      "国家级与国际权威实验室认可委员会高级检测认证检验资质与授权证书"
+    ],
+    "downstream_profile": "属地城市市政公共环卫管理部门、跨国商业连锁机构、制造工厂及外贸进出口检验企业",
+    "pricing_power_verdict": "拥有核心城市稀缺卫生填埋场独占库容资产的固废龙头享有绝对排他垄断提价权；通用低端物业保洁服务商竞争激烈面临人工成本挤压",
+    "channel_inversion_sensitivity": "核心综合定价提价收益率 (Core Pricing Yield) 与垃圾进场倾倒费 (Tipping Fee) 走势是固废龙头护城河最核心的晴雨表"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "核心清运与末端填埋进场费提价收益率保持在 6% 以上，完全跑赢通胀并推动主营营业利润率稳健扩张",
+      "大型垃圾填埋气制可再生天然气 (RNG) 提纯工厂集中并网投产，享受绿色清洁燃料信用补贴增厚巨额自由现金流",
+      "高端半导体、新能源汽车与生物医药供应链第三方独立检验检测 (TIC) 业务高附加值订单爆发式增长"
+    ],
+    "leading_bear_defenses": [
+      "主力填埋场剩余可用库容加速耗尽且周边扩容规划遭遇属地环保抗议被否决，垃圾被迫高成本远途倒运",
+      "填埋场发生严重渗滤液外溢或土壤地下水重金属污染事故，遭遇环保监管顶格巨额重罚与停业整改",
+      "工业制造业低迷导致大宗工商业垃圾与特种工业废弃物产生量骤降，客户压缩清运频次压低服务费"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度固废核心提价收益率 (Core Price) 与清运垃圾处理物理量 (Volume) 结构",
+      "已并网与在建可再生天然气 (RNG) 设施商业化实际产气量与补贴落地",
+      "核心卫生填埋场经审计核定的剩余可用倾倒库容年限 (Remaining Landfill Life)",
+      "年度自由现金流转化率与高质量横向资产并购整合进度"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "为了做大账面利润，对已投运填埋场的封场闭坑、渗滤液处置及终生环境复垦弃置负债 (ARO) 采用过高折现率以恶意少提负债",
+      "将常规清运车队日常维修保养支出违规予以固定资产资本化以人为降低营业成本",
+      "对存在严重环保违规涉诉与土壤修复责任的固废处置厂区推迟计提预计环境民事赔偿准备金"
+    ],
+    "channel_and_revenue_checks": [
+      "市政特许经营权无形资产摊销期限与实际特许合同剩余年限的匹配性审验",
+      "检验认证服务中检测服务实际完工进度与期末收入权责发生制确认核验"
+    ]
+  }
+}

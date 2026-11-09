@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This schema was created by staff of the U.S. Securities and Exchange Commission. -->
+<!-- Data and content created by government employees within the scope of their employment -->
+<!-- are not subject to domestic copyright protection. 17 U.S.C. 105. -->
+<xs:schema
+xmlns:link="http://www.xbrl.org/2003/linkbase"
+xmlns:spac-dep="http://xbrl.sec.gov/spac-dep/2026"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://xbrl.sec.gov/spac-dep/2026"
+elementFormDefault="qualified">
+<xs:annotation>
+<xs:appinfo>
+<link:linkbase id="lnk">
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/dimension-domain" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#dimension-domain"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#hypercube-dimension"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/dimension-default" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#dimension-default"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/domain-member" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#domain-member"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/all" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#all"/>
+<link:arcroleRef arcroleURI="http://www.xbrl.org/2009/arcrole/dep-partConcept-deprecatedAggregateConcept" xlink:type="simple" xlink:href="http://www.xbrl.org/lrr/arcrole/deprecated-2009-12-16.xsd#dep-partConcept-deprecatedAggregateConcept"/>
+<link:arcroleRef arcroleURI="http://www.xbrl.org/2009/arcrole/dep-concept-deprecatedConcept" xlink:type="simple" xlink:href="http://www.xbrl.org/lrr/arcrole/deprecated-2009-12-16.xsd#dep-concept-deprecatedConcept"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/spac/role/Deprecated" xlink:type="simple" xlink:href="spac-2026.xsd#Deprecated"/>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/spac/role/Deprecated">
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_UpfrontUnderwritingFeesMember" xlink:label="UpfrontUnderwritingFeesMember"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_UnderwritingFeesMember" xlink:label="UnderwritingFeesMember"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2009/arcrole/dep-partConcept-deprecatedAggregateConcept" xlink:from="UpfrontUnderwritingFeesMember" xlink:to="UnderwritingFeesMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeferredUnderwritingCommissionsMember" xlink:label="DeferredUnderwritingCommissionsMember"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2009/arcrole/dep-partConcept-deprecatedAggregateConcept" xlink:from="DeferredUnderwritingCommissionsMember" xlink:to="UnderwritingFeesMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_RegisteredOfferingPrice1PerShare" xlink:label="RegisteredOfferingPrice1PerShare"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_RegisteredOfferingPricePerShare" xlink:label="RegisteredOfferingPricePerShare"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2009/arcrole/dep-concept-deprecatedConcept" xlink:from="RegisteredOfferingPrice1PerShare" xlink:to="RegisteredOfferingPricePerShare" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValue1PerShare" xlink:label="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValue1PerShare"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValuePerShare" xlink:label="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValuePerShare"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2009/arcrole/dep-concept-deprecatedConcept" xlink:from="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValue1PerShare" xlink:to="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValuePerShare" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NumberOfSharesUsedToDetermineNetTangibleBookValuePerSharePreTransaction" xlink:label="NumberOfSharesUsedToDetermineNetTangibleBookValuePerSharePreTransaction"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NumberOfSharesUsedToDetermineNetTangibleBookValuePreTransactionPerShare" xlink:label="NumberOfSharesUsedToDetermineNetTangibleBookValuePreTransactionPerShare"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2009/arcrole/dep-concept-deprecatedConcept" xlink:from="NumberOfSharesUsedToDetermineNetTangibleBookValuePerSharePreTransaction" xlink:to="NumberOfSharesUsedToDetermineNetTangibleBookValuePreTransactionPerShare" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NumberOfSharesUsedToDetermineNetTangibleBookValuePerShareAdjusted" xlink:label="NumberOfSharesUsedToDetermineNetTangibleBookValuePerShareAdjusted"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NumberOfSharesUsedToDetermineNetTangibleBookValueAdjusted" xlink:label="NumberOfSharesUsedToDetermineNetTangibleBookValueAdjusted"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2009/arcrole/dep-concept-deprecatedConcept" xlink:from="NumberOfSharesUsedToDetermineNetTangibleBookValuePerShareAdjusted" xlink:to="NumberOfSharesUsedToDetermineNetTangibleBookValueAdjusted" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacNumberOfSharesUsedToDetermineNetTangibleBookValuePerSharePreTransaction" xlink:label="DeSpacNumberOfSharesUsedToDetermineNetTangibleBookValuePerSharePreTransaction"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacNumberOfSharesUsedToDetermineNetTangibleBookValuePerShare" xlink:label="DeSpacNumberOfSharesUsedToDetermineNetTangibleBookValuePerShare"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2009/arcrole/dep-concept-deprecatedConcept" xlink:from="DeSpacNumberOfSharesUsedToDetermineNetTangibleBookValuePerSharePreTransaction" xlink:to="DeSpacNumberOfSharesUsedToDetermineNetTangibleBookValuePerShare" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacCompanyValuationAtWhichSharesNotRedeemedAreAtLeastIpoValue1PerShare" xlink:label="DeSpacCompanyValuationAtWhichSharesNotRedeemedAreAtLeastIpoValue1PerShare"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacCompanyValuationAtWhichSharesNotRedeemedAreAtLeastIpoValuePerShare" xlink:label="DeSpacCompanyValuationAtWhichSharesNotRedeemedAreAtLeastIpoValuePerShare"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2009/arcrole/dep-concept-deprecatedConcept" xlink:from="DeSpacCompanyValuationAtWhichSharesNotRedeemedAreAtLeastIpoValue1PerShare" xlink:to="DeSpacCompanyValuationAtWhichSharesNotRedeemedAreAtLeastIpoValuePerShare" use="optional" priority="10" order="1.0"/>
+</link:definitionLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/spac/role/Deprecated">
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacDeprecatedAbstract" xlink:label="SpacDeprecatedAbstract"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacCompanyValuationAtWhichSharesNotRedeemedAreAtLeastIpoValuePerShare" xlink:label="DeSpacCompanyValuationAtWhichSharesNotRedeemedAreAtLeastIpoValuePerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacDeprecatedAbstract" xlink:to="DeSpacCompanyValuationAtWhichSharesNotRedeemedAreAtLeastIpoValuePerShare" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_UnderwritingFeesMember" xlink:label="UnderwritingFeesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacDeprecatedAbstract" xlink:to="UnderwritingFeesMember" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValuePerShare" xlink:label="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValuePerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacDeprecatedAbstract" xlink:to="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValuePerShare" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NumberOfSharesUsedToDetermineNetTangibleBookValueAdjusted" xlink:label="NumberOfSharesUsedToDetermineNetTangibleBookValueAdjusted"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacDeprecatedAbstract" xlink:to="NumberOfSharesUsedToDetermineNetTangibleBookValueAdjusted" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NumberOfSharesUsedToDetermineNetTangibleBookValuePreTransactionPerShare" xlink:label="NumberOfSharesUsedToDetermineNetTangibleBookValuePreTransactionPerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacDeprecatedAbstract" xlink:to="NumberOfSharesUsedToDetermineNetTangibleBookValuePreTransactionPerShare" order="5.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_RegisteredOfferingPricePerShare" xlink:label="RegisteredOfferingPricePerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacDeprecatedAbstract" xlink:to="RegisteredOfferingPricePerShare" order="6.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacNumberOfSharesUsedToDetermineNetTangibleBookValuePerShare" xlink:label="DeSpacNumberOfSharesUsedToDetermineNetTangibleBookValuePerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacDeprecatedAbstract" xlink:to="DeSpacNumberOfSharesUsedToDetermineNetTangibleBookValuePerShare" order="7.0" priority="10"/>
+</link:presentationLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+</xs:schema>

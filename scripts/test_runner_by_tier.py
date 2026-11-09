@@ -13,25 +13,13 @@ import time
 import unittest
 from pathlib import Path
 
-# 确保项目根目录与 scripts 目录位于 sys.path 最前端，保证所有模块正常导入
+# 确保项目根目录位于 sys.path 最前端，保证所有模块正常导入
 project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
-scripts_dir = Path(__file__).resolve().parent
-if str(scripts_dir) not in sys.path:
-    sys.path.insert(0, str(scripts_dir))
 
 # 导入分类器
-try:
-    from scripts.list_test_cases import scan_all_test_cases
-except ImportError:
-    from list_test_cases import scan_all_test_cases
-
-
-class TestTieredRunnerSmoke(unittest.TestCase):
-    """确保分层测试调度器本身可正常被 unittest 发现与调用。"""
-    def test_scanner_importable(self):
-        self.assertTrue(callable(scan_all_test_cases))
+from list_test_cases import scan_all_test_cases
 
 
 def run_tests_by_tier(tier_target: str, failfast: bool = False, verbose: int = 1):

@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "merchant_power",
+    "industry_name_zh": "市场化独立发电与清洁能源",
+    "sector_id": "utilities",
+    "sector_name_zh": "公用事业",
+    "macro_sector_id": "INFRA_UTIL",
+    "macro_sector_name_zh": "电网公用事业、清洁电力与能源基础设施",
+    "description_zh": "涵盖非受监管的独立发电企业 (IPP)、商业零碳核电站、集中式风电光伏及区域批发电力交易企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.60,
+    "typical_markup_ratio": 1.14,
+    "capex_intensity": "极高重资产",
+    "operating_leverage_exposure": "极高经营杠杆",
+    "typical_gross_margin_range": [0.30, 0.50]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 35.0,
+    "dio_warning_days": 65.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.35,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "商业核电用低浓缩铀燃料棒组件加工配额与地缘供应链安全保障",
+      "重型高效燃气轮机成套发电机组排产周期与核心高温合金热端部件",
+      "区域电网独立系统运营商 (如 PJM, ERCOT) 新增电源并网队列漫长审批积压"
+    ],
+    "downstream_profile": "全球跨国科技巨头 AI 算力中心专属购电方、区域批发电力交易市场及高耗能工业直供电企业",
+    "pricing_power_verdict": "拥有全天候稳定零碳基荷发电能力的商用核电机组享有对科技大厂高额溢价排他性议价权；普通风光电在用电低谷面临电力现货负电价挤压",
+    "channel_inversion_sensitivity": "区域电网容量市场拍卖出清价格 (Capacity Clearing Price) 与远期电力购售协议 (PPA) 签约电价是独立发电商业绩爆发的最敏感先行温度计"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "与头部科技大厂签署为期数十年的核电机组专属长期售电协议 (PPA)，高溢价锁定带来高确定性充沛自由现金流",
+      "区域电网容量市场拍卖出清价格因基荷供给紧缺暴涨数倍，存量发电机组未对冲容量收入呈现非线性爆发",
+      "天然气调峰机组与工商业储能积极参与电网高频辅助服务，现货尖峰峰谷电价套利毛利创历史新高"
+    ],
+    "leading_bear_defenses": [
+      "国家或联邦能源监管委员会出于全网电价公平与电网安全性考量，否决大型科技数据中心表后直连专属供电协议",
+      "暖冬温和气候导致全网用电需求显著走弱，电力现货批发即期价格大幅跳水吞噬未保值敞口机组盈利",
+      "主力核电机组或燃气机组发生突发性非计划跳闸停运，导致必须在现货高电价市场买电履约长期合同引发严重亏损"
+    ],
+    "core_catalyst_dimensions": [
+      "PJM / ERCOT 等区域电力市场年度容量拍卖 (Capacity Auction) 最终出清电价",
+      "新签大型企业客户长期购售电协议 (PPA) 执行电价与累计签约容量 (GW)",
+      "商用核电机组平均容量利用因子 (Capacity Factor) 与机组强迫停运率",
+      "国家能源监管机构关于大型数据中心直连供电政策听证裁决进展"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "为粉饰当期账面盈利，对电力衍生品与大宗商品套期保值未平仓合约采用激进的市场公允估值模型 (Mark-to-Market)",
+      "对核电机组退役处置与乏燃料后续处理负债 (Asset Retirement Obligations, ARO) 提留准备严重不足",
+      "在区域基荷电价长期走低周期推迟对高能耗老旧化石燃料电厂计提固定资产减值准备"
+    ],
+    "channel_and_revenue_checks": [
+      "未平仓电力远期虚拟交易合同衍生品浮动盈亏计量与保证金流动性风险核验",
+      "长期供售电协议 (PPA) 中履约义务划分与容量费收入确认跨期审验"
+    ]
+  }
+}

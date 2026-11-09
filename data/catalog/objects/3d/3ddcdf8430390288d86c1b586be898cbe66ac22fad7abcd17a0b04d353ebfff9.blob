@@ -1,0 +1,52 @@
+{
+  "company": "Seagate Technology Holdings plc",
+  "ticker": "NASDAQ:STX",
+  "currency": "USD",
+  "financial_unit": "USD_million",
+  "sources": {
+    "financial": "data/seagate/2026-10-11/official-results-excerpt.md",
+    "industry": "data/seagate/2026-10-11/sec-10k-excerpt.md",
+    "market": "data/seagate/2026-10-11/google-finance-browser-excerpt.md"
+  },
+  "facts": {
+    "revenue_2026": 12195,
+    "revenue_2025": 9097,
+    "operating_income_2026": 4094,
+    "cfo_2026": 3674,
+    "capex_2026": 569,
+    "fcf_2026": 3105,
+    "sbc_2026": 213,
+    "cash_2026": 1704,
+    "current_debt_2026": 185,
+    "long_debt_2026": 3380,
+    "current_assets_2026": 5221,
+    "current_liabilities_2026": 3127,
+    "total_assets_2026": 9421,
+    "total_liabilities_2026": 7254,
+    "stockholders_equity_2026": 2167,
+    "diluted_eps_2026": 13.90,
+    "q4_diluted_shares_million": 232,
+    "nearline_eb_2026": 695,
+    "nearline_eb_2025": 497,
+    "hdd_eb_2026": 789,
+    "hdd_eb_2025": 595,
+    "data_center_revenue_share_2026": 0.80,
+    "largest_customer_revenue_share_2026": 0.14,
+    "market_price": 783.00,
+    "market_price_date": "2026-10-09",
+    "high52": 1145.00,
+    "low52": 209.00,
+    "marketcap_usd_million": 179339
+  },
+  "assumptions": {
+    "cash_flow_bridge": "以已披露FCF减去SBC作为股东现金流代理；未来净借款假定零，非已披露FCFE，也不是已完成周期正常化。FCFE口径不再扣净债务，不再额外加现金。",
+    "share_basis": "采用Q4 GAAP摊薄股数232百万作为固定稀释代理；可转债未来稀释和偿付尚未完整模拟。",
+    "bear": {"growth_rates": [-0.20, 0.00, 0.03, 0.03, 0.03], "discount_rate": 0.12, "terminal_growth": 0.02},
+    "base": {"growth_rates": [0.15, 0.10, 0.08, 0.06, 0.04], "discount_rate": 0.10, "terminal_growth": 0.03},
+    "bull": {"growth_rates": [0.35, 0.30, 0.25, 0.20, 0.15], "discount_rate": 0.09, "terminal_growth": 0.035},
+    "scenario_probabilities": null,
+    "sensitivity_discount_rates": [0.08, 0.10, 0.12],
+    "sensitivity_terminal_growth_rates": [0.02, 0.03, 0.04],
+    "valuation_note": "全部增长率、折现率和永续增长率为研究者假设，不是管理层指引、历史校准或证券推荐。模型预测期为估值时点之后五个12个月窗口。"
+  }
+}

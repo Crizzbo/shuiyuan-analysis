@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "retail",
+    "industry_name_zh": "大型连锁零售与商超电商",
+    "sector_id": "consumer_discretionary",
+    "sector_name_zh": "可选消费",
+    "macro_sector_id": "TRADE_LOG",
+    "macro_sector_name_zh": "全球物流航运、仓储分拨与批发零售贸易",
+    "description_zh": "涵盖大型会员制仓储商超、全品类电商自营平台、折扣量贩便利连锁及百货零售企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.76,
+    "typical_markup_ratio": 1.12,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "中等经营杠杆",
+    "typical_gross_margin_range": [0.12, 0.28]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 35.0,
+    "dio_warning_days": 65.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.05,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "头部一线快消品牌独家直采配额、优质生鲜直采源头基地与高毛利自有品牌 (Private Label) 代工产能",
+      "核心城市成熟商圈优质物业黄金铺位租赁权与社区前置仓网点资源",
+      "端到端智能冷链物流车队配送运力与即时末端履约配送人员供给"
+    ],
+    "downstream_profile": "全球广大城镇居民个人消费者、中产家庭订阅会员及小微商户批发采购群体",
+    "pricing_power_verdict": "具备海量付费会员规模的仓储超市对供应商享有极高采购压价权与通道费话语权，传统同质化大卖场受制于线上电商价格战",
+    "channel_inversion_sensitivity": "同店销售额增长率 (Same-Store Sales Growth, SSSG) 与单店平均客单价变动是零售业态盈利能力与居民消费意愿最核心的敏感温度计"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "会员制仓储零售业态异地展店顺畅，付费会员续卡率突破 90% 构筑稳健充沛且高毛利纯利现金流护城河",
+      "高性价比自有品牌商品销售占比持续提升，摆脱对知名大牌进货成本依赖并大幅拉阔综合主营毛利率",
+      "数字化供应链智能补调调配算法与自动化立库全面投入使用，生鲜损耗率与订单单均履约成本显著压降"
+    ],
+    "leading_bear_defenses": [
+      "居民消费意愿低迷叠加硬折扣量贩店与兴趣电商低价分流，传统商超同店客流量与客单价遭遇持续下滑",
+      "商用物业刚性租金上涨叠加门店一线雇员法定最低薪酬上调，门店刚性固定开支吞噬微薄主营利润",
+      "生鲜与熟食冷链环节发生严重食品安全恶性违规事件，遭受监管机构重磅处罚并引发消费者严重信任危机"
+    ],
+    "core_catalyst_dimensions": [
+      "季度剔除燃油销售波动的同店销售额增速 (Comparable Store Sales / SSSG)",
+      "付费会员总规模增长人数与年费续约留存率 (Renewal Rate)",
+      "全品类存货周转天数 (DIO) 与综合进销毛利率 (Gross Margin) 环比走向",
+      "自营即时零售履约订单履约费用率 (Fulfillment Expense Ratio) 变动"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "激进确认向供应商收取的通道费、进场费、海报促销费等未实现商业赞助返利以人为冲减营业成本虚增毛利",
+      "对长期库龄积压严重的换季服装或临期预包装食品未按可变现净值充分计提存货跌价准备",
+      "对长期录得大额经营亏损的重资产门店推迟进行资产减值测试，蓄意隐瞒门店使用权资产减值损失"
+    ],
+    "channel_and_revenue_checks": [
+      "预付会员卡与储值购物卡未兑付沉淀资金 (Breakage Revenue) 确认为收入的会计估计激进度审查",
+      "大额售后退换货准备与临期商品退厂折让的实际结算周期核验"
+    ]
+  }
+}

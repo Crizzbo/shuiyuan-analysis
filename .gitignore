@@ -5,3 +5,27 @@ __pycache__/
 *.pyc
 data/
 reports/
+
+# 数据层极致减法设计 (Data Layer Subtraction & Windows Safety)
+# 本地保留完整 10 年高频日线缓存 (2.89GB)，供量化计算高频秒级读取
+# Git 仓库实施极致瘦身：严禁数万个底层小文件与二进制缓存进入版本控制
+data_max/normalized/
+data_max/raw/
+data_max/ledger/
+data_max/validation_store/
+data_max/**/*.gz
+data_max/**/*.parquet
+data_max/**/*.zip
+data_max/**/*.tar
+
+# 彻底阻断 Windows 系统保留设备名 (避免跨平台克隆时因 CON/PRN/AUX/NUL 等直接崩溃)
+CON.*
+PRN.*
+AUX.*
+NUL.*
+COM[1-9].*
+LPT[1-9].*
+**/CON.*
+**/PRN.*
+**/AUX.*
+**/NUL.*

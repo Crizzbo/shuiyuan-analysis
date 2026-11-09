@@ -1,0 +1,3023 @@
+{
+  "schema_version": "1.0.0",
+  "not_an_automated_collector": true,
+  "jobs": [
+    {
+      "industry_id": "oil_gas",
+      "representative": "EOG Resources",
+      "parent_metric_id": "oil_gas_driver_1",
+      "name_zh": "分产品实现售价",
+      "source_candidate_url": "https://investors.eogresources.com/2026-02-24-EOG-Resources-Reports-Fourth-Quarter-and-Full-Year-2025-Results-Announces-2026-Capital-Plan",
+      "required_inputs_zh": [
+        "产品销售收入",
+        "产品销售量"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "ca6b780db492ca0d834eab83615e3fa884b9a1a40357835dcbdfdaa0f63c08d5",
+        "34f966f433b867d0c5ada3c37a1105b13a58bbbfe0ed74fbfa3ce76929af32da"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "产品销售收入",
+        "产品销售量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "oil_gas",
+      "representative": "EOG Resources",
+      "parent_metric_id": "oil_gas_driver_2",
+      "name_zh": "单位开采现金成本",
+      "source_candidate_url": "https://investors.eogresources.com/2026-02-24-EOG-Resources-Reports-Fourth-Quarter-and-Full-Year-2025-Results-Announces-2026-Capital-Plan",
+      "required_inputs_zh": [
+        "现金开采成本",
+        "匹配产量"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "219e5503e929caf214fc9a0f472274ac5ed72a2512f4347e8ea2b68ded91b1af",
+        "6f173d488f9eb72f39e6a98f61f96a7dd4e070862cc48e245074dc6891288fc4",
+        "433c6ee657462e5445f83a60a665a4f2c094727990649a518b17c3ed8cd4a96d",
+        "004d259137cf166a9464f87808a84d8d3b5b6b80fa8b74670cf6c03e450b5161",
+        "3501180f940bc145026d6540bdf6387c4471a29ed9d7bb5843e5397491d92783",
+        "fd83d6e0a2bc87cbb439a4124d0a001cc18a4b273447252374b81c646b13d413"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "现金开采成本",
+        "匹配产量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "oil_gas",
+      "representative": "EOG Resources",
+      "parent_metric_id": "oil_gas_driver_3",
+      "name_zh": "已探明储量寿命",
+      "source_candidate_url": "https://investors.eogresources.com/2026-02-24-EOG-Resources-Reports-Fourth-Quarter-and-Full-Year-2025-Results-Announces-2026-Capital-Plan",
+      "required_inputs_zh": [
+        "已探明储量",
+        "同范围年产量"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "已探明储量",
+        "同范围年产量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "energy_services",
+      "representative": "Transocean",
+      "parent_metric_id": "energy_services_driver_1",
+      "name_zh": "设备日利用率",
+      "source_candidate_url": "https://investor.deepwater.com/news-releases/news-release-details/transocean-ltd-reports-fourth-quarter-and-full-year-2025-results",
+      "required_inputs_zh": [
+        "运营设备天数",
+        "可用设备日历天数"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "76340310d661f243eb78ecb82e4dc4a371f2848d826dca97dd12d480087e8ab4"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "运营设备天数",
+        "可用设备日历天数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "energy_services",
+      "representative": "Transocean",
+      "parent_metric_id": "energy_services_driver_2",
+      "name_zh": "新增订单收入比",
+      "source_candidate_url": "https://investor.deepwater.com/news-releases/news-release-details/transocean-ltd-reports-fourth-quarter-and-full-year-2025-results",
+      "required_inputs_zh": [
+        "当期新增订单金额",
+        "同期间服务收入"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "当期新增订单金额",
+        "同期间服务收入"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "energy_services",
+      "representative": "Transocean",
+      "parent_metric_id": "energy_services_driver_3",
+      "name_zh": "实际合同日收入",
+      "source_candidate_url": "https://investor.deepwater.com/news-releases/news-release-details/transocean-ltd-reports-fourth-quarter-and-full-year-2025-results",
+      "required_inputs_zh": [
+        "匹配合同收入",
+        "合同运营天数"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "edc8f19cecb681cf95abe4232179f2b31897c39a778b9572c794e4aec8c296d6"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "匹配合同收入",
+        "合同运营天数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "midstream",
+      "representative": "Enterprise Products Partners",
+      "parent_metric_id": "midstream_driver_1",
+      "name_zh": "分产品吞吐量",
+      "source_candidate_url": "https://ir.enterpriseproducts.com/news-releases/news-release-details/enterprise-reports-fourth-quarter-2025-earnings",
+      "required_inputs_zh": [
+        "产品吞吐量",
+        "披露单位",
+        "日均或期间总量"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "d43a7ecd46abf8c5033d2bb607b2e3b9a2c222942d2ca98b1c97f2c2609a4874"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "input_complete",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "midstream",
+      "representative": "Enterprise Products Partners",
+      "parent_metric_id": "midstream_driver_2",
+      "name_zh": "固定收费收入占比",
+      "source_candidate_url": "https://ir.enterpriseproducts.com/news-releases/news-release-details/enterprise-reports-fourth-quarter-2025-earnings",
+      "required_inputs_zh": [
+        "固定收费合同收入",
+        "匹配相关收入"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "固定收费合同收入",
+        "匹配相关收入"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "midstream",
+      "representative": "Enterprise Products Partners",
+      "parent_metric_id": "midstream_driver_3",
+      "name_zh": "维持资本开支现金额",
+      "source_candidate_url": "https://ir.enterpriseproducts.com/news-releases/news-release-details/enterprise-reports-fourth-quarter-2025-earnings",
+      "required_inputs_zh": [
+        "公司披露 sustaining capex",
+        "范围说明"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "e09de138838e185e2278fcbc6b2b6ad371da855e4c14b8bd84dd401bbf0e676f"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "公司披露 sustaining capex",
+        "范围说明"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "mining",
+      "representative": "Freeport-McMoRan",
+      "parent_metric_id": "mining_driver_1",
+      "name_zh": "分商品实现售价",
+      "source_candidate_url": "https://investors.fcx.com/investors/news-releases/",
+      "required_inputs_zh": [
+        "商品净销售额",
+        "商品销售数量"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "商品净销售额",
+        "商品销售数量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "mining",
+      "representative": "Freeport-McMoRan",
+      "parent_metric_id": "mining_driver_2",
+      "name_zh": "分商品现金单位成本",
+      "source_candidate_url": "https://investors.fcx.com/investors/news-releases/",
+      "required_inputs_zh": [
+        "净现金生产成本",
+        "匹配商品产量"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "净现金生产成本",
+        "匹配商品产量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "mining",
+      "representative": "Freeport-McMoRan",
+      "parent_metric_id": "mining_driver_3",
+      "name_zh": "矿石品位",
+      "source_candidate_url": "https://investors.fcx.com/investors/news-releases/",
+      "required_inputs_zh": [
+        "有效金属含量",
+        "矿石处理量"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "有效金属含量",
+        "矿石处理量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "chemicals",
+      "representative": "Dow",
+      "parent_metric_id": "chemicals_driver_1",
+      "name_zh": "同产品原料价差",
+      "source_candidate_url": "https://investors.dow.com/en/news/news-details/2026/Dow-reports-fourth-quarter-2025-results/default.aspx",
+      "required_inputs_zh": [
+        "产品单位售价",
+        "匹配原料单位成本",
+        "投入系数"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "产品单位售价",
+        "匹配原料单位成本",
+        "投入系数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "chemicals",
+      "representative": "Dow",
+      "parent_metric_id": "chemicals_driver_2",
+      "name_zh": "有效产能开工率",
+      "source_candidate_url": "https://investors.dow.com/en/news/news-details/2026/Dow-reports-fourth-quarter-2025-results/default.aspx",
+      "required_inputs_zh": [
+        "同产品实际产出",
+        "有效产能"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "同产品实际产出",
+        "有效产能"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "chemicals",
+      "representative": "Dow",
+      "parent_metric_id": "chemicals_driver_3",
+      "name_zh": "指定化工链行业库存",
+      "source_candidate_url": "https://investors.dow.com/en/news/news-details/2026/Dow-reports-fourth-quarter-2025-results/default.aspx",
+      "required_inputs_zh": [
+        "行业库存量",
+        "覆盖企业地区产品"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "行业库存量",
+        "覆盖企业地区产品"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "packaging",
+      "representative": "Packaging Corporation of America",
+      "parent_metric_id": "packaging_driver_1",
+      "name_zh": "分品类出货数量",
+      "source_candidate_url": "https://ir.packagingcorp.com/news-releases/news-release-details/packaging-corporation-america-reports-fourth-quarter-and-full-14",
+      "required_inputs_zh": [
+        "包装产品出货量",
+        "单位"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "包装产品出货量",
+        "单位"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "packaging",
+      "representative": "Packaging Corporation of America",
+      "parent_metric_id": "packaging_driver_2",
+      "name_zh": "成本传导合同滞后",
+      "source_candidate_url": "https://ir.packagingcorp.com/news-releases/news-release-details/packaging-corporation-america-reports-fourth-quarter-and-full-14",
+      "required_inputs_zh": [
+        "成本变化日期",
+        "合同调价生效日期",
+        "合同机制"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "成本变化日期",
+        "合同调价生效日期",
+        "合同机制"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "packaging",
+      "representative": "Packaging Corporation of America",
+      "parent_metric_id": "packaging_driver_3",
+      "name_zh": "回收材料单位投入成本",
+      "source_candidate_url": "https://ir.packagingcorp.com/news-releases/news-release-details/packaging-corporation-america-reports-fourth-quarter-and-full-14",
+      "required_inputs_zh": [
+        "回收原料采购成本",
+        "采购数量"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "回收原料采购成本",
+        "采购数量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "capital_goods",
+      "representative": "GE Vernova",
+      "parent_metric_id": "capital_goods_driver_1",
+      "name_zh": "新增订单收入比",
+      "source_candidate_url": "https://www.sec.gov/Archives/edgar/data/1996810/000199681026000012/gevpressrelease4q25.htm",
+      "required_inputs_zh": [
+        "新增订单金额",
+        "同期间确认收入"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "4d71c547983e357e8044ec13c73a9e6d57b73d1b536d741c938eab8f1b026b58",
+        "8cadfaddbacfb90a97d1405a879eaee902ae30866db4b298dcf82c4bf1c6a25d",
+        "8538a8a18101f6ea86a0d5ddc7dd42c6935c4308ae8c511822acbc8563160f69",
+        "0579107bb87c304c819fc036362bcf572c4458065e18c6e2f2a477696fb07e66",
+        "27880af819c17ba8a2403fdbcc9664f18f854620716da3b3c0510172565cddae",
+        "2142ab8f48c8774ab15d29446d7f32f39c64d3c70cbe0b4483e6bedd4f2a2bdb",
+        "aa1b19bc3f3f7ecc264446eb80a5f40833cadda8e66e4ae6b626f78b75e97d7f",
+        "339cca59be1e569ec03bb011ceb3b373b67b538c478627f576ff0aef404f35a2"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "input_complete",
+      "definition_status": "company_variant_reviewed",
+      "calculation_ready": true,
+      "missing_inputs_zh": [],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "capital_goods",
+      "representative": "GE Vernova",
+      "parent_metric_id": "capital_goods_driver_2",
+      "name_zh": "积压订单及取消条款",
+      "source_candidate_url": "https://www.sec.gov/Archives/edgar/data/1996810/000199681026000012/gevpressrelease4q25.htm",
+      "required_inputs_zh": [
+        "期末 backlog",
+        "取消条款",
+        "可执行条件"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "aef1456ece1459d2d888406c0c3df4630ce6045be38176e2d580ae5ba08f5773"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "期末 backlog",
+        "取消条款",
+        "可执行条件"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "capital_goods",
+      "representative": "GE Vernova",
+      "parent_metric_id": "capital_goods_driver_3",
+      "name_zh": "订单交付周期",
+      "source_candidate_url": "https://www.sec.gov/Archives/edgar/data/1996810/000199681026000012/gevpressrelease4q25.htm",
+      "required_inputs_zh": [
+        "接单日期",
+        "交付验收日期",
+        "订单群"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "接单日期",
+        "交付验收日期",
+        "订单群"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "aerospace_defense",
+      "representative": "Lockheed Martin",
+      "parent_metric_id": "aerospace_defense_driver_1",
+      "name_zh": "已拨款订单占比",
+      "source_candidate_url": "https://news.lockheedmartin.com/2026-01-29-Lockheed-Martin-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results",
+      "required_inputs_zh": [
+        "已拨款或已承诺可执行订单",
+        "相同范围总订单"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "已拨款或已承诺可执行订单",
+        "相同范围总订单"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "aerospace_defense",
+      "representative": "Lockheed Martin",
+      "parent_metric_id": "aerospace_defense_driver_2",
+      "name_zh": "项目总成本偏差",
+      "source_candidate_url": "https://news.lockheedmartin.com/2026-01-29-Lockheed-Martin-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results",
+      "required_inputs_zh": [
+        "最新预计总成本",
+        "原始批准成本基准",
+        "项目标识"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "最新预计总成本",
+        "原始批准成本基准",
+        "项目标识"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "aerospace_defense",
+      "representative": "Lockheed Martin",
+      "parent_metric_id": "aerospace_defense_driver_3",
+      "name_zh": "分机型验收交付数量",
+      "source_candidate_url": "https://news.lockheedmartin.com/2026-01-29-Lockheed-Martin-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results",
+      "required_inputs_zh": [
+        "验收交付量",
+        "产品标识"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "18f4908d427c4eb543163022195442c05243dd117dc2700c075d2e7f4cf4dc80",
+        "cc425aae5449dfbf1f7ed6cd5f2aa897bb267a2c6a7bc45161e7a6fd9398afc9",
+        "fe75f5fd9dfffa9842733d24f1bb6b139a38a72b3b1000692bf004a2ff139a20"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "验收交付量",
+        "产品标识"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "transport_logistics",
+      "representative": "Delta Air Lines",
+      "parent_metric_id": "transport_logistics_driver_1",
+      "name_zh": "运输工作量载运率",
+      "source_candidate_url": "https://ir.delta.com/news/news-details/2026/Delta-Air-Lines-Announces-December-Quarter-and-Full-Year-2025-Financial-Results/default.aspx",
+      "required_inputs_zh": [
+        "收入客公里或吨公里",
+        "可用座公里或吨公里"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "fbf6581d14046046b356287fb5cae771f5ac201436d0a59d98f122e1791cf58f",
+        "46284b6f7ab7926f830bc6e017765f398c217337de0c0c706e1f9c4114a7bbdf",
+        "195fd1f54e97d00d4354406363ccab255367220ae7ab0d360220469d4050f7f7"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "收入客公里或吨公里",
+        "可用座公里或吨公里"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "transport_logistics",
+      "representative": "Delta Air Lines",
+      "parent_metric_id": "transport_logistics_driver_2",
+      "name_zh": "单位运输收入",
+      "source_candidate_url": "https://ir.delta.com/news/news-details/2026/Delta-Air-Lines-Announces-December-Quarter-and-Full-Year-2025-Financial-Results/default.aspx",
+      "required_inputs_zh": [
+        "匹配客运或货运收入",
+        "收入运输工作量"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "91870068cdfe470f93a606141491ec9b108d75f50c45739cd8f675672c477be1"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "匹配客运或货运收入",
+        "收入运输工作量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "transport_logistics",
+      "representative": "Delta Air Lines",
+      "parent_metric_id": "transport_logistics_driver_3",
+      "name_zh": "单位运输燃料成本",
+      "source_candidate_url": "https://ir.delta.com/news/news-details/2026/Delta-Air-Lines-Announces-December-Quarter-and-Full-Year-2025-Financial-Results/default.aspx",
+      "required_inputs_zh": [
+        "匹配燃料成本",
+        "运输工作量"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "匹配燃料成本",
+        "运输工作量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "business_services",
+      "representative": "Automatic Data Processing",
+      "parent_metric_id": "business_services_driver_1",
+      "name_zh": "服务人员计费利用率",
+      "source_candidate_url": "https://www.sec.gov/Archives/edgar/data/8670/000130817925000607/adp014341-def14a.htm",
+      "required_inputs_zh": [
+        "可计费工时",
+        "可用工时"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "可计费工时",
+        "可用工时"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "business_services",
+      "representative": "Automatic Data Processing",
+      "parent_metric_id": "business_services_driver_2",
+      "name_zh": "客户数量留存率",
+      "source_candidate_url": "https://www.sec.gov/Archives/edgar/data/8670/000130817925000607/adp014341-def14a.htm",
+      "required_inputs_zh": [
+        "基期客户中本期留存数量",
+        "基期客户数量"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "基期客户中本期留存数量",
+        "基期客户数量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "business_services",
+      "representative": "Automatic Data Processing",
+      "parent_metric_id": "business_services_driver_3",
+      "name_zh": "标准服务合同单价",
+      "source_candidate_url": "https://www.sec.gov/Archives/edgar/data/8670/000130817925000607/adp014341-def14a.htm",
+      "required_inputs_zh": [
+        "可比服务收入",
+        "匹配计费单位"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "可比服务收入",
+        "匹配计费单位"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "construction",
+      "representative": "Fluor",
+      "parent_metric_id": "construction_driver_1",
+      "name_zh": "可执行积压订单覆盖年数",
+      "source_candidate_url": "https://newsroom.fluor.com/news-releases/news-details/2026/Fluor-Reports-Fourth-Quarter-and-Full-Year-2025-Results/default.aspx",
+      "required_inputs_zh": [
+        "可执行期末订单额",
+        "同范围年度收入"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "0878ccdce6058b11a611dce9a771b5cea6f98a64d8360b4656ec1b2b67a15c75",
+        "68ac41c025fd41ae2e7d89e9f3b0d2a58e697685e603ff2bdcb3c568a440da8f"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "可执行期末订单额",
+        "同范围年度收入"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "construction",
+      "representative": "Fluor",
+      "parent_metric_id": "construction_driver_2",
+      "name_zh": "工程项目成本偏差",
+      "source_candidate_url": "https://newsroom.fluor.com/news-releases/news-details/2026/Fluor-Reports-Fourth-Quarter-and-Full-Year-2025-Results/default.aspx",
+      "required_inputs_zh": [
+        "最新预计总成本",
+        "合同预算",
+        "项目编号"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "最新预计总成本",
+        "合同预算",
+        "项目编号"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "construction",
+      "representative": "Fluor",
+      "parent_metric_id": "construction_driver_3",
+      "name_zh": "合同资产及客户预付款",
+      "source_candidate_url": "https://newsroom.fluor.com/news-releases/news-details/2026/Fluor-Reports-Fourth-Quarter-and-Full-Year-2025-Results/default.aspx",
+      "required_inputs_zh": [
+        "合同资产",
+        "现金客户预付款",
+        "合同负债"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "合同资产",
+        "现金客户预付款",
+        "合同负债"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "autos",
+      "representative": "Toyota Motor",
+      "parent_metric_id": "autos_driver_1",
+      "name_zh": "终端零售车辆数量",
+      "source_candidate_url": "https://global.toyota/en/ir/financial-results/",
+      "required_inputs_zh": [
+        "零售终端交付数",
+        "品牌地区"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "零售终端交付数",
+        "品牌地区"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "autos",
+      "representative": "Toyota Motor",
+      "parent_metric_id": "autos_driver_2",
+      "name_zh": "经销商库存天数",
+      "source_candidate_url": "https://global.toyota/en/ir/financial-results/",
+      "required_inputs_zh": [
+        "经销商库存车辆",
+        "匹配日均零售数"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "经销商库存车辆",
+        "匹配日均零售数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "autos",
+      "representative": "Toyota Motor",
+      "parent_metric_id": "autos_driver_3",
+      "name_zh": "单车变动成本贡献",
+      "source_candidate_url": "https://global.toyota/en/ir/financial-results/",
+      "required_inputs_zh": [
+        "车辆净收入",
+        "明确变动成本",
+        "匹配零售数量"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "车辆净收入",
+        "明确变动成本",
+        "匹配零售数量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "retail",
+      "representative": "Walmart",
+      "parent_metric_id": "retail_driver_1",
+      "name_zh": "可比门店销售增长",
+      "source_candidate_url": "https://stock.walmart.com/sec-filings/all-sec-filings/content/0000104169-26-000032/earningsreleasefy26q4.htm",
+      "required_inputs_zh": [
+        "公司同店销售披露",
+        "门店纳入规则"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "7291a671e747f039514f44a3fba464d8a7215b25c80e76b40340ce13d71b69f0"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "公司同店销售披露",
+        "门店纳入规则"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "retail",
+      "representative": "Walmart",
+      "parent_metric_id": "retail_driver_2",
+      "name_zh": "期间存货周转次数",
+      "source_candidate_url": "https://stock.walmart.com/sec-filings/all-sec-filings/content/0000104169-26-000032/earningsreleasefy26q4.htm",
+      "required_inputs_zh": [
+        "匹配期间销售成本",
+        "期初期末同范围存货"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "匹配期间销售成本",
+        "期初期末同范围存货"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "retail",
+      "representative": "Walmart",
+      "parent_metric_id": "retail_driver_3",
+      "name_zh": "履约成本占相关收入比",
+      "source_candidate_url": "https://stock.walmart.com/sec-filings/all-sec-filings/content/0000104169-26-000032/earningsreleasefy26q4.htm",
+      "required_inputs_zh": [
+        "履约配送仓储成本",
+        "相关收入"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "履约配送仓储成本",
+        "相关收入"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "restaurants",
+      "representative": "McDonald’s",
+      "parent_metric_id": "restaurants_driver_1",
+      "name_zh": "可比餐厅销售增长",
+      "source_candidate_url": "https://corporate.mcdonalds.com/corpmcd/our-stories/article/Q4-full-year-2025-results.html",
+      "required_inputs_zh": [
+        "同店销售增长披露",
+        "店群规则"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "43abfdb06df7f72e3428baef57e62d599e86d77ad28fc58cbf221e75fb33dfd2"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "同店销售增长披露",
+        "店群规则"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "restaurants",
+      "representative": "McDonald’s",
+      "parent_metric_id": "restaurants_driver_2",
+      "name_zh": "单店经营利润",
+      "source_candidate_url": "https://corporate.mcdonalds.com/corpmcd/our-stories/article/Q4-full-year-2025-results.html",
+      "required_inputs_zh": [
+        "同范围门店经营利润",
+        "加权平均店数"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "同范围门店经营利润",
+        "加权平均店数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "restaurants",
+      "representative": "McDonald’s",
+      "parent_metric_id": "restaurants_driver_3",
+      "name_zh": "加盟商闭店与违约记录",
+      "source_candidate_url": "https://corporate.mcdonalds.com/corpmcd/our-stories/article/Q4-full-year-2025-results.html",
+      "required_inputs_zh": [
+        "闭店事件",
+        "违约事件",
+        "加盟商范围"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "闭店事件",
+        "违约事件",
+        "加盟商范围"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "travel_leisure",
+      "representative": "Marriott International",
+      "parent_metric_id": "travel_leisure_driver_1",
+      "name_zh": "可比酒店入住率",
+      "source_candidate_url": "https://marriott.gcs-web.com/news-releases/news-release-details/marriott-international-reports-fourth-quarter-and-full-year-2025",
+      "required_inputs_zh": [
+        "售出间夜",
+        "可售间夜或公司披露入住率"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "ee26886cf04aa1782eb7230c275d6b811d46193e672d713bf3cd5a8248dd6b78"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "partial_inputs",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "售出间夜"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "travel_leisure",
+      "representative": "Marriott International",
+      "parent_metric_id": "travel_leisure_driver_2",
+      "name_zh": "可比酒店 ADR",
+      "source_candidate_url": "https://marriott.gcs-web.com/news-releases/news-release-details/marriott-international-reports-fourth-quarter-and-full-year-2025",
+      "required_inputs_zh": [
+        "匹配客房收入",
+        "售出间夜或公司 ADR"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "87322674aa16106808161a2ea136d4d541682213130b0e767ca5362c255a0672"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "partial_inputs",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "匹配客房收入"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "travel_leisure",
+      "representative": "Marriott International",
+      "parent_metric_id": "travel_leisure_driver_3",
+      "name_zh": "酒店预订群取消率",
+      "source_candidate_url": "https://marriott.gcs-web.com/news-releases/news-release-details/marriott-international-reports-fourth-quarter-and-full-year-2025",
+      "required_inputs_zh": [
+        "同一预订群取消数",
+        "预订群总数"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "同一预订群取消数",
+        "预订群总数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "housing_durables",
+      "representative": "D.R. Horton",
+      "parent_metric_id": "housing_durables_driver_1",
+      "name_zh": "住宅订单取消率",
+      "source_candidate_url": "https://investor.drhorton.com/news-and-events/press-releases/2025/10-28-2025-103117295",
+      "required_inputs_zh": [
+        "取消订单数",
+        "公司定义的匹配订单群"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "8f24a94f8ba92746ab4988d39b4e0e8fb93537970eab04e156dbbf966f81771f"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "取消订单数",
+        "公司定义的匹配订单群"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "housing_durables",
+      "representative": "D.R. Horton",
+      "parent_metric_id": "housing_durables_driver_2",
+      "name_zh": "已结算交付住宅数量",
+      "source_candidate_url": "https://investor.drhorton.com/news-and-events/press-releases/2025/10-28-2025-103117295",
+      "required_inputs_zh": [
+        "完成 closing 的住宅数"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "8a225d430e858444b5dddabf2c2c3333a16037b5ec7b6e315c1f8b3639ca3403"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "input_complete",
+      "definition_status": "company_variant_reviewed",
+      "calculation_ready": true,
+      "missing_inputs_zh": [],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "housing_durables",
+      "representative": "D.R. Horton",
+      "parent_metric_id": "housing_durables_driver_3",
+      "name_zh": "持有与控制土地批次",
+      "source_candidate_url": "https://investor.drhorton.com/news-and-events/press-releases/2025/10-28-2025-103117295",
+      "required_inputs_zh": [
+        "持有地块数",
+        "期权或合同控制地块数"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "持有地块数",
+        "期权或合同控制地块数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "food_beverage",
+      "representative": "Coca-Cola",
+      "parent_metric_id": "food_beverage_driver_1",
+      "name_zh": "可比产品销量增长",
+      "source_candidate_url": "https://investors.coca-colacompany.com/news-events/press-releases/detail/1151/coca-cola-reports-fourth-quarter-and-full-year-2025-results",
+      "required_inputs_zh": [
+        "本期可比销量",
+        "同期可比销量或披露增长"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "b9ff208db80a961fb24f44c5e3dc9f648e09301da76be1041462d9a18fa8f88a"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "本期可比销量",
+        "同期可比销量或披露增长"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "food_beverage",
+      "representative": "Coca-Cola",
+      "parent_metric_id": "food_beverage_driver_2",
+      "name_zh": "价格与组合增长贡献",
+      "source_candidate_url": "https://investors.coca-colacompany.com/news-events/press-releases/detail/1151/coca-cola-reports-fourth-quarter-and-full-year-2025-results",
+      "required_inputs_zh": [
+        "公司价格组合桥接贡献",
+        "公司桥接定义"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "5a5b5803191922364d82c994b04c02de22dfaa4396860cf5a977e9c93e40cf87"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "公司价格组合桥接贡献",
+        "公司桥接定义"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "food_beverage",
+      "representative": "Coca-Cola",
+      "parent_metric_id": "food_beverage_driver_3",
+      "name_zh": "渠道产品库存数量",
+      "source_candidate_url": "https://investors.coca-colacompany.com/news-events/press-releases/detail/1151/coca-cola-reports-fourth-quarter-and-full-year-2025-results",
+      "required_inputs_zh": [
+        "经销商库存量",
+        "产品渠道覆盖"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "经销商库存量",
+        "产品渠道覆盖"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "household_personal",
+      "representative": "Procter & Gamble",
+      "parent_metric_id": "household_personal_driver_1",
+      "name_zh": "有机可比销量增长",
+      "source_candidate_url": "https://www.pginvestor.com/news/news-details/2026/PG-Announces-Fourth-Quarter-and-Fiscal-Year-2026-Results/default.aspx",
+      "required_inputs_zh": [
+        "公司可比销量披露",
+        "范围调整"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "公司可比销量披露",
+        "范围调整"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "household_personal",
+      "representative": "Procter & Gamble",
+      "parent_metric_id": "household_personal_driver_2",
+      "name_zh": "分产品地区市场份额",
+      "source_candidate_url": "https://www.pginvestor.com/news/news-details/2026/PG-Announces-Fourth-Quarter-and-Fiscal-Year-2026-Results/default.aspx",
+      "required_inputs_zh": [
+        "品牌销售量或额",
+        "匹配市场总量"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "品牌销售量或额",
+        "匹配市场总量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "household_personal",
+      "representative": "Procter & Gamble",
+      "parent_metric_id": "household_personal_driver_3",
+      "name_zh": "营销费用收入比",
+      "source_candidate_url": "https://www.pginvestor.com/news/news-details/2026/PG-Announces-Fourth-Quarter-and-Fiscal-Year-2026-Results/default.aspx",
+      "required_inputs_zh": [
+        "明确广告或营销费用",
+        "匹配收入"
+      ],
+      "status": "definition_mismatch_sample_only",
+      "sample_observation_ids": [
+        "4a141be0acb3ad4fc145ea3c53b57f17952f607ed4c8dceedada2ad86abbd219"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "明确广告或营销费用",
+        "匹配收入"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "staples_retail",
+      "representative": "Costco",
+      "parent_metric_id": "staples_retail_driver_1",
+      "name_zh": "可比零售销售增长",
+      "source_candidate_url": "https://investor.costco.com/news/news-details/2025/Costco-Wholesale-Corporation-Reports-Fourth-Quarter-and-Fiscal-Year-2025-Operating-Results/default.aspx",
+      "required_inputs_zh": [
+        "同店销售披露",
+        "店群规则"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "7b7eaa9e0a6889d435c3ae190223e3efc638ee9947c8f38eb2ac8843f54903b6",
+        "c6525e1466050b991d6434f70288815da86919bb89a763dd4deb008ca7ee75f2"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "同店销售披露",
+        "店群规则"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "staples_retail",
+      "representative": "Costco",
+      "parent_metric_id": "staples_retail_driver_2",
+      "name_zh": "零售损耗率",
+      "source_candidate_url": "https://investor.costco.com/news/news-details/2025/Costco-Wholesale-Corporation-Reports-Fourth-Quarter-and-Fiscal-Year-2025-Operating-Results/default.aspx",
+      "required_inputs_zh": [
+        "损耗金额",
+        "明确销售额或存货成本基数"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "损耗金额",
+        "明确销售额或存货成本基数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "staples_retail",
+      "representative": "Costco",
+      "parent_metric_id": "staples_retail_driver_3",
+      "name_zh": "可比交易或客流增长",
+      "source_candidate_url": "https://investor.costco.com/news/news-details/2025/Costco-Wholesale-Corporation-Reports-Fourth-Quarter-and-Fiscal-Year-2025-Operating-Results/default.aspx",
+      "required_inputs_zh": [
+        "本期可比交易数",
+        "同期交易数或公司披露增长"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "本期可比交易数",
+        "同期交易数或公司披露增长"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "tobacco",
+      "representative": "Philip Morris International",
+      "parent_metric_id": "tobacco_driver_1",
+      "name_zh": "传统卷烟出货量",
+      "source_candidate_url": "https://www.pmi.com/media-center/press-releases/press-details?newsId=29566",
+      "required_inputs_zh": [
+        "传统卷烟数量",
+        "地区产品"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "传统卷烟数量",
+        "地区产品"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "tobacco",
+      "representative": "Philip Morris International",
+      "parent_metric_id": "tobacco_driver_2",
+      "name_zh": "卷烟扣税单位净售价",
+      "source_candidate_url": "https://www.pmi.com/media-center/press-releases/press-details?newsId=29566",
+      "required_inputs_zh": [
+        "扣消费税传统产品收入",
+        "匹配传统产品数量"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "扣消费税传统产品收入",
+        "匹配传统产品数量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "tobacco",
+      "representative": "Philip Morris International",
+      "parent_metric_id": "tobacco_driver_3",
+      "name_zh": "替代产品收入及利润",
+      "source_candidate_url": "https://www.pmi.com/media-center/press-releases/press-details?newsId=29566",
+      "required_inputs_zh": [
+        "无烟产品净收入",
+        "同范围经营利润"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "d0c421d8ab7acc2f41b39a04241e1fe67d1a6d52f8d4b144cb707716fa44f991",
+        "0b55b86242de8bc9189dc8e5f263a289edc3a47d9a13d0b39b111a43c7cdf4be",
+        "1d6b38e0b744fdbe8ffc5114ce07787b5b56b52ba7ce6cc9ceb62d9594c5457b"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "partial_inputs",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "同范围经营利润"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "pharma",
+      "representative": "Pfizer",
+      "parent_metric_id": "pharma_driver_1",
+      "name_zh": "单药净销售收入",
+      "source_candidate_url": "https://investors.pfizer.com/Investors/news-events/News/news-details/2026/Pfizer-Reports-Solid-Full-Year-2025-Results-And-Reaffirms-2026-Guidance/default.aspx",
+      "required_inputs_zh": [
+        "产品净收入",
+        "药品与地区标识"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "产品净收入",
+        "药品与地区标识"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "pharma",
+      "representative": "Pfizer",
+      "parent_metric_id": "pharma_driver_2",
+      "name_zh": "指定窗口专利到期收入暴露",
+      "source_candidate_url": "https://investors.pfizer.com/Investors/news-events/News/news-details/2026/Pfizer-Reports-Solid-Full-Year-2025-Results-And-Reaffirms-2026-Guidance/default.aspx",
+      "required_inputs_zh": [
+        "窗口内到期产品基期净收入",
+        "匹配总产品收入",
+        "期限清单"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "窗口内到期产品基期净收入",
+        "匹配总产品收入",
+        "期限清单"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "pharma",
+      "representative": "Pfizer",
+      "parent_metric_id": "pharma_driver_3",
+      "name_zh": "药物研发里程碑事件",
+      "source_candidate_url": "https://investors.pfizer.com/Investors/news-events/News/news-details/2026/Pfizer-Reports-Solid-Full-Year-2025-Results-And-Reaffirms-2026-Guidance/default.aspx",
+      "required_inputs_zh": [
+        "药物项目",
+        "阶段",
+        "主要终点",
+        "结果",
+        "事件日期"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "药物项目",
+        "阶段",
+        "主要终点",
+        "结果",
+        "事件日期"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "biotech",
+      "representative": "Moderna",
+      "parent_metric_id": "biotech_driver_1",
+      "name_zh": "临床研发里程碑事件",
+      "source_candidate_url": "https://www.sec.gov/Archives/edgar/data/1682852/000168285226000015/exhibit9912025q4pressrelea.htm",
+      "required_inputs_zh": [
+        "试验标识",
+        "阶段",
+        "预设终点",
+        "结果",
+        "日期"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "试验标识",
+        "阶段",
+        "预设终点",
+        "结果",
+        "日期"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "biotech",
+      "representative": "Moderna",
+      "parent_metric_id": "biotech_driver_2",
+      "name_zh": "正常化现金跑道",
+      "source_candidate_url": "https://www.sec.gov/Archives/edgar/data/1682852/000168285226000015/exhibit9912025q4pressrelea.htm",
+      "required_inputs_zh": [
+        "可用现金和投资",
+        "正常化月净消耗",
+        "调整项"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "08d873a9e37efac8003b3b01707255f872b6e1b55f2eaafa9429251a4be7ef0a"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "可用现金和投资",
+        "正常化月净消耗",
+        "调整项"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "biotech",
+      "representative": "Moderna",
+      "parent_metric_id": "biotech_driver_3",
+      "name_zh": "融资缺口与稀释情景",
+      "source_candidate_url": "https://www.sec.gov/Archives/edgar/data/1682852/000168285226000015/exhibit9912025q4pressrelea.htm",
+      "required_inputs_zh": [
+        "研发现金预算",
+        "债务到期",
+        "可用资金",
+        "发行价格",
+        "新增股数"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "研发现金预算",
+        "债务到期",
+        "可用资金",
+        "发行价格",
+        "新增股数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "medical_devices",
+      "representative": "Intuitive Surgical",
+      "parent_metric_id": "medical_devices_driver_1",
+      "name_zh": "分手术产品操作数量",
+      "source_candidate_url": "https://isrg.intuitive.com/news-releases/news-release-details/intuitive-announces-fourth-quarter-earnings-5",
+      "required_inputs_zh": [
+        "实际手术数量",
+        "系统类型"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "实际手术数量",
+        "系统类型"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "medical_devices",
+      "representative": "Intuitive Surgical",
+      "parent_metric_id": "medical_devices_driver_2",
+      "name_zh": "新增装机及期末装机量",
+      "source_candidate_url": "https://isrg.intuitive.com/news-releases/news-release-details/intuitive-announces-fourth-quarter-earnings-5",
+      "required_inputs_zh": [
+        "当期系统 placement",
+        "期末 installed base",
+        "退役调整"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "de07a693c44bdb063b04f76f8256bcc564473d44224a0fd54620746a39d56130",
+        "70d4914b395b6cec732d22e9e401cd7b158cf0013b2330c789b2f2cec69974e3"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "当期系统 placement",
+        "期末 installed base",
+        "退役调整"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "medical_devices",
+      "representative": "Intuitive Surgical",
+      "parent_metric_id": "medical_devices_driver_3",
+      "name_zh": "每匹配系统耗材收入",
+      "source_candidate_url": "https://isrg.intuitive.com/news-releases/news-release-details/intuitive-announces-fourth-quarter-earnings-5",
+      "required_inputs_zh": [
+        "同系统耗材收入",
+        "匹配平均有效装机基数"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "同系统耗材收入",
+        "匹配平均有效装机基数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "health_services",
+      "representative": "HCA Healthcare",
+      "parent_metric_id": "health_services_driver_1",
+      "name_zh": "同院可比医疗服务量",
+      "source_candidate_url": "https://investor.hcahealthcare.com/news/news-details/2026/HCA-Healthcare-Reports-Fourth-Quarter-2025-Results-and-Provides-2026-Guidance/default.aspx",
+      "required_inputs_zh": [
+        "住院或等价住院次数",
+        "院群定义"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "41d3dfed54de3094b3ae169b79b3249e972921350aad52509fb5467f6f8a1d99",
+        "ce16c6dcdcfb6a5851e05febd6a0411c56f3ba518f1e2928e90a14db4290ed6b"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "partial_inputs",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "院群定义"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "health_services",
+      "representative": "HCA Healthcare",
+      "parent_metric_id": "health_services_driver_2",
+      "name_zh": "每等价住院净收入",
+      "source_candidate_url": "https://investor.hcahealthcare.com/news/news-details/2026/HCA-Healthcare-Reports-Fourth-Quarter-2025-Results-and-Provides-2026-Guidance/default.aspx",
+      "required_inputs_zh": [
+        "匹配净服务收入",
+        "等价住院次数"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "7fdabbb7202e33fc5731892cdde8ed10b9c315899a3b28107daec7c20a9a07b0"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "匹配净服务收入",
+        "等价住院次数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "health_services",
+      "representative": "HCA Healthcare",
+      "parent_metric_id": "health_services_driver_3",
+      "name_zh": "医疗人工成本收入比",
+      "source_candidate_url": "https://investor.hcahealthcare.com/news/news-details/2026/HCA-Healthcare-Reports-Fourth-Quarter-2025-Results-and-Provides-2026-Guidance/default.aspx",
+      "required_inputs_zh": [
+        "工资福利或匹配人工成本",
+        "净服务收入"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "4ae7482b0140c9913b9b2155cba11f6a0579bcba888f4da28f1d812ced54ef28",
+        "bf7a3d72f16efaa2fa4aaab8034f4b486250476575bb545a5856910098344ac0",
+        "a51e46c3ad5496b681507d533cd5c614b92d66f5ade9e64a39543845f832e5bd"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "input_complete",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "managed_care",
+      "representative": "UnitedHealth Group",
+      "parent_metric_id": "managed_care_driver_1",
+      "name_zh": "报告医疗成本率",
+      "source_candidate_url": "https://www.unitedhealthgroup.com/newsroom/2026/2026-01-27-uhg-reports-2025-results-and-issues-2026-outlook.html",
+      "required_inputs_zh": [
+        "匹配医疗成本",
+        "医疗保费或公司 MCR"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "57ba343670f12af11e58771b26c5cf090341fc8fb689b30674acda97cff7c566",
+        "d53a263c3f36db19957dbeaab2add4b0ecc77b42b63ebee9c3f91b215ce1c453",
+        "d7887886067ea70df2fc3035799d7cd3b315722c5c220861a324cb1cbad62868"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "input_complete",
+      "definition_status": "company_variant_reviewed",
+      "calculation_ready": true,
+      "missing_inputs_zh": [],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "managed_care",
+      "representative": "UnitedHealth Group",
+      "parent_metric_id": "managed_care_driver_2",
+      "name_zh": "分险种会员数",
+      "source_candidate_url": "https://www.unitedhealthgroup.com/newsroom/2026/2026-01-27-uhg-reports-2025-results-and-issues-2026-outlook.html",
+      "required_inputs_zh": [
+        "医疗险会员数量",
+        "险种",
+        "期末或平均"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "医疗险会员数量",
+        "险种",
+        "期末或平均"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "managed_care",
+      "representative": "UnitedHealth Group",
+      "parent_metric_id": "managed_care_driver_3",
+      "name_zh": "同险种可比保费费率调整",
+      "source_candidate_url": "https://www.unitedhealthgroup.com/newsroom/2026/2026-01-27-uhg-reports-2025-results-and-issues-2026-outlook.html",
+      "required_inputs_zh": [
+        "同保障客户群保费变化",
+        "险种及保障规则"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "同保障客户群保费变化",
+        "险种及保障规则"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "banks",
+      "representative": "JPMorgan Chase",
+      "parent_metric_id": "banks_driver_1",
+      "name_zh": "同口径年化净息差",
+      "source_candidate_url": "https://www.jpmorganchase.com/ir/quarterly-earnings",
+      "required_inputs_zh": [
+        "年化净利息收入",
+        "平均生息资产或公司 NIM"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "8f86dfaff5ef0f1be38637678cb0353221cc81212ad2cdf452eb917fd6cf170d",
+        "2ea97a1c95563fa7dc38a75889bdc208b98d9d0f4b3250b7d5d39e24a272e979",
+        "d76459627b422ca523fc3d87dd2f1b109d2b61f73241380522587e00bd1010e4"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "input_complete",
+      "definition_status": "company_variant_reviewed",
+      "calculation_ready": true,
+      "missing_inputs_zh": [],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "banks",
+      "representative": "JPMorgan Chase",
+      "parent_metric_id": "banks_driver_2",
+      "name_zh": "年化贷款净核销率",
+      "source_candidate_url": "https://www.jpmorganchase.com/ir/quarterly-earnings",
+      "required_inputs_zh": [
+        "扣回收后的净核销额",
+        "平均同范围贷款"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "f8a59a030c9a50876bd75ba02159ddb931c28680bb93e61a7dabbb61a0aa9cf2",
+        "a45493f80e503f5eae112850702575be3f09e06faea68e39cedf2d3331d1f81b"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "partial_inputs",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "平均同范围贷款"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "banks",
+      "representative": "JPMorgan Chase",
+      "parent_metric_id": "banks_driver_3",
+      "name_zh": "资本与流动性监管比率",
+      "source_candidate_url": "https://www.jpmorganchase.com/ir/quarterly-earnings",
+      "required_inputs_zh": [
+        "CET1 比率",
+        "LCR 比率",
+        "NSFR 比率",
+        "适用规则"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "97431f446544baed890cf53eac66d6cc834631b12fb7d20ecb46fdd6fad15571",
+        "4eacb7663299613df0f4909251e2ea51700e135f595af3c4943210ecdbcf10aa"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "CET1 比率",
+        "LCR 比率",
+        "NSFR 比率",
+        "适用规则"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "insurance",
+      "representative": "Chubb",
+      "parent_metric_id": "insurance_driver_1",
+      "name_zh": "财险报告综合成本率",
+      "source_candidate_url": "https://investors.chubb.com/News--Events/news/news-details/2026/Chubb-Reports-Fourth-Quarter/default.aspx",
+      "required_inputs_zh": [
+        "同范围赔付率",
+        "费用率或报告 combined ratio"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "aa1cf916fe846daa46b8309d86118dc8eaee7c9174be96606f2f1909847fe43f"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "同范围赔付率",
+        "费用率或报告 combined ratio"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "insurance",
+      "representative": "Chubb",
+      "parent_metric_id": "insurance_driver_2",
+      "name_zh": "历史事故准备金发展",
+      "source_candidate_url": "https://investors.chubb.com/News--Events/news/news-details/2026/Chubb-Reports-Fourth-Quarter/default.aspx",
+      "required_inputs_zh": [
+        "前期事故年度有利或不利发展",
+        "再保险范围"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "abd1996b0a0229c16ad4229fb42b66919cd695b9f18c7986805a3469680bb4d7"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "前期事故年度有利或不利发展",
+        "再保险范围"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "insurance",
+      "representative": "Chubb",
+      "parent_metric_id": "insurance_driver_3",
+      "name_zh": "资产负债期限币种匹配",
+      "source_candidate_url": "https://investors.chubb.com/News--Events/news/news-details/2026/Chubb-Reports-Fourth-Quarter/default.aspx",
+      "required_inputs_zh": [
+        "资产久期",
+        "负债久期",
+        "币种敞口",
+        "匹配范围"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "资产久期",
+        "负债久期",
+        "币种敞口",
+        "匹配范围"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "asset_management",
+      "representative": "BlackRock",
+      "parent_metric_id": "asset_management_driver_1",
+      "name_zh": "客户净资金流入",
+      "source_candidate_url": "https://www.blackrock.com/corporate/newsroom/media/press-releases/blackrock-reports-fourth-quarter-2025",
+      "required_inputs_zh": [
+        "客户流入",
+        "流出",
+        "资本返还",
+        "公司流量定义"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "8bf59b5ceaacb55ee8ce859f394baa4011082dd601c0da9349485d29ad6d3b66"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "客户流入",
+        "流出",
+        "资本返还",
+        "公司流量定义"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "asset_management",
+      "representative": "BlackRock",
+      "parent_metric_id": "asset_management_driver_2",
+      "name_zh": "匹配收费管理资产",
+      "source_candidate_url": "https://www.blackrock.com/corporate/newsroom/media/press-releases/blackrock-reports-fourth-quarter-2025",
+      "required_inputs_zh": [
+        "收费资产余额",
+        "产品和费率范围"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "收费资产余额",
+        "产品和费率范围"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "asset_management",
+      "representative": "BlackRock",
+      "parent_metric_id": "asset_management_driver_3",
+      "name_zh": "基础管理费有效年化率",
+      "source_candidate_url": "https://www.blackrock.com/corporate/newsroom/media/press-releases/blackrock-reports-fourth-quarter-2025",
+      "required_inputs_zh": [
+        "基础管理费",
+        "匹配平均收费资产",
+        "年化方法"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "基础管理费",
+        "匹配平均收费资产",
+        "年化方法"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "payments",
+      "representative": "Visa",
+      "parent_metric_id": "payments_driver_1",
+      "name_zh": "定义内支付处理金额",
+      "source_candidate_url": "https://investor.visa.com/news/news-details/2025/Visa-Fiscal-Fourth-Quarter-and-Full-Year-2025-Financial-Results/default.aspx",
+      "required_inputs_zh": [
+        "支付处理量",
+        "交易类型",
+        "地区币种"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "支付处理量",
+        "交易类型",
+        "地区币种"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "payments",
+      "representative": "Visa",
+      "parent_metric_id": "payments_driver_2",
+      "name_zh": "匹配净交易变现率",
+      "source_candidate_url": "https://investor.visa.com/news/news-details/2025/Visa-Fiscal-Fourth-Quarter-and-Full-Year-2025-Financial-Results/default.aspx",
+      "required_inputs_zh": [
+        "同期间净交易相关收入",
+        "匹配处理金额"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "同期间净交易相关收入",
+        "匹配处理金额"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "payments",
+      "representative": "Visa",
+      "parent_metric_id": "payments_driver_3",
+      "name_zh": "承担的欺诈与信用损失率",
+      "source_candidate_url": "https://investor.visa.com/news/news-details/2025/Visa-Fiscal-Fourth-Quarter-and-Full-Year-2025-Financial-Results/default.aspx",
+      "required_inputs_zh": [
+        "承担欺诈或贷款损失",
+        "匹配交易量或贷款基数"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "承担欺诈或贷款损失",
+        "匹配交易量或贷款基数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "software",
+      "representative": "Datadog",
+      "parent_metric_id": "software_driver_1",
+      "name_zh": "同客户群净收入留存率",
+      "source_candidate_url": "https://investors.datadoghq.com/news-releases/news-release-details/datadog-announces-fourth-quarter-and-fiscal-year-2025-financial",
+      "required_inputs_zh": [
+        "公司 NRR",
+        "同群窗口与定义"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "公司 NRR",
+        "同群窗口与定义"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "software",
+      "representative": "Datadog",
+      "parent_metric_id": "software_driver_2",
+      "name_zh": "ARR 与期间订阅收入",
+      "source_candidate_url": "https://investors.datadoghq.com/news-releases/news-release-details/datadog-announces-fourth-quarter-and-fiscal-year-2025-financial",
+      "required_inputs_zh": [
+        "期末 ARR",
+        "期间订阅收入",
+        "订阅定义"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "期末 ARR",
+        "期间订阅收入",
+        "订阅定义"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "software",
+      "representative": "Datadog",
+      "parent_metric_id": "software_driver_3",
+      "name_zh": "激励费用及股数变化",
+      "source_candidate_url": "https://investors.datadoghq.com/news-releases/news-release-details/datadog-announces-fourth-quarter-and-fiscal-year-2025-financial",
+      "required_inputs_zh": [
+        "SBC 费用",
+        "期初期末实际发行股数",
+        "加权稀释股数"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "1a0b377482999f7a7d3d68e69c0afbe8630e158a8e8d22d8811bd56b3e74bdb8",
+        "c3523a50a0cc30c505d09105d9d15fdc56c2f2ce9e5d88b4e71fd49d7fe43b70"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "partial_inputs",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "期初期末实际发行股数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "semiconductors",
+      "representative": "Micron Technology",
+      "parent_metric_id": "semiconductors_driver_1",
+      "name_zh": "终端渠道库存量或天数",
+      "source_candidate_url": "https://investors.micron.com/news/press-release/2026/Micron-Technology-Inc--Reports-Record-Fiscal-Fourth-Quarter-and-Full-Year-2026-Results/default.aspx",
+      "required_inputs_zh": [
+        "渠道产品库存量",
+        "匹配渠道日销量",
+        "终端类别"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "渠道产品库存量",
+        "匹配渠道日销量",
+        "终端类别"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "semiconductors",
+      "representative": "Micron Technology",
+      "parent_metric_id": "semiconductors_driver_2",
+      "name_zh": "有效晶圆产能利用率",
+      "source_candidate_url": "https://investors.micron.com/news/press-release/2026/Micron-Technology-Inc--Reports-Record-Fiscal-Fourth-Quarter-and-Full-Year-2026-Results/default.aspx",
+      "required_inputs_zh": [
+        "实际产出",
+        "同工艺有效产能"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "实际产出",
+        "同工艺有效产能"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "semiconductors",
+      "representative": "Micron Technology",
+      "parent_metric_id": "semiconductors_driver_3",
+      "name_zh": "同产品单位平均售价",
+      "source_candidate_url": "https://investors.micron.com/news/press-release/2026/Micron-Technology-Inc--Reports-Record-Fiscal-Fourth-Quarter-and-Full-Year-2026-Results/default.aspx",
+      "required_inputs_zh": [
+        "产品收入",
+        "匹配 bit 或芯片数量"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "产品收入",
+        "匹配 bit 或芯片数量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "semi_equipment",
+      "representative": "Tokyo Electron",
+      "parent_metric_id": "semi_equipment_driver_1",
+      "name_zh": "半导体设备订单收入比",
+      "source_candidate_url": "https://www.tel.com/ir/library/report/",
+      "required_inputs_zh": [
+        "新增设备订单",
+        "同期间设备收入"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "新增设备订单",
+        "同期间设备收入"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "semi_equipment",
+      "representative": "Tokyo Electron",
+      "parent_metric_id": "semi_equipment_driver_2",
+      "name_zh": "分客户制程资本开支",
+      "source_candidate_url": "https://www.tel.com/ir/library/report/",
+      "required_inputs_zh": [
+        "客户实际 capex",
+        "工艺及客户标识"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "客户实际 capex",
+        "工艺及客户标识"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "semi_equipment",
+      "representative": "Tokyo Electron",
+      "parent_metric_id": "semi_equipment_driver_3",
+      "name_zh": "客户取消及延期订单",
+      "source_candidate_url": "https://www.tel.com/ir/library/report/",
+      "required_inputs_zh": [
+        "取消订单金额",
+        "延期订单金额",
+        "合同与日期"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "取消订单金额",
+        "延期订单金额",
+        "合同与日期"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "hardware",
+      "representative": "Sony Group",
+      "parent_metric_id": "hardware_driver_1",
+      "name_zh": "分产品硬件出货数量",
+      "source_candidate_url": "https://sonyinteractive.com/en/our-company/business-data-sales/",
+      "required_inputs_zh": [
+        "产品 sell-in 出货量",
+        "地区",
+        "期间"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "669eb460f1de89e3a3e3997ae3630676b4add837ff3a5d72a760554c32a5a156"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "input_complete",
+      "definition_status": "company_variant_reviewed",
+      "calculation_ready": true,
+      "missing_inputs_zh": [],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "hardware",
+      "representative": "Sony Group",
+      "parent_metric_id": "hardware_driver_2",
+      "name_zh": "硬件渠道存量",
+      "source_candidate_url": "https://sonyinteractive.com/en/our-company/business-data-sales/",
+      "required_inputs_zh": [
+        "渠道库存量",
+        "渠道产品覆盖"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "渠道库存量",
+        "渠道产品覆盖"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "hardware",
+      "representative": "Sony Group",
+      "parent_metric_id": "hardware_driver_3",
+      "name_zh": "分产品毛利及收入组合",
+      "source_candidate_url": "https://sonyinteractive.com/en/our-company/business-data-sales/",
+      "required_inputs_zh": [
+        "产品毛利",
+        "产品收入",
+        "同范围总收入"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "产品毛利",
+        "产品收入",
+        "同范围总收入"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "it_services",
+      "representative": "Accenture",
+      "parent_metric_id": "it_services_driver_1",
+      "name_zh": "专业人员可计费利用率",
+      "source_candidate_url": "https://newsroom.accenture.com/news/2026/accenture-reports-fourth-quarter-and-full-year-fiscal-2026-results",
+      "required_inputs_zh": [
+        "计费工时",
+        "可用专业人员工时或公司 utilization"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "计费工时",
+        "可用专业人员工时或公司 utilization"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "it_services",
+      "representative": "Accenture",
+      "parent_metric_id": "it_services_driver_2",
+      "name_zh": "同范围新增合同金额",
+      "source_candidate_url": "https://newsroom.accenture.com/news/2026/accenture-reports-fourth-quarter-and-full-year-fiscal-2026-results",
+      "required_inputs_zh": [
+        "新签合同 bookings",
+        "服务类别"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "0845a0e4532741b8004a79d8d6e86332934eb6a2258933f67bfee34bdca0123f",
+        "561c6ea6519ab5a0e1b4ebc760dc8a94d078deb61d2b2b36c9080573f5d73a6e",
+        "20259f17e7a5eba72a3d5d2a4a9f2404e98fa5ee5f68bbe3df132a9fdf047c74"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "input_complete",
+      "definition_status": "company_variant_reviewed",
+      "calculation_ready": true,
+      "missing_inputs_zh": [],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "it_services",
+      "representative": "Accenture",
+      "parent_metric_id": "it_services_driver_3",
+      "name_zh": "单位计费服务费率",
+      "source_candidate_url": "https://newsroom.accenture.com/news/2026/accenture-reports-fourth-quarter-and-full-year-fiscal-2026-results",
+      "required_inputs_zh": [
+        "同范围服务收入",
+        "实际计费工时"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "同范围服务收入",
+        "实际计费工时"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "telecom",
+      "representative": "Verizon",
+      "parent_metric_id": "telecom_driver_1",
+      "name_zh": "单匹配用户服务 ARPU",
+      "source_candidate_url": "https://www.verizon.com/about/news/feed/verizon-delivers-2025-financial-guidance-highest-quarterly-net-adds",
+      "required_inputs_zh": [
+        "服务收入",
+        "平均对应用户",
+        "月数"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "服务收入",
+        "平均对应用户",
+        "月数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "telecom",
+      "representative": "Verizon",
+      "parent_metric_id": "telecom_driver_2",
+      "name_zh": "同用户群月均流失率",
+      "source_candidate_url": "https://www.verizon.com/about/news/feed/verizon-delivers-2025-financial-guidance-highest-quarterly-net-adds",
+      "required_inputs_zh": [
+        "断开用户数",
+        "平均用户",
+        "月数或披露 churn"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "断开用户数",
+        "平均用户",
+        "月数或披露 churn"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "telecom",
+      "representative": "Verizon",
+      "parent_metric_id": "telecom_driver_3",
+      "name_zh": "网络维持及扩张现金开支",
+      "source_candidate_url": "https://www.verizon.com/about/news/feed/verizon-delivers-2025-financial-guidance-highest-quarterly-net-adds",
+      "required_inputs_zh": [
+        "网络现金 capex",
+        "维持部分",
+        "扩张部分"
+      ],
+      "status": "definition_mismatch_sample_only",
+      "sample_observation_ids": [
+        "39a5c4f153d66cb1cd67c16e73007a18e78415c587da505a24527144c9050b1a"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "网络现金 capex",
+        "维持部分",
+        "扩张部分"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "digital_platforms",
+      "representative": "Meta Platforms",
+      "parent_metric_id": "digital_platforms_driver_1",
+      "name_zh": "定义内活跃用户",
+      "source_candidate_url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Reports-Fourth-Quarter-and-Full-Year-2025-Results/default.aspx",
+      "required_inputs_zh": [
+        "DAU 或 MAU",
+        "频率",
+        "活跃规则"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "410ceb13c44a61921de44fe0d214eaaf8bdf632316e05841987070538e471d60"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "DAU 或 MAU",
+        "频率",
+        "活跃规则"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "digital_platforms",
+      "representative": "Meta Platforms",
+      "parent_metric_id": "digital_platforms_driver_2",
+      "name_zh": "匹配活跃用户变现收入",
+      "source_candidate_url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Reports-Fourth-Quarter-and-Full-Year-2025-Results/default.aspx",
+      "required_inputs_zh": [
+        "同产品收入",
+        "平均活跃用户或公司 ARPP"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "同产品收入",
+        "平均活跃用户或公司 ARPP"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "digital_platforms",
+      "representative": "Meta Platforms",
+      "parent_metric_id": "digital_platforms_driver_3",
+      "name_zh": "平台交易净抽佣率",
+      "source_candidate_url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Reports-Fourth-Quarter-and-Full-Year-2025-Results/default.aspx",
+      "required_inputs_zh": [
+        "净交易收入",
+        "匹配 GMV"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "净交易收入",
+        "匹配 GMV"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "media_entertainment",
+      "representative": "Netflix",
+      "parent_metric_id": "media_entertainment_driver_1",
+      "name_zh": "付费订阅用户数量",
+      "source_candidate_url": "https://ir.netflix.net/financials/quarterly-earnings/",
+      "required_inputs_zh": [
+        "paid membership",
+        "平均或期末",
+        "产品地区"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "paid membership",
+        "平均或期末",
+        "产品地区"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "media_entertainment",
+      "representative": "Netflix",
+      "parent_metric_id": "media_entertainment_driver_2",
+      "name_zh": "内容现金投入",
+      "source_candidate_url": "https://ir.netflix.net/financials/quarterly-earnings/",
+      "required_inputs_zh": [
+        "内容现金支付",
+        "许可自制与预付口径"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "e3938e9d9732862e5d35a8d58d4e2f2472cca0b449afddb470bd466033a29545",
+        "ffe974a2804dcc4724e126b39c1fd3af7c98e4dc28c82cce02fa02ff7f0e65ae",
+        "dd505876f3c053cd26ce85c9667644317255bd0b23271ab3fdde41f9fe4b956b"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "partial_inputs",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "许可自制与预付口径"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "media_entertainment",
+      "representative": "Netflix",
+      "parent_metric_id": "media_entertainment_driver_3",
+      "name_zh": "当期内容摊销",
+      "source_candidate_url": "https://ir.netflix.net/financials/quarterly-earnings/",
+      "required_inputs_zh": [
+        "内容资产摊销或内容成本附注"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "b2d52a2169e9156184c0196bdd9fd5411e83bf69ef5bf1a70ec70c9d779a4ec6"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "input_complete",
+      "definition_status": "company_variant_reviewed",
+      "calculation_ready": true,
+      "missing_inputs_zh": [],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "regulated_utilities",
+      "representative": "Duke Energy",
+      "parent_metric_id": "regulated_utilities_driver_1",
+      "name_zh": "监管批准费率资产基数",
+      "source_candidate_url": "https://www.sec.gov/Archives/edgar/data/17797/000132616026000014/duk-20251231.htm",
+      "required_inputs_zh": [
+        "监管批准 rate base",
+        "法律主体",
+        "决定日期"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "监管批准 rate base",
+        "法律主体",
+        "决定日期"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "regulated_utilities",
+      "representative": "Duke Energy",
+      "parent_metric_id": "regulated_utilities_driver_2",
+      "name_zh": "监管批准权益回报率",
+      "source_candidate_url": "https://www.sec.gov/Archives/edgar/data/17797/000132616026000014/duk-20251231.htm",
+      "required_inputs_zh": [
+        "allowed ROE",
+        "权益资本结构",
+        "决定生效日"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "allowed ROE",
+        "权益资本结构",
+        "决定生效日"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "regulated_utilities",
+      "representative": "Duke Energy",
+      "parent_metric_id": "regulated_utilities_driver_3",
+      "name_zh": "监管成本回收滞后",
+      "source_candidate_url": "https://www.sec.gov/Archives/edgar/data/17797/000132616026000014/duk-20251231.htm",
+      "required_inputs_zh": [
+        "支出日期",
+        "核准回收生效日期",
+        "监管机制"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "支出日期",
+        "核准回收生效日期",
+        "监管机制"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "merchant_power",
+      "representative": "Constellation Energy",
+      "parent_metric_id": "merchant_power_driver_1",
+      "name_zh": "匹配售电捕获价格",
+      "source_candidate_url": "https://investors.constellationenergy.com/news-releases/news-release-details/constellation-reports-fourth-quarter-and-full-year-2025-results",
+      "required_inputs_zh": [
+        "匹配售电净收入",
+        "对应 MWh"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "匹配售电净收入",
+        "对应 MWh"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "merchant_power",
+      "representative": "Constellation Energy",
+      "parent_metric_id": "merchant_power_driver_2",
+      "name_zh": "效率调整后燃料电价差",
+      "source_candidate_url": "https://investors.constellationenergy.com/news-releases/news-release-details/constellation-reports-fourth-quarter-and-full-year-2025-results",
+      "required_inputs_zh": [
+        "同范围电价",
+        "燃料价格",
+        "热耗效率",
+        "单位换算"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "同范围电价",
+        "燃料价格",
+        "热耗效率",
+        "单位换算"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "merchant_power",
+      "representative": "Constellation Energy",
+      "parent_metric_id": "merchant_power_driver_3",
+      "name_zh": "匹配预期发电对冲覆盖率",
+      "source_candidate_url": "https://investors.constellationenergy.com/news-releases/news-release-details/constellation-reports-fourth-quarter-and-full-year-2025-results",
+      "required_inputs_zh": [
+        "已对冲电量",
+        "同窗口预计售电量"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "已对冲电量",
+        "同窗口预计售电量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "equity_reit",
+      "representative": "Prologis",
+      "parent_metric_id": "equity_reit_driver_1",
+      "name_zh": "可比物业 NOI 增长",
+      "source_candidate_url": "https://ir.prologis.com/financials/sec-filings/content/0001193125-26-017256/pld-ex99_2.htm",
+      "required_inputs_zh": [
+        "same-store 本期 NOI",
+        "同群同期 NOI或披露增长"
+      ],
+      "status": "partial_sample_requires_driver_review",
+      "sample_observation_ids": [
+        "a9bcbf1138d229bda93cd3461cfa3f58111726eafef3643789011be326e1ba19"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "same-store 本期 NOI",
+        "同群同期 NOI或披露增长"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "equity_reit",
+      "representative": "Prologis",
+      "parent_metric_id": "equity_reit_driver_2",
+      "name_zh": "同物业面积出租率",
+      "source_candidate_url": "https://ir.prologis.com/financials/sec-filings/content/0001193125-26-017256/pld-ex99_2.htm",
+      "required_inputs_zh": [
+        "已出租面积",
+        "可出租面积或报告 occupancy"
+      ],
+      "status": "definition_mismatch_sample_only",
+      "sample_observation_ids": [
+        "c8f50f13ea132d4d5946e3cf18768adf5308ffb42755a9bfe2706723aaec086e",
+        "c7bf9f367ca5c0d53801bded3a66eb5d3d03393841adf7d89593132a975d9a8d"
+      ],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "已出租面积",
+        "可出租面积或报告 occupancy"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "equity_reit",
+      "representative": "Prologis",
+      "parent_metric_id": "equity_reit_driver_3",
+      "name_zh": "FFO 至 AFFO 调节明细",
+      "source_candidate_url": "https://ir.prologis.com/financials/sec-filings/content/0001193125-26-017256/pld-ex99_2.htm",
+      "required_inputs_zh": [
+        "起点 FFO",
+        "经常资本支出",
+        "租赁佣金",
+        "非现金租金",
+        "其他调整",
+        "终点 AFFO"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "起点 FFO",
+        "经常资本支出",
+        "租赁佣金",
+        "非现金租金",
+        "其他调整",
+        "终点 AFFO"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "real_estate_services",
+      "representative": "Howard Hughes Holdings",
+      "parent_metric_id": "real_estate_services_driver_1",
+      "name_zh": "开发销售现金回款",
+      "source_candidate_url": "https://investor.howardhughes.com/news-releases/news-release-details/howard-hughes-holdings-inc-reports-fourth-quarter-and-full-1",
+      "required_inputs_zh": [
+        "开发项目实际现金收款",
+        "项目范围"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "开发项目实际现金收款",
+        "项目范围"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "real_estate_services",
+      "representative": "Howard Hughes Holdings",
+      "parent_metric_id": "real_estate_services_driver_2",
+      "name_zh": "同预售群取消率",
+      "source_candidate_url": "https://investor.howardhughes.com/news-releases/news-release-details/howard-hughes-holdings-inc-reports-fourth-quarter-and-full-1",
+      "required_inputs_zh": [
+        "预售取消数量或金额",
+        "匹配同预售群基数"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "预售取消数量或金额",
+        "匹配同预售群基数"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    },
+    {
+      "industry_id": "real_estate_services",
+      "representative": "Howard Hughes Holdings",
+      "parent_metric_id": "real_estate_services_driver_3",
+      "name_zh": "经纪管理服务佣金率",
+      "source_candidate_url": "https://investor.howardhughes.com/news-releases/news-release-details/howard-hughes-holdings-inc-reports-fourth-quarter-and-full-1",
+      "required_inputs_zh": [
+        "匹配佣金服务收入",
+        "实际交易金额或数量"
+      ],
+      "status": "pending_original_binding",
+      "sample_observation_ids": [],
+      "research_gate": "blocked",
+      "next_action_zh": "AI 浏览器打开官方原文，按逐行业字典核验每个必需字段；不披露仅记录该份材料范围内缺口，不推断全部公开来源均缺失",
+      "input_status": "pending_input_binding",
+      "definition_status": "definition_review_pending",
+      "calculation_ready": false,
+      "missing_inputs_zh": [
+        "匹配佣金服务收入",
+        "实际交易金额或数量"
+      ],
+      "input_ledger_ref": "data/financial/objects/8f/8f8daa08a357ea1b0e655678ee10fc17e436189195d65bdea572a6c25c1cddbd.json"
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "schema_version": "1.0.0",
+  "models": [
+    {
+      "id": "product_sales",
+      "name": "产品销售",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/product_sales.md",
+      "metric_ids": [
+        "roe",
+        "fcf",
+        "inventory_days",
+        "capex_intensity"
+      ]
+    },
+    {
+      "id": "subscription",
+      "name": "订阅与经常性收入",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/subscription.md",
+      "metric_ids": [
+        "revenue_growth",
+        "fcf",
+        "net_retention"
+      ]
+    },
+    {
+      "id": "transaction_fee",
+      "name": "交易抽佣",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/transaction_fee.md",
+      "metric_ids": [
+        "revenue_growth",
+        "operating_margin",
+        "take_rate"
+      ]
+    },
+    {
+      "id": "advertising",
+      "name": "广告变现",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/advertising.md",
+      "metric_ids": [
+        "revenue_growth",
+        "operating_margin",
+        "fcf"
+      ]
+    },
+    {
+      "id": "retail_distribution",
+      "name": "零售与分销",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/retail_distribution.md",
+      "metric_ids": [
+        "inventory_days",
+        "operating_margin",
+        "fcf"
+      ]
+    },
+    {
+      "id": "franchise",
+      "name": "加盟与品牌授权",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/franchise.md",
+      "metric_ids": [
+        "revenue_growth",
+        "operating_margin",
+        "fcf"
+      ]
+    },
+    {
+      "id": "project_contract",
+      "name": "项目与订单合同",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/project_contract.md",
+      "metric_ids": [
+        "revenue_growth",
+        "operating_margin",
+        "fcf"
+      ]
+    },
+    {
+      "id": "service_contract",
+      "name": "服务合同",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/service_contract.md",
+      "metric_ids": [
+        "revenue_growth",
+        "operating_margin",
+        "fcf"
+      ]
+    },
+    {
+      "id": "infrastructure_fee",
+      "name": "基础设施收费",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/infrastructure_fee.md",
+      "metric_ids": [
+        "capex_intensity",
+        "fcf",
+        "net_debt"
+      ]
+    },
+    {
+      "id": "ip_licensing",
+      "name": "知识产权与研发商业化",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/ip_licensing.md",
+      "metric_ids": [
+        "revenue_growth",
+        "cash_runway",
+        "fcf"
+      ]
+    },
+    {
+      "id": "balance_sheet_lending",
+      "name": "资产负债表放贷",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/balance_sheet_lending.md",
+      "metric_ids": [
+        "roe",
+        "net_interest_margin",
+        "credit_loss_ratio"
+      ]
+    },
+    {
+      "id": "insurance_underwriting",
+      "name": "保险承保",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/insurance_underwriting.md",
+      "metric_ids": [
+        "roe",
+        "combined_ratio",
+        "insurance_loss_ratio",
+        "medical_loss_ratio"
+      ]
+    },
+    {
+      "id": "asset_management_fee",
+      "name": "资产管理收费",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/asset_management_fee.md",
+      "metric_ids": [
+        "revenue_growth",
+        "operating_margin",
+        "fcf"
+      ]
+    },
+    {
+      "id": "regulated_return",
+      "name": "受监管回报",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/regulated_return.md",
+      "metric_ids": [
+        "capex_intensity",
+        "roe",
+        "net_debt"
+      ]
+    },
+    {
+      "id": "asset_rental",
+      "name": "资产租赁",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/asset_rental.md",
+      "metric_ids": [
+        "occupancy",
+        "noi",
+        "net_debt"
+      ]
+    },
+    {
+      "id": "content_license",
+      "name": "内容与版权",
+      "status": "draft",
+      "profile_path": "knowledge/business_models/content_license.md",
+      "metric_ids": [
+        "revenue_growth",
+        "operating_margin",
+        "fcf"
+      ]
+    }
+  ]
+}

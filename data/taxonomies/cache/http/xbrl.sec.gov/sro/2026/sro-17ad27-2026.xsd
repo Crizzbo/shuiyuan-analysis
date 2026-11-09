@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This schema was created by staff of the U.S. Securities and Exchange Commission. -->
+<!-- Data and content created by government employees within the scope of their employment -->
+<!-- are not subject to domestic copyright protection. 17 U.S.C. 105. -->
+<xs:schema
+xmlns:link="http://www.xbrl.org/2003/linkbase"
+xmlns:sro-17ad27="http://xbrl.sec.gov/sro-17ad27/2026"
+xmlns:xbrldt="http://xbrl.org/2005/xbrldt"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://xbrl.sec.gov/sro-17ad27/2026"
+elementFormDefault="qualified">
+<xs:annotation>
+<xs:appinfo>
+<link:linkbase id="lnk">
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/all" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#all"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/domain-member" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#domain-member"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#hypercube-dimension"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/dimension-default" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#dimension-default"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/dimension-domain" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#dimension-domain"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/17ad27/role/SubmissionsTable" xlink:type="simple" xlink:href="sro-2026.xsd#SubmissionsTable"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/17ad27/role/CmspReportTable" xlink:type="simple" xlink:href="sro-2026.xsd#CmspReportTable"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/17ad27/role/AffirmationsTable" xlink:type="simple" xlink:href="sro-2026.xsd#AffirmationsTable"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/17ad27/role/CancellationsTable" xlink:type="simple" xlink:href="sro-2026.xsd#CancellationsTable"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/17ad27/role/ProgressTable" xlink:type="simple" xlink:href="sro-2026.xsd#ProgressTable"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/17ad27/role/SubmittedHoursOnly" xlink:type="simple" xlink:href="sro-2026.xsd#SubmittedHoursOnly"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/17ad27/role/AffirmedHoursOnly" xlink:type="simple" xlink:href="sro-2026.xsd#AffirmedHoursOnly"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/17ad27/role/ServiceTypesOnly" xlink:type="simple" xlink:href="sro-2026.xsd#ServiceTypesOnly"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/17ad27/role/UserTypesOnly" xlink:type="simple" xlink:href="sro-2026.xsd#UserTypesOnly"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/17ad27/role/AssetClassesOnly" xlink:type="simple" xlink:href="sro-2026.xsd#AssetClassesOnly"/>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/CmspReportTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspReportAbstract" xlink:label="CmspReportAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspReportTable" xlink:label="CmspReportTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="CmspReportAbstract" xlink:to="CmspReportTable" order="1.0" xbrldt:contextElement="segment" xbrldt:closed="true" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/CmspReportTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspReportAbstract" xlink:label="CmspReportAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspReportLineItems" xlink:label="CmspReportLineItems"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspReportAbstract" xlink:to="CmspReportLineItems" use="optional" priority="10" order="2.0" xbrldt:usable="false"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_DocumentType" xlink:label="DocumentType"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspReportLineItems" xlink:to="DocumentType" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_AmendmentFlag" xlink:label="AmendmentFlag"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspReportLineItems" xlink:to="AmendmentFlag" use="optional" priority="10" order="2.0"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_AmendmentDescription" xlink:label="AmendmentDescription"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspReportLineItems" xlink:to="AmendmentDescription" use="optional" priority="10" order="3.0"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_EntityRegistrantName" xlink:label="EntityRegistrantName"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspReportLineItems" xlink:to="EntityRegistrantName" use="optional" priority="10" order="4.0"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_EntityCentralIndexKey" xlink:label="EntityCentralIndexKey"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspReportLineItems" xlink:to="EntityCentralIndexKey" use="optional" priority="10" order="5.0"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_DocumentPeriodEndDate" xlink:label="DocumentPeriodEndDate"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspReportLineItems" xlink:to="DocumentPeriodEndDate" use="optional" priority="10" order="6.0"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspStpPlcyPrcdrSmryTextBlock" xlink:label="CmspStpPlcyPrcdrSmryTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspReportLineItems" xlink:to="CmspStpPlcyPrcdrSmryTextBlock" use="optional" priority="10" order="7.0"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspStpPrgrsTextBlock" xlink:label="CmspStpPrgrsTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspReportLineItems" xlink:to="CmspStpPrgrsTextBlock" use="optional" priority="10" order="8.0"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspActnIntdsToTakeForStpTextBlock" xlink:label="CmspActnIntdsToTakeForStpTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspReportLineItems" xlink:to="CmspActnIntdsToTakeForStpTextBlock" use="optional" priority="10" order="9.0"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/SubmissionsTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSubmissionAbstract" xlink:label="CmspSubmissionAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSubmissionsTable" xlink:label="CmspSubmissionsTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="CmspSubmissionAbstract" xlink:to="CmspSubmissionsTable" priority="10" order="1.0" xbrldt:contextElement="segment" xbrldt:closed="true"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/SubmissionsTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSubmissionAbstract" xlink:label="CmspSubmissionAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSubmissionsLineItems" xlink:label="CmspSubmissionsLineItems"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspSubmissionAbstract" xlink:to="CmspSubmissionsLineItems" use="optional" priority="10" order="2.0" xbrldt:usable="false"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspConfsSubmittdAmt" xlink:label="CmspConfsSubmittdAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspSubmissionsLineItems" xlink:to="CmspConfsSubmittdAmt" use="optional" priority="10" order="3.0"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAllcnsSubmittdAmt" xlink:label="CmspAllcnsSubmittdAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspSubmissionsLineItems" xlink:to="CmspAllcnsSubmittdAmt" use="optional" priority="10" order="2.0"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspTrdsSubmittdAmt" xlink:label="CmspTrdsSubmittdAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspSubmissionsLineItems" xlink:to="CmspTrdsSubmittdAmt" use="optional" priority="10" order="1.0"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/SubmissionsTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSubmissionsTable" xlink:label="CmspSubmissionsTable"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypAxis" xlink:label="CmspSvcTypAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmspSubmissionsTable" xlink:to="CmspSvcTypAxis" use="optional" priority="10" order="1.0" xbrldt:targetRole="http://xbrl.sec.gov/17ad27/role/ServiceTypesOnly"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspUsrTypAxis" xlink:label="CmspUsrTypAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmspSubmissionsTable" xlink:to="CmspUsrTypAxis" use="optional" priority="10" order="2.0" xbrldt:targetRole="http://xbrl.sec.gov/17ad27/role/UserTypesOnly"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAsstClsAxis" xlink:label="CmspAsstClsAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmspSubmissionsTable" xlink:to="CmspAsstClsAxis" use="optional" priority="10" order="3.0" xbrldt:targetRole="http://xbrl.sec.gov/17ad27/role/AssetClassesOnly"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSubmHrsAxis" xlink:label="CmspSubmHrsAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmspSubmissionsTable" xlink:to="CmspSubmHrsAxis" use="optional" priority="10" order="4.0" xbrldt:targetRole="http://xbrl.sec.gov/17ad27/role/SubmittedHoursOnly"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/CancellationsTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspCancellationsAbstract" xlink:label="CmspCancellationsAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspCancellationsTable" xlink:label="CmspCancellationsTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="CmspCancellationsAbstract" xlink:to="CmspCancellationsTable" order="1.0" xbrldt:closed="true" xbrldt:contextElement="segment" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/CancellationsTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspCancellationsAbstract" xlink:label="CmspCancellationsAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspCancellationsLineItems" xlink:label="CmspCancellationsLineItems"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspCancellationsAbstract" xlink:to="CmspCancellationsLineItems" use="optional" priority="10" order="2.0" xbrldt:usable="false"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspConfsCancAmt" xlink:label="CmspConfsCancAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspCancellationsLineItems" xlink:to="CmspConfsCancAmt" use="optional" priority="10" order="1.0"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/CancellationsTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspCancellationsTable" xlink:label="CmspCancellationsTable"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypAxis" xlink:label="CmspSvcTypAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmspCancellationsTable" xlink:to="CmspSvcTypAxis" use="optional" priority="10" order="1.0" xbrldt:targetRole="http://xbrl.sec.gov/17ad27/role/ServiceTypesOnly"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspUsrTypAxis" xlink:label="CmspUsrTypAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmspCancellationsTable" xlink:to="CmspUsrTypAxis" use="optional" priority="10" order="2.0" xbrldt:targetRole="http://xbrl.sec.gov/17ad27/role/UserTypesOnly"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAsstClsAxis" xlink:label="CmspAsstClsAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmspCancellationsTable" xlink:to="CmspAsstClsAxis" use="optional" priority="10" order="3.0" xbrldt:targetRole="http://xbrl.sec.gov/17ad27/role/AssetClassesOnly"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/AffirmationsTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAffirmationsAbstract" xlink:label="CmspAffirmationsAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAffirmationsTable" xlink:label="CmspAffirmationsTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="CmspAffirmationsAbstract" xlink:to="CmspAffirmationsTable" order="1.0" xbrldt:closed="true" xbrldt:contextElement="segment" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/AffirmationsTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAffirmationsAbstract" xlink:label="CmspAffirmationsAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAffirmationsLineItems" xlink:label="CmspAffirmationsLineItems"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspAffirmationsAbstract" xlink:to="CmspAffirmationsLineItems" use="optional" priority="10" order="2.0" xbrldt:usable="false"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspConfsAffrmdTradDtPct" xlink:label="CmspConfsAffrmdTradDtPct"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspAffirmationsLineItems" xlink:to="CmspConfsAffrmdTradDtPct" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspPctAllcnsAndConfsMtchdAndConfdPct" xlink:label="CmspPctAllcnsAndConfsMtchdAndConfdPct"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspAffirmationsLineItems" xlink:to="CmspPctAllcnsAndConfsMtchdAndConfdPct" use="optional" priority="10" order="2.0"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/AffirmationsTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAffirmationsTable" xlink:label="CmspAffirmationsTable"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypAxis" xlink:label="CmspSvcTypAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmspAffirmationsTable" xlink:to="CmspSvcTypAxis" use="optional" priority="10" order="1.0" xbrldt:targetRole="http://xbrl.sec.gov/17ad27/role/ServiceTypesOnly"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspUsrTypAxis" xlink:label="CmspUsrTypAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmspAffirmationsTable" xlink:to="CmspUsrTypAxis" use="optional" priority="10" order="2.0" xbrldt:targetRole="http://xbrl.sec.gov/17ad27/role/UserTypesOnly"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAsstClsAxis" xlink:label="CmspAsstClsAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmspAffirmationsTable" xlink:to="CmspAsstClsAxis" use="optional" priority="10" order="3.0" xbrldt:targetRole="http://xbrl.sec.gov/17ad27/role/AssetClassesOnly"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAffrmHrsAxis" xlink:label="CmspAffrmHrsAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmspAffirmationsTable" xlink:to="CmspAffrmHrsAxis" use="optional" priority="10" order="4.0" xbrldt:targetRole="http://xbrl.sec.gov/17ad27/role/AffirmedHoursOnly"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/SubmittedHoursOnly">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSubmHrsAxis" xlink:label="CmspSubmHrsAxis"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSubmHrsDomain" xlink:label="CmspSubmHrsDomain"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/dimension-domain" xlink:from="CmspSubmHrsAxis" xlink:to="CmspSubmHrsDomain" order="1.0" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/ProgressTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspProgressAbstract" xlink:label="CmspProgressAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspProgressTable" xlink:label="CmspProgressTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="CmspProgressAbstract" xlink:to="CmspProgressTable" order="1.0" xbrldt:closed="false" xbrldt:contextElement="segment" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/ProgressTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspProgressAbstract" xlink:label="CmspProgressAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspProgressLineItems" xlink:label="CmspProgressLineItems"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspProgressAbstract" xlink:to="CmspProgressLineItems" use="optional" priority="10" order="2.0" xbrldt:usable="false"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/ProgressTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspProgressTable" xlink:label="CmspProgressTable"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypAxis" xlink:label="CmspSvcTypAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmspProgressTable" xlink:to="CmspSvcTypAxis" use="optional" priority="10" order="1.0" xbrldt:targetRole="http://xbrl.sec.gov/17ad27/role/ServiceTypesOnly"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspUsrTypAxis" xlink:label="CmspUsrTypAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmspProgressTable" xlink:to="CmspUsrTypAxis" use="optional" priority="10" order="2.0" xbrldt:targetRole="http://xbrl.sec.gov/17ad27/role/UserTypesOnly"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAsstClsAxis" xlink:label="CmspAsstClsAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmspProgressTable" xlink:to="CmspAsstClsAxis" use="optional" priority="10" order="3.0" xbrldt:targetRole="http://xbrl.sec.gov/17ad27/role/AssetClassesOnly"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/AffirmedHoursOnly">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAffrmHrsAxis" xlink:label="CmspAffrmHrsAxis"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_ClrAgncyAffrmHoursDomain" xlink:label="ClrAgncyAffrmHoursDomain"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/dimension-domain" xlink:from="CmspAffrmHrsAxis" xlink:to="ClrAgncyAffrmHoursDomain" order="1.0" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/ServiceTypesOnly">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypAxis" xlink:label="CmspSvcTypAxis"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypDomain" xlink:label="CmspSvcTypDomain"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/dimension-domain" xlink:from="CmspSvcTypAxis" xlink:to="CmspSvcTypDomain" order="1.0" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/ServiceTypesOnly">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypDomain" xlink:label="CmspSvcTypDomain"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CentralMatchingMember" xlink:label="CentralMatchingMember"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspSvcTypDomain" xlink:to="CentralMatchingMember" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_ElectronicTradeConfirmationMember" xlink:label="ElectronicTradeConfirmationMember"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmspSvcTypDomain" xlink:to="ElectronicTradeConfirmationMember" use="optional" priority="10" order="2.0"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/UserTypesOnly">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspUsrTypAxis" xlink:label="CmspUsrTypAxis"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspUsrTypDomain" xlink:label="CmspUsrTypDomain"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/dimension-domain" xlink:from="CmspUsrTypAxis" xlink:to="CmspUsrTypDomain" order="1.0" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/AssetClassesOnly">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAsstClsAxis" xlink:label="CmspAsstClsAxis"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAsstClsDomain" xlink:label="CmspAsstClsDomain"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/dimension-domain" xlink:from="CmspAsstClsAxis" xlink:to="CmspAsstClsDomain" order="1.0" priority="10"/>
+</link:definitionLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/SubmissionsTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSubmissionAbstract" xlink:label="CmspSubmissionAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSubmissionsTable" xlink:label="CmspSubmissionsTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSubmissionAbstract" xlink:to="CmspSubmissionsTable" priority="10" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypAxis" xlink:label="CmspSvcTypAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSubmissionsTable" xlink:to="CmspSvcTypAxis" priority="10" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypDomain" xlink:label="CmspSvcTypDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSvcTypAxis" xlink:to="CmspSvcTypDomain" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CentralMatchingMember" xlink:label="CentralMatchingMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSvcTypDomain" xlink:to="CentralMatchingMember" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_ElectronicTradeConfirmationMember" xlink:label="ElectronicTradeConfirmationMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSvcTypDomain" xlink:to="ElectronicTradeConfirmationMember" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspUsrTypAxis" xlink:label="CmspUsrTypAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSubmissionsTable" xlink:to="CmspUsrTypAxis" priority="10" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspUsrTypDomain" xlink:label="CmspUsrTypDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspUsrTypAxis" xlink:to="CmspUsrTypDomain" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAsstClsAxis" xlink:label="CmspAsstClsAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSubmissionsTable" xlink:to="CmspAsstClsAxis" priority="10" order="3.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAsstClsDomain" xlink:label="CmspAsstClsDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspAsstClsAxis" xlink:to="CmspAsstClsDomain" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSubmHrsAxis" xlink:label="CmspSubmHrsAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSubmissionsTable" xlink:to="CmspSubmHrsAxis" order="4.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSubmHrsDomain" xlink:label="CmspSubmHrsDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSubmHrsAxis" xlink:to="CmspSubmHrsDomain" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSubmissionsLineItems" xlink:label="CmspSubmissionsLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSubmissionAbstract" xlink:to="CmspSubmissionsLineItems" priority="10" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspTrdsSubmittdAmt" xlink:label="CmspTrdsSubmittdAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSubmissionsLineItems" xlink:to="CmspTrdsSubmittdAmt" priority="10" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAllcnsSubmittdAmt" xlink:label="CmspAllcnsSubmittdAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSubmissionsLineItems" xlink:to="CmspAllcnsSubmittdAmt" priority="10" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspConfsSubmittdAmt" xlink:label="CmspConfsSubmittdAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSubmissionsLineItems" xlink:to="CmspConfsSubmittdAmt" priority="10" order="3.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/CmspReportTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspReportAbstract" xlink:label="CmspReportAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspReportTable" xlink:label="CmspReportTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspReportAbstract" xlink:to="CmspReportTable" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspReportLineItems" xlink:label="CmspReportLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspReportAbstract" xlink:to="CmspReportLineItems" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_EntityRegistrantName" xlink:label="EntityRegistrantName"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspReportLineItems" xlink:to="EntityRegistrantName" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_EntityCentralIndexKey" xlink:label="EntityCentralIndexKey"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspReportLineItems" xlink:to="EntityCentralIndexKey" order="5.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_DocumentPeriodEndDate" xlink:label="DocumentPeriodEndDate"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspReportLineItems" xlink:to="DocumentPeriodEndDate" order="6.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_AmendmentFlag" xlink:label="AmendmentFlag"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspReportLineItems" xlink:to="AmendmentFlag" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_AmendmentDescription" xlink:label="AmendmentDescription"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspReportLineItems" xlink:to="AmendmentDescription" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_DocumentType" xlink:label="DocumentType"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspReportLineItems" xlink:to="DocumentType" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspStpPlcyPrcdrSmryTextBlock" xlink:label="CmspStpPlcyPrcdrSmryTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspReportLineItems" xlink:to="CmspStpPlcyPrcdrSmryTextBlock" order="7.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspStpPrgrsTextBlock" xlink:label="CmspStpPrgrsTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspReportLineItems" xlink:to="CmspStpPrgrsTextBlock" order="8.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspActnIntdsToTakeForStpTextBlock" xlink:label="CmspActnIntdsToTakeForStpTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspReportLineItems" xlink:to="CmspActnIntdsToTakeForStpTextBlock" order="9.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/CancellationsTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypAxis" xlink:label="CmspSvcTypAxis"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypDomain" xlink:label="CmspSvcTypDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSvcTypAxis" xlink:to="CmspSvcTypDomain" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CentralMatchingMember" xlink:label="CentralMatchingMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSvcTypDomain" xlink:to="CentralMatchingMember" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_ElectronicTradeConfirmationMember" xlink:label="ElectronicTradeConfirmationMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSvcTypDomain" xlink:to="ElectronicTradeConfirmationMember" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspUsrTypAxis" xlink:label="CmspUsrTypAxis"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspUsrTypDomain" xlink:label="CmspUsrTypDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspUsrTypAxis" xlink:to="CmspUsrTypDomain" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAsstClsAxis" xlink:label="CmspAsstClsAxis"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAsstClsDomain" xlink:label="CmspAsstClsDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspAsstClsAxis" xlink:to="CmspAsstClsDomain" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspCancellationsAbstract" xlink:label="CmspCancellationsAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspCancellationsTable" xlink:label="CmspCancellationsTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspCancellationsAbstract" xlink:to="CmspCancellationsTable" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspCancellationsTable" xlink:to="CmspSvcTypAxis" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspCancellationsTable" xlink:to="CmspUsrTypAxis" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspCancellationsTable" xlink:to="CmspAsstClsAxis" order="3.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspCancellationsLineItems" xlink:label="CmspCancellationsLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspCancellationsAbstract" xlink:to="CmspCancellationsLineItems" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspConfsCancAmt" xlink:label="CmspConfsCancAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspCancellationsLineItems" xlink:to="CmspConfsCancAmt" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/AffirmationsTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypAxis" xlink:label="CmspSvcTypAxis"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypDomain" xlink:label="CmspSvcTypDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSvcTypAxis" xlink:to="CmspSvcTypDomain" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CentralMatchingMember" xlink:label="CentralMatchingMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSvcTypDomain" xlink:to="CentralMatchingMember" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_ElectronicTradeConfirmationMember" xlink:label="ElectronicTradeConfirmationMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSvcTypDomain" xlink:to="ElectronicTradeConfirmationMember" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspUsrTypAxis" xlink:label="CmspUsrTypAxis"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspUsrTypDomain" xlink:label="CmspUsrTypDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspUsrTypAxis" xlink:to="CmspUsrTypDomain" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAsstClsAxis" xlink:label="CmspAsstClsAxis"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAsstClsDomain" xlink:label="CmspAsstClsDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspAsstClsAxis" xlink:to="CmspAsstClsDomain" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAffirmationsAbstract" xlink:label="CmspAffirmationsAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAffirmationsTable" xlink:label="CmspAffirmationsTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspAffirmationsAbstract" xlink:to="CmspAffirmationsTable" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspAffirmationsTable" xlink:to="CmspSvcTypAxis" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspAffirmationsTable" xlink:to="CmspUsrTypAxis" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspAffirmationsTable" xlink:to="CmspAsstClsAxis" order="3.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAffrmHrsAxis" xlink:label="CmspAffrmHrsAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspAffirmationsTable" xlink:to="CmspAffrmHrsAxis" order="4.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_ClrAgncyAffrmHoursDomain" xlink:label="ClrAgncyAffrmHoursDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspAffrmHrsAxis" xlink:to="ClrAgncyAffrmHoursDomain" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAffirmationsLineItems" xlink:label="CmspAffirmationsLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspAffirmationsAbstract" xlink:to="CmspAffirmationsLineItems" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspConfsAffrmdTradDtPct" xlink:label="CmspConfsAffrmdTradDtPct"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspAffirmationsLineItems" xlink:to="CmspConfsAffrmdTradDtPct" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspPctAllcnsAndConfsMtchdAndConfdPct" xlink:label="CmspPctAllcnsAndConfsMtchdAndConfdPct"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspAffirmationsLineItems" xlink:to="CmspPctAllcnsAndConfsMtchdAndConfdPct" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/17ad27/role/ProgressTable">
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypAxis" xlink:label="CmspSvcTypAxis"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspSvcTypDomain" xlink:label="CmspSvcTypDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSvcTypAxis" xlink:to="CmspSvcTypDomain" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CentralMatchingMember" xlink:label="CentralMatchingMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSvcTypDomain" xlink:to="CentralMatchingMember" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_ElectronicTradeConfirmationMember" xlink:label="ElectronicTradeConfirmationMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspSvcTypDomain" xlink:to="ElectronicTradeConfirmationMember" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspUsrTypAxis" xlink:label="CmspUsrTypAxis"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspUsrTypDomain" xlink:label="CmspUsrTypDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspUsrTypAxis" xlink:to="CmspUsrTypDomain" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAsstClsAxis" xlink:label="CmspAsstClsAxis"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspAsstClsDomain" xlink:label="CmspAsstClsDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspAsstClsAxis" xlink:to="CmspAsstClsDomain" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspProgressAbstract" xlink:label="CmspProgressAbstract"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspProgressTable" xlink:label="CmspProgressTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspProgressAbstract" xlink:to="CmspProgressTable" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspProgressTable" xlink:to="CmspSvcTypAxis" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspProgressTable" xlink:to="CmspUsrTypAxis" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspProgressTable" xlink:to="CmspAsstClsAxis" order="3.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sro-2026.xsd#sro_CmspProgressLineItems" xlink:label="CmspProgressLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmspProgressAbstract" xlink:to="CmspProgressLineItems" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel" priority="10"/>
+</link:presentationLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+</xs:schema>

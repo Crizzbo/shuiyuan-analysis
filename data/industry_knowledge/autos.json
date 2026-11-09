@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "autos",
+    "industry_name_zh": "汽车整车与核心零部件",
+    "sector_id": "consumer_discretionary",
+    "sector_name_zh": "可选消费",
+    "macro_sector_id": "CAP_GOODS",
+    "macro_sector_name_zh": "工业母机、智能制造装备与汽车交通设备",
+    "description_zh": "涵盖智能电动汽车 (EV)、传统燃油车制造、动力电池系统及核心 Tier 1 汽车电子零部件企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.80,
+    "typical_markup_ratio": 1.08,
+    "capex_intensity": "极高重资产",
+    "operating_leverage_exposure": "极高经营杠杆",
+    "typical_gross_margin_range": [0.15, 0.25]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 45.0,
+    "dio_warning_days": 85.0,
+    "rd_capitalization_max_allowed": 0.12,
+    "top_customer_concentration_redline": 0.35,
+    "debt_covenant_buffer_minimum_ratio": 0.25
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "动力电池正负极材料、碳酸锂现货批价与新型电池量产良率",
+      "车规级 IGBT/碳化硅 (SiC) 功率模块与先进制程智驾芯片供给配额",
+      "一体化压铸超大型压铸机与车身高刚度精密模具研发制造能力"
+    ],
+    "downstream_profile": "全球终端个人乘用车消费者与商用出行车队，对汽车金融信贷利率与宏观居民可支配收入高度敏感",
+    "pricing_power_verdict": "头部新能源巨头凭借垂直整合与规模效应掌握终端定价权，二线追随车企面临以价换量严重失血",
+    "channel_inversion_sensitivity": "终端门店真实含补贴落地价较官方指导价 (MSRP) 折扣幅度与二手车保值率是品牌资产核心指标"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "新一代爆款主力走量车型月度交付量突破规模化瓶颈，单车毛利率跨过 20% 稳健盈利门槛",
+      "动力电池上游原材料碳酸锂价格下行叠加一体化制造工艺成熟，单车制造成本显著压降",
+      "全场景高阶智能驾驶辅助软件商业化订阅渗透率提升，开启高毛利软件与出行服务第二曲线"
+    ],
+    "leading_bear_defenses": [
+      "全行业产能过剩引发恶性价格战血拼，单车净利润遭遇腰斩甚至由正转负",
+      "整车存货周转天数 (DIO) 飙升超过 85 天，渠道库存堰塞湖爆仓迫使主机厂大幅停产降价甩卖",
+      "电池热失控安全缺陷或智驾辅助系统重大缺陷引发全球大范围召回与品牌声誉不可逆损耗"
+    ],
+    "core_catalyst_dimensions": [
+      "行业乘用车月度销量与新势力车企每月 1 日交付量快报",
+      "碳酸锂现货价格与动力电池包电芯度电综合成本走势",
+      "扣除政府积分补贴后的真实汽车销售毛利率 (Automotive Gross Margin ex-credits)",
+      "汽车消费信贷违约率与渠道经销商库存预警指数 (VIA)"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "产成品整车库存增速远超终端交付营收增速，存在向关联出行公司或渠道违规塞车压货",
+      "新车型研发费用资本化比例超过 12%，掩盖实质性研发投入并粉饰当期主营亏损",
+      "对上游供应商应付账款周转天数 (DPO) 恶性拉长至 180 天以上过度挤压供应链现金流"
+    ],
+    "channel_and_revenue_checks": [
+      "官方指导价 (MSRP) 与终端门店真实成交落地价倒挂折价超过 15%",
+      "售后维修与产品质量索赔预计负债 (Warranty Accruals) 计提比率异常低于行业基准"
+    ]
+  }
+}

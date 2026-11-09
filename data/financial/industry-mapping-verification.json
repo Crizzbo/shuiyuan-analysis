@@ -1,0 +1,563 @@
+{
+  "examples": [
+    {
+      "entity_id": "US:INTU:CIK896878",
+      "industry_candidate": "software",
+      "snapshot_path": "data/financial/objects/4b/4b136e64f89ed4ed895a9097ec090fc6eb47414e3a9b0e11912c51c682e7f378.json",
+      "sha256": "4b136e64f89ed4ed895a9097ec090fc6eb47414e3a9b0e11912c51c682e7f378",
+      "computed": 2,
+      "missing_required_metric_ids": [
+        "software_driver_1",
+        "software_driver_2",
+        "software_driver_3"
+      ]
+    },
+    {
+      "entity_id": "JP:6758:CIK313838",
+      "industry_candidate": "hardware",
+      "snapshot_path": "data/financial/objects/2d/2d332a272697f71e6d1abf1663e101a93e963e976a1465d3e1a33f4ecf65252d.json",
+      "sha256": "2d332a272697f71e6d1abf1663e101a93e963e976a1465d3e1a33f4ecf65252d",
+      "computed": 2,
+      "missing_required_metric_ids": [
+        "hardware_driver_1",
+        "hardware_driver_2",
+        "hardware_driver_3"
+      ]
+    },
+    {
+      "entity_id": "JP:7974",
+      "industry_candidate": "media_entertainment",
+      "snapshot_path": "data/financial/objects/eb/ebcbb35f9fb90f3e58011e09eb52ac588701937f71bbbb135d5e4faad967c20b.json",
+      "sha256": "ebcbb35f9fb90f3e58011e09eb52ac588701937f71bbbb135d5e4faad967c20b",
+      "computed": 2,
+      "missing_required_metric_ids": [
+        "media_entertainment_driver_1",
+        "media_entertainment_driver_2",
+        "media_entertainment_driver_3"
+      ]
+    }
+  ],
+  "industry_coverage": [
+    {
+      "industry_id": "aerospace_defense",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "aerospace_defense_driver_1",
+        "aerospace_defense_driver_2",
+        "aerospace_defense_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "asset_management",
+      "bound_shared_metric_ids": [],
+      "blocked_required_metric_ids": [
+        "asset_management_driver_1",
+        "asset_management_driver_2",
+        "asset_management_driver_3"
+      ],
+      "reason": "专门口径未审核"
+    },
+    {
+      "industry_id": "autos",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "autos_driver_1",
+        "autos_driver_2",
+        "autos_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "banks",
+      "bound_shared_metric_ids": [],
+      "blocked_required_metric_ids": [
+        "banks_driver_1",
+        "banks_driver_2",
+        "banks_driver_3"
+      ],
+      "reason": "专门口径未审核"
+    },
+    {
+      "industry_id": "biotech",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "biotech_driver_1",
+        "biotech_driver_2",
+        "biotech_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "business_services",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "business_services_driver_1",
+        "business_services_driver_2",
+        "business_services_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "capital_goods",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "capital_goods_driver_1",
+        "capital_goods_driver_2",
+        "capital_goods_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "chemicals",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "chemicals_driver_1",
+        "chemicals_driver_2",
+        "chemicals_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "construction",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "construction_driver_1",
+        "construction_driver_2",
+        "construction_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "digital_platforms",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "digital_platforms_driver_1",
+        "digital_platforms_driver_2",
+        "digital_platforms_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "energy_services",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "energy_services_driver_1",
+        "energy_services_driver_2",
+        "energy_services_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "equity_reit",
+      "bound_shared_metric_ids": [],
+      "blocked_required_metric_ids": [
+        "equity_reit_driver_1",
+        "equity_reit_driver_2",
+        "equity_reit_driver_3"
+      ],
+      "reason": "专门口径未审核"
+    },
+    {
+      "industry_id": "food_beverage",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "food_beverage_driver_1",
+        "food_beverage_driver_2",
+        "food_beverage_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "hardware",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "hardware_driver_1",
+        "hardware_driver_2",
+        "hardware_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "health_services",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "health_services_driver_1",
+        "health_services_driver_2",
+        "health_services_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "household_personal",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "household_personal_driver_1",
+        "household_personal_driver_2",
+        "household_personal_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "housing_durables",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "housing_durables_driver_1",
+        "housing_durables_driver_2",
+        "housing_durables_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "insurance",
+      "bound_shared_metric_ids": [],
+      "blocked_required_metric_ids": [
+        "insurance_driver_1",
+        "insurance_driver_2",
+        "insurance_driver_3"
+      ],
+      "reason": "专门口径未审核"
+    },
+    {
+      "industry_id": "it_services",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "it_services_driver_1",
+        "it_services_driver_2",
+        "it_services_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "managed_care",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "managed_care_driver_1",
+        "managed_care_driver_2",
+        "managed_care_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "media_entertainment",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "media_entertainment_driver_1",
+        "media_entertainment_driver_2",
+        "media_entertainment_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "medical_devices",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "medical_devices_driver_1",
+        "medical_devices_driver_2",
+        "medical_devices_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "merchant_power",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "merchant_power_driver_1",
+        "merchant_power_driver_2",
+        "merchant_power_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "midstream",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "midstream_driver_1",
+        "midstream_driver_2",
+        "midstream_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "mining",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "mining_driver_1",
+        "mining_driver_2",
+        "mining_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "oil_gas",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "oil_gas_driver_1",
+        "oil_gas_driver_2",
+        "oil_gas_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "packaging",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "packaging_driver_1",
+        "packaging_driver_2",
+        "packaging_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "payments",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "payments_driver_1",
+        "payments_driver_2",
+        "payments_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "pharma",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "pharma_driver_1",
+        "pharma_driver_2",
+        "pharma_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "real_estate_services",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "real_estate_services_driver_1",
+        "real_estate_services_driver_2",
+        "real_estate_services_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "regulated_utilities",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "regulated_utilities_driver_1",
+        "regulated_utilities_driver_2",
+        "regulated_utilities_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "restaurants",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "restaurants_driver_1",
+        "restaurants_driver_2",
+        "restaurants_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "retail",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "retail_driver_1",
+        "retail_driver_2",
+        "retail_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "semi_equipment",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "semi_equipment_driver_1",
+        "semi_equipment_driver_2",
+        "semi_equipment_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "semiconductors",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "semiconductors_driver_1",
+        "semiconductors_driver_2",
+        "semiconductors_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "software",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "software_driver_1",
+        "software_driver_2",
+        "software_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "staples_retail",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "staples_retail_driver_1",
+        "staples_retail_driver_2",
+        "staples_retail_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "telecom",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "telecom_driver_1",
+        "telecom_driver_2",
+        "telecom_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "tobacco",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "tobacco_driver_1",
+        "tobacco_driver_2",
+        "tobacco_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "transport_logistics",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "transport_logistics_driver_1",
+        "transport_logistics_driver_2",
+        "transport_logistics_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    },
+    {
+      "industry_id": "travel_leisure",
+      "bound_shared_metric_ids": [
+        "operating_margin",
+        "revenue_growth"
+      ],
+      "blocked_required_metric_ids": [
+        "travel_leisure_driver_1",
+        "travel_leisure_driver_2",
+        "travel_leisure_driver_3"
+      ],
+      "reason": "行业驱动字段绑定与原始输入尚不完整"
+    }
+  ]
+}

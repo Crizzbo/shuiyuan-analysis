@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+2010-2026 Financial Accounting Foundation; (c) 2007-2010 XBRL US, Inc.; (c) 2020-2026 XBRL US, Inc. All Rights Reserved.
+Notice: Authorized Uses are Set Forth at https://xbrl.fasb.org/terms/TaxonomiesTermsConditions.html
+-->
+<xs:schema targetNamespace='http://fasb.org/dqcrules-0154/2026' elementFormDefault='qualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:dqcrules-0154='http://fasb.org/dqcrules-0154/2026' xmlns:dqcrules='http://fasb.org/dqcrules/2026' xmlns:us-gaap='http://fasb.org/us-gaap/2026' xmlns:link='http://www.xbrl.org/2003/linkbase' xmlns:ref='http://www.xbrl.org/2006/ref' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xbrli='http://www.xbrl.org/2003/instance' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:xbrldt='http://xbrl.org/2005/xbrldt' xmlns='http://www.xbrl.org/2003/linkbase' xsi:schemaLocation='http://www.xbrl.org/2006/ref http://www.xbrl.org/2006/ref-2006-02-27.xsd http://fasb.org/dqcrules/2026 dqcrules-2026.xsd'>
+<xs:import namespace='http://www.xbrl.org/2003/instance' schemaLocation='http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd'/>
+<xs:import namespace='http://www.xbrl.org/2003/linkbase' schemaLocation='http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd'/>
+<xs:import namespace='http://www.xbrl.org/2006/ref' schemaLocation='http://www.xbrl.org/2006/ref-2006-02-27.xsd'/>
+<xs:import namespace='http://xbrl.org/2005/xbrldt' schemaLocation='http://www.xbrl.org/2005/xbrldt-2005.xsd'/>
+<xs:import namespace='http://fasb.org/dqcrules/2026' schemaLocation='dqcrules-2026.xsd'/>
+<xs:import namespace='http://fasb.org/us-roles/2026' schemaLocation='../elts/us-roles-2026.xsd'/>
+<xs:import namespace='http://fasb.org/us-gaap/2026' schemaLocation='../elts/us-gaap-2026.xsd'/>
+<xs:annotation>
+<xs:appinfo>
+<link:roleType roleURI='http://fasb.org/us-gaap/role/dqc/0154' id='dqc_0154'>
+<link:definition>DQC.US.0154</link:definition>
+<link:usedOn>link:definitionLink</link:usedOn>
+<link:usedOn>link:referenceLink</link:usedOn>
+<link:usedOn>link:labelLink</link:usedOn>
+</link:roleType>
+<link:linkbase id='lnk'>
+<link:roleRef roleURI='http://fasb.org/us-gaap/role/dqc/0154' xlink:type='simple' xlink:href='#dqc_0154'/>
+<link:roleRef roleURI='http://fasb.org/us-gaap/role/dqc/dqcNote' xlink:href='dqcrules-2026.xsd#dqcn' xlink:type='simple'/>
+<link:arcroleRef arcroleURI='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:href='dqcrules-2026.xsd#rule-concept' xlink:type='simple'/>
+<link:roleRef roleURI='http://fasb.org/us-gaap/role/dqc/ruleExclusions' xlink:href='dqcrules-2026.xsd#dqcre' xlink:type='simple'/>
+<link:roleRef roleURI='http://fasb.org/us-gaap/role/dqc/ruleID' xlink:href='dqcrules-2026.xsd#dqcrid' xlink:type='simple'/>
+<link:labelLink xlink:type='extended' xlink:role='http://fasb.org/us-gaap/role/dqc/0154'>
+<link:loc xlink:href='#dqcrules-0154_Dqc_0154' xlink:label='loc_dqcrules_Dqc_0154' xlink:type='locator'/>
+<link:loc xlink:href='#dqcrules-0154_Dqc_0154_TaxReconciliationItems' xlink:label='loc_dqcrules_Dqc_0154_TaxReconciliationItems' xlink:type='locator'/>
+<link:label xlink:type='resource' xlink:role='http://www.xbrl.org/2003/role/label' xlink:label='lbl_dqcrules_Dqc_0154' xml:lang='en-US'>DQC.US.0154 [Abstract]</link:label>
+<link:label xlink:type='resource' xlink:role='http://www.xbrl.org/2003/role/label' xlink:label='lbl_dqcrules_Dqc_0154_TaxReconciliationItems' xml:lang='en-US'>DQC.US.0154.Tax Reconciliation Items [Abstract]</link:label>
+<link:labelArc xlink:type='arc' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-label' xlink:from='loc_dqcrules_Dqc_0154' xlink:to='lbl_dqcrules_Dqc_0154'/>
+<link:labelArc xlink:type='arc' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-label' xlink:from='loc_dqcrules_Dqc_0154_TaxReconciliationItems' xlink:to='lbl_dqcrules_Dqc_0154_TaxReconciliationItems'/>
+</link:labelLink>
+<link:definitionLink xlink:type='extended' xlink:role='http://fasb.org/us-gaap/role/dqc/0154'>
+<link:loc xlink:href='#dqcrules-0154_Dqc_0154' xlink:label='loc_Dqc_0154' xlink:type='locator'/>
+<link:loc xlink:href='#dqcrules-0154_Dqc_0154_TaxReconciliationItems' xlink:label='loc_Dqc_0154_TaxReconciliationItems' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_EffectiveIncomeTaxRateReconciliationBeatAmount' xlink:label='loc_EffectiveIncomeTaxRateReconciliationBeatAmount' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_EffectiveIncomeTaxRateReconciliationBeatPercent' xlink:label='loc_EffectiveIncomeTaxRateReconciliationBeatPercent' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_EffectiveIncomeTaxRateReconciliationFdiiAmount' xlink:label='loc_EffectiveIncomeTaxRateReconciliationFdiiAmount' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_EffectiveIncomeTaxRateReconciliationFdiiPercent' xlink:label='loc_EffectiveIncomeTaxRateReconciliationFdiiPercent' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_EffectiveIncomeTaxRateReconciliationForeignIncomeTaxRateDifferential' xlink:label='loc_EffectiveIncomeTaxRateReconciliationForeignIncomeTaxRateDifferential' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_EffectiveIncomeTaxRateReconciliationGiltiAmount' xlink:label='loc_EffectiveIncomeTaxRateReconciliationGiltiAmount' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_EffectiveIncomeTaxRateReconciliationGiltiPercent' xlink:label='loc_EffectiveIncomeTaxRateReconciliationGiltiPercent' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_IncomeTaxReconciliationForeignIncomeTaxRateDifferential' xlink:label='loc_IncomeTaxReconciliationForeignIncomeTaxRateDifferential' xlink:type='locator'/>
+<link:definitionArc order='1.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0154' xlink:to='loc_Dqc_0154_TaxReconciliationItems' xlink:type='arc'/>
+<link:definitionArc order='1.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0154_TaxReconciliationItems' xlink:to='loc_EffectiveIncomeTaxRateReconciliationFdiiPercent' xlink:type='arc'/>
+<link:definitionArc order='2.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0154_TaxReconciliationItems' xlink:to='loc_EffectiveIncomeTaxRateReconciliationFdiiAmount' xlink:type='arc'/>
+<link:definitionArc order='3.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0154_TaxReconciliationItems' xlink:to='loc_EffectiveIncomeTaxRateReconciliationGiltiPercent' xlink:type='arc'/>
+<link:definitionArc order='4.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0154_TaxReconciliationItems' xlink:to='loc_EffectiveIncomeTaxRateReconciliationGiltiAmount' xlink:type='arc'/>
+<link:definitionArc order='5.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0154_TaxReconciliationItems' xlink:to='loc_EffectiveIncomeTaxRateReconciliationBeatPercent' xlink:type='arc'/>
+<link:definitionArc order='6.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0154_TaxReconciliationItems' xlink:to='loc_EffectiveIncomeTaxRateReconciliationBeatAmount' xlink:type='arc'/>
+<link:definitionArc order='7.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0154_TaxReconciliationItems' xlink:to='loc_EffectiveIncomeTaxRateReconciliationForeignIncomeTaxRateDifferential' xlink:type='arc'/>
+<link:definitionArc order='8.0' xlink:arcrole='http://fasb.org/dqcrules/arcrole/rule-concept' xlink:from='loc_Dqc_0154_TaxReconciliationItems' xlink:to='loc_IncomeTaxReconciliationForeignIncomeTaxRateDifferential' xlink:type='arc'/>
+</link:definitionLink>
+<link:referenceLink xlink:role='http://fasb.org/us-gaap/role/dqc/0154' xlink:type='extended'>
+<link:loc xlink:href='#dqcrules-0154_Dqc_0154' xlink:label='loc_Dqc_0154' xlink:type='locator'/>
+<link:loc xlink:href='#dqcrules-0154_Dqc_0154_TaxReconciliationItems' xlink:label='loc_Dqc_0154_TaxReconciliationItems' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_EffectiveIncomeTaxRateReconciliationBeatAmount' xlink:label='loc_EffectiveIncomeTaxRateReconciliationBeatAmount' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_EffectiveIncomeTaxRateReconciliationBeatPercent' xlink:label='loc_EffectiveIncomeTaxRateReconciliationBeatPercent' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_EffectiveIncomeTaxRateReconciliationFdiiAmount' xlink:label='loc_EffectiveIncomeTaxRateReconciliationFdiiAmount' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_EffectiveIncomeTaxRateReconciliationFdiiPercent' xlink:label='loc_EffectiveIncomeTaxRateReconciliationFdiiPercent' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_EffectiveIncomeTaxRateReconciliationForeignIncomeTaxRateDifferential' xlink:label='loc_EffectiveIncomeTaxRateReconciliationForeignIncomeTaxRateDifferential' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_EffectiveIncomeTaxRateReconciliationGiltiAmount' xlink:label='loc_EffectiveIncomeTaxRateReconciliationGiltiAmount' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_EffectiveIncomeTaxRateReconciliationGiltiPercent' xlink:label='loc_EffectiveIncomeTaxRateReconciliationGiltiPercent' xlink:type='locator'/>
+<link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_IncomeTaxReconciliationForeignIncomeTaxRateDifferential' xlink:label='loc_IncomeTaxReconciliationForeignIncomeTaxRateDifferential' xlink:type='locator'/>
+<link:reference xlink:label='dqc_0154' xlink:role='http://fasb.org/us-gaap/role/dqc/dqcNote' xlink:type='resource'>
+<ref:Publisher>XBRL US</ref:Publisher>
+<dqcrules:ruleId>DQC.0154</dqcrules:ruleId>
+<dqcrules:ruleName>Tax Reconciliation Items</dqcrules:ruleName>
+<dqcrules:ruleDocumentation>This rule checks that tax reconciliation items have been selected correctly. The rule checks the following reconciliation items: (1) Foreign-derived intangible income, (2) Global intangible low-taxed income, (3) Base erosion and anti-abuse tax, and (4) Foreign Income Tax Rate Differentials.</dqcrules:ruleDocumentation>
+<ref:URI>https://xbrl.us/data-rule/dqc_0154/</ref:URI>
+</link:reference>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_Dqc_0154' xlink:to='dqc_0154' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_Dqc_0154_TaxReconciliationItems' xlink:to='dqc_0154' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EffectiveIncomeTaxRateReconciliationFdiiPercent' xlink:to='dqc_0154' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EffectiveIncomeTaxRateReconciliationFdiiAmount' xlink:to='dqc_0154' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EffectiveIncomeTaxRateReconciliationGiltiPercent' xlink:to='dqc_0154' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EffectiveIncomeTaxRateReconciliationGiltiAmount' xlink:to='dqc_0154' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EffectiveIncomeTaxRateReconciliationBeatPercent' xlink:to='dqc_0154' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EffectiveIncomeTaxRateReconciliationBeatAmount' xlink:to='dqc_0154' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EffectiveIncomeTaxRateReconciliationForeignIncomeTaxRateDifferential' xlink:to='dqc_0154' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_IncomeTaxReconciliationForeignIncomeTaxRateDifferential' xlink:to='dqc_0154' xlink:type='arc'/>
+<link:reference xlink:type='resource' xlink:label='DQC_US_0154_10068' xlink:role='http://fasb.org/us-gaap/role/dqc/ruleID'><dqcrules:ruleElementId>DQC.US.0154.10068</dqcrules:ruleElementId></link:reference>
+<link:reference xlink:type='resource' xlink:label='DQC_US_0154_10070' xlink:role='http://fasb.org/us-gaap/role/dqc/ruleID'><dqcrules:ruleElementId>DQC.US.0154.10070</dqcrules:ruleElementId></link:reference>
+<link:reference xlink:type='resource' xlink:label='DQC_US_0154_10069' xlink:role='http://fasb.org/us-gaap/role/dqc/ruleID'><dqcrules:ruleElementId>DQC.US.0154.10069</dqcrules:ruleElementId></link:reference>
+<link:reference xlink:type='resource' xlink:label='DQC_US_0154_10071' xlink:role='http://fasb.org/us-gaap/role/dqc/ruleID'><dqcrules:ruleElementId>DQC.US.0154.10071</dqcrules:ruleElementId></link:reference>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EffectiveIncomeTaxRateReconciliationFdiiPercent' xlink:to='DQC_US_0154_10068' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EffectiveIncomeTaxRateReconciliationFdiiAmount' xlink:to='DQC_US_0154_10068' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EffectiveIncomeTaxRateReconciliationGiltiPercent' xlink:to='DQC_US_0154_10070' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EffectiveIncomeTaxRateReconciliationGiltiAmount' xlink:to='DQC_US_0154_10070' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EffectiveIncomeTaxRateReconciliationBeatPercent' xlink:to='DQC_US_0154_10069' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EffectiveIncomeTaxRateReconciliationBeatAmount' xlink:to='DQC_US_0154_10069' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_EffectiveIncomeTaxRateReconciliationForeignIncomeTaxRateDifferential' xlink:to='DQC_US_0154_10071' xlink:type='arc'/>
+<link:referenceArc order='1.0' xlink:arcrole='http://www.xbrl.org/2003/arcrole/concept-reference' xlink:from='loc_IncomeTaxReconciliationForeignIncomeTaxRateDifferential' xlink:to='DQC_US_0154_10071' xlink:type='arc'/>
+</link:referenceLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+<xs:element name='Dqc_0154' id='dqcrules-0154_Dqc_0154' type='xbrli:stringItemType' substitutionGroup='xbrli:item' abstract='true' nillable='true' xbrli:periodType='duration'/>
+<xs:element name='Dqc_0154_TaxReconciliationItems' id='dqcrules-0154_Dqc_0154_TaxReconciliationItems' type='xbrli:stringItemType' substitutionGroup='xbrli:item' abstract='true' nillable='true' xbrli:periodType='duration'/>
+</xs:schema>

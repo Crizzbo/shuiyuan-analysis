@@ -1,0 +1,21 @@
+{
+  "title": "全盘万家上市企业官方监管身份主索引 (10,000+ Company Regulatory Identity Index)",
+  "updated_at": "2026-10-17T12:00:00+00:00",
+  "status": "UNVERIFIED_INDEX_REQUIRES_OFFICIAL_FILINGS",
+  "warning": "待复核历史索引库：本资产池仅作为企业代码与监管身份索引，未取得官方财务三表原文前严禁生成伪造报表或发布非核验证明。",
+  "total_companies": 14892,
+  "market_breakdown": {
+    "US_SEC_EDGAR": 10445,
+    "JP_JPX_TOKYO": 4447
+  },
+  "official_sources": {
+    "sec_tickers_path": "data/universe/sec_company_tickers.json",
+    "jpx_tickers_path": "data/universe/jpx_company_tickers.json",
+    "sp500_universe_path": "data/universe/sp500_universe.json",
+    "sp500_snapshots_path": "data/universe/sp500_fundamental_snapshots.json",
+    "gap_manifest_path": "data/universe/gap_manifest_567.json"
+  },
+  "verified_dossiers_sources": "data_sources/batch*_verified_dossiers_data.py",
+  "synthetic_data_status": "PURGED_COMPLETELY",
+  "policy": "坚决执行真实数据准则。未取得官方权威财务三表原文核验前，严禁合成虚拟报表或发布非核验证明。所有缺口如实纳入 gap_manifest_567.json 跟踪。"
+}

@@ -1,0 +1,1230 @@
+{
+  "schema_version": "1.0.0",
+  "plans": [
+    {
+      "parent_metric_id": "managed_care_driver_1",
+      "selected_variant_zh": "UnitedHealth 2025 集团报告口径医疗成本率",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "匹配医疗成本": [
+          {
+            "component": "unh_reported_medical_cost",
+            "kind": "numeric",
+            "scope": "consolidated_reported_medical_care",
+            "unit": "USD"
+          }
+        ],
+        "医疗保费或公司 MCR": [
+          {
+            "component": "unh_reported_premium_revenue",
+            "kind": "numeric",
+            "scope": "consolidated_reported_medical_care",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "不混用调整后 88.9% 的分子分母；仅限该年度报告口径"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "banks_driver_1",
+      "selected_variant_zh": "JPM 2025 全年完全税当量管理口径净息收益率",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "年化净利息收入": [
+          {
+            "component": "jpm_managed_net_interest_income",
+            "kind": "numeric",
+            "scope": "firm_managed_tax_equivalent",
+            "unit": "USD"
+          }
+        ],
+        "平均生息资产或公司 NIM": [
+          {
+            "component": "jpm_average_interest_earning_assets",
+            "kind": "numeric",
+            "scope": "firm_managed_tax_equivalent",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "全年无需再按季度年化；不是 GAAP 净利息收入或剔除 Markets 口径"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "capital_goods_driver_1",
+      "selected_variant_zh": "GE Vernova 2025 年集团报告订单收入比",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "新增订单金额": [
+          {
+            "component": "company_new_orders",
+            "kind": "numeric",
+            "scope": "consolidated",
+            "unit": "USD"
+          }
+        ],
+        "同期间确认收入": [
+          {
+            "component": "company_order_period_revenue",
+            "kind": "numeric",
+            "scope": "consolidated",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "采用发行人报告订单定义；分部订单与收入必须分别成对，不能跨分部混配"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "it_services_driver_2",
+      "selected_variant_zh": "Accenture FY2026 咨询服务新签合同报告金额",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "新签合同 bookings": [
+          {
+            "component": "acn_consulting_new_bookings",
+            "kind": "numeric",
+            "scope": "consulting",
+            "unit": "USD"
+          }
+        ],
+        "服务类别": [
+          {
+            "component": "acn_consulting_new_bookings",
+            "kind": "scope_metadata",
+            "scope": "consulting",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "咨询合同不是托管合同或确认收入；不能据此判断全部可执行"
+      ],
+      "period_start": "2025-09-01",
+      "period_end": "2026-08-31"
+    },
+    {
+      "parent_metric_id": "hardware_driver_1",
+      "selected_variant_zh": "Sony FY2025 全球 PS5 sell-in 数量",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "产品 sell-in 出货量": [
+          {
+            "component": "sony_ps5_fy2025_sellin",
+            "kind": "numeric",
+            "scope": "PS5_sellin_including_returned_refurbished",
+            "unit": "systems"
+          }
+        ],
+        "地区": [
+          {
+            "component": "sony_ps5_fy2025_sellin",
+            "kind": "scope_metadata",
+            "scope": "PS5_sellin_including_returned_refurbished",
+            "unit": "systems"
+          }
+        ],
+        "期间": [
+          {
+            "component": "sony_ps5_fy2025_sellin",
+            "kind": "period_metadata",
+            "scope": "PS5_sellin_including_returned_refurbished",
+            "unit": "systems"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "含退回及翻新产品；不是终端零售或 Sony 全硬件出货"
+      ],
+      "period_start": "2025-04-01",
+      "period_end": "2026-03-31"
+    },
+    {
+      "parent_metric_id": "housing_durables_driver_2",
+      "selected_variant_zh": "D.R. Horton FY2025 住宅成交交割数",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "完成 closing 的住宅数": [
+          {
+            "component": "homes_closed",
+            "kind": "numeric",
+            "scope": "homebuilding",
+            "unit": "homes"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "closed 不是新签订单或开工量"
+      ],
+      "period_start": "2024-10-01",
+      "period_end": "2025-09-30"
+    },
+    {
+      "parent_metric_id": "software_driver_3",
+      "selected_variant_zh": "Datadog 2025 年费用化股权激励及 EPS 加权稀释股数",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "SBC 费用": [
+          {
+            "component": "ddog_annual_sbc_expense",
+            "kind": "numeric",
+            "scope": "consolidated",
+            "unit": "USD"
+          }
+        ],
+        "加权稀释股数": [
+          {
+            "component": "ddog_weighted_diluted_eps_shares",
+            "kind": "numeric",
+            "scope": "consolidated",
+            "unit": "shares"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "净费用未涵盖资本化激励；期初期末实际发行股数缺失；EPS 加权股数仅用于同名输入，不能代替实际发行股数"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "banks_driver_2",
+      "selected_variant_zh": "JPM 2025 全集团留存贷款净核销",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "扣回收后的净核销额": [
+          {
+            "component": "jpm_firm_net_chargeoffs",
+            "kind": "numeric",
+            "scope": "firm_retained_loans",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "全集团平均留存贷款待补，不能使用批发贷款分母"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "media_entertainment_driver_2",
+      "selected_variant_zh": "Netflix 2025 内容现金流调节项",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "内容现金支付": [
+          {
+            "component": "nflx_content_asset_additions_cf",
+            "kind": "numeric",
+            "scope": "consolidated_content_cashflow",
+            "unit": "USD"
+          },
+          {
+            "component": "nflx_content_liability_change_cf",
+            "kind": "numeric",
+            "scope": "consolidated_content_cashflow",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "资产新增及负债变动与现金支付的关系待审核；许可、自制和预付覆盖待核；摊销不是现金支付"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "media_entertainment_driver_3",
+      "selected_variant_zh": "Netflix 2025 年度内容资产摊销",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "内容资产摊销或内容成本附注": [
+          {
+            "component": "nflx_content_amortization_driver3",
+            "kind": "numeric",
+            "scope": "consolidated_content_cashflow",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "仅限内容资产摊销；不等同现金支付或完整内容成本"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "travel_leisure_driver_1",
+      "selected_variant_zh": "Marriott 2025 美加可比自营酒店入住率",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "可售间夜或公司披露入住率": [
+          {
+            "component": "mar_company_operated_occupancy",
+            "kind": "numeric",
+            "scope": "comparable_company_operated_US_Canada",
+            "unit": "ratio"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "报告比例已有；原始售出间夜与完整客房纳入规则待补"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "travel_leisure_driver_2",
+      "selected_variant_zh": "Marriott 2025 美加可比自营酒店 ADR",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "售出间夜或公司 ADR": [
+          {
+            "component": "mar_company_operated_adr",
+            "kind": "numeric",
+            "scope": "comparable_company_operated_US_Canada",
+            "unit": "USD_per_room_night"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "报告 ADR 已有；匹配客房收入待补，不能与加盟酒店收入混配"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "tobacco_driver_3",
+      "selected_variant_zh": "菲莫国际 2025 无烟业务",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "无烟产品净收入": [
+          {
+            "component": "smoke_free_net_revenue",
+            "kind": "numeric",
+            "scope": "smoke_free_business",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "毛利润不是经营利润；同范围经营利润待补"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "health_services_driver_3",
+      "selected_variant_zh": "HCA 2025 集团工资福利收入比",
+      "definition_reviewed": false,
+      "requires_same_scope": true,
+      "slots": {
+        "工资福利或匹配人工成本": [
+          {
+            "component": "consolidated_salaries_benefits",
+            "kind": "numeric",
+            "scope": "consolidated_all_facilities",
+            "unit": "USD"
+          }
+        ],
+        "净服务收入": [
+          {
+            "component": "consolidated_healthcare_revenue",
+            "kind": "numeric",
+            "scope": "consolidated_all_facilities",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "净服务收入定义等价性和合同工人工覆盖待核；数值输入齐备不放行完整人工成本结论"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "health_services_driver_1",
+      "selected_variant_zh": "HCA 2025 同院等价住院量",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "住院或等价住院次数": [
+          {
+            "component": "same_facility_equivalent_admissions",
+            "kind": "numeric",
+            "scope": "same_facility",
+            "unit": "equivalent_admissions"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "同院纳入群与门诊折算规则待核"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "midstream_driver_1",
+      "selected_variant_zh": "EPD 2025 第四季度天然气加工厂入口日均量",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "产品吞吐量": [
+          {
+            "component": "gas_processing_inlet_daily_volume",
+            "kind": "numeric",
+            "scope": "natural_gas_processing_plant_inlet",
+            "unit": "Bcf_per_day"
+          }
+        ],
+        "披露单位": [
+          {
+            "component": "gas_processing_inlet_daily_volume",
+            "kind": "scope_metadata",
+            "scope": "natural_gas_processing_plant_inlet",
+            "unit": "Bcf_per_day"
+          }
+        ],
+        "日均或期间总量": [
+          {
+            "component": "gas_processing_inlet_daily_volume",
+            "kind": "period_metadata",
+            "scope": "natural_gas_processing_plant_inlet",
+            "unit": "Bcf_per_day"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "入口处理量不自动代表所有中游运输吞吐量"
+      ],
+      "period_start": "2025-10-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "staples_retail_driver_1",
+      "selected_variant_zh": "Costco FY2025 全年集团报告同店销售增长率（含燃油及汇率）",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "同店销售披露": [
+          {
+            "component": "annual_company_comparable_sales_growth",
+            "kind": "numeric",
+            "scope": "total_company_reported_including_gasoline_and_fx",
+            "unit": "ratio"
+          }
+        ],
+        "店群规则": [
+          {
+            "component": "annual_company_comparable_sales_growth",
+            "kind": "scope_metadata",
+            "scope": "total_company_reported_including_gasoline_and_fx",
+            "unit": "ratio"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "包含燃油价格与汇率波动影响；剔除口径为 7.6%"
+      ],
+      "period_start": "2024-09-02",
+      "period_end": "2025-08-31"
+    },
+    {
+      "parent_metric_id": "retail_driver_1",
+      "selected_variant_zh": "Walmart FY2026 Q4 沃尔玛美国可比门店销售增长率（剔除燃油）",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "公司同店销售披露": [
+          {
+            "component": "walmart_us_comparable_sales_growth",
+            "kind": "numeric",
+            "scope": "walmart_us_excluding_fuel",
+            "unit": "ratio"
+          }
+        ],
+        "门店纳入规则": [
+          {
+            "component": "walmart_us_comparable_sales_growth",
+            "kind": "scope_metadata",
+            "scope": "walmart_us_excluding_fuel",
+            "unit": "ratio"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "仅限沃尔玛美国分部且剔除燃油；山姆会员店及国际业务为独立口径"
+      ],
+      "period_start": "2025-11-01",
+      "period_end": "2026-01-30"
+    },
+    {
+      "parent_metric_id": "restaurants_driver_1",
+      "selected_variant_zh": "McDonalds 2025 Q4 全球可比餐厅销售增长率",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "同店销售增长披露": [
+          {
+            "component": "global_comparable_sales_growth",
+            "kind": "numeric",
+            "scope": "global_company_reported_comparable_restaurants",
+            "unit": "ratio"
+          }
+        ],
+        "店群规则": [
+          {
+            "component": "global_comparable_sales_growth",
+            "kind": "scope_metadata",
+            "scope": "global_company_reported_comparable_restaurants",
+            "unit": "ratio"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "包含自营与加盟可比餐厅；仅限开业满13个月以上店群"
+      ],
+      "period_start": "2025-10-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "food_beverage_driver_2",
+      "selected_variant_zh": "Coca-Cola 2025 全年有机营收增长桥接价格与组合贡献率",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "公司价格组合桥接贡献": [
+          {
+            "component": "price_mix_contribution",
+            "kind": "numeric",
+            "scope": "global_company_organic_revenue_growth_bridge",
+            "unit": "ratio"
+          }
+        ],
+        "公司桥接定义": [
+          {
+            "component": "price_mix_contribution",
+            "kind": "scope_metadata",
+            "scope": "global_company_organic_revenue_growth_bridge",
+            "unit": "ratio"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "属于有机收入桥接分解项；不是绝对单价变动金额"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "insurance_driver_2",
+      "selected_variant_zh": "Chubb 2025 Q4 税前有利前期事故准备金发展额",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "前期事故年度有利或不利发展": [
+          {
+            "component": "favorable_prior_period_reserve_development",
+            "kind": "numeric",
+            "scope": "issuer_reported_favorable_prior_period_development_positive_is_favorable",
+            "unit": "USD"
+          }
+        ],
+        "再保险范围": [
+          {
+            "component": "favorable_prior_period_reserve_development",
+            "kind": "scope_metadata",
+            "scope": "issuer_reported_favorable_prior_period_development_positive_is_favorable",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "正值表示有利发展（释放）；仅限当季净额，未涵盖全部事故年度精算分布"
+      ],
+      "period_start": "2025-10-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "aerospace_defense_driver_3",
+      "selected_variant_zh": "Lockheed Martin 2025 全年 F-35 战机报告交付数量",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "验收交付量": [
+          {
+            "component": "lmt_f35_delivered",
+            "kind": "numeric",
+            "scope": "lmt_f35_delivered",
+            "unit": "aircraft"
+          }
+        ],
+        "产品标识": [
+          {
+            "component": "lmt_f35_delivered",
+            "kind": "scope_metadata",
+            "scope": "lmt_f35_delivered",
+            "unit": "aircraft"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "仅限报告交付给军方客户的 F-35；F-16/C-130J 为不同型号独立口径"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "transport_logistics_driver_1",
+      "selected_variant_zh": "Delta Air Lines 2025 全年客运载运率（RPM/ASM）",
+      "definition_reviewed": true,
+      "requires_same_scope": false,
+      "slots": {
+        "收入客公里或吨公里": [
+          {
+            "component": "annual_revenue_passenger_miles",
+            "kind": "numeric",
+            "scope": "consolidated_airline_passenger_traffic",
+            "unit": "passenger_miles"
+          }
+        ],
+        "可用座公里或吨公里": [
+          {
+            "component": "annual_available_seat_miles",
+            "kind": "numeric",
+            "scope": "consolidated_airline_passenger_capacity",
+            "unit": "seat_miles"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "系统英里口径（RPM/ASM）；客座率报告值为 84%"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "oil_gas_driver_2",
+      "selected_variant_zh": "EOG Resources 2025 全年租赁/井运营及集输运输现金成本",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "现金开采成本": [
+          {
+            "component": "eog_lease_well_cost",
+            "kind": "numeric",
+            "scope": "consolidated_reported_sales_cost_schedule",
+            "unit": "USD"
+          },
+          {
+            "component": "eog_gather_processing_cost",
+            "kind": "numeric",
+            "scope": "consolidated_reported_sales_cost_schedule",
+            "unit": "USD"
+          }
+        ],
+        "匹配产量": [
+          {
+            "component": "eog_sales_equivalent_volume",
+            "kind": "numeric",
+            "scope": "consolidated_reported_sales_cost_schedule",
+            "unit": "Boe"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "不包含管理费及生产税；开采范围与实物权益产量匹配性待进一步审核"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "biotech_driver_2",
+      "selected_variant_zh": "Moderna 2025 年末期末现金及投资合计",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "可用现金和投资": [
+          {
+            "component": "mrna_cash_investments_reported",
+            "kind": "numeric",
+            "scope": "consolidated_cash_equivalents_and_investments",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "包含投资及银行授信首笔提取；正常化月净消耗及后续研发调整项待补"
+      ],
+      "period_start": null,
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "insurance_driver_1",
+      "selected_variant_zh": "Chubb 2025 Q4 集团财险报告赔付及两项费用率之和",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "同范围赔付率": [
+          {
+            "component": "cb_pc_loss_ratio_q4",
+            "kind": "numeric",
+            "scope": "group_pc_excludes_life_includes_cats_ppd_crop_derivatives",
+            "unit": "ratio"
+          }
+        ],
+        "费用率或报告 combined ratio": [
+          {
+            "component": "cb_pc_acquisition_ratio_q4",
+            "kind": "numeric",
+            "scope": "group_pc_excludes_life_includes_cats_ppd_crop_derivatives",
+            "unit": "ratio"
+          },
+          {
+            "component": "cb_pc_admin_ratio_q4",
+            "kind": "numeric",
+            "scope": "group_pc_excludes_life_includes_cats_ppd_crop_derivatives",
+            "unit": "ratio"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "54.3%+18.9%+8.0%=81.2%，与原表综合成本率交叉核对；剔除寿险、包含大灾及前期准备金发展、作物衍生品调整"
+      ],
+      "period_start": "2025-10-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "equity_reit_driver_1",
+      "selected_variant_zh": "Prologis 2025 全年权益份额现金同物业 NOI 增长率",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "同群同期 NOI或披露增长": [
+          {
+            "component": "cash_same_store_noi_growth",
+            "kind": "numeric",
+            "scope": "prologis_share_cash_same_store_noi",
+            "unit": "ratio"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "报告现金同店 NOI 增速已取得；原始同群本期与同期 NOI 金额待补"
+      ],
+      "period_start": "2025-10-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "capital_goods_driver_2",
+      "selected_variant_zh": "GE Vernova 2025 年末集团剩余履约义务（RPO）口径积压订单",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "期末 backlog": [
+          {
+            "component": "company_backlog_rpo",
+            "kind": "numeric",
+            "scope": "consolidated_rpo",
+            "unit": "USD"
+          }
+        ],
+        "可执行条件": [
+          {
+            "component": "company_backlog_rpo",
+            "kind": "scope_metadata",
+            "scope": "consolidated_rpo",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "采用 RPO 口径；取消条款与可执行细则待补"
+      ],
+      "period_start": null,
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "food_beverage_driver_1",
+      "selected_variant_zh": "Coca-Cola 2025 全年全球系统标准箱日均销量增长（持平）",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "同期可比销量或披露增长": [
+          {
+            "component": "system_unit_case_volume_growth",
+            "kind": "numeric",
+            "scope": "global_system_average_daily_unit_case_volume",
+            "unit": "ratio"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "披露定性零增长（Even）；原始本期及同期标准箱物理数量待补"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "medical_devices_driver_2",
+      "selected_variant_zh": "Intuitive Surgical 2025 Q4 达芬奇系统新增投放量",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "当期系统 placement": [
+          {
+            "component": "da_vinci_placements",
+            "kind": "numeric",
+            "scope": "worldwide_da_vinci_including_leases",
+            "unit": "systems"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "达芬奇系统包含租赁及直购；期末安装量及退役调整待补"
+      ],
+      "period_start": "2025-10-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "digital_platforms_driver_1",
+      "selected_variant_zh": "Meta 2025 年第四季度应用家族每日活跃人数 (DAP)",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "DAU 或 MAU": [
+          {
+            "component": "family_daily_active_people",
+            "kind": "numeric",
+            "scope": "family_of_apps_deduplicated_people",
+            "unit": "people"
+          }
+        ],
+        "频率": [
+          {
+            "component": "family_daily_active_people",
+            "kind": "period_metadata",
+            "scope": "family_of_apps_deduplicated_people",
+            "unit": "people"
+          }
+        ],
+        "活跃规则": [
+          {
+            "component": "family_daily_active_people",
+            "kind": "scope_metadata",
+            "scope": "family_of_apps_deduplicated_people",
+            "unit": "people"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "去重单人统计；不包含非家族独立服务；不直接代表单应用 DAU"
+      ],
+      "period_start": "2025-12-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "midstream_driver_3",
+      "selected_variant_zh": "Enterprise Products Partners 2025 Q4 维持资本支出现金额",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "公司披露 sustaining capex": [
+          {
+            "component": "sustaining_capex",
+            "kind": "numeric",
+            "scope": "partnership_existing_assets",
+            "unit": "USD"
+          }
+        ],
+        "范围说明": [
+          {
+            "component": "sustaining_capex",
+            "kind": "scope_metadata",
+            "scope": "partnership_existing_assets",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "仅限合伙企业现有资产维持性开支；增长性项目与资产收购不属于本项"
+      ],
+      "period_start": "2025-10-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "banks_driver_3",
+      "selected_variant_zh": "JPMorgan Chase 2025 年末标准化 CET1 资本比率",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "CET1 比率": [
+          {
+            "component": "jpm_standardized_cet1",
+            "kind": "numeric",
+            "scope": "firm_standardized",
+            "unit": "ratio"
+          }
+        ],
+        "适用规则": [
+          {
+            "component": "jpm_standardized_cet1",
+            "kind": "scope_metadata",
+            "scope": "firm_standardized",
+            "unit": "ratio"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "LCR 与 NSFR 比率待补；标准化方法非高级法"
+      ],
+      "period_start": null,
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "housing_durables_driver_1",
+      "selected_variant_zh": "D.R. Horton FY2025 住宅订单取消率订单群定义",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "公司定义的匹配订单群": [
+          {
+            "component": "home_order_cancellation_rate",
+            "kind": "scope_metadata",
+            "scope": "homebuilding_cancelled_sales_orders_over_gross_sales_orders",
+            "unit": "ratio"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "仅取得取消率定义与订单群规则；当期实际取消订单物理套数待补"
+      ],
+      "period_start": "2024-10-01",
+      "period_end": "2025-09-30"
+    },
+    {
+      "parent_metric_id": "asset_management_driver_1",
+      "selected_variant_zh": "BlackRock 2025 全年客户净资金流量定义与披露口径",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "公司流量定义": [
+          {
+            "component": "net_client_flows",
+            "kind": "scope_metadata",
+            "scope": "company_reported_net_flows_including_cash_management",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "包含现金管理业务净流出入；原始客户毛流入、毛流出及资本返还明细待补"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "construction_driver_1",
+      "selected_variant_zh": "Fluor 2025 年度合并工程建筑收入",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "同范围年度收入": [
+          {
+            "component": "construction_annual_revenue",
+            "kind": "numeric",
+            "scope": "consolidated",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "仅取得同范围年度收入；可执行期末订单额待补"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "telecom_driver_2",
+      "selected_variant_zh": "Verizon 2025 Q4 全无线后付费电话报告流失率",
+      "definition_reviewed": false,
+      "requires_same_scope": true,
+      "slots": {
+        "月数或披露 churn": [
+          {
+            "component": "vz_total_postpaid_phone_churn_q4",
+            "kind": "numeric",
+            "scope": "total_wireless_retail_postpaid_phone",
+            "unit": "ratio"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "报告流失率取得；断开用户数与平均同群连接数未取得，不重建分子分母或宣称完整驱动"
+      ],
+      "period_start": "2025-10-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "autos_driver_1",
+      "selected_variant_zh": "丰田汽车 FY2025 全集团全球汽车零售交付总量（含大发与日野）",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "零售终端交付数": [
+          {
+            "component": "tm_retail_vehicle_deliveries_fy25",
+            "kind": "numeric",
+            "scope": "group_retail_all_brands_global",
+            "unit": "physical_quantity"
+          }
+        ],
+        "品牌地区": [
+          {
+            "component": "tm_retail_vehicle_deliveries_fy25",
+            "kind": "scope_metadata",
+            "scope": "group_retail_all_brands_global",
+            "unit": "physical_quantity"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "包含丰田雷克萨斯大发日野全品牌全球零售交付数；非合并批发口径",
+        "含442.5万台混动及电动化车辆"
+      ],
+      "period_start": "2024-04-01",
+      "period_end": "2025-03-31"
+    },
+    {
+      "parent_metric_id": "staples_retail_driver_3",
+      "selected_variant_zh": "Costco FY2025 全球可比仓储店到店客流频次增长率",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "同期交易数或公司披露增长": [
+          {
+            "component": "cost_worldwide_traffic_growth_fy25",
+            "kind": "numeric",
+            "scope": "worldwide_comparable_traffic",
+            "unit": "ratio"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "报告客流增长 5.4%；原始交易笔数待补"
+      ],
+      "period_start": "2024-09-02",
+      "period_end": "2025-08-31"
+    },
+    {
+      "parent_metric_id": "retail_driver_2",
+      "selected_variant_zh": "Walmart FY2025 全集团销售成本与期初期末平均存货",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "匹配期间销售成本": [
+          {
+            "component": "wmt_cost_of_sales_fy25",
+            "kind": "numeric",
+            "scope": "consolidated_cost_of_sales",
+            "unit": "USD"
+          }
+        ],
+        "期初期末同范围存货": [
+          {
+            "component": "wmt_average_inventories_fy25",
+            "kind": "numeric",
+            "scope": "consolidated_cost_of_sales",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "存货周转率计算分子分母完整成对；不混用单季度未年化分母"
+      ],
+      "period_start": "2024-02-01",
+      "period_end": "2025-01-31"
+    },
+    {
+      "parent_metric_id": "semiconductors_driver_3",
+      "selected_variant_zh": "Micron FY2026 全年 DRAM 业务分部报告收入",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "产品收入": [
+          {
+            "component": "mu_dram_annual_revenue_fy26",
+            "kind": "numeric",
+            "scope": "dram_products_annual",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "取得同产品收入 $100.68B；匹配 bit 数量或出货量待补充"
+      ],
+      "period_start": "2025-08-29",
+      "period_end": "2026-09-03"
+    },
+    {
+      "parent_metric_id": "pharma_driver_1",
+      "selected_variant_zh": "Pfizer FY2024 全年 Eliquis 全球报告净销售额（含联盟分成）",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "产品净收入": [
+          {
+            "component": "pfe_eliquis_worldwide_revenue_fy24",
+            "kind": "numeric",
+            "scope": "worldwide_eliquis_alliance_and_direct_revenue",
+            "unit": "USD"
+          }
+        ],
+        "药品与地区标识": [
+          {
+            "component": "pfe_eliquis_worldwide_revenue_fy24",
+            "kind": "scope_metadata",
+            "scope": "worldwide_eliquis_alliance_and_direct_revenue",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "仅限 Eliquis 单药全球销售额；未包含其他专利到期药或直销拆分"
+      ],
+      "period_start": "2024-01-01",
+      "period_end": "2024-12-31"
+    },
+    {
+      "parent_metric_id": "payments_driver_1",
+      "selected_variant_zh": "Visa FY2024 全财年名义支付处理总额（常量美元口径）",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "支付处理量": [
+          {
+            "component": "visa_payments_volume_fy24",
+            "kind": "numeric",
+            "scope": "global_nominal_payments_volume_fy24",
+            "unit": "USD"
+          }
+        ],
+        "交易类型": [
+          {
+            "component": "visa_payments_volume_fy24",
+            "kind": "scope_metadata",
+            "scope": "global_nominal_payments_volume_fy24",
+            "unit": "USD"
+          }
+        ],
+        "地区币种": [
+          {
+            "component": "visa_payments_volume_fy24",
+            "kind": "scope_metadata",
+            "scope": "global_nominal_payments_volume_fy24",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "全球 Visa 品牌卡片名义支付处理总额；不包含现金提现交易与欧洲双标卡剔除口径"
+      ],
+      "period_start": "2023-10-01",
+      "period_end": "2024-09-30"
+    },
+    {
+      "parent_metric_id": "mining_driver_1",
+      "selected_variant_zh": "Freeport-McMoRan 2024 全年铜综合实现平均售价",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "商品净销售额": [
+          {
+            "component": "fcx_copper_average_realized_price_2024",
+            "kind": "numeric",
+            "scope": "consolidated_copper_sales_2024",
+            "unit": "USD_per_pound"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "实现售价为 $4.21/lb；总销售额与实物销量分子分母待核"
+      ],
+      "period_start": "2024-01-01",
+      "period_end": "2024-12-31"
+    },
+    {
+      "parent_metric_id": "chemicals_driver_1",
+      "selected_variant_zh": "Dow 2024 全年包装与特种塑料分部净销售额",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "产品单位售价": [
+          {
+            "component": "dow_psp_segment_net_sales_2024",
+            "kind": "numeric",
+            "scope": "packaging_and_specialty_plastics_segment",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "仅取得分部净收入，单位产品售价与乙烯原料成本待补"
+      ],
+      "period_start": "2024-01-01",
+      "period_end": "2024-12-31"
+    },
+    {
+      "parent_metric_id": "packaging_driver_1",
+      "selected_variant_zh": "Packaging Corp 2024 全年瓦楞制品出货销售面积（67 BSF）",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "包装产品出货量": [
+          {
+            "component": "pkg_corrugated_products_shipments_2024",
+            "kind": "numeric",
+            "scope": "corrugated_products_annual_shipments",
+            "unit": "billion_square_feet"
+          }
+        ],
+        "单位": [
+          {
+            "component": "pkg_corrugated_products_shipments_2024",
+            "kind": "scope_metadata",
+            "scope": "corrugated_products_annual_shipments",
+            "unit": "billion_square_feet"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "瓦楞包装制品出货面积；非箱板纸原纸造纸产量"
+      ],
+      "period_start": "2024-01-01",
+      "period_end": "2024-12-31"
+    }
+  ]
+}

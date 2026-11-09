@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This schema was created by staff of the U.S. Securities and Exchange Commission. -->
+<!-- Data and content created by government employees within the scope of their employment -->
+<!-- are not subject to domestic copyright protection. 17 U.S.C. 105. -->
+<xs:schema
+xmlns:ffd-doc="http://xbrl.sec.gov/ffd-doc/2026"
+xmlns:link="http://www.xbrl.org/2003/linkbase"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://xbrl.sec.gov/ffd-doc/2026"
+elementFormDefault="qualified">
+<xs:annotation>
+<xs:appinfo>
+<link:linkbase id="lnk">
+<link:labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+<link:label xlink:type="resource" xlink:label="label_Rule429AggtOfferingAmt" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The maximum aggregate offering amount of unsold securities registered on the prior registration statement that are carried forward under Rule 429. Only applicable if 457(o) was used in the fee calculation for the prior registration statement.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429AggtOfferingAmt" xlink:to="label_Rule429AggtOfferingAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429AggtOfferingAmt" xlink:label="Rule429AggtOfferingAmt"/>
+<link:label xlink:type="resource" xlink:label="label_FeeAmt" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Total amount of registration fee (amount due after offsets).</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeeAmt" xlink:to="label_FeeAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_FeeAmt" xlink:label="FeeAmt"/>
+<link:label xlink:type="resource" xlink:label="label_FeeRate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The rate per dollar of fees that public companies and other issuers pay to register their securities with the Commission.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeeRate" xlink:to="label_FeeRate" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_FeeRate" xlink:label="FeeRate"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingAxis" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">A sequence number (1, 2, 3...) used to distinguish different security offerings on a single fee bearing submission.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingAxis" xlink:to="label_OfferingAxis" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OfferingAxis" xlink:label="OfferingAxis"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingSctyTp" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Type of securities: "Asset-backed Securities", "ADRs/ADSs", "Debt", "Debt Convertible into Equity", "Equity", "Face Amount Certificates", "Limited Partnership Interests", "Mortgage Backed Securities", "Non-Convertible Debt", "Unallocated (Universal) Shelf", "Exchange Traded Vehicle Securities", "Other"</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingSctyTp" xlink:to="label_OfferingSctyTp" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OfferingSctyTp" xlink:label="OfferingSctyTp"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingSctyTitl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The title of the class of securities being registered (for each class being registered).</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingSctyTitl" xlink:to="label_OfferingSctyTitl" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OfferingSctyTitl" xlink:label="OfferingSctyTitl"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457aFlg" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Checkbox indicating whether filer is using Rule 457(a) to calculate the registration fee due.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457aFlg" xlink:to="label_Rule457aFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule457aFlg" xlink:label="Rule457aFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457fFlg" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Checkbox indicating whether filer is using Rule 457(f) to calculate the registration fee due.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457fFlg" xlink:to="label_Rule457fFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule457fFlg" xlink:label="Rule457fFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457oFlg" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Checkbox indicating whether filer is using Rule 457(o) to calculate the registration fee due.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457oFlg" xlink:to="label_Rule457oFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule457oFlg" xlink:label="Rule457oFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457uFlg" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Checkbox indicating whether filer is using Rule 457(u) to calculate the registration fee due.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457uFlg" xlink:to="label_Rule457uFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule457uFlg" xlink:label="Rule457uFlg"/>
+<link:label xlink:type="resource" xlink:label="label_AmtSctiesRegd" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The amount of securities being registered.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AmtSctiesRegd" xlink:to="label_AmtSctiesRegd" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_AmtSctiesRegd" xlink:label="AmtSctiesRegd"/>
+<link:label xlink:type="resource" xlink:label="label_MaxOfferingPricPerScty" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The maximum offering price per share/unit being registered.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="MaxOfferingPricPerScty" xlink:to="label_MaxOfferingPricPerScty" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_MaxOfferingPricPerScty" xlink:label="MaxOfferingPricPerScty"/>
+<link:label xlink:type="resource" xlink:label="label_MaxAggtOfferingPric" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The maximum aggregate offering price for the offering that is being registered.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="MaxAggtOfferingPric" xlink:to="label_MaxAggtOfferingPric" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_MaxAggtOfferingPric" xlink:label="MaxAggtOfferingPric"/>
+<link:label xlink:type="resource" xlink:label="label_Rule415a6Flg" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Checkbox indicating whether filer is claiming a 415(a)(6) carryforward.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule415a6Flg" xlink:to="label_Rule415a6Flg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule415a6Flg" xlink:label="Rule415a6Flg"/>
+<link:label xlink:type="resource" xlink:label="label_CfwdFormTp" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The Form Type of the prior shelf registration statement from which unsold securities are carried forward under 415(a)(6). This should be an EDGAR submission type (S-3, S-3/A, S-3ASR, etc.), which means there is a fixed set of possible responses. Note that while the XBRL response should be an EDGAR submission type, the human-readable Ex. 107 could include a simpler label (e.g., "Form S-3" in the human-readable and "S-3ASR" in the XBRL).</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CfwdFormTp" xlink:to="label_CfwdFormTp" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CfwdFormTp" xlink:label="CfwdFormTp"/>
+<link:label xlink:type="resource" xlink:label="label_CfwdPrrFileNb" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The EDGAR File Number of the prior shelf registration statement from which unsold securities are carried forward under 415(a)(6). If the prior registration statement has a Securities Act File Number and an Investment Company Act File Number, the Securities Act File Number should be used.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CfwdPrrFileNb" xlink:to="label_CfwdPrrFileNb" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CfwdPrrFileNb" xlink:label="CfwdPrrFileNb"/>
+<link:label xlink:type="resource" xlink:label="label_CfwdPrrFctvDt" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The initial effective date of the prior shelf registration statement from which unsold securities are carried forward under 415(a)(6).</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CfwdPrrFctvDt" xlink:to="label_CfwdPrrFctvDt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CfwdPrrFctvDt" xlink:label="CfwdPrrFctvDt"/>
+<link:label xlink:type="resource" xlink:label="label_CfwdPrevslyPdFee" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The fee previously paid in connection with the securities being brought forward from the prior shelf registration statement on which unsold securities are carried forward under 415(a)(6).</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CfwdPrevslyPdFee" xlink:to="label_CfwdPrevslyPdFee" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CfwdPrevslyPdFee" xlink:label="CfwdPrevslyPdFee"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetAxis" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">A sequence number (1, 2, 3...) used to distinguish different offsets as applied to a fee bearing submission.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetAxis" xlink:to="label_OffsetAxis" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetAxis" xlink:label="OffsetAxis"/>
+<link:label xlink:type="resource" xlink:label="label_CmbndPrspctsItemAxis" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">A sequence number (1, 2, 3...) used to distinguish different references to earlier prospectuses on a single fee bearing submission.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmbndPrspctsItemAxis" xlink:to="label_CmbndPrspctsItemAxis" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CmbndPrspctsItemAxis" xlink:label="CmbndPrspctsItemAxis"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457pOffsetFlg" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Checkbox indicating whether filer is claiming an offset under Rule 457(p).</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457pOffsetFlg" xlink:to="label_Rule457pOffsetFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule457pOffsetFlg" xlink:label="Rule457pOffsetFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457bOffsetFlg" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Checkbox indicating whether filer is claiming an offset under Rule 457(b) or 0-11(a)(2).</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457bOffsetFlg" xlink:to="label_Rule457bOffsetFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule457bOffsetFlg" xlink:label="Rule457bOffsetFlg"/>
+<link:label xlink:type="resource" xlink:label="label_AmtSctiesRcvd" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Amount of securities to be received by the registrant (or cancelled upon issuance of securities to be registered on the form)</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AmtSctiesRcvd" xlink:to="label_AmtSctiesRcvd" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_AmtSctiesRcvd" xlink:label="AmtSctiesRcvd"/>
+<link:label xlink:type="resource" xlink:label="label_ValSctiesRcvdPerShr" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Value per share of securities to be received by the registrant (or cancelled upon issuance of securities to be registered on the form). This is included in the explanation of 457(f) fee calculation.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ValSctiesRcvdPerShr" xlink:to="label_ValSctiesRcvdPerShr" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_ValSctiesRcvdPerShr" xlink:label="ValSctiesRcvdPerShr"/>
+<link:label xlink:type="resource" xlink:label="label_ValSctiesRcvd" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Value of securities to be received by the registrant (or cancelled upon issuance of securities to be registered on the form)</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ValSctiesRcvd" xlink:to="label_ValSctiesRcvd" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_ValSctiesRcvd" xlink:label="ValSctiesRcvd"/>
+<link:label xlink:type="resource" xlink:label="label_CshPdByRegistrantInTx" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Amount of cash consideration paid by registrant in connection with the exchange or other transaction being registered (in a 457(f) calculation).</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CshPdByRegistrantInTx" xlink:to="label_CshPdByRegistrantInTx" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CshPdByRegistrantInTx" xlink:label="CshPdByRegistrantInTx"/>
+<link:label xlink:type="resource" xlink:label="label_CshRcvdByRegistrantInTx" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Amount of cash consideration received by registrant in connection with the exchange or other transaction being registered (in a 457(f) calculation).</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CshRcvdByRegistrantInTx" xlink:to="label_CshRcvdByRegistrantInTx" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_CshRcvdByRegistrantInTx" xlink:label="CshRcvdByRegistrantInTx"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429CmbndPrspctsFlg" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Checkbox indicating whether filer is using a combined prospectus under Rule 429.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429CmbndPrspctsFlg" xlink:to="label_Rule429CmbndPrspctsFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429CmbndPrspctsFlg" xlink:label="Rule429CmbndPrspctsFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429EarlierFileNb" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The Securities Act File Number of the earlier effective registration statement(s) from which securities may be offered and sold using the combined prospectus pursuant to Rule 429.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429EarlierFileNb" xlink:to="label_Rule429EarlierFileNb" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429EarlierFileNb" xlink:label="Rule429EarlierFileNb"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429EarlierFormTp" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The Form Type of the earlier registration statement from which unsold securities are carried forward under Rule 429. This should be an EDGAR submission type (S-3, S-3/A, S-3ASR, etc.), which means there is a fixed set of possible responses. Note that while the XBRL response should be an EDGAR submission type, the human-readable Ex. 107 could include a simpler label (e.g., "Form S-3" in the human-readable and "S-3ASR" in the XBRL).</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429EarlierFormTp" xlink:to="label_Rule429EarlierFormTp" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429EarlierFormTp" xlink:label="Rule429EarlierFormTp"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429InitlFctvDt" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The filing date of the earlier registration statement from which unsold securities are carried forward under Rule 429.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429InitlFctvDt" xlink:to="label_Rule429InitlFctvDt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429InitlFctvDt" xlink:label="Rule429InitlFctvDt"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429NbOfUnsoldScties" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The number of securities registered on the prior registration statement that are carried forward under Rule 429.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429NbOfUnsoldScties" xlink:to="label_Rule429NbOfUnsoldScties" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_Rule429NbOfUnsoldScties" xlink:label="Rule429NbOfUnsoldScties"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrFilerNm" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The name of the registrant that filed the earlier registration statement with which the earlier (offsetting) fee was paid.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrFilerNm" xlink:to="label_OffsetPrrFilerNm" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrFilerNm" xlink:label="OffsetPrrFilerNm"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrFormTp" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The Form Type of the offset filing.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrFormTp" xlink:to="label_OffsetPrrFormTp" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrFormTp" xlink:label="OffsetPrrFormTp"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrFileNb" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The EDGAR File Number of the earlier registration statement with which the earlier (offsetting) fee was paid. If the offset filing for the offset has a Securities Act File Number and an Investment Company Act File Number, the Securities Act File Number should be used.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrFileNb" xlink:to="label_OffsetPrrFileNb" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrFileNb" xlink:label="OffsetPrrFileNb"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetClmInitlFilgDt" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The initial filing date of the earlier registration statement with which the earlier (offsetting) fee was paid for a claimed offset. If the offset fee was paid with an amendment, do not provide the amendment date under this element; instead, provide the date of the initial filing (i.e. the "parent" filing) .</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetClmInitlFilgDt" xlink:to="label_OffsetClmInitlFilgDt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetClmInitlFilgDt" xlink:label="OffsetClmInitlFilgDt"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetClmdAmt" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The amount of offsetting fees being claimed.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetClmdAmt" xlink:to="label_OffsetClmdAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetClmdAmt" xlink:label="OffsetClmdAmt"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrUnsoldOfferingAmt" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The aggregate offering amount of unsold securities registered on the prior registration statement that are associated with the claimed offset.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrUnsoldOfferingAmt" xlink:to="label_OffsetPrrUnsoldOfferingAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrUnsoldOfferingAmt" xlink:label="OffsetPrrUnsoldOfferingAmt"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetSrcFilgDt" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The filing date of the earlier registration statement with which the earlier (offsetting) fee was paid in an offset.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetSrcFilgDt" xlink:to="label_OffsetSrcFilgDt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetSrcFilgDt" xlink:label="OffsetSrcFilgDt"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrFeeAmt" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The fee previously paid from which an offset is being derived.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrFeeAmt" xlink:to="label_OffsetPrrFeeAmt" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrFeeAmt" xlink:label="OffsetPrrFeeAmt"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrNbOfUnsoldScties" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The number of unsold securities registered on the prior registration statement that are associated with the claimed offset.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrNbOfUnsoldScties" xlink:to="label_OffsetPrrNbOfUnsoldScties" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrNbOfUnsoldScties" xlink:label="OffsetPrrNbOfUnsoldScties"/>
+<link:label xlink:type="resource" xlink:label="label_FeesOthrRuleFlg" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Checkbox indicating whether filer is using a rule other than 457(a), 457(o), or 457(f) to calculate the registration fee due.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeesOthrRuleFlg" xlink:to="label_FeesOthrRuleFlg" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_FeesOthrRuleFlg" xlink:label="FeesOthrRuleFlg"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrSctyTp" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">Type of securities: "Asset-backed Securities", "ADRs/ADSs", "Debt", "Debt Convertible into Equity", "Equity", "Face Amount Certificates", "Limited Partnership Interests", "Mortgage Backed Securities", "Non-Convertible Debt", "Unallocated (Universal) Shelf", "Exchange Traded Vehicle Securities", "Other"</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrSctyTp" xlink:to="label_OffsetPrrSctyTp" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrSctyTp" xlink:label="OffsetPrrSctyTp"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrSctyTitl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en-US">The title of the class of securities from which offset fees were derived.</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrSctyTitl" xlink:to="label_OffsetPrrSctyTitl" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="ffd-2026.xsd#ffd_OffsetPrrSctyTitl" xlink:label="OffsetPrrSctyTitl"/>
+</link:labelLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+</xs:schema>

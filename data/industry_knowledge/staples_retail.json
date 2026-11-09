@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "staples_retail",
+    "industry_name_zh": "必需消费零售与生鲜商超",
+    "sector_id": "consumer_staples",
+    "sector_name_zh": "必需消费",
+    "macro_sector_id": "TRADE_LOG",
+    "macro_sector_name_zh": "全球物流航运、仓储分拨与批发零售贸易",
+    "description_zh": "涵盖大型连锁生鲜超市、社区平价食品折扣商超、药房食品便利综合店及农产品直采零售企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.75,
+    "typical_markup_ratio": 1.06,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "中等经营杠杆",
+    "typical_gross_margin_range": [0.20, 0.28]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 30.0,
+    "dio_warning_days": 55.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.05,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "优质生鲜果蔬源头基地直采协议与大型规模化肉禽蛋奶屠宰加工厂配额",
+      "高性价比自有品牌 (Private Label) 优质代工生产线产能协同",
+      "全温区现代化冷链仓储干线运输与城市高密度前置仓物流配送网络"
+    ],
+    "downstream_profile": "广大城镇社区常住居民家庭客群、工薪日常生活刚需消费群体及高频高粘性会员",
+    "pricing_power_verdict": "区域高密度网点商超对普通供应商享有较强通道费与账期议价权，但面对 C 端日常必需品定价高度透明受制于平价硬折扣店竞争",
+    "channel_inversion_sensitivity": "剔除燃油波动的同店销售额增速 (Identical Sales ex-fuel) 与生鲜损耗率 (Shrinkage Rate) 是必需品超市盈利健康度的核心温度计"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "高性价比生鲜自有品牌销售占比突破 30%，摆脱品牌进货成本依赖并推动进销毛利率持续改善",
+      "数字化即时零售到店自提与配送订单履约效率大幅优化，线上业务综合履约成本持续压降",
+      "智能防损监控系统与自动化生鲜补调系统全面落地，门店生鲜腐败损耗与商品被盗损耗率显著改善"
+    ],
+    "leading_bear_defenses": [
+      "基础必需品价格通胀导致大众客群出现防御性消费降级，客流大面积流向极致硬折扣量贩超市导致同店销售负增长",
+      "门店内盗与有组织零售盗窃犯罪猖獗导致商品损耗率异动飙升，严重侵蚀本就微薄的门店营业利润",
+      "门店一线员工法定最低小时用工成本刚性递增，刚性人工开支增速超过同店营收增速压制盈利"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度剔除燃油波动的同店销售额增速 (Identical Sales ex-fuel)",
+      "进销主营毛利率 (FIFO Gross Margin ex-fuel) 走向",
+      "门店综合零售损耗率 (Shrink Rate) 占营业收入比重",
+      "数字化全渠道即时零售业务线上销售额增速 (Digital Sales Growth)"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "为虚增当期毛利，将尚未实质达成考核条件的供应商促销返利提前冲减当期主营业务成本",
+      "对生鲜临期腐烂、破损等实际变质报废存货未及时足额计提盘亏与存货跌价损失",
+      "对长期严重亏损的直营老旧门店推迟进行资产减值测试，蓄意隐瞒门店使用权资产减值损失"
+    ],
+    "channel_and_revenue_checks": [
+      "后进先出法 (LIFO) 存货准备金会计变动对当期营业利润影响的审慎性核验",
+      "预付购物卡未兑换失效沉淀收益 (Breakage) 会计确认进度的合理性审计"
+    ]
+  }
+}

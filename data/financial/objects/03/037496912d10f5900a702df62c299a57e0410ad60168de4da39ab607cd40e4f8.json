@@ -1,0 +1,379 @@
+{
+  "id": "nintendo-2026-annual-v1",
+  "entity_id": "JP:7974",
+  "format": "pdf_reviewed",
+  "receipt_path": "data/browser-search/receipts/496f23b72fe37aadd7585537bbaabeb8b3f5800a4b02c1f3cb2731926d67fe94.json",
+  "expected_sha256": "adf1d61bfa20412235535f3689e3a52805e46947214f874377d428ffeb878d16",
+  "currency": "JPY",
+  "accounting_basis": "J-GAAP",
+  "cover_text": "Nintendo Co., Ltd.",
+  "basis_page": 3,
+  "basis_text": "generally accepted in Japan",
+  "rounding_tolerance": "1000000",
+  "supersedes_report_id": null,
+  "translation_notes": "发行人官方英文译本；日文原版优先。美元列仅为便利折算，不作为美元事实。",
+  "rows": [
+    {
+      "field": "assets",
+      "page": 59,
+      "label": "Total assets",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "instant",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Previous fiscal year",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "amount",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    },
+    {
+      "field": "cash_deposits",
+      "page": 59,
+      "label": "Cash and deposits",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "instant",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Previous fiscal year",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "amount",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    },
+    {
+      "field": "liabilities",
+      "page": 60,
+      "label": "Total liabilities",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "instant",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Previous fiscal year",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "amount",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    },
+    {
+      "field": "equity",
+      "page": 60,
+      "label": "Total net assets",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "instant",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Previous fiscal year",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "amount",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    },
+    {
+      "field": "revenue",
+      "page": 61,
+      "label": "Net sales",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated statements of income",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "amount",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    },
+    {
+      "field": "operating_income",
+      "page": 61,
+      "label": "Operating profit",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated statements of income",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "amount",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    },
+    {
+      "field": "net_income",
+      "page": 61,
+      "label": "Profit",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated statements of income",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "amount",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    },
+    {
+      "field": "operating_cash_flow",
+      "page": 66,
+      "label": "Net cash provided by (used in) operating activities",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated statements of cash flows",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "amount",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    },
+    {
+      "field": "investing_cash_flow",
+      "page": 66,
+      "label": "Net cash provided by (used in) investing activities",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated statements of cash flows",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "amount",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    },
+    {
+      "field": "financing_cash_flow",
+      "page": 66,
+      "label": "Net cash provided by (used in) financing activities",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated statements of cash flows",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "amount",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    },
+    {
+      "field": "fx_cash_change",
+      "page": 66,
+      "label": "Effect of exchange rate change on cash and cash equivalents",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated statements of cash flows",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "amount",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    },
+    {
+      "field": "cash_change",
+      "page": 66,
+      "label": "Net increase (decrease) in cash and cash equivalents",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated statements of cash flows",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "amount",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    },
+    {
+      "field": "cash_begin",
+      "page": 66,
+      "label": "Cash and cash equivalents at beginning of period",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated statements of cash flows",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "amount",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    },
+    {
+      "field": "cash_end",
+      "page": 66,
+      "label": "Cash and cash equivalents at end of period",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated statements of cash flows",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "*1",
+        "amount",
+        "*1",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    },
+    {
+      "field": "capex_ppe_and_intangibles",
+      "page": 66,
+      "label": "Purchase of property, plant and equipment and intangible\nassets",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated statements of cash flows",
+      "year_header": "March 31, 2026",
+      "unit_header": "(millions of yen)",
+      "column_tokens": [
+        "amount",
+        "amount",
+        "amount"
+      ],
+      "selected_columns": [
+        0,
+        1
+      ]
+    }
+  ]
+}

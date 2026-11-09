@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+(c) 2010-2026 Financial Accounting Foundation; (c) 2007-2010 XBRL US, Inc.  All Rights Reserved.
+Notice: Authorized Uses are Set Forth at https://xbrl.fasb.org/terms/TaxonomiesTermsConditions.html
+  -->
+<link:linkbase xmlns:link='http://www.xbrl.org/2003/linkbase' xmlns:xbrldt='http://xbrl.org/2005/xbrldt' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.xbrl.org/2003/linkbase http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd'>
+  <link:roleRef roleURI='http://fasb.org/us-gaap/role/disclosure/ForeignOperationsAndCurrencyTranslationScheduleOfIntercompanyForeignCurrencyBalanceTable' xlink:href='../elts/us-roles-2026.xsd#ForeignOperationsAndCurrencyTranslationScheduleOfIntercompanyForeignCurrencyBalanceTable' xlink:type='simple' />
+  <link:roleRef roleURI='http://fasb.org/us-gaap/role/disclosure/ForeignOperationsAndCurrencyTranslationScheduleOfDifferencesBetweenReportedAmountAndReportingCurrencyDenominatedAmountTable' xlink:href='../elts/us-roles-2026.xsd#ForeignOperationsAndCurrencyTranslationScheduleOfDifferencesBetweenReportedAmountAndReportingCurrencyDenominatedAmountTable' xlink:type='simple' />
+  <link:arcroleRef arcroleURI='http://xbrl.org/int/dim/arcrole/all' xlink:href='http://www.xbrl.org/2005/xbrldt-2005.xsd#all' xlink:type='simple' />
+  <link:arcroleRef arcroleURI='http://xbrl.org/int/dim/arcrole/hypercube-dimension' xlink:href='http://www.xbrl.org/2005/xbrldt-2005.xsd#hypercube-dimension' xlink:type='simple' />
+  <link:arcroleRef arcroleURI='http://xbrl.org/int/dim/arcrole/dimension-domain' xlink:href='http://www.xbrl.org/2005/xbrldt-2005.xsd#dimension-domain' xlink:type='simple' />
+  <link:arcroleRef arcroleURI='http://xbrl.org/int/dim/arcrole/dimension-default' xlink:href='http://www.xbrl.org/2005/xbrldt-2005.xsd#dimension-default' xlink:type='simple' />
+  <link:arcroleRef arcroleURI='http://xbrl.org/int/dim/arcrole/domain-member' xlink:href='http://www.xbrl.org/2005/xbrldt-2005.xsd#domain-member' xlink:type='simple' />
+  <link:definitionLink xlink:role='http://fasb.org/us-gaap/role/disclosure/ForeignOperationsAndCurrencyTranslationScheduleOfIntercompanyForeignCurrencyBalanceTable' xlink:type='extended'>
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_ScheduleOfIntercompanyForeignCurrencyBalanceTable' xlink:label='loc_ScheduleOfIntercompanyForeignCurrencyBalanceTable' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_IntercompanyForeignCurrencyBalanceLineItems' xlink:label='loc_IntercompanyForeignCurrencyBalanceLineItems' xlink:type='locator' />
+    <link:definitionArc order='1.0' xbrldt:closed='true' xbrldt:contextElement='segment' xlink:arcrole='http://xbrl.org/int/dim/arcrole/all' xlink:from='loc_IntercompanyForeignCurrencyBalanceLineItems' xlink:to='loc_ScheduleOfIntercompanyForeignCurrencyBalanceTable' xlink:type='arc' />
+  </link:definitionLink>
+  <link:definitionLink xlink:role='http://fasb.org/us-gaap/role/disclosure/ForeignOperationsAndCurrencyTranslationScheduleOfIntercompanyForeignCurrencyBalanceTable' xlink:type='extended'>
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_ScheduleOfIntercompanyForeignCurrencyBalanceTable' xlink:label='loc_ScheduleOfIntercompanyForeignCurrencyBalanceTable' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_IntercompanyForeignCurrencyBalanceByDescriptionAxis' xlink:label='loc_IntercompanyForeignCurrencyBalanceByDescriptionAxis' xlink:type='locator' />
+    <link:definitionArc order='1.0' xlink:arcrole='http://xbrl.org/int/dim/arcrole/hypercube-dimension' xlink:from='loc_ScheduleOfIntercompanyForeignCurrencyBalanceTable' xlink:to='loc_IntercompanyForeignCurrencyBalanceByDescriptionAxis' xlink:type='arc' />
+  </link:definitionLink>
+  <link:definitionLink xlink:role='http://fasb.org/us-gaap/role/disclosure/ForeignOperationsAndCurrencyTranslationScheduleOfIntercompanyForeignCurrencyBalanceTable' xlink:type='extended'>
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_IntercompanyForeignCurrencyBalanceByDescriptionAxis' xlink:label='loc_IntercompanyForeignCurrencyBalanceByDescriptionAxis' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_IntercompanyForeignCurrencyBalanceNameDomain' xlink:label='loc_IntercompanyForeignCurrencyBalanceNameDomain' xlink:type='locator' />
+    <link:definitionArc order='1.0' xlink:arcrole='http://xbrl.org/int/dim/arcrole/dimension-domain' xlink:from='loc_IntercompanyForeignCurrencyBalanceByDescriptionAxis' xlink:to='loc_IntercompanyForeignCurrencyBalanceNameDomain' xlink:type='arc' />
+  </link:definitionLink>
+  <link:definitionLink xlink:role='http://fasb.org/us-gaap/role/disclosure/ForeignOperationsAndCurrencyTranslationScheduleOfIntercompanyForeignCurrencyBalanceTable' xlink:type='extended'>
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_IntercompanyForeignCurrencyBalanceByDescriptionAxis' xlink:label='loc_IntercompanyForeignCurrencyBalanceByDescriptionAxis' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_IntercompanyForeignCurrencyBalanceNameDomain' xlink:label='loc_IntercompanyForeignCurrencyBalanceNameDomain' xlink:type='locator' />
+    <link:definitionArc order='1.0' xlink:arcrole='http://xbrl.org/int/dim/arcrole/dimension-default' xlink:from='loc_IntercompanyForeignCurrencyBalanceByDescriptionAxis' xlink:to='loc_IntercompanyForeignCurrencyBalanceNameDomain' xlink:type='arc' />
+  </link:definitionLink>
+  <link:definitionLink xlink:role='http://fasb.org/us-gaap/role/disclosure/ForeignOperationsAndCurrencyTranslationScheduleOfIntercompanyForeignCurrencyBalanceTable' xlink:type='extended'>
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_IntercompanyForeignCurrencyBalanceLineItems' xlink:label='loc_IntercompanyForeignCurrencyBalanceLineItems' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_IntercompanyForeignCurrencyBalanceAmount' xlink:label='loc_IntercompanyForeignCurrencyBalanceAmount' xlink:type='locator' />
+    <link:definitionArc order='1.0' xlink:arcrole='http://xbrl.org/int/dim/arcrole/domain-member' xlink:from='loc_IntercompanyForeignCurrencyBalanceLineItems' xlink:to='loc_IntercompanyForeignCurrencyBalanceAmount' xlink:type='arc' />
+  </link:definitionLink>
+  <link:definitionLink xlink:role='http://fasb.org/us-gaap/role/disclosure/ForeignOperationsAndCurrencyTranslationScheduleOfDifferencesBetweenReportedAmountAndReportingCurrencyDenominatedAmountTable' xlink:type='extended'>
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_ScheduleOfDifferencesBetweenReportedAmountAndReportingCurrencyDenominatedAmountTable' xlink:label='loc_ScheduleOfDifferencesBetweenReportedAmountAndReportingCurrencyDenominatedAmountTable' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_FinancialStatementLineItemsWithDifferencesInReportedAmountAndReportingCurrencyDenominatedAmountsLineItems' xlink:label='loc_FinancialStatementLineItemsWithDifferencesInReportedAmountAndReportingCurrencyDenominatedAmountsLineItems' xlink:type='locator' />
+    <link:definitionArc order='1.0' xbrldt:closed='true' xbrldt:contextElement='segment' xlink:arcrole='http://xbrl.org/int/dim/arcrole/all' xlink:from='loc_FinancialStatementLineItemsWithDifferencesInReportedAmountAndReportingCurrencyDenominatedAmountsLineItems' xlink:to='loc_ScheduleOfDifferencesBetweenReportedAmountAndReportingCurrencyDenominatedAmountTable' xlink:type='arc' />
+  </link:definitionLink>
+  <link:definitionLink xlink:role='http://fasb.org/us-gaap/role/disclosure/ForeignOperationsAndCurrencyTranslationScheduleOfDifferencesBetweenReportedAmountAndReportingCurrencyDenominatedAmountTable' xlink:type='extended'>
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_ScheduleOfDifferencesBetweenReportedAmountAndReportingCurrencyDenominatedAmountTable' xlink:label='loc_ScheduleOfDifferencesBetweenReportedAmountAndReportingCurrencyDenominatedAmountTable' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_StatementOfIncomeLocationBalanceAxis' xlink:label='loc_StatementOfIncomeLocationBalanceAxis' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_OtherComprehensiveIncomeBalanceAxis' xlink:label='loc_OtherComprehensiveIncomeBalanceAxis' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_StatementOfFinancialPositionLocationBalanceAxis' xlink:label='loc_StatementOfFinancialPositionLocationBalanceAxis' xlink:type='locator' />
+    <link:definitionArc order='1.0' xlink:arcrole='http://xbrl.org/int/dim/arcrole/hypercube-dimension' xlink:from='loc_ScheduleOfDifferencesBetweenReportedAmountAndReportingCurrencyDenominatedAmountTable' xlink:to='loc_StatementOfIncomeLocationBalanceAxis' xlink:type='arc' />
+    <link:definitionArc order='2.0' xlink:arcrole='http://xbrl.org/int/dim/arcrole/hypercube-dimension' xlink:from='loc_ScheduleOfDifferencesBetweenReportedAmountAndReportingCurrencyDenominatedAmountTable' xlink:to='loc_OtherComprehensiveIncomeBalanceAxis' xlink:type='arc' />
+    <link:definitionArc order='3.0' xlink:arcrole='http://xbrl.org/int/dim/arcrole/hypercube-dimension' xlink:from='loc_ScheduleOfDifferencesBetweenReportedAmountAndReportingCurrencyDenominatedAmountTable' xlink:to='loc_StatementOfFinancialPositionLocationBalanceAxis' xlink:type='arc' />
+  </link:definitionLink>
+  <link:definitionLink xlink:role='http://fasb.org/us-gaap/role/disclosure/ForeignOperationsAndCurrencyTranslationScheduleOfDifferencesBetweenReportedAmountAndReportingCurrencyDenominatedAmountTable' xlink:type='extended'>
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_FinancialStatementLineItemsWithDifferencesInReportedAmountAndReportingCurrencyDenominatedAmountsLineItems' xlink:label='loc_FinancialStatementLineItemsWithDifferencesInReportedAmountAndReportingCurrencyDenominatedAmountsLineItems' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_AssetReportingCurrencyDenominatedValue' xlink:label='loc_AssetReportingCurrencyDenominatedValue' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_LiabilityReportingCurrencyDenominatedValue' xlink:label='loc_LiabilityReportingCurrencyDenominatedValue' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_RevenuesAndGainsReportingCurrencyDenominatedValue' xlink:label='loc_RevenuesAndGainsReportingCurrencyDenominatedValue' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_ExpensesAndLossesReportingCurrencyDenominatedValue' xlink:label='loc_ExpensesAndLossesReportingCurrencyDenominatedValue' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_DifferenceBetweenReportedAmountAndReportingCurrencyDenominatedAmountValue' xlink:label='loc_DifferenceBetweenReportedAmountAndReportingCurrencyDenominatedAmountValue' xlink:type='locator' />
+    <link:loc xlink:href='../elts/us-gaap-2026.xsd#us-gaap_AmountRecognizedInIncomeDueToInflationaryAccounting' xlink:label='loc_AmountRecognizedInIncomeDueToInflationaryAccounting' xlink:type='locator' />
+    <link:definitionArc order='1.0' xlink:arcrole='http://xbrl.org/int/dim/arcrole/domain-member' xlink:from='loc_FinancialStatementLineItemsWithDifferencesInReportedAmountAndReportingCurrencyDenominatedAmountsLineItems' xlink:to='loc_AssetReportingCurrencyDenominatedValue' xlink:type='arc' />
+    <link:definitionArc order='2.0' xlink:arcrole='http://xbrl.org/int/dim/arcrole/domain-member' xlink:from='loc_FinancialStatementLineItemsWithDifferencesInReportedAmountAndReportingCurrencyDenominatedAmountsLineItems' xlink:to='loc_LiabilityReportingCurrencyDenominatedValue' xlink:type='arc' />
+    <link:definitionArc order='3.0' xlink:arcrole='http://xbrl.org/int/dim/arcrole/domain-member' xlink:from='loc_FinancialStatementLineItemsWithDifferencesInReportedAmountAndReportingCurrencyDenominatedAmountsLineItems' xlink:to='loc_RevenuesAndGainsReportingCurrencyDenominatedValue' xlink:type='arc' />
+    <link:definitionArc order='4.0' xlink:arcrole='http://xbrl.org/int/dim/arcrole/domain-member' xlink:from='loc_FinancialStatementLineItemsWithDifferencesInReportedAmountAndReportingCurrencyDenominatedAmountsLineItems' xlink:to='loc_ExpensesAndLossesReportingCurrencyDenominatedValue' xlink:type='arc' />
+    <link:definitionArc order='5.0' xlink:arcrole='http://xbrl.org/int/dim/arcrole/domain-member' xlink:from='loc_FinancialStatementLineItemsWithDifferencesInReportedAmountAndReportingCurrencyDenominatedAmountsLineItems' xlink:to='loc_DifferenceBetweenReportedAmountAndReportingCurrencyDenominatedAmountValue' xlink:type='arc' />
+    <link:definitionArc order='6.0' xlink:arcrole='http://xbrl.org/int/dim/arcrole/domain-member' xlink:from='loc_FinancialStatementLineItemsWithDifferencesInReportedAmountAndReportingCurrencyDenominatedAmountsLineItems' xlink:to='loc_AmountRecognizedInIncomeDueToInflationaryAccounting' xlink:type='arc' />
+  </link:definitionLink>
+</link:linkbase>

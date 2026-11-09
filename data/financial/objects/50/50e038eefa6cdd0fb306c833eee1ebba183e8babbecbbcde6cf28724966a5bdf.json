@@ -1,0 +1,13 @@
+{
+  "id": "intu-2026-10k-v1",
+  "entity_id": "US:INTU:CIK896878",
+  "format": "inline_zip",
+  "receipt_path": "data/browser-search/receipts/c989109050cec976f2be61f1953b27120b4e2f0a91c1e76784058e43d55c3396.json",
+  "expected_sha256": "d2c2584bc5662aa133c531a93e716fcea29367cebd7784458d25d205458045fb",
+  "member": "intu-20260731.htm",
+  "cik": "896878",
+  "currency": "USD",
+  "accounting_basis": "GAAP",
+  "taxonomy_namespace": "http://fasb.org/us-gaap/2026",
+  "supersedes_report_id": null
+}

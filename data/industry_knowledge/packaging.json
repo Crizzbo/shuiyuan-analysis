@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "packaging",
+    "industry_name_zh": "包装容器与林纸材料",
+    "sector_id": "materials",
+    "sector_name_zh": "原材料",
+    "macro_sector_id": "CONS_GOODS",
+    "macro_sector_name_zh": "耐用消费品、纺织服饰与通用轻工业制造",
+    "description_zh": "涵盖铝制饮料易拉罐、高阻隔柔性塑料包装、特种医药无菌包装及瓦楞纸箱纸板制造企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.78,
+    "typical_markup_ratio": 1.05,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "中等经营杠杆",
+    "typical_gross_margin_range": [0.12, 0.22]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 40.0,
+    "dio_warning_days": 75.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.30,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "食品级高纯度再生铝合金制罐铝卷与高延展性罐盖特种合金板材",
+      "全球漂白阔叶木与针叶木商品纸浆货源及森林砍伐可持续 FSC 认证批文",
+      "特种高阻隔 EVOH 阻隔薄膜树脂与环保可降解改性塑料粒子"
+    ],
+    "downstream_profile": "全球跨国啤酒饮料集团、预包装快消食品跨国企业、医疗器械药企及电商物流分拨中心",
+    "pricing_power_verdict": "拥有就近贴厂建设壁垒的龙头制罐与包装商通过原材料成本自动联动传导机制锁定加工费利润；通用瓦楞纸箱受制于纸价周期剧烈波动",
+    "channel_inversion_sensitivity": "剔除原材料价格顺价影响后的实际发货出货量增速 (Shipment Volume Growth) 是消费终端真实动销的核心晴雨表"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "环保减塑政策推动饮料包装全面加速向高回收率金属铝罐替代切换，高毛利异形特种罐出货保持快速增长",
+      "下游快消酒水客户夏季旺季动销超预期爆发，高附加值无菌医药软包装与特种阻隔膜快速渗透增厚毛利",
+      "铝材与纸浆原料价格高位平稳回落，合同顺价机制滞后效应完全消化后加工费净利润空间稳健修复"
+    ],
+    "leading_bear_defenses": [
+      "宏观消费意愿疲软致使包装饮料与预制食品销量下滑，下游品牌客户集中缩减包材采购导致产线闲置",
+      "铝锭与大宗纸浆价格短期内单边剧烈暴涨，由于长协价格联动公式存在季度结算时滞导致毛利遭遇阶段性严重压缩",
+      "核心大客户为防范供应链风险引入二供二采，导致公司在主要单一客户处的供货采购配额被分流稀释"
+    ],
+    "core_catalyst_dimensions": [
+      "全球单季度金属饮料罐与瓦楞包装实际出货量 (Shipment Volume) 同比表现",
+      "伦敦金属交易所 (LME) 铝现货均价与国际商品纸浆月度外盘报价走势",
+      "各主力大区制造工厂平均开工利用率 (Operating Rate)",
+      "核心跨国饮料食品客户年度供货框架协议续约与加工费基准调整"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "在原材料大宗价格下行周期，推迟将顺价下调反映在客户结算单中违规虚高营业收入与应收账款",
+      "对长期停机闲置、能耗偏高的老旧落后制罐与造纸产线推迟计提固定资产减值准备",
+      "对按历史高成本购进的原料卷材库存未结合期末产成品市价充分计提存货跌价准备"
+    ],
+    "channel_and_revenue_checks": [
+      "铝价与原纸大宗商品套期保值交易会计处理 (Hedge Accounting) 与实际订单匹配审验",
+      "向大型品牌客户支付的年度阶梯销售折让在各会计报告期的跨期匹配充分性审查"
+    ]
+  }
+}

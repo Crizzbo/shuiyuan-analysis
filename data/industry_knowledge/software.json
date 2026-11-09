@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "software",
+    "industry_name_zh": "基础软件与企业级云计算",
+    "sector_id": "information_technology",
+    "sector_name_zh": "信息技术",
+    "macro_sector_id": "INFO_COMM",
+    "macro_sector_name_zh": "现代数字信息、互联网平台与电信基础设施",
+    "description_zh": "涵盖基础操作系统、数据库、云基础设施、网络安全、企业级 SaaS 订阅软件及生成式 AI 应用软件。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.25,
+    "typical_markup_ratio": 1.45,
+    "capex_intensity": "纯轻资产研发",
+    "operating_leverage_exposure": "弱经营杠杆",
+    "typical_gross_margin_range": [0.70, 0.85]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 0.0,
+    "dio_warning_days": 0.0,
+    "rd_capitalization_max_allowed": 0.08,
+    "top_customer_concentration_redline": 0.15,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "公有云基础设施 (AWS, Azure, GCP) 算力租用成本与 GPU 推理算力配额",
+      "顶尖 AI 算法与全栈软件工程高薪研发人才储备",
+      "开源基础大模型商业授权协议与第三方基础模型 API 稳定性"
+    ],
+    "downstream_profile": "全球政企大客户、中小型企业与独立开发者，商业模式核心依赖净收入留存率 (NDR) 与席位扩张",
+    "pricing_power_verdict": "拥有核心业务工作流数据沉淀与深度集成的系统享受高转换壁垒与提价权，轻型工具软件易受同质化竞争侵蚀",
+    "channel_inversion_sensitivity": "合同负债 (预收订阅年费) 骤降是客户流失与续约率恶化的核心领先指标"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "企业级大客户净收入留存率 (NDR) 持续超越 120%，席位扩展与多产品交叉销售强劲",
+      "生成式 AI 原生功能商业化变现顺利，ARPU 显著上移且 AI 推理算力毛利率未被摊薄",
+      "年度经常性收入 (ARR) 增速超预期，自由现金流利润率突破 30% 达成 Rule of 40 顶级软件标准"
+    ],
+    "leading_bear_defenses": [
+      "宏观企业 IT 预算收紧导致软件采购审批周期大幅拉长、中小客户净流失率 (Churn Rate) 飙升",
+      "云基础设施与 AI 模型推理成本过高，导致产品综合毛利率结构性塌陷跌破 70%",
+      "主要核心功能被操作系统或公有云巨头原生免费整合替代，单品独立软件护城河迅速瓦解"
+    ],
+    "core_catalyst_dimensions": [
+      "季度 ARR 年度经常性收入与 RPO 剩余履约价值披露",
+      "全球企业 IT 支出意愿 CIO 调研报告",
+      "合同负债蓄水池与真实剔除 SBC 后经营现金流净额变动",
+      "公有云平台算力降价与大模型推理成本曲线走势"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "研发支出大额资本化超过 8.0% 掩盖实质性亏损 (软件行业极其高危的会计粉饰)",
+      "过量发放员工股权激励 (SBC) 占营收比重超过 25%，表面造血繁荣但老股东股权遭遇严重稀释",
+      "合同负债 (预收款蓄水池) 单季环比负增长超过 15% 表明客户续约严重失血"
+    ],
+    "channel_and_revenue_checks": [
+      "应收账款周转天数 (DSO) 异常拉长，表明为了粉饰营收放宽信用账期让客户延期付款",
+      "未开票收入 (Unbilled Receivables) 异常飙升"
+    ]
+  }
+}

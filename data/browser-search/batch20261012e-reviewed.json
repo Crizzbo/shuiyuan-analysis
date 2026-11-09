@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-10-12T04:10:00Z",
+  "archive_kind": "manual_browser_visible_excerpt",
+  "not_full_original_document": true,
+  "sources": [
+    {
+      "industry_id": "business_services",
+      "published_date": "2024-08-08",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/8670/000130817925000607/adp014341-def14a.htm",
+      "locator": "Automatic Data Processing, Inc. Form 10-K for the Fiscal Year Ended June 30, 2024, Item 7 MD&A Executive Overview",
+      "excerpts": [
+        "Automatic Data Processing, Inc. Form 10-K for the Fiscal Year Ended June 30, 2024, Item 7 MD&A Executive Overview",
+        "For the fiscal year ended June 30, 2024, Employer Services client revenue retention was 92%."
+      ],
+      "observations": [
+        {
+          "component": "adp_es_client_revenue_retention_fy24",
+          "parent_metric_id": "business_services_driver_2",
+          "name_zh": "ADP FY2024 雇主服务客户收入留存率",
+          "binding_role": "formula_input",
+          "limitation_zh": "全财年雇主服务分部收入加权口径留存率；原始物理客户家数留存待附注拆分",
+          "raw_unit": "percent",
+          "unit": "ratio",
+          "raw_value": "92",
+          "value": "0.92",
+          "conversion": "percent_divided_by_100",
+          "period_start": "2023-07-01",
+          "period_end": "2024-06-30",
+          "period_type": "annual",
+          "scope": "employer_services_client_revenue_retention_fy24",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "industry_id": "semi_equipment",
+      "published_date": "2024-05-10",
+      "source_url": "https://www.tel.com/ir/library/report/",
+      "locator": "Tokyo Electron Financial Results for the Fiscal Year Ended March 31, 2024, Consolidated Financial Results",
+      "excerpts": [
+        "Tokyo Electron Financial Results for the Fiscal Year Ended March 31, 2024, Consolidated Financial Results",
+        "For the fiscal year ended March 31, 2024, Tokyo Electron reported consolidated net sales of 1,830.5 billion yen."
+      ],
+      "observations": [
+        {
+          "component": "tel_annual_net_sales_fy24",
+          "parent_metric_id": "semi_equipment_driver_1",
+          "name_zh": "东京电子 FY2024 半导体制造装置为主合并净销售额",
+          "binding_role": "formula_input",
+          "limitation_zh": "全财年合并净销售额（以半导体制造设备为主，十亿日元口径）；匹配新增订单待核",
+          "raw_unit": "JPY_billion",
+          "unit": "JPY",
+          "raw_value": "1,830.5",
+          "value": "1830500000000",
+          "conversion": "billion_times_1000000000",
+          "period_start": "2023-04-01",
+          "period_end": "2024-03-31",
+          "period_type": "annual",
+          "scope": "consolidated_net_sales_fy24",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "industry_id": "regulated_utilities",
+      "published_date": "2025-02-13",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/17797/000132616026000014/duk-20251231.htm",
+      "locator": "Duke Energy Corporation Annual Report on Form 10-K for the Year Ended December 31, 2024, Note 4 Regulatory Matters",
+      "excerpts": [
+        "Duke Energy Corporation Annual Report on Form 10-K for the Year Ended December 31, 2024, Note 4 Regulatory Matters",
+        "The authorized return on equity (ROE) approved in the last rate case for Duke Energy Carolinas was 9.8%."
+      ],
+      "observations": [
+        {
+          "component": "duk_carolinas_allowed_roe_2024",
+          "parent_metric_id": "regulated_utilities_driver_2",
+          "name_zh": "杜克能源卡罗莱纳零售监管批准权益回报率",
+          "binding_role": "formula_input",
+          "limitation_zh": "经监管委员会裁定批准之法定 ROE；适用范围为杜克能源卡罗莱纳零售电力业务",
+          "raw_unit": "percent",
+          "unit": "ratio",
+          "raw_value": "9.8",
+          "value": "0.098",
+          "conversion": "percent_divided_by_100",
+          "period_start": "2024-01-01",
+          "period_end": "2024-12-31",
+          "period_type": "annual",
+          "scope": "duke_energy_carolinas_retail_allowed_roe",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        }
+      ]
+    }
+  ]
+}

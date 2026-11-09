@@ -1,0 +1,1949 @@
+{
+  "artifact": {
+    "acquired_at": "2026-10-11T01:45:05+00:00",
+    "availability_basis": "first_observed_by_project",
+    "available_at": "2026-10-11T01:45:05+00:00",
+    "browser_receipt": {
+      "document_url": "https://www.sony.com/en/SonyInfo/IR/library/FY2025_20F_PDF.pdf",
+      "entity_id": "JP:6758:CIK313838",
+      "format": "pdf",
+      "id": "sony-fy2025-20f-browser-pdf",
+      "page_url": "https://www.sony.com/en/SonyInfo/IR/library/sec.html",
+      "publication_precision": "unknown",
+      "published_date": null,
+      "search_url": "https://www.google.com/search?q=Sony+2025+20-F+XBRL+zip+sony.com",
+      "verification_notes": "浏览器搜索进入 Sony 官方 SEC Filings 页，FY2025 行 PDF [PDF:884KB] 下载；财年标识不等同于报告结束年份，发布时间未核实。"
+    },
+    "dataset_kind": "financial",
+    "origin_url": "https://www.sony.com/en/SonyInfo/IR/library/FY2025_20F_PDF.pdf",
+    "provider": "ai_browser",
+    "published_at": null,
+    "quality_status": "unreviewed",
+    "raw_transport": "browser_download",
+    "sha256": "ea208480be5f6ba6c76a15377b6ea67addc69b274a0fcc9ba479876e40516772",
+    "source_kind": "primary",
+    "source_path": "data/ingestion/objects/ea/ea208480be5f6ba6c76a15377b6ea67addc69b274a0fcc9ba479876e40516772.raw"
+  },
+  "calculations": [
+    {
+      "accounting_basis": "IFRS",
+      "calculation": {
+        "formula": "总负债 / 总资产；不等同有息债务比例",
+        "function": "solvency_model.get_debt_to_assets_ratio",
+        "library": "financetoolkit"
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "59d6b08ba523a1e2966f43d2a8bcc2dbd8875886771c584dc9a2866ef4814602",
+        "15dfc6d857038ad4077abda58073fcf2ac99c52d5511e82bdf01ea23d023bef0"
+      ],
+      "metric_id": "liabilities_to_assets",
+      "name_zh": "总负债占资产比例",
+      "period": {
+        "basis": "instant",
+        "end": "2025-03-31",
+        "start": null
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.7588726012251718
+    },
+    {
+      "accounting_basis": "IFRS",
+      "calculation": {
+        "formula": "总负债 / 总资产；不等同有息债务比例",
+        "function": "solvency_model.get_debt_to_assets_ratio",
+        "library": "financetoolkit"
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "6082014819987991cc2ecd39a694cbf1f90709bb5eda7ff76e8bcce7a7b3ee05",
+        "05023b6f00fa73aca2489da198d83e5160732410a12fd5593257de86e54e2694"
+      ],
+      "metric_id": "liabilities_to_assets",
+      "name_zh": "总负债占资产比例",
+      "period": {
+        "basis": "instant",
+        "end": "2026-03-31",
+        "start": null
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.4571623407800177
+    },
+    {
+      "accounting_basis": "IFRS",
+      "calculation": {
+        "implementation_path": "finance_tools/basic.py",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "input_sha256": "6909b727056adc5117ec1d028210e214cc017b61f0ae12b42d727cbb4e11aacb",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "parameters": {
+          "denominator": 11260037000000.0,
+          "numerator": 1035255000000.0,
+          "operation": "operating_margin"
+        },
+        "result": {
+          "value": 0.091940639271434
+        }
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "58b555fef87676cf9337a127307a5b8c54eb12e1a241c8c8f67a5972ccbef1ee",
+        "53ca43b7181c3c96f17602794b2a358b5f417c19524a11376909f67bd358d751"
+      ],
+      "metric_id": "operating_margin",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "scope_id": "consolidated_continuing",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.091940639271434
+    },
+    {
+      "accounting_basis": "IFRS",
+      "currency": "JPY",
+      "metric_id": "net_margin",
+      "missing_fields": [
+        "net_income"
+      ],
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "scope_id": "consolidated_continuing",
+      "status": "blocked",
+      "value": null
+    },
+    {
+      "accounting_basis": "IFRS",
+      "calculation": {
+        "formula": "同期间、同范围经营现金流净额 / 收入",
+        "function": "Series.div",
+        "library": "pandas"
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "561643346433cd77038de44010776a84c1e9f28e88dc0b6d312a68347eae3c26",
+        "53ca43b7181c3c96f17602794b2a358b5f417c19524a11376909f67bd358d751"
+      ],
+      "metric_id": "operating_cash_flow_margin",
+      "name_zh": "经营现金流收入比",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "scope_id": "consolidated_continuing",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.09801433156924795
+    },
+    {
+      "accounting_basis": "IFRS",
+      "currency": "JPY",
+      "metric_id": "revenue_growth",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "reason": "缺少同报告、同范围、相邻年度的正收入基数",
+      "scope_id": "consolidated_continuing",
+      "status": "blocked",
+      "value": null
+    },
+    {
+      "accounting_basis": "IFRS",
+      "calculation": {
+        "implementation_path": "finance_tools/basic.py",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "input_sha256": "0d2a83dc41479620a6963c858ee37b268c563f4dac2108997dcfe3a3c875ff03",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "parameters": {
+          "denominator": 12034917000000.0,
+          "numerator": 1276635000000.0,
+          "operation": "operating_margin"
+        },
+        "result": {
+          "value": 0.1060775907303723
+        }
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "8bd6d5fe72fe9f2726c35c7e5cd202879d15dbca2f5eb6a308116c70b34eb234",
+        "0777fc17c5e84c51fd998a96fb3e34539fb0936f309e31f3bd853eb01265524d"
+      ],
+      "metric_id": "operating_margin",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "scope_id": "consolidated_continuing",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.1060775907303723
+    },
+    {
+      "accounting_basis": "IFRS",
+      "currency": "JPY",
+      "metric_id": "net_margin",
+      "missing_fields": [
+        "net_income"
+      ],
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "scope_id": "consolidated_continuing",
+      "status": "blocked",
+      "value": null
+    },
+    {
+      "accounting_basis": "IFRS",
+      "calculation": {
+        "formula": "同期间、同范围经营现金流净额 / 收入",
+        "function": "Series.div",
+        "library": "pandas"
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "c85c0388d6ac9a3d0180c959b970fd490d5c188462b5bb53c727db5927787e6a",
+        "0777fc17c5e84c51fd998a96fb3e34539fb0936f309e31f3bd853eb01265524d"
+      ],
+      "metric_id": "operating_cash_flow_margin",
+      "name_zh": "经营现金流收入比",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "scope_id": "consolidated_continuing",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.16380245912788596
+    },
+    {
+      "accounting_basis": "IFRS",
+      "calculation": {
+        "formula": "本年收入 / 上年收入 - 1；同一报告比较列",
+        "function": "Series.pct_change",
+        "library": "pandas"
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "0777fc17c5e84c51fd998a96fb3e34539fb0936f309e31f3bd853eb01265524d",
+        "53ca43b7181c3c96f17602794b2a358b5f417c19524a11376909f67bd358d751"
+      ],
+      "metric_id": "revenue_growth",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "scope_id": "consolidated_continuing",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.0688168253798811
+    },
+    {
+      "accounting_basis": "IFRS",
+      "calculation": {
+        "implementation_path": "finance_tools/basic.py",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "input_sha256": "fe2618a959916570307b40be7f2abc27625ac03bd6bd18e3722980dece19bfea",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "parameters": {
+          "denominator": 12479620000000.0,
+          "numerator": 1447507000000.0,
+          "operation": "operating_margin"
+        },
+        "result": {
+          "value": 0.11598966955724613
+        }
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "bd92fe7e422f056be1a084088c9021bb99817d2e2bac9e24b5e05520f05889e2",
+        "6e7506f21f69136a695ab76785c42b3e83146e39319798ae210b256d421ad15c"
+      ],
+      "metric_id": "operating_margin",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "scope_id": "consolidated_continuing",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.11598966955724613
+    },
+    {
+      "accounting_basis": "IFRS",
+      "currency": "JPY",
+      "metric_id": "net_margin",
+      "missing_fields": [
+        "net_income"
+      ],
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "scope_id": "consolidated_continuing",
+      "status": "blocked",
+      "value": null
+    },
+    {
+      "accounting_basis": "IFRS",
+      "calculation": {
+        "formula": "同期间、同范围经营现金流净额 / 收入",
+        "function": "Series.div",
+        "library": "pandas"
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "8e5e97dad34bd0c5fafe2de4c66da36049b0f0fe07766c91af3d212d8ef02810",
+        "6e7506f21f69136a695ab76785c42b3e83146e39319798ae210b256d421ad15c"
+      ],
+      "metric_id": "operating_cash_flow_margin",
+      "name_zh": "经营现金流收入比",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "scope_id": "consolidated_continuing",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.15756024622544595
+    },
+    {
+      "accounting_basis": "IFRS",
+      "calculation": {
+        "formula": "本年收入 / 上年收入 - 1；同一报告比较列",
+        "function": "Series.pct_change",
+        "library": "pandas"
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "6e7506f21f69136a695ab76785c42b3e83146e39319798ae210b256d421ad15c",
+        "0777fc17c5e84c51fd998a96fb3e34539fb0936f309e31f3bd853eb01265524d"
+      ],
+      "metric_id": "revenue_growth",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "scope_id": "consolidated_continuing",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.036951064972031045
+    },
+    {
+      "accounting_basis": "IFRS",
+      "currency": "JPY",
+      "metric_id": "operating_margin",
+      "missing_fields": [
+        "operating_income",
+        "revenue"
+      ],
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "scope_id": "consolidated",
+      "status": "blocked",
+      "value": null
+    },
+    {
+      "accounting_basis": "IFRS",
+      "currency": "JPY",
+      "metric_id": "net_margin",
+      "missing_fields": [
+        "revenue"
+      ],
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "scope_id": "consolidated",
+      "status": "blocked",
+      "value": null
+    },
+    {
+      "accounting_basis": "IFRS",
+      "currency": "JPY",
+      "metric_id": "operating_margin",
+      "missing_fields": [
+        "operating_income",
+        "revenue"
+      ],
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "scope_id": "consolidated",
+      "status": "blocked",
+      "value": null
+    },
+    {
+      "accounting_basis": "IFRS",
+      "currency": "JPY",
+      "metric_id": "net_margin",
+      "missing_fields": [
+        "revenue"
+      ],
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "scope_id": "consolidated",
+      "status": "blocked",
+      "value": null
+    },
+    {
+      "accounting_basis": "IFRS",
+      "currency": "JPY",
+      "metric_id": "operating_margin",
+      "missing_fields": [
+        "operating_income",
+        "revenue"
+      ],
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "scope_id": "consolidated",
+      "status": "blocked",
+      "value": null
+    },
+    {
+      "accounting_basis": "IFRS",
+      "currency": "JPY",
+      "metric_id": "net_margin",
+      "missing_fields": [
+        "revenue"
+      ],
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "scope_id": "consolidated",
+      "status": "blocked",
+      "value": null
+    }
+  ],
+  "checks": [
+    {
+      "check": "balance_sheet",
+      "fact_refs": [
+        "15dfc6d857038ad4077abda58073fcf2ac99c52d5511e82bdf01ea23d023bef0",
+        "59d6b08ba523a1e2966f43d2a8bcc2dbd8875886771c584dc9a2866ef4814602",
+        "9cd44196a4a4e7ec6c930040118e5c7a431683acb1e234c89bb1f88b7c41a7b7"
+      ],
+      "group": [
+        "{\"basis\": \"instant\", \"end\": \"2025-03-31\", \"start\": null}",
+        "consolidated",
+        "IFRS",
+        "JPY"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "1500000"
+    },
+    {
+      "check": "balance_sheet",
+      "fact_refs": [
+        "05023b6f00fa73aca2489da198d83e5160732410a12fd5593257de86e54e2694",
+        "6082014819987991cc2ecd39a694cbf1f90709bb5eda7ff76e8bcce7a7b3ee05",
+        "2a526ce4ca728a23cb5fb15bdda846efb3f7217e20f9eb15598b27d8d767d6c3"
+      ],
+      "group": [
+        "{\"basis\": \"instant\", \"end\": \"2026-03-31\", \"start\": null}",
+        "consolidated",
+        "IFRS",
+        "JPY"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "1500000"
+    },
+    {
+      "check": "cash_flow_bridge",
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2024-03-31\", \"start\": \"2023-04-01\"}",
+        "consolidated_continuing",
+        "IFRS",
+        "JPY"
+      ],
+      "missing_fields": [
+        "cash_change",
+        "investing_cash_flow",
+        "financing_cash_flow",
+        "fx_cash_change"
+      ],
+      "status": "incomplete"
+    },
+    {
+      "check": "cash_flow_bridge",
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2025-03-31\", \"start\": \"2024-04-01\"}",
+        "consolidated_continuing",
+        "IFRS",
+        "JPY"
+      ],
+      "missing_fields": [
+        "cash_change",
+        "investing_cash_flow",
+        "financing_cash_flow",
+        "fx_cash_change"
+      ],
+      "status": "incomplete"
+    },
+    {
+      "check": "cash_flow_bridge",
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2026-03-31\", \"start\": \"2025-04-01\"}",
+        "consolidated_continuing",
+        "IFRS",
+        "JPY"
+      ],
+      "missing_fields": [
+        "cash_change",
+        "investing_cash_flow",
+        "financing_cash_flow",
+        "fx_cash_change"
+      ],
+      "status": "incomplete"
+    },
+    {
+      "check": "cash_flow_bridge",
+      "fact_refs": [
+        "502ca5603abcab786137bdd55cf78f2ecd42770f2f38c9e43cb6190fbfbd7fd5",
+        "d3c66d953eed496759d0fcd58e1864d3680c4c84e4b5a984bd01df1c25e6eec1",
+        "02ed3386933b22e783bd9af60ce5c95b74327efce5eca37600b072412ece1fec",
+        "45dd089f7c11d15b8e2e7c817997d07b51303ed61ca4914e0b77320b41e4f29e",
+        "ac543060c6a57130d51b50bebd3c3c819e971d6eab648b1566efc00b10c1840b"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2024-03-31\", \"start\": \"2023-04-01\"}",
+        "consolidated",
+        "IFRS",
+        "JPY"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "2500000"
+    },
+    {
+      "check": "cash_flow_bridge",
+      "fact_refs": [
+        "330fcb7134106784ea0c8d07f06a7391a3dd18d9d87bd08a4975e9e873aae0c0",
+        "a30b19d0f4e11b678e62d8414ddda05e4889632f063d89d9517e789e5ba52f49",
+        "df50ad491aa74a07d8ac7b55d6808f94988a0746173be7bad03c9200ee8d1564",
+        "7a96027e54e5df7efb8221d414ab76f0ceb7ae2098311b5e8a259e2d6e6fdac4",
+        "52bd3c6b49145c403a675f4ee783626bca50cd1a7b5cedf3c79be91a4f598d79"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2025-03-31\", \"start\": \"2024-04-01\"}",
+        "consolidated",
+        "IFRS",
+        "JPY"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "2500000"
+    },
+    {
+      "check": "cash_flow_bridge",
+      "fact_refs": [
+        "2ac9d31341d0546eec9c56f0fb6847ea6ee7f8104d82094dd98efb2b201a7615",
+        "95f9739bdadad0802c0cea1df7791e8cc84cadcaf4cf34674b052c654f60b44e",
+        "1f40fcd6f67d4e5a1f59f6f7c314acec298a56e2c087352dc8abd6ae166fc8b6",
+        "7fa9805ee641a42785ad7ae59215c3e4d29075a57ee8e50a0e3b8091a6235d1a",
+        "88291e76ebc7819dcf0e71254a2942818170e16f7adf50a249bfa5edcbf02507"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2026-03-31\", \"start\": \"2025-04-01\"}",
+        "consolidated",
+        "IFRS",
+        "JPY"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "2500000"
+    },
+    {
+      "check": "cash_stock_bridge",
+      "fact_refs": [
+        "026a15fc4ef0e3bfddcc80474941e4d3b17c63f7a08f699b969349195a09a8be",
+        "9ed3bcbbf307a6e5e301c9df07e83c15984b508ae8db3df3c60ac2bdf99ea967",
+        "502ca5603abcab786137bdd55cf78f2ecd42770f2f38c9e43cb6190fbfbd7fd5"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2024-03-31\", \"start\": \"2023-04-01\"}",
+        "consolidated",
+        "IFRS",
+        "JPY"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "1500000"
+    },
+    {
+      "check": "cash_stock_bridge",
+      "fact_refs": [
+        "4a7ec9ad29d16d3333748e063e44d949435d50de05666326a4c8bd5f0be9f98a",
+        "0694d7778a8d01fe19a152d17521c42940f2c32899acbe9b05a213c5ca1072c3",
+        "330fcb7134106784ea0c8d07f06a7391a3dd18d9d87bd08a4975e9e873aae0c0"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2025-03-31\", \"start\": \"2024-04-01\"}",
+        "consolidated",
+        "IFRS",
+        "JPY"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "1500000"
+    },
+    {
+      "check": "cash_stock_bridge",
+      "fact_refs": [
+        "5f7eb09b0c0b88a4f690b9a386e3aa23c285bd11106f2582237b8912fe50cace",
+        "e55233b87ce04f009f806538dfef1338877219a2fe23eadd9f4d520aa5f0f58f",
+        "2ac9d31341d0546eec9c56f0fb6847ea6ee7f8104d82094dd98efb2b201a7615"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2026-03-31\", \"start\": \"2025-04-01\"}",
+        "consolidated",
+        "IFRS",
+        "JPY"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "1500000"
+    }
+  ],
+  "entity_id": "JP:6758:CIK313838",
+  "facts": [
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Total assets",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "assets",
+      "id": "15dfc6d857038ad4077abda58073fcf2ac99c52d5511e82bdf01ea23d023bef0",
+      "name_zh": "资产总额",
+      "period": {
+        "basis": "instant",
+        "end": "2025-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Total assets\n35,293,173\n15,683,490",
+        "kind": "primary",
+        "locator": "PDF page 126, row Total assets, year 2025",
+        "path": "data/financial/objects/4d/4d3102107e0e1061b726c2072a11e7fe8ec69b309b529d4bee73c060934b5c33.txt",
+        "published_at": null,
+        "sha256": "4d3102107e0e1061b726c2072a11e7fe8ec69b309b529d4bee73c060934b5c33"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "35293173000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Total assets",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "assets",
+      "id": "05023b6f00fa73aca2489da198d83e5160732410a12fd5593257de86e54e2694",
+      "name_zh": "资产总额",
+      "period": {
+        "basis": "instant",
+        "end": "2026-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Total assets\n35,293,173\n15,683,490",
+        "kind": "primary",
+        "locator": "PDF page 126, row Total assets, year 2026",
+        "path": "data/financial/objects/4d/4d3102107e0e1061b726c2072a11e7fe8ec69b309b529d4bee73c060934b5c33.txt",
+        "published_at": null,
+        "sha256": "4d3102107e0e1061b726c2072a11e7fe8ec69b309b529d4bee73c060934b5c33"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "15683490000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Cash and cash equivalents",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash",
+      "id": "0aba51dca58c60046fff0445012b222088ebda4a64e29a44775f3f45d4b9740d",
+      "name_zh": "现金及现金等价物",
+      "period": {
+        "basis": "instant",
+        "end": "2025-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Cash and cash equivalents\n27\n2,980,956\n2,208,879",
+        "kind": "primary",
+        "locator": "PDF page 126, row Cash and cash equivalents, year 2025",
+        "path": "data/financial/objects/4d/4d3102107e0e1061b726c2072a11e7fe8ec69b309b529d4bee73c060934b5c33.txt",
+        "published_at": null,
+        "sha256": "4d3102107e0e1061b726c2072a11e7fe8ec69b309b529d4bee73c060934b5c33"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "2980956000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Cash and cash equivalents",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash",
+      "id": "ae7a2a9c15160516f0e1a03c244191471ae845b8e57c5eac137726183ad03468",
+      "name_zh": "现金及现金等价物",
+      "period": {
+        "basis": "instant",
+        "end": "2026-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Cash and cash equivalents\n27\n2,980,956\n2,208,879",
+        "kind": "primary",
+        "locator": "PDF page 126, row Cash and cash equivalents, year 2026",
+        "path": "data/financial/objects/4d/4d3102107e0e1061b726c2072a11e7fe8ec69b309b529d4bee73c060934b5c33.txt",
+        "published_at": null,
+        "sha256": "4d3102107e0e1061b726c2072a11e7fe8ec69b309b529d4bee73c060934b5c33"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "2208879000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Total liabilities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "liabilities",
+      "id": "59d6b08ba523a1e2966f43d2a8bcc2dbd8875886771c584dc9a2866ef4814602",
+      "name_zh": "负债总额",
+      "period": {
+        "basis": "instant",
+        "end": "2025-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Total liabilities\n26,783,022\n7,169,901",
+        "kind": "primary",
+        "locator": "PDF page 127, row Total liabilities, year 2025",
+        "path": "data/financial/objects/7f/7f4302dca5fd427843d1a8aa16a964180fd832ee7d9cfe9c6e1717f4d2a50e87.txt",
+        "published_at": null,
+        "sha256": "7f4302dca5fd427843d1a8aa16a964180fd832ee7d9cfe9c6e1717f4d2a50e87"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "26783022000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Total liabilities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "liabilities",
+      "id": "6082014819987991cc2ecd39a694cbf1f90709bb5eda7ff76e8bcce7a7b3ee05",
+      "name_zh": "负债总额",
+      "period": {
+        "basis": "instant",
+        "end": "2026-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Total liabilities\n26,783,022\n7,169,901",
+        "kind": "primary",
+        "locator": "PDF page 127, row Total liabilities, year 2026",
+        "path": "data/financial/objects/7f/7f4302dca5fd427843d1a8aa16a964180fd832ee7d9cfe9c6e1717f4d2a50e87.txt",
+        "published_at": null,
+        "sha256": "7f4302dca5fd427843d1a8aa16a964180fd832ee7d9cfe9c6e1717f4d2a50e87"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "7169901000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Total equity",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "equity",
+      "id": "9cd44196a4a4e7ec6c930040118e5c7a431683acb1e234c89bb1f88b7c41a7b7",
+      "name_zh": "权益总额",
+      "period": {
+        "basis": "instant",
+        "end": "2025-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Total equity\n8,510,151\n8,513,589",
+        "kind": "primary",
+        "locator": "PDF page 127, row Total equity, year 2025",
+        "path": "data/financial/objects/7f/7f4302dca5fd427843d1a8aa16a964180fd832ee7d9cfe9c6e1717f4d2a50e87.txt",
+        "published_at": null,
+        "sha256": "7f4302dca5fd427843d1a8aa16a964180fd832ee7d9cfe9c6e1717f4d2a50e87"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "8510151000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Total equity",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "equity",
+      "id": "2a526ce4ca728a23cb5fb15bdda846efb3f7217e20f9eb15598b27d8d767d6c3",
+      "name_zh": "权益总额",
+      "period": {
+        "basis": "instant",
+        "end": "2026-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Total equity\n8,510,151\n8,513,589",
+        "kind": "primary",
+        "locator": "PDF page 127, row Total equity, year 2026",
+        "path": "data/financial/objects/7f/7f4302dca5fd427843d1a8aa16a964180fd832ee7d9cfe9c6e1717f4d2a50e87.txt",
+        "published_at": null,
+        "sha256": "7f4302dca5fd427843d1a8aa16a964180fd832ee7d9cfe9c6e1717f4d2a50e87"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "8513589000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Sales",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "revenue",
+      "id": "53ca43b7181c3c96f17602794b2a358b5f417c19524a11376909f67bd358d751",
+      "name_zh": "收入",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated_continuing",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Sales\n22\n11,260,037\n12,034,917\n12,479,620",
+        "kind": "primary",
+        "locator": "PDF page 128, row Sales, year 2024",
+        "path": "data/financial/objects/7a/7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1.txt",
+        "published_at": null,
+        "sha256": "7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "11260037000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Sales",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "revenue",
+      "id": "0777fc17c5e84c51fd998a96fb3e34539fb0936f309e31f3bd853eb01265524d",
+      "name_zh": "收入",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated_continuing",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Sales\n22\n11,260,037\n12,034,917\n12,479,620",
+        "kind": "primary",
+        "locator": "PDF page 128, row Sales, year 2025",
+        "path": "data/financial/objects/7a/7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1.txt",
+        "published_at": null,
+        "sha256": "7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "12034917000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Sales",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "revenue",
+      "id": "6e7506f21f69136a695ab76785c42b3e83146e39319798ae210b256d421ad15c",
+      "name_zh": "收入",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated_continuing",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Sales\n22\n11,260,037\n12,034,917\n12,479,620",
+        "kind": "primary",
+        "locator": "PDF page 128, row Sales, year 2026",
+        "path": "data/financial/objects/7a/7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1.txt",
+        "published_at": null,
+        "sha256": "7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "12479620000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Operating income",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "operating_income",
+      "id": "58b555fef87676cf9337a127307a5b8c54eb12e1a241c8c8f67a5972ccbef1ee",
+      "name_zh": "营业利润",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated_continuing",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Operating income\n1,035,255\n1,276,635\n1,447,507",
+        "kind": "primary",
+        "locator": "PDF page 128, row Operating income, year 2024",
+        "path": "data/financial/objects/7a/7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1.txt",
+        "published_at": null,
+        "sha256": "7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1035255000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Operating income",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "operating_income",
+      "id": "8bd6d5fe72fe9f2726c35c7e5cd202879d15dbca2f5eb6a308116c70b34eb234",
+      "name_zh": "营业利润",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated_continuing",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Operating income\n1,035,255\n1,276,635\n1,447,507",
+        "kind": "primary",
+        "locator": "PDF page 128, row Operating income, year 2025",
+        "path": "data/financial/objects/7a/7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1.txt",
+        "published_at": null,
+        "sha256": "7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1276635000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Operating income",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "operating_income",
+      "id": "bd92fe7e422f056be1a084088c9021bb99817d2e2bac9e24b5e05520f05889e2",
+      "name_zh": "营业利润",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated_continuing",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Operating income\n1,035,255\n1,276,635\n1,447,507",
+        "kind": "primary",
+        "locator": "PDF page 128, row Operating income, year 2026",
+        "path": "data/financial/objects/7a/7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1.txt",
+        "published_at": null,
+        "sha256": "7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1447507000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net income (loss)",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "net_income",
+      "id": "253d672e9b6458ee6188dc780a4985d8e93ba92259810bbc9a895265bf59ada3",
+      "name_zh": "合并净利润",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net income (loss)\n980,494\n1,159,887\n(302,492)",
+        "kind": "primary",
+        "locator": "PDF page 128, row Net income (loss), year 2024",
+        "path": "data/financial/objects/7a/7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1.txt",
+        "published_at": null,
+        "sha256": "7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "980494000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net income (loss)",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "net_income",
+      "id": "aee1781c060489162d499f827e4ce76d97c703fa31767098fcf8d4384de101de",
+      "name_zh": "合并净利润",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net income (loss)\n980,494\n1,159,887\n(302,492)",
+        "kind": "primary",
+        "locator": "PDF page 128, row Net income (loss), year 2025",
+        "path": "data/financial/objects/7a/7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1.txt",
+        "published_at": null,
+        "sha256": "7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1159887000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net income (loss)",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "net_income",
+      "id": "bc8152180aeec870873a6b3848bc108a3efdc2b94a7c85ec5fed71e8abd77367",
+      "name_zh": "合并净利润",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net income (loss)\n980,494\n1,159,887\n(302,492)",
+        "kind": "primary",
+        "locator": "PDF page 128, row Net income (loss), year 2026",
+        "path": "data/financial/objects/7a/7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1.txt",
+        "published_at": null,
+        "sha256": "7a07ccd6cf3e945c678a00b692eae7d3ddb45be9210d9c73a90822efc52c54d1"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-302492000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net cash provided by operating activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "operating_cash_flow",
+      "id": "d3c66d953eed496759d0fcd58e1864d3680c4c84e4b5a984bd01df1c25e6eec1",
+      "name_zh": "经营现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net cash provided by operating activities\n1,373,213\n2,321,675\n1,945,617",
+        "kind": "primary",
+        "locator": "PDF page 132, row Net cash provided by operating activities, year 2024",
+        "path": "data/financial/objects/aa/aa35710a8947bdcd9da593adc6b4c383924e7a05246d0dfac1a0a2ff3043c2b9.txt",
+        "published_at": null,
+        "sha256": "aa35710a8947bdcd9da593adc6b4c383924e7a05246d0dfac1a0a2ff3043c2b9"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1373213000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net cash provided by operating activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "operating_cash_flow",
+      "id": "a30b19d0f4e11b678e62d8414ddda05e4889632f063d89d9517e789e5ba52f49",
+      "name_zh": "经营现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net cash provided by operating activities\n1,373,213\n2,321,675\n1,945,617",
+        "kind": "primary",
+        "locator": "PDF page 132, row Net cash provided by operating activities, year 2025",
+        "path": "data/financial/objects/aa/aa35710a8947bdcd9da593adc6b4c383924e7a05246d0dfac1a0a2ff3043c2b9.txt",
+        "published_at": null,
+        "sha256": "aa35710a8947bdcd9da593adc6b4c383924e7a05246d0dfac1a0a2ff3043c2b9"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "2321675000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net cash provided by operating activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "operating_cash_flow",
+      "id": "95f9739bdadad0802c0cea1df7791e8cc84cadcaf4cf34674b052c654f60b44e",
+      "name_zh": "经营现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net cash provided by operating activities\n1,373,213\n2,321,675\n1,945,617",
+        "kind": "primary",
+        "locator": "PDF page 132, row Net cash provided by operating activities, year 2026",
+        "path": "data/financial/objects/aa/aa35710a8947bdcd9da593adc6b4c383924e7a05246d0dfac1a0a2ff3043c2b9.txt",
+        "published_at": null,
+        "sha256": "aa35710a8947bdcd9da593adc6b4c383924e7a05246d0dfac1a0a2ff3043c2b9"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1945617000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Total net cash provided by operating activities from continuing operations",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "operating_cash_flow",
+      "id": "561643346433cd77038de44010776a84c1e9f28e88dc0b6d312a68347eae3c26",
+      "name_zh": "经营现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated_continuing",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Total net cash provided by operating activities from continuing operations\n1,103,645\n1,971,349\n1,966,292",
+        "kind": "primary",
+        "locator": "PDF page 132, row Total net cash provided by operating activities from continuing operations, year 2024",
+        "path": "data/financial/objects/aa/aa35710a8947bdcd9da593adc6b4c383924e7a05246d0dfac1a0a2ff3043c2b9.txt",
+        "published_at": null,
+        "sha256": "aa35710a8947bdcd9da593adc6b4c383924e7a05246d0dfac1a0a2ff3043c2b9"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1103645000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Total net cash provided by operating activities from continuing operations",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "operating_cash_flow",
+      "id": "c85c0388d6ac9a3d0180c959b970fd490d5c188462b5bb53c727db5927787e6a",
+      "name_zh": "经营现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated_continuing",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Total net cash provided by operating activities from continuing operations\n1,103,645\n1,971,349\n1,966,292",
+        "kind": "primary",
+        "locator": "PDF page 132, row Total net cash provided by operating activities from continuing operations, year 2025",
+        "path": "data/financial/objects/aa/aa35710a8947bdcd9da593adc6b4c383924e7a05246d0dfac1a0a2ff3043c2b9.txt",
+        "published_at": null,
+        "sha256": "aa35710a8947bdcd9da593adc6b4c383924e7a05246d0dfac1a0a2ff3043c2b9"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1971349000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Total net cash provided by operating activities from continuing operations",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "operating_cash_flow",
+      "id": "8e5e97dad34bd0c5fafe2de4c66da36049b0f0fe07766c91af3d212d8ef02810",
+      "name_zh": "经营现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated_continuing",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Total net cash provided by operating activities from continuing operations\n1,103,645\n1,971,349\n1,966,292",
+        "kind": "primary",
+        "locator": "PDF page 132, row Total net cash provided by operating activities from continuing operations, year 2026",
+        "path": "data/financial/objects/aa/aa35710a8947bdcd9da593adc6b4c383924e7a05246d0dfac1a0a2ff3043c2b9.txt",
+        "published_at": null,
+        "sha256": "aa35710a8947bdcd9da593adc6b4c383924e7a05246d0dfac1a0a2ff3043c2b9"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1966292000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net cash used in investing activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "investing_cash_flow",
+      "id": "02ed3386933b22e783bd9af60ce5c95b74327efce5eca37600b072412ece1fec",
+      "name_zh": "投资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net cash used in investing activities\n(818,886)\n(930,120)\n(1,970,542)",
+        "kind": "primary",
+        "locator": "PDF page 133, row Net cash used in investing activities, year 2024",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-818886000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net cash used in investing activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "investing_cash_flow",
+      "id": "df50ad491aa74a07d8ac7b55d6808f94988a0746173be7bad03c9200ee8d1564",
+      "name_zh": "投资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net cash used in investing activities\n(818,886)\n(930,120)\n(1,970,542)",
+        "kind": "primary",
+        "locator": "PDF page 133, row Net cash used in investing activities, year 2025",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-930120000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net cash used in investing activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "investing_cash_flow",
+      "id": "1f40fcd6f67d4e5a1f59f6f7c314acec298a56e2c087352dc8abd6ae166fc8b6",
+      "name_zh": "投资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net cash used in investing activities\n(818,886)\n(930,120)\n(1,970,542)",
+        "kind": "primary",
+        "locator": "PDF page 133, row Net cash used in investing activities, year 2026",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-1970542000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net cash used in financing activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "financing_cash_flow",
+      "id": "45dd089f7c11d15b8e2e7c817997d07b51303ed61ca4914e0b77320b41e4f29e",
+      "name_zh": "融资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net cash used in financing activities\n(210,709)\n(298,243)\n(842,761)",
+        "kind": "primary",
+        "locator": "PDF page 133, row Net cash used in financing activities, year 2024",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-210709000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net cash used in financing activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "financing_cash_flow",
+      "id": "7a96027e54e5df7efb8221d414ab76f0ceb7ae2098311b5e8a259e2d6e6fdac4",
+      "name_zh": "融资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net cash used in financing activities\n(210,709)\n(298,243)\n(842,761)",
+        "kind": "primary",
+        "locator": "PDF page 133, row Net cash used in financing activities, year 2025",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-298243000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net cash used in financing activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "financing_cash_flow",
+      "id": "7fa9805ee641a42785ad7ae59215c3e4d29075a57ee8e50a0e3b8091a6235d1a",
+      "name_zh": "融资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net cash used in financing activities\n(210,709)\n(298,243)\n(842,761)",
+        "kind": "primary",
+        "locator": "PDF page 133, row Net cash used in financing activities, year 2026",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-842761000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Effect of exchange rate changes on cash and cash equivalents",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "fx_cash_change",
+      "id": "ac543060c6a57130d51b50bebd3c3c819e971d6eab648b1566efc00b10c1840b",
+      "name_zh": "汇率变动对现金的影响",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Effect of exchange rate changes on cash and cash equivalents\n82,595\n(19,469)\n95,609",
+        "kind": "primary",
+        "locator": "PDF page 133, row Effect of exchange rate changes on cash and cash equivalents, year 2024",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "82595000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Effect of exchange rate changes on cash and cash equivalents",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "fx_cash_change",
+      "id": "52bd3c6b49145c403a675f4ee783626bca50cd1a7b5cedf3c79be91a4f598d79",
+      "name_zh": "汇率变动对现金的影响",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Effect of exchange rate changes on cash and cash equivalents\n82,595\n(19,469)\n95,609",
+        "kind": "primary",
+        "locator": "PDF page 133, row Effect of exchange rate changes on cash and cash equivalents, year 2025",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-19469000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Effect of exchange rate changes on cash and cash equivalents",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "fx_cash_change",
+      "id": "88291e76ebc7819dcf0e71254a2942818170e16f7adf50a249bfa5edcbf02507",
+      "name_zh": "汇率变动对现金的影响",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Effect of exchange rate changes on cash and cash equivalents\n82,595\n(19,469)\n95,609",
+        "kind": "primary",
+        "locator": "PDF page 133, row Effect of exchange rate changes on cash and cash equivalents, year 2026",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "95609000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net increase (decrease) in cash and cash equivalents",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_change",
+      "id": "502ca5603abcab786137bdd55cf78f2ecd42770f2f38c9e43cb6190fbfbd7fd5",
+      "name_zh": "现金净变动",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net increase (decrease) in cash and cash equivalents\n426,213\n1,073,843\n(772,077)",
+        "kind": "primary",
+        "locator": "PDF page 133, row Net increase (decrease) in cash and cash equivalents, year 2024",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "426213000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net increase (decrease) in cash and cash equivalents",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_change",
+      "id": "330fcb7134106784ea0c8d07f06a7391a3dd18d9d87bd08a4975e9e873aae0c0",
+      "name_zh": "现金净变动",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net increase (decrease) in cash and cash equivalents\n426,213\n1,073,843\n(772,077)",
+        "kind": "primary",
+        "locator": "PDF page 133, row Net increase (decrease) in cash and cash equivalents, year 2025",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1073843000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Net increase (decrease) in cash and cash equivalents",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_change",
+      "id": "2ac9d31341d0546eec9c56f0fb6847ea6ee7f8104d82094dd98efb2b201a7615",
+      "name_zh": "现金净变动",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Net increase (decrease) in cash and cash equivalents\n426,213\n1,073,843\n(772,077)",
+        "kind": "primary",
+        "locator": "PDF page 133, row Net increase (decrease) in cash and cash equivalents, year 2026",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-772077000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Cash and cash equivalents at beginning of the fiscal year",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_begin",
+      "id": "026a15fc4ef0e3bfddcc80474941e4d3b17c63f7a08f699b969349195a09a8be",
+      "name_zh": "期初现金及现金等价物",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Cash and cash equivalents at beginning of the fiscal year\n27\n1,480,900\n1,907,113\n2,980,956",
+        "kind": "primary",
+        "locator": "PDF page 133, row Cash and cash equivalents at beginning of the fiscal year, year 2024",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1480900000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Cash and cash equivalents at beginning of the fiscal year",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_begin",
+      "id": "4a7ec9ad29d16d3333748e063e44d949435d50de05666326a4c8bd5f0be9f98a",
+      "name_zh": "期初现金及现金等价物",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Cash and cash equivalents at beginning of the fiscal year\n27\n1,480,900\n1,907,113\n2,980,956",
+        "kind": "primary",
+        "locator": "PDF page 133, row Cash and cash equivalents at beginning of the fiscal year, year 2025",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1907113000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Cash and cash equivalents at beginning of the fiscal year",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_begin",
+      "id": "5f7eb09b0c0b88a4f690b9a386e3aa23c285bd11106f2582237b8912fe50cace",
+      "name_zh": "期初现金及现金等价物",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Cash and cash equivalents at beginning of the fiscal year\n27\n1,480,900\n1,907,113\n2,980,956",
+        "kind": "primary",
+        "locator": "PDF page 133, row Cash and cash equivalents at beginning of the fiscal year, year 2026",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "2980956000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Cash and cash equivalents at end of the fiscal year",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_end",
+      "id": "9ed3bcbbf307a6e5e301c9df07e83c15984b508ae8db3df3c60ac2bdf99ea967",
+      "name_zh": "期末现金及现金等价物",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Cash and cash equivalents at end of the fiscal year\n27\n1,907,113\n2,980,956\n2,208,879",
+        "kind": "primary",
+        "locator": "PDF page 133, row Cash and cash equivalents at end of the fiscal year, year 2024",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1907113000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Cash and cash equivalents at end of the fiscal year",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_end",
+      "id": "0694d7778a8d01fe19a152d17521c42940f2c32899acbe9b05a213c5ca1072c3",
+      "name_zh": "期末现金及现金等价物",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Cash and cash equivalents at end of the fiscal year\n27\n1,907,113\n2,980,956\n2,208,879",
+        "kind": "primary",
+        "locator": "PDF page 133, row Cash and cash equivalents at end of the fiscal year, year 2025",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "2980956000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Cash and cash equivalents at end of the fiscal year",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_end",
+      "id": "e55233b87ce04f009f806538dfef1338877219a2fe23eadd9f4d520aa5f0f58f",
+      "name_zh": "期末现金及现金等价物",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Cash and cash equivalents at end of the fiscal year\n27\n1,907,113\n2,980,956\n2,208,879",
+        "kind": "primary",
+        "locator": "PDF page 133, row Cash and cash equivalents at end of the fiscal year, year 2026",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "2208879000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Payments for property, plant and equipment and other intangible assets",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "capex_ppe_and_intangibles",
+      "id": "a891952364eb83ad709ebba2d7d8d4e51f60c152182b57d8f9c73af669ba9a31",
+      "name_zh": "固定资产及其他无形资产现金支出",
+      "period": {
+        "basis": "annual",
+        "end": "2024-03-31",
+        "start": "2023-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated_continuing",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Payments for property, plant and equipment and other intangible assets\n(605,779)\n(620,985)\n(457,681)",
+        "kind": "primary",
+        "locator": "PDF page 133, row Payments for property, plant and equipment and other intangible assets, year 2024",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-605779000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Payments for property, plant and equipment and other intangible assets",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "capex_ppe_and_intangibles",
+      "id": "3efbf8ef6ec634c7d57799486f60a75f872007e5c66c6b5270dc2b799aa642a4",
+      "name_zh": "固定资产及其他无形资产现金支出",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated_continuing",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Payments for property, plant and equipment and other intangible assets\n(605,779)\n(620,985)\n(457,681)",
+        "kind": "primary",
+        "locator": "PDF page 133, row Payments for property, plant and equipment and other intangible assets, year 2025",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-620985000000"
+    },
+    {
+      "accounting_basis": "IFRS",
+      "concept": "Payments for property, plant and equipment and other intangible assets",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "capex_ppe_and_intangibles",
+      "id": "eda8afccf7e170e1b568fa9044db38dddd72c7019470d4aca9a38fe3658ad6ef",
+      "name_zh": "固定资产及其他无形资产现金支出",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated_continuing",
+      "source": {
+        "available_at": "2026-10-11T01:45:05+00:00",
+        "excerpt": "Payments for property, plant and equipment and other intangible assets\n(605,779)\n(620,985)\n(457,681)",
+        "kind": "primary",
+        "locator": "PDF page 133, row Payments for property, plant and equipment and other intangible assets, year 2026",
+        "path": "data/financial/objects/66/66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf.txt",
+        "published_at": null,
+        "sha256": "66d776d949872878dac3688d7928b70bb6d30fab35125118023411f8452d85bf"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-457681000000"
+    }
+  ],
+  "implementation_sha256": "22681e89fbfc660f1bf7da27aab9b8326e257b966f3365a7a7aeada1251b3fe7",
+  "issues": [],
+  "missing_capabilities": [],
+  "parser": {
+    "basis_page": 135,
+    "basis_text": "prepared in accordance with IFRS® Accounting Standards",
+    "layout_profile": "reviewed_exact_document_only",
+    "original_sha256_lock": "ea208480be5f6ba6c76a15377b6ea67addc69b274a0fcc9ba479876e40516772"
+  },
+  "plan_sha256": "4406dac087d4c2b80f14e5717e6dcf465a5c0e0412af92dec43ff6fc760bc075",
+  "release_status": "staging_pending_review",
+  "report_id": "sony-2026-20f-v1",
+  "schema_version": "1.0.0",
+  "supersedes_report_id": null,
+  "taxonomy_validation": {
+    "status": "not_applicable"
+  }
+}

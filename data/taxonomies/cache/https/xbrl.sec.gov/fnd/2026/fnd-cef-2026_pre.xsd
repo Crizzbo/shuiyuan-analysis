@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This schema was created by staff of the U.S. Securities and Exchange Commission. -->
+<!-- Data and content created by government employees within the scope of their employment -->
+<!-- are not subject to domestic copyright protection. 17 U.S.C. 105. -->
+<xs:schema
+xmlns:fnd-cef-pre="http://xbrl.sec.gov/fnd-cef-pre/2026"
+xmlns:link="http://www.xbrl.org/2003/linkbase"
+xmlns:ref="http://www.xbrl.org/2006/ref"
+xmlns:xbrldt="http://xbrl.org/2005/xbrldt"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+targetNamespace="http://xbrl.sec.gov/fnd-cef-pre/2026"
+elementFormDefault="qualified"
+xsi:schemaLocation="http://www.xbrl.org/2006/ref http://www.xbrl.org/2006/ref-2006-02-27.xsd">
+<xs:import namespace="http://xbrl.sec.gov/cef-pre/2026" schemaLocation="https://xbrl.sec.gov/cef/2026/cef-2026_pre.xsd"/>
+<xs:import namespace="http://xbrl.sec.gov/fnd-lab/2026" schemaLocation="fnd-2026_lab.xsd"/>
+<xs:annotation>
+<xs:appinfo>
+<link:linkbase id="lnk">
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/all" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#all"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/domain-member" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#domain-member"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/cef/role/N2" xlink:type="simple" xlink:href="https://xbrl.sec.gov/cef/2026/cef-2026.xsd#N2"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/cef/role/Item8.2.b.instr.2" xlink:type="simple" xlink:href="fnd-2026.xsd#Item8.2.b.instr.2"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/cef/role/CommonDimensions" xlink:type="simple" xlink:href="https://xbrl.sec.gov/cef/2026/cef-2026.xsd#CommonDimensions"/>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/cef/role/Item8.2.b.instr.2">
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/cef/2026/cef-2026.xsd#cef_ProspectusLineItems" xlink:label="ProspectusLineItems"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/cef/2026/cef-2026.xsd#cef_ProspectusTable" xlink:label="ProspectusTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="ProspectusLineItems" xlink:to="ProspectusTable" order="1.0" xbrldt:targetRole="http://xbrl.sec.gov/cef/role/CommonDimensions" xbrldt:closed="true" xbrldt:contextElement="segment" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/cef/role/Item8.2.b.instr.2">
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/cef/2026/cef-2026.xsd#cef_ProspectusLineItems" xlink:label="ProspectusLineItems"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1TermDfnTextBlock" xlink:label="NmRule35d1TermDfnTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="ProspectusLineItems" xlink:to="NmRule35d1TermDfnTextBlock" use="optional" priority="10" order="2.0"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1TermSlctnCritTextBlock" xlink:label="NmRule35d1TermSlctnCritTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="ProspectusLineItems" xlink:to="NmRule35d1TermSlctnCritTextBlock" use="optional" priority="10" order="3.0"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1EightyPctInvstmntPlcyTextBlock" xlink:label="NmRule35d1EightyPctInvstmntPlcyTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="ProspectusLineItems" xlink:to="NmRule35d1EightyPctInvstmntPlcyTextBlock" use="optional" priority="10" order="4.0"/>
+</link:definitionLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/cef/role/N2">
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/cef/2026/cef-2026.xsd#cef_InvestmentObjectivesAndPracticesTextBlock" xlink:label="InvestmentObjectivesAndPracticesTextBlock"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1TermDfnTextBlock" xlink:label="NmRule35d1TermDfnTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="InvestmentObjectivesAndPracticesTextBlock" xlink:to="NmRule35d1TermDfnTextBlock" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1TermSlctnCritTextBlock" xlink:label="NmRule35d1TermSlctnCritTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="InvestmentObjectivesAndPracticesTextBlock" xlink:to="NmRule35d1TermSlctnCritTextBlock" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1EightyPctInvstmntPlcyTextBlock" xlink:label="NmRule35d1EightyPctInvstmntPlcyTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="InvestmentObjectivesAndPracticesTextBlock" xlink:to="NmRule35d1EightyPctInvstmntPlcyTextBlock" order="4.0" priority="10"/>
+</link:presentationLink>
+<link:referenceLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1DsclsrLineItems" xlink:label="NmRule35d1DsclsrLineItems"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1DsclsrLineItems" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form N-2</ref:Name>
+<ref:Section>Item</ref:Section>
+<ref:Subsection>8</ref:Subsection>
+<ref:Paragraph>2</ref:Paragraph>
+<ref:Subparagraph>b</ref:Subparagraph>
+<ref:Sentence>instruction</ref:Sentence>
+<ref:Clause>2</ref:Clause>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1DsclsrLineItems" xlink:to="reference_NmRule35d1DsclsrLineItems" priority="10"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1DsclsrLineItems_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form N-8B-2</ref:Name>
+<ref:Section>Item</ref:Section>
+<ref:Subsection>11</ref:Subsection>
+<ref:Paragraph>Instruction</ref:Paragraph>
+<ref:Subparagraph>2</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1DsclsrLineItems" xlink:to="reference_NmRule35d1DsclsrLineItems_2" priority="10"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1DsclsrLineItems_3" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Investment Company Act</ref:Name>
+<ref:Number>270</ref:Number>
+<ref:Section>35d-1</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1DsclsrLineItems" xlink:to="reference_NmRule35d1DsclsrLineItems_3" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1TermDfnTextBlock" xlink:label="NmRule35d1TermDfnTextBlock"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1TermDfnTextBlock" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form N-2</ref:Name>
+<ref:Section>Item</ref:Section>
+<ref:Subsection>8</ref:Subsection>
+<ref:Paragraph>2</ref:Paragraph>
+<ref:Subparagraph>b</ref:Subparagraph>
+<ref:Sentence>instruction</ref:Sentence>
+<ref:Clause>2</ref:Clause>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1TermDfnTextBlock" xlink:to="reference_NmRule35d1TermDfnTextBlock" priority="10"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1TermDfnTextBlock_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form N-8B-2</ref:Name>
+<ref:Section>Item</ref:Section>
+<ref:Subsection>11</ref:Subsection>
+<ref:Paragraph>Instruction</ref:Paragraph>
+<ref:Subparagraph>2</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1TermDfnTextBlock" xlink:to="reference_NmRule35d1TermDfnTextBlock_2" priority="10"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1TermDfnTextBlock_3" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Investment Company Act</ref:Name>
+<ref:Number>270</ref:Number>
+<ref:Section>35d-1</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1TermDfnTextBlock" xlink:to="reference_NmRule35d1TermDfnTextBlock_3" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1TermSlctnCritTextBlock" xlink:label="NmRule35d1TermSlctnCritTextBlock"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1TermSlctnCritTextBlock" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form N-2</ref:Name>
+<ref:Section>Item</ref:Section>
+<ref:Subsection>8</ref:Subsection>
+<ref:Paragraph>2</ref:Paragraph>
+<ref:Subparagraph>b</ref:Subparagraph>
+<ref:Sentence>instruction</ref:Sentence>
+<ref:Clause>2</ref:Clause>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1TermSlctnCritTextBlock" xlink:to="reference_NmRule35d1TermSlctnCritTextBlock" priority="10"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1TermSlctnCritTextBlock_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form N-8B-2</ref:Name>
+<ref:Section>Item</ref:Section>
+<ref:Subsection>11</ref:Subsection>
+<ref:Paragraph>Instruction</ref:Paragraph>
+<ref:Subparagraph>2</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1TermSlctnCritTextBlock" xlink:to="reference_NmRule35d1TermSlctnCritTextBlock_2" priority="10"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1TermSlctnCritTextBlock_3" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Investment Company Act</ref:Name>
+<ref:Number>270</ref:Number>
+<ref:Section>35d-1</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1TermSlctnCritTextBlock" xlink:to="reference_NmRule35d1TermSlctnCritTextBlock_3" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1TermDfnSmryTextBlock" xlink:label="NmRule35d1TermDfnSmryTextBlock"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1TermDfnSmryTextBlock" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form N-1A</ref:Name>
+<ref:Section>Item</ref:Section>
+<ref:Subsection>4</ref:Subsection>
+<ref:Paragraph>a</ref:Paragraph>
+<ref:Subparagraph>1</ref:Subparagraph>
+<ref:Sentence>instruction</ref:Sentence>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1TermDfnSmryTextBlock" xlink:to="reference_NmRule35d1TermDfnSmryTextBlock" priority="10"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1TermDfnSmryTextBlock_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Investment Company Act</ref:Name>
+<ref:Number>270</ref:Number>
+<ref:Section>35d-1</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1TermDfnSmryTextBlock" xlink:to="reference_NmRule35d1TermDfnSmryTextBlock_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1TermSlctnCritSmryTextBlock" xlink:label="NmRule35d1TermSlctnCritSmryTextBlock"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1TermSlctnCritSmryTextBlock" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form N-1A</ref:Name>
+<ref:Section>Item</ref:Section>
+<ref:Subsection>4</ref:Subsection>
+<ref:Paragraph>a</ref:Paragraph>
+<ref:Subparagraph>1</ref:Subparagraph>
+<ref:Sentence>instruction</ref:Sentence>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1TermSlctnCritSmryTextBlock" xlink:to="reference_NmRule35d1TermSlctnCritSmryTextBlock" priority="10"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1TermSlctnCritSmryTextBlock_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Investment Company Act</ref:Name>
+<ref:Number>270</ref:Number>
+<ref:Section>35d-1</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1TermSlctnCritSmryTextBlock" xlink:to="reference_NmRule35d1TermSlctnCritSmryTextBlock_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1EightyPctInvstmntPlcyTextBlock" xlink:label="NmRule35d1EightyPctInvstmntPlcyTextBlock"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1EightyPctInvstmntPlcyTextBlock" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form N-1A</ref:Name>
+<ref:Section>Item</ref:Section>
+<ref:Subsection>4</ref:Subsection>
+<ref:Paragraph>a</ref:Paragraph>
+<ref:Subparagraph>1</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1EightyPctInvstmntPlcyTextBlock" xlink:to="reference_NmRule35d1EightyPctInvstmntPlcyTextBlock" priority="10"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1EightyPctInvstmntPlcyTextBlock_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form N-2</ref:Name>
+<ref:Section>Item</ref:Section>
+<ref:Subsection>8</ref:Subsection>
+<ref:Paragraph>2</ref:Paragraph>
+<ref:Subparagraph>b</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1EightyPctInvstmntPlcyTextBlock" xlink:to="reference_NmRule35d1EightyPctInvstmntPlcyTextBlock_2" priority="10"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1EightyPctInvstmntPlcyTextBlock_3" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Investment Company Act</ref:Name>
+<ref:Number>270</ref:Number>
+<ref:Section>35d-1</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1EightyPctInvstmntPlcyTextBlock" xlink:to="reference_NmRule35d1EightyPctInvstmntPlcyTextBlock_3" priority="10"/>
+</link:referenceLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+</xs:schema>

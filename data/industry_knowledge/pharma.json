@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "pharma",
+    "industry_name_zh": "成熟跨国制药与专利药企",
+    "sector_id": "health_care",
+    "sector_name_zh": "医疗保健",
+    "macro_sector_id": "HEALTH_BIO",
+    "macro_sector_name_zh": "医疗保健、专利创新药与生物技术服务",
+    "description_zh": "涵盖拥有全球重磅专利药物、完善商业化销售网络及多元疾病管线的大型跨国制药集团。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.32,
+    "typical_markup_ratio": 1.32,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "高经营杠杆",
+    "typical_gross_margin_range": [0.65, 0.85]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 110.0,
+    "dio_warning_days": 190.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.35,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "高品质化学原料药 (API)、高纯度药用辅料及无菌预充式注射针剂包材",
+      "全球头部生物医药研发定制生产 (CDMO) 商业化大规模原液发酵与无菌灌装产线产能",
+      "全球多中心三期临床试验合格受试患者入组筛选效率与权威医学伦理审批批文"
+    ],
+    "downstream_profile": "全球跨国医药流通商业分销巨头、公立与私立医院处方系统、大型连锁药店及主权国家医保支付方",
+    "pricing_power_verdict": "独家专利期内享有绝对定价权与暴利边际收益；核心化合物专利到期后直面仿制药断崖冲击，定价权瞬间归零",
+    "channel_inversion_sensitivity": "美国联邦医保药品价格谈判清单与药品福利管理机构 (PBM) 处方目录排除是单药收入雪崩的最核心先行信号"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "减重代谢、自免或肿瘤领域跨代超级单品全球处方量井喷，突破产能瓶颈推动单药年销售额站上百亿美元大关",
+      "关键候选管线三期临床主要终点大获成功并在国际顶刊公布积极数据，获得监管优先审评与重磅新适应症拓展",
+      "前瞻性外部管线授权引入或精准并购顺利落地，优质中后期临床资产无缝衔接即将到期的专利悬崖缺口"
+    ],
+    "leading_bear_defenses": [
+      "旗舰核心品种化合物专利保护期届满，生物类似药与仿制药低价大举切入导致原研药量价齐跌出现断崖式萎缩",
+      "核心研发管线关键三期临床试验未达主要疗效终点或因严重毒副作用意外折戟，前期沉没成本全额计提资产减值",
+      "主权医保控费政策强化带量采购或直接价格谈判机制，核心产品公立采购定价遭遇腰斩式压缩"
+    ],
+    "core_catalyst_dimensions": [
+      "监管机构处方药申报审批目标决策日 (PDUFA Date) 审批裁决结果",
+      "国际顶级医学大会 (ASCO/ESMO/ADA) 关键临床试验中晚期疗效与安全性重磅数据读出",
+      "单季度全球处方药终端跟踪销量 (IQVIA 处方追踪数据) 增长趋势",
+      "政府医保目录准入与集中谈判价格变动明细"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "在财年尾声向三大医药商业批发分销商大额折价非正常压货塞库以提前透支下期营收",
+      "重大并购形成的巨额商誉及在研管线无形资产在临床遇阻或失效后未及时全额计提减值准备",
+      "将常规失败管线的后续支出违规计入资本化无形资产以蓄意掩盖当期研发费用超支"
+    ],
+    "channel_and_revenue_checks": [
+      "处方药销售从毛额到净额 (Gross-to-Net, GTN) 调整中渠道折扣、医疗回扣计提的合理性与充分性",
+      "重大药品不良反应事件引发的未决集体诉讼潜在赔付责任预计负债计提审计"
+    ]
+  }
+}

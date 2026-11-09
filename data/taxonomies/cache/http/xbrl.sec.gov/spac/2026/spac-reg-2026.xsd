@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This schema was created by staff of the U.S. Securities and Exchange Commission. -->
+<!-- Data and content created by government employees within the scope of their employment -->
+<!-- are not subject to domestic copyright protection. 17 U.S.C. 105. -->
+<xs:schema
+xmlns:link="http://www.xbrl.org/2003/linkbase"
+xmlns:spac-reg="http://xbrl.sec.gov/spac-reg/2026"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://xbrl.sec.gov/spac-reg/2026"
+elementFormDefault="qualified">
+<xs:import namespace="http://xbrl.sec.gov/spac-com/2026" schemaLocation="spac-com-2026.xsd"/>
+<xs:annotation>
+<xs:appinfo>
+<link:linkbase id="lnk">
+<link:roleRef roleURI="http://xbrl.sec.gov/spac/role/sk1602" xlink:type="simple" xlink:href="spac-2026.xsd#sk1602"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/spac/role/sk1602a4" xlink:type="simple" xlink:href="spac-2026.xsd#sk1602a4"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/spac/role/sk1602b6" xlink:type="simple" xlink:href="spac-2026.xsd#sk1602b6"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/spac/role/sk1602c" xlink:type="simple" xlink:href="spac-2026.xsd#sk1602c"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/spac/role/sk1602a3" xlink:type="simple" xlink:href="spac-2026.xsd#sk1602a3"/>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/spac/role/sk1602">
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacRegisteredOfferingLineItems" xlink:label="SpacRegisteredOfferingLineItems"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartLineItems" xlink:label="SpacOfferingForepartLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacRegisteredOfferingLineItems" xlink:to="SpacOfferingForepartLineItems" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartDeSpacConsummationTimeframe" xlink:label="SpacOfferingForepartDeSpacConsummationTimeframe"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartLineItems" xlink:to="SpacOfferingForepartDeSpacConsummationTimeframe" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartDeSpacConsummationTimeframeDescriptionTextBlock" xlink:label="SpacOfferingForepartDeSpacConsummationTimeframeDescriptionTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartLineItems" xlink:to="SpacOfferingForepartDeSpacConsummationTimeframeDescriptionTextBlock" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartDeSpacConsummationTimeframeMayBeExtendedFlag" xlink:label="SpacOfferingForepartDeSpacConsummationTimeframeMayBeExtendedFlag"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartLineItems" xlink:to="SpacOfferingForepartDeSpacConsummationTimeframeMayBeExtendedFlag" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartSecurityHoldersHaveTheOpportunityToRedeemSecuritiesFlag" xlink:label="SpacOfferingForepartSecurityHoldersHaveTheOpportunityToRedeemSecuritiesFlag"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartLineItems" xlink:to="SpacOfferingForepartSecurityHoldersHaveTheOpportunityToRedeemSecuritiesFlag" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartSecurityHolderRedemptionsSubjectToLimitationsFlag" xlink:label="SpacOfferingForepartSecurityHolderRedemptionsSubjectToLimitationsFlag"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartLineItems" xlink:to="SpacOfferingForepartSecurityHolderRedemptionsSubjectToLimitationsFlag" order="5.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartSponsorCompensationTableTextBlock" xlink:label="SpacOfferingForepartSponsorCompensationTableTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartLineItems" xlink:to="SpacOfferingForepartSponsorCompensationTableTextBlock" order="6.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartSponsorCompensationMaterialDilutionFlag" xlink:label="SpacOfferingForepartSponsorCompensationMaterialDilutionFlag"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartLineItems" xlink:to="SpacOfferingForepartSponsorCompensationMaterialDilutionFlag" order="8.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartAdjustedNetTangibleBookValuePerShareTableTextBlock" xlink:label="SpacOfferingForepartAdjustedNetTangibleBookValuePerShareTableTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartLineItems" xlink:to="SpacOfferingForepartAdjustedNetTangibleBookValuePerShareTableTextBlock" order="9.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartActualOrMaterialConflictOfInterestFlag" xlink:label="SpacOfferingForepartActualOrMaterialConflictOfInterestFlag"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartLineItems" xlink:to="SpacOfferingForepartActualOrMaterialConflictOfInterestFlag" order="10.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartSponsorCompensationFootnotesTextBlock" xlink:label="SpacOfferingForepartSponsorCompensationFootnotesTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartLineItems" xlink:to="SpacOfferingForepartSponsorCompensationFootnotesTextBlock" order="7.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingProspectusSummaryLineItems" xlink:label="SpacOfferingProspectusSummaryLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacRegisteredOfferingLineItems" xlink:to="SpacOfferingProspectusSummaryLineItems" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacRegisteredOfferingProspectusSummaryIdentifyAndEvaluatePotentialBusinessCombinationCandidatesMannerTextBlock" xlink:label="SpacRegisteredOfferingProspectusSummaryIdentifyAndEvaluatePotentialBusinessCombinationCandidatesMannerTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="SpacRegisteredOfferingProspectusSummaryIdentifyAndEvaluatePotentialBusinessCombinationCandidatesMannerTextBlock" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacWillSolicitShareholderApprovalForDeSpacTransactionFlag" xlink:label="SpacWillSolicitShareholderApprovalForDeSpacTransactionFlag"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="SpacWillSolicitShareholderApprovalForDeSpacTransactionFlag" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacTrustOrEscrowAccountMaterialTermsTextBlock" xlink:label="SpacTrustOrEscrowAccountMaterialTermsTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="SpacTrustOrEscrowAccountMaterialTermsTextBlock" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacTrustOrEscrowAccountGrossOfferingProceedsPlacedAmount" xlink:label="SpacTrustOrEscrowAccountGrossOfferingProceedsPlacedAmount"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="SpacTrustOrEscrowAccountGrossOfferingProceedsPlacedAmount" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacTrustOrEscrowAccountGrossOfferingProceedsPlacedPercent" xlink:label="SpacTrustOrEscrowAccountGrossOfferingProceedsPlacedPercent"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="SpacTrustOrEscrowAccountGrossOfferingProceedsPlacedPercent" order="5.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacSecuritiesOfferedMaterialTermsTextBlock" xlink:label="SpacSecuritiesOfferedMaterialTermsTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="SpacSecuritiesOfferedMaterialTermsTextBlock" order="6.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacSecuritiesOfferedRedemptionRightsTextBlock" xlink:label="SpacSecuritiesOfferedRedemptionRightsTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="SpacSecuritiesOfferedRedemptionRightsTextBlock" order="7.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacSecuritiesOfferedSameClassAsHeldBySponsorAndAffiliatesFlag" xlink:label="SpacSecuritiesOfferedSameClassAsHeldBySponsorAndAffiliatesFlag"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="SpacSecuritiesOfferedSameClassAsHeldBySponsorAndAffiliatesFlag" order="8.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacConsummationTimeframeDuration" xlink:label="DeSpacConsummationTimeframeDuration"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="DeSpacConsummationTimeframeDuration" order="9.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacConsummationTimeframePlansIfItFailsTextBlock" xlink:label="DeSpacConsummationTimeframePlansIfItFailsTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="DeSpacConsummationTimeframePlansIfItFailsTextBlock" order="10.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacConsummationTimeframeMayBeExtendedFlag" xlink:label="DeSpacConsummationTimeframeMayBeExtendedFlag"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="DeSpacConsummationTimeframeMayBeExtendedFlag" order="11.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacConsummationTimeframeHowExtendedTextBlock" xlink:label="DeSpacConsummationTimeframeHowExtendedTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="DeSpacConsummationTimeframeHowExtendedTextBlock" order="12.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacConsummationTimeframeLimitationsOnExtensionsTextBlock" xlink:label="DeSpacConsummationTimeframeLimitationsOnExtensionsTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="DeSpacConsummationTimeframeLimitationsOnExtensionsTextBlock" order="13.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacConsummationTimeframePossibleExtensions" xlink:label="DeSpacConsummationTimeframePossibleExtensions"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="DeSpacConsummationTimeframePossibleExtensions" order="14.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacConsummationTimeframeExtensionFailureConsequencesToSponsorTextBlock" xlink:label="DeSpacConsummationTimeframeExtensionFailureConsequencesToSponsorTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="DeSpacConsummationTimeframeExtensionFailureConsequencesToSponsorTextBlock" order="15.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacConsummationTimeframeExtensionSecurityHoldersVotingOrRedemptionRightsFlag" xlink:label="DeSpacConsummationTimeframeExtensionSecurityHoldersVotingOrRedemptionRightsFlag"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="DeSpacConsummationTimeframeExtensionSecurityHoldersVotingOrRedemptionRightsFlag" order="16.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacAdditionalFinancingPlansImpactOnSecurityHoldersTextBlock" xlink:label="SpacAdditionalFinancingPlansImpactOnSecurityHoldersTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="SpacAdditionalFinancingPlansImpactOnSecurityHoldersTextBlock" order="17.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacProspectusSummarySponsorCompensationTableTextBlock" xlink:label="SpacProspectusSummarySponsorCompensationTableTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="SpacProspectusSummarySponsorCompensationTableTextBlock" order="18.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacActualOrPotentialMaterialConflictOfInterestProspectusSummaryTextBlock" xlink:label="SpacActualOrPotentialMaterialConflictOfInterestProspectusSummaryTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="SpacActualOrPotentialMaterialConflictOfInterestProspectusSummaryTextBlock" order="21.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacCompensationAndSecuritiesIssuanceMaterialDilutionLikelihoodTextBlock" xlink:label="SpacCompensationAndSecuritiesIssuanceMaterialDilutionLikelihoodTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="SpacCompensationAndSecuritiesIssuanceMaterialDilutionLikelihoodTextBlock" order="20.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacProspectusSummarySponsorCompensationFootnotesTextBlock" xlink:label="SpacProspectusSummarySponsorCompensationFootnotesTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingProspectusSummaryLineItems" xlink:to="SpacProspectusSummarySponsorCompensationFootnotesTextBlock" order="19.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingDilutionLineItems" xlink:label="SpacOfferingDilutionLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacRegisteredOfferingLineItems" xlink:to="SpacOfferingDilutionLineItems" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacAdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionTableTextBlock" xlink:label="SpacAdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionTableTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingDilutionLineItems" xlink:to="SpacAdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionTableTextBlock" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacMaterialPotentialSourceOfFutureDilutionOfSharesNotTenderedTextBlock" xlink:label="SpacMaterialPotentialSourceOfFutureDilutionOfSharesNotTenderedTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingDilutionLineItems" xlink:to="SpacMaterialPotentialSourceOfFutureDilutionOfSharesNotTenderedTextBlock" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacAdjustedNetTangibleBookValuePerShareCalculationAdditionalInformationTextBlock" xlink:label="SpacAdjustedNetTangibleBookValuePerShareCalculationAdditionalInformationTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingDilutionLineItems" xlink:to="SpacAdjustedNetTangibleBookValuePerShareCalculationAdditionalInformationTextBlock" order="3.0" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/spac/role/sk1602a4">
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacForepartAdjustedNetTangibleBookValuePerShareAbstract" xlink:label="SpacForepartAdjustedNetTangibleBookValuePerShareAbstract"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartAdjustedNetTangibleBookValuePerShareTable" xlink:label="SpacOfferingForepartAdjustedNetTangibleBookValuePerShareTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacForepartAdjustedNetTangibleBookValuePerShareAbstract" xlink:to="SpacOfferingForepartAdjustedNetTangibleBookValuePerShareTable" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SecurityClassAxis" xlink:label="SecurityClassAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartAdjustedNetTangibleBookValuePerShareTable" xlink:to="SecurityClassAxis" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_AllSecurityClassesMember" xlink:label="AllSecurityClassesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SecurityClassAxis" xlink:to="AllSecurityClassesMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_FounderSharesMember" xlink:label="FounderSharesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllSecurityClassesMember" xlink:to="FounderSharesMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_PublicUnitsMember" xlink:label="PublicUnitsMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllSecurityClassesMember" xlink:to="PublicUnitsMember" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_CommonSharesMember" xlink:label="CommonSharesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllSecurityClassesMember" xlink:to="CommonSharesMember" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_WarrantsMember" xlink:label="WarrantsMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllSecurityClassesMember" xlink:to="WarrantsMember" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_RedemptionLevelAxis" xlink:label="RedemptionLevelAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartAdjustedNetTangibleBookValuePerShareTable" xlink:to="RedemptionLevelAxis" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_AllRedemptionLevelsMember" xlink:label="AllRedemptionLevelsMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="RedemptionLevelAxis" xlink:to="AllRedemptionLevelsMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NoRedemptionMember" xlink:label="NoRedemptionMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllRedemptionLevelsMember" xlink:to="NoRedemptionMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_RedemptionAt100PercentOfMaximumMember" xlink:label="RedemptionAt100PercentOfMaximumMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllRedemptionLevelsMember" xlink:to="RedemptionAt100PercentOfMaximumMember" order="5.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_RedemptionAt25PercentOfMaximumMember" xlink:label="RedemptionAt25PercentOfMaximumMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllRedemptionLevelsMember" xlink:to="RedemptionAt25PercentOfMaximumMember" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_RedemptionAt50PercentOfMaximumMember" xlink:label="RedemptionAt50PercentOfMaximumMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllRedemptionLevelsMember" xlink:to="RedemptionAt50PercentOfMaximumMember" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_RedemptionAt75PercentOfMaximumMember" xlink:label="RedemptionAt75PercentOfMaximumMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllRedemptionLevelsMember" xlink:to="RedemptionAt75PercentOfMaximumMember" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_OverAllotmentOptionAxis" xlink:label="OverAllotmentOptionAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartAdjustedNetTangibleBookValuePerShareTable" xlink:to="OverAllotmentOptionAxis" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_AllOverAllotmentOptionsMember" xlink:label="AllOverAllotmentOptionsMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OverAllotmentOptionAxis" xlink:to="AllOverAllotmentOptionsMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_OverAllotmentOptionNotExercisedMember" xlink:label="OverAllotmentOptionNotExercisedMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllOverAllotmentOptionsMember" xlink:to="OverAllotmentOptionNotExercisedMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_OverAllotmentOptionExercisedMember" xlink:label="OverAllotmentOptionExercisedMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllOverAllotmentOptionsMember" xlink:to="OverAllotmentOptionExercisedMember" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacForepartAdjustedNetTangibleBookValuePerShareLineItems" xlink:label="SpacForepartAdjustedNetTangibleBookValuePerShareLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacForepartAdjustedNetTangibleBookValuePerShareAbstract" xlink:to="SpacForepartAdjustedNetTangibleBookValuePerShareLineItems" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NetTangibleBookValueAdjustedPerShare" xlink:label="NetTangibleBookValueAdjustedPerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacForepartAdjustedNetTangibleBookValuePerShareLineItems" xlink:to="NetTangibleBookValueAdjustedPerShare" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValue1PerShare" xlink:label="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValue1PerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacForepartAdjustedNetTangibleBookValuePerShareLineItems" xlink:to="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValue1PerShare" order="5.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValuePerShare" xlink:label="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValuePerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValue1PerShare" xlink:to="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValuePerShare" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_RegisteredOfferingPrice1PerShare" xlink:label="RegisteredOfferingPrice1PerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacForepartAdjustedNetTangibleBookValuePerShareLineItems" xlink:to="RegisteredOfferingPrice1PerShare" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_RegisteredOfferingPricePerShare" xlink:label="RegisteredOfferingPricePerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="RegisteredOfferingPrice1PerShare" xlink:to="RegisteredOfferingPricePerShare" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NetTangibleBookValueIncreaseFromPublicShareholdersPerShare" xlink:label="NetTangibleBookValueIncreaseFromPublicShareholdersPerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacForepartAdjustedNetTangibleBookValuePerShareLineItems" xlink:to="NetTangibleBookValueIncreaseFromPublicShareholdersPerShare" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NetTangibleBookValuePreTransactionPerShare" xlink:label="NetTangibleBookValuePreTransactionPerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacForepartAdjustedNetTangibleBookValuePerShareLineItems" xlink:to="NetTangibleBookValuePreTransactionPerShare" order="2.0" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/spac/role/sk1602b6">
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacProspectusSummarySponsorCompensationAbstract" xlink:label="SpacProspectusSummarySponsorCompensationAbstract"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacProspectusSummarySponsorCompensationTable" xlink:label="SpacProspectusSummarySponsorCompensationTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacProspectusSummarySponsorCompensationAbstract" xlink:to="SpacProspectusSummarySponsorCompensationTable" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacSponsorAffiliateOrPromoterAxis" xlink:label="SpacSponsorAffiliateOrPromoterAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacProspectusSummarySponsorCompensationTable" xlink:to="SpacSponsorAffiliateOrPromoterAxis" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_AllSpacSponsorsAffiliatesOrPromotersMember" xlink:label="AllSpacSponsorsAffiliatesOrPromotersMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacSponsorAffiliateOrPromoterAxis" xlink:to="AllSpacSponsorsAffiliatesOrPromotersMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_CompensationNatureAxis" xlink:label="CompensationNatureAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacProspectusSummarySponsorCompensationTable" xlink:to="CompensationNatureAxis" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_AllCompensationNaturesMember" xlink:label="AllCompensationNaturesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CompensationNatureAxis" xlink:to="AllCompensationNaturesMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_FounderSharesMember" xlink:label="FounderSharesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllCompensationNaturesMember" xlink:to="FounderSharesMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_PublicUnitsMember" xlink:label="PublicUnitsMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllCompensationNaturesMember" xlink:to="PublicUnitsMember" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_CommonSharesMember" xlink:label="CommonSharesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllCompensationNaturesMember" xlink:to="CommonSharesMember" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_WarrantsMember" xlink:label="WarrantsMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllCompensationNaturesMember" xlink:to="WarrantsMember" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacProspectusSummarySponsorCompensationLineItems" xlink:label="SpacProspectusSummarySponsorCompensationLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacProspectusSummarySponsorCompensationAbstract" xlink:to="SpacProspectusSummarySponsorCompensationLineItems" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SponsorCompensationNature" xlink:label="SponsorCompensationNature"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacProspectusSummarySponsorCompensationLineItems" xlink:to="SponsorCompensationNature" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SponsorCompensationAmount" xlink:label="SponsorCompensationAmount"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacProspectusSummarySponsorCompensationLineItems" xlink:to="SponsorCompensationAmount" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SecuritiesIssuedOrToBeIssuedShares" xlink:label="SecuritiesIssuedOrToBeIssuedShares"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacProspectusSummarySponsorCompensationLineItems" xlink:to="SecuritiesIssuedOrToBeIssuedShares" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_PricePaidOrToBePaidForSecuritiesTotalAmount" xlink:label="PricePaidOrToBePaidForSecuritiesTotalAmount"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacProspectusSummarySponsorCompensationLineItems" xlink:to="PricePaidOrToBePaidForSecuritiesTotalAmount" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_PricePaidOrToBePaidForSecuritiesPerShare" xlink:label="PricePaidOrToBePaidForSecuritiesPerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacProspectusSummarySponsorCompensationLineItems" xlink:to="PricePaidOrToBePaidForSecuritiesPerShare" order="5.0" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/spac/role/sk1602c">
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SecurityClassAxis" xlink:label="SecurityClassAxis"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_AllSecurityClassesMember" xlink:label="AllSecurityClassesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SecurityClassAxis" xlink:to="AllSecurityClassesMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_FounderSharesMember" xlink:label="FounderSharesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllSecurityClassesMember" xlink:to="FounderSharesMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_PublicUnitsMember" xlink:label="PublicUnitsMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllSecurityClassesMember" xlink:to="PublicUnitsMember" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_CommonSharesMember" xlink:label="CommonSharesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllSecurityClassesMember" xlink:to="CommonSharesMember" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_RedemptionLevelAxis" xlink:label="RedemptionLevelAxis"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_AllRedemptionLevelsMember" xlink:label="AllRedemptionLevelsMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="RedemptionLevelAxis" xlink:to="AllRedemptionLevelsMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NoRedemptionMember" xlink:label="NoRedemptionMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllRedemptionLevelsMember" xlink:to="NoRedemptionMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_RedemptionAt100PercentOfMaximumMember" xlink:label="RedemptionAt100PercentOfMaximumMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllRedemptionLevelsMember" xlink:to="RedemptionAt100PercentOfMaximumMember" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_OverAllotmentOptionAxis" xlink:label="OverAllotmentOptionAxis"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_AllOverAllotmentOptionsMember" xlink:label="AllOverAllotmentOptionsMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OverAllotmentOptionAxis" xlink:to="AllOverAllotmentOptionsMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_OverAllotmentOptionNotExercisedMember" xlink:label="OverAllotmentOptionNotExercisedMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllOverAllotmentOptionsMember" xlink:to="OverAllotmentOptionNotExercisedMember" use="optional" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_OverAllotmentOptionExercisedMember" xlink:label="OverAllotmentOptionExercisedMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllOverAllotmentOptionsMember" xlink:to="OverAllotmentOptionExercisedMember" use="optional" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValue1PerShare" xlink:label="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValue1PerShare"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValuePerShare" xlink:label="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValuePerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValue1PerShare" xlink:to="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValuePerShare" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_RegisteredOfferingPrice1PerShare" xlink:label="RegisteredOfferingPrice1PerShare"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_RegisteredOfferingPricePerShare" xlink:label="RegisteredOfferingPricePerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="RegisteredOfferingPrice1PerShare" xlink:to="RegisteredOfferingPricePerShare" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacAdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionAbstract" xlink:label="SpacAdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionAbstract"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacAdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionTable" xlink:label="SpacAdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacAdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionAbstract" xlink:to="SpacAdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionTable" order="1.0" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacAdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionTable" xlink:to="SecurityClassAxis" order="1.0" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacAdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionTable" xlink:to="RedemptionLevelAxis" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DilutionSourceAxis" xlink:label="DilutionSourceAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacAdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionTable" xlink:to="DilutionSourceAxis" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_AllDilutionSourcesMember" xlink:label="AllDilutionSourcesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DilutionSourceAxis" xlink:to="AllDilutionSourcesMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ShareholderRedemptionsMember" xlink:label="ShareholderRedemptionsMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllDilutionSourcesMember" xlink:to="ShareholderRedemptionsMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacSponsorCompensationMember" xlink:label="SpacSponsorCompensationMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllDilutionSourcesMember" xlink:to="SpacSponsorCompensationMember" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_UpfrontUnderwritingFeesMember" xlink:label="UpfrontUnderwritingFeesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllDilutionSourcesMember" xlink:to="UpfrontUnderwritingFeesMember" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeferredUnderwritingCommissionsMember" xlink:label="DeferredUnderwritingCommissionsMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllDilutionSourcesMember" xlink:to="DeferredUnderwritingCommissionsMember" order="5.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ConvertibleSecuritiesMember" xlink:label="ConvertibleSecuritiesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllDilutionSourcesMember" xlink:to="ConvertibleSecuritiesMember" order="6.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_PipeFinancingMember" xlink:label="PipeFinancingMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllDilutionSourcesMember" xlink:to="PipeFinancingMember" order="7.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_OverallotmentLiabilityMember" xlink:label="OverallotmentLiabilityMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllDilutionSourcesMember" xlink:to="OverallotmentLiabilityMember" order="8.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_OrdinarySharesForfeitedOrCancelledMember" xlink:label="OrdinarySharesForfeitedOrCancelledMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllDilutionSourcesMember" xlink:to="OrdinarySharesForfeitedOrCancelledMember" order="9.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_OtherDilutionSourceMember" xlink:label="OtherDilutionSourceMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllDilutionSourcesMember" xlink:to="OtherDilutionSourceMember" order="10.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_UnderwritingFeesMember" xlink:label="UnderwritingFeesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllDilutionSourcesMember" xlink:to="UnderwritingFeesMember" order="3.0" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacAdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionTable" xlink:to="OverAllotmentOptionAxis" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_AdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionLineItems" xlink:label="AdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacAdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionAbstract" xlink:to="AdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionLineItems" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NetTangibleBookValueNatureOfDilutionSource" xlink:label="NetTangibleBookValueNatureOfDilutionSource"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionLineItems" xlink:to="NetTangibleBookValueNatureOfDilutionSource" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NetTangibleBookValuePerShareLineItems" xlink:label="NetTangibleBookValuePerShareLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionLineItems" xlink:to="NetTangibleBookValuePerShareLineItems" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NetTangibleBookValuePreTransactionPerShare" xlink:label="NetTangibleBookValuePreTransactionPerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="NetTangibleBookValuePerShareLineItems" xlink:to="NetTangibleBookValuePreTransactionPerShare" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NetTangibleBookValueAmountOfDilutionPerShare" xlink:label="NetTangibleBookValueAmountOfDilutionPerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="NetTangibleBookValuePerShareLineItems" xlink:to="NetTangibleBookValueAmountOfDilutionPerShare" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NetTangibleBookValueAdjustedPerShare" xlink:label="NetTangibleBookValueAdjustedPerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="NetTangibleBookValuePerShareLineItems" xlink:to="NetTangibleBookValueAdjustedPerShare" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NetTangibleBookValueIncreaseFromPublicShareholdersPerShare" xlink:label="NetTangibleBookValueIncreaseFromPublicShareholdersPerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="NetTangibleBookValuePerShareLineItems" xlink:to="NetTangibleBookValueIncreaseFromPublicShareholdersPerShare" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NetTangibleBookValueLineItems" xlink:label="NetTangibleBookValueLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionLineItems" xlink:to="NetTangibleBookValueLineItems" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NetTangibleBookValue" xlink:label="NetTangibleBookValue"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="NetTangibleBookValueLineItems" xlink:to="NetTangibleBookValue" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NetTangibleBookValueAmountOfDilution" xlink:label="NetTangibleBookValueAmountOfDilution"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="NetTangibleBookValueLineItems" xlink:to="NetTangibleBookValueAmountOfDilution" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NetTangibleBookValueAdjusted" xlink:label="NetTangibleBookValueAdjusted"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="NetTangibleBookValueLineItems" xlink:to="NetTangibleBookValueAdjusted" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NetTangibleBookValueProceedsFromOffering" xlink:label="NetTangibleBookValueProceedsFromOffering"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="NetTangibleBookValueLineItems" xlink:to="NetTangibleBookValueProceedsFromOffering" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NumberOfSharesUsedLineItems" xlink:label="NumberOfSharesUsedLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionLineItems" xlink:to="NumberOfSharesUsedLineItems" order="5.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NumberOfSharesUsedAdjustment" xlink:label="NumberOfSharesUsedAdjustment"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="NumberOfSharesUsedLineItems" xlink:to="NumberOfSharesUsedAdjustment" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NumberOfSharesUsedOffering" xlink:label="NumberOfSharesUsedOffering"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="NumberOfSharesUsedLineItems" xlink:to="NumberOfSharesUsedOffering" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NumberOfSharesUsedToDetermineNetTangibleBookValuePerSharePreTransaction" xlink:label="NumberOfSharesUsedToDetermineNetTangibleBookValuePerSharePreTransaction"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="NumberOfSharesUsedLineItems" xlink:to="NumberOfSharesUsedToDetermineNetTangibleBookValuePerSharePreTransaction" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NumberOfSharesUsedToDetermineNetTangibleBookValuePreTransactionPerShare" xlink:label="NumberOfSharesUsedToDetermineNetTangibleBookValuePreTransactionPerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="NumberOfSharesUsedToDetermineNetTangibleBookValuePerSharePreTransaction" xlink:to="NumberOfSharesUsedToDetermineNetTangibleBookValuePreTransactionPerShare" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NumberOfSharesUsedToDetermineNetTangibleBookValuePerShareAdjusted" xlink:label="NumberOfSharesUsedToDetermineNetTangibleBookValuePerShareAdjusted"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="NumberOfSharesUsedLineItems" xlink:to="NumberOfSharesUsedToDetermineNetTangibleBookValuePerShareAdjusted" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_NumberOfSharesUsedToDetermineNetTangibleBookValueAdjusted" xlink:label="NumberOfSharesUsedToDetermineNetTangibleBookValueAdjusted"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="NumberOfSharesUsedToDetermineNetTangibleBookValuePerShareAdjusted" xlink:to="NumberOfSharesUsedToDetermineNetTangibleBookValueAdjusted" order="1.0" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionLineItems" xlink:to="RegisteredOfferingPrice1PerShare" order="1.0" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AdjustedNetTangibleBookValuePerShareWithSourcesOfDilutionLineItems" xlink:to="DifferenceBetweenTheOfferingPriceAndTheAdjustedNetTangibleBookValue1PerShare" order="6.0" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/spac/role/sk1602a3">
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacSponsorAffiliateOrPromoterAxis" xlink:label="SpacSponsorAffiliateOrPromoterAxis"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_AllSpacSponsorsAffiliatesOrPromotersMember" xlink:label="AllSpacSponsorsAffiliatesOrPromotersMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacSponsorAffiliateOrPromoterAxis" xlink:to="AllSpacSponsorsAffiliatesOrPromotersMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_CompensationNatureAxis" xlink:label="CompensationNatureAxis"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_AllCompensationNaturesMember" xlink:label="AllCompensationNaturesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CompensationNatureAxis" xlink:to="AllCompensationNaturesMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_FounderSharesMember" xlink:label="FounderSharesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllCompensationNaturesMember" xlink:to="FounderSharesMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_PublicUnitsMember" xlink:label="PublicUnitsMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllCompensationNaturesMember" xlink:to="PublicUnitsMember" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_CommonSharesMember" xlink:label="CommonSharesMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllCompensationNaturesMember" xlink:to="CommonSharesMember" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_WarrantsMember" xlink:label="WarrantsMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="AllCompensationNaturesMember" xlink:to="WarrantsMember" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartSponsorCompensationAbstract" xlink:label="SpacOfferingForepartSponsorCompensationAbstract"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartSponsorCompensationTable" xlink:label="SpacOfferingForepartSponsorCompensationTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartSponsorCompensationAbstract" xlink:to="SpacOfferingForepartSponsorCompensationTable" order="1.0" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartSponsorCompensationTable" xlink:to="SpacSponsorAffiliateOrPromoterAxis" order="1.0" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartSponsorCompensationTable" xlink:to="CompensationNatureAxis" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SpacOfferingForepartSponsorCompensationLineItems" xlink:label="SpacOfferingForepartSponsorCompensationLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartSponsorCompensationAbstract" xlink:to="SpacOfferingForepartSponsorCompensationLineItems" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_SecuritiesIssuedOrToBeIssuedShares" xlink:label="SecuritiesIssuedOrToBeIssuedShares"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartSponsorCompensationLineItems" xlink:to="SecuritiesIssuedOrToBeIssuedShares" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_PricePaidOrToBePaidForSecuritiesTotalAmount" xlink:label="PricePaidOrToBePaidForSecuritiesTotalAmount"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartSponsorCompensationLineItems" xlink:to="PricePaidOrToBePaidForSecuritiesTotalAmount" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_PricePaidOrToBePaidForSecuritiesPerShare" xlink:label="PricePaidOrToBePaidForSecuritiesPerShare"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SpacOfferingForepartSponsorCompensationLineItems" xlink:to="PricePaidOrToBePaidForSecuritiesPerShare" order="3.0" priority="10"/>
+</link:presentationLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+</xs:schema>

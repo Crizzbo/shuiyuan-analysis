@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "real_estate_services",
+    "industry_name_zh": "商业地产服务与不动产运营开发",
+    "sector_id": "real_estate",
+    "sector_name_zh": "房地产",
+    "macro_sector_id": "CONST_RE",
+    "macro_sector_name_zh": "建筑工程、城市基础设施与不动产",
+    "description_zh": "涵盖全球商业地产大宗交易经纪、企业综合设施物业管理 (GWS)、不动产项目运营开发及估值咨询企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.75,
+    "typical_markup_ratio": 1.08,
+    "capex_intensity": "轻重混合",
+    "operating_leverage_exposure": "中等偏高经营杠杆",
+    "typical_gross_margin_range": [0.12, 0.25]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 120.0,
+    "dio_warning_days": 240.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.15,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "高能级核心城市稀缺核心地块土地规划用途指标与开发融资授信额度",
+      "全球主权基金、大型保险资管与私募另类不动产基金大宗收购投资委托配额",
+      "具备全球跨国网络运作能力的高级地产经纪人团队与注册估价师专家"
+    ],
+    "downstream_profile": "全球跨国企业大客户租户、机构不动产投资人、核心商业综合体品牌零售商及城镇购房家庭",
+    "pricing_power_verdict": "拥有全球企业网络的一线不动产综合服务巨头在跨国设施管理外包享有排他性高粘性定价权；重资产纯住宅开发受制于土地成本与市场去化周期",
+    "channel_inversion_sensitivity": "全球商业地产大宗交易规模 (Capital Markets Volume) 与写字楼净吸纳量 (Net Absorption) 是行业盈利周期最核心的前置温度计"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "全球降息周期启动全面激活不动产资本市场，跨国商业物业与现代物流资产大宗并购交易额超预期井喷",
+      "全球企业设施综合管理服务 (GWS) 长期年金化合同续签率突破 95%，经常性服务收入占比提升构筑深厚防御护城河",
+      "核心城市高品质商办与高品质改善住宅项目去化顺畅，预售回款充沛驱动经营现金流创历史新高"
+    ],
+    "leading_bear_defenses": [
+      "远程与混合办公模式常态化导致欧美甲级写字楼空置率居高不下，大宗买卖交易陷入冰冻经纪佣金断崖下滑",
+      "高财务杠杆重资产开发业务遭遇流动性紧缩，被迫大幅折价降价抛售在建项目导致计提大额存货减值准备",
+      "商业地产租户大面积退租违约，引发物业管理与综合运营服务大额应收款项产生系统性逾期"
+    ],
+    "core_catalyst_dimensions": [
+      "全球商业地产单季度大宗投资咨询交易规模 (Capital Markets Advisory Volume) 同比增速",
+      "全球核心枢纽商务区甲级写字楼综合空置率 (Vacancy Rate) 与净吸纳面积",
+      "经常性企业设施管理服务 (GWS) 积压在手未交付合同规模 (Contract Backlog)",
+      "不动产开发板块单季度合同销售金额与实际销售回款到账率"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "对长期滞销停工、周边竞品大幅降价的房地产开发项目推迟计提存货跌价准备以虚增账面净资产",
+      "通过非并表联合营企业架构蓄意隐藏实质性带息负债或对合作方提供隐性兜底担保",
+      "在大型商业物业大宗交易尚未实质满足所有交割先决条件前激进提前确认全额交易顾问佣金收入"
+    ],
+    "channel_and_revenue_checks": [
+      "物业管理长期托管协议中受托业主预缴资金与企业自有营运资金是否严格实现物理账户隔离",
+      "商品房预售监管账户资金监管使用合规性与违规挪用风险排查"
+    ]
+  }
+}

@@ -1,0 +1,866 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-10-11T09:10:10Z",
+  "archive_kind": "manual_browser_visible_excerpt_with_optional_original_pdf",
+  "sources": [
+    {
+      "industry_id": "oil_gas",
+      "published_date": "2026-02-24",
+      "locator": "Volumes and Prices / Revenues, Costs and Margins per Boe; annual 2025 column",
+      "excerpts": [
+        "Volumes and Prices (Unaudited) 2024 2025 First Second Third Fourth Full First Second Third Fourth Full Quarter Quarter Quarter Quarter Year Quarter Quarter Quarter Quarter Year",
+        "Composite Crude Oil and Condensate Average Price ($/Bbl) 65.63",
+        "Composite Natural Gas Average Price ($/Mcf) 3.02",
+        "Revenues, Costs and Margins Per Barrel of Oil Equivalent (Continued) 2025 2024 2023 2022 2021 (In millions, except per barrel of oil equivalent data) Volume - Million Barrels Oil Equivalent 449.8",
+        "Lease and Well 1,675 Gathering, Processing and Transportation 2,134 General and Administrative 820 Taxes Other Than Income 1,234 Interest Expense 235",
+        "Cash Operating Costs consist of LOE, GP&T and G&A. Cash Operating Costs 10.28"
+      ],
+      "observations": [
+        {
+          "component": "eog_crude_realized_price",
+          "name_zh": "原油凝析油综合实现售价",
+          "parent_metric_id": "oil_gas_driver_1",
+          "raw_unit": "USD_per_Bbl",
+          "unit": "USD_per_Bbl",
+          "binding_role": "reported_metric",
+          "limitation_zh": "按产品单独保存；套保排除规则待完整脚注核对，不代替收入和销售量输入",
+          "raw_value": "65.63",
+          "value": "65.63",
+          "conversion": "remove_thousands_separator",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "composite_crude_condensate",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "component": "eog_gas_realized_price",
+          "name_zh": "天然气综合实现售价",
+          "parent_metric_id": "oil_gas_driver_1",
+          "raw_unit": "USD_per_Mcf",
+          "unit": "USD_per_Mcf",
+          "binding_role": "reported_metric",
+          "limitation_zh": "Mcf 不是 MMBtu；套保口径待完整脚注核对",
+          "raw_value": "3.02",
+          "value": "3.02",
+          "conversion": "remove_thousands_separator",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "composite_natural_gas",
+          "excerpt_indices": [
+            0,
+            2
+          ]
+        },
+        {
+          "component": "eog_lease_well_cost",
+          "name_zh": "租赁及井运营成本",
+          "parent_metric_id": "oil_gas_driver_2",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "分别保存成本项目；现金性、生产税归属及开采范围待核，不自动求和为开采现金成本",
+          "raw_value": "1,675",
+          "value": "1675000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_reported_sales_cost_schedule",
+          "excerpt_indices": [
+            3,
+            4
+          ]
+        },
+        {
+          "component": "eog_gather_processing_cost",
+          "name_zh": "集输加工运输成本",
+          "parent_metric_id": "oil_gas_driver_2",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "分别保存成本项目；现金性、生产税归属及开采范围待核，不自动求和为开采现金成本",
+          "raw_value": "2,134",
+          "value": "2134000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_reported_sales_cost_schedule",
+          "excerpt_indices": [
+            3,
+            4
+          ]
+        },
+        {
+          "component": "eog_gaap_ga_cost",
+          "name_zh": "GAAP 管理费用",
+          "parent_metric_id": "oil_gas_driver_2",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "分别保存成本项目；现金性、生产税归属及开采范围待核，不自动求和为开采现金成本",
+          "raw_value": "820",
+          "value": "820000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_reported_sales_cost_schedule",
+          "excerpt_indices": [
+            3,
+            4
+          ]
+        },
+        {
+          "component": "eog_production_other_tax",
+          "name_zh": "非所得税税费",
+          "parent_metric_id": "oil_gas_driver_2",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "分别保存成本项目；现金性、生产税归属及开采范围待核，不自动求和为开采现金成本",
+          "raw_value": "1,234",
+          "value": "1234000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_reported_sales_cost_schedule",
+          "excerpt_indices": [
+            3,
+            4
+          ]
+        },
+        {
+          "component": "eog_sales_equivalent_volume",
+          "name_zh": "成本表油当量销售量",
+          "parent_metric_id": "oil_gas_driver_2",
+          "raw_unit": "million_units",
+          "unit": "Boe",
+          "binding_role": "formula_input",
+          "limitation_zh": "销售量不能替代储量表含实物权益产量；是否匹配开采成本待核",
+          "raw_value": "449.8",
+          "value": "449800000.0",
+          "conversion": "million_quantity_times_1000000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_reported_sales_cost_schedule",
+          "excerpt_indices": [
+            3
+          ]
+        },
+        {
+          "component": "eog_reported_cash_operating_cost",
+          "name_zh": "报告单位现金运营成本",
+          "parent_metric_id": "oil_gas_driver_2",
+          "raw_unit": "USD_per_Boe",
+          "unit": "USD_per_Boe",
+          "binding_role": "scope_mismatch_sample",
+          "limitation_zh": "公司定义包括管理费但排除生产税，与项目单位开采现金成本并非自动等价",
+          "raw_value": "10.28",
+          "value": "10.28",
+          "conversion": "remove_thousands_separator",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "LOE_plus_GPT_plus_GA_excluding_production_tax",
+          "excerpt_indices": [
+            5
+          ]
+        }
+      ],
+      "source_url": "https://investors.eogresources.com/2026-02-24-EOG-Resources-Reports-Fourth-Quarter-and-Full-Year-2025-Results-Announces-2026-Capital-Plan"
+    },
+    {
+      "industry_id": "aerospace_defense",
+      "published_date": "2026-01-29",
+      "locator": "Aircraft Deliveries, years ended Dec. 31; 2025 annual column",
+      "excerpts": [
+        "Aircraft Deliveries Quarters Ended Dec. 31, Years Ended Dec. 31, 2025 2024 2025 2024",
+        "F-35 48 62 191 110",
+        "F-16 4 7 16 16",
+        "C-130J — 8 2 21"
+      ],
+      "observations": [
+        {
+          "component": "lmt_f35_delivered",
+          "name_zh": "F-35 年度交付数量",
+          "parent_metric_id": "aerospace_defense_driver_3",
+          "raw_unit": "aircraft",
+          "unit": "aircraft",
+          "binding_role": "formula_input",
+          "limitation_zh": "具体机型报告交付数；是否全部通过客户验收待核，不拼成跨型号单一产量",
+          "raw_value": "191",
+          "value": "191",
+          "conversion": "remove_thousands_separator",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "lmt_f35_delivered",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "component": "lmt_f16_delivered",
+          "name_zh": "F-16 年度交付数量",
+          "parent_metric_id": "aerospace_defense_driver_3",
+          "raw_unit": "aircraft",
+          "unit": "aircraft",
+          "binding_role": "formula_input",
+          "limitation_zh": "具体机型报告交付数；是否全部通过客户验收待核，不拼成跨型号单一产量",
+          "raw_value": "16",
+          "value": "16",
+          "conversion": "remove_thousands_separator",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "lmt_f16_delivered",
+          "excerpt_indices": [
+            0,
+            2
+          ]
+        },
+        {
+          "component": "lmt_c130j_delivered",
+          "name_zh": "C-130J 年度交付数量",
+          "parent_metric_id": "aerospace_defense_driver_3",
+          "raw_unit": "aircraft",
+          "unit": "aircraft",
+          "binding_role": "formula_input",
+          "limitation_zh": "具体机型报告交付数；是否全部通过客户验收待核，不拼成跨型号单一产量",
+          "raw_value": "2",
+          "value": "2",
+          "conversion": "remove_thousands_separator",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "lmt_c130j_delivered",
+          "excerpt_indices": [
+            0,
+            3
+          ]
+        }
+      ],
+      "source_url": "https://news.lockheedmartin.com/2026-01-29-Lockheed-Martin-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results"
+    },
+    {
+      "industry_id": "travel_leisure",
+      "published_date": null,
+      "locator": "KEY LODGING STATISTICS, comparable company-operated US & Canada, twelve months ended Dec.31 2025",
+      "excerpts": [
+        "KEY LODGING STATISTICS In Constant $ Comparable Company-Operated U.S. & Canada Properties Twelve Months Ended December 31, 2025 and 2024",
+        "U.S. & Canada - All5 $185.78 2.3% 69.0% -0.4% pts. $269.36 2.9%",
+        "Occupancy, ADR and RevPAR comparisons between 2025 and 2024 reflect properties that are comparable in both years."
+      ],
+      "observations": [
+        {
+          "component": "mar_company_operated_occupancy",
+          "name_zh": "美加可比自营酒店年度入住率",
+          "parent_metric_id": "travel_leisure_driver_1",
+          "raw_unit": "percent",
+          "unit": "ratio",
+          "binding_role": "reported_metric",
+          "limitation_zh": "固定可比自营酒店群；不与加盟或全球系统酒店 ADR 混配；原始售出和可售房晚仍缺",
+          "raw_value": "69.0",
+          "value": "0.690",
+          "conversion": "percent_divided_by_100",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "comparable_company_operated_US_Canada",
+          "excerpt_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "component": "mar_company_operated_adr",
+          "name_zh": "美加可比自营酒店年度日均房价",
+          "parent_metric_id": "travel_leisure_driver_2",
+          "raw_unit": "USD_per_room_night",
+          "unit": "USD_per_room_night",
+          "binding_role": "reported_metric",
+          "limitation_zh": "常量美元与可比酒店群口径；原始客房收入及售出房晚仍缺",
+          "raw_value": "269.36",
+          "value": "269.36",
+          "conversion": "remove_thousands_separator",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "comparable_company_operated_US_Canada",
+          "excerpt_indices": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "source_url": "https://marriott.gcs-web.com/news-releases/news-release-details/marriott-international-reports-fourth-quarter-and-full-year-2025"
+    },
+    {
+      "industry_id": "it_services",
+      "published_date": "2026-10-01",
+      "locator": "Official FY2026 results PDF, page 4, annual bookings and revenues",
+      "excerpts": [
+        "Q4 FY26 Financial Review\nQ4 Cash Flow\nFourth Quarter Fiscal 2026\n(in billions)\nFourth Quarter Fiscal 2025\n(in billions)\nOperating Cash Flow $3.10 $3.91\nLess: Property & Equipment Additions $(0.25) $(0.11)\nFree Cash Flow $2.85 $3.81\nAmounts in table may not total due to rounding.\nDays services outstanding, or DSOs, were 50 days at August 31, 2026, compared with 47 days at August 31, \n2025.\nAccenture’s total cash balance at August 31, 2026 was $12.8 billion, compared with $11.5 billion at August 31, \n2025.\nFull Year Fiscal 2026 Financial Review\nFiscal 2026 New Bookings\nNew bookings for fiscal 2026 were $84.54 billion, an increase of 5% in U.S. dollars and 3% in local currency \ncompared with fiscal 2025, with a book-to-bill of 1.1. \n• Consulting new bookings were $40.86 billion, with a book-to-bill of 1.1.\n• Managed Services new bookings were $43.67 billion, with a book-to-bill of 1.2.\nFiscal 2026 Revenues\nRevenues for fiscal 2026 were $74.18 billion, an increase of 6% in U.S. dollars and 5% in local currency, and \nwere above the company’s guided range of 3% to 4% growth in local currency. Revenues reflect a foreign-\nexchange impact of approximately positive 2%, consistent with the assumption provided in the company’s \nthird-quarter earnings release.\nFiscal 2026 Revenues by Type of Work \nRevenues \n(in billions)\nIncrease from FY25\nU.S. Dollars Local Currency\nConsulting  $36.88  5 %  3 %\nManaged Services  $37.30  8 %  6 %\nTotal  $74.18  6 %  5 %\n4"
+      ],
+      "observations": [
+        {
+          "component": "acn_annual_new_bookings",
+          "name_zh": "年度集团新签合同",
+          "parent_metric_id": "it_services_driver_2",
+          "raw_unit": "USD_billion",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "保留公司合同估计金额；取消权、汇率及变动范围待核，不等同已确认收入",
+          "raw_value": "84.54",
+          "value": "84540000000.00",
+          "conversion": "billion_times_1000000000",
+          "period_start": "2025-09-01",
+          "period_end": "2026-08-31",
+          "period_type": "annual",
+          "scope": "consolidated",
+          "excerpt_indices": [
+            0
+          ]
+        },
+        {
+          "component": "acn_consulting_new_bookings",
+          "name_zh": "年度咨询新签合同",
+          "parent_metric_id": "it_services_driver_2",
+          "raw_unit": "USD_billion",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "保留公司合同估计金额；取消权、汇率及变动范围待核，不等同已确认收入",
+          "raw_value": "40.86",
+          "value": "40860000000.00",
+          "conversion": "billion_times_1000000000",
+          "period_start": "2025-09-01",
+          "period_end": "2026-08-31",
+          "period_type": "annual",
+          "scope": "consulting",
+          "excerpt_indices": [
+            0
+          ]
+        },
+        {
+          "component": "acn_managed_new_bookings",
+          "name_zh": "年度托管服务新签合同",
+          "parent_metric_id": "it_services_driver_2",
+          "raw_unit": "USD_billion",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "保留公司合同估计金额；取消权、汇率及变动范围待核，不等同已确认收入",
+          "raw_value": "43.67",
+          "value": "43670000000.00",
+          "conversion": "billion_times_1000000000",
+          "period_start": "2025-09-01",
+          "period_end": "2026-08-31",
+          "period_type": "annual",
+          "scope": "managed_services",
+          "excerpt_indices": [
+            0
+          ]
+        }
+      ],
+      "source_url": "https://newsroom.accenture.com/news/2026/accenture-reports-fourth-quarter-and-full-year-fiscal-2026-results",
+      "original_document": {
+        "path": "data/financial/objects/b6/b621c8dbc47f8b03bc41fec771bbd1a5ae31dc72bc91f74d69de7f5779b26e23.pdf",
+        "sha256": "b621c8dbc47f8b03bc41fec771bbd1a5ae31dc72bc91f74d69de7f5779b26e23",
+        "source_url": "https://newsroom.accenture.com/content/4q-full-fy26-earnings/accenture-reports-fourth-quarter-and-full-year-fiscal-2026-results.pdf",
+        "excerpt_pages": [
+          4
+        ]
+      }
+    },
+    {
+      "industry_id": "software",
+      "published_date": "2026-02-10",
+      "locator": "Condensed Statements / SBC reconciliation; annual 2025 column, in thousands",
+      "excerpts": [
+        "In thousands, except per share data; unaudited Three Months Ended December 31, Year Ended December 31, 2025 2024 2025 2024",
+        "Stock-based compensation, net of amounts capitalized 205,386 158,461 750,671 570,336",
+        "Weighted average shares used in computing net income per share: Diluted 365,516 360,940 363,471 358,636"
+      ],
+      "observations": [
+        {
+          "component": "ddog_annual_sbc_expense",
+          "name_zh": "年度股权激励费用（扣资本化）",
+          "parent_metric_id": "software_driver_3",
+          "raw_unit": "USD_thousand",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "仅费用部分，资本化股权激励待补；不能独立生成稀释率",
+          "raw_value": "750,671",
+          "value": "750671000",
+          "conversion": "accounting_thousand_times_1000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "component": "ddog_weighted_diluted_eps_shares",
+          "name_zh": "年度 EPS 加权稀释股数",
+          "parent_metric_id": "software_driver_3",
+          "raw_unit": "thousand_shares",
+          "unit": "shares",
+          "binding_role": "context_sample",
+          "limitation_zh": "EPS 加权股数不是期末实际发行股数，禁止用于期初期末稀释计算",
+          "raw_value": "363,471",
+          "value": "363471000",
+          "conversion": "accounting_thousand_times_1000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated",
+          "excerpt_indices": [
+            0,
+            2
+          ]
+        }
+      ],
+      "source_url": "https://investors.datadoghq.com/news-releases/news-release-details/datadog-announces-fourth-quarter-and-fiscal-year-2025-financial"
+    },
+    {
+      "industry_id": "managed_care",
+      "published_date": "2026-01-27",
+      "locator": "Official FY2025 results PDF, adjusted MCR table page 20, reported annual column",
+      "excerpts": [
+        "Adjusted Net Margin\nThree Months Ended \nDecember 31,\nYear Ended \nDecember 31,\n2025 2024 2025 2024\nConsolidated revenues   ............................................................................................................................................ $113,215 $100,807 $447,567 $400,278\nNet portfolio divestitures and South American impacts    ...................................................................................... — — — 220\nRestructuring and other (2)  ...................................................................................................................................... 519 — 519 —\nAdjusted consolidated revenues     ..................................................................................................................... $113,734 $100,807 $448,086 $400,498\nNet earnings attributable to UnitedHealth Group common shareholders     ........................................................ $10 $5,543 $12,056 $14,405\nDirect response costs - cyberattack     ....................................................................................................................... 799 513 799 2,223\nNet portfolio divestitures and South American impacts (1)     ................................................................................ (442) 24 (442) 8,459\nRestructuring and other (2)  ...................................................................................................................................... 2,521 — 2,521 —\nTax effect of adjustments    ......................................................................................................................................... (1,256) (89) (1,256) (645)\nAdjusted net earnings attributable to UnitedHealth Group common shareholders for direct \nresponse costs, net portfolio divestitures and South American impacts and restructuring and \nother    .............................................................................................................................................................. $1,632 $5,991 $13,678 $24,442\nNet margin attributable to UnitedHealth Group common shareholders    ...........................................................  — %  5.5 %  2.7 %  3.6 %\nAdjusted net margin attributable to UnitedHealth Group common shareholders for direct response \ncosts, net portfolio divestitures and South American impacts and restructuring and other    ...................  1.4 %  5.9 %  3.1 %  6.1 %\nAdjusted Medical Care Ratio\nThree Months Ended \nDecember 31, 2025\n Year Ended \nDecember 31, 2025\nPremium revenues     ..................................................................................................................................................... $88,811 $352,229\nRestructuring and other     ............................................................................................................................................. 122 122\nAdjusted premium revenues    ..................................................................................................................................... $88,933 $352,351\nMedical costs   .............................................................................................................................................................. $82,041 $313,995\nRestructuring and other     ............................................................................................................................................. (623) (623)\nAdjusted medical costs    ......................................................................................................................................... $81,418 $313,372\nMedical care ratio      .......................................................................................................................................................  92.4 %  89.1 %\nAdjusted medical care ratio    ......................................................................................................................................  91.5 %  88.9 %\nNote:  See end notes for further information regarding non-GAAP adjustments.\n20"
+      ],
+      "observations": [
+        {
+          "component": "unh_reported_premium_revenue",
+          "name_zh": "年度报告保费收入",
+          "parent_metric_id": "managed_care_driver_1",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "报告口径，禁止与调整后医疗成本混配",
+          "raw_value": "352,229",
+          "value": "352229000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_reported_medical_care",
+          "excerpt_indices": [
+            0
+          ]
+        },
+        {
+          "component": "unh_reported_medical_cost",
+          "name_zh": "年度报告医疗成本",
+          "parent_metric_id": "managed_care_driver_1",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "报告口径，包括亏损合同调整影响；不能混配调整后保费",
+          "raw_value": "313,995",
+          "value": "313995000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_reported_medical_care",
+          "excerpt_indices": [
+            0
+          ]
+        },
+        {
+          "component": "unh_reported_mcr",
+          "name_zh": "年度报告医疗成本率",
+          "parent_metric_id": "managed_care_driver_1",
+          "raw_unit": "percent",
+          "unit": "ratio",
+          "binding_role": "reported_metric",
+          "limitation_zh": "报告比例取整；调整后 88.9% 是另一口径",
+          "raw_value": "89.1",
+          "value": "0.891",
+          "conversion": "percent_divided_by_100",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_reported_medical_care",
+          "excerpt_indices": [
+            0
+          ]
+        }
+      ],
+      "source_url": "https://www.unitedhealthgroup.com/newsroom/2026/2026-01-27-uhg-reports-2025-results-and-issues-2026-outlook.html",
+      "original_document": {
+        "path": "data/financial/objects/da/da191e35c8e6b8b44aa3db80aba8cb259f72f1e915aa51653a4372d2f847e65f.pdf",
+        "sha256": "da191e35c8e6b8b44aa3db80aba8cb259f72f1e915aa51653a4372d2f847e65f",
+        "source_url": "https://www.unitedhealthgroup.com/content/dam/UHG/PDF/investors/2025/unh-reports-2025-results-and-issues-2026-outlook.pdf",
+        "excerpt_pages": [
+          20
+        ]
+      }
+    },
+    {
+      "industry_id": "biotech",
+      "published_date": null,
+      "locator": "Cash Position paragraph, Dec.31 2025 actual, not 2026 outlook",
+      "excerpts": [
+        "Cash, cash equivalents and investments as of December 31, 2025, were $8.1 billion, compared to compared to $9.5 billion as of December 31, 2024.",
+        "The year-end balance included a $600 million initial draw on the Company’s $1.5 billion credit facility."
+      ],
+      "observations": [
+        {
+          "component": "mrna_cash_investments_reported",
+          "name_zh": "期末现金等价物及投资合计",
+          "parent_metric_id": "biotech_driver_2",
+          "raw_unit": "USD_billion",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "包含投资及借款提款；受限资金、投资可变现性和标准化月度现金消耗尚缺",
+          "raw_value": "8.1",
+          "value": "8100000000.0",
+          "conversion": "billion_times_1000000000",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "period_type": "instant",
+          "scope": "consolidated_cash_equivalents_and_investments",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        }
+      ],
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1682852/000168285226000015/exhibit9912025q4pressrelea.htm"
+    },
+    {
+      "industry_id": "hardware",
+      "published_date": null,
+      "locator": "Worldwide PlayStation 5 Hardware Unit Sales, sell-in, FY2025 annual",
+      "excerpts": [
+        "Worldwide PlayStation 5 Hardware Unit Sales (Sell-in / Unit: millions)",
+        "Q1 (April-June) Q2 (July-September) Q3 (October-December) Q4 (January-March) FY (April-March)",
+        "FY2025 2.5 4.0 7.9 1.5 16.0",
+        "Including returned and refurbished products"
+      ],
+      "observations": [
+        {
+          "component": "sony_ps5_fy2025_sellin",
+          "name_zh": "PS5 财年渠道出货量",
+          "parent_metric_id": "hardware_driver_1",
+          "raw_unit": "million_units",
+          "unit": "systems",
+          "binding_role": "formula_input",
+          "limitation_zh": "sell-in 不是终端零售；包含退回和翻新产品，不能代表 Sony 全部硬件出货",
+          "raw_value": "16.0",
+          "value": "16000000.0",
+          "conversion": "million_quantity_times_1000000",
+          "period_start": "2025-04-01",
+          "period_end": "2026-03-31",
+          "period_type": "annual",
+          "scope": "PS5_sellin_including_returned_refurbished",
+          "excerpt_indices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      ],
+      "source_url": "https://sonyinteractive.com/en/our-company/business-data-sales/"
+    },
+    {
+      "industry_id": "media_entertainment",
+      "published_date": "2026-01-23",
+      "locator": "2025 10-K consolidated cash flows, annual 2025 column",
+      "excerpts": [
+        "CONSOLIDATED STATEMENTS OF CASH FLOWS (in thousands) Year Ended December 31, 2025 2024 2023",
+        "Additions to content assets (17,096,617) (16,223,617) (12,554,703)",
+        "Change in content liabilities (610,838) (779,135) (585,602)",
+        "Amortization of content assets 16,422,166 15,301,517 14,197,437"
+      ],
+      "observations": [
+        {
+          "component": "nflx_content_asset_additions_cf",
+          "name_zh": "内容资产新增的现金流调节项",
+          "parent_metric_id": "media_entertainment_driver_2",
+          "raw_unit": "USD_thousand",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "按现金流表保留负号；单独该项不是内容现金支付，须结合内容负债变动",
+          "raw_value": "(17,096,617)",
+          "value": "-17096617000",
+          "conversion": "accounting_thousand_times_1000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_content_cashflow",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "component": "nflx_content_liability_change_cf",
+          "name_zh": "内容负债变动现金流项",
+          "parent_metric_id": "media_entertainment_driver_2",
+          "raw_unit": "USD_thousand",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "保留现金流负号，与同期间内容资产新增配对；不是期末负债余额",
+          "raw_value": "(610,838)",
+          "value": "-610838000",
+          "conversion": "accounting_thousand_times_1000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_content_cashflow",
+          "excerpt_indices": [
+            0,
+            2
+          ]
+        },
+        {
+          "component": "nflx_content_amortization",
+          "name_zh": "年度内容摊销",
+          "parent_metric_id": "media_entertainment_driver_2",
+          "raw_unit": "USD_thousand",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "非现金费用；不能直接视作内容现金支出",
+          "raw_value": "16,422,166",
+          "value": "16422166000",
+          "conversion": "accounting_thousand_times_1000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_content_cashflow",
+          "excerpt_indices": [
+            0,
+            3
+          ]
+        }
+      ],
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000034/nflx-20251231.htm"
+    },
+    {
+      "industry_id": "banks",
+      "published_date": null,
+      "locator": "2025 10-K net interest income/selected metrics/capital risk tables; footnote b for Q4 average LCR",
+      "excerpts": [
+        "Year ended December 31, (in millions, except rates) 2025 2024 2023 Reported net interest income $95,443 Fully taxable-equivalent adjustments 425 Managed net interest income $95,868 Average interest-earning assets $3,834,359 Net yield on interest-earning assets 2.50%",
+        "As of or for the year ended December 31, (in millions, except per share, ratio, employee data and where otherwise noted) 2025 2024 2023 Net charge-offs 9,849 Net charge-off rate 0.74%",
+        "December 31, 2025 (in millions, except ratios) Standardized Advanced Firm JPMorgan Chase Bank, N.A. Firm JPMorgan Chase Bank, N.A. Common equity Tier 1 capital ratio 14.6% 15.3% 14.1% 15.8%",
+        "Firm Liquidity coverage ratio (“LCR”) (average)(b) 111 113 113",
+        "For the years ended December 31, 2025, 2024 and 2023, the percentage represents average ratios for the three months ended December 31, 2025, 2024 and 2023."
+      ],
+      "observations": [
+        {
+          "component": "jpm_managed_net_interest_income",
+          "name_zh": "年度税当量管理口径净利息收入",
+          "parent_metric_id": "banks_driver_1",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "管理税当量口径而非 GAAP 报告口径；分母使用同表生息资产",
+          "raw_value": "95,868",
+          "value": "95868000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "firm_managed_tax_equivalent",
+          "excerpt_indices": [
+            0
+          ]
+        },
+        {
+          "component": "jpm_average_interest_earning_assets",
+          "name_zh": "年度平均生息资产",
+          "parent_metric_id": "banks_driver_1",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "不是期末总资产，也不是剔除 Markets 资产",
+          "raw_value": "3,834,359",
+          "value": "3834359000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "firm_managed_tax_equivalent",
+          "excerpt_indices": [
+            0
+          ]
+        },
+        {
+          "component": "jpm_managed_net_yield",
+          "name_zh": "年度管理口径净息收益率",
+          "parent_metric_id": "banks_driver_1",
+          "raw_unit": "percent",
+          "unit": "ratio",
+          "binding_role": "reported_metric",
+          "limitation_zh": "完全税当量口径；取整披露比例",
+          "raw_value": "2.50",
+          "value": "0.0250",
+          "conversion": "percent_divided_by_100",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "firm_managed_tax_equivalent",
+          "excerpt_indices": [
+            0
+          ]
+        },
+        {
+          "component": "jpm_firm_net_chargeoffs",
+          "name_zh": "年度全集团净核销额",
+          "parent_metric_id": "banks_driver_2",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "binding_role": "formula_input",
+          "limitation_zh": "匹配平均留存贷款分母待补；不能使用批发业务单独分母",
+          "raw_value": "9,849",
+          "value": "9849000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "firm_retained_loans",
+          "excerpt_indices": [
+            1
+          ]
+        },
+        {
+          "component": "jpm_firm_net_chargeoff_rate",
+          "name_zh": "年度全集团净核销率",
+          "parent_metric_id": "banks_driver_2",
+          "raw_unit": "percent",
+          "unit": "ratio",
+          "binding_role": "reported_metric",
+          "limitation_zh": "报告比例；平均留存贷款原始输入尚缺",
+          "raw_value": "0.74",
+          "value": "0.0074",
+          "conversion": "percent_divided_by_100",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "firm_retained_loans",
+          "excerpt_indices": [
+            1
+          ]
+        },
+        {
+          "component": "jpm_standardized_cet1",
+          "name_zh": "期末集团标准法 CET1 比率",
+          "parent_metric_id": "banks_driver_3",
+          "raw_unit": "percent",
+          "unit": "ratio",
+          "binding_role": "reported_metric",
+          "limitation_zh": "标准法集团而非银行子公司或高级法；风险资产及资本分子待补",
+          "raw_value": "14.6",
+          "value": "0.146",
+          "conversion": "percent_divided_by_100",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "period_type": "instant",
+          "scope": "firm_standardized",
+          "excerpt_indices": [
+            2
+          ]
+        },
+        {
+          "component": "jpm_q4_average_lcr",
+          "name_zh": "第四季度平均流动性覆盖率",
+          "parent_metric_id": "banks_driver_3",
+          "raw_unit": "percent",
+          "unit": "ratio",
+          "binding_role": "reported_metric",
+          "limitation_zh": "脚注限定第四季度平均，不能登记为全年平均；NSFR 实际值仍缺",
+          "raw_value": "111",
+          "value": "1.11",
+          "conversion": "percent_divided_by_100",
+          "period_start": "2025-10-01",
+          "period_end": "2025-12-31",
+          "period_type": "quarterly",
+          "scope": "firm_lcr_quarter_average",
+          "excerpt_indices": [
+            3,
+            4
+          ]
+        }
+      ],
+      "source_url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+    },
+    {
+      "industry_id": "household_personal",
+      "published_date": "2026-07-29",
+      "locator": "FY2026 annual sales paragraph",
+      "excerpts": [
+        "The Company reported fiscal year 2026 net sales of $87.0 billion, an increase of three percent versus the prior year."
+      ],
+      "observations": [
+        {
+          "component": "pg_fy2026_net_sales",
+          "name_zh": "财年集团净销售额",
+          "parent_metric_id": "household_personal_driver_3",
+          "raw_unit": "USD_billion",
+          "unit": "USD",
+          "binding_role": "context_sample",
+          "limitation_zh": "营销费用覆盖范围及金额未取得；净收入不能独立构成营销费用率",
+          "raw_value": "87.0",
+          "value": "87000000000.0",
+          "conversion": "billion_times_1000000000",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "period_type": "annual",
+          "scope": "consolidated",
+          "excerpt_indices": [
+            0
+          ]
+        }
+      ],
+      "source_url": "https://www.pginvestor.com/news/news-details/2026/PG-Announces-Fourth-Quarter-and-Fiscal-Year-2026-Results/default.aspx"
+    },
+    {
+      "industry_id": "telecom",
+      "published_date": null,
+      "locator": "Annual cash flow and capital expenditure paragraph",
+      "excerpts": [
+        "Capital expenditures were $17.0 billion in 2025."
+      ],
+      "observations": [
+        {
+          "component": "vz_annual_total_capex",
+          "name_zh": "年度集团总资本开支",
+          "parent_metric_id": "telecom_driver_3",
+          "raw_unit": "USD_billion",
+          "unit": "USD",
+          "binding_role": "scope_mismatch_sample",
+          "limitation_zh": "集团总额缺网络、维持性与增长性拆分，不能替代网络资本开支强度",
+          "raw_value": "17.0",
+          "value": "17000000000.0",
+          "conversion": "billion_times_1000000000",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_total_capex",
+          "excerpt_indices": [
+            0
+          ]
+        }
+      ],
+      "source_url": "https://www.verizon.com/about/news/feed/verizon-delivers-2025-financial-guidance-highest-quarterly-net-adds"
+    }
+  ]
+}

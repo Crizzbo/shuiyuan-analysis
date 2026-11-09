@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "capital_goods",
+    "industry_name_zh": "工业装备与智能制造自动化",
+    "sector_id": "industrials",
+    "sector_name_zh": "工业",
+    "macro_sector_id": "CAP_GOODS",
+    "macro_sector_name_zh": "工业母机、智能制造装备与汽车交通设备",
+    "description_zh": "涵盖工业高档数控母机、多关节工业机器人、大型工程机械装备、智能物流成套系统及自动化产线控制企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.65,
+    "typical_markup_ratio": 1.16,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "高经营杠杆",
+    "typical_gross_margin_range": [0.22, 0.40]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 80.0,
+    "dio_warning_days": 140.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.30,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "高端五轴联动机床数控系统、高频响应伺服电机与绝对值精密光学编码器",
+      "超精密级滚珠丝杠、直线重载导轨、精密减速器 (RV/谐波) 与高压比例液压阀件",
+      "高刚性机身床身结构特种树脂砂铸铁件及大型精密加工母机产能"
+    ],
+    "downstream_profile": "汽车整车及动力总成焊装总装车间、3C消费电子精密结构件制造、新能源电池产线及全球基础设施土石方工程",
+    "pricing_power_verdict": "掌握底层运动控制算法与核心数控系统的工业母机龙头享有极高品牌壁垒与超额溢价，通用中低端组装厂商议价能力疲弱",
+    "channel_inversion_sensitivity": "日本机床工业协会 (JMTBA) 单月新签订单额与工程机械设备综合开工小时数是全球制造业固定资产投资周期的核心先行指针"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "全球产业链重构与制造业设备换新政策红利共振，下游产线智能化升级拉动工业装备新签订单呈现爆发式增长",
+      "核心精密数控系统与高端核心零部件自制率实现重大突破，整机降本增效显著且高附加值定制机型占比攀升增厚毛利",
+      "存量工业设备基数庞大，高毛利设备全生命周期维保、原厂备品备件更换及智能化软件运维服务收入占比突破 25%"
+    ],
+    "leading_bear_defenses": [
+      "宏观经济下行压力导致下游工业制造企业大幅缩减资本开支，延迟或全额取消新建产线重大成套装备采购预算",
+      "同质化设备产能过剩引发行业非理性价格战，部分竞对采取零首付甚至过度赊销垫资扰乱市场良性竞争秩序",
+      "核心进口高精度减速器或特种芯片断供受阻，导致在制品设备装配交付停滞且面临客户合同违约索赔"
+    ],
+    "core_catalyst_dimensions": [
+      "日本工作机械工业会 (JMTBA) 全球机床月度新签订单公布数据",
+      "工程机械物联网设备月度开工小时数 (Komtrax Operating Hours) 景气指标",
+      "制造企业季度新签订单额 (Order Intake) 与订单出货比 (Book-to-Bill Ratio)",
+      "国家级制造业转型升级贴息再贷款与工业母机税收优惠扶持政策落地实施细则"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "在大型成套自动化装备尚未完成客户现场调试并取得终验收确认书前激进提前全额确认营业收入",
+      "采用融资租赁或按揭担保模式销售大型工程装备，蓄意隐瞒客户违约导致的连带回购代偿兜底或有负债",
+      "发出商品 (Goods in Transit) 长期挂账未结转且时间跨度超一年以上，实质为客户拒绝验收退货或项目停工烂尾"
+    ],
+    "channel_and_revenue_checks": [
+      "长期应收款信用减值准备计提是否真实充分反映终端客户的分期逾期违约风险",
+      "下游经销商是否存在非正常的渠道压库与厂商承诺保价回购协议"
+    ]
+  }
+}

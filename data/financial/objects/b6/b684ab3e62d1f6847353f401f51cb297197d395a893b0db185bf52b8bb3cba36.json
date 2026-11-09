@@ -1,0 +1,251 @@
+{
+  "id": "sony-2026-20f-v1",
+  "entity_id": "JP:6758:CIK313838",
+  "format": "pdf_reviewed",
+  "receipt_path": "data/browser-search/receipts/58e2ad2f7c9e9641ca491d7def964f25991a321d596cce83a7c0a51df4dc394c.json",
+  "expected_sha256": "ea208480be5f6ba6c76a15377b6ea67addc69b274a0fcc9ba479876e40516772",
+  "currency": "JPY",
+  "accounting_basis": "IFRS",
+  "cover_text": "For the fiscal year ended March 31, 2026",
+  "basis_page": 135,
+  "basis_text": "prepared in accordance with IFRS® Accounting Standards",
+  "supersedes_report_id": null,
+  "rows": [
+    {
+      "field": "assets",
+      "page": 126,
+      "label": "Total assets",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "instant",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Financial Position",
+      "year_header": "March 31,\n2025\nMarch 31,\n2026"
+    },
+    {
+      "field": "cash",
+      "page": 126,
+      "label": "Cash and cash equivalents",
+      "note": "27",
+      "scope_id": "consolidated",
+      "basis": "instant",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Financial Position",
+      "year_header": "March 31,\n2025\nMarch 31,\n2026"
+    },
+    {
+      "field": "liabilities",
+      "page": 127,
+      "label": "Total liabilities",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "instant",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Financial Position",
+      "year_header": "March 31,\n2025\nMarch 31,\n2026"
+    },
+    {
+      "field": "equity",
+      "page": 127,
+      "label": "Total equity",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "instant",
+      "years": [
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Financial Position",
+      "year_header": "March 31,\n2025\nMarch 31,\n2026"
+    },
+    {
+      "field": "revenue",
+      "page": 128,
+      "label": "Sales",
+      "note": "22",
+      "scope_id": "consolidated_continuing",
+      "basis": "annual",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Income",
+      "year_header": "Note\n2024\n2025\n2026"
+    },
+    {
+      "field": "operating_income",
+      "page": 128,
+      "label": "Operating income",
+      "note": null,
+      "scope_id": "consolidated_continuing",
+      "basis": "annual",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Income",
+      "year_header": "Note\n2024\n2025\n2026"
+    },
+    {
+      "field": "net_income",
+      "page": 128,
+      "label": "Net income (loss)",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Income",
+      "year_header": "Note\n2024\n2025\n2026"
+    },
+    {
+      "field": "operating_cash_flow",
+      "page": 132,
+      "label": "Net cash provided by operating activities",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Cash Flows",
+      "year_header": "Note\n2024\n2025\n2026"
+    },
+    {
+      "field": "operating_cash_flow",
+      "page": 132,
+      "label": "Total net cash provided by operating activities from continuing operations",
+      "note": null,
+      "scope_id": "consolidated_continuing",
+      "basis": "annual",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Cash Flows",
+      "year_header": "Note\n2024\n2025\n2026"
+    },
+    {
+      "field": "investing_cash_flow",
+      "page": 133,
+      "label": "Net cash used in investing activities",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Cash Flows",
+      "year_header": "Note\n2024\n2025\n2026"
+    },
+    {
+      "field": "financing_cash_flow",
+      "page": 133,
+      "label": "Net cash used in financing activities",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Cash Flows",
+      "year_header": "Note\n2024\n2025\n2026"
+    },
+    {
+      "field": "fx_cash_change",
+      "page": 133,
+      "label": "Effect of exchange rate changes on cash and cash equivalents",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Cash Flows",
+      "year_header": "Note\n2024\n2025\n2026"
+    },
+    {
+      "field": "cash_change",
+      "page": 133,
+      "label": "Net increase (decrease) in cash and cash equivalents",
+      "note": null,
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Cash Flows",
+      "year_header": "Note\n2024\n2025\n2026"
+    },
+    {
+      "field": "cash_begin",
+      "page": 133,
+      "label": "Cash and cash equivalents at beginning of the fiscal year",
+      "note": "27",
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Cash Flows",
+      "year_header": "Note\n2024\n2025\n2026"
+    },
+    {
+      "field": "cash_end",
+      "page": 133,
+      "label": "Cash and cash equivalents at end of the fiscal year",
+      "note": "27",
+      "scope_id": "consolidated",
+      "basis": "annual",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Cash Flows",
+      "year_header": "Note\n2024\n2025\n2026"
+    },
+    {
+      "field": "capex_ppe_and_intangibles",
+      "page": 133,
+      "label": "Payments for property, plant and equipment and other intangible assets",
+      "note": null,
+      "scope_id": "consolidated_continuing",
+      "basis": "annual",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "header": "Consolidated Statements of Cash Flows",
+      "year_header": "Note\n2024\n2025\n2026"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "snapshot_path": "data/financial/objects/09/09ab149882d379b5433054e39c8392f963336e0345f4ad8f1f6136733d446882.json",
+  "sha256": "09ab149882d379b5433054e39c8392f963336e0345f4ad8f1f6136733d446882",
+  "drivers": 123,
+  "input_complete": 51,
+  "calculation_ready": 47,
+  "partial_inputs": 0,
+  "pending_input_binding": 72
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.1.0",
+  "source_id": "market_quotes_snapshot_20261014",
+  "revision": 1,
+  "source_path": "data/google-finance/raw/20261014_market_quotes.json",
+  "source_kind": "secondary",
+  "dataset_kind": "market",
+  "published_at": null,
+  "available_at": "2026-11-01T17:16:15.278911+00:00",
+  "acquired_at": "2026-11-01T17:16:15.278911+00:00",
+  "effective_period": "2026-10-14",
+  "license_notes": "最新公开官方及二级市场行情快照，用于水源分析六步法及每日研报决策",
+  "quality_notes": [
+    "覆盖 RXRX, NVDA, LLY, 7203, 8035, 6501 六只美日核心标的",
+    "字段包含 Open, High, Low, Close, Volume, 52W High/Low, Market Cap, Shares",
+    "已用于驱动水源分析期望值决策及凯利公式仓位测算"
+  ],
+  "supersedes_revision": null,
+  "published_date": "2026-10-14",
+  "publication_precision": "day"
+}

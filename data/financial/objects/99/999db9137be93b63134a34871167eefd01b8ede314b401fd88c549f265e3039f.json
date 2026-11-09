@@ -1,0 +1,390 @@
+{
+  "schema_version": "1.0.0",
+  "plans": [
+    {
+      "parent_metric_id": "managed_care_driver_1",
+      "selected_variant_zh": "UnitedHealth ?? 2025 ??????????",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "??????": [
+          {
+            "component": "unh_reported_medical_cost",
+            "kind": "numeric",
+            "scope": "consolidated_reported_medical_care",
+            "unit": "USD"
+          }
+        ],
+        "??????? MCR": [
+          {
+            "component": "unh_reported_premium_revenue",
+            "kind": "numeric",
+            "scope": "consolidated_reported_medical_care",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "?????? 88.9% ???????????????"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "banks_driver_1",
+      "selected_variant_zh": "JPM ?? 2025 ????????????????",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "???????": [
+          {
+            "component": "jpm_managed_net_interest_income",
+            "kind": "numeric",
+            "scope": "firm_managed_tax_equivalent",
+            "unit": "USD"
+          }
+        ],
+        "????????? NIM": [
+          {
+            "component": "jpm_average_interest_earning_assets",
+            "kind": "numeric",
+            "scope": "firm_managed_tax_equivalent",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "????????????? GAAP ??????????? Markets ??"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "capital_goods_driver_1",
+      "selected_variant_zh": "GE Vernova 2025 ??????????",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "??????": [
+          {
+            "component": "company_new_orders",
+            "kind": "numeric",
+            "scope": "consolidated",
+            "unit": "USD"
+          }
+        ],
+        "???????": [
+          {
+            "component": "company_order_period_revenue",
+            "kind": "numeric",
+            "scope": "consolidated",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "???????????????????????????????????"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "it_services_driver_2",
+      "selected_variant_zh": "Accenture FY2026 ????????????",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "???? bookings": [
+          {
+            "component": "acn_consulting_new_bookings",
+            "kind": "numeric",
+            "scope": "consulting",
+            "unit": "USD"
+          }
+        ],
+        "????": [
+          {
+            "component": "acn_consulting_new_bookings",
+            "kind": "scope_metadata",
+            "scope": "consulting",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "?????????????????????????????"
+      ],
+      "period_start": "2025-09-01",
+      "period_end": "2026-08-31"
+    },
+    {
+      "parent_metric_id": "hardware_driver_1",
+      "selected_variant_zh": "Sony FY2025 ?? PS5 sell-in ??",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "?? sell-in ???": [
+          {
+            "component": "sony_ps5_fy2025_sellin",
+            "kind": "numeric",
+            "scope": "PS5_sellin_including_returned_refurbished",
+            "unit": "systems"
+          }
+        ],
+        "??": [
+          {
+            "component": "sony_ps5_fy2025_sellin",
+            "kind": "period_metadata",
+            "scope": "PS5_sellin_including_returned_refurbished",
+            "unit": "systems"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "??????????????????? Sony ?????"
+      ],
+      "period_start": "2025-04-01",
+      "period_end": "2026-03-31"
+    },
+    {
+      "parent_metric_id": "housing_durables_driver_2",
+      "selected_variant_zh": "D.R. Horton FY2025 ???????",
+      "definition_reviewed": true,
+      "requires_same_scope": true,
+      "slots": {
+        "?? closing ????": [
+          {
+            "component": "homes_closed",
+            "kind": "numeric",
+            "scope": "homebuilding",
+            "unit": "homes"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "closed ??????????"
+      ],
+      "period_start": "2024-10-01",
+      "period_end": "2025-09-30"
+    },
+    {
+      "parent_metric_id": "software_driver_3",
+      "selected_variant_zh": "Datadog 2025 ????????",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "SBC ??": [
+          {
+            "component": "ddog_annual_sbc_expense",
+            "kind": "numeric",
+            "scope": "consolidated",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "??????????????????????????EPS ??????????????????????"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "banks_driver_2",
+      "selected_variant_zh": "JPM 2025 ???????????",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "?????????": [
+          {
+            "component": "jpm_firm_net_chargeoffs",
+            "kind": "numeric",
+            "scope": "firm_retained_loans",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "??????????????????????"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "media_entertainment_driver_2",
+      "selected_variant_zh": "Netflix 2025 ????????",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "??????": [
+          {
+            "component": "nflx_content_asset_additions_cf",
+            "kind": "numeric",
+            "scope": "consolidated_content_cashflow",
+            "unit": "USD"
+          },
+          {
+            "component": "nflx_content_liability_change_cf",
+            "kind": "numeric",
+            "scope": "consolidated_content_cashflow",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "??????????????????????????????????????????????"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "travel_leisure_driver_1",
+      "selected_variant_zh": "Marriott 2025 ????????????",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "????????????": [
+          {
+            "component": "mar_company_operated_occupancy",
+            "kind": "numeric",
+            "scope": "comparable_company_operated_US_Canada",
+            "unit": "ratio"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "??????????????????????????"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "travel_leisure_driver_2",
+      "selected_variant_zh": "Marriott 2025 ????????? ADR",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "??????? ADR": [
+          {
+            "component": "mar_company_operated_adr",
+            "kind": "numeric",
+            "scope": "comparable_company_operated_US_Canada",
+            "unit": "USD_per_room_night"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "ADR ????????????????????????????"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "tobacco_driver_3",
+      "selected_variant_zh": "???? 2025 ????",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "???????": [
+          {
+            "component": "smoke_free_net_revenue",
+            "kind": "numeric",
+            "scope": "smoke_free_business",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "????????????????????"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "health_services_driver_3",
+      "selected_variant_zh": "HCA 2025 ?????????",
+      "definition_reviewed": false,
+      "requires_same_scope": true,
+      "slots": {
+        "???????????": [
+          {
+            "component": "consolidated_salaries_benefits",
+            "kind": "numeric",
+            "scope": "consolidated_all_facilities",
+            "unit": "USD"
+          }
+        ],
+        "?????": [
+          {
+            "component": "consolidated_healthcare_revenue",
+            "kind": "numeric",
+            "scope": "consolidated_all_facilities",
+            "unit": "USD"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "????????????????????????????????????????????????"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "health_services_driver_1",
+      "selected_variant_zh": "HCA 2025 ???????",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "?????????": [
+          {
+            "component": "same_facility_equivalent_admissions",
+            "kind": "numeric",
+            "scope": "same_facility",
+            "unit": "equivalent_admissions"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "??????????????"
+      ],
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31"
+    },
+    {
+      "parent_metric_id": "midstream_driver_1",
+      "selected_variant_zh": "EPD 2025 ???????????????",
+      "definition_reviewed": false,
+      "requires_same_scope": false,
+      "slots": {
+        "?????": [
+          {
+            "component": "gas_processing_inlet_daily_volume",
+            "kind": "numeric",
+            "scope": "natural_gas_processing_plant_inlet",
+            "unit": "Bcf_per_day"
+          }
+        ],
+        "????": [
+          {
+            "component": "gas_processing_inlet_daily_volume",
+            "kind": "scope_metadata",
+            "scope": "natural_gas_processing_plant_inlet",
+            "unit": "Bcf_per_day"
+          }
+        ],
+        "???????": [
+          {
+            "component": "gas_processing_inlet_daily_volume",
+            "kind": "period_metadata",
+            "scope": "natural_gas_processing_plant_inlet",
+            "unit": "Bcf_per_day"
+          }
+        ]
+      },
+      "limitations_zh": [
+        "Bcf/day ??????????????????????????"
+      ],
+      "period_start": "2025-10-01",
+      "period_end": "2025-12-31"
+    }
+  ]
+}

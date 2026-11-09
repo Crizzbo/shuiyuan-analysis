@@ -1,0 +1,448 @@
+"""本地财报提取、证据与计算；完整离线 DTS 校验由 taxonomy 模块执行。"""
+from collections import defaultdict
+from decimal import Decimal
+import hashlib
+import json
+from pathlib import Path
+import re
+import sqlite3
+import zipfile
+
+from lxml import etree
+try:
+    from arelle import FunctionIxt
+except ImportError:
+    FunctionIxt = None
+from finance_tools.service import calculate
+
+ROOT = Path(__file__).resolve().parents[1]
+NS = {'x': 'http://www.xbrl.org/2003/instance', 'ix': 'http://www.xbrl.org/2013/inlineXBRL'}
+FIELDS = {
+    'revenue': ('收入', 'Revenues'), 'operating_income': ('营业利润', 'OperatingIncomeLoss'),
+    'net_income': ('合并净利润', 'NetIncomeLoss'), 'assets': ('资产总额', 'Assets'),
+    'liabilities': ('负债总额', 'Liabilities'), 'equity': ('权益总额', 'StockholdersEquity'),
+    'cash': ('现金及现金等价物', 'CashAndCashEquivalentsAtCarryingValue'),
+    'operating_cash_flow': ('经营现金流净额', 'NetCashProvidedByUsedInOperatingActivities'),
+    'investing_cash_flow': ('投资现金流净额', 'NetCashProvidedByUsedInInvestingActivities'),
+    'financing_cash_flow': ('融资现金流净额', 'NetCashProvidedByUsedInFinancingActivities'),
+    'fx_cash_change': ('汇率变动对现金的影响', 'EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents'),
+    'cash_change': ('现金净变动', 'CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect'),
+    'capex_ppe': ('购建固定资产现金支出', 'PaymentsToAcquirePropertyPlantAndEquipment'),
+    'cash_including_restricted': ('现金及受限现金合计', 'CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents'),
+    'capex_ppe_and_intangibles': ('固定资产及其他无形资产现金支出', '__pdf_only__'),
+    'cash_begin': ('期初现金及现金等价物', '__pdf_cash_begin__'),
+    'cash_end': ('期末现金及现金等价物', '__pdf_cash_end__'),
+    'cash_deposits': ('现金及存款', '__pdf_cash_deposits__'),
+}
+
+def local(path):
+    """所有业务输入输出必须在项目内，拒绝绝对路径和符号链接越界。"""
+    p = Path(path)
+    if p.is_absolute() or ':' in str(path) or '\\' in str(path) or '..' in p.parts:
+        raise ValueError('须使用项目内相对路径')
+    target = (ROOT / p).resolve()
+    if not target.is_relative_to(ROOT) or target == ROOT:
+        raise ValueError('路径越界')
+    return target
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def save_object(raw, suffix):
+    sha = digest(raw)
+    path = f'data/financial/objects/{sha[:2]}/{sha}.{suffix}'
+    target = local(path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if target.exists():
+        if target.read_bytes() != raw:
+            raise ValueError('归档内容冲突')
+    else:
+        with target.open('xb') as out:
+            out.write(raw)
+    return path, sha
+
+def source_info(artifact, text, locator, excerpt):
+    path, sha = save_object(text.encode('utf-8'), 'txt')
+    return dict(path=path, sha256=sha, locator=locator, excerpt=excerpt, kind='primary',
+                published_at=artifact['published_at'], available_at=artifact['available_at'])
+
+def numeric(node):
+    """数字格式由成熟转换注册表处理；nil、未知转换和续接数值不猜测。"""
+    if node.get('{http://www.w3.org/2001/XMLSchema-instance}nil') in ('true', '1'):
+        raise ValueError('nil')
+    if node.get('continuedAt') or node.find('.//ix:exclude', NS) is not None:
+        raise ValueError('尚不支持数字续接或排除片段')
+    text = ''.join(node.itertext()).strip()
+    fmt = node.get('format')
+    if fmt:
+        prefix, name = fmt.split(':')
+        try:
+            if FunctionIxt is not None and hasattr(FunctionIxt, 'ixtNamespaceFunctions'):
+                text = FunctionIxt.ixtNamespaceFunctions[node.nsmap[prefix]][name](text)
+            else:
+                norm_name = name.lower().replace('-', '').replace('_', '')
+                if norm_name in ('fixedzero', 'zerodash'):
+                    text = '0'
+                elif 'num' in norm_name and 'dot' in norm_name and 'decimal' in norm_name:
+                    text = text.replace(',', '').replace(' ', '')
+                elif 'num' in norm_name and 'comma' in norm_name:
+                    text = text.replace('.', '').replace(',', '.')
+                else:
+                    text = text.replace(',', '').replace(' ', '')
+        except KeyError as e:
+            raise ValueError('未知 Inline XBRL 转换') from e
+    value = Decimal(text)
+    if not value.is_finite() or node.get('sign', '+') not in ('+', '-'):
+        raise ValueError('无效数字或符号')
+    if node.get('sign') == '-':
+        value = -value
+    scale = int(node.get('scale', '0'))
+    if abs(scale) > 18:
+        raise ValueError('尺度超出审核范围')
+    return str(value * (Decimal(10) ** scale))
+
+def period_of(context):
+    """保存 instant 和 duration 原貌；季度累计值不自动拆成单季度。"""
+    p = context.find('x:period', NS)
+    end = p.findtext('x:instant', namespaces=NS)
+    if end:
+        return {'start': None, 'end': end, 'basis': 'instant'}
+    start, end = p.findtext('x:startDate', namespaces=NS), p.findtext('x:endDate', namespaces=NS)
+    from datetime import date
+    days = (date.fromisoformat(end) - date.fromisoformat(start)).days + 1
+    if days <= 0:
+        raise ValueError('财务期间倒置')
+    basis = 'annual' if 350 <= days <= 380 else 'quarter' if 70 <= days <= 105 else 'ytd_or_other'
+    return {'start': start, 'end': end, 'basis': basis}
+
+def make_fact(field, value, period, scope, basis, currency, concept, source, report, precision):
+    return {'id': digest(json.dumps([report, field, period, scope, concept, source['locator']], sort_keys=True).encode()),
+            'field': field, 'name_zh': FIELDS.get(field, (field,))[0], 'value': value,
+            'period': period, 'scope_id': scope, 'accounting_basis': basis, 'currency': currency,
+            'unit': 'currency', 'scale': 1, 'concept': concept, 'source': source,
+            'rounding_tolerance': precision, 'status': 'extracted', 'duplicate_refs': []}
+
+def parse_inline(plan, artifact, raw):
+    """只解析明确选定的 ZIP 成员；不解压执行、不跟随外部分类标准链接。"""
+    member = plan['member']
+    if plan['accounting_basis']!='GAAP' or not re.fullmatch(r'http://fasb.org/us-gaap/\d{4}',plan['taxonomy_namespace']):
+        raise ValueError('本版 Inline 映射仅审核 US-GAAP 主科目')
+    with zipfile.ZipFile(local(artifact['source_path'])) as z:
+        info = z.getinfo(member)
+        if info.file_size > 50 * 1024 * 1024:
+            raise ValueError('XML 成员过大')
+        xml = z.read(member)
+    if b'<!DOCTYPE' in xml.upper() or b'<!ENTITY' in xml.upper():
+        raise ValueError('禁止 DTD 和实体声明')
+    root = etree.fromstring(xml, etree.XMLParser(resolve_entities=False, no_network=True))
+    # 转为 UTF-8 原文，不另造证据摘要；原 ZIP 的哈希和成员哈希另行保留。
+    text = xml.decode('ascii') if xml.startswith(b"<?xml version='1.0' encoding='ASCII'") else xml.decode('utf-8')
+    contexts = {c.get('id'): c for c in root.findall('.//x:context', NS)}
+    units = {u.get('id'): u for u in root.findall('.//x:unit', NS)}
+    aliases = {tag: field for field, (_, tag) in FIELDS.items()}
+    facts, issues = [], []
+    for node in root.findall('.//ix:nonFraction', NS):
+        name = node.get('name', '')
+        prefix, tag = name.split(':')
+        namespace = node.nsmap.get(prefix, '')
+        if tag not in aliases or namespace != plan['taxonomy_namespace']:
+            continue
+        try:
+            c = contexts[node.get('contextRef')]
+            # 无维度的合并口径才进入当前映射；保留审计跳过原因。
+            if c.find('.//{http://www.xbrl.org/2003/instance}segment') is not None or c.find('x:scenario', NS) is not None:
+                continue
+            identifier = c.find('x:entity/x:identifier', NS)
+            if identifier.text.lstrip('0') != plan['cik'].lstrip('0') or identifier.get('scheme') != 'http://www.sec.gov/CIK':
+                raise ValueError('公司身份不匹配')
+            u = units[node.get('unitRef')]
+            measure = u.find('x:measure', NS)
+            if len(u) != 1 or measure is None or measure.text != 'iso4217:' + plan['currency'] or measure.nsmap.get('iso4217') != 'http://www.xbrl.org/2003/iso4217':
+                raise ValueError('币种单位不匹配')
+            excerpt = etree.tostring(node, encoding='unicode', with_tail=False)
+            # lxml 重序列化的命名空间不同，用原文中的 id 定位抓取原始节点串。
+            match = re.search(r'<ix:nonFraction\b[^>]*\bid="' + re.escape(node.get('id', '')) + r'"[^>]*>.*?</ix:nonFraction>', text, re.S)
+            if not match:
+                raise ValueError('无法定位原文节点')
+            excerpt = match.group(0)
+            dec = node.get('decimals')
+            tolerance = '0' if dec == 'INF' else str(Decimal(10) ** (-int(dec)) / 2) if dec is not None else None
+            facts.append(make_fact(aliases[tag], numeric(node), period_of(c), 'consolidated',
+                        plan['accounting_basis'], plan['currency'], '{'+namespace+'}'+tag,
+                        source_info(artifact, text, f'{member}#{node.get("id")} context={node.get("contextRef")}', excerpt), plan['id'], tolerance))
+        except (ValueError, KeyError, ArithmeticError) as e:
+            issues.append({'locator': node.get('id'), 'reason': str(e)})
+    return facts, issues, {'member': member, 'member_sha256': digest(xml), 'dts_validation': 'not_performed_offline_taxonomy_not_loaded'}
+
+def pdf_row(text, label, note, count):
+    """审核后的准确行名及注释编号；列数或出现次数变化即阻断。"""
+    lines = text.splitlines()
+    positions = [i for i, x in enumerate(lines) if x == label]
+    if len(positions) != 1:
+        raise ValueError('PDF 行名缺失或重名')
+    start = positions[0]
+    offset = start + 1
+    if note is not None:
+        if lines[offset] != note:
+            raise ValueError('PDF 注释列变化')
+        offset += 1
+    tokens = lines[offset:offset+count]
+    if len(tokens) != count or any(not re.fullmatch(r'\(?[\d,]+\)?', t) for t in tokens):
+        raise ValueError('PDF 金额列缺失或不明确，不把横线当零')
+    if offset+count < len(lines) and re.fullmatch(r'\(?[\d,]+\)?', lines[offset+count]):
+        raise ValueError('PDF 金额列数超出已审核数量')
+    values = [str(Decimal(t.replace(',', '').replace('(', '-').replace(')', ''))*1000000) for t in tokens]
+    return values, '\n'.join(lines[start:offset+count])
+
+def pdf_reviewed_columns(text, row):
+    """只适用锁定文件：保留原行证据，核对附注位置及便利美元列后选日元列。"""
+    original = text.splitlines()
+    indexed = [(i, x.strip()) for i, x in enumerate(original) if x.strip()]
+    lines = [x for _, x in indexed]
+    labels = row['label'].split('\n')
+    positions = [i for i in range(len(lines)) if lines[i:i+len(labels)] == labels]
+    if len(positions) != 1:
+        raise ValueError('PDF 行名缺失或重名')
+    start = positions[0]
+    offset = start + len(labels)
+    values = []
+    for expected in row['column_tokens']:
+        if offset >= len(lines):
+            raise ValueError('PDF 列缺失')
+        token = lines[offset]
+        if expected == 'amount':
+            if not re.fullmatch(r'\(?[\d,]+\)?', token):
+                raise ValueError('PDF 金额列变化')
+            values.append(str(Decimal(token.replace(',', '').replace('(', '-').replace(')', ''))*1000000))
+        elif token != expected:
+            raise ValueError('PDF 注释列变化')
+        offset += 1
+    if offset < len(lines) and re.fullmatch(r'\(?[\d,]+\)?', lines[offset]):
+        raise ValueError('PDF 金额列数超出审核数量')
+    return [values[i] for i in row['selected_columns']], '\n'.join(original[indexed[start][0]:indexed[offset-1][0]+1])
+
+def parse_pdf(plan, artifact, raw):
+    import pymupdf
+    if plan['currency']!='JPY' or plan['accounting_basis'] not in ('IFRS','J-GAAP'):
+        raise ValueError('未审核的 PDF 会计口径')
+    if plan['accounting_basis']=='J-GAAP' and plan['basis_text']!='generally accepted in Japan':
+        raise ValueError('J-GAAP 准则声明不匹配')
+    facts, issues = [], []
+    with pymupdf.open(stream=raw, filetype='pdf') as doc:
+        cover = doc[0].get_text()
+        if plan['cover_text'] not in cover:
+            raise ValueError('PDF 公司或年度封面不匹配')
+        basis_page = doc[plan['basis_page']-1].get_text()
+        if plan['basis_text'] not in basis_page:
+            raise ValueError('会计准则证据缺失')
+        for row in plan['rows']:
+            page = doc[row['page']-1].get_text()
+            try:
+                if row['header'] not in page or row.get('unit_header','Yen in millions') not in page:
+                    raise ValueError('PDF 表名或单位变化')
+                # 年份排列也需逐字核对，不能仅靠选择最后一个数值。
+                if row['year_header'] not in page:
+                    raise ValueError('PDF 年份列变化')
+                values, excerpt = (pdf_reviewed_columns(page,row) if 'column_tokens' in row else
+                                   pdf_row(page, row['label'], row['note'], len(row['years'])))
+                for year, value in zip(row['years'], values):
+                    p = {'start': f'{year-1}-04-01' if row['basis']=='annual' else None,
+                         'end': f'{year}-03-31', 'basis': row['basis']}
+                    f = make_fact(row['field'], value, p, row['scope_id'], plan['accounting_basis'], plan['currency'], row['label'],
+                                  source_info(artifact, page, f'PDF page {row["page"]}, row {row["label"]}, year {year}', excerpt), plan['id'], plan.get('rounding_tolerance','500000'))
+                    facts.append(f)
+            except ValueError as e:
+                issues.append({'locator': f'PDF page {row["page"]}, {row["label"]}', 'reason': str(e)})
+    return facts, issues, {'basis_page': plan['basis_page'], 'basis_text': plan['basis_text'],
+                            'layout_profile': 'reviewed_exact_document_only', 'original_sha256_lock': plan['expected_sha256']}
+
+def key(f):
+    return (f['field'], json.dumps(f['period'],sort_keys=True), f['scope_id'], f['accounting_basis'], f['currency'])
+
+def reconcile(facts):
+    """相同含义和期间的重复事实：同值保留引用，冲突整体阻断，禁止任意取第一条。"""
+    groups = defaultdict(list)
+    for f in facts:
+        groups[key(f)].append(f)
+    rows = []
+    for group in groups.values():
+        head = group[0]
+        if len({Decimal(f['value']) for f in group}) != 1:
+            for f in group:
+                f['status'] = 'conflict'
+            rows.extend(group)
+        else:
+            head['duplicate_refs'] = [f['source'] for f in group[1:]]
+            rows.append(head)
+    return rows
+
+def validate(facts):
+    groups = defaultdict(dict)
+    for f in facts:
+        if f['status'] != 'conflict':
+            k = (json.dumps(f['period'],sort_keys=True),f['scope_id'],f['accounting_basis'],f['currency'])
+            groups[k][f['field']] = f
+    checks = []
+    for k, rows in groups.items():
+        for name, fields, weights in [('balance_sheet', ['assets','liabilities','equity'],[1,-1,-1]),
+                ('cash_flow_bridge',['cash_change','operating_cash_flow','investing_cash_flow','financing_cash_flow','fx_cash_change'],[1,-1,-1,-1,-1])]:
+            if not any(x in rows for x in fields):
+                continue
+            missing = [x for x in fields if x not in rows]
+            if missing or any(rows[x]['rounding_tolerance'] is None for x in fields if x in rows):
+                checks.append({'check':name,'group':list(k),'status':'incomplete','missing_fields':missing})
+                continue
+            residual = sum(Decimal(rows[x]['value'])*w for x,w in zip(fields,weights))
+            tolerance = sum(Decimal(rows[x]['rounding_tolerance']) for x in fields)
+            passed = abs(residual) <= tolerance
+            checks.append({'check':name,'group':list(k),'status':'passed' if passed else 'failed',
+                           'residual':str(residual),'tolerance':str(tolerance),'fact_refs':[rows[x]['id'] for x in fields]})
+            if not passed:
+                for x in fields:
+                    rows[x]['status']='check_failed'
+    # 现金存量与流量桥接；采用报表明确的现金口径，不混用受限现金。
+    for k, rows in list(groups.items()):
+        period=json.loads(k[0])
+        if period['basis']!='annual' or 'cash_change' not in rows:
+            continue
+        cash_field='cash_including_restricted' if k[2]=='GAAP' else 'cash'
+        from datetime import date,timedelta
+        previous=(date.fromisoformat(period['start'])-timedelta(days=1)).isoformat()
+        endpoints=[]
+        for end in [previous,period['end']]:
+            match=[f for f in facts if f['field']==cash_field and f['period']=={'start':None,'end':end,'basis':'instant'}
+                   and (f['scope_id'],f['accounting_basis'],f['currency'])==k[1:] and f['status']=='extracted']
+            endpoints.append(match[0] if len(match)==1 else None)
+        if k[2] in ('IFRS','J-GAAP') and 'cash_begin' in rows and 'cash_end' in rows:
+            endpoints=[rows['cash_begin'],rows['cash_end']]
+        inputs=[*endpoints,rows['cash_change']]
+        if any(f is None or f['rounding_tolerance'] is None for f in inputs):
+            checks.append({'check':'cash_stock_bridge','group':list(k),'status':'incomplete','missing_fields':['matching_cash_endpoints']})
+            continue
+        residual=Decimal(endpoints[1]['value'])-Decimal(endpoints[0]['value'])-Decimal(rows['cash_change']['value'])
+        tolerance=sum(Decimal(f['rounding_tolerance']) for f in inputs)
+        passed=abs(residual)<=tolerance
+        checks.append({'check':'cash_stock_bridge','group':list(k),'status':'passed' if passed else 'failed',
+                       'residual':str(residual),'tolerance':str(tolerance),'fact_refs':[f['id'] for f in inputs]})
+        if not passed:
+            for f in inputs:
+                f['status']='check_failed'
+    return checks
+
+def calculations(facts):
+    """明确口径后调用已有 FinanceToolkit 服务；未映射的公式不自动补齐。"""
+    groups = defaultdict(dict)
+    for f in facts:
+        if f['status']=='extracted':
+            groups[(json.dumps(f['period'],sort_keys=True),f['scope_id'],f['accounting_basis'],f['currency'])][f['field']]=f
+    results=[]
+    for k, rows in groups.items():
+        if json.loads(k[0])['basis']=='instant':
+            if 'assets' in rows and 'liabilities' in rows and Decimal(rows['assets']['value'])>0:
+                # 分子是全部负债而非有息债务，中文名称明确区分。
+                from financetoolkit.ratios.solvency_model import get_debt_to_assets_ratio
+                value=float(get_debt_to_assets_ratio(float(rows['liabilities']['value']),float(rows['assets']['value'])))
+                results.append({'metric_id':'liabilities_to_assets','name_zh':'总负债占资产比例','period':json.loads(k[0]),
+                                'scope_id':k[1],'accounting_basis':k[2],'currency':k[3],'status':'computed','unit':'ratio',
+                                'value':value,'input_fact_refs':[rows['liabilities']['id'],rows['assets']['id']],
+                                'calculation':{'library':'financetoolkit','function':'solvency_model.get_debt_to_assets_ratio',
+                                               'formula':'总负债 / 总资产；不等同有息债务比例'}})
+            continue
+        if json.loads(k[0])['basis']!='annual':
+            continue
+        for metric, a, b in [('operating_margin','operating_income','revenue'),('net_margin','net_income','revenue')]:
+            missing=[x for x in [a,b] if x not in rows]
+            result={'metric_id':metric,'period':json.loads(k[0]),'scope_id':k[1],'accounting_basis':k[2],'currency':k[3]}
+            if missing:
+                result.update(status='blocked',missing_fields=missing,value=None)
+            else:
+                try:
+                    calc=calculate('financial_ratio',{'operation':metric,'numerator':float(rows[a]['value']),'denominator':float(rows[b]['value'])})
+                    result.update(status='computed',value=calc['result']['value'],unit='ratio',input_fact_refs=[rows[a]['id'],rows[b]['id']],calculation=calc)
+                except ValueError as e:
+                    result.update(status='blocked',value=None,reason=str(e))
+            results.append(result)
+        if 'operating_cash_flow' in rows and 'revenue' in rows and Decimal(rows['revenue']['value'])>0:
+            import pandas as pd
+            calc=float(pd.Series([float(rows['operating_cash_flow']['value'])]).div(float(rows['revenue']['value'])).iloc[0])
+            results.append({'metric_id':'operating_cash_flow_margin','name_zh':'经营现金流收入比','period':json.loads(k[0]),
+                           'scope_id':k[1],'accounting_basis':k[2],'currency':k[3],'status':'computed','unit':'ratio','value':calc,
+                           'input_fact_refs':[rows['operating_cash_flow']['id'],rows['revenue']['id']],
+                           'calculation':{'library':'pandas','function':'Series.div',
+                                          'formula':'同期间、同范围经营现金流净额 / 收入'}})
+        if 'revenue' in rows:
+            current=rows['revenue']
+            from datetime import date,timedelta
+            preceding_end=(date.fromisoformat(current['period']['start'])-timedelta(days=1)).isoformat()
+            previous=[f for f in facts if f['field']=='revenue' and f['period']['basis']=='annual' and f['period']['end']==preceding_end
+                      and (f['scope_id'],f['accounting_basis'],f['currency'])==k[1:] and f['status']=='extracted']
+            result={'metric_id':'revenue_growth','period':json.loads(k[0]),'scope_id':k[1],'accounting_basis':k[2],'currency':k[3]}
+            if len(previous)!=1 or Decimal(previous[0]['value'])<=0:
+                result.update(status='blocked',value=None,reason='缺少同报告、同范围、相邻年度的正收入基数')
+            else:
+                import pandas as pd
+                growth=float(pd.Series([float(previous[0]['value']),float(current['value'])]).pct_change(fill_method=None).iloc[-1])
+                result.update(status='computed',value=growth,unit='ratio',input_fact_refs=[current['id'],previous[0]['id']],
+                              calculation={'library':'pandas','function':'Series.pct_change','formula':'本年收入 / 上年收入 - 1；同一报告比较列'})
+            results.append(result)
+    return results
+
+def metric_batch(report, period_end, as_of):
+    """软件行业已审核绑定的实际输入；未知发布日期保留 null，禁止导出冲突数据。"""
+    from finance_tools.metric_pipeline import instant
+    if instant(report['artifact']['available_at'])>instant(as_of):
+        raise ValueError('研究时点早于财报首次可得时间')
+    facts=[]
+    for f in report['facts']:
+        if f['field'] not in ('operating_income','revenue') or f['period']['end']!=period_end or f['period']['basis']!='annual':
+            continue
+        if f['status']!='extracted' or f['scope_id']!='consolidated' or f['accounting_basis']!='GAAP':
+            raise ValueError('软件执行绑定尚不支持该范围、准则或质量状态')
+        facts.append({k:f[k] for k in ('id','field','scope_id','period','accounting_basis','unit','currency','scale','source')} |
+                     {'entity_id':report['entity_id'],'value':float(f['value'])})
+    return {'schema_version':'1.1.0','entity_id':report['entity_id'],'scope_id':'consolidated','industry_id':'software',
+            'currency':'USD','as_of':as_of,'is_synthetic':False,'facts':facts,'requests':['operating_margin']}
+
+def run(plan, full_taxonomy=False):
+    """原始字节、公司身份、报告版本同时锁定；重述报告采用新 plan ID 和 supersedes。"""
+    receipt=json.loads(local(plan['receipt_path']).read_text(encoding='utf-8'))
+    artifact=receipt['artifact']
+    raw=local(artifact['source_path']).read_bytes()
+    if digest(raw)!=artifact['sha256'] or artifact['sha256']!=plan['expected_sha256']:
+        raise ValueError('原文内容锁不匹配')
+    if artifact['browser_receipt']['entity_id']!=plan['entity_id']:
+        raise ValueError('来源公司身份不匹配')
+    parser=parse_inline if plan['format']=='inline_zip' else parse_pdf if plan['format']=='pdf_reviewed' else None
+    if parser is None:
+        raise ValueError('未知解析格式')
+    facts,issues,parser_info=parser(plan,artifact,raw)
+    facts=reconcile(facts)
+    checks=validate(facts)
+    taxonomy={'status':'not_applicable' if plan['format']=='pdf_reviewed' else 'not_run'}
+    if full_taxonomy and plan['format']=='inline_zip':
+        from .taxonomy import validate_dts
+        _,taxonomy=validate_dts(plan)
+    return {'schema_version':'1.0.0','report_id':plan['id'],'entity_id':plan['entity_id'],
+            'supersedes_report_id':plan.get('supersedes_report_id'),'artifact':artifact,'parser':parser_info,
+            'plan_sha256':digest(json.dumps(plan,sort_keys=True,ensure_ascii=False).encode()),
+            'implementation_sha256':digest(Path(__file__).read_bytes()),'facts':facts,'issues':issues,'checks':checks,
+            'calculations':calculations(facts),'release_status':'staging_pending_review',
+            'taxonomy_validation':taxonomy,
+            'missing_capabilities':['full_taxonomy_validation'] if taxonomy['status']=='not_run' else []}
+
+def store(report):
+    """财务 staging 为独立追加式存储，不修改历史研究目录。"""
+    from jsonschema import Draft202012Validator, FormatChecker
+    schema=json.loads(local('schemas/financial-report.schema.json').read_text(encoding='utf-8'))
+    Draft202012Validator(schema,format_checker=FormatChecker()).validate(report)
+    raw=json.dumps(report,ensure_ascii=False,sort_keys=True,indent=2,allow_nan=False).encode('utf-8')
+    path,sha=save_object(raw,'json')
+    db_path=local('data/financial/reports.sqlite3')
+    with sqlite3.connect(db_path) as db:
+        db.execute('CREATE TABLE IF NOT EXISTS reports (sha256 TEXT PRIMARY KEY, report_id TEXT NOT NULL, entity_id TEXT NOT NULL, available_at TEXT NOT NULL, snapshot_path TEXT NOT NULL, release_status TEXT NOT NULL)')
+        for action in ['UPDATE','DELETE']:
+            db.execute(f"CREATE TRIGGER IF NOT EXISTS no_{action.lower()} BEFORE {action} ON reports BEGIN SELECT RAISE(ABORT,'append-only financial reports'); END")
+        db.execute('INSERT OR IGNORE INTO reports VALUES (?,?,?,?,?,?)',(sha,report['report_id'],report['entity_id'],report['artifact']['available_at'],path,report['release_status']))
+    return {'snapshot_path':path,'sha256':sha,'fact_count':len(report['facts']),
+            'conflicts':sum(f['status']=='conflict' for f in report['facts']),
+            'checks':report['checks'],'calculation_count':sum(x['status']=='computed' for x in report['calculations']), 'issues':report['issues']}

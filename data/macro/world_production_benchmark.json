@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_name": "World Production & Macroeconomic Factor Distribution Benchmark",
+  "as_of": "2026-10-17T00:00:00Z",
+  "benchmark_year": 2024,
+  "sources": [
+    {
+      "institution": "International Monetary Fund (IMF)",
+      "publication": "World Economic Outlook Database (WEO)",
+      "series": "Gross domestic product, current prices (U.S. dollars)",
+      "url": "https://www.imf.org/en/Publications/WEO",
+      "verified_range": "$110.0 Trillion USD (2024) to $115.5 Trillion USD (2025)"
+    },
+    {
+      "institution": "Organisation for Economic Co-operation and Development (OECD)",
+      "publication": "Inter-Country Input-Output (ICIO) & TiVA Database",
+      "series": "PROD (Gross Output) and VALU (Value Added / GDP)",
+      "url": "https://www.oecd.org/sti/ind/inter-country-input-output-tables.htm",
+      "verified_metric": "Aggregate Value-Added to Gross-Output ratio (PROD_VASH) ~0.49 - 0.51"
+    },
+    {
+      "institution": "International Labour Organization (ILO) / Penn World Table",
+      "publication": "Global Wage Report & Factor Income Database",
+      "series": "Labor Share of GDP vs Capital Share (Gross Operating Surplus)",
+      "url": "https://www.ilo.org",
+      "verified_metric": "Global Labor Share ~52.5% - 53.5%; Capital Share ~37.5% - 38.5%"
+    }
+  ],
+  "world_aggregate_metrics": {
+    "world_nominal_gdp_trillion_usd": 110.0,
+    "world_gross_output_trillion_usd": 222.1,
+    "value_added_to_gross_output_ratio": 0.4953,
+    "world_real_gdp_growth_rate": 0.032,
+    "world_gdp_deflator_inflation": 0.026,
+    "world_nominal_growth_rate": 0.0588,
+    "marginal_production_increment_trillion_usd": 6.468,
+    "world_capital_stock_trillion_usd": 350.0,
+    "world_gross_capital_formation_trillion_usd": 28.6,
+    "world_labor_force_billion_persons": 3.65,
+    "tfp_annual_growth_rate": 0.011,
+    "capital_elasticity_alpha": 0.45,
+    "labor_elasticity_one_minus_alpha": 0.55
+  },
+  "factor_income_distribution": {
+    "labor_compensation_trillion_usd": 58.3,
+    "labor_share_pct": 53.0,
+    "capital_operating_surplus_trillion_usd": 41.8,
+    "capital_share_pct": 38.0,
+    "net_production_taxes_trillion_usd": 9.9,
+    "taxes_share_pct": 9.0,
+    "balance_check_formula": "Labor + Capital + Taxes == World GDP",
+    "is_balanced": true
+  },
+  "household_final_absorption": {
+    "household_final_consumption_trillion_usd": 63.8,
+    "gross_capital_formation_investment_trillion_usd": 28.6,
+    "government_final_consumption_trillion_usd": 17.6,
+    "absorption_sum_trillion_usd": 110.0,
+    "is_macro_identity_held": true
+  }
+}

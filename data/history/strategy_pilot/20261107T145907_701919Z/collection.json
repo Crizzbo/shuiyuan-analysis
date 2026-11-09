@@ -1,0 +1,301 @@
+{
+  "id": "20261107T145907_701919Z",
+  "sources": [
+    {
+      "ticker": "MSFT",
+      "kind": "facts",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/MSFT_facts.json",
+      "sha256": "8c1903c041f5c27e86ed15f37debb1f41882b7904bba129ef9edc76478b1e8ea",
+      "catalog": {
+        "source_id": "strategy-pilot-MSFT-facts-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "8c1903c041f5c27e86ed15f37debb1f41882b7904bba129ef9edc76478b1e8ea",
+        "archived_path": "data/catalog/objects/8c/8c1903c041f5c27e86ed15f37debb1f41882b7904bba129ef9edc76478b1e8ea.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "kind": "prices",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?period1=1262304000&period2=1794063547&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/MSFT_prices.json",
+      "sha256": "d251f5c05715c717795a475ec0743d64e454ac8198226755f4526feca45dfe56",
+      "catalog": {
+        "source_id": "strategy-pilot-MSFT-prices-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "d251f5c05715c717795a475ec0743d64e454ac8198226755f4526feca45dfe56",
+        "archived_path": "data/catalog/objects/d2/d251f5c05715c717795a475ec0743d64e454ac8198226755f4526feca45dfe56.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "AAPL",
+      "kind": "facts",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/AAPL_facts.json",
+      "sha256": "f085735b4d08fb116ade18d24247ffabe11df8eb52eae6556b165831f15ef1ad",
+      "catalog": {
+        "source_id": "strategy-pilot-AAPL-facts-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "f085735b4d08fb116ade18d24247ffabe11df8eb52eae6556b165831f15ef1ad",
+        "archived_path": "data/catalog/objects/f0/f085735b4d08fb116ade18d24247ffabe11df8eb52eae6556b165831f15ef1ad.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "AAPL",
+      "kind": "prices",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?period1=1262304000&period2=1794063550&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/AAPL_prices.json",
+      "sha256": "915633b459c73ebaecd669fc1eaba3a1aea4fecc886a7cc17c4a2a0908cfa2bb",
+      "catalog": {
+        "source_id": "strategy-pilot-AAPL-prices-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "915633b459c73ebaecd669fc1eaba3a1aea4fecc886a7cc17c4a2a0908cfa2bb",
+        "archived_path": "data/catalog/objects/91/915633b459c73ebaecd669fc1eaba3a1aea4fecc886a7cc17c4a2a0908cfa2bb.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "CSCO",
+      "kind": "facts",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000858877.json",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/CSCO_facts.json",
+      "sha256": "69ccd0bc491edf4ef2191e8813ebc1766c0daf00c9e3d1aaa182d24b2e39e0df",
+      "catalog": {
+        "source_id": "strategy-pilot-CSCO-facts-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "69ccd0bc491edf4ef2191e8813ebc1766c0daf00c9e3d1aaa182d24b2e39e0df",
+        "archived_path": "data/catalog/objects/69/69ccd0bc491edf4ef2191e8813ebc1766c0daf00c9e3d1aaa182d24b2e39e0df.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "CSCO",
+      "kind": "prices",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/CSCO?period1=1262304000&period2=1794063552&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/CSCO_prices.json",
+      "sha256": "a279666a069cf17e6644c67cc6b1fad285486f11e5f7c3db9c76356f8e977998",
+      "catalog": {
+        "source_id": "strategy-pilot-CSCO-prices-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "a279666a069cf17e6644c67cc6b1fad285486f11e5f7c3db9c76356f8e977998",
+        "archived_path": "data/catalog/objects/a2/a279666a069cf17e6644c67cc6b1fad285486f11e5f7c3db9c76356f8e977998.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "INTC",
+      "kind": "facts",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000050863.json",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/INTC_facts.json",
+      "sha256": "9c568557a91cfbc234c999183d6434f8bbf7b8ebf2f29577f28d761a9becb59d",
+      "catalog": {
+        "source_id": "strategy-pilot-INTC-facts-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "9c568557a91cfbc234c999183d6434f8bbf7b8ebf2f29577f28d761a9becb59d",
+        "archived_path": "data/catalog/objects/9c/9c568557a91cfbc234c999183d6434f8bbf7b8ebf2f29577f28d761a9becb59d.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "INTC",
+      "kind": "prices",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/INTC?period1=1262304000&period2=1794063555&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/INTC_prices.json",
+      "sha256": "67f0ba94e3a7db2e43fceebf4bad73565a212b65676b63626f65b480c94db050",
+      "catalog": {
+        "source_id": "strategy-pilot-INTC-prices-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "67f0ba94e3a7db2e43fceebf4bad73565a212b65676b63626f65b480c94db050",
+        "archived_path": "data/catalog/objects/67/67f0ba94e3a7db2e43fceebf4bad73565a212b65676b63626f65b480c94db050.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "KO",
+      "kind": "facts",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/KO_facts.json",
+      "sha256": "87a4173fcd3d662d18d19e0e885095aa5e3812b74c54d1ee55808ff1540a8081",
+      "catalog": {
+        "source_id": "strategy-pilot-KO-facts-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "87a4173fcd3d662d18d19e0e885095aa5e3812b74c54d1ee55808ff1540a8081",
+        "archived_path": "data/catalog/objects/87/87a4173fcd3d662d18d19e0e885095aa5e3812b74c54d1ee55808ff1540a8081.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "KO",
+      "kind": "prices",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/KO?period1=1262304000&period2=1794063557&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/KO_prices.json",
+      "sha256": "381bb2cd34f99f9de045c58a5b6581bb31ab6014d92ba9a52c2e8e48bb80225e",
+      "catalog": {
+        "source_id": "strategy-pilot-KO-prices-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "381bb2cd34f99f9de045c58a5b6581bb31ab6014d92ba9a52c2e8e48bb80225e",
+        "archived_path": "data/catalog/objects/38/381bb2cd34f99f9de045c58a5b6581bb31ab6014d92ba9a52c2e8e48bb80225e.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "JNJ",
+      "kind": "facts",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000200406.json",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/JNJ_facts.json",
+      "sha256": "9ce98e50414e9a6704eaf485e1868c2298c6ae36acc85a82c0a3737485303be7",
+      "catalog": {
+        "source_id": "strategy-pilot-JNJ-facts-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "9ce98e50414e9a6704eaf485e1868c2298c6ae36acc85a82c0a3737485303be7",
+        "archived_path": "data/catalog/objects/9c/9ce98e50414e9a6704eaf485e1868c2298c6ae36acc85a82c0a3737485303be7.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "JNJ",
+      "kind": "prices",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/JNJ?period1=1262304000&period2=1794063561&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/JNJ_prices.json",
+      "sha256": "b59d7cd3c53a8625758dc991b98c78f9882bc5f0dcf5e4b82d2e8c7790d28c1a",
+      "catalog": {
+        "source_id": "strategy-pilot-JNJ-prices-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "b59d7cd3c53a8625758dc991b98c78f9882bc5f0dcf5e4b82d2e8c7790d28c1a",
+        "archived_path": "data/catalog/objects/b5/b59d7cd3c53a8625758dc991b98c78f9882bc5f0dcf5e4b82d2e8c7790d28c1a.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "XOM",
+      "kind": "facts",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000034088.json",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/XOM_facts.json",
+      "sha256": "9b95535419e5662e3deed01de803e83deead477a4c81316e1c45186368fdd8b8",
+      "catalog": {
+        "source_id": "strategy-pilot-XOM-facts-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "9b95535419e5662e3deed01de803e83deead477a4c81316e1c45186368fdd8b8",
+        "archived_path": "data/catalog/objects/9b/9b95535419e5662e3deed01de803e83deead477a4c81316e1c45186368fdd8b8.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "XOM",
+      "kind": "prices",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/XOM?period1=1262304000&period2=1794063564&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/XOM_prices.json",
+      "sha256": "39ee23d74a43833c446d5ca6559c438ef0f5c2f5780647d2b5471524e98c9099",
+      "catalog": {
+        "source_id": "strategy-pilot-XOM-prices-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "39ee23d74a43833c446d5ca6559c438ef0f5c2f5780647d2b5471524e98c9099",
+        "archived_path": "data/catalog/objects/39/39ee23d74a43833c446d5ca6559c438ef0f5c2f5780647d2b5471524e98c9099.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "PG",
+      "kind": "facts",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000080424.json",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/PG_facts.json",
+      "sha256": "c6ae61e012a2b4aadeaa49400847842dd637a4a4a03cbdf4dfff27dffd78f8d1",
+      "catalog": {
+        "source_id": "strategy-pilot-PG-facts-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "c6ae61e012a2b4aadeaa49400847842dd637a4a4a03cbdf4dfff27dffd78f8d1",
+        "archived_path": "data/catalog/objects/c6/c6ae61e012a2b4aadeaa49400847842dd637a4a4a03cbdf4dfff27dffd78f8d1.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "PG",
+      "kind": "prices",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/PG?period1=1262304000&period2=1794063567&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/PG_prices.json",
+      "sha256": "ac9d559377a4158a9a0e71896478784c9ced27741083b6169ea5408c346e2347",
+      "catalog": {
+        "source_id": "strategy-pilot-PG-prices-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "ac9d559377a4158a9a0e71896478784c9ced27741083b6169ea5408c346e2347",
+        "archived_path": "data/catalog/objects/ac/ac9d559377a4158a9a0e71896478784c9ced27741083b6169ea5408c346e2347.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "MCD",
+      "kind": "facts",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000063908.json",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/MCD_facts.json",
+      "sha256": "b7d5525b3c9a6037dc1f1581138b46fade373722c62271641ada5483f6ff1dfe",
+      "catalog": {
+        "source_id": "strategy-pilot-MCD-facts-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "b7d5525b3c9a6037dc1f1581138b46fade373722c62271641ada5483f6ff1dfe",
+        "archived_path": "data/catalog/objects/b7/b7d5525b3c9a6037dc1f1581138b46fade373722c62271641ada5483f6ff1dfe.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "MCD",
+      "kind": "prices",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/MCD?period1=1262304000&period2=1794063570&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/MCD_prices.json",
+      "sha256": "81de4425983f724879bdeb8282005faa60d3df69020825699c50dd7eaff53902",
+      "catalog": {
+        "source_id": "strategy-pilot-MCD-prices-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "81de4425983f724879bdeb8282005faa60d3df69020825699c50dd7eaff53902",
+        "archived_path": "data/catalog/objects/81/81de4425983f724879bdeb8282005faa60d3df69020825699c50dd7eaff53902.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "WMT",
+      "kind": "facts",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/WMT_facts.json",
+      "sha256": "49330f98609f70fcef4054edc90bc811398a58c4bf26dc0b218d607967a8dbe4",
+      "catalog": {
+        "source_id": "strategy-pilot-WMT-facts-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "49330f98609f70fcef4054edc90bc811398a58c4bf26dc0b218d607967a8dbe4",
+        "archived_path": "data/catalog/objects/49/49330f98609f70fcef4054edc90bc811398a58c4bf26dc0b218d607967a8dbe4.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "WMT",
+      "kind": "prices",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/WMT?period1=1262304000&period2=1794063573&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/WMT_prices.json",
+      "sha256": "8263a2a84848c8dec7f591e4e0811603dbddbc1726103f3c5df75486f5efbf49",
+      "catalog": {
+        "source_id": "strategy-pilot-WMT-prices-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "8263a2a84848c8dec7f591e4e0811603dbddbc1726103f3c5df75486f5efbf49",
+        "archived_path": "data/catalog/objects/82/8263a2a84848c8dec7f591e4e0811603dbddbc1726103f3c5df75486f5efbf49.blob",
+        "idempotent": false
+      }
+    },
+    {
+      "ticker": "SPY",
+      "kind": "prices",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?period1=1262304000&period2=1794063576&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/SPY_prices.json",
+      "sha256": "4d43b7963bf6eb734be61acfcb95c66a72bb576f0a54e5f2664c4ce3f50b0cc5",
+      "catalog": {
+        "source_id": "strategy-pilot-SPY-prices-20261107T145907_701919Z",
+        "revision": 1,
+        "sha256": "4d43b7963bf6eb734be61acfcb95c66a72bb576f0a54e5f2664c4ce3f50b0cc5",
+        "archived_path": "data/catalog/objects/4d/4d43b7963bf6eb734be61acfcb95c66a72bb576f0a54e5f2664c4ce3f50b0cc5.blob",
+        "idempotent": false
+      }
+    }
+  ],
+  "failures": [],
+  "protocol_sha256": "7511a3670eeb4d900517c37a82aaca9668cc4d804a0f0e781547874be32e4328"
+}

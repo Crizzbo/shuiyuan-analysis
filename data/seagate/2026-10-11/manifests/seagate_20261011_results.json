@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.1.0",
+  "source_id": "seagate_20261011_results",
+  "revision": 1,
+  "source_path": "data/seagate/2026-10-11/official-results-excerpt.md",
+  "source_kind": "primary",
+  "dataset_kind": "financial",
+  "published_at": null,
+  "published_date": "2026-07-28",
+  "publication_precision": "date",
+  "available_at": "2026-10-11T10:06:39Z",
+  "acquired_at": "2026-10-11T10:06:39Z",
+  "effective_period": null,
+  "license_notes": "项目内研究使用；不代表再分发授权",
+  "quality_notes": [
+    "官方年度、季度财务及明确标注的指引"
+  ],
+  "supersedes_revision": null
+}

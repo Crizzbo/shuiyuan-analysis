@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "hardware",
+    "industry_name_zh": "科技硬件与精密电子制造",
+    "sector_id": "information_technology",
+    "sector_name_zh": "信息技术",
+    "macro_sector_id": "TECH_SEMI",
+    "macro_sector_name_zh": "高精尖半导体、通信电子与精密光学",
+    "description_zh": "涵盖智能手机终端、PC平板、AI 算力服务器、800G/1.6T 高速光模块及精密电子制造企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.72,
+    "typical_markup_ratio": 1.20,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "中等经营杠杆",
+    "typical_gross_margin_range": [0.15, 0.45]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 40.0,
+    "dio_warning_days": 80.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.45,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "先进制程核心 SoC/GPU 算力芯片及高带宽内存 (HBM/LPDDR5X) 采购配额",
+      "高端柔性 OLED 显示屏、潜望式光学镜头模组与高强度轻量化合金精密构件",
+      "高速 EML 光芯片与高频高速多层高阶 HDI/CCL 覆铜板材料"
+    ],
+    "downstream_profile": "全球广大个人消费者换机群体、大型公有云超算中心 (CSP) 与跨国政企私有云基础设施",
+    "pricing_power_verdict": "拥有自研生态闭环的超级消费终端品牌享有绝对零售溢价，中游纯 EMS 组装与代工企业受制于大客户比价压价",
+    "channel_inversion_sensitivity": "二级现货渠道批价由首发溢价转为破发折价是新品换机周期见顶的核心先行指针"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "搭载原生端侧 AI 架构的跨代旗舰硬件引爆全球超长换机潮，单季度出货量持续打破历史峰值",
+      "800G/1.6T 高速光模块与 AI 训练推理服务器出货量强劲翻倍，高附加值品类拉升综合毛利率中枢",
+      "供应链精益制造降本顺利叠加高毛利软件与数字服务生态 (Services) 营收占比持续攀升"
+    ],
+    "leading_bear_defenses": [
+      "全球消费电子换机周期被动拉长，新品硬件缺乏革命性微创新致使首发动销不及预期造成存货积压",
+      "核心大客户将组装订单向海外低成本产区转移，或启动第二供方分流采购配额压低供货单价",
+      "上游核心存储芯片与关键材料大幅涨价，中下游硬件终端无法全额向下顺价传导导致毛利严重受损"
+    ],
+    "core_catalyst_dimensions": [
+      "全球科技巨头秋季新品发布会与首周末预购预定周期动销数据",
+      "权威行业监测机构 (IDC/Canalys) 全球智能终端与 AI 服务器季度出货量快报",
+      "北美超算云厂商 (CSP) 季度 AI 基础设施资本开支指引与供应链急单追加动态",
+      "高阶 HDI 载板与光芯片上游交期周期波动"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "产成品库房存货激增而营收增速放缓，存在为完成季度 KPI 向渠道经销商提前开票虚假塞货",
+      "专用机加工制造设备 (如大客户专用特定模具) 在客户砍单或换代后未及时计提固定资产减值准备",
+      "第一大客户营收占比超过 45% 且附注中披露大客户正在扶植二供或自研核心模组"
+    ],
+    "channel_and_revenue_checks": [
+      "渠道新品开售 1 个月内现货市场渠道批价大幅低于官方建议零售价破发折价",
+      "应收账款周转天数异常拉长反映大客户单方延长供应链付款信用账期"
+    ]
+  }
+}

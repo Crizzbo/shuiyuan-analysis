@@ -1,0 +1,195 @@
+{
+  "batch_id": "Phase2-Batch-3",
+  "description": "第二阶段拓展第三批 (终局大决战 - 全球核心ETF 12 只与高成长新星 5 家共计 17 只核心资产) 矢量PDF生成及云端同步",
+  "executed_at": "2026-11-05T06:06:30.374615+00:00",
+  "total_tackled": 17,
+  "results": [
+    {
+      "ticker": "MELI",
+      "company_name": "自由市场公司 (MercadoLibre, Inc.)",
+      "market": "US",
+      "file_name": "MELI_自由市场拉美电商与数字金融双飞轮霸主深度分析.pdf",
+      "pdf_size_bytes": 460706,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:04:23.116789+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "IONQ",
+      "company_name": "IonQ公司 (IonQ, Inc.)",
+      "market": "US",
+      "file_name": "IONQ_IonQ离子阱量子计算全栈商业化系统深度分析.pdf",
+      "pdf_size_bytes": 480303,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:04:32.558534+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "RDDT",
+      "company_name": "Reddit公司 (Reddit, Inc.)",
+      "market": "US",
+      "file_name": "RDDT_Reddit全球人类社区数据喂养AI与高成长商业化深度分析.pdf",
+      "pdf_size_bytes": 465196,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:04:40.650138+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "CAVA",
+      "company_name": "CAVA集团 (CAVA Group, Inc.)",
+      "market": "US",
+      "file_name": "CAVA_CAVA地中海风味高坪效连锁餐饮新星深度分析.pdf",
+      "pdf_size_bytes": 478247,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:04:48.358178+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "DUOL",
+      "company_name": "多邻国公司 (Duolingo, Inc.)",
+      "market": "US",
+      "file_name": "DUOL_多邻国AI原生个性化语言教育订阅变现龙头深度分析.pdf",
+      "pdf_size_bytes": 470341,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:04:57.857336+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "SPY",
+      "company_name": "SPDR标普500指数信托 (SPDR S&P 500 ETF Trust)",
+      "market": "US",
+      "file_name": "SPY_SPDR全球流动性之王标普500指数ETF深度分析.pdf",
+      "pdf_size_bytes": 460323,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:05:06.786922+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "QQQ",
+      "company_name": "Invesco纳斯达克100信托 (Invesco QQQ Trust, Series 1)",
+      "market": "US",
+      "file_name": "QQQ_Invesco全球大盘科技与AI创新旗舰ETF深度分析.pdf",
+      "pdf_size_bytes": 443400,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:05:14.526288+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "IWM",
+      "company_name": "iShares罗素2000ETF (iShares Russell 2000 ETF)",
+      "market": "US",
+      "file_name": "IWM_iShares全美中小企业降息弹性标杆罗素2000ETF深度分析.pdf",
+      "pdf_size_bytes": 456998,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:05:22.611447+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "SMH",
+      "company_name": "VanEck半导体ETF (VanEck Semiconductor ETF)",
+      "market": "US",
+      "file_name": "SMH_VanEck全球半导体25强芯片算力飞轮ETF深度分析.pdf",
+      "pdf_size_bytes": 445830,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:05:30.424878+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "XLK",
+      "company_name": "科技精选行业SPDR基金 (Technology Select Sector SPDR Fund)",
+      "market": "US",
+      "file_name": "XLK_科技精选行业SPDR基金微软苹果英伟达超级权重深度分析.pdf",
+      "pdf_size_bytes": 441364,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:05:38.061390+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "XBI",
+      "company_name": "SPDR标普生物科技ETF (SPDR S&P Biotech ETF)",
+      "market": "US",
+      "file_name": "XBI_SPDR标普生物科技创新药等权重降息弹性先锋深度分析.pdf",
+      "pdf_size_bytes": 471124,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:05:45.975267+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "XLE",
+      "company_name": "能源精选行业SPDR基金 (Energy Select Sector SPDR Fund)",
+      "market": "US",
+      "file_name": "XLE_能源精选行业SPDR基金传统油气自由现金流巨兽深度分析.pdf",
+      "pdf_size_bytes": 471933,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:05:53.315587+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "SCHD",
+      "company_name": "嘉信美国高股息股票ETF (Schwab U.S. Dividend Equity ETF)",
+      "market": "US",
+      "file_name": "SCHD_嘉信美国高股息100只稳健现金牛防御基石ETF深度分析.pdf",
+      "pdf_size_bytes": 462745,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:06:01.196159+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "VIG",
+      "company_name": "Vanguard股息增长ETF (Vanguard Dividend Appreciation ETF)",
+      "market": "US",
+      "file_name": "VIG_Vanguard股息增长连续十年增配蓝筹矩阵ETF深度分析.pdf",
+      "pdf_size_bytes": 457235,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:06:10.348398+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "TLT",
+      "company_name": "iShares 20+年期美国国债ETF (iShares 20+ Year Treasury Bond ETF)",
+      "market": "US",
+      "file_name": "TLT_iShares长久期美债利率敏感度与降息博弈工具深度分析.pdf",
+      "pdf_size_bytes": 429154,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:06:16.653647+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "IEF",
+      "company_name": "iShares 7-10年期美国国债ETF (iShares 7-10 Year Treasury Bond ETF)",
+      "market": "US",
+      "file_name": "IEF_iShares中期美债基准利率传导稳健基石ETF深度分析.pdf",
+      "pdf_size_bytes": 414774,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:06:23.708678+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "HYG",
+      "company_name": "iShares高收益公司债ETF (iShares iBoxx $ High Yield Corporate Bond ETF)",
+      "market": "US",
+      "file_name": "HYG_iShares信用利差与全市场违约风险情绪晴雨表高收益债ETF深度分析.pdf",
+      "pdf_size_bytes": 460967,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:06:30.373620+00:00",
+      "status": "COMPLETED_EXPANDED"
+    }
+  ]
+}

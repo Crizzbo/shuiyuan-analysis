@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-10-12T04:00:00Z",
+  "archive_kind": "manual_browser_visible_excerpt",
+  "not_full_original_document": true,
+  "sources": [
+    {
+      "industry_id": "mining",
+      "published_date": "2025-01-23",
+      "source_url": "https://investors.fcx.com/investors/news-releases/",
+      "locator": "Freeport-McMoRan Reports Fourth-Quarter and Year-End 2024 Results, Summary Operating Data",
+      "excerpts": [
+        "Freeport-McMoRan Reports Fourth-Quarter and Year-End 2024 Results (January 23, 2025)",
+        "Consolidated sales totaled 4.1 billion pounds of copper, and the average realized price was $4.21 per pound in 2024."
+      ],
+      "observations": [
+        {
+          "component": "fcx_copper_average_realized_price_2024",
+          "parent_metric_id": "mining_driver_1",
+          "name_zh": "自由港麦克莫兰 2024 年度铜平均实现单价",
+          "binding_role": "formula_input",
+          "limitation_zh": "合并口径铜平均实现销售单价；含副产品抵扣前后需结合现金成本附注分析",
+          "raw_unit": "USD_per_pound",
+          "unit": "USD_per_pound",
+          "raw_value": "4.21",
+          "value": "4.21",
+          "conversion": "identity",
+          "period_start": "2024-01-01",
+          "period_end": "2024-12-31",
+          "period_type": "annual",
+          "scope": "consolidated_copper_sales_2024",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "industry_id": "chemicals",
+      "published_date": "2025-01-30",
+      "source_url": "https://investors.dow.com/en/news/news-details/2026/Dow-reports-fourth-quarter-2025-results/default.aspx",
+      "locator": "Dow Inc. Form 10-K for the Fiscal Year Ended December 31, 2024, Item 7 MD&A Segment Results",
+      "excerpts": [
+        "Dow Inc. Annual Report on Form 10-K for the Year Ended December 31, 2024, Item 7 MD&A Segment Results",
+        "Packaging & Specialty Plastics net sales were $21,776 million in 2024, compared with $23,149 million in 2023."
+      ],
+      "observations": [
+        {
+          "component": "dow_psp_segment_net_sales_2024",
+          "parent_metric_id": "chemicals_driver_1",
+          "name_zh": "陶氏化学 2024 包装与特种塑料分部净销售额",
+          "binding_role": "formula_input",
+          "limitation_zh": "全财年特种塑料分部产品净销售额；匹配原料乙烯单位成本待补充",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "raw_value": "21,776",
+          "value": "21776000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2024-01-01",
+          "period_end": "2024-12-31",
+          "period_type": "annual",
+          "scope": "packaging_and_specialty_plastics_segment",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "industry_id": "packaging",
+      "published_date": "2025-01-27",
+      "source_url": "https://ir.packagingcorp.com/news-releases/news-release-details/packaging-corporation-america-reports-fourth-quarter-and-full-14",
+      "locator": "Packaging Corporation of America Form 10-K for the Fiscal Year Ended December 31, 2024, Item 1 Business Packaging Segment",
+      "excerpts": [
+        "Packaging Corporation of America Annual Report on Form 10-K for the Fiscal Year Ended December 31, 2024, Item 1 Business - Packaging Segment",
+        "The company's corrugated products manufacturing plants sold 67 billion square feet (BSF) of corrugated products in 2024."
+      ],
+      "observations": [
+        {
+          "component": "pkg_corrugated_products_shipments_2024",
+          "parent_metric_id": "packaging_driver_1",
+          "name_zh": "包装公司 2024 全年瓦楞制品出货销售面积",
+          "binding_role": "formula_input",
+          "limitation_zh": "全年瓦楞包装制品工厂销售出货量；以十亿平方英尺（BSF）为披露单位",
+          "raw_unit": "billion_square_feet",
+          "unit": "billion_square_feet",
+          "raw_value": "67",
+          "value": "67",
+          "conversion": "identity",
+          "period_start": "2024-01-01",
+          "period_end": "2024-12-31",
+          "period_type": "annual",
+          "scope": "corrugated_products_annual_shipments",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This schema was created by staff of the U.S. Securities and Exchange Commission. -->
+<!-- Data and content created by government employees within the scope of their employment -->
+<!-- are not subject to domestic copyright protection. 17 U.S.C. 105. -->
+<xs:schema
+xmlns:dtr-types="http://www.xbrl.org/dtr/type/2024-01-31"
+xmlns:fnd="http://xbrl.sec.gov/fnd/2026"
+xmlns:link="http://www.xbrl.org/2003/linkbase"
+xmlns:ref="http://www.xbrl.org/2006/ref"
+xmlns:xbrli="http://www.xbrl.org/2003/instance"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+targetNamespace="http://xbrl.sec.gov/fnd/2026"
+elementFormDefault="qualified"
+xsi:schemaLocation="http://www.xbrl.org/2006/ref http://www.xbrl.org/2006/ref-2006-02-27.xsd">
+<xs:import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+<xs:import namespace="http://xbrl.org/2005/xbrldt" schemaLocation="http://www.xbrl.org/2005/xbrldt-2005.xsd"/>
+<xs:import namespace="http://www.xbrl.org/dtr/type/2024-01-31" schemaLocation="https://www.xbrl.org/dtr/type/2024-01-31/types.xsd"/>
+<xs:annotation>
+<xs:appinfo>
+<link:roleType roleURI="http://xbrl.sec.gov/cef/role/Item8.2.b.instr.2" id="Item8.2.b.instr.2">
+<link:definition>040812 - Disclosure - N-2 Item 8.2.b Instruction 2, Definition of Terms in Fund Name</link:definition>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/uit/role/Item11.2" id="Item11.2">
+<link:definition>080000 - Disclosure - Definition of Terms in Fund Name</link:definition>
+<link:usedOn>link:presentationLink</link:usedOn>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:linkbase id="lnk">
+<link:referenceLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+<link:loc xlink:type="locator" xlink:href="#fnd_NmRule35d1DsclsrLineItems" xlink:label="NmRule35d1DsclsrLineItems"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1DsclsrLineItems_3" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Investment Company Act</ref:Name>
+<ref:Number>270</ref:Number>
+<ref:Section>35d-1</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1DsclsrLineItems" xlink:to="reference_NmRule35d1DsclsrLineItems_3" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#fnd_NmRule35d1TermDfnTextBlock" xlink:label="NmRule35d1TermDfnTextBlock"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1TermDfnTextBlock_3" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Investment Company Act</ref:Name>
+<ref:Number>270</ref:Number>
+<ref:Section>35d-1</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1TermDfnTextBlock" xlink:to="reference_NmRule35d1TermDfnTextBlock_3" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#fnd_NmRule35d1TermSlctnCritTextBlock" xlink:label="NmRule35d1TermSlctnCritTextBlock"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1TermSlctnCritTextBlock_3" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Investment Company Act</ref:Name>
+<ref:Number>270</ref:Number>
+<ref:Section>35d-1</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1TermSlctnCritTextBlock" xlink:to="reference_NmRule35d1TermSlctnCritTextBlock_3" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#fnd_NmRule35d1TermDfnSmryTextBlock" xlink:label="NmRule35d1TermDfnSmryTextBlock"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1TermDfnSmryTextBlock_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Investment Company Act</ref:Name>
+<ref:Number>270</ref:Number>
+<ref:Section>35d-1</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1TermDfnSmryTextBlock" xlink:to="reference_NmRule35d1TermDfnSmryTextBlock_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#fnd_NmRule35d1TermSlctnCritSmryTextBlock" xlink:label="NmRule35d1TermSlctnCritSmryTextBlock"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1TermSlctnCritSmryTextBlock_2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Investment Company Act</ref:Name>
+<ref:Number>270</ref:Number>
+<ref:Section>35d-1</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1TermSlctnCritSmryTextBlock" xlink:to="reference_NmRule35d1TermSlctnCritSmryTextBlock_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#fnd_NmRule35d1EightyPctInvstmntPlcyTextBlock" xlink:label="NmRule35d1EightyPctInvstmntPlcyTextBlock"/>
+<link:reference xlink:type="resource" xlink:label="reference_NmRule35d1EightyPctInvstmntPlcyTextBlock_3" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Investment Company Act</ref:Name>
+<ref:Number>270</ref:Number>
+<ref:Section>35d-1</ref:Section>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="NmRule35d1EightyPctInvstmntPlcyTextBlock" xlink:to="reference_NmRule35d1EightyPctInvstmntPlcyTextBlock_3" priority="10"/>
+</link:referenceLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+<xs:element name="NmRule35d1TermDfnSmryTextBlock" id="fnd_NmRule35d1TermDfnSmryTextBlock" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="NmRule35d1TermSlctnCritSmryTextBlock" id="fnd_NmRule35d1TermSlctnCritSmryTextBlock" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="NmRule35d1DsclsrLineItems" id="fnd_NmRule35d1DsclsrLineItems" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="NmRule35d1TermDfnTextBlock" id="fnd_NmRule35d1TermDfnTextBlock" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="NmRule35d1TermSlctnCritTextBlock" id="fnd_NmRule35d1TermSlctnCritTextBlock" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="NmRule35d1EightyPctInvstmntPlcyTextBlock" id="fnd_NmRule35d1EightyPctInvstmntPlcyTextBlock" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+</xs:schema>

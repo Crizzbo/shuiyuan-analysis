@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "digital_platforms",
+    "industry_name_zh": "互联网平台与数字经济",
+    "sector_id": "communication_services",
+    "sector_name_zh": "通信服务",
+    "macro_sector_id": "INFO_COMM",
+    "macro_sector_name_zh": "现代数字信息、互联网平台与电信基础设施",
+    "description_zh": "涵盖数字广告平台、社交网络、流媒体娱乐、移动应用分发与多边网络效应数字经济实体。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.22,
+    "typical_markup_ratio": 1.48,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "极高经营杠杆",
+    "typical_gross_margin_range": [0.75, 0.85]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 0.0,
+    "dio_warning_days": 0.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.10,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "AI 数据中心服务器、高端 GPU 加速卡配额与低成本绿色电力供应",
+      "移动操作系统 (iOS/Android) 隐私保护政策与底层平台抽成壁垒",
+      "全球版权内容采购 (音乐、影视、体育赛事) 授权成本"
+    ],
+    "downstream_profile": "全球数十亿活跃个人用户 (DAU/MAU) 与海量跨行业中小企业及电商品牌广告主",
+    "pricing_power_verdict": "拥有顶级用户注意力停留时长与双边网络效应的超级平台具备绝对流量分配权与广告提价权",
+    "channel_inversion_sensitivity": "广告平均竞价 (Price Per Ad) 与展示量 (Ad Impressions) 背离是宏观广告支出晴雨表"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "生成式 AI 推荐与广告定向算法显著提高转化率，驱动每广告展示收入 (Price Per Ad) 持续超预期提升",
+      "短视频与新型交互形态用户停留时长超越竞品，平台广告库存变现率加速释放",
+      "资本开支与自由现金流保持健康平衡，大额股票回购持续注销并增厚每股 EPS"
+    ],
+    "leading_bear_defenses": [
+      "宏观消费疲软与电商品牌削减投放预算，导致单季广告单价面临阶段性通缩",
+      "重度投入前沿技术基础设施导致单季 CapEx 与研发折旧严重失控侵蚀营业利润率",
+      "全球反垄断监管罚款、数据主权限制或第三方隐私政策收紧导致用户数据归因追踪失效"
+    ],
+    "core_catalyst_dimensions": [
+      "全球日活跃用户数 (DAU) 与每用户平均收入 (ARPU) 变动",
+      "广告展示量 (Ad Impressions) 与平均广告单价 (Average Price Per Ad) 增速矩阵",
+      "AI 资本开支 (CapEx) 节奏与折旧摊销对营业利润率的传导",
+      "全球反垄断与隐私保护立法动态"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "无形资产与研发支出资本化比例超过 5.0% (互联网平台研发应 100% 费用化)",
+      "员工股权激励 (SBC) 膨胀速度大幅超越营收增速导致老股东遭遇严重隐性稀释",
+      "应收账款增速远高于广告营收增速表明对广告主放宽授信以掩盖内生放缓"
+    ],
+    "channel_and_revenue_checks": [
+      "第三方网络监测数据与财报披露用户活跃度出现严重背离",
+      "递延收入 (Deferred Revenue) 出现异常剧烈下滑"
+    ]
+  }
+}

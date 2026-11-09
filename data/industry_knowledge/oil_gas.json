@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "oil_gas",
+    "industry_name_zh": "油气勘探与生产",
+    "sector_id": "energy",
+    "sector_name_zh": "能源",
+    "macro_sector_id": "ENERGY_MIN",
+    "macro_sector_name_zh": "能源采掘、矿产开采与大宗原材料",
+    "description_zh": "涵盖陆上与海上原油、天然气勘探、页岩油水力压裂及综合上游开采企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.55,
+    "typical_markup_ratio": 1.18,
+    "capex_intensity": "极高重资产",
+    "operating_leverage_exposure": "极高经营杠杆",
+    "typical_gross_margin_range": [0.35, 0.60]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 30.0,
+    "dio_warning_days": 65.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.30,
+    "debt_covenant_buffer_minimum_ratio": 0.25
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "高端油田技术服务 (水力压裂车组、深水钻井平台与随钻测井) 日费率与产能排期",
+      "特种抗硫化氢油井套管钢管、高等级支撑剂压裂砂与钻井工程助剂",
+      "优质油气盆地核心地块采矿权出租与环保勘探审批许可"
+    ],
+    "downstream_profile": "全球大型炼化一体化石油化工集团、国家战略石油储备机构与跨国大宗原油贸易商",
+    "pricing_power_verdict": "属于纯基准价格接受者 (Price Taker)，核心核心护城河为单桶油当量全周期盈亏平衡开采成本",
+    "channel_inversion_sensitivity": "原油期货近远月期限结构贴水与升水 (Backwardation/Contango) 是实体供需平衡领先指标"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "产油国联盟超预期严守产量配额支撑油价维持高位，公司上游开采单桶自由现金流持续井喷",
+      "核心油田水平井钻井与压裂技术优化，单桶完全盈亏平衡成本压降至 40 美元以下具备极强成本垫",
+      "管理层坚守资本纪律不盲目资本开支扩产，自由现金流全额转为丰厚股息分红与股票回购注销"
+    ],
+    "leading_bear_defenses": [
+      "宏观经济陷入深度衰退致使全球能源需求塌缩，非欧佩克产油国增产引发国际油价断崖暴跌",
+      "主力油田自然递减率过快叠加储量重估大跌，导致未开发油气资产计提大额天花板减值损失",
+      "高负债油企遭遇银行借贷基底 (Borrowing Base) 随油价下挫大幅收缩，引爆债务流动性违约危机"
+    ],
+    "core_catalyst_dimensions": [
+      "OPEC+ 部长级监督委员会原油产量配额决议",
+      "美国能源信息署 (EIA) 每周全美原油及商业库存变动报告",
+      "贝克休斯 (Baker Hughes) 每周全球油气钻机数量变化",
+      "单桶油当量完全开采成本 (All-in Cash Cost per BOE) 财报披露"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "滥用完全成本法将未获得商业发现的干井勘探费用大规模资本化以虚增利润",
+      "资产报废弃置负债 (ARO) 计提严重不足，推迟确认老旧油井封堵与环境治理复垦成本",
+      "在国际油价大跌周期拒绝计提油气资产天花板折现减值测试损失 (Ceiling Test Impairment)"
+    ],
+    "channel_and_revenue_checks": [
+      "大宗商品衍生品单边投机套保产生巨额保证金追缴或未平仓浮亏",
+      "第三方储量评估报告中证实已开发储量 (P1 Reserves) 估算参数显著脱离地质实际"
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+{"execution": {"function": "Series.pct_change", "library": "pandas", "library_version": "3.0.6", "value": 0.9855844425635365}, "formula": "同报告相邻年度、同范围收入 / 上年收入 - 1", "metric_id": "revenue_growth", "observation_id": "855c606cf95fef70ca129e0366741415187172355bccbeefa9a2e1e822c374a9"}

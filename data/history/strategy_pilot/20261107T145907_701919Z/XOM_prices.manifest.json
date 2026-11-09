@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.1.0",
+  "source_id": "strategy-pilot-XOM-prices-20261107T145907_701919Z",
+  "revision": 1,
+  "source_path": "data/history/strategy_pilot/20261107T145907_701919Z/raw/XOM_prices.json",
+  "source_kind": "secondary",
+  "dataset_kind": "market",
+  "published_at": null,
+  "available_at": "2026-11-07T14:59:27.620754+00:00",
+  "acquired_at": "2026-11-07T14:59:27.620754+00:00",
+  "effective_period": null,
+  "license_notes": "Public provider original response, archived for local research only; not redistributed.",
+  "quality_notes": [
+    "Source identity: https://query1.finance.yahoo.com/v8/finance/chart/XOM?period1=1262304000&period2=1794063564&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+    "Capture timestamp is not historical availability; SEC filed/accession metadata is checked separately in reconstruction.",
+    "Pilot convenience universe chosen now; survival/selection bias limits interpretation."
+  ],
+  "supersedes_revision": null,
+  "published_date": null,
+  "publication_precision": "unknown"
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0.0",
+  "reports": [
+    {
+      "report_id": "intu-2026-10k-v1",
+      "snapshot_path": "data/financial/objects/7a/7a58e699ad77d85b320820656a89d6253407f0cd5f1a99e18778a7112077e02e.json",
+      "sha256": "7a58e699ad77d85b320820656a89d6253407f0cd5f1a99e18778a7112077e02e",
+      "entity_id": "US:INTU:CIK896878",
+      "fact_count": 42,
+      "calculations_computed": 13,
+      "checks_by_status": {
+        "passed": 8,
+        "failed": 0,
+        "incomplete": 2
+      },
+      "parser_issues": [],
+      "release_status": "staging_pending_review",
+      "taxonomy_validation": {
+        "dts_document_count": 31,
+        "errors": [],
+        "fact_count": 1739,
+        "sha256": "d62975a3861de045e3fd94c453ff0d28736c7d62d7e3400a1bbd23687a861803",
+        "snapshot_path": "data/financial/objects/d6/d62975a3861de045e3fd94c453ff0d28736c7d62d7e3400a1bbd23687a861803.json",
+        "status": "passed",
+        "validation_fingerprint": "f826a018a574884f1a1328c4341fe7b848fe56de5089d665d1a0ddf6b52e86bb"
+      }
+    },
+    {
+      "report_id": "sony-2026-20f-v1",
+      "snapshot_path": "data/financial/objects/03/0358e9adb359f92f28049d68093d7c871da7afc544580c6b487b19b1050bfce8.json",
+      "sha256": "0358e9adb359f92f28049d68093d7c871da7afc544580c6b487b19b1050bfce8",
+      "entity_id": "JP:6758:CIK313838",
+      "fact_count": 44,
+      "calculations_computed": 10,
+      "checks_by_status": {
+        "passed": 8,
+        "failed": 0,
+        "incomplete": 3
+      },
+      "parser_issues": [],
+      "release_status": "staging_pending_review",
+      "taxonomy_validation": {
+        "status": "not_applicable"
+      }
+    },
+    {
+      "report_id": "nintendo-2026-annual-v1",
+      "snapshot_path": "data/financial/objects/4e/4e2b78575f14295da8dcddf84ca9f51abc4d83b3765c109703f984b5c6b1d3d2.json",
+      "sha256": "4e2b78575f14295da8dcddf84ca9f51abc4d83b3765c109703f984b5c6b1d3d2",
+      "entity_id": "JP:7974",
+      "fact_count": 30,
+      "calculations_computed": 9,
+      "checks_by_status": {
+        "passed": 6,
+        "failed": 0,
+        "incomplete": 0
+      },
+      "parser_issues": [],
+      "release_status": "staging_pending_review",
+      "taxonomy_validation": {
+        "status": "not_applicable"
+      }
+    }
+  ],
+  "boundary": "真实财报解析快照；正式 facts 登记见 research-facts-verification.json；不代表六步研究已完成"
+}

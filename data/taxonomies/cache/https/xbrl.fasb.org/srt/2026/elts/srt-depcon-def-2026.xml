@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+(c) 2010-2026 Financial Accounting Foundation; (c) 2007-2010 XBRL US, Inc.  All Rights Reserved.
+Notice: Authorized Uses are Set Forth at https://xbrl.fasb.org/terms/SRT_TermsConditions.html
+  -->
+<link:linkbase xmlns:link='http://www.xbrl.org/2003/linkbase' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.xbrl.org/2003/linkbase http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd'>
+  <link:roleRef roleURI='http://fasb.org/srt/role/deprecated/deprecated' xlink:href='srt-roles-2026.xsd#srt-depcon' xlink:type='simple' />
+  <link:arcroleRef arcroleURI='http://www.xbrl.org/2009/arcrole/dep-concept-deprecatedConcept' xlink:href='http://www.xbrl.org/lrr/arcrole/deprecated-2009-12-16.xsd#dep-concept-deprecatedConcept' xlink:type='simple' />
+  <link:arcroleRef arcroleURI='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:href='http://www.xbrl.org/lrr/arcrole/deprecated-2009-12-16.xsd#dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:type='simple' />
+  <link:definitionLink xlink:role='http://fasb.org/srt/role/deprecated/deprecated' xlink:type='extended'>
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowConsolidatedSubsidiaryWithNoncontrollingInterest' xlink:label='loc_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowConsolidatedSubsidiaryWithNoncontrollingInterest' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_SignificantEconomicInterestInStandardizedMeasureOfDiscountedFutureNetCashFlowsAttributableToConsolidatedSubsidiaryIesWithSignificantMinorityInterests' xlink:label='loc_SignificantEconomicInterestInStandardizedMeasureOfDiscountedFutureNetCashFlowsAttributableToConsolidatedSubsidiaryIesWithSignificantMinorityInterests' xlink:type='locator' />
+    <link:definitionArc order='10' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-concept-deprecatedConcept' xlink:from='loc_OilAndGasStandardizedMeasureDiscountedFutureNetCashFlowConsolidatedSubsidiaryWithNoncontrollingInterest' xlink:to='loc_SignificantEconomicInterestInStandardizedMeasureOfDiscountedFutureNetCashFlowsAttributableToConsolidatedSubsidiaryIesWithSignificantMinorityInterests' xlink:type='arc' />
+  </link:definitionLink>
+  <link:definitionLink xlink:role='http://fasb.org/srt/role/deprecated/deprecated' xlink:type='extended'>
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasProductiveWellGrossNumber' xlink:label='loc_OilAndGasProductiveWellGrossNumber' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveGasWellsNumberOfWellsGross' xlink:label='loc_ProductiveGasWellsNumberOfWellsGross' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveOilWellsNumberOfWellsGross' xlink:label='loc_ProductiveOilWellsNumberOfWellsGross' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ReserveQuantitiesByTypeOfReserveAxis' xlink:label='loc_ReserveQuantitiesByTypeOfReserveAxis' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveGasWellsNumberOfWellsNet' xlink:label='loc_ProductiveGasWellsNumberOfWellsNet' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_ProductiveOilWellsNumberOfWellsNet' xlink:label='loc_ProductiveOilWellsNumberOfWellsNet' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_TypeOfReserveDomain' xlink:label='loc_TypeOfReserveDomain' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_NaturalGasReservesMember' xlink:label='loc_NaturalGasReservesMember' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_OilAndGasProductiveWellNetNumber' xlink:label='loc_OilAndGasProductiveWellNetNumber' xlink:type='locator' />
+    <link:loc xlink:href='srt-2026.xsd#srt_CrudeOilMember' xlink:label='loc_CrudeOilMember' xlink:type='locator' />
+    <link:definitionArc order='10' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_OilAndGasProductiveWellGrossNumber' xlink:to='loc_ProductiveGasWellsNumberOfWellsGross' xlink:type='arc' />
+    <link:definitionArc order='20' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_OilAndGasProductiveWellGrossNumber' xlink:to='loc_ProductiveOilWellsNumberOfWellsGross' xlink:type='arc' />
+    <link:definitionArc order='10' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_ReserveQuantitiesByTypeOfReserveAxis' xlink:to='loc_ProductiveGasWellsNumberOfWellsGross' xlink:type='arc' />
+    <link:definitionArc order='20' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_ReserveQuantitiesByTypeOfReserveAxis' xlink:to='loc_ProductiveGasWellsNumberOfWellsNet' xlink:type='arc' />
+    <link:definitionArc order='30' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_ReserveQuantitiesByTypeOfReserveAxis' xlink:to='loc_ProductiveOilWellsNumberOfWellsGross' xlink:type='arc' />
+    <link:definitionArc order='40' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_ReserveQuantitiesByTypeOfReserveAxis' xlink:to='loc_ProductiveOilWellsNumberOfWellsNet' xlink:type='arc' />
+    <link:definitionArc order='10' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_TypeOfReserveDomain' xlink:to='loc_ProductiveGasWellsNumberOfWellsGross' xlink:type='arc' />
+    <link:definitionArc order='20' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_TypeOfReserveDomain' xlink:to='loc_ProductiveGasWellsNumberOfWellsNet' xlink:type='arc' />
+    <link:definitionArc order='30' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_TypeOfReserveDomain' xlink:to='loc_ProductiveOilWellsNumberOfWellsGross' xlink:type='arc' />
+    <link:definitionArc order='40' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_TypeOfReserveDomain' xlink:to='loc_ProductiveOilWellsNumberOfWellsNet' xlink:type='arc' />
+    <link:definitionArc order='10' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_NaturalGasReservesMember' xlink:to='loc_ProductiveGasWellsNumberOfWellsGross' xlink:type='arc' />
+    <link:definitionArc order='20' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_NaturalGasReservesMember' xlink:to='loc_ProductiveGasWellsNumberOfWellsNet' xlink:type='arc' />
+    <link:definitionArc order='10' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_OilAndGasProductiveWellNetNumber' xlink:to='loc_ProductiveGasWellsNumberOfWellsNet' xlink:type='arc' />
+    <link:definitionArc order='20' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_OilAndGasProductiveWellNetNumber' xlink:to='loc_ProductiveOilWellsNumberOfWellsNet' xlink:type='arc' />
+    <link:definitionArc order='10' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_CrudeOilMember' xlink:to='loc_ProductiveOilWellsNumberOfWellsGross' xlink:type='arc' />
+    <link:definitionArc order='20' xlink:arcrole='http://www.xbrl.org/2009/arcrole/dep-dimensionallyQualifiedConcept-deprecatedConcept' xlink:from='loc_CrudeOilMember' xlink:to='loc_ProductiveOilWellsNumberOfWellsNet' xlink:type='arc' />
+  </link:definitionLink>
+</link:linkbase>

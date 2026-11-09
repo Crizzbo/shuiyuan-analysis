@@ -1,0 +1,58 @@
+{
+  "version": "trial-v1",
+  "label": "new-rule retrospective reconstruction; convenience sample chosen now; not full-market or prior-live-system performance",
+  "universe": [
+    "MSFT",
+    "AAPL",
+    "CSCO",
+    "INTC",
+    "KO",
+    "JNJ",
+    "XOM",
+    "PG",
+    "MCD",
+    "WMT"
+  ],
+  "period_start": "2018-01-01",
+  "period_end": "2024-12-31",
+  "initial_cash": {
+    "US": 100000,
+    "JP": 100000
+  },
+  "max_positions": 10,
+  "max_weight": 0.1,
+  "max_holding_sessions": 63,
+  "commission_bps": 10,
+  "slippage_bps": 10,
+  "cost_scenarios_bps_each": [
+    0,
+    10,
+    25
+  ],
+  "decision": "DCF median >= current close AND production SEPA Pivot_Triggered AND complete evidence/risk gates",
+  "dcf": {
+    "forecast_years": 5,
+    "growth_mean": 0.1,
+    "growth_std": 0.06,
+    "wacc_mean": 0.1,
+    "wacc_std": 0.015,
+    "terminal_g_mean": 0.025,
+    "terminal_g_std": 0.005,
+    "iterations": 1000,
+    "seed": 42
+  },
+  "sepa_adapter": {
+    "rs": "252-observation total-return percentile within fixed pilot sample; not vendor RS",
+    "pivot": "maximum high of prior 20 sessions",
+    "contractions": "range percent in three consecutive past 20-session blocks, measured at date t-1",
+    "base_duration_sessions": 60,
+    "dryup": "minimum volume in prior 20 sessions",
+    "no_future_data": true
+  },
+  "valuation": "production MonteCarloDCF on latest eligible annual same-accession SEC facts; cash CFO-capex proxy as used by project, model-interpretation caveat; net debt excludes leases to match disclosed core borrowings",
+  "publication_guard": "annual filing date + 1 full calendar day; never period-end as availability",
+  "unknown_inputs": "skip; never fill zero absent explicit zero fact",
+  "JP_status": "NO_ELIGIBLE_FINANCIAL_HISTORY",
+  "price_basis": "Yahoo split-adjusted OHLC/volume and dividend amounts; convert to decision-date share units; immutable raw actions retained",
+  "adjustment_note": "Historical split scale conversion is a unit transformation; original decision price and 2-decimal core rounding are computed in contemporaneous units."
+}

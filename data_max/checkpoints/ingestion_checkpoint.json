@@ -1,0 +1,9 @@
+{
+  "status": "COMPLETED",
+  "last_updated": "2026-11-08T04:05:09.474218+00:00",
+  "synced_counts": {
+    "us_bars_synced": 39,
+    "jp_bars_synced": 9
+  },
+  "notes": "全量资产池元数据与已有高精度多周期日线数据已成功归档并接入 data_max 生产空间"
+}

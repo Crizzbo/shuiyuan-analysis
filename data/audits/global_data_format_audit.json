@@ -1,0 +1,41 @@
+{
+  "audit_timestamp_utc": "2026-11-08T03:20:58.177131+00:00",
+  "overall_inspected": 734,
+  "overall_passed": 734,
+  "overall_failed": 0,
+  "overall_pass_rate_pct": 100.0,
+  "domains": {
+    "quotes": {
+      "domain_name": "行情数据源全息格式体检 (Market Quotes)",
+      "total": 8,
+      "passed": 8,
+      "failed": 0,
+      "pass_rate_pct": 100.0,
+      "sample_errors": []
+    },
+    "universe": {
+      "domain_name": "资产池主索引全量格式体检 (Universe Indexes)",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "pass_rate_pct": 100.0,
+      "sample_errors": []
+    },
+    "dossiers": {
+      "domain_name": "AI 深度档案全量格式与小数保真度体检 (AI Dossiers)",
+      "total": 705,
+      "passed": 705,
+      "failed": 0,
+      "pass_rate_pct": 100.0,
+      "sample_errors": []
+    },
+    "markdown": {
+      "domain_name": "Markdown 研报与决策卡文本语法格式正则扫描 (Markdown Reports)",
+      "total": 15,
+      "passed": 15,
+      "failed": 0,
+      "pass_rate_pct": 100.0,
+      "sample_errors": []
+    }
+  }
+}

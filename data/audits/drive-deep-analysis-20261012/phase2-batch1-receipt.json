@@ -1,0 +1,96 @@
+{
+  "batch_id": "Phase2-Batch-1",
+  "description": "第二阶段拓展第一批 (黄金与贵金属大宗商品深度研究体系 8 只核心标的) 矢量PDF生成及云端同步",
+  "executed_at": "2026-11-05T10:55:37.537003+00:00",
+  "total_tackled": 8,
+  "results": [
+    {
+      "ticker": "GLD",
+      "company_name": "SPDR黄金信托 (SPDR Gold Shares Trust)",
+      "market": "US",
+      "file_name": "GLD_SPDR全球最大实物黄金信托ETF深度分析.pdf",
+      "pdf_size_bytes": 467854,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:09:06.186917+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "IAU",
+      "company_name": "iShares黄金信托 (iShares Gold Trust)",
+      "market": "US",
+      "file_name": "IAU_iShares贝莱德超低费率实物黄金信托ETF深度分析.pdf",
+      "pdf_size_bytes": 434668,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:09:14.622898+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "SLV",
+      "company_name": "iShares白银信托 (iShares Silver Trust)",
+      "market": "US",
+      "file_name": "SLV_iShares全球最大实物白银信托ETF深度分析.pdf",
+      "pdf_size_bytes": 450632,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T06:09:17.765438+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "NEM",
+      "company_name": "纽蒙特黄金公司 (Newmont Corporation)",
+      "market": "US",
+      "file_name": "NEM_纽蒙特全球第一大特级金矿航母深度分析.pdf",
+      "pdf_size_bytes": 481128,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:55:26.551582+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "GOLD",
+      "company_name": "巴里克黄金公司 (Barrick Gold Corporation)",
+      "market": "US",
+      "file_name": "GOLD_巴里克全球第二大特级金铜矿业航母深度分析.pdf",
+      "pdf_size_bytes": 473558,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:55:29.619529+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "AEM",
+      "company_name": "阿尼科阿格尼科矿业公司 (Agnico Eagle Mines Limited)",
+      "market": "US",
+      "file_name": "AEM_阿尼科矿业全球最低政治地缘风险特级金矿深度分析.pdf",
+      "pdf_size_bytes": 465449,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:55:32.130312+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "WPM",
+      "company_name": "惠顿贵金属公司 (Wheaton Precious Metals Corp.)",
+      "market": "US",
+      "file_name": "WPM_惠顿贵金属全球流转特许权轻资产暴利现金牛深度分析.pdf",
+      "pdf_size_bytes": 467628,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:55:34.440311+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "GDX",
+      "company_name": "VanEck黄金矿业ETF (VanEck Gold Miners ETF)",
+      "market": "US",
+      "file_name": "GDX_VanEck全球黄金矿业巨头ETF深度分析.pdf",
+      "pdf_size_bytes": 451858,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:55:37.537003+00:00",
+      "status": "COMPLETED_EXPANDED"
+    }
+  ]
+}

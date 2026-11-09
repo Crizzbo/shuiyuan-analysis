@@ -23,7 +23,6 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from finance_tools.event_radar_collector import RadarDatabaseManager
 from finance_tools.sotp_event_analyzer import SotpEventAnalyzer
-from finance_tools.supply_chain_ripple_analyzer import SupplyChainRippleAnalyzer
 
 
 def generate_dashboard_html(
@@ -93,30 +92,12 @@ def generate_dashboard_html(
             except Exception as e:
                 pass
 
-    # Phase 2 产业链上下游涟漪效应传导计算
-    ripple_analyzer = SupplyChainRippleAnalyzer(db_path=db_path)
-    topologies = ripple_analyzer.list_topologies()
-    ripple_reports = [r.to_dict() for r in ripple_analyzer.analyze_all_major_events()]
-
-    # 加载密码学防伪收据总账
-    receipts_path = PROJECT_ROOT / "data/ledger/verification_receipts.json"
-    receipts = []
-    if receipts_path.is_file():
-        try:
-            with open(receipts_path, "r", encoding="utf-8") as f:
-                receipts = json.load(f)
-        except Exception:
-            receipts = []
-
     # 序列化为前端 JavaScript 安全的 JSON
     events_json = json.dumps(events, ensure_ascii=False)
     cycles_json = json.dumps(cycles, ensure_ascii=False)
     stats_json = json.dumps(stats, ensure_ascii=False)
     sotp_profiles_json = json.dumps(sotp_profiles, ensure_ascii=False)
     sotp_impacts_json = json.dumps(sotp_impacts, ensure_ascii=False)
-    receipts_json = json.dumps(receipts, ensure_ascii=False)
-    topologies_json = json.dumps(topologies, ensure_ascii=False)
-    ripple_reports_json = json.dumps(ripple_reports, ensure_ascii=False)
 
     html_content = f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -334,141 +315,6 @@ body {{
   box-shadow: 0 0 0 2px var(--success-bg);
 }}
 
-@keyframes pulse-dot {{
-  0% {{ transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }}
-  70% {{ transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }}
-  100% {{ transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }}
-}}
-
-.dot.pulsing {{
-  background: var(--success);
-  animation: pulse-dot 2s infinite;
-}}
-
-.dot.offline {{
-  background: var(--text-muted);
-  box-shadow: none;
-}}
-
-/* SOTP 突发事件因果拓扑图组件 */
-.topology-wrapper {{
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
-  border-radius: 10px;
-  padding: 16px;
-  margin-top: 16px;
-  margin-bottom: 20px;
-}}
-.topology-container {{
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}}
-@media (min-width: 900px) {{
-  .topology-container {{
-    display: grid;
-    grid-template-columns: 280px 32px 1fr 32px 260px;
-    align-items: center;
-  }}
-}}
-.topology-arrow {{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent);
-  font-size: 20px;
-  font-weight: 700;
-  opacity: 0.85;
-}}
-.topology-node {{
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 8px;
-  padding: 12px 14px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}}
-.topology-node.active-event {{
-  border-left: 4px solid var(--p1-border);
-}}
-.topology-node.segments-cluster {{
-  border-left: 4px solid var(--accent);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}}
-.topology-node.outcome-node {{
-  border-left: 4px solid var(--warning);
-}}
-.topology-node-header {{
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}}
-.topology-node-title {{
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.4;
-}}
-.topology-segment-item {{
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
-  border-radius: 6px;
-  padding: 8px 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.78rem;
-}}
-.topology-segment-item.exposed {{
-  border-color: var(--p1-border);
-  background: var(--p1-badge-bg);
-  color: var(--p1-badge-text);
-  font-weight: 600;
-}}
-.topology-badge {{
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 4px;
-}}
-
-/* 法定防伪收据审计账本 */
-.receipt-badge {{
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  background: var(--accent-subtle);
-  color: var(--accent);
-  padding: 2px 6px;
-  border-radius: 4px;
-  border: 1px solid var(--accent);
-}}
-.receipt-hash {{
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  background: var(--bg-subtle);
-  padding: 2px 5px;
-  border-radius: 3px;
-}}
-.circuit-breaker-lifted {{
-  background: var(--success-bg);
-  color: var(--success);
-  border: 1px solid var(--success);
-  font-size: 0.72rem;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-weight: 600;
-}}
-
 .theme-toggle-btn {{
   background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
@@ -562,73 +408,6 @@ body {{
 .section-card.sotp-console-card {{
   border-left: 4px solid #2563eb;
   background: linear-gradient(to bottom, var(--bg-surface), var(--bg-subtle) 95%);
-}}
-
-.section-card.ripple-console-card {{
-  border-left: 4px solid #10b981;
-  background: linear-gradient(to bottom, var(--bg-surface), var(--bg-subtle) 95%);
-}}
-
-.ripple-node-card {{
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 8px;
-  padding: 12px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-}}
-
-.ripple-node-upstream {{
-  border-left: 3px solid #8b5cf6;
-}}
-
-.ripple-node-hub {{
-  border-left: 3px solid #f59e0b;
-}}
-
-.ripple-node-downstream {{
-  border-left: 3px solid #06b6d4;
-}}
-
-.vuln-badge {{
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 7px;
-  border-radius: 4px;
-  font-size: 0.72rem;
-  font-weight: 700;
-}}
-
-.vuln-正向受益 {{
-  background: #dcfce7;
-  color: #15803d;
-  border: 1px solid #86efac;
-}}
-
-.vuln-稳健防御 {{
-  background: #ecfdf5;
-  color: #047857;
-  border: 1px solid #a7f3d0;
-}}
-
-.vuln-中度承压 {{
-  background: #fef9c3;
-  color: #854d0e;
-  border: 1px solid #fde047;
-}}
-
-.vuln-高度承压 {{
-  background: #ffedd5;
-  color: #9a3412;
-  border: 1px solid #fed7aa;
-}}
-
-.vuln-极高脆弱 {{
-  background: #fee2e2;
-  color: #991b1b;
-  border: 1px solid #fca5a5;
 }}
 
 .section-header {{
@@ -1517,12 +1296,9 @@ body {{
       </div>
     </div>
     <div class="header-status-capsules">
-      <div class="capsule" id="liveStreamCapsule">
-        <span class="dot" id="liveStreamDot"></span>
-        <span id="liveStreamText">推流探针待机</span>
-      </div>
       <div class="capsule">
-        <span>⚖️ 法定收据: <strong id="headerReceiptsCount">{len(receipts)}</strong> 份</span>
+        <span class="dot"></span>
+        <span>探针: Google DNS (8.8.8.8:53) 1.15ms</span>
       </div>
       <div class="capsule">
         <span>时段: 美股盘前 (Pre-Market 5m)</span>
@@ -1623,21 +1399,6 @@ body {{
       </div>
     </div>
 
-    <!-- 突发事件多业务分部因果拓扑链路图 -->
-    <div class="topology-wrapper">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-        <h3 style="margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 6px;">
-          <span>🕸️ 突发事件多业务分部因果拓扑链路 (Causal Chain Topology)</span>
-        </h3>
-        <span style="font-size: 0.75rem; color: var(--text-muted);">
-          微观物理事件源 ➔ 各业务分部因果暴露 ➔ DIO库存与转嫁权双防线 ➔ 财务损益与买方直觉
-        </span>
-      </div>
-      <div id="sotpTopologyContainer" class="topology-container">
-        <!-- 由 JavaScript 动态渲染拓扑节点 -->
-      </div>
-    </div>
-
     <!-- 企业级整体财务冲击与买方决策卡 -->
     <div class="sotp-summary-card" id="sotpSummaryCard">
       <!-- 动态渲染 -->
@@ -1669,74 +1430,6 @@ body {{
             </tr>
           </thead>
           <tbody id="sotpSegmentTbody">
-            <!-- 动态渲染 -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================
-       【方向 B 核心】产业链上下游涟漪效应传导矩阵 (Supply Chain Ripple Effect)
-       ======================================================== -->
-  <section class="section-card ripple-console-card">
-    <div class="section-header">
-      <h2 class="section-title">
-        <span>🔗 产业链上下游涟漪效应传导矩阵</span>
-        <span class="badge-count" style="background: #10b981; color: #ffffff;">买方横向穿透</span>
-      </h2>
-      <div style="font-size: 0.8rem; color: var(--text-muted);">
-        穿透“上游原材料与关键设备 ➔ 核心制造中枢 ➔ 下游大客户终端”全链因果 · 存货周转天数 (DIO) 吸收 · 定价转嫁权 (PT) 冲销
-      </div>
-    </div>
-
-    <!-- 交互控制条：产业链选择与突发事件联动 -->
-    <div class="sotp-controls-bar">
-      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-        <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted);">战略产业链:</span>
-        <div id="rippleTopologyButtons" style="display: flex; gap: 6px; flex-wrap: wrap;">
-          <!-- 动态渲染产业链拓扑切换按钮 -->
-        </div>
-      </div>
-
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted);">驱动事件:</span>
-        <select id="rippleEventSelector" class="sotp-event-select" onchange="onRippleEventChange(this.value)">
-          <!-- 动态填充事件列表 -->
-        </select>
-      </div>
-    </div>
-
-    <!-- 产业链全息涟漪受损与买方评级大卡 -->
-    <div id="rippleChainSummaryCard" class="sotp-summary-card">
-      <!-- 动态渲染 -->
-    </div>
-
-    <!-- 产业链拓扑因果受损矩阵表 -->
-    <div>
-      <div style="margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
-        <h3 style="margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-primary);">
-          🕸️ 产业链上下游各节点因果受损与防御明细
-        </h3>
-        <span style="font-size: 0.75rem; color: var(--text-muted);">
-          未覆盖敞口天数 = max(0, 物理断供天数 - DIO) · 利润损益严格遵循有限责任防御
-        </span>
-      </div>
-      <div class="table-responsive">
-        <table class="event-table" id="rippleNodeTable">
-          <thead>
-            <tr>
-              <th>生态位</th>
-              <th>实体名称与代码</th>
-              <th>存货缓冲 (DIO)</th>
-              <th>未覆盖敞口</th>
-              <th>定价转嫁权 (PT)</th>
-              <th>营业利润冲击 (ΔEBIT)</th>
-              <th>买方评级</th>
-              <th>商业逻辑与因果推演</th>
-            </tr>
-          </thead>
-          <tbody id="rippleNodeTbody">
             <!-- 动态渲染 -->
           </tbody>
         </table>
@@ -1837,41 +1530,6 @@ body {{
     </div>
   </section>
 
-  <!-- 官方信源法定鉴真与传闻熔断解除收据账本 -->
-  <section class="section-card">
-    <div class="section-header">
-      <h2 class="section-title">
-        <span>⚖️ 官方信源法定鉴真与传闻熔断解除收据账本 (verification_receipts)</span>
-        <span class="badge-count" id="receiptsBadgeCount">{len(receipts)} 份已核验</span>
-      </h2>
-      <div style="font-size: 0.8rem; color: var(--text-muted);">
-        遵循《2026-10-11 最新数据来源策略》· SHA-256 密码学防伪指纹 · 官方公报平账 · 熔断解除可审计留痕
-      </div>
-    </div>
-    <div class="table-responsive">
-      <table class="event-table" id="receiptsTable">
-        <thead>
-          <tr>
-            <th>收据流水号</th>
-            <th>关联事件 ID</th>
-            <th>事件概要</th>
-            <th>状态跃迁</th>
-            <th>信源提级</th>
-            <th>本地证据文件</th>
-            <th>SHA-256 密码学指纹</th>
-            <th>核验时间戳 (UTC)</th>
-          </tr>
-        </thead>
-        <tbody id="receiptsTableBody">
-          <!-- 动态渲染 -->
-        </tbody>
-      </table>
-      <div id="receiptsEmptyMessage" class="empty-state" style="display: none;">
-        暂未生成官方鉴真收据。在 inbox 投放公报或运行 run_evidence_verification.py 即可自动验签并解除传闻熔断。
-      </div>
-    </div>
-  </section>
-
   <!-- 定时巡检时序与看门狗审计日志 -->
   <section class="section-card cycle-card">
     <div class="section-header">
@@ -1915,9 +1573,6 @@ const RAW_CYCLES = {cycles_json};
 const RAW_STATS = {stats_json};
 const SOTP_PROFILES = {sotp_profiles_json};
 const SOTP_IMPACTS = {sotp_impacts_json};
-let RAW_RECEIPTS = {receipts_json};
-const RAW_TOPOLOGIES = {topologies_json};
-const RAW_RIPPLE_REPORTS = {ripple_reports_json};
 
 let currentSeverityFilter = "ALL";
 let currentCategoryFilter = "ALL";
@@ -2223,290 +1878,6 @@ function renderSotpConsole() {{
       `;
     }}).join("");
   }}
-
-  // 联动渲染 SOTP 微观因果链路拓扑图
-  renderTopologyGraph(selectedSotpEventId, selectedSotpTicker);
-}}
-
-// 渲染 SOTP 微观因果链路拓扑图
-function renderTopologyGraph(eventId, ticker) {{
-  const container = document.getElementById("sotpTopologyContainer");
-  if (!container) return;
-
-  const eventObj = RAW_EVENTS.find(e => e.event_id === eventId);
-  const profile = SOTP_PROFILES[ticker];
-  const impactData = (SOTP_IMPACTS[eventId] && SOTP_IMPACTS[eventId][ticker]) || null;
-
-  if (!eventObj || !profile) {{
-    container.innerHTML = '<div class="empty-state">暂无因果拓扑数据</div>';
-    return;
-  }}
-
-  const isRumor = eventObj.verification_status === "Unverified_Rumor";
-  const sevPill = `<span class="severity-pill ${{eventObj.severity_level}}">${{eventObj.severity_level}}</span>`;
-  const credBadge = renderCredibilityBadge(eventObj);
-
-  // 1. 突发事件源节点
-  const eventNodeHtml = `
-    <div class="topology-node active-event">
-      <div class="topology-node-header">
-        <span>突发物理事件源</span>
-        <span>${{sevPill}}</span>
-      </div>
-      <div class="topology-node-title">${{eventObj.title}}</div>
-      <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">
-        编号: ${{eventObj.event_id}} | 信源: ${{eventObj.source_name}}
-      </div>
-      <div style="font-size: 0.78rem; color: var(--text-secondary); background: var(--bg-subtle); padding: 6px 8px; border-radius: 4px; line-height: 1.4;">
-        ${{eventObj.micro_physical_impact || "微观物理事实提取中..."}}
-      </div>
-      <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
-        ${{credBadge}}
-      </div>
-    </div>
-  `;
-
-  // 2. 业务分部暴露群
-  const segmentsHtml = profile.segments.map(seg => {{
-    const segImpact = impactData && impactData.segment_impacts ? impactData.segment_impacts.find(s => s.segment_id === seg.segment_id) : null;
-    const isExposed = segImpact && segImpact.exposure_score > 0.05;
-    const weightPct = (seg.revenue_weight * 100).toFixed(0);
-    const dio = seg.inventory_buffer_days;
-    const pt = (seg.cost_pass_through_power * 100).toFixed(0);
-
-    return `
-      <div class="topology-segment-item ${{isExposed ? 'exposed' : ''}}">
-        <div>
-          <span style="font-weight: 600;">${{seg.name_zh}}</span>
-          <span style="font-size: 0.7rem; opacity: 0.8; margin-left: 4px;">(${{weightPct}}% 权重)</span>
-        </div>
-        <div style="font-family: var(--font-mono); font-size: 0.72rem;">
-          ${{isExposed ? `暴露度 ${{(segImpact.exposure_score * 100).toFixed(0)}}% | DIO ${{dio}}天 | 转嫁权 ${{pt}}%` : '未波及 (安全隔离)'}}
-        </div>
-      </div>
-    `;
-  }}).join("");
-
-  const segmentsNodeHtml = `
-    <div class="topology-node segments-cluster">
-      <div class="topology-node-header">
-        <span>${{profile.company_name}} (${{ticker}}) 业务分部暴露</span>
-        <span>${{profile.segments.length}} 大核心主营</span>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 6px;">
-        ${{segmentsHtml}}
-      </div>
-    </div>
-  `;
-
-  // 3. 财务与决策终点
-  let outcomeHtml = "";
-  if (isRumor) {{
-    outcomeHtml = `
-      <div class="topology-node outcome-node" style="border-left-color: #ef4444; background: var(--p0-badge-bg);">
-        <div class="topology-node-header" style="color: #991b1b;">
-          <span>传闻熔断门禁已锁止</span>
-          <span>🛑 拦截</span>
-        </div>
-        <div style="font-size: 0.82rem; font-weight: 700; color: #991b1b;">
-          未核实小道快讯，前置阻断调仓与估值下调
-        </div>
-        <div style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">
-          等待官方公报/8-K原文入库并通过 SHA-256 验签后自动解封重算。
-        </div>
-      </div>
-    `;
-  }} else if (impactData) {{
-    const ebitVal = impactData.total_operating_income_impact;
-    const epsVal = impactData.total_eps_impact;
-    const isPos = ebitVal > 0;
-    const isZero = Math.abs(ebitVal) < 0.01;
-    const ebitColor = isZero ? 'var(--text-muted)' : (isPos ? 'var(--success)' : '#ef4444');
-
-    outcomeHtml = `
-      <div class="topology-node outcome-node">
-        <div class="topology-node-header">
-          <span>最终因果落地与决策</span>
-          <span>${{impactData.recommended_action.substring(0, 15)}}</span>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 4px;">
-          <div style="font-size: 0.8rem; color: var(--text-muted);">
-            营业利润净冲击 (ΔEBIT):
-            <strong style="color: ${{ebitColor}}; font-size: 0.95rem;">${{isPos ? '+' : ''}}${{ebitVal.toFixed(2)}} M$</strong>
-          </div>
-          <div style="font-size: 0.8rem; color: var(--text-muted);">
-            每股收益冲击 (ΔEPS):
-            <strong style="color: ${{ebitColor}}; font-size: 0.95rem;">${{isPos ? '+' : ''}}${{epsVal.toFixed(4)}} $</strong>
-          </div>
-          <div style="font-size: 0.8rem; color: var(--text-muted);">
-            DCF 靶心变动:
-            <strong style="color: var(--text-primary); font-size: 0.88rem;">${{(impactData.valuation_target_discount_pct * 100).toFixed(2)}}%</strong>
-          </div>
-        </div>
-        <div style="margin-top: 6px; font-size: 0.75rem; font-weight: 600; padding: 4px 8px; border-radius: 4px; background: var(--bg-subtle);">
-          建议: ${{impactData.recommended_action}}
-        </div>
-      </div>
-    `;
-  }} else {{
-    outcomeHtml = '<div class="topology-node outcome-node"><div class="empty-state">无冲击</div></div>';
-  }}
-
-  container.innerHTML = `
-    ${{eventNodeHtml}}
-    <div class="topology-arrow">➔</div>
-    ${{segmentsNodeHtml}}
-    <div class="topology-arrow">➔</div>
-    ${{outcomeHtml}}
-  `;
-}}
-
-// ========================================================
-// 产业链上下游涟漪效应传导矩阵 (Supply Chain Ripple Effect)
-// ========================================================
-let selectedRippleTopologyId = RAW_TOPOLOGIES.length > 0 ? RAW_TOPOLOGIES[0].topology_id : "";
-let selectedRippleEventId = "";
-
-function initRippleConsole() {{
-  const btnContainer = document.getElementById("rippleTopologyButtons");
-  const eventSelect = document.getElementById("rippleEventSelector");
-  if (!btnContainer || !eventSelect) return;
-
-  // 1. 渲染产业链拓扑切换按钮
-  btnContainer.innerHTML = RAW_TOPOLOGIES.map((topo, idx) => {{
-    const isActive = topo.topology_id === selectedRippleTopologyId;
-    return `
-      <button class="ticker-btn ${{isActive ? 'active' : ''}}" onclick="selectRippleTopology('${{topo.topology_id}}', this)">
-        <span>${{topo.name_zh.substring(0, 14)}}...</span>
-        <span style="font-size: 0.7rem; opacity: 0.8;">中枢: ${{topo.core_hub}}</span>
-      </button>
-    `;
-  }}).join("");
-
-  // 2. 渲染关联事件下拉列表
-  const candidateEvents = RAW_RIPPLE_REPORTS.length > 0
-    ? RAW_RIPPLE_REPORTS.map(r => ({{ event_id: r.event_id, title: r.event_title }}))
-    : RAW_EVENTS.filter(e => e.severity_level === "P0" || e.severity_level === "P1").map(e => ({{ event_id: e.event_id, title: e.title }}));
-
-  if (candidateEvents.length > 0) {{
-    eventSelect.innerHTML = candidateEvents.map(evt => `
-      <option value="${{evt.event_id}}">
-        [${{evt.event_id}}] ${{evt.title.substring(0, 32)}}...
-      </option>
-    `).join("");
-    selectedRippleEventId = candidateEvents[0].event_id;
-    eventSelect.value = selectedRippleEventId;
-  }}
-
-  renderRippleConsole();
-}}
-
-function selectRippleTopology(topologyId, btn) {{
-  selectedRippleTopologyId = topologyId;
-  document.querySelectorAll("#rippleTopologyButtons .ticker-btn").forEach(b => b.classList.remove("active"));
-  if (btn) btn.classList.add("active");
-  renderRippleConsole();
-}}
-
-function onRippleEventChange(eventId) {{
-  selectedRippleEventId = eventId;
-  renderRippleConsole();
-}}
-
-function renderRippleConsole() {{
-  const summaryContainer = document.getElementById("rippleChainSummaryCard");
-  const tbody = document.getElementById("rippleNodeTbody");
-  if (!summaryContainer || !tbody) return;
-
-  // 查找匹配的报告
-  let report = RAW_RIPPLE_REPORTS.find(r => r.event_id === selectedRippleEventId && r.topology_id === selectedRippleTopologyId);
-  if (!report) {{
-    report = RAW_RIPPLE_REPORTS.find(r => r.topology_id === selectedRippleTopologyId) || RAW_RIPPLE_REPORTS[0];
-  }}
-
-  if (!report) {{
-    summaryContainer.innerHTML = '<div class="empty-state">当前未发现匹配的产业链涟漪传导数据</div>';
-    tbody.innerHTML = '<tr><td colspan="8" class="empty-state">暂无产业链节点冲击明细</td></tr>';
-    return;
-  }}
-
-  // 1. 渲染全链摘要大卡
-  const vulnClass = `vuln-${{report.chain_vulnerability_level || '稳健防御'}}`;
-  summaryContainer.innerHTML = `
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
-      <div>
-        <div style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono);">
-          拓扑编号: ${{report.topology_id}} | 触发事件: ${{report.event_id}}
-        </div>
-        <div style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-top: 2px;">
-          ${{report.topology_name_zh}}
-        </div>
-        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">
-          ⚡ 物理断供源: <strong>${{report.event_title}}</strong> (预估影响周期: ${{report.disruption_duration_days}} 天)
-        </div>
-      </div>
-      <div>
-        <span class="vuln-badge ${{vulnClass}}">
-          ${{report.chain_vulnerability_level}}
-        </span>
-      </div>
-    </div>
-    <div class="sotp-narrative-box" style="margin-top: 10px; font-size: 0.82rem; line-height: 1.5;">
-      ${{report.chain_summary_zh.replace(/\\n/g, '<br/>')}}
-    </div>
-  `;
-
-  // 2. 渲染各节点明细表
-  const nodes = report.transmission_matrix || [];
-  if (nodes.length === 0) {{
-    tbody.innerHTML = '<tr><td colspan="8" class="empty-state">暂无节点明细</td></tr>';
-    return;
-  }}
-
-  tbody.innerHTML = nodes.map(n => {{
-    let roleName = "核心中枢";
-    if (n.node_role === "upstream") {{
-      roleName = "上游供应";
-    }} else if (n.node_role === "downstream") {{
-      roleName = "下游大客户";
-    }}
-
-    const loss = n.ebit_impact_pct || 0.0;
-    const isLoss = loss < 0;
-    const isZero = Math.abs(loss) < 0.01;
-    const lossColor = isZero ? 'var(--text-muted)' : (isLoss ? '#ef4444' : 'var(--success)');
-    const tickerStr = n.ticker ? `<span class="mono-cell" style="font-weight: 700; margin-left: 4px;">(${{n.ticker}})</span>` : '';
-    const nodeVulnClass = `vuln-${{n.vulnerability_level || '稳健防御'}}`;
-
-    return `
-      <tr>
-        <td>
-          <span style="font-size: 0.75rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: var(--bg-subtle);">
-            ${{roleName}}
-          </span>
-        </td>
-        <td>
-          <span style="font-weight: 600; color: var(--text-primary);">${{n.name_zh}}</span>
-          ${{tickerStr}}
-        </td>
-        <td class="mono-cell">${{n.buffer_dio_days.toFixed(0)}} 天</td>
-        <td class="mono-cell" style="color: ${{n.uncovered_exposure_days > 0 ? 'var(--p0-badge-text)' : 'inherit'}}; font-weight: 600;">
-          ${{n.uncovered_exposure_days.toFixed(0)}} 天
-        </td>
-        <td class="mono-cell">${{(n.pricing_power_pt * 100).toFixed(0)}}%</td>
-        <td class="mono-cell" style="color: ${{lossColor}}; font-weight: 700; font-size: 0.85rem;">
-          ${{loss > 0 ? '+' : ''}}${{loss.toFixed(2)}}%
-        </td>
-        <td>
-          <span class="vuln-badge ${{nodeVulnClass}}">${{n.vulnerability_level}}</span>
-        </td>
-        <td style="font-size: 0.78rem; color: var(--text-secondary); max-width: 320px; line-height: 1.4;">
-          <strong>${{n.buyer_verdict_zh}}</strong><br/>
-          ${{n.rationale_zh}}
-        </td>
-      </tr>
-    `;
-  }}).join("");
 }}
 
 // 渲染 SQLite 事件表格
@@ -2710,99 +2081,12 @@ function toggleTheme() {{
   document.getElementById("themeLabel").innerText = nextTheme === "dark" ? "深色模式" : "浅色模式";
 }}
 
-// 渲染法定鉴真防伪收据审计账本
-function renderReceiptsTable() {{
-  const tbody = document.getElementById("receiptsTableBody");
-  const emptyMsg = document.getElementById("receiptsEmptyMessage");
-  const badgeCount = document.getElementById("receiptsBadgeCount");
-  const headerCount = document.getElementById("headerReceiptsCount");
-
-  if (badgeCount) badgeCount.innerText = `${{RAW_RECEIPTS.length}} 份已核验`;
-  if (headerCount) headerCount.innerText = RAW_RECEIPTS.length;
-
-  if (!RAW_RECEIPTS || RAW_RECEIPTS.length === 0) {{
-    if (tbody) tbody.innerHTML = "";
-    if (emptyMsg) emptyMsg.style.display = "block";
-    return;
-  }}
-  if (emptyMsg) emptyMsg.style.display = "none";
-
-  if (tbody) {{
-    tbody.innerHTML = RAW_RECEIPTS.map(r => `
-      <tr>
-        <td class="mono-cell"><span class="receipt-badge">${{r.receipt_id || "-"}}</span></td>
-        <td class="mono-cell" style="font-weight: 600;">${{r.event_id || "-"}}</td>
-        <td style="max-width: 240px; font-weight: 500;">${{r.title || "-"}}</td>
-        <td>
-          <span style="font-size: 0.72rem; color: var(--text-muted);">${{r.previous_status || "-"}}</span>
-          ➔
-          <span class="circuit-breaker-lifted">已解封 (${{r.new_status || "Confirmed_Fact"}})</span>
-        </td>
-        <td>
-          <span class="cred-badge cred-Tier1_Official_Regulatory">🏛️ ${{r.new_credibility || "Tier1"}}</span>
-        </td>
-        <td class="mono-cell" style="font-size: 0.72rem; max-width: 200px; word-break: break-all;">
-          ${{r.evidence_path || "-"}} (${{r.file_size_bytes || 0}} B)
-        </td>
-        <td class="mono-cell">
-          <span class="receipt-hash" title="${{r.evidence_sha256 || ''}}">
-            ${{(r.evidence_sha256 || '').substring(0, 16)}}...
-          </span>
-        </td>
-        <td class="mono-cell" style="font-size: 0.72rem;">${{formatTime(r.verified_at)}}</td>
-      </tr>
-    `).join("");
-  }}
-}}
-
-// 交易室动态推流探针连接器 (Live Stream Connector)
-function initLiveStreamConnector() {{
-  const dot = document.getElementById("liveStreamDot");
-  const text = document.getElementById("liveStreamText");
-
-  async function probeStream() {{
-    try {{
-      const resp = await fetch("/api/stream", {{ cache: "no-store" }});
-      if (!resp.ok) throw new Error("HTTP " + resp.status);
-      const data = await resp.json();
-
-      if (dot) {{
-        dot.classList.add("pulsing");
-        dot.classList.remove("offline");
-      }}
-      if (text) {{
-        text.innerText = "🟢 交易室实时推流中";
-      }}
-
-      // 若远端收据数量或事件数量发生变动，动态重载更新
-      if (data.receipts && data.receipts.length !== RAW_RECEIPTS.length) {{
-        RAW_RECEIPTS = data.receipts;
-        renderReceiptsTable();
-      }}
-    }} catch (e) {{
-      if (dot) {{
-        dot.classList.remove("pulsing");
-        dot.classList.add("offline");
-      }}
-      if (text) {{
-        text.innerText = "推流探针待机";
-      }}
-    }}
-  }}
-
-  probeStream();
-  setInterval(probeStream, 8000);
-}}
-
 // 页面初始化
 document.addEventListener("DOMContentLoaded", () => {{
   renderCriticalAlerts();
   initSotpSelector();
-  initRippleConsole();
   renderEventTable();
   renderCycleTable();
-  renderReceiptsTable();
-  initLiveStreamConnector();
 }});
 </script>
 </body>

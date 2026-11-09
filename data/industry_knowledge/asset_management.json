@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "asset_management",
+    "industry_name_zh": "资产管理与资本市场服务",
+    "sector_id": "financials",
+    "sector_name_zh": "金融",
+    "macro_sector_id": "FIN_INS",
+    "macro_sector_name_zh": "银行信贷、保险保障、证券资管与房地产金融",
+    "description_zh": "涵盖全球公募资管巨头、私募另类投资机构、跨国投资银行及证券交易所基础设施企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.45,
+    "typical_markup_ratio": 1.22,
+    "capex_intensity": "中等偏低",
+    "operating_leverage_exposure": "极高经营杠杆",
+    "typical_gross_margin_range": [0.35, 0.65]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 0.0,
+    "dio_warning_days": 0.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.15,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "全球主权财富基金、主权养老金及大型捐赠基金长期资本配置委托配额",
+      "稀缺的高水准投资组合经理 (Portfolio Manager) 阿尔法超额收益获取能力",
+      "全球主要金融监管部门资产管理、投行与衍生品牌照准入与净资本监管合规"
+    ],
+    "downstream_profile": "全球跨国机构投资者、家族办公室高净值财富管理客群及互联网零售基金定投散户",
+    "pricing_power_verdict": "拥有顶尖声誉的另类私募股权与私人信贷机构享有高昂管理费与超额业绩分成绝对溢价；同质化主动权益公募基金面临被动 ETF 极致低费率的价格战挤压",
+    "channel_inversion_sensitivity": "长期净资金流向 (Long-Term Net Flows) 与资产管理规模 (AUM) 是资管企业管理费收入增减最核心的先行温度计"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "全球资本市场牛市共振推升管理总规模 (AUM) 创历史新高，长线增量资金单季度净申购规模呈现爆发式增长",
+      "非标私人信贷 (Private Credit) 与基建基金等高附加值另类资产募资顺利，带动高比例业绩报酬分成 (Carried Interest) 集中释放",
+      "资管科技底层系统 (如风险管理风控系统) 订阅制年经常性收入 (ARR) 保持高速增长构筑抗周期现金流底座"
+    ],
+    "leading_bear_defenses": [
+      "全球金融资产遭遇跨资产系统性暴跌致使在管资产大幅缩水，恐慌性集中赎回迫使管理费收入基数断崖式下挫",
+      "底层投资组合非标资产 (如高杠杆商业地产、重组违约债) 爆发实质性暴雷，公允价值大幅减值导致业绩报酬归零",
+      "全球被动宽基 ETF 费率内卷战持续加剧，倒逼行业综合平均管理费率中枢被迫下调侵蚀营业利润率"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度总资产管理规模 (AUM) 与长期净资金流入 (Net Inflows) 表现",
+      "资管业务平均基础管理费率 (Base Fee Margin) 与超额业绩提成收益",
+      "跨国投行业务单季度新股 IPO 承销规模与大型企业并购财务顾问收入",
+      "另类资管待投资未调用资金 (Dry Powder) 储备与新基金完成募集规模"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "为粉饰账面投资业绩或防范客户大额赎回，对未上市底层非标股权与信贷资产主观拒绝进行审慎公允价值下调减值",
+      "将产生重大浮亏的种子基金与跟投劣后级份额通过表外特殊目的载体 (SPV) 隐匿逃避合并报表确认",
+      "在未满足全部门槛收益率与回拨保护条款约束前，激进提前确认私募另类业绩报酬收入 (Carried Interest)"
+    ],
+    "channel_and_revenue_checks": [
+      "业绩报酬回拨保护机制 (Clawback Provision) 下可能出现的超额收益返还义务预计负债充分性审查",
+      "支付给银行与三方财富代销渠道的尾随客户维护佣金冲减营业收入的会计处理审验"
+    ]
+  }
+}

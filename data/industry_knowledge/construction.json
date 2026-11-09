@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "construction",
+    "industry_name_zh": "建筑工程总承包与重大基础设施",
+    "sector_id": "industrials",
+    "sector_name_zh": "工业",
+    "macro_sector_id": "CONST_RE",
+    "macro_sector_name_zh": "建筑工程、城市基础设施与不动产",
+    "description_zh": "涵盖跨国基础设施 EPC 工程总承包、重型工业建筑、轨道交通隧道建造及特许经营基础设施企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.88,
+    "typical_markup_ratio": 1.04,
+    "capex_intensity": "中等偏低",
+    "operating_leverage_exposure": "中等经营杠杆",
+    "typical_gross_margin_range": [0.08, 0.15]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 35.0,
+    "dio_warning_days": 70.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.25,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "建筑钢材、商品混凝土、高标号特种水泥及改性沥青等大宗建材价格波动",
+      "超大直径泥水平衡盾构机、重型深基础桩工机械等特种施工成套装备",
+      "具备一级建造师与特种作业资质的专业工程技术骨干与分包劳务施工力量"
+    ],
+    "downstream_profile": "主权国家交通基建管理部门、地方政府基础设施平台、大型能源化工集团及商用不动产投资方",
+    "pricing_power_verdict": "拥有超级复杂工程 (如跨海大桥、特长深埋隧道、大型核电土建) 顶级总包资质的龙头在重大工程招投标中享有较强议价权；通用民用房建竞争白热化利润微薄",
+    "channel_inversion_sensitivity": "在手未完工合同储备规模 (Order Backlog) 与订单出货比 (Book-to-Bill Ratio) 是建筑企业未来业绩能见度的核心先行指针"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "国家级重大基建投资规划集中启动，高毛利大型水利交通与先进工业厂房新签订单呈现爆发式增长",
+      "采用成本加成 (Cost-Plus) 与材料调价机制保护的优质工程合同占比提升，有效平抑建材价格波动风险",
+      "特许经营收费高速公路与清洁能源基础设施资产并网运营，高确定性运营期现金流回流优化综合盈利结构"
+    ],
+    "leading_bear_defenses": [
+      "大型固定总价 (Lump-Sum) 海外复杂工程发生重大地质异常或严重拖期，成本超支导致项目发生大额合同亏损",
+      "主要业主方遭遇资金流动性紧缩导致工程进度款拖延支付，沉淀庞大合同资产并引发大额信用减值计提",
+      "钢材水泥等大宗建材与劳动力成本在施工高峰期超预期单边暴涨，固定包干项目无法调价导致毛利严重受损"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度新签工程承包合同总金额 (New Contract Awards) 同比增速",
+      "在手未完工订单储备总额 (Total Backlog) 对未来年度营业收入的覆盖倍数",
+      "工程结算款实际现金回款率与经营活动净现金流走势",
+      "国家重大基础设施专项债发行与重大工程实物工作量落地节奏"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "采用完工百分比法 (Percentage-of-Completion) 确认收入时主观恶意低估工程预计总成本以虚增当期完工进度与利润",
+      "已完工未结算款 (合同资产 Contract Assets) 长期恶性攀升，实质为工程质量存在重大争议导致业主拒绝计量签认",
+      "推迟对已明显陷入亏损泥潭的重大固定总价在建项目足额计提预计合同损失准备 (Onerous Contract Provision)"
+    ],
+    "channel_and_revenue_checks": [
+      "向专业劳务分包与工程外包服务商支付工程款的实际履约单据真实性穿透审查",
+      "特许经营基础设施 (BOT/PPP) 项目金融资产与无形资产会计核算模式划分审验"
+    ]
+  }
+}

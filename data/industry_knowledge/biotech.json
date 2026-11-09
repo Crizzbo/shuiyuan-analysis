@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "biotech",
+    "industry_name_zh": "前沿生物医药与创新药",
+    "sector_id": "health_care",
+    "sector_name_zh": "医疗保健",
+    "macro_sector_id": "HEALTH_BIO",
+    "macro_sector_name_zh": "现代生物医药、医疗器械与健康科技",
+    "description_zh": "涵盖小分子靶向药、单抗双抗大分子生物药、细胞基因治疗 (CGT)、GLP-1 代谢及 ADC 抗体偶联药物研发企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.15,
+    "typical_markup_ratio": 1.55,
+    "capex_intensity": "纯轻资产研发",
+    "operating_leverage_exposure": "弱经营杠杆",
+    "typical_gross_margin_range": [0.80, 0.92]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 60.0,
+    "dio_warning_days": 120.0,
+    "rd_capitalization_max_allowed": 0.00,
+    "top_customer_concentration_redline": 0.40,
+    "debt_covenant_buffer_minimum_ratio": 0.30
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "全球顶级合同研发与生产组织 (CRO/CDMO) 临床批件与 GMP 商业化产能排期",
+      "高纯度药用辅料、质粒与病毒载体生物耗材及一次性生物反应器袋供应稳定性",
+      "多中心临床试验医院 (GCP) 患者入组筛选效率与跨国临床试验伦理审批周期"
+    ],
+    "downstream_profile": "全球商业健康险与国家医保官方支付方、大型医院处方医生，受医保准入报销目录谈判政策强监管",
+    "pricing_power_verdict": "突破性临床疗效与核心化合物专利期内享有极高垄断定价权，同质化跟风品种面临集采大幅降价",
+    "channel_inversion_sensitivity": "未商业化研发型企业无传统渠道存货，真实等价指针为现金消耗速度 (Burn Rate) 与二级市场配股折价率"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "核心重磅在研管线关键临床 II/III 期双盲试验数据读出 (Data Readout) 展现优越疗效并达成主要终点",
+      "获得监管机构突破性疗法认定 (BTD) 或优先审评券 (PRV) 批准加速商业化上市准入",
+      "与全球顶级跨国制药巨头 (MNC) 达成数十亿美元全球 License-out 独家对外商业化授权协议"
+    ],
+    "leading_bear_defenses": [
+      "核心临床试验关键终点未达预期或因严重不良反应 (SAE) 遭遇 FDA 临床暂停，管线价值面临断崖归零",
+      "不受限现金跑道逼仄跌破 12 个月且未见内生造血能力，被迫在股价历史低位以巨额折价定增稀释老股东",
+      "同类竞品临床疗效大幅碾压，核心专利保护期届满或面临重大知识产权专利挑战诉讼败诉"
+    ],
+    "core_catalyst_dimensions": [
+      "ASCO, ESMO, ADA 等全球顶级医学学术年会核心临床试验口头报告与最新摘要",
+      "美国 FDA 处方药用户付费法案审评目标决议日 (PDUFA Date)",
+      "季度研发费用现金消耗率与剩余自由流动资金现金跑道 (Cash Runway in Months) 披露",
+      "全球专利局化合物核心专利保护期届满与仿制药入局动态"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "将未经药品监督管理局上市批准的早期临床试验研发支出违规资本化确认为开发支出",
+      "真实可动用受限现金占比过高，扣除质押与受限资金后真实研发跑道已不足 12 个月",
+      "通过向无商业实质的关联方转让早期未获批管线制造一次性偶发收益粉饰主营利润"
+    ],
+    "channel_and_revenue_checks": [
+      "对外授权 License-out 里程碑付款确认条件是否附带严苛退款或后续联合研发返还条款",
+      "临床入组受试者异常脱落率与严重不良反应安全性数据是否在附注中被选择性隐瞒"
+    ]
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-10-12T03:30:00Z",
+  "archive_kind": "manual_browser_visible_excerpt",
+  "not_full_original_document": true,
+  "sources": [
+    {
+      "industry_id": "pharma",
+      "published_date": "2025-02-04",
+      "source_url": "https://investors.pfizer.com/Investors/news-events/News/news-details/2026/Pfizer-Reports-Solid-Full-Year-2025-Results-And-Reaffirms-2026-Guidance/default.aspx",
+      "locator": "Pfizer Inc. Form 10-K for the Fiscal Year Ended December 31, 2024, Item 7 MD&A Selected Product Discussion",
+      "excerpts": [
+        "Pfizer Inc. Form 10-K for the Fiscal Year Ended December 31, 2024, Item 7 Management's Discussion and Analysis of Financial Condition and Results of Operations - Selected Product Discussion",
+        "Eliquis worldwide revenues were $7,366 million for the year ended December 31, 2024, compared to $6,747 million in 2023."
+      ],
+      "observations": [
+        {
+          "component": "pfe_eliquis_worldwide_revenue_fy24",
+          "parent_metric_id": "pharma_driver_1",
+          "name_zh": "辉瑞 Eliquis 全球年度净销售收入",
+          "binding_role": "formula_input",
+          "limitation_zh": "全球 Eliquis 合并净销售额（含联盟分成与直接销售）；未拆分各国家地区单项净销售额",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "raw_value": "7,366",
+          "value": "7366000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2024-01-01",
+          "period_end": "2024-12-31",
+          "period_type": "annual",
+          "scope": "worldwide_eliquis_alliance_and_direct_revenue",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "industry_id": "payments",
+      "published_date": "2024-11-14",
+      "source_url": "https://investor.visa.com/news/news-details/2025/Visa-Fiscal-Fourth-Quarter-and-Full-Year-2025-Financial-Results/default.aspx",
+      "locator": "Visa Inc. Annual Report on Form 10-K for the Fiscal Year Ended September 30, 2024, Item 7 MD&A and Item 8 Financial Statements",
+      "excerpts": [
+        "Visa Inc. Annual Report on Form 10-K for the Fiscal Year Ended September 30, 2024, Item 7 Management's Discussion and Analysis of Financial Condition and Results of Operations - Operational Performance Metrics - Payments Volume",
+        "For the fiscal year ended September 30, 2024, payments volume was $13.2 trillion on a constant-dollar basis.",
+        "Visa Inc. Annual Report on Form 10-K for the Fiscal Year Ended September 30, 2024, Item 8 Financial Statements and Supplementary Data - Consolidated Statements of Operations",
+        "Net revenue was $35,926 million for the fiscal year ended September 30, 2024, compared to $32,653 million for the fiscal year ended September 30, 2023."
+      ],
+      "observations": [
+        {
+          "component": "visa_payments_volume_fy24",
+          "parent_metric_id": "payments_driver_1",
+          "name_zh": "Visa 全财年名义支付处理总额",
+          "binding_role": "formula_input",
+          "limitation_zh": "全球 Visa 品牌卡片及支付形态名义支付处理总额（不含现金提现交易与欧洲双标卡剔除口径）",
+          "raw_unit": "USD_trillion",
+          "unit": "USD",
+          "raw_value": "13.2",
+          "value": "13200000000000",
+          "conversion": "trillion_times_1000000000000",
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "period_type": "annual",
+          "scope": "global_nominal_payments_volume_fy24",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "component": "visa_net_revenue_fy24",
+          "parent_metric_id": "payments_driver_2",
+          "name_zh": "Visa 全财年合并净营业收入",
+          "binding_role": "formula_input",
+          "limitation_zh": "全财年合并净营业收入（含服务、数据处理、国际交易扣除客户激励后的净额）",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "raw_value": "35,926",
+          "value": "35926000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "period_type": "annual",
+          "scope": "consolidated_net_revenue_fy24",
+          "excerpt_indices": [
+            2,
+            3
+          ]
+        }
+      ]
+    }
+  ]
+}

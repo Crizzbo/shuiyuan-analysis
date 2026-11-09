@@ -369,14 +369,16 @@ class GlobalDataFormatAuditor:
             # 1. 正则检索未替换的占位符 (如 {price}, {ticker}, undefined, NaN)
             placeholder_pattern = re.compile(r"\{[a-zA-Z0-9_]+\}|(?:undefined|NaN)\b")
             found_placeholders = placeholder_pattern.findall(content)
-            # 过滤正常 markdown 语法或特定代码块
-            suspicious = [p for p in found_placeholders if p not in ["{ :--- }", "{:---}"]]
+            # 过滤正常 markdown 语法或特定代码块与路径模式
+            suspicious = [p for p in found_placeholders if p not in ["{ :--- }", "{:---}", "{stamp}"]]
             if suspicious:
                 file_issues.append(f"检测到未注入的模板占位符或异常值: {suspicious[:5]}")
 
             # 2. 检索裸美元数字简写 (如出现类似 $204 后面紧跟空格或换行，未保留 .00 精度)
-            # 排除带 B/M 缩写的情况 (如 $204B)
-            naked_dollar_pattern = re.compile(r"\$(?!\d+\.\d{2}(?:B|M)?)(?!\d+\.\d(?:B|M))\d+(?!\.\d)(?![BMbm])")
+            # 排除带 B/M 缩写的情况 (如 $204B) 以及标准千分位金额 (如 $100,000) 或两位美分小数
+            naked_dollar_pattern = re.compile(
+                r"\$(?!\d+\.\d{2}(?:B|M)?)(?!\d+\.\d(?:B|M))(?!\d{1,3}(?:,\d{3})+)\d+(?!\.\d)(?![BMbm])"
+            )
             naked_matches = naked_dollar_pattern.findall(content)
             if naked_matches:
                 file_issues.append(f"检测到疑似未保留小数位的简写金额: {naked_matches[:5]}")

@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This schema was created by staff of the U.S. Securities and Exchange Commission. -->
+<!-- Data and content created by government employees within the scope of their employment -->
+<!-- are not subject to domestic copyright protection. 17 U.S.C. 105. -->
+<xs:schema
+xmlns:link="http://www.xbrl.org/2003/linkbase"
+xmlns:ref="http://www.xbrl.org/2006/ref"
+xmlns:rxp-ref="http://xbrl.sec.gov/rxp-ref/2026"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+targetNamespace="http://xbrl.sec.gov/rxp-ref/2026" attributeFormDefault="unqualified"
+elementFormDefault="qualified"
+xsi:schemaLocation="http://www.xbrl.org/2006/ref http://www.xbrl.org/2006/ref-2006-02-27.xsd">
+<xs:annotation>
+<xs:appinfo>
+<link:linkbase id="lnk">
+<link:referenceLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_TotalPayments" xlink:label="TotalPayments"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.019d" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>9</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="TotalPayments" xlink:to="SECFormSD2.019d" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_Co" xlink:label="Co"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01a5vii" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>a</ref:Subsection>
+<ref:Paragraph>5</ref:Paragraph>
+<ref:Subparagraph>vii</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Co" xlink:to="SECFormSD2.01a5vii" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_Gv" xlink:label="Gv"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Gv" xlink:to="SECFormSD2.01a5vii" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_Pr" xlink:label="Pr"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01a5viii" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>a</ref:Subsection>
+<ref:Paragraph>5</ref:Paragraph>
+<ref:Subparagraph>viii</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Pr" xlink:to="SECFormSD2.01a5viii" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_P" xlink:label="P"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01a5" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>a</ref:Subsection>
+<ref:Paragraph>5</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="P" xlink:to="SECFormSD2.01a5" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_A" xlink:label="A"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="A" xlink:to="SECFormSD2.01a5" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_Cm" xlink:label="Cm"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01instruction2" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>instruction</ref:Subsection>
+<ref:Paragraph>2</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Cm" xlink:to="SECFormSD2.01instruction2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_K" xlink:label="K"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01instruction12" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>instruction</ref:Subsection>
+<ref:Paragraph>12</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="K" xlink:to="SECFormSD2.01instruction12" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_Km" xlink:label="Km"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Km" xlink:to="SECFormSD2.01instruction12" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_Sg" xlink:label="Sg"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01via5" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>a</ref:Subsection>
+<ref:Paragraph>5</ref:Paragraph>
+<ref:Subparagraph>vi</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Sg" xlink:to="SECFormSD2.01via5" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_Bonuses" xlink:label="Bonuses"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01d9iiiE" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>9</ref:Paragraph>
+<ref:Subparagraph>iii</ref:Subparagraph>
+<ref:Clause>E</ref:Clause>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Bonuses" xlink:to="SECFormSD2.01d9iiiE" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_Dividends" xlink:label="Dividends"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01d9iiiF" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>9</ref:Paragraph>
+<ref:Subparagraph>iii</ref:Subparagraph>
+<ref:Clause>F</ref:Clause>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Dividends" xlink:to="SECFormSD2.01d9iiiF" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_Fees" xlink:label="Fees"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01d9iiiC" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>9</ref:Paragraph>
+<ref:Subparagraph>iii</ref:Subparagraph>
+<ref:Clause>C</ref:Clause>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Fees" xlink:to="SECFormSD2.01d9iiiC" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_InfrastructureImprovements" xlink:label="InfrastructureImprovements"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01d9iiiG" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>9</ref:Paragraph>
+<ref:Subparagraph>iii</ref:Subparagraph>
+<ref:Clause>G</ref:Clause>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="InfrastructureImprovements" xlink:to="SECFormSD2.01d9iiiG" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_ProductionEntitlements" xlink:label="ProductionEntitlements"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01d9iiiD" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>9</ref:Paragraph>
+<ref:Subparagraph>iii</ref:Subparagraph>
+<ref:Clause>D</ref:Clause>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="ProductionEntitlements" xlink:to="SECFormSD2.01d9iiiD" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_Royalties" xlink:label="Royalties"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01d9iiiB" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>9</ref:Paragraph>
+<ref:Subparagraph>iii</ref:Subparagraph>
+<ref:Clause>B</ref:Clause>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Royalties" xlink:to="SECFormSD2.01d9iiiB" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_Taxes" xlink:label="Taxes"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01d9iiiA" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>9</ref:Paragraph>
+<ref:Subparagraph>iii</ref:Subparagraph>
+<ref:Clause>A</ref:Clause>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Taxes" xlink:to="SECFormSD2.01d9iiiA" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_M" xlink:label="M"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01a5x" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>a</ref:Subsection>
+<ref:Paragraph>5</ref:Paragraph>
+<ref:Subparagraph>x</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="M" xlink:to="SECFormSD2.01a5x" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_R" xlink:label="R"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01a5ix" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>a</ref:Subsection>
+<ref:Paragraph>5</ref:Paragraph>
+<ref:Subparagraph>ix</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="R" xlink:to="SECFormSD2.01a5ix" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_Sn" xlink:label="Sn"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01a5xi" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>a</ref:Subsection>
+<ref:Paragraph>5</ref:Paragraph>
+<ref:Subparagraph>xi</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="Sn" xlink:to="SECFormSD2.01a5xi" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_CommunityAndSocial" xlink:label="CommunityAndSocial"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01d9iiiH" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>9</ref:Paragraph>
+<ref:Subparagraph>iii</ref:Subparagraph>
+<ref:Clause>H</ref:Clause>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CommunityAndSocial" xlink:to="SECFormSD2.01d9iiiH" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_ProjectAxis" xlink:label="ProjectAxis"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01d10" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>10</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="ProjectAxis" xlink:to="SECFormSD2.01d10" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_ResourceAxis" xlink:label="ResourceAxis"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01instruction5i" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>instruction</ref:Subsection>
+<ref:Paragraph>5</ref:Paragraph>
+<ref:Subparagraph>i</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="ResourceAxis" xlink:to="SECFormSD2.01instruction5i" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_SubnationalJurisdictionsAxis" xlink:label="SubnationalJurisdictionsAxis"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01d10iii" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>10</ref:Paragraph>
+<ref:Subparagraph>iii</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="SubnationalJurisdictionsAxis" xlink:to="SECFormSD2.01d10iii" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_PmtAxis" xlink:label="PmtAxis"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01d9" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>9</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="PmtAxis" xlink:to="SECFormSD2.01d9" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_SegmentAxis" xlink:label="SegmentAxis"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01d1" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>1</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="SegmentAxis" xlink:to="SECFormSD2.01d1" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_AllSegmentsMember" xlink:label="AllSegmentsMember"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="AllSegmentsMember" xlink:to="SECFormSD2.01d1" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_AllGovernmentsMember" xlink:label="AllGovernmentsMember"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01d6" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>6</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="AllGovernmentsMember" xlink:to="SECFormSD2.01d6" priority="10"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01d7" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>7</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="AllGovernmentsMember" xlink:to="SECFormSD2.01d7" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_AllPaymentTypesMember" xlink:label="AllPaymentTypesMember"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="AllPaymentTypesMember" xlink:to="SECFormSD2.01d9" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_AllResourcesMember" xlink:label="AllResourcesMember"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="AllResourcesMember" xlink:to="SECFormSD2.01instruction5i" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_AllProjectsMember" xlink:label="AllProjectsMember"/>
+<link:reference xlink:type="resource" xlink:label="FormSD2.01SECd10" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>d</ref:Subsection>
+<ref:Paragraph>10</ref:Paragraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="AllProjectsMember" xlink:to="FormSD2.01SECd10" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_PaymentsByCategoryTable" xlink:label="PaymentsByCategoryTable"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01a5iii" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>a</ref:Subsection>
+<ref:Paragraph>5</ref:Paragraph>
+<ref:Subparagraph>iii</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="PaymentsByCategoryTable" xlink:to="SECFormSD2.01a5iii" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_PaymentsLineItems" xlink:label="PaymentsLineItems"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="PaymentsLineItems" xlink:to="SECFormSD2.01a5" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_PaymentsDetailAbstract" xlink:label="PaymentsDetailAbstract"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="PaymentsDetailAbstract" xlink:to="SECFormSD2.01a5" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_PaymentsDetailTable" xlink:label="PaymentsDetailTable"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="PaymentsDetailTable" xlink:to="SECFormSD2.01a5" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_PaymentsByProjectTable" xlink:label="PaymentsByProjectTable"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="PaymentsByProjectTable" xlink:to="SECFormSD2.01a5" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_PaymentsByProjectAbstract" xlink:label="PaymentsByProjectAbstract"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="PaymentsByProjectAbstract" xlink:to="SECFormSD2.01a5" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_PaymentsByGovernmentAbstract" xlink:label="PaymentsByGovernmentAbstract"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01a5ii" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>a</ref:Subsection>
+<ref:Paragraph>5</ref:Paragraph>
+<ref:Subparagraph>ii</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="PaymentsByGovernmentAbstract" xlink:to="SECFormSD2.01a5ii" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_PaymentsByGovernmentTable" xlink:label="PaymentsByGovernmentTable"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="PaymentsByGovernmentTable" xlink:to="SECFormSD2.01a5ii" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_PaymentsByCategoryAbstract" xlink:label="PaymentsByCategoryAbstract"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="PaymentsByCategoryAbstract" xlink:to="SECFormSD2.01a5iii" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_CountryAxis" xlink:label="CountryAxis"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01instruction3iii" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>instruction</ref:Subsection>
+<ref:Paragraph>3</ref:Paragraph>
+<ref:Subparagraph>iii</ref:Subparagraph>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="CountryAxis" xlink:to="SECFormSD2.01instruction3iii" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_GovernmentAxis" xlink:label="GovernmentAxis"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="GovernmentAxis" xlink:to="SECFormSD2.01d6" priority="10"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="GovernmentAxis" xlink:to="SECFormSD2.01d7" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_PaymentTypeAxis" xlink:label="PaymentTypeAxis"/>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="PaymentTypeAxis" xlink:to="SECFormSD2.01d9" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="rxp-2026.xsd#rxp_AlternativeReportingRegime" xlink:label="AlternativeReportingRegime"/>
+<link:reference xlink:type="resource" xlink:label="SECFormSD2.01c" xlink:role="http://www.xbrl.org/2003/role/presentationRef">
+<ref:Publisher>SEC</ref:Publisher>
+<ref:Name>Form SD</ref:Name>
+<ref:Section>2.01</ref:Section>
+<ref:Subsection>c</ref:Subsection>
+</link:reference>
+<link:referenceArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-reference" xlink:from="AlternativeReportingRegime" xlink:to="SECFormSD2.01c" priority="10"/>
+</link:referenceLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+</xs:schema>

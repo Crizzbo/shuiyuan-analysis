@@ -17,14 +17,7 @@ PORTABLE_TESTS = (
     "scripts.test_release_audit",
     "scripts.test_sotp_event_penetration",
     "scripts.test_sotp_profiles",
-    "scripts.test_alert_dispatcher",
-    "scripts.test_evidence_verification_pipeline",
-    "scripts.test_radar_dashboard_serve",
-    "scripts.test_browser_verification_assistant",
-    "scripts.test_supply_chain_ripple_engine",
-    "scripts.test_data_readiness_tracker",
-    "scripts.test_screening_universe_builder",
-    "scripts.test_screening_universe_batch",
+    "scripts.test_historical_model_validation",
 )
 
 

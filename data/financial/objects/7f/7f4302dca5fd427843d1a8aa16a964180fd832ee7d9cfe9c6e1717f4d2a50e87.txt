@@ -1,0 +1,124 @@
+SONY GROUP CORPORATION AND CONSOLIDATED SUBSIDIARIES
+Consolidated Statements of Financial Position (Continued)
+Yen in millions
+Note
+March 31,
+2025
+March 31,
+2026
+LIABILITIES
+Current liabilities:
+Short-term borrowings
+5,14
+1,843,959
+51,183
+Lease liabilities
+2,5
+90,495
+94,160
+Current portion of long-term debt
+5,14
+196,950
+166,410
+Trade and other payables
+5
+2,100,144
+2,240,566
+Deposits from customers in the banking business
+5
+3,981,193
+-
+Income taxes payables
+89,485
+196,000
+Participation and residual liabilities in the Pictures segment
+18
+236,752
+223,233
+Contract liabilities
+2,22
+590,719
+594,336
+Other financial liabilities
+5
+110,689
+115,785
+Other current liabilities
+13,19
+1,448,402
+1,350,951
+Total current liabilities
+10,688,788
+5,032,624
+Non-current liabilities:
+Long-term debt
+5,14
+1,557,867
+824,393
+Lease liabilities
+2,5
+508,975
+533,523
+Defined benefit liabilities
+17
+236,941
+165,017
+Deferred tax liabilities
+25
+175,228
+211,391
+Insurance contract liabilities
+13
+12,689,306
+-
+Participation and residual liabilities in the Pictures segment
+18
+188,919
+140,893
+Other financial liabilities
+5
+574,351
+105,827
+Other non-current liabilities
+19
+162,647
+156,233
+Total non-current liabilities
+16,094,234
+2,137,277
+Total liabilities
+26,783,022
+7,169,901
+EQUITY
+Sony Group Corporation’s stockholders’ equity:
+20
+Common stock
+881,357
+881,357
+Additional paid-in capital
+1,483,527
+1,465,499
+Retained earnings
+6,678,168
+5,294,890
+Accumulated other comprehensive income
+(566,447)
+1,229,371
+Treasury stock, at cost
+(296,860)
+(752,106)
+Equity attributable to Sony Group Corporation’s stockholders
+8,179,745
+8,119,011
+Noncontrolling interests
+27
+330,406
+394,578
+Total equity
+8,510,151
+8,513,589
+Total liabilities and equity
+35,293,173
+15,683,490
+The accompanying notes are an integral part of these statements.
+F-5

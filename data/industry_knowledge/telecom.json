@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "telecom",
+    "industry_name_zh": "电信运营与数字通信网络",
+    "sector_id": "communication_services",
+    "sector_name_zh": "通信服务",
+    "macro_sector_id": "INFO_SOFT",
+    "macro_sector_name_zh": "企业级软件、超大规模云服务与数字通信网络",
+    "description_zh": "涵盖移动蜂窝网络通信、千兆光纤骨干宽带接入、卫星互联网通信及政企专属算力网络企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.68,
+    "typical_markup_ratio": 1.15,
+    "capex_intensity": "极高重资产",
+    "operating_leverage_exposure": "中等偏高经营杠杆",
+    "typical_gross_margin_range": [0.25, 0.40]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 15.0,
+    "dio_warning_days": 35.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.05,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "国家无线电通信监管部门黄金频谱牌照特许使用权拍卖竞标批文",
+      "通信铁塔基站站址排他性挂载资源与高负荷电力变压器增容指标",
+      "核心光通信路由器、OTN 光传输设备及高端射频天线 AAU 供应链"
+    ],
+    "downstream_profile": "全国数以亿计的个人移动手机终端用户、家庭千兆固网宽带家庭及政企行业专网专线政企客户",
+    "pricing_power_verdict": "拥有极高特许牌照与全国性物理网络寡头垄断壁垒，受制于公用事业普惠属性；虚拟网络运营商受制于基础运营商结算价格",
+    "channel_inversion_sensitivity": "每用户平均收入 (Average Revenue Per User, ARPU) 走向与后付费用户月度离网率 (Churn Rate) 是电信网络护城河的最敏感晴雨表"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "双千兆网络渗透率持续加深，高阶 5G 资费套餐占比提升驱动综合 ARPU 呈现超预期逆势上行",
+      "新一代移动网络资本开支建设高峰期过去，年度 CapEx 规模大幅缩减驱动自由现金流迎来爆发式回流",
+      "政企产业数字化专线、主权云基础设施与智能物联网连接数快速扩容构筑第二增长引擎"
+    ],
+    "leading_bear_defenses": [
+      "移动电话用户红利见顶且同质化低价流量战再起，行业陷入存量博弈恶性竞争致使 ARPU 持续阴跌",
+      "历史高价竞拍频谱牌照与网络建设形成庞大带息债务包袱，高息宏观周期下面临沉重财务利息刚性支出",
+      "骨干光纤网络或核心交换机发生重大大面积通信瘫痪事故，遭遇国家监管部门严厉问责与巨额用户赔付"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度移动后付费手机净增用户数 (Postpaid Phone Net Adds) 与宽带新增订阅数",
+      "移动综合每用户平均收入 (ARPU) 变动与月度用户离网率 (Churn Rate)",
+      "年度资本开支占营业收入比重 (CapEx-to-Revenue Ratio) 与自由现金流表现",
+      "监管机构关于通信资费提速降费指导政策与新频段拍卖规则方案"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "为减少当期营业成本折旧费用以人为做大账面利润，违规随意延长基站设备与骨干光缆的固定资产折旧年限",
+      "对长期逾期未缴清的合约套餐违约客户应收款项推迟全额计提预期信用损失减值准备",
+      "将常规网络通信日常检修维护费用违规予以资本化计入在建工程或无形资产"
+    ],
+    "channel_and_revenue_checks": [
+      "存费送机与合约机分期绑销业务中多重履约义务的交易价格拆分与收入跨期匹配审验",
+      "铁塔租赁长期合同使用权资产与租赁负债折现计量的会计处理充分性审查"
+    ]
+  }
+}

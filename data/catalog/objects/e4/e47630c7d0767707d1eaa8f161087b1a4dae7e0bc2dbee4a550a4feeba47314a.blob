@@ -1,0 +1,2305 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "1.0.0",
+        "1.1.0"
+      ]
+    },
+    "research_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "is_fictional": {
+      "type": "boolean"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "market_session_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "investment_horizon_months": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "subject": {
+      "$ref": "#/$defs/subject"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evidence"
+      },
+      "minItems": 0
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/observation"
+      },
+      "minItems": 0
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/claim"
+      },
+      "minItems": 0
+    },
+    "calculations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/calculation"
+      },
+      "minItems": 0
+    },
+    "steps": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/step1"
+        },
+        {
+          "$ref": "#/$defs/step2"
+        },
+        {
+          "$ref": "#/$defs/step3"
+        },
+        {
+          "$ref": "#/$defs/step4"
+        },
+        {
+          "$ref": "#/$defs/step5"
+        },
+        {
+          "$ref": "#/$defs/step6"
+        }
+      ],
+      "items": false,
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "invalidation_events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/invalidation"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "schema_version",
+    "research_id",
+    "revision",
+    "is_fictional",
+    "as_of",
+    "recorded_at",
+    "market_session_date",
+    "investment_horizon_months",
+    "subject",
+    "evidence",
+    "observations",
+    "claims",
+    "calculations",
+    "steps",
+    "invalidation_events"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "schema_version": {
+            "const": "1.0.0"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidence": {
+            "items": {
+              "properties": {
+                "published_at": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schema_version": {
+            "const": "1.1.0"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidence": {
+            "items": {
+              "required": [
+                "published_date",
+                "publication_precision"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shuiyuan:research:1.1.0",
+  "title": "水源六步研究记录",
+  "description": "结构契约＋本地语义校验；$schema URI 仅是标准标识，不进行网络解析",
+  "$defs": {
+    "local_path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z][A-Za-z0-9+.-]*:)(?![/\\\\]).+"
+    },
+    "quantity": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "value",
+        "unit",
+        "currency"
+      ],
+      "additionalProperties": false
+    },
+    "period": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date"
+        },
+        "end": {
+          "type": "string",
+          "format": "date"
+        },
+        "basis": {
+          "enum": [
+            "quarter",
+            "year",
+            "ttm",
+            "point_in_time",
+            "custom"
+          ]
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "basis"
+      ],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_path": {
+          "$ref": "#/$defs/local_path"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_kind": {
+          "enum": [
+            "primary",
+            "secondary",
+            "project_design",
+            "synthetic"
+          ]
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "available_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "acquired_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "excerpt_or_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "published_date": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publication_precision": {
+          "enum": [
+            "instant",
+            "date",
+            "unknown"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "source_path",
+        "locator",
+        "source_kind",
+        "published_at",
+        "available_at",
+        "acquired_at",
+        "excerpt_or_summary",
+        "limitations"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "publication_precision"
+            ],
+            "properties": {
+              "publication_precision": {
+                "const": "instant"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "published_at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "publication_precision"
+            ],
+            "properties": {
+              "publication_precision": {
+                "const": "date"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "published_at": {
+                "type": "null"
+              },
+              "published_date": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "publication_precision"
+            ],
+            "properties": {
+              "publication_precision": {
+                "const": "unknown"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "published_at": {
+                "type": "null"
+              },
+              "published_date": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "observation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metric_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "segment_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "period": {
+          "$ref": "#/$defs/period"
+        },
+        "available_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/quantity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "accounting_basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "comparability_notes": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "metric_id",
+        "segment_id",
+        "period",
+        "available_at",
+        "value",
+        "missing_reason",
+        "accounting_basis",
+        "comparability_notes",
+        "evidence_refs"
+      ],
+      "additionalProperties": false
+    },
+    "claim": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "fact",
+            "inference",
+            "assumption",
+            "unknown",
+            "not_applicable"
+          ]
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "observation_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "counterevidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "assumption_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "uncertainty": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "statement",
+        "evidence_refs",
+        "observation_refs",
+        "counterevidence_refs",
+        "assumption_refs",
+        "uncertainty"
+      ],
+      "additionalProperties": false
+    },
+    "calculation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "implementation_path": {
+          "$ref": "#/$defs/local_path"
+        },
+        "input_observation_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "assumption_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/quantity"
+          },
+          "minItems": 1
+        },
+        "verification_status": {
+          "enum": [
+            "unchecked",
+            "checked"
+          ]
+        },
+        "verification_evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "method_version",
+        "implementation_path",
+        "input_observation_refs",
+        "assumption_refs",
+        "outputs",
+        "verification_status",
+        "verification_evidence_refs"
+      ],
+      "additionalProperties": false
+    },
+    "segment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "industry_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "business_model_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "classification_evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "subindustry_description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "weight_basis": {
+          "enum": [
+            "revenue",
+            "operating_profit",
+            "assets",
+            "unknown"
+          ]
+        },
+        "weight": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "weight_period": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/period"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "weight_evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "industry_ids",
+        "business_model_ids",
+        "classification_evidence_refs",
+        "subindustry_description",
+        "weight_basis",
+        "weight",
+        "weight_period",
+        "weight_evidence_refs"
+      ],
+      "additionalProperties": false
+    },
+    "subject": {
+      "type": "object",
+      "properties": {
+        "company_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "security_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/segment"
+          },
+          "minItems": 1
+        },
+        "is_adr": {
+          "type": "boolean"
+        },
+        "is_reit": {
+          "type": "boolean"
+        },
+        "classification_status": {
+          "enum": [
+            "unreviewed",
+            "reviewed"
+          ]
+        },
+        "unallocated_or_elimination_notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "company_id",
+        "security_ids",
+        "segments",
+        "is_adr",
+        "is_reit",
+        "classification_status",
+        "unallocated_or_elimination_notes"
+      ],
+      "additionalProperties": false
+    },
+    "assessment": {
+      "type": "object",
+      "properties": {
+        "verdict": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "verdict",
+        "claim_refs",
+        "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "step1_output": {
+      "type": "object",
+      "properties": {
+        "segment_positions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "segment_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "industry_rule_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "positions": {
+                "type": "object",
+                "properties": {
+                  "lifecycle": {
+                    "$ref": "#/$defs/assessment"
+                  },
+                  "supply_demand": {
+                    "$ref": "#/$defs/assessment"
+                  },
+                  "earnings": {
+                    "$ref": "#/$defs/assessment"
+                  },
+                  "credit": {
+                    "$ref": "#/$defs/assessment"
+                  },
+                  "sentiment": {
+                    "$ref": "#/$defs/assessment"
+                  },
+                  "pricing": {
+                    "$ref": "#/$defs/assessment"
+                  }
+                },
+                "required": [
+                  "lifecycle",
+                  "supply_demand",
+                  "earnings",
+                  "credit",
+                  "sentiment",
+                  "pricing"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "segment_id",
+              "industry_rule_id",
+              "positions"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "research_priorities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "conclusion_claim_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "segment_positions",
+        "research_priorities",
+        "conclusion_claim_refs"
+      ],
+      "additionalProperties": false
+    },
+    "step2_output": {
+      "type": "object",
+      "properties": {
+        "checks": {
+          "type": "object",
+          "properties": {
+            "business_model": {
+              "$ref": "#/$defs/assessment"
+            },
+            "demand_growth": {
+              "$ref": "#/$defs/assessment"
+            },
+            "competition": {
+              "$ref": "#/$defs/assessment"
+            },
+            "financial_quality": {
+              "$ref": "#/$defs/assessment"
+            },
+            "cash_flow": {
+              "$ref": "#/$defs/assessment"
+            },
+            "debt_liquidity": {
+              "$ref": "#/$defs/assessment"
+            },
+            "governance": {
+              "$ref": "#/$defs/assessment"
+            },
+            "capital_allocation": {
+              "$ref": "#/$defs/assessment"
+            }
+          },
+          "required": [
+            "business_model",
+            "demand_growth",
+            "competition",
+            "financial_quality",
+            "cash_flow",
+            "debt_liquidity",
+            "governance",
+            "capital_allocation"
+          ],
+          "additionalProperties": false
+        },
+        "thesis_claim_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "critical_unknown_claim_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "checks",
+        "thesis_claim_refs",
+        "critical_unknown_claim_refs"
+      ],
+      "additionalProperties": false
+    },
+    "trigger": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metric_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "condition_description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "target_steps": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "metric_ids",
+        "condition_description",
+        "claim_refs",
+        "target_steps"
+      ],
+      "additionalProperties": false
+    },
+    "step3_output": {
+      "type": "object",
+      "properties": {
+        "catalysts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "event": {
+                "type": "string",
+                "minLength": 1
+              },
+              "transmission": {
+                "type": "string",
+                "minLength": 1
+              },
+              "expected_window": {
+                "$ref": "#/$defs/period"
+              },
+              "claim_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              }
+            },
+            "required": [
+              "id",
+              "event",
+              "transmission",
+              "expected_window",
+              "claim_refs"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        },
+        "no_catalyst_reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "monitoring_indicators": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metric_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "rationale": {
+                "type": "string",
+                "minLength": 1
+              },
+              "cadence": {
+                "type": "string",
+                "minLength": 1
+              },
+              "baseline_observation_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "missing_baseline_reason": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "metric_id",
+              "rationale",
+              "cadence",
+              "baseline_observation_refs",
+              "missing_baseline_reason"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "invalidation_triggers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/trigger"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "catalysts",
+        "no_catalyst_reason",
+        "monitoring_indicators",
+        "invalidation_triggers"
+      ],
+      "additionalProperties": false
+    },
+    "scenario": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "enum": [
+            "bear",
+            "base",
+            "bull"
+          ]
+        },
+        "assumption_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "intrinsic_value_per_share": {
+          "$ref": "#/$defs/quantity"
+        },
+        "calculation_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "probability": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "assumption_refs",
+        "intrinsic_value_per_share",
+        "calculation_refs",
+        "probability"
+      ],
+      "additionalProperties": false
+    },
+    "step4_output": {
+      "type": "object",
+      "properties": {
+        "valuation_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "applicability_claim_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "price_observation_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scenarios": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/scenario"
+          },
+          "minItems": 3
+        },
+        "probability_basis_claim_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "crosscheck_calculation_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "sensitivity_calculation_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "market_expectation_claim_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "value_bridge_claim_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "valuation_horizon": {
+          "$ref": "#/$defs/period"
+        },
+        "investment_horizon": {
+          "$ref": "#/$defs/period"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "valuation_method",
+        "applicability_claim_refs",
+        "price_observation_ref",
+        "scenarios",
+        "probability_basis_claim_refs",
+        "crosscheck_calculation_refs",
+        "sensitivity_calculation_refs",
+        "market_expectation_claim_refs",
+        "value_bridge_claim_refs",
+        "valuation_horizon",
+        "investment_horizon",
+        "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "step5_output": {
+      "type": "object",
+      "properties": {
+        "decision": {
+          "enum": [
+            "watch",
+            "action_conditions_met",
+            "conditions_not_met",
+            "unable_to_judge"
+          ]
+        },
+        "company_quality": {
+          "$ref": "#/$defs/assessment"
+        },
+        "price_attractiveness": {
+          "$ref": "#/$defs/assessment"
+        },
+        "action_suitability": {
+          "$ref": "#/$defs/assessment"
+        },
+        "permanent_loss_risks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/assessment"
+          },
+          "minItems": 1
+        },
+        "entry_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "exit_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "portfolio_assessment": {
+          "enum": [
+            "not_assessed",
+            "assessed"
+          ]
+        },
+        "portfolio_evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "portfolio_calculation_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "position_fraction": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "validated_rule_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "decision_claim_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "decision",
+        "company_quality",
+        "price_attractiveness",
+        "action_suitability",
+        "permanent_loss_risks",
+        "entry_conditions",
+        "exit_conditions",
+        "portfolio_assessment",
+        "portfolio_evidence_refs",
+        "portfolio_calculation_refs",
+        "position_fraction",
+        "validated_rule_refs",
+        "decision_claim_refs"
+      ],
+      "additionalProperties": false
+    },
+    "step6_output": {
+      "type": "object",
+      "properties": {
+        "monitoring_plan": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metric_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "cadence": {
+                "type": "string",
+                "minLength": 1
+              },
+              "owner": {
+                "type": "string",
+                "minLength": 1
+              },
+              "last_observation_ref": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "next_due_at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "required": [
+              "metric_id",
+              "cadence",
+              "owner",
+              "last_observation_ref",
+              "next_due_at"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "triggers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/trigger"
+          },
+          "minItems": 1
+        },
+        "review_records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reviewed_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "new_evidence_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "changed_claim_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "conclusion": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "reviewed_at",
+              "new_evidence_refs",
+              "changed_claim_refs",
+              "conclusion"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        },
+        "next_review_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "monitoring_plan",
+        "triggers",
+        "review_records",
+        "next_review_at"
+      ],
+      "additionalProperties": false
+    },
+    "dependency": {
+      "type": "object",
+      "properties": {
+        "step_id": {
+          "enum": [
+            "S1",
+            "S2",
+            "S3",
+            "S4",
+            "S5"
+          ]
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "step_id",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "gate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "result": {
+          "enum": [
+            "pass",
+            "fail",
+            "not_applicable"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "result",
+        "reason",
+        "evidence_refs"
+      ],
+      "additionalProperties": false
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dependency"
+          },
+          "minItems": 0
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "observation_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "claim_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "dependencies",
+        "evidence_refs",
+        "observation_refs",
+        "claim_refs"
+      ],
+      "additionalProperties": false
+    },
+    "step1": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "const": "S1"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "in_progress",
+            "completed",
+            "insufficient_evidence",
+            "needs_review",
+            "invalidated"
+          ]
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "inputs": {
+          "$ref": "#/$defs/inputs"
+        },
+        "gates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/gate"
+          },
+          "minItems": 0
+        },
+        "output": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/step1_output"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "status",
+        "updated_at",
+        "inputs",
+        "gates",
+        "output",
+        "notes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "completed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "output": {
+                "$ref": "#/$defs/step1_output"
+              },
+              "gates": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "pending"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "output": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "step2": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "const": "S2"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "in_progress",
+            "completed",
+            "insufficient_evidence",
+            "needs_review",
+            "invalidated"
+          ]
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "inputs": {
+          "$ref": "#/$defs/inputs"
+        },
+        "gates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/gate"
+          },
+          "minItems": 0
+        },
+        "output": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/step2_output"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "status",
+        "updated_at",
+        "inputs",
+        "gates",
+        "output",
+        "notes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "completed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "output": {
+                "$ref": "#/$defs/step2_output"
+              },
+              "gates": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "pending"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "output": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "step3": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "const": "S3"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "in_progress",
+            "completed",
+            "insufficient_evidence",
+            "needs_review",
+            "invalidated"
+          ]
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "inputs": {
+          "$ref": "#/$defs/inputs"
+        },
+        "gates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/gate"
+          },
+          "minItems": 0
+        },
+        "output": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/step3_output"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "status",
+        "updated_at",
+        "inputs",
+        "gates",
+        "output",
+        "notes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "completed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "output": {
+                "$ref": "#/$defs/step3_output"
+              },
+              "gates": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "pending"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "output": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "step4": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "const": "S4"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "in_progress",
+            "completed",
+            "insufficient_evidence",
+            "needs_review",
+            "invalidated"
+          ]
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "inputs": {
+          "$ref": "#/$defs/inputs"
+        },
+        "gates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/gate"
+          },
+          "minItems": 0
+        },
+        "output": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/step4_output"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "status",
+        "updated_at",
+        "inputs",
+        "gates",
+        "output",
+        "notes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "completed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "output": {
+                "$ref": "#/$defs/step4_output"
+              },
+              "gates": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "pending"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "output": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "step5": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "const": "S5"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "in_progress",
+            "completed",
+            "insufficient_evidence",
+            "needs_review",
+            "invalidated"
+          ]
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "inputs": {
+          "$ref": "#/$defs/inputs"
+        },
+        "gates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/gate"
+          },
+          "minItems": 0
+        },
+        "output": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/step5_output"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "status",
+        "updated_at",
+        "inputs",
+        "gates",
+        "output",
+        "notes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "completed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "output": {
+                "$ref": "#/$defs/step5_output"
+              },
+              "gates": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "pending"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "output": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "step6": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "const": "S6"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "in_progress",
+            "completed",
+            "insufficient_evidence",
+            "needs_review",
+            "invalidated"
+          ]
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "inputs": {
+          "$ref": "#/$defs/inputs"
+        },
+        "gates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/gate"
+          },
+          "minItems": 0
+        },
+        "output": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/step6_output"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "status",
+        "updated_at",
+        "inputs",
+        "gates",
+        "output",
+        "notes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "completed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "output": {
+                "$ref": "#/$defs/step6_output"
+              },
+              "gates": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "pending"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "output": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "snapshot": {
+      "type": "object",
+      "properties": {
+        "step_id": {
+          "enum": [
+            "S1",
+            "S2",
+            "S3",
+            "S4",
+            "S5",
+            "S6"
+          ]
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "step_id",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "invalidation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurred_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "earliest_step": {
+          "enum": [
+            "S1",
+            "S2",
+            "S3",
+            "S4",
+            "S5",
+            "S6"
+          ]
+        },
+        "affected_steps": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5",
+              "S6"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "status": {
+          "enum": [
+            "open",
+            "resolved"
+          ]
+        },
+        "baseline_versions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/snapshot"
+          },
+          "minItems": 1
+        },
+        "resolved_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "occurred_at",
+        "reason",
+        "evidence_refs",
+        "earliest_step",
+        "affected_steps",
+        "status",
+        "baseline_versions",
+        "resolved_at"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

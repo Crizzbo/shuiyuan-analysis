@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This schema was created by staff of the U.S. Securities and Exchange Commission. -->
+<!-- Data and content created by government employees within the scope of their employment -->
+<!-- are not subject to domestic copyright protection. 17 U.S.C. 105. -->
+<xs:schema
+xmlns:fnd-lab="http://xbrl.sec.gov/fnd-lab/2026"
+xmlns:link="http://www.xbrl.org/2003/linkbase"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://xbrl.sec.gov/fnd-lab/2026"
+elementFormDefault="qualified">
+<xs:annotation>
+<xs:appinfo>
+<link:linkbase id="lnk">
+<link:labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1DsclsrLineItems" xlink:label="NmRule35d1DsclsrLineItems"/>
+<link:label xlink:type="resource" xlink:label="label_NmRule35d1DsclsrLineItems" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Fund Name Disclosure [Line Items]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NmRule35d1DsclsrLineItems" xlink:to="label_NmRule35d1DsclsrLineItems" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1TermDfnTextBlock" xlink:label="NmRule35d1TermDfnTextBlock"/>
+<link:label xlink:type="resource" xlink:label="label_NmRule35d1TermDfnTextBlock" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Definition of Rule 35d-1 Term in Fund Name [Text Block]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NmRule35d1TermDfnTextBlock" xlink:to="label_NmRule35d1TermDfnTextBlock" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1TermSlctnCritTextBlock" xlink:label="NmRule35d1TermSlctnCritTextBlock"/>
+<link:label xlink:type="resource" xlink:label="label_NmRule35d1TermSlctnCritTextBlock" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Selection Criteria for Rule 35d-1 Term in Fund Name [Text Block]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NmRule35d1TermSlctnCritTextBlock" xlink:to="label_NmRule35d1TermSlctnCritTextBlock" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1TermDfnSmryTextBlock" xlink:label="NmRule35d1TermDfnSmryTextBlock"/>
+<link:label xlink:type="resource" xlink:label="label_NmRule35d1TermDfnSmryTextBlock" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Summary of Definition of Rule 35d-1 Term in Fund Name [Text Block]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NmRule35d1TermDfnSmryTextBlock" xlink:to="label_NmRule35d1TermDfnSmryTextBlock" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1TermSlctnCritSmryTextBlock" xlink:label="NmRule35d1TermSlctnCritSmryTextBlock"/>
+<link:label xlink:type="resource" xlink:label="label_NmRule35d1TermSlctnCritSmryTextBlock" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Summary of Selection Criteria for Rule 35d-1 Term in Fund Name [Text Block]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NmRule35d1TermSlctnCritSmryTextBlock" xlink:to="label_NmRule35d1TermSlctnCritSmryTextBlock" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="fnd-2026.xsd#fnd_NmRule35d1EightyPctInvstmntPlcyTextBlock" xlink:label="NmRule35d1EightyPctInvstmntPlcyTextBlock"/>
+<link:label xlink:type="resource" xlink:label="label_NmRule35d1EightyPctInvstmntPlcyTextBlock" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 35d-1 Eighty Percent Investment Policy [Text Block]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NmRule35d1EightyPctInvstmntPlcyTextBlock" xlink:to="label_NmRule35d1EightyPctInvstmntPlcyTextBlock" priority="10"/>
+</link:labelLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+</xs:schema>

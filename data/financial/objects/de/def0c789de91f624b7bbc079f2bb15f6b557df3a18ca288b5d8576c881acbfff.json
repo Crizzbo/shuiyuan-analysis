@@ -1,0 +1,1300 @@
+{
+  "artifact": {
+    "acquired_at": "2026-10-11T02:01:15+00:00",
+    "availability_basis": "first_observed_by_project",
+    "available_at": "2026-10-11T02:01:15+00:00",
+    "browser_receipt": {
+      "document_url": "https://www.nintendo.co.jp/ir/pdf/2026/annual2603e.pdf",
+      "entity_id": "JP:7974",
+      "format": "pdf",
+      "id": "nintendo-2026-annual-browser-pdf",
+      "page_url": "https://www.nintendo.co.jp/ir/en/index.html",
+      "publication_precision": "date",
+      "published_date": "2026-07-06",
+      "search_url": "https://www.google.com/search?q=Nintendo+2026+financial+results+Japanese+GAAP+nintendo.co.jp",
+      "verification_notes": "浏览器进入 Nintendo 官方 IR 页，Jul. 6 2026 行 Annual Report 2026（1.5MB）链接下载；仅日期精度，精确时刻未核实。"
+    },
+    "dataset_kind": "financial",
+    "origin_url": "https://www.nintendo.co.jp/ir/pdf/2026/annual2603e.pdf",
+    "provider": "ai_browser",
+    "published_at": null,
+    "quality_status": "unreviewed",
+    "raw_transport": "browser_download",
+    "sha256": "adf1d61bfa20412235535f3689e3a52805e46947214f874377d428ffeb878d16",
+    "source_kind": "primary",
+    "source_path": "data/ingestion/objects/ad/adf1d61bfa20412235535f3689e3a52805e46947214f874377d428ffeb878d16.raw"
+  },
+  "calculations": [
+    {
+      "accounting_basis": "J-GAAP",
+      "calculation": {
+        "formula": "总负债 / 总资产；不等同有息债务比例",
+        "function": "solvency_model.get_debt_to_assets_ratio",
+        "library": "financetoolkit"
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "4381ab9fd926e8b92dff084988f40d0f0a8a9a64defd773715dbb6f1fc2eed9d",
+        "b2e8b6151f6123e519a5d1cec5e543108cba8375b573d524cd15e2305c4e7ba2"
+      ],
+      "metric_id": "liabilities_to_assets",
+      "name_zh": "总负债占资产比例",
+      "period": {
+        "basis": "instant",
+        "end": "2025-03-31",
+        "start": null
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.19804767670585535
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "calculation": {
+        "formula": "总负债 / 总资产；不等同有息债务比例",
+        "function": "solvency_model.get_debt_to_assets_ratio",
+        "library": "financetoolkit"
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "04fa825d8c4c5353c4d237cba163d3ba8ad6b5862af7f8febca27dce2093d404",
+        "d299a73a101aa3a539c80116ca4d2def27c384fb5c9597a4e851c463b2f25603"
+      ],
+      "metric_id": "liabilities_to_assets",
+      "name_zh": "总负债占资产比例",
+      "period": {
+        "basis": "instant",
+        "end": "2026-03-31",
+        "start": null
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.22340664839046048
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "calculation": {
+        "implementation_path": "finance_tools/basic.py",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "input_sha256": "3d383ca69fa903c0321f264e1dd2bcab3fe89f403d30a3c279a08347a231f218",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "parameters": {
+          "denominator": 1164922000000.0,
+          "numerator": 282553000000.0,
+          "operation": "operating_margin"
+        },
+        "result": {
+          "value": 0.24255100341482091
+        }
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "3656d7b6985b20879e74cd8f1f4976c943eb87824f0c0cab134666f4dfbe7233",
+        "d854af8f633bd9effbe479c87e71e7a7420f9b0fee20278c63173f63d1e59d5a"
+      ],
+      "metric_id": "operating_margin",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.24255100341482091
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "calculation": {
+        "implementation_path": "finance_tools/basic.py",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "input_sha256": "fa955728a504228d05d0aee5f42e6c6db565f0ea18de61508aa614e8da714f13",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "parameters": {
+          "denominator": 1164922000000.0,
+          "numerator": 278852000000.0,
+          "operation": "net_margin"
+        },
+        "result": {
+          "value": 0.23937396666901303
+        }
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "fcf99f4c6b6e20e5feff229363df1893ec31f8d33fc8df2c1e07e52d630875b9",
+        "d854af8f633bd9effbe479c87e71e7a7420f9b0fee20278c63173f63d1e59d5a"
+      ],
+      "metric_id": "net_margin",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.23937396666901303
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "calculation": {
+        "formula": "同期间、同范围经营现金流净额 / 收入",
+        "function": "Series.div",
+        "library": "pandas"
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "b15b5066d1a8a6c3998efad0f75a941e976260b4d56fbacf054fe905bb87c139",
+        "d854af8f633bd9effbe479c87e71e7a7420f9b0fee20278c63173f63d1e59d5a"
+      ],
+      "metric_id": "operating_cash_flow_margin",
+      "name_zh": "经营现金流收入比",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.010360350306715815
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "currency": "JPY",
+      "metric_id": "revenue_growth",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "reason": "缺少同报告、同范围、相邻年度的正收入基数",
+      "scope_id": "consolidated",
+      "status": "blocked",
+      "value": null
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "calculation": {
+        "implementation_path": "finance_tools/basic.py",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "input_sha256": "6094439c53d04737c5cc428d65cce2765f48a09f173e52902a884534c793f4b0",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "parameters": {
+          "denominator": 2313051000000.0,
+          "numerator": 360117000000.0,
+          "operation": "operating_margin"
+        },
+        "result": {
+          "value": 0.15568917416866296
+        }
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "cebc0b4d6573034dc838363afe00a4f663e80ede78cffeb3bc8fbba20e88ed5d",
+        "c2e680a33a5b3e012dee02a097efe319d5e8a8e195fa324015a7adca7357667e"
+      ],
+      "metric_id": "operating_margin",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.15568917416866296
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "calculation": {
+        "implementation_path": "finance_tools/basic.py",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "input_sha256": "41baff3474ba4ed86aa369c0ae465db29b0ed34a9dfe9dc76193885648c79865",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "parameters": {
+          "denominator": 2313051000000.0,
+          "numerator": 424092000000.0,
+          "operation": "net_margin"
+        },
+        "result": {
+          "value": 0.183347448888935
+        }
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "a808a962e437c0fa944fa6bc3a3eadee599103437fb709ed771f379edde9defc",
+        "c2e680a33a5b3e012dee02a097efe319d5e8a8e195fa324015a7adca7357667e"
+      ],
+      "metric_id": "net_margin",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.183347448888935
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "calculation": {
+        "formula": "同期间、同范围经营现金流净额 / 收入",
+        "function": "Series.div",
+        "library": "pandas"
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "7b28cadfca93b058a551bb7bbc9de4767e799b2288cdda0438f0593cdd1fc029",
+        "c2e680a33a5b3e012dee02a097efe319d5e8a8e195fa324015a7adca7357667e"
+      ],
+      "metric_id": "operating_cash_flow_margin",
+      "name_zh": "经营现金流收入比",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.12528431063560638
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "calculation": {
+        "formula": "本年收入 / 上年收入 - 1；同一报告比较列",
+        "function": "Series.pct_change",
+        "library": "pandas"
+      },
+      "currency": "JPY",
+      "input_fact_refs": [
+        "c2e680a33a5b3e012dee02a097efe319d5e8a8e195fa324015a7adca7357667e",
+        "d854af8f633bd9effbe479c87e71e7a7420f9b0fee20278c63173f63d1e59d5a"
+      ],
+      "metric_id": "revenue_growth",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.9855844425635365
+    }
+  ],
+  "checks": [
+    {
+      "check": "balance_sheet",
+      "fact_refs": [
+        "b2e8b6151f6123e519a5d1cec5e543108cba8375b573d524cd15e2305c4e7ba2",
+        "4381ab9fd926e8b92dff084988f40d0f0a8a9a64defd773715dbb6f1fc2eed9d",
+        "426723b48dbdf393467c04cc06a04ce2b8e9967c1e1c35effb48ad03818e6c1b"
+      ],
+      "group": [
+        "{\"basis\": \"instant\", \"end\": \"2025-03-31\", \"start\": null}",
+        "consolidated",
+        "J-GAAP",
+        "JPY"
+      ],
+      "residual": "1000000",
+      "status": "passed",
+      "tolerance": "3000000"
+    },
+    {
+      "check": "balance_sheet",
+      "fact_refs": [
+        "d299a73a101aa3a539c80116ca4d2def27c384fb5c9597a4e851c463b2f25603",
+        "04fa825d8c4c5353c4d237cba163d3ba8ad6b5862af7f8febca27dce2093d404",
+        "373d586ed0e3277ab620290d00fec21c0b1a86fd27d9fe87a2bc5aa449879552"
+      ],
+      "group": [
+        "{\"basis\": \"instant\", \"end\": \"2026-03-31\", \"start\": null}",
+        "consolidated",
+        "J-GAAP",
+        "JPY"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "3000000"
+    },
+    {
+      "check": "cash_flow_bridge",
+      "fact_refs": [
+        "136cdcecf0fe9b46c7d60a62229a8a3c5c406f7167c90432493b0e051733fd76",
+        "b15b5066d1a8a6c3998efad0f75a941e976260b4d56fbacf054fe905bb87c139",
+        "dc7314ec82c678ad76ed2c651c06930ece998bd7b0839c9f738697077dd7f2fd",
+        "daab64d46f5685689506d7f5e7d7b4ef91fc57a1f9047f41973b0e311acb7b75",
+        "7130eace2b1bed3f410523f998af8d6b89c6c4751f565243464a72604b59396b"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2025-03-31\", \"start\": \"2024-04-01\"}",
+        "consolidated",
+        "J-GAAP",
+        "JPY"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "5000000"
+    },
+    {
+      "check": "cash_flow_bridge",
+      "fact_refs": [
+        "3f80fa7b17176954502a3335e1fa0dcc47ab19ae4d6a4879410a312f21af6ee7",
+        "7b28cadfca93b058a551bb7bbc9de4767e799b2288cdda0438f0593cdd1fc029",
+        "ddd044035432a49e8d9743f9575701d1db07769b83d24a9d50c524fd3903bc9d",
+        "f226ad11acd074d72e118ace22b9446db0a0062b80faaa0769329751a5c0e886",
+        "556df6a60769d570911fd2d626b9109e63799e2c2630cb47a796a18f8c039dff"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2026-03-31\", \"start\": \"2025-04-01\"}",
+        "consolidated",
+        "J-GAAP",
+        "JPY"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "5000000"
+    },
+    {
+      "check": "cash_stock_bridge",
+      "fact_refs": [
+        "662bc74dae3ff8b0d87916963ad9bb8e86c73fb816de202d8e2192ca331764f0",
+        "0f578be76b127e7d63eeb3983ef36af0190266bdf30440cde835cd8d8049d873",
+        "136cdcecf0fe9b46c7d60a62229a8a3c5c406f7167c90432493b0e051733fd76"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2025-03-31\", \"start\": \"2024-04-01\"}",
+        "consolidated",
+        "J-GAAP",
+        "JPY"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "3000000"
+    },
+    {
+      "check": "cash_stock_bridge",
+      "fact_refs": [
+        "0fab57b276e72450f6a4396c7f85232439ba3e7ee6ff740dd8f7acb326dd90ed",
+        "e82bfdac2318b636c546553c96de4a4556e0f56b52ae198d3d1dd53e6fc73d0f",
+        "3f80fa7b17176954502a3335e1fa0dcc47ab19ae4d6a4879410a312f21af6ee7"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2026-03-31\", \"start\": \"2025-04-01\"}",
+        "consolidated",
+        "J-GAAP",
+        "JPY"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "3000000"
+    }
+  ],
+  "entity_id": "JP:7974",
+  "facts": [
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Total assets",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "assets",
+      "id": "b2e8b6151f6123e519a5d1cec5e543108cba8375b573d524cd15e2305c4e7ba2",
+      "name_zh": "资产总额",
+      "period": {
+        "basis": "instant",
+        "end": "2025-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Total assets \n \n3,398,515 \n \n3,805,312 \n23,932 ",
+        "kind": "primary",
+        "locator": "PDF page 59, row Total assets, year 2025",
+        "path": "data/financial/objects/bb/bb96b1b8a00fa83adbdcf4bf0a0f900b407e3528bfea08f25e6e7675fc007ee5.txt",
+        "published_at": null,
+        "sha256": "bb96b1b8a00fa83adbdcf4bf0a0f900b407e3528bfea08f25e6e7675fc007ee5"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "3398515000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Total assets",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "assets",
+      "id": "d299a73a101aa3a539c80116ca4d2def27c384fb5c9597a4e851c463b2f25603",
+      "name_zh": "资产总额",
+      "period": {
+        "basis": "instant",
+        "end": "2026-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Total assets \n \n3,398,515 \n \n3,805,312 \n23,932 ",
+        "kind": "primary",
+        "locator": "PDF page 59, row Total assets, year 2026",
+        "path": "data/financial/objects/bb/bb96b1b8a00fa83adbdcf4bf0a0f900b407e3528bfea08f25e6e7675fc007ee5.txt",
+        "published_at": null,
+        "sha256": "bb96b1b8a00fa83adbdcf4bf0a0f900b407e3528bfea08f25e6e7675fc007ee5"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "3805312000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Cash and deposits",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_deposits",
+      "id": "9387e05be33b79b1386a271b2758f1cf3eafb547d1b0272f8008fa255c471f12",
+      "name_zh": "现金及存款",
+      "period": {
+        "basis": "instant",
+        "end": "2025-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Cash and deposits \n \n1,586,275 \n \n1,791,802 \n11,269 ",
+        "kind": "primary",
+        "locator": "PDF page 59, row Cash and deposits, year 2025",
+        "path": "data/financial/objects/bb/bb96b1b8a00fa83adbdcf4bf0a0f900b407e3528bfea08f25e6e7675fc007ee5.txt",
+        "published_at": null,
+        "sha256": "bb96b1b8a00fa83adbdcf4bf0a0f900b407e3528bfea08f25e6e7675fc007ee5"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1586275000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Cash and deposits",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_deposits",
+      "id": "40b7629bbe4f3a9c3b7d8ae698b48ba540818bbd891eda1a586878dc5e1cb726",
+      "name_zh": "现金及存款",
+      "period": {
+        "basis": "instant",
+        "end": "2026-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Cash and deposits \n \n1,586,275 \n \n1,791,802 \n11,269 ",
+        "kind": "primary",
+        "locator": "PDF page 59, row Cash and deposits, year 2026",
+        "path": "data/financial/objects/bb/bb96b1b8a00fa83adbdcf4bf0a0f900b407e3528bfea08f25e6e7675fc007ee5.txt",
+        "published_at": null,
+        "sha256": "bb96b1b8a00fa83adbdcf4bf0a0f900b407e3528bfea08f25e6e7675fc007ee5"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1791802000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Total liabilities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "liabilities",
+      "id": "4381ab9fd926e8b92dff084988f40d0f0a8a9a64defd773715dbb6f1fc2eed9d",
+      "name_zh": "负债总额",
+      "period": {
+        "basis": "instant",
+        "end": "2025-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Total liabilities \n \n673,068 \n \n850,132 \n5,346 ",
+        "kind": "primary",
+        "locator": "PDF page 60, row Total liabilities, year 2025",
+        "path": "data/financial/objects/45/457db555c6923a2b9a11bad254260f399c3d85b0e6c524d5505d63f82867076a.txt",
+        "published_at": null,
+        "sha256": "457db555c6923a2b9a11bad254260f399c3d85b0e6c524d5505d63f82867076a"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "673068000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Total liabilities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "liabilities",
+      "id": "04fa825d8c4c5353c4d237cba163d3ba8ad6b5862af7f8febca27dce2093d404",
+      "name_zh": "负债总额",
+      "period": {
+        "basis": "instant",
+        "end": "2026-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Total liabilities \n \n673,068 \n \n850,132 \n5,346 ",
+        "kind": "primary",
+        "locator": "PDF page 60, row Total liabilities, year 2026",
+        "path": "data/financial/objects/45/457db555c6923a2b9a11bad254260f399c3d85b0e6c524d5505d63f82867076a.txt",
+        "published_at": null,
+        "sha256": "457db555c6923a2b9a11bad254260f399c3d85b0e6c524d5505d63f82867076a"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "850132000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Total net assets",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "equity",
+      "id": "426723b48dbdf393467c04cc06a04ce2b8e9967c1e1c35effb48ad03818e6c1b",
+      "name_zh": "权益总额",
+      "period": {
+        "basis": "instant",
+        "end": "2025-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Total net assets \n \n2,725,446 \n \n2,955,180 \n18,586 ",
+        "kind": "primary",
+        "locator": "PDF page 60, row Total net assets, year 2025",
+        "path": "data/financial/objects/45/457db555c6923a2b9a11bad254260f399c3d85b0e6c524d5505d63f82867076a.txt",
+        "published_at": null,
+        "sha256": "457db555c6923a2b9a11bad254260f399c3d85b0e6c524d5505d63f82867076a"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "2725446000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Total net assets",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "equity",
+      "id": "373d586ed0e3277ab620290d00fec21c0b1a86fd27d9fe87a2bc5aa449879552",
+      "name_zh": "权益总额",
+      "period": {
+        "basis": "instant",
+        "end": "2026-03-31",
+        "start": null
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Total net assets \n \n2,725,446 \n \n2,955,180 \n18,586 ",
+        "kind": "primary",
+        "locator": "PDF page 60, row Total net assets, year 2026",
+        "path": "data/financial/objects/45/457db555c6923a2b9a11bad254260f399c3d85b0e6c524d5505d63f82867076a.txt",
+        "published_at": null,
+        "sha256": "457db555c6923a2b9a11bad254260f399c3d85b0e6c524d5505d63f82867076a"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "2955180000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Net sales",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "revenue",
+      "id": "d854af8f633bd9effbe479c87e71e7a7420f9b0fee20278c63173f63d1e59d5a",
+      "name_zh": "收入",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Net sales \n \n1,164,922 \n \n2,313,051 \n14,547 ",
+        "kind": "primary",
+        "locator": "PDF page 61, row Net sales, year 2025",
+        "path": "data/financial/objects/80/80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b.txt",
+        "published_at": null,
+        "sha256": "80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1164922000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Net sales",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "revenue",
+      "id": "c2e680a33a5b3e012dee02a097efe319d5e8a8e195fa324015a7adca7357667e",
+      "name_zh": "收入",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Net sales \n \n1,164,922 \n \n2,313,051 \n14,547 ",
+        "kind": "primary",
+        "locator": "PDF page 61, row Net sales, year 2026",
+        "path": "data/financial/objects/80/80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b.txt",
+        "published_at": null,
+        "sha256": "80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "2313051000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Operating profit",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "operating_income",
+      "id": "3656d7b6985b20879e74cd8f1f4976c943eb87824f0c0cab134666f4dfbe7233",
+      "name_zh": "营业利润",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Operating profit \n \n282,553 \n \n360,117 \n2,264 ",
+        "kind": "primary",
+        "locator": "PDF page 61, row Operating profit, year 2025",
+        "path": "data/financial/objects/80/80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b.txt",
+        "published_at": null,
+        "sha256": "80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "282553000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Operating profit",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "operating_income",
+      "id": "cebc0b4d6573034dc838363afe00a4f663e80ede78cffeb3bc8fbba20e88ed5d",
+      "name_zh": "营业利润",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Operating profit \n \n282,553 \n \n360,117 \n2,264 ",
+        "kind": "primary",
+        "locator": "PDF page 61, row Operating profit, year 2026",
+        "path": "data/financial/objects/80/80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b.txt",
+        "published_at": null,
+        "sha256": "80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "360117000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Profit",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "net_income",
+      "id": "fcf99f4c6b6e20e5feff229363df1893ec31f8d33fc8df2c1e07e52d630875b9",
+      "name_zh": "合并净利润",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Profit \n \n278,852 \n \n424,092 \n2,667 ",
+        "kind": "primary",
+        "locator": "PDF page 61, row Profit, year 2025",
+        "path": "data/financial/objects/80/80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b.txt",
+        "published_at": null,
+        "sha256": "80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "278852000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Profit",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "net_income",
+      "id": "a808a962e437c0fa944fa6bc3a3eadee599103437fb709ed771f379edde9defc",
+      "name_zh": "合并净利润",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Profit \n \n278,852 \n \n424,092 \n2,667 ",
+        "kind": "primary",
+        "locator": "PDF page 61, row Profit, year 2026",
+        "path": "data/financial/objects/80/80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b.txt",
+        "published_at": null,
+        "sha256": "80ad3aab0344260ffb44e47f881017f782ac62ea0b1800abe125943f35a1a27b"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "424092000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Net cash provided by (used in) operating activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "operating_cash_flow",
+      "id": "b15b5066d1a8a6c3998efad0f75a941e976260b4d56fbacf054fe905bb87c139",
+      "name_zh": "经营现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Net cash provided by (used in) operating activities \n \n12,069 \n \n289,789 \n1,822 ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Net cash provided by (used in) operating activities, year 2025",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "12069000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Net cash provided by (used in) operating activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "operating_cash_flow",
+      "id": "7b28cadfca93b058a551bb7bbc9de4767e799b2288cdda0438f0593cdd1fc029",
+      "name_zh": "经营现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Net cash provided by (used in) operating activities \n \n12,069 \n \n289,789 \n1,822 ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Net cash provided by (used in) operating activities, year 2026",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "289789000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Net cash provided by (used in) investing activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "investing_cash_flow",
+      "id": "dc7314ec82c678ad76ed2c651c06930ece998bd7b0839c9f738697077dd7f2fd",
+      "name_zh": "投资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Net cash provided by (used in) investing activities \n \n753,063 \n \n(210,054) \n(1,321) ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Net cash provided by (used in) investing activities, year 2025",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "753063000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Net cash provided by (used in) investing activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "investing_cash_flow",
+      "id": "ddd044035432a49e8d9743f9575701d1db07769b83d24a9d50c524fd3903bc9d",
+      "name_zh": "投资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Net cash provided by (used in) investing activities \n \n753,063 \n \n(210,054) \n(1,321) ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Net cash provided by (used in) investing activities, year 2026",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-210054000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Net cash provided by (used in) financing activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "financing_cash_flow",
+      "id": "daab64d46f5685689506d7f5e7d7b4ef91fc57a1f9047f41973b0e311acb7b75",
+      "name_zh": "融资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Net cash provided by (used in) financing activities \n \n(195,126) \n \n(249,714) \n(1,570) ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Net cash provided by (used in) financing activities, year 2025",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-195126000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Net cash provided by (used in) financing activities",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "financing_cash_flow",
+      "id": "f226ad11acd074d72e118ace22b9446db0a0062b80faaa0769329751a5c0e886",
+      "name_zh": "融资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Net cash provided by (used in) financing activities \n \n(195,126) \n \n(249,714) \n(1,570) ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Net cash provided by (used in) financing activities, year 2026",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-249714000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Effect of exchange rate change on cash and cash equivalents",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "fx_cash_change",
+      "id": "7130eace2b1bed3f410523f998af8d6b89c6c4751f565243464a72604b59396b",
+      "name_zh": "汇率变动对现金的影响",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Effect of exchange rate change on cash and cash equivalents \n \n(9,317) \n \n72,538 \n456 ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Effect of exchange rate change on cash and cash equivalents, year 2025",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-9317000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Effect of exchange rate change on cash and cash equivalents",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "fx_cash_change",
+      "id": "556df6a60769d570911fd2d626b9109e63799e2c2630cb47a796a18f8c039dff",
+      "name_zh": "汇率变动对现金的影响",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Effect of exchange rate change on cash and cash equivalents \n \n(9,317) \n \n72,538 \n456 ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Effect of exchange rate change on cash and cash equivalents, year 2026",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "72538000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Net increase (decrease) in cash and cash equivalents",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_change",
+      "id": "136cdcecf0fe9b46c7d60a62229a8a3c5c406f7167c90432493b0e051733fd76",
+      "name_zh": "现金净变动",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Net increase (decrease) in cash and cash equivalents \n \n560,689 \n \n(97,441) \n(612) ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Net increase (decrease) in cash and cash equivalents, year 2025",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "560689000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Net increase (decrease) in cash and cash equivalents",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_change",
+      "id": "3f80fa7b17176954502a3335e1fa0dcc47ab19ae4d6a4879410a312f21af6ee7",
+      "name_zh": "现金净变动",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Net increase (decrease) in cash and cash equivalents \n \n560,689 \n \n(97,441) \n(612) ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Net increase (decrease) in cash and cash equivalents, year 2026",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-97441000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Cash and cash equivalents at beginning of period",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_begin",
+      "id": "662bc74dae3ff8b0d87916963ad9bb8e86c73fb816de202d8e2192ca331764f0",
+      "name_zh": "期初现金及现金等价物",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Cash and cash equivalents at beginning of period \n \n853,432 \n \n1,414,121 \n8,893 ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Cash and cash equivalents at beginning of period, year 2025",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "853432000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Cash and cash equivalents at beginning of period",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_begin",
+      "id": "0fab57b276e72450f6a4396c7f85232439ba3e7ee6ff740dd8f7acb326dd90ed",
+      "name_zh": "期初现金及现金等价物",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Cash and cash equivalents at beginning of period \n \n853,432 \n \n1,414,121 \n8,893 ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Cash and cash equivalents at beginning of period, year 2026",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1414121000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Cash and cash equivalents at end of period",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_end",
+      "id": "0f578be76b127e7d63eeb3983ef36af0190266bdf30440cde835cd8d8049d873",
+      "name_zh": "期末现金及现金等价物",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Cash and cash equivalents at end of period \n*1 \n1,414,121 \n*1 \n1,316,680 \n8,281 ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Cash and cash equivalents at end of period, year 2025",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1414121000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Cash and cash equivalents at end of period",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "cash_end",
+      "id": "e82bfdac2318b636c546553c96de4a4556e0f56b52ae198d3d1dd53e6fc73d0f",
+      "name_zh": "期末现金及现金等价物",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Cash and cash equivalents at end of period \n*1 \n1,414,121 \n*1 \n1,316,680 \n8,281 ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Cash and cash equivalents at end of period, year 2026",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "1316680000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Purchase of property, plant and equipment and intangible\nassets",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "capex_ppe_and_intangibles",
+      "id": "cc2d30a0ad54abe44fe713ca0f4121aefdaa8c683393722259ce28e02498575c",
+      "name_zh": "固定资产及其他无形资产现金支出",
+      "period": {
+        "basis": "annual",
+        "end": "2025-03-31",
+        "start": "2024-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Purchase of property, plant and equipment and intangible \nassets \n \n(19,008) \n \n(27,169) \n(170) ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Purchase of property, plant and equipment and intangible\nassets, year 2025",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-19008000000"
+    },
+    {
+      "accounting_basis": "J-GAAP",
+      "concept": "Purchase of property, plant and equipment and intangible\nassets",
+      "currency": "JPY",
+      "duplicate_refs": [],
+      "field": "capex_ppe_and_intangibles",
+      "id": "3544a567c29b92bfa926c842fb346c8367381b862c5c5ccf5924cbf220f815d1",
+      "name_zh": "固定资产及其他无形资产现金支出",
+      "period": {
+        "basis": "annual",
+        "end": "2026-03-31",
+        "start": "2025-04-01"
+      },
+      "rounding_tolerance": "1000000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T02:01:15+00:00",
+        "excerpt": "Purchase of property, plant and equipment and intangible \nassets \n \n(19,008) \n \n(27,169) \n(170) ",
+        "kind": "primary",
+        "locator": "PDF page 66, row Purchase of property, plant and equipment and intangible\nassets, year 2026",
+        "path": "data/financial/objects/3e/3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706.txt",
+        "published_at": null,
+        "sha256": "3e794a0abc71ed350fbf5a0c2b4dda82580511802f177e6d16a07dbbb7fa0706"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-27169000000"
+    }
+  ],
+  "implementation_sha256": "3d97fc8bf63f51acfb96fa70a07d13bc25ae1d43ade35a3d00c4b8cc2699246d",
+  "issues": [],
+  "missing_capabilities": [
+    "full_taxonomy_validation",
+    "automatic_research_observation_registration"
+  ],
+  "parser": {
+    "basis_page": 3,
+    "basis_text": "generally accepted in Japan",
+    "layout_profile": "reviewed_exact_document_only",
+    "original_sha256_lock": "adf1d61bfa20412235535f3689e3a52805e46947214f874377d428ffeb878d16"
+  },
+  "plan_sha256": "54c104c5a025d157bfc0bc529795bebea5a9224593c6a2aab50142b8de17e11b",
+  "release_status": "staging_pending_review",
+  "report_id": "nintendo-2026-annual-v1",
+  "schema_version": "1.0.0",
+  "supersedes_report_id": null
+}

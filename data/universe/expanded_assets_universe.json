@@ -1,0 +1,49 @@
+{
+  "version": "2026-10-12",
+  "description": "待567家个股攻坚清零后横向拓展的高价值成长股、ETF与黄金/大宗商品全息资产池",
+  "status": "ready_for_pipeline_execution_post_phase1",
+  "asset_classes": {
+    "etfs": {
+      "broad_market_indices": [
+        {"ticker": "SPY", "name": "SPDR S&P 500 ETF Trust", "category": "大盘蓝筹基准", "expense_ratio": "0.09%"},
+        {"ticker": "QQQ", "name": "Invesco QQQ Trust (纳斯达克100)", "category": "大盘科技成长", "expense_ratio": "0.20%"},
+        {"ticker": "IWM", "name": "iShares Russell 2000 ETF", "category": "小盘股流动性与弹性", "expense_ratio": "0.19%"}
+      ],
+      "sector_and_thematic": [
+        {"ticker": "SMH", "name": "VanEck Semiconductor ETF", "category": "半导体算力全产业链", "expense_ratio": "0.35%"},
+        {"ticker": "XLK", "name": "Technology Select Sector SPDR", "category": "科技巨头与软件", "expense_ratio": "0.09%"},
+        {"ticker": "XLE", "name": "Energy Select Sector SPDR", "category": "传统油气与能源高分红", "expense_ratio": "0.09%"},
+        {"ticker": "XBI", "name": "SPDR S&P Biotech ETF", "category": "创新药与生物科技等权高弹性", "expense_ratio": "0.35%"}
+      ],
+      "dividend_and_fixed_income": [
+        {"ticker": "SCHD", "name": "Schwab U.S. Dividend Equity ETF", "category": "优质高股息现金流防御", "expense_ratio": "0.06%"},
+        {"ticker": "TLT", "name": "iShares 20+ Year Treasury Bond ETF", "category": "超长久期美债利率对冲", "expense_ratio": "0.15%"}
+      ]
+    },
+    "gold_and_precious_metals": {
+      "physical_gold_trusts": [
+        {"ticker": "GLD", "name": "SPDR Gold Shares", "category": "实物黄金信托 (全球最大)", "underlying": "伦敦金银市场协会金条"},
+        {"ticker": "IAU", "name": "iShares Gold Trust", "category": "实物黄金低费率信托", "underlying": "实物金条"}
+      ],
+      "gold_miners": [
+        {"ticker": "NEM", "name": "纽蒙特黄金 (Newmont Corporation)", "category": "全球第一大黄金开采商", "metric": "AISC全维持成本与储量"},
+        {"ticker": "GOLD", "name": "巴里克黄金 (Barrick Gold Corporation)", "category": "跨国顶级一级金矿运营商", "metric": "自由现金流与地缘金矿"},
+        {"ticker": "AEM", "name": "阿尼科伊格尔 (Agnico Eagle Mines Limited)", "category": "北美低政治风险优质金矿龙头", "metric": "最高运营稳定性与优质品位"}
+      ],
+      "silver_and_miners": [
+        {"ticker": "SLV", "name": "iShares Silver Trust", "category": "实物白银信托", "metric": "光伏与工业属性叠加金融属性"},
+        {"ticker": "PAAS", "name": "泛美白银 (Pan American Silver)", "category": "白银开采龙头", "metric": "白银金银比率杠杆"}
+      ]
+    },
+    "high_value_growth_equities": [
+      {"ticker": "PLTR", "name": "Palantir Technologies Inc.", "sector": "企业级与国防AI本体软件SaaS", "focus": "AIP商业化与国防高壁垒订单"},
+      {"ticker": "ARM", "name": "Arm Holdings plc", "sector": "低功耗芯片架构IP绝对垄断", "focus": "v9架构版权费率倍增与数据中心CPU"},
+      {"ticker": "CRWD", "name": "CrowdStrike Holdings, Inc.", "sector": "终端安全与XDR云安全平台", "focus": "Falcon单代理架构与事件后复苏黏性"},
+      {"ticker": "MELI", "name": "MercadoLibre, Inc.", "sector": "拉美电商与金融科技超级生态", "focus": "拉美亚马逊+PayPal闭环复利增长"},
+      {"ticker": "APP", "name": "AppLovin Corporation", "sector": "AI广告引擎与移动应用商业化", "focus": "AXON 2.0 AI驱动的高毛利高变现飞轮"},
+      {"ticker": "VRT", "name": "维谛技术 (Vertiv Holdings)", "sector": "AI数据中心精密温控与液冷供配电", "focus": "超算液冷CDU与高密电力系统"},
+      {"ticker": "ASTS", "name": "AST SpaceMobile, Inc.", "sector": "天基蜂窝卫星直连手机通信", "focus": "BlueBird卫星星座与三大运营商合作"},
+      {"ticker": "RKLB", "name": "Rocket Lab USA, Inc.", "sector": "商业航天发射与卫星系统制造", "focus": "Electron高频发射与中型中子号火箭"}
+    ]
+  }
+}

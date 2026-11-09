@@ -1,0 +1,195 @@
+{
+  "schema_version": "1.0.0",
+  "protocol_id": "real_history_diagnostic_v1",
+  "allowed_hosts": [
+    "mba.tuck.dartmouth.edu",
+    "www.microsoft.com"
+  ],
+  "max_download_bytes": 12000000,
+  "normalization_start": "2010-01-01",
+  "evaluation": {
+    "start": "2018-01-01",
+    "end": "2024-12-31",
+    "lookback_observations": 252,
+    "confidence_levels": [
+      0.95,
+      0.99
+    ],
+    "bootstrap": {
+      "repetitions": 1000,
+      "block_lengths": [
+        5,
+        20,
+        60
+      ],
+      "seed": 20261107
+    }
+  },
+  "sources": [
+    {
+      "id": "ff_library",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
+      "format": "html",
+      "role": "methodology",
+      "source_kind": "primary",
+      "dataset_kind": "research_material",
+      "license_notes": "Copyright Eugene F. Fama and Kenneth R. French; publisher's publicly downloadable research files, retained for local research only; no redistribution license asserted.",
+      "notes": "发布者提供的研究组合资料；Mkt-RF加RF还原总收益，百分数单位；可能有历史修订；JP为美元口径，不是TOPIX日元行情。"
+    },
+    {
+      "id": "ff_us_methodology",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/f-f_factors.html",
+      "format": "html",
+      "role": "methodology",
+      "source_kind": "primary",
+      "dataset_kind": "research_material",
+      "license_notes": "Copyright Eugene F. Fama and Kenneth R. French; publisher's publicly downloadable research files, retained for local research only; no redistribution license asserted.",
+      "notes": "发布者提供的研究组合资料；Mkt-RF加RF还原总收益，百分数单位；可能有历史修订；JP为美元口径，不是TOPIX日元行情。"
+    },
+    {
+      "id": "ff_international_methodology",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/f-f_developed.html",
+      "format": "html",
+      "role": "methodology",
+      "source_kind": "primary",
+      "dataset_kind": "research_material",
+      "license_notes": "Copyright Eugene F. Fama and Kenneth R. French; publisher's publicly downloadable research files, retained for local research only; no redistribution license asserted.",
+      "notes": "发布者提供的研究组合资料；Mkt-RF加RF还原总收益，百分数单位；可能有历史修订；JP为美元口径，不是TOPIX日元行情。"
+    },
+    {
+      "id": "ff_us_daily",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_daily_CSV.zip",
+      "format": "zip",
+      "role": "daily_returns",
+      "source_kind": "secondary",
+      "dataset_kind": "market",
+      "license_notes": "Copyright Eugene F. Fama and Kenneth R. French; publisher's publicly downloadable research files, retained for local research only; no redistribution license asserted.",
+      "notes": "发布者提供的研究组合资料；Mkt-RF加RF还原总收益，百分数单位；可能有历史修订；JP为美元口径，不是TOPIX日元行情。"
+    },
+    {
+      "id": "ff_japan_daily",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/Japan_3_Factors_Daily_CSV.zip",
+      "format": "zip",
+      "role": "daily_returns",
+      "source_kind": "secondary",
+      "dataset_kind": "market",
+      "license_notes": "Copyright Eugene F. Fama and Kenneth R. French; publisher's publicly downloadable research files, retained for local research only; no redistribution license asserted.",
+      "notes": "发布者提供的研究组合资料；Mkt-RF加RF还原总收益，百分数单位；可能有历史修订；JP为美元口径，不是TOPIX日元行情。"
+    },
+    {
+      "id": "msft_ar2015",
+      "url": "https://www.microsoft.com/investor/reports/ar15/index.html",
+      "format": "html",
+      "role": "microsoft_cashflow",
+      "fiscal_year": 2015,
+      "source_kind": "primary",
+      "dataset_kind": "financial",
+      "license_notes": "Microsoft issuer annual report; original public disclosure archived for local research only; not redistributed.",
+      "notes": "发行人原始年报；只提取当年现金流量表CFO及现金资本开支，单位百万美元；不冒充已平账的完整三表或严格历史可用版本。"
+    },
+    {
+      "id": "msft_ar2016",
+      "url": "https://www.microsoft.com/investor/reports/ar16/index.html",
+      "format": "html",
+      "role": "microsoft_cashflow",
+      "fiscal_year": 2016,
+      "source_kind": "primary",
+      "dataset_kind": "financial",
+      "license_notes": "Microsoft issuer annual report; original public disclosure archived for local research only; not redistributed.",
+      "notes": "发行人原始年报；只提取当年现金流量表CFO及现金资本开支，单位百万美元；不冒充已平账的完整三表或严格历史可用版本。"
+    },
+    {
+      "id": "msft_ar2017",
+      "url": "https://www.microsoft.com/investor/reports/ar17/index.html",
+      "format": "html",
+      "role": "microsoft_cashflow",
+      "fiscal_year": 2017,
+      "source_kind": "primary",
+      "dataset_kind": "financial",
+      "license_notes": "Microsoft issuer annual report; original public disclosure archived for local research only; not redistributed.",
+      "notes": "发行人原始年报；只提取当年现金流量表CFO及现金资本开支，单位百万美元；不冒充已平账的完整三表或严格历史可用版本。"
+    },
+    {
+      "id": "msft_ar2018",
+      "url": "https://www.microsoft.com/investor/reports/ar18/index.html",
+      "format": "html",
+      "role": "microsoft_cashflow",
+      "fiscal_year": 2018,
+      "source_kind": "primary",
+      "dataset_kind": "financial",
+      "license_notes": "Microsoft issuer annual report; original public disclosure archived for local research only; not redistributed.",
+      "notes": "发行人原始年报；只提取当年现金流量表CFO及现金资本开支，单位百万美元；不冒充已平账的完整三表或严格历史可用版本。"
+    },
+    {
+      "id": "msft_ar2019",
+      "url": "https://www.microsoft.com/investor/reports/ar19/index.html",
+      "format": "html",
+      "role": "microsoft_cashflow",
+      "fiscal_year": 2019,
+      "source_kind": "primary",
+      "dataset_kind": "financial",
+      "license_notes": "Microsoft issuer annual report; original public disclosure archived for local research only; not redistributed.",
+      "notes": "发行人原始年报；只提取当年现金流量表CFO及现金资本开支，单位百万美元；不冒充已平账的完整三表或严格历史可用版本。"
+    },
+    {
+      "id": "msft_ar2020",
+      "url": "https://www.microsoft.com/investor/reports/ar20/index.html",
+      "format": "html",
+      "role": "microsoft_cashflow",
+      "fiscal_year": 2020,
+      "source_kind": "primary",
+      "dataset_kind": "financial",
+      "license_notes": "Microsoft issuer annual report; original public disclosure archived for local research only; not redistributed.",
+      "notes": "发行人原始年报；只提取当年现金流量表CFO及现金资本开支，单位百万美元；不冒充已平账的完整三表或严格历史可用版本。"
+    },
+    {
+      "id": "msft_ar2021",
+      "url": "https://www.microsoft.com/investor/reports/ar21/index.html",
+      "format": "html",
+      "role": "microsoft_cashflow",
+      "fiscal_year": 2021,
+      "source_kind": "primary",
+      "dataset_kind": "financial",
+      "license_notes": "Microsoft issuer annual report; original public disclosure archived for local research only; not redistributed.",
+      "notes": "发行人原始年报；只提取当年现金流量表CFO及现金资本开支，单位百万美元；不冒充已平账的完整三表或严格历史可用版本。"
+    },
+    {
+      "id": "msft_ar2022",
+      "url": "https://www.microsoft.com/investor/reports/ar22/index.html",
+      "format": "html",
+      "role": "microsoft_cashflow",
+      "fiscal_year": 2022,
+      "source_kind": "primary",
+      "dataset_kind": "financial",
+      "license_notes": "Microsoft issuer annual report; original public disclosure archived for local research only; not redistributed.",
+      "notes": "发行人原始年报；只提取当年现金流量表CFO及现金资本开支，单位百万美元；不冒充已平账的完整三表或严格历史可用版本。"
+    },
+    {
+      "id": "msft_ar2023",
+      "url": "https://www.microsoft.com/investor/reports/ar23/index.html",
+      "format": "html",
+      "role": "microsoft_cashflow",
+      "fiscal_year": 2023,
+      "source_kind": "primary",
+      "dataset_kind": "financial",
+      "license_notes": "Microsoft issuer annual report; original public disclosure archived for local research only; not redistributed.",
+      "notes": "发行人原始年报；只提取当年现金流量表CFO及现金资本开支，单位百万美元；不冒充已平账的完整三表或严格历史可用版本。"
+    },
+    {
+      "id": "msft_ar2024",
+      "url": "https://www.microsoft.com/investor/reports/ar24/index.html",
+      "format": "html",
+      "role": "microsoft_cashflow",
+      "fiscal_year": 2024,
+      "source_kind": "primary",
+      "dataset_kind": "financial",
+      "license_notes": "Microsoft issuer annual report; original public disclosure archived for local research only; not redistributed.",
+      "notes": "发行人原始年报；只提取当年现金流量表CFO及现金资本开支，单位百万美元；不冒充已平账的完整三表或严格历史可用版本。"
+    }
+  ],
+  "limitations": [
+    "Frozen before observing collected data results, no tuning",
+    "Retrospective revised-data diagnosis, not strict point-in-time backtest",
+    "No trading-performance or production approval threshold"
+  ]
+}

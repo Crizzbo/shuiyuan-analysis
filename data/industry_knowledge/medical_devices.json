@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "medical_devices",
+    "industry_name_zh": "高端医疗器械与生命科学仪器",
+    "sector_id": "health_care",
+    "sector_name_zh": "医疗保健",
+    "macro_sector_id": "HEALTH_BIO",
+    "macro_sector_name_zh": "医疗保健、专利创新药与生物技术服务",
+    "description_zh": "涵盖微创手术机器人、心血管介入植入耗材、高端医学影像设备及生命科学实验室分析仪器研发制造企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.45,
+    "typical_markup_ratio": 1.25,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "中等偏高经营杠杆",
+    "typical_gross_margin_range": [0.50, 0.70]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 85.0,
+    "dio_warning_days": 150.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.25,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "高精度微创手术器械多自由度精密微传动绳、医用级超弹性镍钛合金丝与生物相容性涂层材料",
+      "超导核磁共振磁体线圈、低温深冷杜瓦瓶及超低噪声固态辐射探测芯片",
+      "高端质谱色谱分析仪用光学光栅、高纯生物酶试剂与无菌一次性耗材"
+    ],
+    "downstream_profile": "全球知名大型综合公立与私立医院手术科室、独立医学检验中心 (ICL) 及生物制药科研实验室",
+    "pricing_power_verdict": "具备高转换成本生态的手术机器人与独家专利介入器械享有耗材封闭定价权；同质化常规耗材直面公立医保集中集采强力杀价",
+    "channel_inversion_sensitivity": "医院单季度择期手术总台数 (Elective Procedure Volume) 与科研客户资本开支预算是行业景气度转向的最先导指针"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "旗舰微创手术机器人全球装机基数稳健扩大，高毛利专用配套手术刀头耗材单台利用率持续突破历史新高",
+      "创新经导管心脏瓣膜或脑血管神经介入突破性产品获批上市并纳入医保报销，临床手术渗透率加速放量",
+      "仪器耗材一体化商业模式运转顺畅，高频复购专有耗材与售后维保服务收入占比突破 70% 构筑高确定性现金流底座"
+    ],
+    "leading_bear_defenses": [
+      "高值医用耗材遭遇跨区域带量集采大幅降价，产品中标价格遭断崖式腰斩致使原有渠道经销商体系利润塌陷",
+      "全球生物医药投融资降温导致科研机构与中小型药企削减开支，大型分析仪器采购呈现客户订单延迟或推迟确认",
+      "核心植入类医疗器械爆发严重不良事件或术中缺陷，遭遇监管机构发出最高级别召回警报并陷入巨额患者诉讼赔偿"
+    ],
+    "core_catalyst_dimensions": [
+      "全球主要医疗系统单季度择期外科手术总量与设备装机开工率",
+      "国家或地方高值医用耗材集中带量采购最终中选规则与价格降幅",
+      "全球生命科学与制药研发资本支出指引变动趋势",
+      "监管机构重大创新医疗器械绿色审批与上市许可批准批件"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "向医院采取免费投放或租售名义铺设大型仪器，在未实质满足风险报酬转移前激进确认全额设备销售收入",
+      "经销商渠道存货周转天数异常飙升但未按终端手术实际消耗结转，存在为达成考核向渠道违规塞货虚增应收",
+      "爆发重大一级器械召回事件后选择性推迟计提产品召回损失、保修更换履约负债及潜在诉讼赔偿金"
+    ],
+    "channel_and_revenue_checks": [
+      "大型医疗设备长期维保与软件升级合约收入跨期确认是否符合履约义务进度",
+      "向各级医药代理商支付的高额学术推广费用与技术咨询费的合规性穿透审查"
+    ]
+  }
+}

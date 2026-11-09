@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0.0",
+  "entity_id": "US:INTU:CIK896878",
+  "industry_id": "software",
+  "as_of": "2026-10-11T01:53:26.814621+00:00",
+  "is_synthetic": false,
+  "binding_version": "1.0.0",
+  "input_batch_sha256": "25ac36184336e19cbe02e33e4d1ebc47140867e3abacb87e33a807e501343295",
+  "binding_implementation_path": "finance_tools/metric_pipeline.py",
+  "binding_implementation_sha256": "b5b657458ee32e1df4592b8e5346b1c223b91a1c6f21375e983fd49fd0f0faf9",
+  "results": [
+    {
+      "metric_id": "operating_margin",
+      "status": "computed",
+      "unit": "ratio",
+      "currency": null,
+      "period": {
+        "start": "2025-08-01",
+        "end": "2026-07-31",
+        "basis": "annual"
+      },
+      "value": 0.2743379336068631,
+      "input_fact_refs": [
+        "7ce8a85c76eb1ad5e122bab85315c8c3ac8d047e6ee3b027277514c562218b8b",
+        "5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f"
+      ],
+      "input_facts": [
+        {
+          "id": "7ce8a85c76eb1ad5e122bab85315c8c3ac8d047e6ee3b027277514c562218b8b",
+          "field": "operating_income",
+          "scope_id": "consolidated",
+          "period": {
+            "start": "2025-08-01",
+            "end": "2026-07-31",
+            "basis": "annual"
+          },
+          "accounting_basis": "GAAP",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": 1,
+          "source": {
+            "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+            "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34",
+            "locator": "intu-20260731.htm#f-90 context=c-1",
+            "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:OperatingIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-90\">5,884</ix:nonFraction>",
+            "kind": "primary",
+            "published_at": null,
+            "available_at": "2026-10-11T01:37:03+00:00"
+          },
+          "entity_id": "US:INTU:CIK896878",
+          "value": 5884000000.0
+        },
+        {
+          "id": "5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f",
+          "field": "revenue",
+          "scope_id": "consolidated",
+          "period": {
+            "start": "2025-08-01",
+            "end": "2026-07-31",
+            "basis": "annual"
+          },
+          "accounting_basis": "GAAP",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": 1,
+          "source": {
+            "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+            "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34",
+            "locator": "intu-20260731.htm#f-60 context=c-1",
+            "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:Revenues\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-60\">21,448</ix:nonFraction>",
+            "kind": "primary",
+            "published_at": null,
+            "available_at": "2026-10-11T01:37:03+00:00"
+          },
+          "entity_id": "US:INTU:CIK896878",
+          "value": 21448000000.0
+        }
+      ],
+      "calculation": {
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "implementation_path": "finance_tools/basic.py",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "parameters": {
+          "denominator": 21448000000.0,
+          "numerator": 5884000000.0,
+          "operation": "operating_margin"
+        },
+        "input_sha256": "d32f19a0b932dce10357c2724a8aae0d91168c963a74b241303c95dd7316ac1b",
+        "result": {
+          "value": 0.2743379336068631
+        }
+      }
+    }
+  ],
+  "blocked_metric_ids": [],
+  "missing_industry_driver_ids": [
+    "software_driver_1",
+    "software_driver_2",
+    "software_driver_3"
+  ],
+  "research_readiness": {
+    "S1": "pending_industry_evidence",
+    "S2": "blocked",
+    "S3": "pending_transmission_evidence",
+    "S4": "pending_valuation_inputs",
+    "S5": "pending_risk_evidence",
+    "S6": "pending_monitoring_plan"
+  },
+  "research_export_status": "staging_only_raw_facts_not_registered_as_research_observations"
+}

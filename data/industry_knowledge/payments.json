@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "payments",
+    "industry_name_zh": "数字支付与金融基础设施网络",
+    "sector_id": "financials",
+    "sector_name_zh": "金融",
+    "macro_sector_id": "FIN_INS",
+    "macro_sector_name_zh": "银行信贷、保险保障、证券资管与房地产金融",
+    "description_zh": "涵盖全球卡组织清算网络、商户收单机构、跨境支付通道及数字钱包基础设施企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.48,
+    "typical_markup_ratio": 1.25,
+    "capex_intensity": "中等",
+    "operating_leverage_exposure": "极高经营杠杆",
+    "typical_gross_margin_range": [0.50, 0.85]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 0.0,
+    "dio_warning_days": 0.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.15,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "全球发卡银行与商户收单机构双边网络节点排他性绑定深度",
+      "主权国家中央银行跨境资金流动监管合规准入与清算牌照资质",
+      "高并发毫秒级清算交易处理架构与 PCI-DSS 顶级安全合规认证"
+    ],
+    "downstream_profile": "全球数十亿持卡消费者群体、数千万线下零售实体商户及跨境外贸电商独立站",
+    "pricing_power_verdict": "双寡头全球清算网络拥有绝对垄断双边网络效应与极高提价权；中下游二线聚合支付服务商面临费率白热化内卷",
+    "channel_inversion_sensitivity": "总支付清算交易额 (Payment Volume) 尤其是高毛利跨境交易额 (Cross-Border Volume) 增速是清算网络利润变动的最前置晴雨表"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "全球跨国商务差旅与出境游强劲反弹，高费率跨境清算交易额迎来超预期爆发式增长",
+      "现金替代进程在主要新兴市场国家加速推进，活跃发卡量与商户网络受理终端数双双创历史新高",
+      "反欺诈实时风控、交易代币化 (Tokenization) 等高附加值增值技术服务 (VAS) 营收占比突破 25% 拓宽利润边际"
+    ],
+    "leading_bear_defenses": [
+      "主要经济体监管机构强行推进信用卡交换费法定费率上限立法，导致清算网络综合货币化率遭遇政策性压缩",
+      "主权级本土即时支付清算体系 (如印度 UPI、巴西 PIX) 异军突起，对传统卡组织网络形成长期实质性分流替代",
+      "宏观消费意愿疲软导致居民高客单价可选大额消费骤降，单笔交易额与总体刷卡周转量增速明显放缓"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度总支付交易额 (Payment Volume) 与跨境交易额 (Cross-Border Volume) 同比增速",
+      "综合货币化率 (Take Rate) 与发卡行激励支出 (Client Incentives) 占毛收入比重",
+      "全球有效流通卡量 (Cards in Circulation) 与商户受理网点增长",
+      "主要国家针对支付网络刷卡手续费反垄断诉讼与合规立法裁决走向"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "将给予大型发卡行的巨额商业激励支出 (Client Incentives) 违规予以资本化或推迟冲减当期营业收入以粉饰净收入",
+      "对商户大额欺诈拒付、盗刷及未决争议款项未充分计提预期信用与结算赔偿风险准备金",
+      "收单代理业务中将客户委托沉淀的受托代付资金按总额法违规确认为主营业务收入以夸大业务体量"
+    ],
+    "channel_and_revenue_checks": [
+      "客户激励补贴在不同会计期间的跨期确认是否与实际交易清算量达成严格权责发生制匹配",
+      "商户清算备付金托管账户合规性与资金挪用风险排查"
+    ]
+  }
+}

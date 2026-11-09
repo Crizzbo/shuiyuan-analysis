@@ -1,0 +1,37 @@
+{
+  "packages": [
+    {
+      "id": "us-gaap-2026",
+      "path": "data/taxonomies/downloads/us-gaap-2026.zip",
+      "sha256": "f4c8b8b5697ba7d825a8614b159611cd25a46640e98a9737cda1e4a672bd4c81",
+      "document_url": "https://xbrl.fasb.org/us-gaap/2026/us-gaap-2026.zip",
+      "page_url": "https://www.sec.gov/data-research/structured-data/taxonomies-schemas/standard-taxonomies/operating-companies",
+      "acquired_at": "2026-10-11T01:56:20.915725+00:00",
+      "source_kind": "primary",
+      "dataset_kind": "classification",
+      "method": "ai_browser_download"
+    },
+    {
+      "id": "srt-2026",
+      "path": "data/taxonomies/downloads/srt-2026.zip",
+      "sha256": "34dab1ee7a10b9991fee1e17437c278908599ff2258ea3270ef718cab265be05",
+      "document_url": "https://xbrl.fasb.org/srt/2026/srt-2026.zip",
+      "page_url": "https://www.sec.gov/data-research/structured-data/taxonomies-schemas/standard-taxonomies/operating-companies",
+      "acquired_at": "2026-10-11T01:56:20.915725+00:00",
+      "source_kind": "primary",
+      "dataset_kind": "classification",
+      "method": "ai_browser_download"
+    },
+    {
+      "id": "sec-2026",
+      "path": "data/taxonomies/downloads/sec-2026.zip",
+      "sha256": "16243a0713f10fb7bebd020cb0da505e2bf4ef180af3e19b8e4cd4ad2a75a6a0",
+      "document_url": "https://xbrl.sec.gov/2026.zip",
+      "page_url": "https://www.sec.gov/data-research/structured-data/taxonomies-schemas/taxonomy-files-annual-updates",
+      "acquired_at": "2026-10-11T02:01:14.967421+00:00",
+      "source_kind": "primary",
+      "dataset_kind": "classification",
+      "method": "ai_browser_download"
+    }
+  ]
+}

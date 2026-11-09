@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This schema was created by staff of the U.S. Securities and Exchange Commission. -->
+<!-- Data and content created by government employees within the scope of their employment -->
+<!-- are not subject to domestic copyright protection. 17 U.S.C. 105. -->
+<xs:schema
+xmlns:link="http://www.xbrl.org/2003/linkbase"
+xmlns:sbs-sbsef-fin="http://xbrl.sec.gov/sbs-sbsef-fin/2026"
+xmlns:xbrldt="http://xbrl.org/2005/xbrldt"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://xbrl.sec.gov/sbs-sbsef-fin/2026"
+elementFormDefault="qualified">
+<xs:import namespace="http://xbrl.sec.gov/sbs-sbsef-com/2026" schemaLocation="sbs-sbsef-com-2026.xsd"/>
+<xs:annotation>
+<xs:appinfo>
+<link:linkbase id="lnk">
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#hypercube-dimension"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/all" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#all"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/domain-member" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#domain-member"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/dimension-default" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#dimension-default"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/dimension-domain" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#dimension-domain"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReport" xlink:type="simple" xlink:href="sbs-2026.xsd#FinancialResourcesReport"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReportExpense" xlink:type="simple" xlink:href="sbs-2026.xsd#FinancialResourcesReportExpense"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReportMarketValue" xlink:type="simple" xlink:href="sbs-2026.xsd#FinancialResourcesReportMarketValue"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReportWindDownProjection" xlink:type="simple" xlink:href="sbs-2026.xsd#FinancialResourcesReportWindDownProjection"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReportWindDownCosts" xlink:type="simple" xlink:href="sbs-2026.xsd#FinancialResourcesReportWindDownCosts"/>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReport">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefFinancialResourcesReportLineItems" xlink:label="SbsefFinancialResourcesReportLineItems"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefFinancialResourcesNecessary" xlink:label="SbsefFinancialResourcesNecessary"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefFinancialResourcesReportLineItems" xlink:to="SbsefFinancialResourcesNecessary" order="1.0" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReportWindDownCosts">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownCostsLineItems" xlink:label="SbsefWindDownCostsLineItems"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownCostTable" xlink:label="SbsefWindDownCostTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="SbsefWindDownCostsLineItems" xlink:to="SbsefWindDownCostTable" order="1.0" xbrldt:contextElement="segment" xbrldt:closed="true" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownCostAxis" xlink:label="SbsefWindDownCostAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="SbsefWindDownCostTable" xlink:to="SbsefWindDownCostAxis" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownCostName" xlink:label="SbsefWindDownCostName"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefWindDownCostsLineItems" xlink:to="SbsefWindDownCostName" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownCost" xlink:label="SbsefWindDownCost"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefWindDownCostsLineItems" xlink:to="SbsefWindDownCost" order="3.0" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReportExpense">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefExpenseLineItems" xlink:label="SbsefExpenseLineItems"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefExpenseTable" xlink:label="SbsefExpenseTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="SbsefExpenseLineItems" xlink:to="SbsefExpenseTable" order="1.0" xbrldt:contextElement="segment" xbrldt:closed="true" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefExpenseAxis" xlink:label="SbsefExpenseAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="SbsefExpenseTable" xlink:to="SbsefExpenseAxis" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefExpenseName" xlink:label="SbsefExpenseName"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefExpenseLineItems" xlink:to="SbsefExpenseName" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefExpense" xlink:label="SbsefExpense"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefExpenseLineItems" xlink:to="SbsefExpense" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefExpenseExcludedOrProratedFlag" xlink:label="SbsefExpenseExcludedOrProratedFlag"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefExpenseLineItems" xlink:to="SbsefExpenseExcludedOrProratedFlag" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefExpenseExcludedOrProratedTextBlock" xlink:label="SbsefExpenseExcludedOrProratedTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefExpenseLineItems" xlink:to="SbsefExpenseExcludedOrProratedTextBlock" order="5.0" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReportMarketValue">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefFinancialResourcesMarketValueLineItems" xlink:label="SbsefFinancialResourcesMarketValueLineItems"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefFinancialResourceMarketValueTable" xlink:label="SbsefFinancialResourceMarketValueTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="SbsefFinancialResourcesMarketValueLineItems" xlink:to="SbsefFinancialResourceMarketValueTable" order="1.0" xbrldt:contextElement="segment" xbrldt:closed="true" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefFinancialResourceAxis" xlink:label="SbsefFinancialResourceAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="SbsefFinancialResourceMarketValueTable" xlink:to="SbsefFinancialResourceAxis" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefFinancialResourceName" xlink:label="SbsefFinancialResourceName"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefFinancialResourcesMarketValueLineItems" xlink:to="SbsefFinancialResourceName" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefFinancialResourceMarketValue" xlink:label="SbsefFinancialResourceMarketValue"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefFinancialResourcesMarketValueLineItems" xlink:to="SbsefFinancialResourceMarketValue" order="3.0" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReportWindDownProjection">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownLineItems" xlink:label="SbsefWindDownLineItems"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownProjectedDuration" xlink:label="SbsefWindDownProjectedDuration"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefWindDownLineItems" xlink:to="SbsefWindDownProjectedDuration" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownEstimateBasisTextBlock" xlink:label="SbsefWindDownEstimateBasisTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefWindDownLineItems" xlink:to="SbsefWindDownEstimateBasisTextBlock" order="2.0" priority="10"/>
+</link:definitionLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReport">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefFinancialResourcesReportLineItems" xlink:label="SbsefFinancialResourcesReportLineItems"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefFinancialResourcesNecessary" xlink:label="SbsefFinancialResourcesNecessary"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefFinancialResourcesReportLineItems" xlink:to="SbsefFinancialResourcesNecessary" order="1.0" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReportWindDownCosts">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownCostTable" xlink:label="SbsefWindDownCostTable"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownCostAxis" xlink:label="SbsefWindDownCostAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefWindDownCostTable" xlink:to="SbsefWindDownCostAxis" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownCostsLineItems" xlink:label="SbsefWindDownCostsLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefWindDownCostTable" xlink:to="SbsefWindDownCostsLineItems" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownCost" xlink:label="SbsefWindDownCost"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefWindDownCostsLineItems" xlink:to="SbsefWindDownCost" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownCostName" xlink:label="SbsefWindDownCostName"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefWindDownCostsLineItems" xlink:to="SbsefWindDownCostName" order="1.0" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReportExpense">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefExpenseTable" xlink:label="SbsefExpenseTable"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefExpenseAxis" xlink:label="SbsefExpenseAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefExpenseTable" xlink:to="SbsefExpenseAxis" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefExpenseLineItems" xlink:label="SbsefExpenseLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefExpenseTable" xlink:to="SbsefExpenseLineItems" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefExpenseName" xlink:label="SbsefExpenseName"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefExpenseLineItems" xlink:to="SbsefExpenseName" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefExpense" xlink:label="SbsefExpense"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefExpenseLineItems" xlink:to="SbsefExpense" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefExpenseExcludedOrProratedFlag" xlink:label="SbsefExpenseExcludedOrProratedFlag"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefExpenseLineItems" xlink:to="SbsefExpenseExcludedOrProratedFlag" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefExpenseExcludedOrProratedTextBlock" xlink:label="SbsefExpenseExcludedOrProratedTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefExpenseLineItems" xlink:to="SbsefExpenseExcludedOrProratedTextBlock" order="4.0" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReportMarketValue">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefFinancialResourceMarketValueTable" xlink:label="SbsefFinancialResourceMarketValueTable"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefFinancialResourceAxis" xlink:label="SbsefFinancialResourceAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefFinancialResourceMarketValueTable" xlink:to="SbsefFinancialResourceAxis" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefFinancialResourcesMarketValueLineItems" xlink:label="SbsefFinancialResourcesMarketValueLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefFinancialResourceMarketValueTable" xlink:to="SbsefFinancialResourcesMarketValueLineItems" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefFinancialResourceName" xlink:label="SbsefFinancialResourceName"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefFinancialResourcesMarketValueLineItems" xlink:to="SbsefFinancialResourceName" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefFinancialResourceMarketValue" xlink:label="SbsefFinancialResourceMarketValue"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefFinancialResourcesMarketValueLineItems" xlink:to="SbsefFinancialResourceMarketValue" order="2.0" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/FinancialResourcesReportWindDownProjection">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownLineItems" xlink:label="SbsefWindDownLineItems"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownProjectedDuration" xlink:label="SbsefWindDownProjectedDuration"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefWindDownLineItems" xlink:to="SbsefWindDownProjectedDuration" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefWindDownEstimateBasisTextBlock" xlink:label="SbsefWindDownEstimateBasisTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefWindDownLineItems" xlink:to="SbsefWindDownEstimateBasisTextBlock" order="2.0" priority="10"/>
+</link:presentationLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+</xs:schema>

@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "chemicals",
+    "industry_name_zh": "特种化学品与基础化工",
+    "sector_id": "materials",
+    "sector_name_zh": "原材料",
+    "macro_sector_id": "ENERGY_MIN",
+    "macro_sector_name_zh": "能源采掘、矿产开采与大宗原材料",
+    "description_zh": "涵盖基础聚烯烃、聚氨酯 (MDI/TDI)、精细电子化学品、氟硅特种新材料及农化化学品生产企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.72,
+    "typical_markup_ratio": 1.08,
+    "capex_intensity": "极高重资产",
+    "operating_leverage_exposure": "极高经营杠杆",
+    "typical_gross_margin_range": [0.15, 0.35]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 45.0,
+    "dio_warning_days": 80.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.25,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "原油石脑油裂解料、煤炭甲醇原料及工业管道天然气能源供给",
+      "贵金属特种催化剂体系 (铂/钯/铑) 配方技术与超高压反应机组装备",
+      "危险化学品项目严苛的属地安全环评与碳排放总量指标合规批文"
+    ],
+    "downstream_profile": "汽车轻量化工程塑料、建筑节能保温材料、半导体晶圆制造电子化学品及光伏新能源封装胶膜",
+    "pricing_power_verdict": "大宗基础化工品属于价格接受者，受全球产能增量周期主导；高纯度电子级特种化学品拥有独家配方专利与高额技术溢价",
+    "channel_inversion_sensitivity": "主要产品价差 (如 MDI 与纯苯原料价差) 及贸易商社会流通库存是化工景气度周期转向最灵敏的温度计"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "海外高成本同业装置因地缘能源冲击或老旧环保合规永久性退出，全球供需偏紧拉升核心产品利差",
+      "高附加值先进制程电子化学品与高性能氟硅聚合物顺利通过头部晶圆厂认证并进入大规模量产放量期",
+      "现代化一体化绿色化工园区全产能负荷平稳释放，单耗能耗与物流协同达到全球成本曲线最低分位"
+    ],
+    "leading_bear_defenses": [
+      "全行业进入盲目资本开支扩张高峰期，同质化新增产能集中投放引发价格战导致产品毛利被严重吞噬",
+      "上游原料能源价格单边大涨而下游终端工业需求疲弱无力顺价传导，产品毛利遭遇两头挤压陷入亏损",
+      "厂区发生重大火灾燃爆或危化品渗漏突发恶性事故，导致属地监管责令长期停产整顿并处巨额生态处罚"
+    ],
+    "core_catalyst_dimensions": [
+      "国际化工权威机构大宗化学品现货报价及吨产品利差跟踪指数",
+      "全行业主要大型化工装置单周平均开工负荷率 (Operating Rate) 与企业库存天数",
+      "国际原油与天然气基准期货价格大幅波动",
+      "国家环保生态巡查与高污染淘汰类落后产能整顿执法动向"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "在行业低谷与开工严重不足时期违规推迟重大在建工程转入固定资产以减少当期折旧费用虚饰报表",
+      "危化品安全环保防范治理资金计提严重缩水，未足额预提土壤与水体污染修复预计负债",
+      "产成品价格已跌破单位生产成本但期末未按市价充分计提存货跌价准备"
+    ],
+    "channel_and_revenue_checks": [
+      "利用关联方或合作贸易公司进行无货物实际转移的大宗商品买卖循环以虚增营业收入体量",
+      "化工原料仓单质押融资业务可能存在的实质性代垫与隐性违约连带清偿风险"
+    ]
+  }
+}

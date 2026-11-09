@@ -1,0 +1,23 @@
+{
+  "title": "2026-10-15 美股与日股每日行情研报与深度推荐云端同步审计收据",
+  "daily_folder_id": "CONFIGURE_YOUR_OWN_CLOUD_TARGET",
+  "executed_at": "2026-10-15T07:30:00Z",
+  "briefings": [
+    {
+      "market": "US",
+      "report_name": "美股市场 (US Equities)",
+      "file_name": "2026-10-15_美股市场每日总行情与深度推荐.pdf",
+      "cloud_id": "1yR9c8e4N0F1US_sample_id",
+      "pdf_size_bytes": 125840,
+      "upload_timestamp": "2026-10-15T07:28:10Z"
+    },
+    {
+      "market": "JP",
+      "report_name": "日股市场 (JP Equities)",
+      "file_name": "2026-10-15_日股市场每日总行情与深度推荐.pdf",
+      "cloud_id": "1yR9c8e4N0F1JP_sample_id",
+      "pdf_size_bytes": 118920,
+      "upload_timestamp": "2026-10-15T07:29:45Z"
+    }
+  ]
+}

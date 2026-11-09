@@ -1,0 +1,78 @@
+{
+  "captured_at": "2026-11-07T14:49:46.384847+00:00",
+  "sources": [
+    {
+      "id": "MSFT",
+      "symbol": "MSFT",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?period1=1262304000&period2=1735689600&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_execution_inputs/20261107T144946_383769Z/MSFT.json",
+      "sha256": "7f628722713062719e34af2a2d9991a1276cc6b2688017fb521aa138dd92f5d3",
+      "bars": 3774,
+      "dividend_events": 60,
+      "split_events": 0,
+      "registration": {
+        "source_id": "strategy-price-MSFT-20261107T144946_383769Z",
+        "revision": 1,
+        "sha256": "7f628722713062719e34af2a2d9991a1276cc6b2688017fb521aa138dd92f5d3",
+        "archived_path": "data/catalog/objects/7f/7f628722713062719e34af2a2d9991a1276cc6b2688017fb521aa138dd92f5d3.blob",
+        "idempotent": false
+      },
+      "execution_eligible": false
+    },
+    {
+      "id": "SPY",
+      "symbol": "SPY",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?period1=1262304000&period2=1735689600&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_execution_inputs/20261107T144946_383769Z/SPY.json",
+      "sha256": "92633aac82ff45118a4317a31ed906f362f6b950cf16aa80d643069af45bf9e4",
+      "bars": 3774,
+      "dividend_events": 60,
+      "split_events": 0,
+      "registration": {
+        "source_id": "strategy-price-SPY-20261107T144946_383769Z",
+        "revision": 1,
+        "sha256": "92633aac82ff45118a4317a31ed906f362f6b950cf16aa80d643069af45bf9e4",
+        "archived_path": "data/catalog/objects/92/92633aac82ff45118a4317a31ed906f362f6b950cf16aa80d643069af45bf9e4.blob",
+        "idempotent": false
+      },
+      "execution_eligible": false
+    },
+    {
+      "id": "7203_T",
+      "symbol": "7203.T",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/7203.T?period1=1262304000&period2=1735689600&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_execution_inputs/20261107T144946_383769Z/7203_T.json",
+      "sha256": "b2ee6283f2608f9eda666409a9d3f9cf1b72ee17bfcf4e9c8147d63953620ff3",
+      "bars": 3691,
+      "dividend_events": 30,
+      "split_events": 1,
+      "registration": {
+        "source_id": "strategy-price-7203_T-20261107T144946_383769Z",
+        "revision": 1,
+        "sha256": "b2ee6283f2608f9eda666409a9d3f9cf1b72ee17bfcf4e9c8147d63953620ff3",
+        "archived_path": "data/catalog/objects/b2/b2ee6283f2608f9eda666409a9d3f9cf1b72ee17bfcf4e9c8147d63953620ff3.blob",
+        "idempotent": false
+      },
+      "execution_eligible": false
+    },
+    {
+      "id": "1306_T",
+      "symbol": "1306.T",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/1306.T?period1=1262304000&period2=1735689600&interval=1d&events=div%2Csplits&includeAdjustedClose=true",
+      "path": "data/history/strategy_execution_inputs/20261107T144946_383769Z/1306_T.json",
+      "sha256": "b454dec7aef20eff6e02bcc7536fa33dbef6e8e2abdbc27293051bd39a30f4ed",
+      "bars": 3691,
+      "dividend_events": 12,
+      "split_events": 0,
+      "registration": {
+        "source_id": "strategy-price-1306_T-20261107T144946_383769Z",
+        "revision": 1,
+        "sha256": "b454dec7aef20eff6e02bcc7536fa33dbef6e8e2abdbc27293051bd39a30f4ed",
+        "archived_path": "data/catalog/objects/b4/b454dec7aef20eff6e02bcc7536fa33dbef6e8e2abdbc27293051bd39a30f4ed.blob",
+        "idempotent": false
+      },
+      "execution_eligible": false
+    }
+  ],
+  "failures": []
+}

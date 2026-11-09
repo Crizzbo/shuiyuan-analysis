@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This schema was created by staff of the U.S. Securities and Exchange Commission. -->
+<!-- Data and content created by government employees within the scope of their employment -->
+<!-- are not subject to domestic copyright protection. 17 U.S.C. 105. -->
+<xs:schema
+xmlns:link="http://www.xbrl.org/2003/linkbase"
+xmlns:spac-proj="http://xbrl.sec.gov/spac-proj/2026"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://xbrl.sec.gov/spac-proj/2026"
+elementFormDefault="qualified">
+<xs:annotation>
+<xs:appinfo>
+<link:linkbase id="lnk">
+<link:roleRef roleURI="http://xbrl.sec.gov/spac/role/sk1609" xlink:type="simple" xlink:href="spac-2026.xsd#sk1609"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/spac/role/sk1609b" xlink:type="simple" xlink:href="spac-2026.xsd#sk1609b"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/spac/role/sk1609c" xlink:type="simple" xlink:href="spac-2026.xsd#sk1609c"/>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/spac/role/sk1609">
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacProjectionPreparersAbstract" xlink:label="DeSpacProjectionPreparersAbstract"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacProjectionPreparersTable" xlink:label="DeSpacProjectionPreparersTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionPreparersAbstract" xlink:to="DeSpacProjectionPreparersTable" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacProjectionPreparerAxis" xlink:label="DeSpacProjectionPreparerAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionPreparersTable" xlink:to="DeSpacProjectionPreparerAxis" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_AllDeSpacProjectionPreparersMember" xlink:label="AllDeSpacProjectionPreparersMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionPreparerAxis" xlink:to="AllDeSpacProjectionPreparersMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacProjectionPreparerLineItems" xlink:label="DeSpacProjectionPreparerLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionPreparersAbstract" xlink:to="DeSpacProjectionPreparerLineItems" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacProjectionPurpose" xlink:label="DeSpacProjectionPurpose"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionPreparerLineItems" xlink:to="DeSpacProjectionPurpose" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacProjectionPreparerName" xlink:label="DeSpacProjectionPreparerName"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionPreparerLineItems" xlink:to="DeSpacProjectionPreparerName" order="2.0" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/spac/role/sk1609b">
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacProjectionsAbstract" xlink:label="DeSpacProjectionsAbstract"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacProjectionsTable" xlink:label="DeSpacProjectionsTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionsAbstract" xlink:to="DeSpacProjectionsTable" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacProjectionAxis" xlink:label="DeSpacProjectionAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionsTable" xlink:to="DeSpacProjectionAxis" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.fasb.org/srt/2026/elts/srt-2026.xsd#srt_RangeAxis" xlink:label="RangeAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionsTable" xlink:to="RangeAxis" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.fasb.org/srt/2026/elts/srt-2026.xsd#srt_RangeMember" xlink:label="RangeMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="RangeAxis" xlink:to="RangeMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.fasb.org/srt/2026/elts/srt-2026.xsd#srt_MinimumMember" xlink:label="MinimumMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="RangeMember" xlink:to="MinimumMember" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.fasb.org/srt/2026/elts/srt-2026.xsd#srt_MaximumMember" xlink:label="MaximumMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="RangeMember" xlink:to="MaximumMember" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.fasb.org/srt/2026/elts/srt-2026.xsd#srt_WeightedAverageMember" xlink:label="WeightedAverageMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="RangeMember" xlink:to="WeightedAverageMember" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.fasb.org/srt/2026/elts/srt-2026.xsd#srt_MedianMember" xlink:label="MedianMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="RangeMember" xlink:to="MedianMember" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.fasb.org/srt/2026/elts/srt-2026.xsd#srt_ArithmeticAverageMember" xlink:label="ArithmeticAverageMember"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="RangeMember" xlink:to="ArithmeticAverageMember" order="5.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.fasb.org/srt/2026/elts/srt-2026.xsd#srt_StatementScenarioAxis" xlink:label="StatementScenarioAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionsTable" xlink:to="StatementScenarioAxis" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.fasb.org/srt/2026/elts/srt-2026.xsd#srt_ScenarioUnspecifiedDomain" xlink:label="ScenarioUnspecifiedDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="StatementScenarioAxis" xlink:to="ScenarioUnspecifiedDomain" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacProjectionLineItems" xlink:label="DeSpacProjectionLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionsAbstract" xlink:to="DeSpacProjectionLineItems" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionOfAMaterialGrowthOrReductionRateInAFinancialStatementItemBasesAndAssumptionsTextBlock" xlink:label="ProjectionOfAMaterialGrowthOrReductionRateInAFinancialStatementItemBasesAndAssumptionsTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionLineItems" xlink:to="ProjectionOfAMaterialGrowthOrReductionRateInAFinancialStatementItemBasesAndAssumptionsTextBlock" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionDiscountRatesLineItems" xlink:label="ProjectionDiscountRatesLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionLineItems" xlink:to="ProjectionDiscountRatesLineItems" order="5.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionWaccDiscountRatePercent" xlink:label="ProjectionWaccDiscountRatePercent"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionDiscountRatesLineItems" xlink:to="ProjectionWaccDiscountRatePercent" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionTerminalDiscountRatePercent" xlink:label="ProjectionTerminalDiscountRatePercent"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionDiscountRatesLineItems" xlink:to="ProjectionTerminalDiscountRatePercent" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionOtherDiscountRatePercent" xlink:label="ProjectionOtherDiscountRatePercent"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionDiscountRatesLineItems" xlink:to="ProjectionOtherDiscountRatePercent" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionDiscountRateWaccReasonTextBlock" xlink:label="ProjectionDiscountRateWaccReasonTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionDiscountRatesLineItems" xlink:to="ProjectionDiscountRateWaccReasonTextBlock" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionDiscountRateTerminalValueReasonTextBlock" xlink:label="ProjectionDiscountRateTerminalValueReasonTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionDiscountRatesLineItems" xlink:to="ProjectionDiscountRateTerminalValueReasonTextBlock" order="5.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionDiscountRateOtherDiscountRateReasonTextBlock" xlink:label="ProjectionDiscountRateOtherDiscountRateReasonTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionDiscountRatesLineItems" xlink:to="ProjectionDiscountRateOtherDiscountRateReasonTextBlock" order="6.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_OtherMaterialBasesAndAssumptionsUnderlyingProjectionsTextBlock" xlink:label="OtherMaterialBasesAndAssumptionsUnderlyingProjectionsTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionDiscountRatesLineItems" xlink:to="OtherMaterialBasesAndAssumptionsUnderlyingProjectionsTextBlock" order="7.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_MaterialFactorsAffectingMaterialAssumptionsGrowthOrReductionRateFinancialStatementItemsTextBlock" xlink:label="MaterialFactorsAffectingMaterialAssumptionsGrowthOrReductionRateFinancialStatementItemsTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionDiscountRatesLineItems" xlink:to="MaterialFactorsAffectingMaterialAssumptionsGrowthOrReductionRateFinancialStatementItemsTextBlock" order="8.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_MaterialFactorsAffectingMaterialAssumptionsGrowthOrReductionRateNonGaapItemsTextBlock" xlink:label="MaterialFactorsAffectingMaterialAssumptionsGrowthOrReductionRateNonGaapItemsTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionDiscountRatesLineItems" xlink:to="MaterialFactorsAffectingMaterialAssumptionsGrowthOrReductionRateNonGaapItemsTextBlock" order="9.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_MaterialFactorsAffectingMaterialAssumptionsGrowthOrReductionRateOtherMeasuresTextBlock" xlink:label="MaterialFactorsAffectingMaterialAssumptionsGrowthOrReductionRateOtherMeasuresTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionDiscountRatesLineItems" xlink:to="MaterialFactorsAffectingMaterialAssumptionsGrowthOrReductionRateOtherMeasuresTextBlock" order="10.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_MaterialFactorsAffectingMaterialAssumptionsDiscountRateWaccTextBlock" xlink:label="MaterialFactorsAffectingMaterialAssumptionsDiscountRateWaccTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionDiscountRatesLineItems" xlink:to="MaterialFactorsAffectingMaterialAssumptionsDiscountRateWaccTextBlock" order="11.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_MaterialFactorsAffectingMaterialAssumptionsDiscountRateTerminalValueTextBlock" xlink:label="MaterialFactorsAffectingMaterialAssumptionsDiscountRateTerminalValueTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionDiscountRatesLineItems" xlink:to="MaterialFactorsAffectingMaterialAssumptionsDiscountRateTerminalValueTextBlock" order="12.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_MaterialFactorsAffectingMaterialAssumptionsDiscountRateOtherDiscountRateTextBlock" xlink:label="MaterialFactorsAffectingMaterialAssumptionsDiscountRateOtherDiscountRateTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionDiscountRatesLineItems" xlink:to="MaterialFactorsAffectingMaterialAssumptionsDiscountRateOtherDiscountRateTextBlock" order="13.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionMaterialGrowthRateLineItems" xlink:label="ProjectionMaterialGrowthRateLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionLineItems" xlink:to="ProjectionMaterialGrowthRateLineItems" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionMaterialGrowthOrReductionRatePercent" xlink:label="ProjectionMaterialGrowthOrReductionRatePercent"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionMaterialGrowthRateLineItems" xlink:to="ProjectionMaterialGrowthOrReductionRatePercent" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionMaterialGrowthOrReductionAmount" xlink:label="ProjectionMaterialGrowthOrReductionAmount"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionMaterialGrowthRateLineItems" xlink:to="ProjectionMaterialGrowthOrReductionAmount" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionMaterialGrowthOrReductionRateOrAmountReasonTextBlock" xlink:label="ProjectionMaterialGrowthOrReductionRateOrAmountReasonTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="ProjectionMaterialGrowthRateLineItems" xlink:to="ProjectionMaterialGrowthOrReductionRateOrAmountReasonTextBlock" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionOfAMaterialGrowthOrReductionRateInANonGaapItemBasesAndAssumptionsTextBlock" xlink:label="ProjectionOfAMaterialGrowthOrReductionRateInANonGaapItemBasesAndAssumptionsTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionLineItems" xlink:to="ProjectionOfAMaterialGrowthOrReductionRateInANonGaapItemBasesAndAssumptionsTextBlock" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionOfAMaterialGrowthOrReductionRateInOtherMeasuresBasesAndAssumptionsTextBlock" xlink:label="ProjectionOfAMaterialGrowthOrReductionRateInOtherMeasuresBasesAndAssumptionsTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionLineItems" xlink:to="ProjectionOfAMaterialGrowthOrReductionRateInOtherMeasuresBasesAndAssumptionsTextBlock" order="3.0" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/spac/role/sk1609c">
+<link:loc xlink:type="locator" xlink:href="https://xbrl.fasb.org/srt/2026/elts/srt-2026.xsd#srt_StatementScenarioAxis" xlink:label="StatementScenarioAxis"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.fasb.org/srt/2026/elts/srt-2026.xsd#srt_ScenarioUnspecifiedDomain" xlink:label="ScenarioUnspecifiedDomain"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="StatementScenarioAxis" xlink:to="ScenarioUnspecifiedDomain" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacProjectionFuturePerformanceAbstract" xlink:label="DeSpacProjectionFuturePerformanceAbstract"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacProjectionFuturePerformanceTable" xlink:label="DeSpacProjectionFuturePerformanceTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionFuturePerformanceAbstract" xlink:to="DeSpacProjectionFuturePerformanceTable" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacProjectionAxis" xlink:label="DeSpacProjectionAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionFuturePerformanceTable" xlink:to="DeSpacProjectionAxis" order="2.0" priority="10"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionFuturePerformanceTable" xlink:to="StatementScenarioAxis" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_DeSpacProjectionFuturePerformanceLineItems" xlink:label="DeSpacProjectionFuturePerformanceLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionFuturePerformanceAbstract" xlink:to="DeSpacProjectionFuturePerformanceLineItems" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionSpacFuturePerformanceReflectsTheViewOfManagementOrBoardOfDirectorsFlag" xlink:label="ProjectionSpacFuturePerformanceReflectsTheViewOfManagementOrBoardOfDirectorsFlag"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionFuturePerformanceLineItems" xlink:to="ProjectionSpacFuturePerformanceReflectsTheViewOfManagementOrBoardOfDirectorsFlag" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionTargetCompanyFuturePerformanceReflectsTheViewOfManagementOrBoardOfDirectorsFlag" xlink:label="ProjectionTargetCompanyFuturePerformanceReflectsTheViewOfManagementOrBoardOfDirectorsFlag"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionFuturePerformanceLineItems" xlink:to="ProjectionTargetCompanyFuturePerformanceReflectsTheViewOfManagementOrBoardOfDirectorsFlag" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionNoLongerReflectsTheViewOfSpacManagementOrBoardOfDirectorsPurposeAndReasonsForAnyContinuedRelianceTextBlock" xlink:label="ProjectionNoLongerReflectsTheViewOfSpacManagementOrBoardOfDirectorsPurposeAndReasonsForAnyContinuedRelianceTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionFuturePerformanceLineItems" xlink:to="ProjectionNoLongerReflectsTheViewOfSpacManagementOrBoardOfDirectorsPurposeAndReasonsForAnyContinuedRelianceTextBlock" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="spac-2026.xsd#spac_ProjectionNoLongerReflectsTheViewOfTargetCompanyManagementOrBoardOfDirectorsPurposeAndReasonsForAnyContinuedRelianceTextBlock" xlink:label="ProjectionNoLongerReflectsTheViewOfTargetCompanyManagementOrBoardOfDirectorsPurposeAndReasonsForAnyContinuedRelianceTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="DeSpacProjectionFuturePerformanceLineItems" xlink:to="ProjectionNoLongerReflectsTheViewOfTargetCompanyManagementOrBoardOfDirectorsPurposeAndReasonsForAnyContinuedRelianceTextBlock" order="4.0" priority="10"/>
+</link:presentationLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+</xs:schema>

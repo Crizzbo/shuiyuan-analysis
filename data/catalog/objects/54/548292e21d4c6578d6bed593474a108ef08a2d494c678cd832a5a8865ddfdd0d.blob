@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "purpose": "工程新鲜度提醒，不是投资阈值；按可得时间对研究截止时间计算日历日",
+  "max_age_calendar_days": {"daily": 7, "weekly": 21, "monthly": 62, "quarterly": 150, "annual": 450, "yearly": 450, "source_dependent": null},
+  "unknown_cadence": "manual_review",
+  "missing_required_driver": "warning",
+  "synthetic_data": "non_actionable",
+  "stale_data": "manual_review"
+}

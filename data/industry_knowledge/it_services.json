@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "it_services",
+    "industry_name_zh": "IT 咨询、系统集成与数字化服务",
+    "sector_id": "information_technology",
+    "sector_name_zh": "信息技术",
+    "macro_sector_id": "INFO_SOFT",
+    "macro_sector_name_zh": "企业级软件、超大规模云服务与数字通信网络",
+    "description_zh": "涵盖企业数字化战略咨询、大型企业级管理软件实施、生成式 AI 应用落地、云原生迁移及管理式运维服务企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.65,
+    "typical_markup_ratio": 1.12,
+    "capex_intensity": "轻资产",
+    "operating_leverage_exposure": "中等经营杠杆",
+    "typical_gross_margin_range": [0.28, 0.40]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 0.0,
+    "dio_warning_days": 0.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.15,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "头部企业级应用软件生态 (SAP/Salesforce/ServiceNow/Workday) 认证集成商资质与实施专家储备",
+      "全球三大超算云厂商高级云原生架构师与生成式 AI (GenAI) 提示工程/模型微调专业人才",
+      "全球低成本离岸交付中心高素质软件工程开发与数据标注人才梯队"
+    ],
+    "downstream_profile": "全球跨国银行与金融机构、大型高端制造集团、跨国医疗药企、零售商超及主权国家政府部门",
+    "pricing_power_verdict": "拥有顶层战略咨询与超大型复杂系统端到端交付能力的咨询龙头享有极高溢价与客户粘性；中低端人力外包服务商面临激烈的费率竞争与降价压力",
+    "channel_inversion_sensitivity": "新签合同订单总额 (New Bookings) 与订单出货比 (Book-to-Bill Ratio) 是 IT 服务企业未来数个季度业绩增速最核心的先行指针"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "全球跨国巨头全面加速生成式 AI 应用落地与核心业务上云，数字化战略咨询与系统集成新签订单呈现爆发式井喷",
+      "全球离岸与近岸交付体系协同顺畅，高计费单价战略咨询业务占比提升带动综合营业利润率稳健扩张",
+      "长期管理式运维服务 (Managed Services) 与全托管云运维收入占比突破 50% 构筑高确定性抗周期现金流底座"
+    ],
+    "leading_bear_defenses": [
+      "宏观经济波动导致企业客户大幅削减非必要自由裁量 IT 支出 (Discretionary IT Spending)，延迟甚至搁置数字化咨询项目采购",
+      "固定总价大型复杂总集成项目出现严重需求蔓延与技术障碍导致交付严重逾期，被迫计提大额前瞻性合同亏损准备",
+      "生成式 AI 自动化代码生成工具普及对中低端传统按人头计费外包业务形成结构性替代与人均产值通缩压力"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度新签合同订单总规模 (New Bookings) 与订单出货比 (Book-to-Bill Ratio)",
+      "咨询业务 (Consulting) 与管理式服务 (Managed Services) 收入结构与增速走向",
+      "全球员工离职流失率 (Attrition Rate) 与可计费顾问工时利用率 (Utilization Rate)",
+      "生成式 AI 专项合同订单累计签署金额与商业落地投产客户数量"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "大型固定总价合同采用完工百分比法 (Percentage-of-Completion) 确认收入时蓄意低估项目总发生成本以提前透支虚增当期收入",
+      "未开票应收账款 (Unbilled Receivables) 与合同资产异常激增，实质为项目交付存在重大系统缺陷客户拒绝签署阶段性验收单",
+      "推迟对已发生严重工期延误与成本超支的项目计提预计合同损失准备以掩盖当期经营恶化"
+    ],
+    "channel_and_revenue_checks": [
+      "外包分包工程服务商真实发票与项目实际工时单据的真实性核验",
+      "客户因预算冻结导致项目单方叫停时合同资产减值拨备计提的充分性审查"
+    ]
+  }
+}

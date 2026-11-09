@@ -1,0 +1,2056 @@
+{
+  "artifact": {
+    "acquired_at": "2026-10-11T01:37:03+00:00",
+    "availability_basis": "first_observed_by_project",
+    "available_at": "2026-10-11T01:37:03+00:00",
+    "browser_receipt": {
+      "document_url": "https://investors.intuit.com/sec-filings/all-sec-filings/content/0000896878-26-000037/0000896878-26-000037-xbrl.zip",
+      "entity_id": "US:INTU:CIK896878",
+      "format": "zip",
+      "id": "intu-2026-10k-browser-xbrl",
+      "page_url": "https://investors.intuit.com/sec-filings/annual-reports",
+      "publication_precision": "date",
+      "published_date": "2026-09-09",
+      "search_url": "https://www.google.com/search?q=Intuit+2026+10-K+investors.intuit.com",
+      "verification_notes": "AI 浏览器搜索后进入 Intuit 官方 Annual Reports；可见 09/09/26、10-K 记录及对应 Download Raw XBRL Files 链接，使用该链接下载；不是搜索摘要或 AI 生成的财务内容。"
+    },
+    "dataset_kind": "financial",
+    "origin_url": "https://investors.intuit.com/sec-filings/all-sec-filings/content/0000896878-26-000037/0000896878-26-000037-xbrl.zip",
+    "provider": "ai_browser",
+    "published_at": null,
+    "quality_status": "unreviewed",
+    "raw_transport": "browser_download",
+    "sha256": "d2c2584bc5662aa133c531a93e716fcea29367cebd7784458d25d205458045fb",
+    "source_kind": "primary",
+    "source_path": "data/ingestion/objects/d2/d2c2584bc5662aa133c531a93e716fcea29367cebd7784458d25d205458045fb.raw"
+  },
+  "calculations": [
+    {
+      "accounting_basis": "GAAP",
+      "calculation": {
+        "implementation_path": "finance_tools/basic.py",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "input_sha256": "d32f19a0b932dce10357c2724a8aae0d91168c963a74b241303c95dd7316ac1b",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "parameters": {
+          "denominator": 21448000000.0,
+          "numerator": 5884000000.0,
+          "operation": "operating_margin"
+        },
+        "result": {
+          "value": 0.2743379336068631
+        }
+      },
+      "currency": "USD",
+      "input_fact_refs": [
+        "7ce8a85c76eb1ad5e122bab85315c8c3ac8d047e6ee3b027277514c562218b8b",
+        "5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f"
+      ],
+      "metric_id": "operating_margin",
+      "period": {
+        "basis": "annual",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.2743379336068631
+    },
+    {
+      "accounting_basis": "GAAP",
+      "calculation": {
+        "implementation_path": "finance_tools/basic.py",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "input_sha256": "a26d502e650ad68220f5c4ee2b2c74e7a45b43b3e732610be2abbcc538ba46b4",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "parameters": {
+          "denominator": 21448000000.0,
+          "numerator": 4566000000.0,
+          "operation": "net_margin"
+        },
+        "result": {
+          "value": 0.2128869824692279
+        }
+      },
+      "currency": "USD",
+      "input_fact_refs": [
+        "6e5a6720d71c1b749e6c85789a07b4553fca897c3f30212a14e29948ce97ef6b",
+        "5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f"
+      ],
+      "metric_id": "net_margin",
+      "period": {
+        "basis": "annual",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.2128869824692279
+    },
+    {
+      "accounting_basis": "GAAP",
+      "calculation": {
+        "formula": "同期间、同范围经营现金流净额 / 收入",
+        "function": "Series.div",
+        "library": "pandas"
+      },
+      "currency": "USD",
+      "input_fact_refs": [
+        "672f9bc577b2284c1a29bba1d023bd87e58bacd13429f9765f59305ec7857635",
+        "5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f"
+      ],
+      "metric_id": "operating_cash_flow_margin",
+      "name_zh": "经营现金流收入比",
+      "period": {
+        "basis": "annual",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.4120663931368892
+    },
+    {
+      "accounting_basis": "GAAP",
+      "calculation": {
+        "formula": "本年收入 / 上年收入 - 1；同一报告比较列",
+        "function": "Series.pct_change",
+        "library": "pandas"
+      },
+      "currency": "USD",
+      "input_fact_refs": [
+        "5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f",
+        "651c3903d462dce36b6bb8a577e93b19f3ab681a2e6f622b37996453660bb021"
+      ],
+      "metric_id": "revenue_growth",
+      "period": {
+        "basis": "annual",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.13897297010249066
+    },
+    {
+      "accounting_basis": "GAAP",
+      "calculation": {
+        "implementation_path": "finance_tools/basic.py",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "input_sha256": "de83c58f5575f689446b560800d22a0e58e90393b050bcc960a511b03e89736b",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "parameters": {
+          "denominator": 18831000000.0,
+          "numerator": 4923000000.0,
+          "operation": "operating_margin"
+        },
+        "result": {
+          "value": 0.2614306197227975
+        }
+      },
+      "currency": "USD",
+      "input_fact_refs": [
+        "5592ed28a5b4a3ebb6b0a6e9de86332b35f7f8e72d1e8d217319a3854c8fca3d",
+        "651c3903d462dce36b6bb8a577e93b19f3ab681a2e6f622b37996453660bb021"
+      ],
+      "metric_id": "operating_margin",
+      "period": {
+        "basis": "annual",
+        "end": "2025-07-31",
+        "start": "2024-08-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.2614306197227975
+    },
+    {
+      "accounting_basis": "GAAP",
+      "calculation": {
+        "implementation_path": "finance_tools/basic.py",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "input_sha256": "57722900d311fcd8d9d7cade110411ee369194283aa7e809b3227c04018f0662",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "parameters": {
+          "denominator": 18831000000.0,
+          "numerator": 3869000000.0,
+          "operation": "net_margin"
+        },
+        "result": {
+          "value": 0.2054590834262652
+        }
+      },
+      "currency": "USD",
+      "input_fact_refs": [
+        "4c6f06c601a925bb7597f75c0da1c05923e70dacc54ea24b38b926f14eec8c82",
+        "651c3903d462dce36b6bb8a577e93b19f3ab681a2e6f622b37996453660bb021"
+      ],
+      "metric_id": "net_margin",
+      "period": {
+        "basis": "annual",
+        "end": "2025-07-31",
+        "start": "2024-08-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.2054590834262652
+    },
+    {
+      "accounting_basis": "GAAP",
+      "calculation": {
+        "formula": "同期间、同范围经营现金流净额 / 收入",
+        "function": "Series.div",
+        "library": "pandas"
+      },
+      "currency": "USD",
+      "input_fact_refs": [
+        "af76866df189555a8b53fe0d9e62398f5d2cbe5b232245158a08266b066635f9",
+        "651c3903d462dce36b6bb8a577e93b19f3ab681a2e6f622b37996453660bb021"
+      ],
+      "metric_id": "operating_cash_flow_margin",
+      "name_zh": "经营现金流收入比",
+      "period": {
+        "basis": "annual",
+        "end": "2025-07-31",
+        "start": "2024-08-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.3296160586267325
+    },
+    {
+      "accounting_basis": "GAAP",
+      "calculation": {
+        "formula": "本年收入 / 上年收入 - 1；同一报告比较列",
+        "function": "Series.pct_change",
+        "library": "pandas"
+      },
+      "currency": "USD",
+      "input_fact_refs": [
+        "651c3903d462dce36b6bb8a577e93b19f3ab681a2e6f622b37996453660bb021",
+        "b88780cd815cf83f012615eb41435650cbce0f290332a00cffdbba5b5f2399ca"
+      ],
+      "metric_id": "revenue_growth",
+      "period": {
+        "basis": "annual",
+        "end": "2025-07-31",
+        "start": "2024-08-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.1563401903592263
+    },
+    {
+      "accounting_basis": "GAAP",
+      "calculation": {
+        "implementation_path": "finance_tools/basic.py",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "input_sha256": "4e2ed05d5e5d8d10f7e7d9a092486ddcd51f84e0a96e8a439ec674ecd48ded9c",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "parameters": {
+          "denominator": 16285000000.0,
+          "numerator": 3630000000.0,
+          "operation": "operating_margin"
+        },
+        "result": {
+          "value": 0.22290451335584893
+        }
+      },
+      "currency": "USD",
+      "input_fact_refs": [
+        "ea6f1bc693809a13719ba1344c01ee046c8b8b2b2e00103ece5115a8d7ed96bc",
+        "b88780cd815cf83f012615eb41435650cbce0f290332a00cffdbba5b5f2399ca"
+      ],
+      "metric_id": "operating_margin",
+      "period": {
+        "basis": "annual",
+        "end": "2024-07-31",
+        "start": "2023-08-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.22290451335584893
+    },
+    {
+      "accounting_basis": "GAAP",
+      "calculation": {
+        "implementation_path": "finance_tools/basic.py",
+        "implementation_sha256": "b84999dc3c4fd11b148192de9feaaff28f8a4918cc33dd222e57f06061cafb0c",
+        "input_sha256": "a9a754fd6fb3380d8afa84487aa9d8c72167593b8a30a418bfa645bf48d57eb9",
+        "library": "financetoolkit",
+        "library_version": "2.2.1",
+        "method": "financial_ratio",
+        "method_version": "1.0.0",
+        "parameters": {
+          "denominator": 16285000000.0,
+          "numerator": 2963000000.0,
+          "operation": "net_margin"
+        },
+        "result": {
+          "value": 0.18194657660423702
+        }
+      },
+      "currency": "USD",
+      "input_fact_refs": [
+        "596216d62f38e7010b81b852f454048fba4bd8e123e67442a620baa452736f3d",
+        "b88780cd815cf83f012615eb41435650cbce0f290332a00cffdbba5b5f2399ca"
+      ],
+      "metric_id": "net_margin",
+      "period": {
+        "basis": "annual",
+        "end": "2024-07-31",
+        "start": "2023-08-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.18194657660423702
+    },
+    {
+      "accounting_basis": "GAAP",
+      "calculation": {
+        "formula": "同期间、同范围经营现金流净额 / 收入",
+        "function": "Series.div",
+        "library": "pandas"
+      },
+      "currency": "USD",
+      "input_fact_refs": [
+        "623da78c40bbcc4b8c233d80ebc46f48e9bfec6b35d49537e503c92f1c12a889",
+        "b88780cd815cf83f012615eb41435650cbce0f290332a00cffdbba5b5f2399ca"
+      ],
+      "metric_id": "operating_cash_flow_margin",
+      "name_zh": "经营现金流收入比",
+      "period": {
+        "basis": "annual",
+        "end": "2024-07-31",
+        "start": "2023-08-01"
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.2999078906969604
+    },
+    {
+      "accounting_basis": "GAAP",
+      "currency": "USD",
+      "metric_id": "revenue_growth",
+      "period": {
+        "basis": "annual",
+        "end": "2024-07-31",
+        "start": "2023-08-01"
+      },
+      "reason": "缺少同报告、同范围、相邻年度的正收入基数",
+      "scope_id": "consolidated",
+      "status": "blocked",
+      "value": null
+    },
+    {
+      "accounting_basis": "GAAP",
+      "calculation": {
+        "formula": "总负债 / 总资产；不等同有息债务比例",
+        "function": "solvency_model.get_debt_to_assets_ratio",
+        "library": "financetoolkit"
+      },
+      "currency": "USD",
+      "input_fact_refs": [
+        "20f858176a2a68544361932d38afaf2162e9023012271ce2e6be28c19cecdefc",
+        "0ccdd65ca46b2eb1868e529db6d60d8a16fbf3ad89505538a2615575de29e9f1"
+      ],
+      "metric_id": "liabilities_to_assets",
+      "name_zh": "总负债占资产比例",
+      "period": {
+        "basis": "instant",
+        "end": "2026-07-31",
+        "start": null
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.4837166313271353
+    },
+    {
+      "accounting_basis": "GAAP",
+      "calculation": {
+        "formula": "总负债 / 总资产；不等同有息债务比例",
+        "function": "solvency_model.get_debt_to_assets_ratio",
+        "library": "financetoolkit"
+      },
+      "currency": "USD",
+      "input_fact_refs": [
+        "87045d0aa02720def340bc298e4d3ee49ec094192357d0f125e72a04f6d82017",
+        "dd344a787a1486caa166e06c9ab4e96b8718310c8f20ede36003dfca42691c12"
+      ],
+      "metric_id": "liabilities_to_assets",
+      "name_zh": "总负债占资产比例",
+      "period": {
+        "basis": "instant",
+        "end": "2025-07-31",
+        "start": null
+      },
+      "scope_id": "consolidated",
+      "status": "computed",
+      "unit": "ratio",
+      "value": 0.46669192055847175
+    }
+  ],
+  "checks": [
+    {
+      "check": "cash_flow_bridge",
+      "fact_refs": [
+        "a9bd0057b46de1024ce0523f3c598c5935a684d91a6299773b9d3294c3c6bdac",
+        "672f9bc577b2284c1a29bba1d023bd87e58bacd13429f9765f59305ec7857635",
+        "45fac67da23c00f9bb78198ccc6f98703f46b1cc0a84e30fcbd12bfcc508490a",
+        "fa033948c1efbe89ffd8f6288a0562b78d1c9f8a12a06de1b57d3584e7a84768",
+        "555229034a3386531dec4156e4c79e4912af8899a39e05c354213677410b6181"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2026-07-31\", \"start\": \"2025-08-01\"}",
+        "consolidated",
+        "GAAP",
+        "USD"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "2500000"
+    },
+    {
+      "check": "cash_flow_bridge",
+      "fact_refs": [
+        "aa1ffe9a16c4b4e8407073e04c5a5a3b6410f39fe33a023c18d15f1f7f2cce5e",
+        "af76866df189555a8b53fe0d9e62398f5d2cbe5b232245158a08266b066635f9",
+        "5eb045ba0d28fd15b163922c586034c27d36dd8506eb4cfb478e1a5803ac4144",
+        "e0ff656b4164f0180a311791aee61db7e3299edd072c8ad9285e3cc819831f11",
+        "fee352d94e7d166f67b190265b2421bc1c5d8fdc9a23ce4e2054b97910282ebf"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2025-07-31\", \"start\": \"2024-08-01\"}",
+        "consolidated",
+        "GAAP",
+        "USD"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "2500000"
+    },
+    {
+      "check": "cash_flow_bridge",
+      "fact_refs": [
+        "1a5692ae7e8d786d07f45edfc31a7f3971141cacab7c4957aec0194115a63ace",
+        "623da78c40bbcc4b8c233d80ebc46f48e9bfec6b35d49537e503c92f1c12a889",
+        "5b746488866943e6b72e37f723c50dbbc33ad511719fb4a69d8e97f83fcceaef",
+        "5331cafd36c62ef037f50bf1e8850348dc3543e771edd085703fe202e86499c4",
+        "f869af0acde33d9e75ea0a92dbc9049b62c89e3761616bcb7e67fc5d7f419b6d"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2024-07-31\", \"start\": \"2023-08-01\"}",
+        "consolidated",
+        "GAAP",
+        "USD"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "2500000"
+    },
+    {
+      "check": "balance_sheet",
+      "fact_refs": [
+        "0ccdd65ca46b2eb1868e529db6d60d8a16fbf3ad89505538a2615575de29e9f1",
+        "20f858176a2a68544361932d38afaf2162e9023012271ce2e6be28c19cecdefc",
+        "28fdc397f99f6a434f684dcf769d73b117a91525039af2ee42f7b41f00699bce"
+      ],
+      "group": [
+        "{\"basis\": \"instant\", \"end\": \"2026-07-31\", \"start\": null}",
+        "consolidated",
+        "GAAP",
+        "USD"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "1500000"
+    },
+    {
+      "check": "balance_sheet",
+      "fact_refs": [
+        "dd344a787a1486caa166e06c9ab4e96b8718310c8f20ede36003dfca42691c12",
+        "87045d0aa02720def340bc298e4d3ee49ec094192357d0f125e72a04f6d82017",
+        "8fb8f7112f432bacd73621db153ac25c56d6a1182cb3d53d4df1ac95dac15d8f"
+      ],
+      "group": [
+        "{\"basis\": \"instant\", \"end\": \"2025-07-31\", \"start\": null}",
+        "consolidated",
+        "GAAP",
+        "USD"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "1500000"
+    },
+    {
+      "check": "balance_sheet",
+      "group": [
+        "{\"basis\": \"instant\", \"end\": \"2023-07-31\", \"start\": null}",
+        "consolidated",
+        "GAAP",
+        "USD"
+      ],
+      "missing_fields": [
+        "assets",
+        "liabilities"
+      ],
+      "status": "incomplete"
+    },
+    {
+      "check": "balance_sheet",
+      "group": [
+        "{\"basis\": \"instant\", \"end\": \"2024-07-31\", \"start\": null}",
+        "consolidated",
+        "GAAP",
+        "USD"
+      ],
+      "missing_fields": [
+        "assets",
+        "liabilities"
+      ],
+      "status": "incomplete"
+    },
+    {
+      "check": "cash_stock_bridge",
+      "fact_refs": [
+        "b9a42117d6d4ad5a026db18b14f4c557f64cc30f97eef67d2f70fc58bb2eab71",
+        "cd63d11287d0aac2bf34f9d92b36ab8f1771ac7eaf3812201e5566f80bf0b077",
+        "a9bd0057b46de1024ce0523f3c598c5935a684d91a6299773b9d3294c3c6bdac"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2026-07-31\", \"start\": \"2025-08-01\"}",
+        "consolidated",
+        "GAAP",
+        "USD"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "1500000"
+    },
+    {
+      "check": "cash_stock_bridge",
+      "fact_refs": [
+        "c1f6e5861a1b25b382b6d4d6c86a0a7fd12c58893ab731756949776c29926ddf",
+        "b9a42117d6d4ad5a026db18b14f4c557f64cc30f97eef67d2f70fc58bb2eab71",
+        "aa1ffe9a16c4b4e8407073e04c5a5a3b6410f39fe33a023c18d15f1f7f2cce5e"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2025-07-31\", \"start\": \"2024-08-01\"}",
+        "consolidated",
+        "GAAP",
+        "USD"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "1500000"
+    },
+    {
+      "check": "cash_stock_bridge",
+      "fact_refs": [
+        "ab0f14775aab86f3a10615a23a7795ff6e92c21c51b8219e2e17e2a5c165c54f",
+        "c1f6e5861a1b25b382b6d4d6c86a0a7fd12c58893ab731756949776c29926ddf",
+        "1a5692ae7e8d786d07f45edfc31a7f3971141cacab7c4957aec0194115a63ace"
+      ],
+      "group": [
+        "{\"basis\": \"annual\", \"end\": \"2024-07-31\", \"start\": \"2023-08-01\"}",
+        "consolidated",
+        "GAAP",
+        "USD"
+      ],
+      "residual": "0",
+      "status": "passed",
+      "tolerance": "1500000"
+    }
+  ],
+  "entity_id": "US:INTU:CIK896878",
+  "facts": [
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}Revenues",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "revenue",
+      "id": "5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f",
+      "name_zh": "收入",
+      "period": {
+        "basis": "annual",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:Revenues\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-60\">21,448</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-60 context=c-1",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "21448000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}Revenues",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "revenue",
+      "id": "651c3903d462dce36b6bb8a577e93b19f3ab681a2e6f622b37996453660bb021",
+      "name_zh": "收入",
+      "period": {
+        "basis": "annual",
+        "end": "2025-07-31",
+        "start": "2024-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-10\" decimals=\"-6\" name=\"us-gaap:Revenues\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-61\">18,831</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-61 context=c-10",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "18831000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}Revenues",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "revenue",
+      "id": "b88780cd815cf83f012615eb41435650cbce0f290332a00cffdbba5b5f2399ca",
+      "name_zh": "收入",
+      "period": {
+        "basis": "annual",
+        "end": "2024-07-31",
+        "start": "2023-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-11\" decimals=\"-6\" name=\"us-gaap:Revenues\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-62\">16,285</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-62 context=c-11",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "16285000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}OperatingIncomeLoss",
+      "currency": "USD",
+      "duplicate_refs": [
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:OperatingIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-1582\">5,884</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-1582 context=c-1",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        }
+      ],
+      "field": "operating_income",
+      "id": "7ce8a85c76eb1ad5e122bab85315c8c3ac8d047e6ee3b027277514c562218b8b",
+      "name_zh": "营业利润",
+      "period": {
+        "basis": "annual",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:OperatingIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-90\">5,884</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-90 context=c-1",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "5884000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}OperatingIncomeLoss",
+      "currency": "USD",
+      "duplicate_refs": [
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-10\" decimals=\"-6\" name=\"us-gaap:OperatingIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-1583\">4,923</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-1583 context=c-10",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        }
+      ],
+      "field": "operating_income",
+      "id": "5592ed28a5b4a3ebb6b0a6e9de86332b35f7f8e72d1e8d217319a3854c8fca3d",
+      "name_zh": "营业利润",
+      "period": {
+        "basis": "annual",
+        "end": "2025-07-31",
+        "start": "2024-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-10\" decimals=\"-6\" name=\"us-gaap:OperatingIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-91\">4,923</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-91 context=c-10",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "4923000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}OperatingIncomeLoss",
+      "currency": "USD",
+      "duplicate_refs": [
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-11\" decimals=\"-6\" name=\"us-gaap:OperatingIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-1584\">3,630</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-1584 context=c-11",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        }
+      ],
+      "field": "operating_income",
+      "id": "ea6f1bc693809a13719ba1344c01ee046c8b8b2b2e00103ece5115a8d7ed96bc",
+      "name_zh": "营业利润",
+      "period": {
+        "basis": "annual",
+        "end": "2024-07-31",
+        "start": "2023-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-11\" decimals=\"-6\" name=\"us-gaap:OperatingIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-92\">3,630</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-92 context=c-11",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "3630000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}NetIncomeLoss",
+      "currency": "USD",
+      "duplicate_refs": [
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:NetIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-120\">4,566</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-120 context=c-1",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        },
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:NetIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-320\">4,566</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-320 context=c-1",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        },
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:NetIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-525\">4,566</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-525 context=c-1",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        }
+      ],
+      "field": "net_income",
+      "id": "6e5a6720d71c1b749e6c85789a07b4553fca897c3f30212a14e29948ce97ef6b",
+      "name_zh": "合并净利润",
+      "period": {
+        "basis": "annual",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:NetIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-105\">4,566</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-105 context=c-1",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "4566000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}NetIncomeLoss",
+      "currency": "USD",
+      "duplicate_refs": [
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-10\" decimals=\"-6\" name=\"us-gaap:NetIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-121\">3,869</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-121 context=c-10",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        },
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-10\" decimals=\"-6\" name=\"us-gaap:NetIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-321\">3,869</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-321 context=c-10",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        },
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-10\" decimals=\"-6\" name=\"us-gaap:NetIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-526\">3,869</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-526 context=c-10",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        }
+      ],
+      "field": "net_income",
+      "id": "4c6f06c601a925bb7597f75c0da1c05923e70dacc54ea24b38b926f14eec8c82",
+      "name_zh": "合并净利润",
+      "period": {
+        "basis": "annual",
+        "end": "2025-07-31",
+        "start": "2024-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-10\" decimals=\"-6\" name=\"us-gaap:NetIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-106\">3,869</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-106 context=c-10",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "3869000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}NetIncomeLoss",
+      "currency": "USD",
+      "duplicate_refs": [
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-11\" decimals=\"-6\" name=\"us-gaap:NetIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-122\">2,963</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-122 context=c-11",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        },
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-11\" decimals=\"-6\" name=\"us-gaap:NetIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-322\">2,963</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-322 context=c-11",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        },
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-11\" decimals=\"-6\" name=\"us-gaap:NetIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-527\">2,963</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-527 context=c-11",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        }
+      ],
+      "field": "net_income",
+      "id": "596216d62f38e7010b81b852f454048fba4bd8e123e67442a620baa452736f3d",
+      "name_zh": "合并净利润",
+      "period": {
+        "basis": "annual",
+        "end": "2024-07-31",
+        "start": "2023-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-11\" decimals=\"-6\" name=\"us-gaap:NetIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-107\">2,963</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-107 context=c-11",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "2963000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}CashAndCashEquivalentsAtCarryingValue",
+      "currency": "USD",
+      "duplicate_refs": [
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-12\" decimals=\"-6\" name=\"us-gaap:CashAndCashEquivalentsAtCarryingValue\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-467\">4,705</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-467 context=c-12",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        },
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-12\" decimals=\"-6\" name=\"us-gaap:CashAndCashEquivalentsAtCarryingValue\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-651\">4,705</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-651 context=c-12",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        }
+      ],
+      "field": "cash",
+      "id": "a8f232ce50cf5a58c567febcd5aaa887f8f9ff5aef326e59f047f3a8ffcd20fe",
+      "name_zh": "现金及现金等价物",
+      "period": {
+        "basis": "instant",
+        "end": "2026-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-12\" decimals=\"-6\" name=\"us-gaap:CashAndCashEquivalentsAtCarryingValue\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-141\">4,705</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-141 context=c-12",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "4705000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}CashAndCashEquivalentsAtCarryingValue",
+      "currency": "USD",
+      "duplicate_refs": [
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-13\" decimals=\"-6\" name=\"us-gaap:CashAndCashEquivalentsAtCarryingValue\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-468\">2,884</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-468 context=c-13",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        },
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-13\" decimals=\"-6\" name=\"us-gaap:CashAndCashEquivalentsAtCarryingValue\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-653\">2,884</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-653 context=c-13",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        }
+      ],
+      "field": "cash",
+      "id": "f4ef28f3bec8cd70a11f7d8a330364445373b3182b17ff840e3d874adbe9f412",
+      "name_zh": "现金及现金等价物",
+      "period": {
+        "basis": "instant",
+        "end": "2025-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-13\" decimals=\"-6\" name=\"us-gaap:CashAndCashEquivalentsAtCarryingValue\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-142\">2,884</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-142 context=c-13",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "2884000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}Assets",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "assets",
+      "id": "0ccdd65ca46b2eb1868e529db6d60d8a16fbf3ad89505538a2615575de29e9f1",
+      "name_zh": "资产总额",
+      "period": {
+        "basis": "instant",
+        "end": "2026-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-12\" decimals=\"-6\" name=\"us-gaap:Assets\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-177\">36,786</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-177 context=c-12",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "36786000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}Assets",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "assets",
+      "id": "dd344a787a1486caa166e06c9ab4e96b8718310c8f20ede36003dfca42691c12",
+      "name_zh": "资产总额",
+      "period": {
+        "basis": "instant",
+        "end": "2025-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-13\" decimals=\"-6\" name=\"us-gaap:Assets\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-178\">36,958</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-178 context=c-13",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "36958000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}Liabilities",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "liabilities",
+      "id": "20f858176a2a68544361932d38afaf2162e9023012271ce2e6be28c19cecdefc",
+      "name_zh": "负债总额",
+      "period": {
+        "basis": "instant",
+        "end": "2026-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-12\" decimals=\"-6\" name=\"us-gaap:Liabilities\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-203\">17,794</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-203 context=c-12",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "17794000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}Liabilities",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "liabilities",
+      "id": "87045d0aa02720def340bc298e4d3ee49ec094192357d0f125e72a04f6d82017",
+      "name_zh": "负债总额",
+      "period": {
+        "basis": "instant",
+        "end": "2025-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-13\" decimals=\"-6\" name=\"us-gaap:Liabilities\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-204\">17,248</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-204 context=c-13",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "17248000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}StockholdersEquity",
+      "currency": "USD",
+      "duplicate_refs": [
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-12\" decimals=\"-6\" name=\"us-gaap:StockholdersEquity\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-319\">18,992</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-319 context=c-12",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        }
+      ],
+      "field": "equity",
+      "id": "28fdc397f99f6a434f684dcf769d73b117a91525039af2ee42f7b41f00699bce",
+      "name_zh": "权益总额",
+      "period": {
+        "basis": "instant",
+        "end": "2026-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-12\" decimals=\"-6\" name=\"us-gaap:StockholdersEquity\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-243\">18,992</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-243 context=c-12",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "18992000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}StockholdersEquity",
+      "currency": "USD",
+      "duplicate_refs": [
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-13\" decimals=\"-6\" name=\"us-gaap:StockholdersEquity\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-295\">19,710</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-295 context=c-13",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        }
+      ],
+      "field": "equity",
+      "id": "8fb8f7112f432bacd73621db153ac25c56d6a1182cb3d53d4df1ac95dac15d8f",
+      "name_zh": "权益总额",
+      "period": {
+        "basis": "instant",
+        "end": "2025-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-13\" decimals=\"-6\" name=\"us-gaap:StockholdersEquity\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-244\">19,710</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-244 context=c-13",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "19710000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}StockholdersEquity",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "equity",
+      "id": "dd5d76f06c24f34fd0a650ea6e455ed3b8394b7ef7164bbca41b777c4afcf373",
+      "name_zh": "权益总额",
+      "period": {
+        "basis": "instant",
+        "end": "2023-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-23\" decimals=\"-6\" name=\"us-gaap:StockholdersEquity\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-253\">17,269</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-253 context=c-23",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "17269000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}StockholdersEquity",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "equity",
+      "id": "74d53dff04da33752dff7159f67518d0db66c399b7bb20ba5b60cd72c462d0f5",
+      "name_zh": "权益总额",
+      "period": {
+        "basis": "instant",
+        "end": "2024-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-34\" decimals=\"-6\" name=\"us-gaap:StockholdersEquity\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-274\">18,436</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-274 context=c-34",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "18436000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}NetCashProvidedByUsedInOperatingActivities",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "operating_cash_flow",
+      "id": "672f9bc577b2284c1a29bba1d023bd87e58bacd13429f9765f59305ec7857635",
+      "name_zh": "经营现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:NetCashProvidedByUsedInOperatingActivities\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-380\">8,838</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-380 context=c-1",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "8838000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}NetCashProvidedByUsedInOperatingActivities",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "operating_cash_flow",
+      "id": "af76866df189555a8b53fe0d9e62398f5d2cbe5b232245158a08266b066635f9",
+      "name_zh": "经营现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2025-07-31",
+        "start": "2024-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-10\" decimals=\"-6\" name=\"us-gaap:NetCashProvidedByUsedInOperatingActivities\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-381\">6,207</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-381 context=c-10",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "6207000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}NetCashProvidedByUsedInOperatingActivities",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "operating_cash_flow",
+      "id": "623da78c40bbcc4b8c233d80ebc46f48e9bfec6b35d49537e503c92f1c12a889",
+      "name_zh": "经营现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2024-07-31",
+        "start": "2023-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-11\" decimals=\"-6\" name=\"us-gaap:NetCashProvidedByUsedInOperatingActivities\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-382\">4,884</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-382 context=c-11",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "4884000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}PaymentsToAcquirePropertyPlantAndEquipment",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "capex_ppe",
+      "id": "7c076cc5182f85a7f4ff410e1dac596ea4fe3ed2f9816621ef9834e9bdc35c46",
+      "name_zh": "购建固定资产现金支出",
+      "period": {
+        "basis": "annual",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:PaymentsToAcquirePropertyPlantAndEquipment\" scale=\"6\" id=\"f-392\">175</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-392 context=c-1",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "175000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}PaymentsToAcquirePropertyPlantAndEquipment",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "capex_ppe",
+      "id": "54234f1a50781c5ede708d13627bf8850db4eaa4c878e005c57c967b6a8072ab",
+      "name_zh": "购建固定资产现金支出",
+      "period": {
+        "basis": "annual",
+        "end": "2025-07-31",
+        "start": "2024-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-10\" decimals=\"-6\" name=\"us-gaap:PaymentsToAcquirePropertyPlantAndEquipment\" scale=\"6\" id=\"f-393\">84</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-393 context=c-10",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "84000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}PaymentsToAcquirePropertyPlantAndEquipment",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "capex_ppe",
+      "id": "744aa0feee369079a080db81bd440e908472303003eda447f9583ea536ee99ef",
+      "name_zh": "购建固定资产现金支出",
+      "period": {
+        "basis": "annual",
+        "end": "2024-07-31",
+        "start": "2023-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-11\" decimals=\"-6\" name=\"us-gaap:PaymentsToAcquirePropertyPlantAndEquipment\" scale=\"6\" id=\"f-394\">191</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-394 context=c-11",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "191000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}NetCashProvidedByUsedInInvestingActivities",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "investing_cash_flow",
+      "id": "45fac67da23c00f9bb78198ccc6f98703f46b1cc0a84e30fcbd12bfcc508490a",
+      "name_zh": "投资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" sign=\"-\" name=\"us-gaap:NetCashProvidedByUsedInInvestingActivities\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-413\">1,412</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-413 context=c-1",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-1412000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}NetCashProvidedByUsedInInvestingActivities",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "investing_cash_flow",
+      "id": "5eb045ba0d28fd15b163922c586034c27d36dd8506eb4cfb478e1a5803ac4144",
+      "name_zh": "投资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2025-07-31",
+        "start": "2024-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-10\" decimals=\"-6\" sign=\"-\" name=\"us-gaap:NetCashProvidedByUsedInInvestingActivities\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-414\">2,318</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-414 context=c-10",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-2318000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}NetCashProvidedByUsedInInvestingActivities",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "investing_cash_flow",
+      "id": "5b746488866943e6b72e37f723c50dbbc33ad511719fb4a69d8e97f83fcceaef",
+      "name_zh": "投资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2024-07-31",
+        "start": "2023-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-11\" decimals=\"-6\" sign=\"-\" name=\"us-gaap:NetCashProvidedByUsedInInvestingActivities\" scale=\"6\" id=\"f-415\">227</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-415 context=c-11",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-227000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}NetCashProvidedByUsedInFinancingActivities",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "financing_cash_flow",
+      "id": "fa033948c1efbe89ffd8f6288a0562b78d1c9f8a12a06de1b57d3584e7a84768",
+      "name_zh": "融资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" sign=\"-\" name=\"us-gaap:NetCashProvidedByUsedInFinancingActivities\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-452\">7,689</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-452 context=c-1",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-7689000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}NetCashProvidedByUsedInFinancingActivities",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "financing_cash_flow",
+      "id": "e0ff656b4164f0180a311791aee61db7e3299edd072c8ad9285e3cc819831f11",
+      "name_zh": "融资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2025-07-31",
+        "start": "2024-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-10\" decimals=\"-6\" sign=\"-\" name=\"us-gaap:NetCashProvidedByUsedInFinancingActivities\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-453\">1,510</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-453 context=c-10",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-1510000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}NetCashProvidedByUsedInFinancingActivities",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "financing_cash_flow",
+      "id": "5331cafd36c62ef037f50bf1e8850348dc3543e771edd085703fe202e86499c4",
+      "name_zh": "融资现金流净额",
+      "period": {
+        "basis": "annual",
+        "end": "2024-07-31",
+        "start": "2023-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-11\" decimals=\"-6\" sign=\"-\" name=\"us-gaap:NetCashProvidedByUsedInFinancingActivities\" scale=\"6\" id=\"f-454\">397</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-454 context=c-11",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-397000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "fx_cash_change",
+      "id": "555229034a3386531dec4156e4c79e4912af8899a39e05c354213677410b6181",
+      "name_zh": "汇率变动对现金的影响",
+      "period": {
+        "basis": "annual",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" sign=\"-\" name=\"us-gaap:EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents\" scale=\"6\" id=\"f-455\">2</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-455 context=c-1",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-2000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "fx_cash_change",
+      "id": "fee352d94e7d166f67b190265b2421bc1c5d8fdc9a23ce4e2054b97910282ebf",
+      "name_zh": "汇率变动对现金的影响",
+      "period": {
+        "basis": "annual",
+        "end": "2025-07-31",
+        "start": "2024-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-10\" decimals=\"-6\" name=\"us-gaap:EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents\" scale=\"6\" id=\"f-456\">3</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-456 context=c-10",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "3000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "fx_cash_change",
+      "id": "f869af0acde33d9e75ea0a92dbc9049b62c89e3761616bcb7e67fc5d7f419b6d",
+      "name_zh": "汇率变动对现金的影响",
+      "period": {
+        "basis": "annual",
+        "end": "2024-07-31",
+        "start": "2023-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-11\" decimals=\"-6\" sign=\"-\" name=\"us-gaap:EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents\" scale=\"6\" id=\"f-457\">13</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-457 context=c-11",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-13000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "cash_change",
+      "id": "a9bd0057b46de1024ce0523f3c598c5935a684d91a6299773b9d3294c3c6bdac",
+      "name_zh": "现金净变动",
+      "period": {
+        "basis": "annual",
+        "end": "2026-07-31",
+        "start": "2025-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" sign=\"-\" name=\"us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect\" scale=\"6\" id=\"f-458\">265</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-458 context=c-1",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "-265000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "cash_change",
+      "id": "aa1ffe9a16c4b4e8407073e04c5a5a3b6410f39fe33a023c18d15f1f7f2cce5e",
+      "name_zh": "现金净变动",
+      "period": {
+        "basis": "annual",
+        "end": "2025-07-31",
+        "start": "2024-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-10\" decimals=\"-6\" name=\"us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-459\">2,382</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-459 context=c-10",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "2382000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "cash_change",
+      "id": "1a5692ae7e8d786d07f45edfc31a7f3971141cacab7c4957aec0194115a63ace",
+      "name_zh": "现金净变动",
+      "period": {
+        "basis": "annual",
+        "end": "2024-07-31",
+        "start": "2023-08-01"
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-11\" decimals=\"-6\" name=\"us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-460\">4,247</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-460 context=c-11",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "4247000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+      "currency": "USD",
+      "duplicate_refs": [
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-13\" decimals=\"-6\" name=\"us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-465\">9,481</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-465 context=c-13",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        },
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-13\" decimals=\"-6\" name=\"us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-474\">9,481</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-474 context=c-13",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        }
+      ],
+      "field": "cash_including_restricted",
+      "id": "b9a42117d6d4ad5a026db18b14f4c557f64cc30f97eef67d2f70fc58bb2eab71",
+      "name_zh": "现金及受限现金合计",
+      "period": {
+        "basis": "instant",
+        "end": "2025-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-13\" decimals=\"-6\" name=\"us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-461\">9,481</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-461 context=c-13",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "9481000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+      "currency": "USD",
+      "duplicate_refs": [
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-34\" decimals=\"-6\" name=\"us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-466\">7,099</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-466 context=c-34",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        },
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-34\" decimals=\"-6\" name=\"us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-475\">7,099</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-475 context=c-34",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        }
+      ],
+      "field": "cash_including_restricted",
+      "id": "c1f6e5861a1b25b382b6d4d6c86a0a7fd12c58893ab731756949776c29926ddf",
+      "name_zh": "现金及受限现金合计",
+      "period": {
+        "basis": "instant",
+        "end": "2024-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-34\" decimals=\"-6\" name=\"us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-462\">7,099</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-462 context=c-34",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "7099000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "cash_including_restricted",
+      "id": "ab0f14775aab86f3a10615a23a7795ff6e92c21c51b8219e2e17e2a5c165c54f",
+      "name_zh": "现金及受限现金合计",
+      "period": {
+        "basis": "instant",
+        "end": "2023-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-23\" decimals=\"-6\" name=\"us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-463\">2,852</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-463 context=c-23",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "2852000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+      "currency": "USD",
+      "duplicate_refs": [
+        {
+          "available_at": "2026-10-11T01:37:03+00:00",
+          "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-12\" decimals=\"-6\" name=\"us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-473\">9,216</ix:nonFraction>",
+          "kind": "primary",
+          "locator": "intu-20260731.htm#f-473 context=c-12",
+          "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+          "published_at": null,
+          "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+        }
+      ],
+      "field": "cash_including_restricted",
+      "id": "cd63d11287d0aac2bf34f9d92b36ab8f1771ac7eaf3812201e5566f80bf0b077",
+      "name_zh": "现金及受限现金合计",
+      "period": {
+        "basis": "instant",
+        "end": "2026-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-12\" decimals=\"-6\" name=\"us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-464\">9,216</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-464 context=c-12",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "9216000000"
+    },
+    {
+      "accounting_basis": "GAAP",
+      "concept": "{http://fasb.org/us-gaap/2026}CashAndCashEquivalentsAtCarryingValue",
+      "currency": "USD",
+      "duplicate_refs": [],
+      "field": "cash",
+      "id": "7809e4a1d6d98dcb7c0f3d09310aa74faef4f9cc54f61834cecbe519c4057bf7",
+      "name_zh": "现金及现金等价物",
+      "period": {
+        "basis": "instant",
+        "end": "2024-07-31",
+        "start": null
+      },
+      "rounding_tolerance": "500000",
+      "scale": 1,
+      "scope_id": "consolidated",
+      "source": {
+        "available_at": "2026-10-11T01:37:03+00:00",
+        "excerpt": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-34\" decimals=\"-6\" name=\"us-gaap:CashAndCashEquivalentsAtCarryingValue\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-469\">3,609</ix:nonFraction>",
+        "kind": "primary",
+        "locator": "intu-20260731.htm#f-469 context=c-34",
+        "path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+        "published_at": null,
+        "sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+      },
+      "status": "extracted",
+      "unit": "currency",
+      "value": "3609000000"
+    }
+  ],
+  "implementation_sha256": "455dbab972887440a575e380a2e20f4ac9b602a08a854fad52843c41f4b85ba8",
+  "issues": [],
+  "missing_capabilities": [
+    "full_taxonomy_validation"
+  ],
+  "parser": {
+    "dts_validation": "not_performed_offline_taxonomy_not_loaded",
+    "member": "intu-20260731.htm",
+    "member_sha256": "b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+  },
+  "plan_sha256": "7ab8cc8a2736cf2ca41d395a8631ba9261b8b973b13aeb5a14dff738932ac55a",
+  "release_status": "staging_pending_review",
+  "report_id": "intu-2026-10k-v1",
+  "schema_version": "1.0.0",
+  "supersedes_report_id": null,
+  "taxonomy_validation": {
+    "dts_document_count": 31,
+    "errors": [],
+    "fact_count": 1739,
+    "sha256": "fcdae1d63fa25b7652d0f399ae8f33012faf93fafa2d53f3aa292b326a4af26d",
+    "snapshot_path": "data/financial/objects/fc/fcdae1d63fa25b7652d0f399ae8f33012faf93fafa2d53f3aa292b326a4af26d.json",
+    "status": "passed",
+    "validation_fingerprint": "d5e38fed9e4a3941633870a2e0ca9f8d6ffbb48527574f3af4238bd4ed558f01"
+  }
+}

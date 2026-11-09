@@ -1,0 +1,1905 @@
+{
+  "schema_version": "1.1.0",
+  "research_id": "seagate_20261011",
+  "revision": 1,
+  "is_fictional": false,
+  "as_of": "2026-10-11T10:06:39Z",
+  "recorded_at": "2026-10-11T10:06:39Z",
+  "market_session_date": "2026-10-09",
+  "investment_horizon_months": 12,
+  "subject": {
+    "company_id": "seagate",
+    "security_ids": [
+      "NASDAQ:STX"
+    ],
+    "segments": [
+      {
+        "id": "storage",
+        "name": "存储产品（单一会计分部）",
+        "industry_ids": [
+          "hardware"
+        ],
+        "business_model_ids": [
+          "product_sales"
+        ],
+        "classification_evidence_refs": [
+          "e_10k"
+        ],
+        "subindustry_description": "大容量HDD/存储系统；Data Center和Edge IoT为市场维度",
+        "weight_basis": "revenue",
+        "weight": 1,
+        "weight_period": {
+          "start": "2025-06-28",
+          "end": "2026-07-03",
+          "basis": "year"
+        },
+        "weight_evidence_refs": [
+          "e_10k"
+        ]
+      }
+    ],
+    "is_adr": false,
+    "is_reit": false,
+    "classification_status": "reviewed",
+    "unallocated_or_elimination_notes": "不制造未披露的独立分部利润；80%/20%是市场收入构成，不是两个会计分部。"
+  },
+  "evidence": [
+    {
+      "id": "e_results",
+      "source_path": "data/seagate/2026-10-11/official-results-excerpt.md",
+      "locator": "全文（选择性摘录/计算记录）",
+      "source_kind": "primary",
+      "published_at": null,
+      "published_date": "2026-07-28",
+      "publication_precision": "date",
+      "available_at": "2026-10-11T10:06:39Z",
+      "acquired_at": "2026-10-11T10:06:39Z",
+      "excerpt_or_summary": "官方年度、季度财务及明确标注的指引",
+      "limitations": [
+        "选择性摘录；数字转录不等于完整独立审计"
+      ]
+    },
+    {
+      "id": "e_10k",
+      "source_path": "data/seagate/2026-10-11/sec-10k-excerpt.md",
+      "locator": "全文（选择性摘录/计算记录）",
+      "source_kind": "primary",
+      "published_at": null,
+      "published_date": null,
+      "publication_precision": "unknown",
+      "available_at": "2026-10-11T10:06:39Z",
+      "acquired_at": "2026-10-11T10:06:39Z",
+      "excerpt_or_summary": "SEC身份、单分部、EB出货、客户集中度与风险",
+      "limitations": [
+        "选择性摘录；数字转录不等于完整独立审计"
+      ]
+    },
+    {
+      "id": "e_quote",
+      "source_path": "data/seagate/2026-10-11/google-finance-browser-excerpt.md",
+      "locator": "全文（选择性摘录/计算记录）",
+      "source_kind": "secondary",
+      "published_at": null,
+      "published_date": null,
+      "publication_precision": "unknown",
+      "available_at": "2026-10-11T10:06:39Z",
+      "acquired_at": "2026-10-11T10:06:39Z",
+      "excerpt_or_summary": "浏览器常规交易报价；MCP本次失败",
+      "limitations": [
+        "仅支持声明范围；不是独立原始公司披露"
+      ]
+    },
+    {
+      "id": "e_inputs",
+      "source_path": "data/seagate/2026-10-11/inputs.json",
+      "locator": "全文（选择性摘录/计算记录）",
+      "source_kind": "project_design",
+      "published_at": null,
+      "published_date": null,
+      "publication_precision": "unknown",
+      "available_at": "2026-10-11T10:06:39Z",
+      "acquired_at": "2026-10-11T10:06:39Z",
+      "excerpt_or_summary": "本地事实转录与显式模型假设",
+      "limitations": [
+        "仅支持声明范围；不是独立原始公司披露"
+      ]
+    },
+    {
+      "id": "e_checks",
+      "source_path": "data/seagate/2026-10-11/verification.json",
+      "locator": "全文（选择性摘录/计算记录）",
+      "source_kind": "project_design",
+      "published_at": null,
+      "published_date": null,
+      "publication_precision": "unknown",
+      "available_at": "2026-10-11T10:06:39Z",
+      "acquired_at": "2026-10-11T10:06:39Z",
+      "excerpt_or_summary": "开源NPV交叉核对与反向DCF重算",
+      "limitations": [
+        "仅支持声明范围；不是独立原始公司披露"
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "id": "o_price",
+      "metric_id": "market_price",
+      "segment_id": null,
+      "period": {
+        "start": "2026-10-09",
+        "end": "2026-10-09",
+        "basis": "point_in_time"
+      },
+      "available_at": "2026-10-11T10:06:39Z",
+      "value": {
+        "value": 783.0,
+        "unit": "currency_per_share",
+        "currency": "USD"
+      },
+      "missing_reason": null,
+      "accounting_basis": "US GAAP/明确的描述性桥接；见口径说明",
+      "comparability_notes": "2026-10-09常规收盘；非实时或盘后价",
+      "evidence_refs": [
+        "e_quote"
+      ]
+    },
+    {
+      "id": "o_fcf",
+      "metric_id": "fcf",
+      "segment_id": null,
+      "period": {
+        "start": "2025-06-28",
+        "end": "2026-07-03",
+        "basis": "year"
+      },
+      "available_at": "2026-10-11T10:06:39Z",
+      "value": {
+        "value": 3105000000.0,
+        "unit": "currency",
+        "currency": "USD"
+      },
+      "missing_reason": null,
+      "accounting_basis": "US GAAP/明确的描述性桥接；见口径说明",
+      "comparability_notes": "公司定义CFO-capex；利息之后，非FCFF或完整FCFE",
+      "evidence_refs": [
+        "e_results"
+      ]
+    },
+    {
+      "id": "o_margin",
+      "metric_id": "operating_margin",
+      "segment_id": null,
+      "period": {
+        "start": "2025-06-28",
+        "end": "2026-07-03",
+        "basis": "year"
+      },
+      "available_at": "2026-10-11T10:06:39Z",
+      "value": {
+        "value": 0.33571135711357114,
+        "unit": "ratio",
+        "currency": null
+      },
+      "missing_reason": null,
+      "accounting_basis": "US GAAP/明确的描述性桥接；见口径说明",
+      "comparability_notes": "US GAAP年度；FY2026为53周",
+      "evidence_refs": [
+        "e_10k"
+      ]
+    },
+    {
+      "id": "o_growth",
+      "metric_id": "revenue_growth",
+      "segment_id": null,
+      "period": {
+        "start": "2025-06-28",
+        "end": "2026-07-03",
+        "basis": "year"
+      },
+      "available_at": "2026-10-11T10:06:39Z",
+      "value": {
+        "value": 0.3405518302737167,
+        "unit": "ratio",
+        "currency": null
+      },
+      "missing_reason": null,
+      "accounting_basis": "US GAAP/明确的描述性桥接；见口径说明",
+      "comparability_notes": "53周对52周；未按同周调整",
+      "evidence_refs": [
+        "e_results"
+      ]
+    },
+    {
+      "id": "o_debt",
+      "metric_id": "net_debt",
+      "segment_id": null,
+      "period": {
+        "start": "2026-07-03",
+        "end": "2026-07-03",
+        "basis": "point_in_time"
+      },
+      "available_at": "2026-10-11T10:06:39Z",
+      "value": {
+        "value": 1861000000.0,
+        "unit": "currency",
+        "currency": "USD"
+      },
+      "missing_reason": null,
+      "accounting_basis": "US GAAP/明确的描述性桥接；见口径说明",
+      "comparability_notes": "账面有息债务减现金；未包含租赁/其他现金需求，非当前报价日债务",
+      "evidence_refs": [
+        "e_results"
+      ]
+    },
+    {
+      "id": "o_units_missing",
+      "metric_id": "hardware_driver_1",
+      "segment_id": null,
+      "period": {
+        "start": "2025-06-28",
+        "end": "2026-07-03",
+        "basis": "year"
+      },
+      "available_at": "2026-10-11T10:06:39Z",
+      "value": null,
+      "missing_reason": "披露EB容量不是硬盘台数，不能以789EB填台数",
+      "accounting_basis": "US GAAP/明确的描述性桥接；见口径说明",
+      "comparability_notes": "披露EB容量不是硬盘台数，不能以789EB填台数",
+      "evidence_refs": [
+        "e_10k"
+      ]
+    },
+    {
+      "id": "o_channel_missing",
+      "metric_id": "hardware_driver_2",
+      "segment_id": null,
+      "period": {
+        "start": "2025-06-28",
+        "end": "2026-07-03",
+        "basis": "year"
+      },
+      "available_at": "2026-10-11T10:06:39Z",
+      "value": null,
+      "missing_reason": "渠道库存未披露；公司库存1571百万美元不是渠道库存",
+      "accounting_basis": "US GAAP/明确的描述性桥接；见口径说明",
+      "comparability_notes": "渠道库存未披露；公司库存1571百万美元不是渠道库存",
+      "evidence_refs": [
+        "e_10k"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "c_identity",
+      "kind": "fact",
+      "statement": "爱尔兰普通股STX；硬件产品销售；一个会计分部，数据中心/Edge IoT为市场维度。",
+      "evidence_refs": [
+        "e_10k"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [],
+      "assumption_refs": [],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "c_capacity",
+      "kind": "fact",
+      "statement": "Nearline容量695EB对497EB；总容量789EB对595EB；数据中心收入占80%；一客户约14%。",
+      "evidence_refs": [
+        "e_10k"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [],
+      "assumption_refs": [],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "c_profit",
+      "kind": "fact",
+      "statement": "FY2026营收12195、净利3184、FCF3105百万美元；Q4毛利率52.3%；FY2026比上年多一周。",
+      "evidence_refs": [
+        "e_results",
+        "e_10k"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [],
+      "assumption_refs": [],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "c_guidance",
+      "kind": "fact",
+      "statement": "管理层7月28日给出的FY2027Q1营收4100±100百万美元、非GAAP EPS7.30±0.20，是指引而非实际。",
+      "evidence_refs": [
+        "e_results"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [],
+      "assumption_refs": [],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "c_risk",
+      "kind": "fact",
+      "statement": "官方披露客户订单变化、HAMR技术资格/良率、NAND替代、债券现金结算与稀释、BIS履约和诉讼风险。",
+      "evidence_refs": [
+        "e_10k"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [],
+      "assumption_refs": [],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "c_cycle",
+      "kind": "inference",
+      "statement": "成熟存储产业出现高容量技术升级；已披露经营处扩张和提价阶段，但缺少完整供需、信用和情绪周期证据。",
+      "evidence_refs": [
+        "e_10k",
+        "e_results"
+      ],
+      "observation_refs": [
+        "o_growth",
+        "o_margin"
+      ],
+      "counterevidence_refs": [
+        "e_10k"
+      ],
+      "assumption_refs": [],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "c_quality",
+      "kind": "inference",
+      "statement": "容量增长、定价和现金流共同支持经营改善；客户集中和现金流周期性限制长期确定性。",
+      "evidence_refs": [
+        "e_10k",
+        "e_results"
+      ],
+      "observation_refs": [
+        "o_fcf"
+      ],
+      "counterevidence_refs": [
+        "e_10k"
+      ],
+      "assumption_refs": [],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "c_unknown",
+      "kind": "unknown",
+      "statement": "渠道库存、HAMR占比/良率、全行业产能、最新季度实际、债券前瞻偿付/稀释与代理声明专项治理审阅未完成。",
+      "evidence_refs": [
+        "e_10k",
+        "e_results"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [],
+      "assumption_refs": [],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "a_bridge",
+      "kind": "assumption",
+      "statement": "以已披露FCF减去SBC作为股东现金流代理；未来净借款假定零，非已披露FCFE，也不是已完成周期正常化。FCFE口径不再扣净债务，不再额外加现金。 采用Q4 GAAP摊薄股数232百万作为固定稀释代理；可转债未来稀释和偿付尚未完整模拟。",
+      "evidence_refs": [
+        "e_inputs"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [],
+      "assumption_refs": [],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "a_bear",
+      "kind": "assumption",
+      "statement": "{\"growth_rates\": [-0.2, 0.0, 0.03, 0.03, 0.03], \"discount_rate\": 0.12, \"terminal_growth\": 0.02}；参数为研究假设，非统计校准。",
+      "evidence_refs": [
+        "e_inputs"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [],
+      "assumption_refs": [
+        "a_bridge"
+      ],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "a_base",
+      "kind": "assumption",
+      "statement": "{\"growth_rates\": [0.15, 0.1, 0.08, 0.06, 0.04], \"discount_rate\": 0.1, \"terminal_growth\": 0.03}；参数为研究假设，非统计校准。",
+      "evidence_refs": [
+        "e_inputs"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [],
+      "assumption_refs": [
+        "a_bridge"
+      ],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "a_bull",
+      "kind": "assumption",
+      "statement": "{\"growth_rates\": [0.35, 0.3, 0.25, 0.2, 0.15], \"discount_rate\": 0.09, \"terminal_growth\": 0.035}；参数为研究假设，非统计校准。",
+      "evidence_refs": [
+        "e_inputs"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [],
+      "assumption_refs": [
+        "a_bridge"
+      ],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "a_sensitivity",
+      "kind": "assumption",
+      "statement": "股权成本8/10/12%，永续增长2/3/4%；没有CAPM输入，不声称市场校准。",
+      "evidence_refs": [
+        "e_inputs"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [],
+      "assumption_refs": [
+        "a_base"
+      ],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "c_bridge",
+      "kind": "inference",
+      "statement": "FCF减SBC为2892百万美元代理；FCFE不再减净债务；不额外加现金；尚未完成债务及跨周期正常化。",
+      "evidence_refs": [
+        "e_inputs",
+        "e_results"
+      ],
+      "observation_refs": [
+        "o_fcf"
+      ],
+      "counterevidence_refs": [],
+      "assumption_refs": [
+        "a_bridge"
+      ],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "c_value",
+      "kind": "inference",
+      "statement": "在本次显式参数下报价高于三情景价值；反向DCF衡量所需增速，不能据此断言市场错误。",
+      "evidence_refs": [
+        "e_inputs",
+        "e_quote"
+      ],
+      "observation_refs": [
+        "o_price"
+      ],
+      "counterevidence_refs": [
+        "e_results"
+      ],
+      "assumption_refs": [
+        "a_bear",
+        "a_base",
+        "a_bull"
+      ],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "c_watch",
+      "kind": "inference",
+      "statement": "观察；未证实安全边际，深跌行业阈值未校准、关键未知未解决、未评估用户组合，不输出仓位。",
+      "evidence_refs": [
+        "e_inputs",
+        "e_quote",
+        "e_10k"
+      ],
+      "observation_refs": [
+        "o_price"
+      ],
+      "counterevidence_refs": [
+        "e_results"
+      ],
+      "assumption_refs": [
+        "a_base"
+      ],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    },
+    {
+      "id": "a_review",
+      "kind": "assumption",
+      "statement": "2026-10-19检查新披露，2026-11-02研究复盘；为计划时点，非财报预约日、无自动任务。",
+      "evidence_refs": [
+        "e_inputs"
+      ],
+      "observation_refs": [],
+      "counterevidence_refs": [],
+      "assumption_refs": [],
+      "uncertainty": "结论仅覆盖已归档资料；不是概率估计"
+    }
+  ],
+  "calculations": [
+    {
+      "id": "calc_bear",
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_path": "finance_tools/valuation.py",
+      "input_observation_refs": [
+        "o_fcf"
+      ],
+      "assumption_refs": [
+        "a_bear"
+      ],
+      "outputs": [
+        {
+          "value": 100.14181690232225,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_base",
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_path": "finance_tools/valuation.py",
+      "input_observation_refs": [
+        "o_fcf"
+      ],
+      "assumption_refs": [
+        "a_base"
+      ],
+      "outputs": [
+        {
+          "value": 234.37650264810708,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_bull",
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_path": "finance_tools/valuation.py",
+      "input_observation_refs": [
+        "o_fcf"
+      ],
+      "assumption_refs": [
+        "a_bull"
+      ],
+      "outputs": [
+        {
+          "value": 564.2960784103951,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_reverse",
+      "method": "reverse_dcf",
+      "method_version": "1.0.0",
+      "implementation_path": "finance_tools/valuation.py",
+      "input_observation_refs": [
+        "o_price",
+        "o_fcf"
+      ],
+      "assumption_refs": [
+        "a_base"
+      ],
+      "outputs": [
+        {
+          "value": 0.4133666442576214,
+          "unit": "ratio",
+          "currency": null
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_sensitivity_1",
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_path": "finance_tools/valuation.py",
+      "input_observation_refs": [
+        "o_fcf"
+      ],
+      "assumption_refs": [
+        "a_sensitivity"
+      ],
+      "outputs": [
+        {
+          "value": 283.5754628425194,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_sensitivity_2",
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_path": "finance_tools/valuation.py",
+      "input_observation_refs": [
+        "o_fcf"
+      ],
+      "assumption_refs": [
+        "a_sensitivity"
+      ],
+      "outputs": [
+        {
+          "value": 329.5743698723911,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_sensitivity_3",
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_path": "finance_tools/valuation.py",
+      "input_observation_refs": [
+        "o_fcf"
+      ],
+      "assumption_refs": [
+        "a_sensitivity"
+      ],
+      "outputs": [
+        {
+          "value": 398.5727304171988,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_sensitivity_4",
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_path": "finance_tools/valuation.py",
+      "input_observation_refs": [
+        "o_fcf"
+      ],
+      "assumption_refs": [
+        "a_sensitivity"
+      ],
+      "outputs": [
+        {
+          "value": 211.47810875929426,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_sensitivity_5",
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_path": "finance_tools/valuation.py",
+      "input_observation_refs": [
+        "o_fcf"
+      ],
+      "assumption_refs": [
+        "a_sensitivity"
+      ],
+      "outputs": [
+        {
+          "value": 234.37650264810708,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_sensitivity_6",
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_path": "finance_tools/valuation.py",
+      "input_observation_refs": [
+        "o_fcf"
+      ],
+      "assumption_refs": [
+        "a_sensitivity"
+      ],
+      "outputs": [
+        {
+          "value": 264.9076944998575,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_sensitivity_7",
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_path": "finance_tools/valuation.py",
+      "input_observation_refs": [
+        "o_fcf"
+      ],
+      "assumption_refs": [
+        "a_sensitivity"
+      ],
+      "outputs": [
+        {
+          "value": 168.27875225616808,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_sensitivity_8",
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_path": "finance_tools/valuation.py",
+      "input_observation_refs": [
+        "o_fcf"
+      ],
+      "assumption_refs": [
+        "a_sensitivity"
+      ],
+      "outputs": [
+        {
+          "value": 181.53587230969504,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_sensitivity_9",
+      "method": "multistage_dcf",
+      "method_version": "1.0.0",
+      "implementation_path": "finance_tools/valuation.py",
+      "input_observation_refs": [
+        "o_fcf"
+      ],
+      "assumption_refs": [
+        "a_sensitivity"
+      ],
+      "outputs": [
+        {
+          "value": 198.10727237660382,
+          "unit": "currency_per_share",
+          "currency": "USD"
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_pe",
+      "method": "financial_ratio",
+      "method_version": "1.0.0;financetoolkit=2.2.1",
+      "implementation_path": "finance_tools/basic.py",
+      "input_observation_refs": [
+        "o_price"
+      ],
+      "assumption_refs": [],
+      "outputs": [
+        {
+          "value": 56.33093525179856,
+          "unit": "multiple",
+          "currency": null
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_margin",
+      "method": "financial_ratio",
+      "method_version": "1.0.0;financetoolkit=2.2.1",
+      "implementation_path": "finance_tools/basic.py",
+      "input_observation_refs": [
+        "o_margin"
+      ],
+      "assumption_refs": [],
+      "outputs": [
+        {
+          "value": 0.33571135711357114,
+          "unit": "ratio",
+          "currency": null
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    },
+    {
+      "id": "calc_liquidity",
+      "method": "financial_ratio",
+      "method_version": "1.0.0;financetoolkit=2.2.1",
+      "implementation_path": "finance_tools/basic.py",
+      "input_observation_refs": [],
+      "assumption_refs": [],
+      "outputs": [
+        {
+          "value": 1.669651423089223,
+          "unit": "multiple",
+          "currency": null
+        }
+      ],
+      "verification_status": "checked",
+      "verification_evidence_refs": [
+        "e_checks"
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "id": "S1",
+      "version": 1,
+      "status": "completed",
+      "updated_at": "2026-10-11T10:06:39Z",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [
+          "e_results",
+          "e_10k",
+          "e_quote",
+          "e_inputs",
+          "e_checks"
+        ],
+        "observation_refs": [
+          "o_price",
+          "o_fcf",
+          "o_margin",
+          "o_growth",
+          "o_debt",
+          "o_units_missing",
+          "o_channel_missing"
+        ],
+        "claim_refs": [
+          "c_identity",
+          "c_capacity",
+          "c_profit",
+          "c_guidance",
+          "c_risk",
+          "c_cycle",
+          "c_quality",
+          "c_unknown",
+          "a_bridge",
+          "a_bear",
+          "a_base",
+          "a_bull",
+          "a_sensitivity",
+          "c_bridge",
+          "c_value",
+          "c_watch",
+          "a_review"
+        ]
+      },
+      "gates": [
+        {
+          "id": "classification",
+          "result": "pass",
+          "reason": "SEC证券身份及单一分部已核对；按硬件/产品销售归类",
+          "evidence_refs": [
+            "e_10k",
+            "e_results"
+          ]
+        },
+        {
+          "id": "cycle_dimensions",
+          "result": "pass",
+          "reason": "六维均给出有依据的定性结论或未知边界，未启用数值规则",
+          "evidence_refs": [
+            "e_10k",
+            "e_results"
+          ]
+        },
+        {
+          "id": "evidence_traceable",
+          "result": "pass",
+          "reason": "原始摘录、单位、期间和本地引用完整",
+          "evidence_refs": [
+            "e_10k",
+            "e_results"
+          ]
+        }
+      ],
+      "output": {
+        "segment_positions": [
+          {
+            "segment_id": "storage",
+            "industry_rule_id": "hardware",
+            "positions": {
+              "lifecycle": {
+                "verdict": "成熟产业中的高容量技术升级",
+                "claim_refs": [
+                  "c_identity",
+                  "c_cycle"
+                ],
+                "limitations": [
+                  "仅定性判断；不代表统计校准"
+                ]
+              },
+              "supply_demand": {
+                "verdict": "公司层面nearline扩张和有利定价；全行业供需未定",
+                "claim_refs": [
+                  "c_capacity",
+                  "c_cycle"
+                ],
+                "limitations": [
+                  "仅定性判断；不代表统计校准"
+                ]
+              },
+              "earnings": {
+                "verdict": "已披露盈利处于明显扩张；周期峰值未判定",
+                "claim_refs": [
+                  "c_profit",
+                  "c_cycle"
+                ],
+                "limitations": [
+                  "仅定性判断；不代表统计校准"
+                ]
+              },
+              "credit": {
+                "verdict": "账面降债；行业信用周期证据不足",
+                "claim_refs": [
+                  "c_risk",
+                  "c_unknown"
+                ],
+                "limitations": [
+                  "仅定性判断；不代表统计校准"
+                ]
+              },
+              "sentiment": {
+                "verdict": "没有资金流和期权序列，情绪周期未知",
+                "claim_refs": [
+                  "c_unknown"
+                ],
+                "limitations": [
+                  "仅定性判断；不代表统计校准"
+                ]
+              },
+              "pricing": {
+                "verdict": "报价要求高增长；距52周高点不等于行业深跌",
+                "claim_refs": [
+                  "c_value",
+                  "c_watch"
+                ],
+                "limitations": [
+                  "仅定性判断；不代表统计校准"
+                ]
+              }
+            }
+          }
+        ],
+        "research_priorities": [
+          "HAMR现金回报与稀释",
+          "需求/定价持续性",
+          "渠道库存与同行供需",
+          "全周期现金流正常化"
+        ],
+        "conclusion_claim_refs": [
+          "c_cycle"
+        ]
+      },
+      "notes": [
+        "研究输出验收通过≠公司无风险、假设真实或可以买入；结论为watch。"
+      ]
+    },
+    {
+      "id": "S2",
+      "version": 1,
+      "status": "completed",
+      "updated_at": "2026-10-11T10:06:39Z",
+      "inputs": {
+        "dependencies": [
+          {
+            "step_id": "S1",
+            "version": 1
+          }
+        ],
+        "evidence_refs": [
+          "e_results",
+          "e_10k",
+          "e_quote",
+          "e_inputs",
+          "e_checks"
+        ],
+        "observation_refs": [
+          "o_price",
+          "o_fcf",
+          "o_margin",
+          "o_growth",
+          "o_debt",
+          "o_units_missing",
+          "o_channel_missing"
+        ],
+        "claim_refs": [
+          "c_identity",
+          "c_capacity",
+          "c_profit",
+          "c_guidance",
+          "c_risk",
+          "c_cycle",
+          "c_quality",
+          "c_unknown",
+          "a_bridge",
+          "a_bear",
+          "a_base",
+          "a_bull",
+          "a_sensitivity",
+          "c_bridge",
+          "c_value",
+          "c_watch",
+          "a_review"
+        ]
+      },
+      "gates": [
+        {
+          "id": "mandatory_checks",
+          "result": "pass",
+          "reason": "八项检查均给出结论及未知；完成范围为观察型研究",
+          "evidence_refs": [
+            "e_10k",
+            "e_results"
+          ]
+        },
+        {
+          "id": "counterevidence",
+          "result": "pass",
+          "reason": "客户、技术、债券及法律反证与正面论点并列",
+          "evidence_refs": [
+            "e_10k",
+            "e_results"
+          ]
+        },
+        {
+          "id": "financial_comparability",
+          "result": "pass",
+          "reason": "53/52周、GAAP/非GAAP、EB/台数和不同股数已拆开",
+          "evidence_refs": [
+            "e_10k",
+            "e_results"
+          ]
+        }
+      ],
+      "output": {
+        "checks": {
+          "business_model": {
+            "verdict": "硬件产品销售，现金回收随周期变化",
+            "claim_refs": [
+              "c_identity"
+            ],
+            "limitations": [
+              "仅定性判断；不代表统计校准"
+            ]
+          },
+          "demand_growth": {
+            "verdict": "nearline容量和数据中心占比上升",
+            "claim_refs": [
+              "c_capacity"
+            ],
+            "limitations": [
+              "仅定性判断；不代表统计校准"
+            ]
+          },
+          "competition": {
+            "verdict": "高容量路线优势待持续验证；有HDD同业及NAND替代",
+            "claim_refs": [
+              "c_risk"
+            ],
+            "limitations": [
+              "仅定性判断；不代表统计校准"
+            ]
+          },
+          "financial_quality": {
+            "verdict": "GAAP利润改善；53/52周与非GAAP口径已分开",
+            "claim_refs": [
+              "c_profit"
+            ],
+            "limitations": [
+              "仅定性判断；不代表统计校准"
+            ]
+          },
+          "cash_flow": {
+            "verdict": "FCF改善；SBC与偿债使股东现金不同于公司FCF",
+            "claim_refs": [
+              "c_bridge"
+            ],
+            "limitations": [
+              "仅定性判断；不代表统计校准"
+            ]
+          },
+          "debt_liquidity": {
+            "verdict": "账面降债，但可转债现金结算与稀释尚需模拟",
+            "claim_refs": [
+              "c_risk"
+            ],
+            "limitations": [
+              "仅定性判断；不代表统计校准"
+            ]
+          },
+          "governance": {
+            "verdict": "BIS及诉讼披露已列出；专项代理声明审阅未完成",
+            "claim_refs": [
+              "c_risk",
+              "c_unknown"
+            ],
+            "limitations": [
+              "仅定性判断；不代表统计校准"
+            ]
+          },
+          "capital_allocation": {
+            "verdict": "还债优先、分红和回购；不能把资本回报直接当作盈利质量",
+            "claim_refs": [
+              "c_profit",
+              "c_risk"
+            ],
+            "limitations": [
+              "仅定性判断；不代表统计校准"
+            ]
+          }
+        },
+        "thesis_claim_refs": [
+          "c_quality"
+        ],
+        "critical_unknown_claim_refs": [
+          "c_unknown"
+        ]
+      },
+      "notes": [
+        "研究输出验收通过≠公司无风险、假设真实或可以买入；结论为watch。"
+      ]
+    },
+    {
+      "id": "S3",
+      "version": 1,
+      "status": "completed",
+      "updated_at": "2026-10-11T10:06:39Z",
+      "inputs": {
+        "dependencies": [
+          {
+            "step_id": "S1",
+            "version": 1
+          },
+          {
+            "step_id": "S2",
+            "version": 1
+          }
+        ],
+        "evidence_refs": [
+          "e_results",
+          "e_10k",
+          "e_quote",
+          "e_inputs",
+          "e_checks"
+        ],
+        "observation_refs": [
+          "o_price",
+          "o_fcf",
+          "o_margin",
+          "o_growth",
+          "o_debt",
+          "o_units_missing",
+          "o_channel_missing"
+        ],
+        "claim_refs": [
+          "c_identity",
+          "c_capacity",
+          "c_profit",
+          "c_guidance",
+          "c_risk",
+          "c_cycle",
+          "c_quality",
+          "c_unknown",
+          "a_bridge",
+          "a_bear",
+          "a_base",
+          "a_bull",
+          "a_sensitivity",
+          "c_bridge",
+          "c_value",
+          "c_watch",
+          "a_review"
+        ]
+      },
+      "gates": [
+        {
+          "id": "transmission",
+          "result": "pass",
+          "reason": "需求容量→产品组合/定价→利润/现金路径有原文，确定事件日期不足已说明",
+          "evidence_refs": [
+            "e_10k",
+            "e_results"
+          ]
+        },
+        {
+          "id": "monitoring",
+          "result": "pass",
+          "reason": "现金及利润有基线，渠道和台数缺口明确登记",
+          "evidence_refs": [
+            "e_10k",
+            "e_results"
+          ]
+        },
+        {
+          "id": "invalidation_conditions",
+          "result": "pass",
+          "reason": "技术、订单和偿付变化触发全部相关步骤重算",
+          "evidence_refs": [
+            "e_10k",
+            "e_results"
+          ]
+        }
+      ],
+      "output": {
+        "catalysts": [],
+        "no_catalyst_reason": "HAMR和财报可能改变判断，但本次没有核实具体未来发生日；不登记已确定的事件催化剂",
+        "monitoring_indicators": [
+          {
+            "metric_id": "fcf",
+            "rationale": "检验增量利润是否转成现金，结合SBC和资本开支",
+            "cadence": "quarterly",
+            "baseline_observation_refs": [
+              "o_fcf"
+            ],
+            "missing_baseline_reason": null
+          },
+          {
+            "metric_id": "operating_margin",
+            "rationale": "检验定价与产品组合的盈利传导",
+            "cadence": "quarterly",
+            "baseline_observation_refs": [
+              "o_margin"
+            ],
+            "missing_baseline_reason": null
+          },
+          {
+            "metric_id": "net_debt",
+            "rationale": "跟踪债务偿还及可转债现金结算",
+            "cadence": "quarterly",
+            "baseline_observation_refs": [
+              "o_debt"
+            ],
+            "missing_baseline_reason": null
+          },
+          {
+            "metric_id": "hardware_driver_1",
+            "rationale": "硬盘台数与容量需分别取得，不混用EB",
+            "cadence": "quarterly",
+            "baseline_observation_refs": [],
+            "missing_baseline_reason": "没有公开可用且同口径的数值，不用代理值顶替"
+          },
+          {
+            "metric_id": "hardware_driver_2",
+            "rationale": "跟踪真实渠道库存，禁止用公司库存代替",
+            "cadence": "quarterly",
+            "baseline_observation_refs": [],
+            "missing_baseline_reason": "没有公开可用且同口径的数值，不用代理值顶替"
+          }
+        ],
+        "invalidation_triggers": [
+          {
+            "id": "stx_thesis_change",
+            "description": "技术、现金流或财务口径改变后回退研究",
+            "metric_ids": [
+              "fcf",
+              "operating_margin",
+              "hardware_driver_1",
+              "hardware_driver_2"
+            ],
+            "condition_description": "实际披露表明HAMR认证/良率延误、订单削减、提价逆转或资本需求增加；先核对原文，不使用未校准固定阈值",
+            "claim_refs": [
+              "c_risk",
+              "c_unknown"
+            ],
+            "target_steps": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5"
+            ]
+          }
+        ]
+      },
+      "notes": [
+        "研究输出验收通过≠公司无风险、假设真实或可以买入；结论为watch。"
+      ]
+    },
+    {
+      "id": "S4",
+      "version": 1,
+      "status": "completed",
+      "updated_at": "2026-10-11T10:06:39Z",
+      "inputs": {
+        "dependencies": [
+          {
+            "step_id": "S1",
+            "version": 1
+          },
+          {
+            "step_id": "S2",
+            "version": 1
+          },
+          {
+            "step_id": "S3",
+            "version": 1
+          }
+        ],
+        "evidence_refs": [
+          "e_results",
+          "e_10k",
+          "e_quote",
+          "e_inputs",
+          "e_checks"
+        ],
+        "observation_refs": [
+          "o_price",
+          "o_fcf",
+          "o_margin",
+          "o_growth",
+          "o_debt",
+          "o_units_missing",
+          "o_channel_missing"
+        ],
+        "claim_refs": [
+          "c_identity",
+          "c_capacity",
+          "c_profit",
+          "c_guidance",
+          "c_risk",
+          "c_cycle",
+          "c_quality",
+          "c_unknown",
+          "a_bridge",
+          "a_bear",
+          "a_base",
+          "a_bull",
+          "a_sensitivity",
+          "c_bridge",
+          "c_value",
+          "c_watch",
+          "a_review"
+        ]
+      },
+      "gates": [
+        {
+          "id": "model_applicability",
+          "result": "pass",
+          "reason": "股权现金代理适用范围及正常化不足明确，不将FCF冒充FCFF",
+          "evidence_refs": [
+            "e_10k",
+            "e_results",
+            "e_checks"
+          ]
+        },
+        {
+          "id": "scenario_calculations",
+          "result": "pass",
+          "reason": "三情景输入和中间结果齐全，概率留空，开源NPV逐项核对",
+          "evidence_refs": [
+            "e_10k",
+            "e_results",
+            "e_checks"
+          ]
+        },
+        {
+          "id": "crosscheck",
+          "result": "pass",
+          "reason": "年度PE和反向DCF交叉检查，已重算求根",
+          "evidence_refs": [
+            "e_10k",
+            "e_results",
+            "e_checks"
+          ]
+        },
+        {
+          "id": "sensitivity",
+          "result": "pass",
+          "reason": "九格折现率/终值敏感性保留并独立NPV核对",
+          "evidence_refs": [
+            "e_10k",
+            "e_results",
+            "e_checks"
+          ]
+        },
+        {
+          "id": "value_bridge",
+          "result": "pass",
+          "reason": "股权口径不二次扣债务，现金/SBC/股数桥及其不足明确",
+          "evidence_refs": [
+            "e_10k",
+            "e_results",
+            "e_checks"
+          ]
+        }
+      ],
+      "output": {
+        "valuation_method": "multistage_dcf / FCFE proxy; reverse_dcf; FinanceToolkit PE crosscheck",
+        "applicability_claim_refs": [
+          "c_bridge",
+          "c_value"
+        ],
+        "price_observation_ref": "o_price",
+        "scenarios": [
+          {
+            "name": "bear",
+            "assumption_refs": [
+              "a_bear"
+            ],
+            "intrinsic_value_per_share": {
+              "value": 100.14181690232225,
+              "unit": "currency_per_share",
+              "currency": "USD"
+            },
+            "calculation_refs": [
+              "calc_bear"
+            ],
+            "probability": null
+          },
+          {
+            "name": "base",
+            "assumption_refs": [
+              "a_base"
+            ],
+            "intrinsic_value_per_share": {
+              "value": 234.37650264810708,
+              "unit": "currency_per_share",
+              "currency": "USD"
+            },
+            "calculation_refs": [
+              "calc_base"
+            ],
+            "probability": null
+          },
+          {
+            "name": "bull",
+            "assumption_refs": [
+              "a_bull"
+            ],
+            "intrinsic_value_per_share": {
+              "value": 564.2960784103951,
+              "unit": "currency_per_share",
+              "currency": "USD"
+            },
+            "calculation_refs": [
+              "calc_bull"
+            ],
+            "probability": null
+          }
+        ],
+        "probability_basis_claim_refs": [],
+        "crosscheck_calculation_refs": [
+          "calc_pe",
+          "calc_reverse"
+        ],
+        "sensitivity_calculation_refs": [
+          "calc_sensitivity_1",
+          "calc_sensitivity_2",
+          "calc_sensitivity_3",
+          "calc_sensitivity_4",
+          "calc_sensitivity_5",
+          "calc_sensitivity_6",
+          "calc_sensitivity_7",
+          "calc_sensitivity_8",
+          "calc_sensitivity_9"
+        ],
+        "market_expectation_claim_refs": [
+          "c_value"
+        ],
+        "value_bridge_claim_refs": [
+          "c_bridge"
+        ],
+        "valuation_horizon": {
+          "start": "2026-10-11",
+          "end": "2031-10-11",
+          "basis": "custom"
+        },
+        "investment_horizon": {
+          "start": "2026-10-11",
+          "end": "2027-10-11",
+          "basis": "custom"
+        },
+        "limitations": [
+          "现金流代理尚未正常化；可转债未完整模拟",
+          "折现率/增速为假设，非目标价",
+          "年度年末折现；假设一年后的现金流以FY2026为基期；未做月度过渡",
+          "PE使用已披露年度，不年化Q1指引"
+        ]
+      },
+      "notes": [
+        "研究输出验收通过≠公司无风险、假设真实或可以买入；结论为watch。"
+      ]
+    },
+    {
+      "id": "S5",
+      "version": 1,
+      "status": "completed",
+      "updated_at": "2026-10-11T10:06:39Z",
+      "inputs": {
+        "dependencies": [
+          {
+            "step_id": "S1",
+            "version": 1
+          },
+          {
+            "step_id": "S2",
+            "version": 1
+          },
+          {
+            "step_id": "S3",
+            "version": 1
+          },
+          {
+            "step_id": "S4",
+            "version": 1
+          }
+        ],
+        "evidence_refs": [
+          "e_results",
+          "e_10k",
+          "e_quote",
+          "e_inputs",
+          "e_checks"
+        ],
+        "observation_refs": [
+          "o_price",
+          "o_fcf",
+          "o_margin",
+          "o_growth",
+          "o_debt",
+          "o_units_missing",
+          "o_channel_missing"
+        ],
+        "claim_refs": [
+          "c_identity",
+          "c_capacity",
+          "c_profit",
+          "c_guidance",
+          "c_risk",
+          "c_cycle",
+          "c_quality",
+          "c_unknown",
+          "a_bridge",
+          "a_bear",
+          "a_base",
+          "a_bull",
+          "a_sensitivity",
+          "c_bridge",
+          "c_value",
+          "c_watch",
+          "a_review"
+        ]
+      },
+      "gates": [
+        {
+          "id": "permanent_loss",
+          "result": "pass",
+          "reason": "永久损失路径与一般波动分开记录",
+          "evidence_refs": [
+            "e_10k",
+            "e_results",
+            "e_checks"
+          ]
+        },
+        {
+          "id": "action_conditions",
+          "result": "pass",
+          "reason": "已评估且判断行动条件尚未满足，输出watch",
+          "evidence_refs": [
+            "e_10k",
+            "e_results",
+            "e_checks"
+          ]
+        },
+        {
+          "id": "portfolio_scope",
+          "result": "pass",
+          "reason": "组合未评估；仓位null，无组合计算或交易指令",
+          "evidence_refs": [
+            "e_10k",
+            "e_results",
+            "e_checks"
+          ]
+        },
+        {
+          "id": "decision_evidence",
+          "result": "pass",
+          "reason": "观察结论回连报价、假设和风险证据",
+          "evidence_refs": [
+            "e_10k",
+            "e_results",
+            "e_checks"
+          ]
+        }
+      ],
+      "output": {
+        "decision": "watch",
+        "company_quality": {
+          "verdict": "经营改善、风险可识别；长期优势待验证",
+          "claim_refs": [
+            "c_quality"
+          ],
+          "limitations": [
+            "仅定性判断；不代表统计校准"
+          ]
+        },
+        "price_attractiveness": {
+          "verdict": "本参数下未证实安全边际",
+          "claim_refs": [
+            "c_value"
+          ],
+          "limitations": [
+            "仅定性判断；不代表统计校准"
+          ]
+        },
+        "action_suitability": {
+          "verdict": "观察；关键未知和校准不足",
+          "claim_refs": [
+            "c_watch"
+          ],
+          "limitations": [
+            "仅定性判断；不代表统计校准"
+          ]
+        },
+        "permanent_loss_risks": [
+          {
+            "verdict": "技术失败/客户订单流失/永久替代",
+            "claim_refs": [
+              "c_risk"
+            ],
+            "limitations": [
+              "仅定性判断；不代表统计校准"
+            ]
+          },
+          {
+            "verdict": "高价资本化不可持续利润、稀释和现金偿付",
+            "claim_refs": [
+              "c_value",
+              "c_risk"
+            ],
+            "limitations": [
+              "仅定性判断；不代表统计校准"
+            ]
+          }
+        ],
+        "entry_conditions": [
+          "取得同口径最新实际与正常化现金流",
+          "完成债务/稀释模拟及独立行情核实",
+          "只在有证据的价格与风险边界下重新评估"
+        ],
+        "exit_conditions": [
+          "需求或技术优势被原文证据否定",
+          "现金回报长期低于维持技术与偿债所需"
+        ],
+        "portfolio_assessment": "not_assessed",
+        "portfolio_evidence_refs": [],
+        "portfolio_calculation_refs": [],
+        "position_fraction": null,
+        "validated_rule_refs": [],
+        "decision_claim_refs": [
+          "c_watch"
+        ]
+      },
+      "notes": [
+        "研究输出验收通过≠公司无风险、假设真实或可以买入；结论为watch。"
+      ]
+    },
+    {
+      "id": "S6",
+      "version": 1,
+      "status": "completed",
+      "updated_at": "2026-10-11T10:06:39Z",
+      "inputs": {
+        "dependencies": [
+          {
+            "step_id": "S1",
+            "version": 1
+          },
+          {
+            "step_id": "S2",
+            "version": 1
+          },
+          {
+            "step_id": "S3",
+            "version": 1
+          },
+          {
+            "step_id": "S4",
+            "version": 1
+          },
+          {
+            "step_id": "S5",
+            "version": 1
+          }
+        ],
+        "evidence_refs": [
+          "e_results",
+          "e_10k",
+          "e_quote",
+          "e_inputs",
+          "e_checks"
+        ],
+        "observation_refs": [
+          "o_price",
+          "o_fcf",
+          "o_margin",
+          "o_growth",
+          "o_debt",
+          "o_units_missing",
+          "o_channel_missing"
+        ],
+        "claim_refs": [
+          "c_identity",
+          "c_capacity",
+          "c_profit",
+          "c_guidance",
+          "c_risk",
+          "c_cycle",
+          "c_quality",
+          "c_unknown",
+          "a_bridge",
+          "a_bear",
+          "a_base",
+          "a_bull",
+          "a_sensitivity",
+          "c_bridge",
+          "c_value",
+          "c_watch",
+          "a_review"
+        ]
+      },
+      "gates": [
+        {
+          "id": "monitoring_schedule",
+          "result": "pass",
+          "reason": "计划时间晚于截止时刻；不假称财报确定日",
+          "evidence_refs": [
+            "e_10k",
+            "e_results",
+            "e_checks"
+          ]
+        },
+        {
+          "id": "rerun_triggers",
+          "result": "pass",
+          "reason": "新证据须回退重算；不能沿用旧结论",
+          "evidence_refs": [
+            "e_10k",
+            "e_results",
+            "e_checks"
+          ]
+        },
+        {
+          "id": "review_plan",
+          "result": "pass",
+          "reason": "复盘计划已给出，尚无已执行复盘记录",
+          "evidence_refs": [
+            "e_10k",
+            "e_results",
+            "e_checks"
+          ]
+        }
+      ],
+      "output": {
+        "monitoring_plan": [
+          {
+            "metric_id": "fcf",
+            "cadence": "quarterly",
+            "owner": "研究执行agent（未配置自动任务）",
+            "last_observation_ref": "o_fcf",
+            "next_due_at": "2026-10-19T00:00:00Z"
+          },
+          {
+            "metric_id": "operating_margin",
+            "cadence": "quarterly",
+            "owner": "研究执行agent（未配置自动任务）",
+            "last_observation_ref": "o_margin",
+            "next_due_at": "2026-10-19T00:00:00Z"
+          },
+          {
+            "metric_id": "net_debt",
+            "cadence": "quarterly",
+            "owner": "研究执行agent（未配置自动任务）",
+            "last_observation_ref": "o_debt",
+            "next_due_at": "2026-10-19T00:00:00Z"
+          },
+          {
+            "metric_id": "hardware_driver_1",
+            "cadence": "quarterly",
+            "owner": "研究执行agent（未配置自动任务）",
+            "last_observation_ref": null,
+            "next_due_at": "2026-10-19T00:00:00Z"
+          },
+          {
+            "metric_id": "hardware_driver_2",
+            "cadence": "quarterly",
+            "owner": "研究执行agent（未配置自动任务）",
+            "last_observation_ref": null,
+            "next_due_at": "2026-10-19T00:00:00Z"
+          }
+        ],
+        "triggers": [
+          {
+            "id": "stx_thesis_change",
+            "description": "技术、现金流或财务口径改变后回退研究",
+            "metric_ids": [
+              "fcf",
+              "operating_margin",
+              "hardware_driver_1",
+              "hardware_driver_2"
+            ],
+            "condition_description": "实际披露表明HAMR认证/良率延误、订单削减、提价逆转或资本需求增加；先核对原文，不使用未校准固定阈值",
+            "claim_refs": [
+              "c_risk",
+              "c_unknown"
+            ],
+            "target_steps": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5"
+            ]
+          }
+        ],
+        "review_records": [],
+        "next_review_at": "2026-11-02T00:00:00Z"
+      },
+      "notes": [
+        "研究输出验收通过≠公司无风险、假设真实或可以买入；结论为watch。"
+      ]
+    }
+  ],
+  "invalidation_events": []
+}

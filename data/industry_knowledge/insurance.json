@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "insurance",
+    "industry_name_zh": "保险保障与跨国再保险",
+    "sector_id": "financials",
+    "sector_name_zh": "金融",
+    "macro_sector_id": "FIN_INS",
+    "macro_sector_name_zh": "银行信贷、保险保障、证券资管与房地产金融",
+    "description_zh": "涵盖全球综合财产险 (P&C)、人寿健康险、跨国巨灾再保险及特种商业险承保企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.65,
+    "typical_markup_ratio": 1.12,
+    "capex_intensity": "中等",
+    "operating_leverage_exposure": "中等经营杠杆",
+    "typical_gross_margin_range": [0.15, 0.35]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 0.0,
+    "dio_warning_days": 0.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.05,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "属地监管机构偿付能力充足率红线与最低资本金约束标准",
+      "高级精算核保专家人才与基于数十年气候巨灾历史数据的精算定价模型",
+      "长久期高信用等级主权国债与投资级固定收益资产配置供给收益率"
+    ],
+    "downstream_profile": "全球个人汽车与家庭人寿投保群体、跨国工业企业商业财产险客户及初级直保机构",
+    "pricing_power_verdict": "再保险与大型财险龙头在硬市场周期享有绝对提价权；普通寿险受制于同质化预定利率竞争与代理人渠道成本",
+    "channel_inversion_sensitivity": "综合成本率 (Combined Ratio) 突破 100% 警戒红线是财险承保业务步入实质性失血亏损的核心分水岭"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "全球财险与再保险迈入硬周期，核保保费费率大幅提升，综合成本率优化至 92% 以下释放丰厚承保利润",
+      "长端主权国债收益率上行拉升高息定收资产配置盘收益，庞大保险浮存金 (Float) 投资回报显著修复",
+      "寿险新业务价值 (NBV) 超预期反弹，高价值保障型期交保单占比提升夯实长期内含价值质量"
+    ],
+    "leading_bear_defenses": [
+      "全球连续发生超预期破坏性飓风、地震或野火等巨灾事故，巨额直接赔付击穿年度核保拨备",
+      "宏观长端利率长期低迷引发资产负债严重久期错配，高保底预定利率存量保单陷入系统性利差损",
+      "另类投资与高风险商业地产违约爆发，大额投资资产减值计提侵蚀资本充足率与当期净利润"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度综合成本率 (Combined Ratio) 与承保净利润变动",
+      "寿险新业务价值增长率 (NBV Growth) 与内含价值 (EV) 波动",
+      "净投资收益率 (Net Investment Yield) 与总投资收益率表现",
+      "核心与综合偿付能力充足率 (Solvency Margin Ratio) 监管披露"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "为平滑当期利润，精算假设主观低估期末已发生未报案 (IBNR) 未决赔款准备金提转差",
+      "在人身险责任准备金计提中采用不合规的高折现率假设蓄意少提负债以虚增净资产",
+      "将已发生实质性违约风险的非标债务工具长期分类在公允价值计量科目逃避信用减值损失确认"
+    ],
+    "channel_and_revenue_checks": [
+      "个人代理人渠道虚假保单套取高额首年佣金后的第二年断缴退保率真实性穿透",
+      "向离岸未经评级再保机构分保时的信用履约担保与资本代持合规性审验"
+    ]
+  }
+}

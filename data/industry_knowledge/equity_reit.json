@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "equity_reit",
+    "industry_name_zh": "权益型不动产投资信托与算力基础设施",
+    "sector_id": "real_estate",
+    "sector_name_zh": "房地产",
+    "macro_sector_id": "CONST_RE",
+    "macro_sector_name_zh": "建筑工程、城市基础设施与不动产",
+    "description_zh": "涵盖超算 AI 数据中心机房、通信铁塔基站、现代化物流冷链立库及生物科技产业园区 REITs 企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.35,
+    "typical_markup_ratio": 1.25,
+    "capex_intensity": "极高重资产",
+    "operating_leverage_exposure": "中等偏高经营杠杆",
+    "typical_gross_margin_range": [0.55, 0.75]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 0.0,
+    "dio_warning_days": 0.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.20,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "核心城市枢纽区域超高压电网变电站大容量电力负荷接入审批指标",
+      "关键物流枢纽与数据中心园区土地规划合规用途指标",
+      "高密度机柜冷板式液冷散热成套设备与大功率备用应急柴油发电机组产能"
+    ],
+    "downstream_profile": "全球跨国公有云超算中心 (CSP)、跨国电商物流平台、基础电信运营商及大型跨国金融机构私有云",
+    "pricing_power_verdict": "拥有极度稀缺高功率电力配额的数据中心和枢纽物流资产享有强劲续约提价权；远离负荷中心的中小通用资产直面价格战",
+    "channel_inversion_sensitivity": "同物业净营业收入增长率 (Same-Store NOI Growth) 与运营现金流 (Funds From Operations, FFO) 是不动产信托资产定价的核心锚"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "生成式 AI 算力集群推动数据中心高密度机柜出租率突破 95%，新签与续约机柜租金差价率超预期大涨",
+      "全球跨境电商海外建仓与智能仓储升级带动现代化物流立库租金维持双位数高复合增长",
+      "宏观基准利率步入降息通道，折现率预期回落拉动资产净值 (NAV) 估值倍数与股息收益率溢价强劲重估"
+    ],
+    "leading_bear_defenses": [
+      "全球长期国债收益率高位黏性，高财务杠杆下巨额存量债务面临极高再融资利息成本吞噬可分配利润",
+      "部分区域普通机柜供应阶段性过剩叠加部分科技租户降本退租，导致空置率上行与租金增速失速",
+      "核心大客户长期租约集中到期要求大幅折价续签或转为自建基础设施不再续约引发资产估值损耗"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度同物业净营业收入增速 (Same-Store NOI Growth) 与期末综合出租率 (Occupancy Rate)",
+      "单股调整后运营现金流 (AFFO per Share) 与年度现金股息分红指引",
+      "新签与续约租赁合同租金差价率 (Lease Spread)",
+      "在建基础设施项目 (Development Pipeline) 预租率与并网交付节奏"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "为了人为抬高调整后运营现金流 (AFFO)，将常规性经常性维护资本开支 (Recurring CapEx) 违规分类在非经常性项目",
+      "对长期出租率严重低迷且周边竞品降价严重的边缘物业推迟计提投资性不动产减值损失",
+      "对已陷入实质性财务危机的租户拖欠的长期应收租金未足额计提预期坏账损失准备"
+    ],
+    "channel_and_revenue_checks": [
+      "跨周期租金收入直线性平摊确认 (Straight-Line Rent) 会计计量的平滑度与真实性审验",
+      "租户提前解约清偿违约赔偿金确认为当期利润的会计核算合规性审查"
+    ]
+  }
+}

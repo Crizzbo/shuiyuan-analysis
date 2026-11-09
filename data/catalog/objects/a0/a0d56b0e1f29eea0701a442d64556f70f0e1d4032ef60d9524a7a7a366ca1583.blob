@@ -1,0 +1,116 @@
+"""正式财务事实→行业指标观测；保留范围、版本和缺口，不自动确认公司行业。"""
+import json
+import math
+from decimal import Decimal
+from datetime import date,timedelta
+import sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
+from .pipeline import local,digest,save_object
+from .registry import read_as_of
+from finance_tools.service import calculate
+
+SPECIAL={'banks','insurance','asset_management','equity_reit'}
+BINDINGS={
+ 'operating_margin':{'fields':['operating_income','revenue'],'formula':'同期间、同范围营业利润 / 收入'},
+ 'revenue_growth':{'fields':['revenue'],'formula':'同报告相邻年度、同范围收入 / 上年收入 - 1'}}
+
+def map_industry(entity_id,industry_id,period_end,as_of,scope_id='consolidated',report_id=None):
+    """行业由请求明确指定；返回候选适配，不替代分部分类审核。"""
+    ids={p.stem for p in local('knowledge/contracts/industries').glob('*.json')}
+    if industry_id not in ids:raise ValueError('未知行业')
+    industry=json.loads(local('knowledge/contracts/industries/'+industry_id+'.json').read_text(encoding='utf-8'))
+    catalog=json.loads(local('knowledge/metrics/catalog.json').read_text(encoding='utf-8'))
+    metrics={m['id']:m for m in catalog['metrics']}
+    registered=read_as_of(entity_id,as_of)
+    if report_id:registered=[p for p in registered if p['report_id']==report_id]
+    reports={p['report_id'] for p in registered}
+    if len(reports)!=1:raise ValueError('须明确选择唯一报告版本；没有可得正式事实也不能映射')
+    facts=[p for p in registered if p['fact']['scope_id']==scope_id and p['fact']['period']['basis']=='annual']
+    current=[p for p in facts if p['fact']['period']['end']==period_end]
+    if not current:raise ValueError('指定范围及年度没有正式事实')
+    rows=[];observations=[];evidence=[];source_map={};calculations=[];lineage=[]
+    requested=list(dict.fromkeys(list(BINDINGS)+industry['required_metric_ids']))
+    for metric_id in requested:
+        result={'metric_id':metric_id,'status':'blocked','reason':None,'input_registration_ids':[]}
+        if metric_id not in BINDINGS:
+            result['reason']='行业专属指标缺审核字段绑定与原始输入；总收入不能替代 ARR、留存或其他驱动指标'
+            rows.append(result);continue
+        if industry_id in SPECIAL:
+            result['reason']='该行业需专门财务口径，当前一般经营业务绑定不适用'
+            rows.append(result);continue
+        selected=[]
+        try:
+            for field in BINDINGS[metric_id]['fields']:
+                candidates=[p for p in current if p['fact']['field']==field]
+                if len(candidates)!=1:raise ValueError(field+' 缺失或有多个同范围候选')
+                selected.append(candidates[0])
+            if metric_id=='revenue_growth':
+                f=selected[0]['fact'];previous_end=(date.fromisoformat(f['period']['start'])-timedelta(days=1)).isoformat()
+                prior=[p for p in facts if p['fact']['field']=='revenue' and p['fact']['period']['end']==previous_end]
+                if len(prior)!=1:raise ValueError('缺同一报告相邻年度收入基数')
+                selected.append(prior[0])
+            inputs=[p['fact'] for p in selected]
+            if len({(f['scope_id'],f['accounting_basis'],f['currency']) for f in inputs})!=1:
+                raise ValueError('范围、准则或币种不一致')
+            if metric_id=='operating_margin' and inputs[0]['period']!=inputs[1]['period']:
+                raise ValueError('分子分母期间不同')
+            if any(f['status']!='extracted' for f in inputs):raise ValueError('事实质量未通过')
+            if Decimal(inputs[1]['value'])<=0:raise ValueError('分母必须为正')
+            if metric_id=='operating_margin':
+                calculation=calculate('financial_ratio',{'operation':'operating_margin','numerator':float(inputs[0]['value']),'denominator':float(inputs[1]['value'])})
+                value=calculation['result']['value']
+            else:
+                import pandas as pd
+                value=float(pd.Series([float(inputs[1]['value']),float(inputs[0]['value'])]).pct_change(fill_method=None).iloc[-1])
+                from importlib.metadata import version
+                calculation={'library':'pandas','library_version':version('pandas'),'function':'Series.pct_change','value':value}
+            if not math.isfinite(value):raise ValueError('计算产生非有限值，禁止生成观测')
+            ids=[]
+            for p in selected:
+                f=p['fact'];s=f['source'];eid='financial-'+f['id'];ids.append(eid)
+                from data_store import LocalStore
+                c=LocalStore()
+                try:
+                    link=p['evidence_source']
+                    manifest=json.loads(c.db.execute('SELECT manifest_json FROM sources WHERE source_id=? AND revision=?',(link['source_id'],link['revision'])).fetchone()[0])
+                finally:c.close()
+                if eid not in source_map:
+                    evidence.append({'id':eid,'source_path':s['path'],'locator':s['locator'],'source_kind':'primary',
+                      'published_at':s['published_at'],'published_date':manifest['published_date'],'publication_precision':manifest['publication_precision'],
+                      'available_at':s['available_at'],'acquired_at':manifest['acquired_at'],'excerpt_or_summary':s['excerpt'],
+                      'limitations':['正式原文与解析版本见指标 lineage；比较年度按当前报告可得时点，不能用于早期回测。']})
+                    source_map[eid]={k:link[k] for k in ['source_id','revision']}
+            period={'start':inputs[0]['period']['start'],'end':period_end,'basis':'year'}
+            oid=digest(json.dumps([metric_id,[p['registration_id'] for p in selected]],sort_keys=True).encode())
+            observations.append({'id':oid,'metric_id':metric_id,'segment_id':None,'period':period,
+              'available_at':max((f['source']['available_at'] for f in inputs),key=__import__('datetime').datetime.fromisoformat),
+              'value':{'value':value,'unit':metrics[metric_id]['unit'],'currency':None},'missing_reason':None,
+              'accounting_basis':inputs[0]['accounting_basis'],
+              'comparability_notes':f"{scope_id}；同报告可比列；{BINDINGS[metric_id]['formula']}；行业 {industry_id} 为待审核候选，不代替真实分部分类。",
+              'evidence_refs':ids})
+            calc_record={'metric_id':metric_id,'observation_id':oid,'formula':BINDINGS[metric_id]['formula'],'execution':calculation}
+            calc_path,calc_sha=save_object(json.dumps(calc_record,ensure_ascii=False,sort_keys=True,allow_nan=False).encode(),'json')
+            calculations.append({'observation_id':oid,'path':calc_path,'sha256':calc_sha})
+            lineage.append({'observation_id':oid,'registration_ids':[p['registration_id'] for p in selected],
+                            'report_refs':[p['report_ref'] for p in selected],'scope_id':scope_id})
+            result.update(status='computed',reason=None,input_registration_ids=[p['registration_id'] for p in selected])
+        except (ValueError,KeyError) as error:result['reason']=str(error)
+        rows.append(result)
+    missing=[m for m in industry['required_metric_ids'] if not any(r['metric_id']==m and r['status']=='computed' for r in rows)]
+    result={'schema_version':'1.0.0','entity_id':entity_id,'industry_id':industry_id,'classification_status':'unreviewed',
+      'scope_id':scope_id,'period_end':period_end,'as_of':as_of,'mapping_results':rows,'observations':observations,
+      'evidence':evidence,'source_map':source_map,'calculation_refs':calculations,'lineage':lineage,
+      'missing_required_metric_ids':missing,'industry_gate_status':'blocked' if missing else 'pending_classification_review'}
+    from jsonschema import Draft202012Validator,FormatChecker
+    Draft202012Validator(json.loads(local('schemas/industry-observations.schema.json').read_text(encoding='utf-8')),format_checker=FormatChecker()).validate(result)
+    return result
+
+def verify_mapping(mapping):
+    """接入前重新从正式事实计算，禁止手改输出值或解除行业缺口。"""
+    report_ids={json.loads(local(p['path']).read_text(encoding='utf-8'))['report_id']
+                for lineage in mapping['lineage'] for p in lineage['report_refs']}
+    if len(report_ids)!=1:raise ValueError('映射没有唯一可核验报告')
+    rebuilt=map_industry(mapping['entity_id'],mapping['industry_id'],mapping['period_end'],mapping['as_of'],
+                         mapping['scope_id'],next(iter(report_ids)))
+    if rebuilt!=mapping:raise ValueError('映射与正式来源重新执行结果不一致，需重建新快照')

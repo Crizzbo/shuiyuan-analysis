@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "managed_care",
+    "industry_name_zh": "管理式医疗与医疗健康险",
+    "sector_id": "health_care",
+    "sector_name_zh": "医疗保健",
+    "macro_sector_id": "HEALTH_BIO",
+    "macro_sector_name_zh": "医疗保健、专利创新药与生物技术服务",
+    "description_zh": "涵盖商业雇主健康险、联邦医疗保险优势计划 (Medicare Advantage)、医疗补助及处方药福利管理 (PBM) 企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.82,
+    "typical_markup_ratio": 1.08,
+    "capex_intensity": "中等偏低",
+    "operating_leverage_exposure": "中等偏高经营杠杆",
+    "typical_gross_margin_range": [0.12, 0.22]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 0.0,
+    "dio_warning_days": 0.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.35,
+    "debt_covenant_buffer_minimum_ratio": 0.18
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "联邦医保与医疗补助服务中心 (CMS) 官方核准保费基准费率与星级评价评定方案",
+      "优质排他性定点综合医院、专科门诊手术中心与家庭全科医生签约网络",
+      "重磅专利创新药处方集准入返利议价协议与药品福利管理协议"
+    ],
+    "downstream_profile": "老年退休联邦医保参保人、低收入群体医疗救助受益人、跨国大型企业雇员及个人自费参保群体",
+    "pricing_power_verdict": "依托数千万级庞大参保人基座，管理式医疗巨头享有对下游医院诊疗服务与上游药企采购定价的极强压价控费话语权；终极费率受制于国家医保法案政策约束",
+    "channel_inversion_sensitivity": "综合医疗赔付损失率 (Medical Loss Ratio, MLR) 是衡量承保业务盈亏平衡与利润安全边际最核心的主导指标"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "价值医疗健康管理体系显著压降重症再住院率，综合医疗损失率在合规区间内维持健康水平驱动承保净利超预期释放",
+      "核心医保优势计划产品在官方年度综合星级评定中取得高分，享受政府高额品质奖励补贴提升整体保费收入",
+      "自营医生网络、日间手术中心及专业慢病药房等高毛利医疗增值服务协同放量，构筑强劲非承保业务利润支柱"
+    ],
+    "leading_bear_defenses": [
+      "老年参保群体门诊及外科择期手术利用率超预期集中反弹，拉动综合医疗赔付率异动飙升并侵蚀当期主营净利润",
+      "官方监管推行新版风险调整编码规则改革，调降特定慢性病风险补贴系数引发医保计划收入增速显著放缓",
+      "核心主力保险产品星级评级遭遇意外下调导致政府奖金补贴缩减数亿美元，倒逼削减参保福利引发会员退保流失"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度综合医疗损失率 (Medical Care Ratio / MLR) 环比同比变动",
+      "有效医疗参保总会员人数 (Total Medical Enrollment) 净增规模",
+      "官方公布的年度医保优势计划 (Medicare Advantage) 最终费率通知与星级评定明细",
+      "自营综合健康科技服务板块营业收入增速与营业利润率表现"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "为了平滑当期账面利润波动，在财年期末蓄意低估已发生未报案 (Incurred But Not Reported, IBNR) 医疗理赔准备金负债",
+      "通过激进病历编码挖掘 (Aggressive Risk Coding) 夸大参保人疾病风险系数以骗取超额政府风险补偿金面临追责追缴",
+      "将常规日常软件升级与运营维护费用违规予以资本化计入无形资产以减少当期管理费用"
+    ],
+    "channel_and_revenue_checks": [
+      "药企处方药回扣返利冲减主营医疗赔付成本的权责发生制匹配度与真实性审验",
+      "法定最低医疗损失率返还条款 (MLR Rebates) 预计应付款项计提的充分性审查"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "mode": "agent_browser_workflow",
+  "credential_policy": "no_api_keys_no_registration",
+  "tasks": [
+    {"id": "us-original-statements", "replaces": ["sec", "alpha_vantage"], "request": "指定发行人、报告期和三表字段", "search_template": "公司名称 股票代码 年度 季度 annual report 10-K 10-Q investor relations", "preferred_sources": ["发行人官方 IR", "SEC 公开网页"], "required_evidence": ["官方原文", "发行人身份", "报告期", "会计准则", "单位", "页面发布时间及精度", "原文表格/上下文定位"], "status": "per_research_request"},
+    {"id": "jp-original-statements", "replaces": ["edinet", "jquants"], "request": "指定日本发行人、报告期和缺失字段", "search_template": "公司日文名 证券代码 決算短信 有価証券報告書 決算説明資料 IR 年度", "preferred_sources": ["发行人官方 IR", "TDnet 免费页面", "EDINET 公开浏览页面"], "required_evidence": ["集团与上市子公司身份", "原文 PDF/XBRL", "JGAAP/IFRS", "合并范围", "期间与单位", "公告/更正时间"], "status": "per_research_request"},
+    {"id": "macro-vintages", "replaces": ["fred", "estat"], "request": "指定序列、研究时点和缺少的原始发布版本", "search_template": "机构名称 序列名称 发布日期 statistical release archive revision", "preferred_sources": ["统计机构发布档案", "央行官方页面"], "required_evidence": ["原发布档案", "观察期与发布日期", "版本/修订说明", "单位与频率"], "status": "per_research_request", "missing_rule": "找不到历史发布版本就标记缺失；当前修订值不能替代历史已知数据"}
+  ]
+}

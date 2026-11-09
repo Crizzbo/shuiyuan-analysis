@@ -1,0 +1,74 @@
+{
+  "as_of_iso": "2026-10-31T20:00:00Z",
+  "as_of_edt": "2026-10-31 16:00 EDT",
+  "source": "google_finance_mcp_authoritative_close",
+  "session_type": "previous_close_baseline",
+  "quotes": {
+    "AAPL": {
+      "ticker": "AAPL",
+      "company_name": "Apple Inc.",
+      "current_price": 344.63,
+      "currency": "USD",
+      "timestamp_iso": "2026-10-31T20:00:00Z",
+      "timestamp_formatted": "2026-10-31 16:00 EDT 前收盘基准",
+      "session_type": "previous_close_baseline",
+      "is_valid": true,
+      "staleness_status": "FRESH_BASELINE"
+    },
+    "META": {
+      "ticker": "META",
+      "company_name": "Meta Platforms, Inc.",
+      "current_price": 618.45,
+      "currency": "USD",
+      "timestamp_iso": "2026-10-31T20:00:00Z",
+      "timestamp_formatted": "2026-10-31 16:00 EDT 前收盘基准",
+      "session_type": "previous_close_baseline",
+      "is_valid": true,
+      "staleness_status": "FRESH_BASELINE"
+    },
+    "MSFT": {
+      "ticker": "MSFT",
+      "company_name": "Microsoft Corporation",
+      "current_price": 435.20,
+      "currency": "USD",
+      "timestamp_iso": "2026-10-31T20:00:00Z",
+      "timestamp_formatted": "2026-10-31 16:00 EDT 前收盘基准",
+      "session_type": "previous_close_baseline",
+      "is_valid": true,
+      "staleness_status": "FRESH_BASELINE"
+    },
+    "NVDA": {
+      "ticker": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "current_price": 204.00,
+      "currency": "USD",
+      "timestamp_iso": "2026-10-31T20:00:00Z",
+      "timestamp_formatted": "2026-10-31 16:00 EDT 前收盘基准 (最新实核精确价)",
+      "session_type": "previous_close_baseline",
+      "is_valid": true,
+      "staleness_status": "FRESH_BASELINE"
+    },
+    "QQQ": {
+      "ticker": "QQQ",
+      "company_name": "Invesco QQQ Trust",
+      "current_price": 490.50,
+      "currency": "USD",
+      "timestamp_iso": "2026-10-31T20:00:00Z",
+      "timestamp_formatted": "2026-10-31 16:00 EDT 前收盘基准",
+      "session_type": "previous_close_baseline",
+      "is_valid": true,
+      "staleness_status": "FRESH_BASELINE"
+    },
+    "GOOGL": {
+      "ticker": "GOOGL",
+      "company_name": "Alphabet Inc.",
+      "current_price": 283.84,
+      "currency": "USD",
+      "timestamp_iso": "2026-10-31T20:00:00Z",
+      "timestamp_formatted": "2026-10-31 16:00 EDT 前收盘基准",
+      "session_type": "previous_close_baseline",
+      "is_valid": true,
+      "staleness_status": "FRESH_BASELINE"
+    }
+  }
+}

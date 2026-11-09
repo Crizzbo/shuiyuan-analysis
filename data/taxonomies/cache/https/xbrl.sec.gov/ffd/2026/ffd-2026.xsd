@@ -1,0 +1,1323 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This schema was created by staff of the U.S. Securities and Exchange Commission. -->
+<!-- Data and content created by government employees within the scope of their employment -->
+<!-- are not subject to domestic copyright protection. 17 U.S.C. 105. -->
+<xs:schema
+xmlns:dtr-types="http://www.xbrl.org/dtr/type/2024-01-31"
+xmlns:ffd="http://xbrl.sec.gov/ffd/2026"
+xmlns:link="http://www.xbrl.org/2003/linkbase"
+xmlns:xbrldt="http://xbrl.org/2005/xbrldt"
+xmlns:xbrli="http://www.xbrl.org/2003/instance"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://xbrl.sec.gov/ffd/2026"
+elementFormDefault="qualified">
+<xs:import namespace="http://www.xbrl.org/2003/linkbase" schemaLocation="http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd"/>
+<xs:import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+<xs:import namespace="http://xbrl.org/2005/xbrldt" schemaLocation="http://www.xbrl.org/2005/xbrldt-2005.xsd"/>
+<xs:import namespace="http://www.xbrl.org/dtr/type/2024-01-31" schemaLocation="https://www.xbrl.org/dtr/type/2024-01-31/types.xsd"/>
+<xs:import namespace="http://xbrl.sec.gov/dei/2026" schemaLocation="https://xbrl.sec.gov/dei/2026/dei-2026.xsd"/>
+<xs:import namespace="http://www.xbrl.org/2009/arcrole/deprecated" schemaLocation="http://www.xbrl.org/lrr/arcrole/deprecated-2009-12-16.xsd"/>
+<xs:annotation>
+<xs:appinfo>
+<link:roleType roleURI="http://xbrl.sec.gov/ffd/role/document/submissionTable" id="submissionTable">
+<link:definition>995210 - Document - Submission</link:definition>
+<link:usedOn>link:presentationLink</link:usedOn>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/ffd/role/document/feesOfferingTable" id="feesOfferingTable">
+<link:definition>995211 - Document - Offerings</link:definition>
+<link:usedOn>link:presentationLink</link:usedOn>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/ffd/role/document/feesOffsetTable" id="feesOffsetTable">
+<link:definition>995212 - Document - Offsets</link:definition>
+<link:usedOn>link:presentationLink</link:usedOn>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/ffd/role/document/feesByCmbndPrspctsTable" id="feesByCmbndPrspctsTable">
+<link:definition>995213 - Document - Combined Prospectus</link:definition>
+<link:usedOn>link:presentationLink</link:usedOn>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/ffd/role/document/securities424iTable" id="securities424iTable">
+<link:definition>995214 - Document - Securities, 424I</link:definition>
+<link:usedOn>link:presentationLink</link:usedOn>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/ffd/role/document/feesSummaryTable" id="feesSummaryTable">
+<link:definition>995215 - Document - Fees Summary</link:definition>
+<link:usedOn>link:presentationLink</link:usedOn>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:roleType roleURI="http://xbrl.sec.gov/ffd/role/deprecated/ffd" id="dep-ffd">
+<link:definition>995219 - Document - Deprecated Filing Fee Disclosure Concepts</link:definition>
+<link:usedOn>link:presentationLink</link:usedOn>
+<link:usedOn>link:definitionLink</link:usedOn>
+</link:roleType>
+<link:linkbase id="lnk">
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/all" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#all"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/domain-member" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#domain-member"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#hypercube-dimension"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/ffd/role/document/feesSummaryTable" xlink:type="simple" xlink:href="#feesSummaryTable"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/ffd/role/document/feesByCmbndPrspctsTable" xlink:type="simple" xlink:href="#feesByCmbndPrspctsTable"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/ffd/role/document/feesOfferingTable" xlink:type="simple" xlink:href="#feesOfferingTable"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/ffd/role/document/feesOffsetTable" xlink:type="simple" xlink:href="#feesOffsetTable"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/ffd/role/document/securities424iTable" xlink:type="simple" xlink:href="#securities424iTable"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/ffd/role/document/submissionTable" xlink:type="simple" xlink:href="#submissionTable"/>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/feesOffsetTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetLineItems" xlink:label="OffsetLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TermntnCmpltnWdrwl" xlink:label="TermntnCmpltnWdrwl"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="TermntnCmpltnWdrwl" priority="10" order="19.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrFeeAmt" xlink:label="OffsetPrrFeeAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="OffsetPrrFeeAmt" use="optional" priority="10" order="16.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetExpltnForClmdAmt" xlink:label="OffsetExpltnForClmdAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="OffsetExpltnForClmdAmt" use="optional" priority="10" order="17.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetNote" xlink:label="OffsetNote"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="OffsetNote" use="optional" priority="10" order="18.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule011a2OffsetFlg" xlink:label="Rule011a2OffsetFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="Rule011a2OffsetFlg" use="optional" priority="10" order="4.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457bOffsetFlg" xlink:label="Rule457bOffsetFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="Rule457bOffsetFlg" use="optional" priority="10" order="3.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457pOffsetFlg" xlink:label="Rule457pOffsetFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="Rule457pOffsetFlg" use="optional" priority="10" order="5.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrFilerNm" xlink:label="OffsetPrrFilerNm"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="OffsetPrrFilerNm" use="optional" priority="10" order="6.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrFormTp" xlink:label="OffsetPrrFormTp"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="OffsetPrrFormTp" use="optional" priority="10" order="7.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrFileNb" xlink:label="OffsetPrrFileNb"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="OffsetPrrFileNb" use="optional" priority="10" order="8.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetClmInitlFilgDt" xlink:label="OffsetClmInitlFilgDt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="OffsetClmInitlFilgDt" use="optional" priority="10" order="9.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetClmdAmt" xlink:label="OffsetClmdAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="OffsetClmdAmt" use="optional" priority="10" order="11.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrSctyTp" xlink:label="OffsetPrrSctyTp"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="OffsetPrrSctyTp" use="optional" priority="10" order="12.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrSctyTitl" xlink:label="OffsetPrrSctyTitl"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="OffsetPrrSctyTitl" use="optional" priority="10" order="13.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrUnsoldOfferingAmt" xlink:label="OffsetPrrUnsoldOfferingAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="OffsetPrrUnsoldOfferingAmt" use="optional" priority="10" order="15.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrNbOfUnsoldScties" xlink:label="OffsetPrrNbOfUnsoldScties"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="OffsetPrrNbOfUnsoldScties" use="optional" priority="10" order="14.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetClmdInd" xlink:label="OffsetClmdInd"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="OffsetClmdInd" use="optional" priority="10" order="2.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetSrcFilgDt" xlink:label="OffsetSrcFilgDt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OffsetLineItems" xlink:to="OffsetSrcFilgDt" use="optional" priority="10" order="10.0"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/feesOffsetTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetLineItems" xlink:label="OffsetLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetTable" xlink:label="OffsetTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="OffsetLineItems" xlink:to="OffsetTable" use="optional" priority="10" order="1.0" xbrldt:closed="true" xbrldt:contextElement="segment"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/feesOffsetTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetTable" xlink:label="OffsetTable"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetAxis" xlink:label="OffsetAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="OffsetTable" xlink:to="OffsetAxis" priority="10" order="1.0"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/submissionTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_SubmissionLineItems" xlink:label="SubmissionLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_SubmissionTable" xlink:label="SubmissionTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="SubmissionLineItems" xlink:to="SubmissionTable" priority="10" order="1.0" xbrldt:contextElement="segment" xbrldt:closed="true"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/submissionTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_SubmissionLineItems" xlink:label="SubmissionLineItems"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_EntityCentralIndexKey" xlink:label="EntityCentralIndexKey"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SubmissionLineItems" xlink:to="EntityCentralIndexKey" use="optional" priority="10" order="2.0"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_EntityRegistrantName" xlink:label="EntityRegistrantName"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SubmissionLineItems" xlink:to="EntityRegistrantName" use="optional" priority="10" order="3.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_RegnFileNb" xlink:label="RegnFileNb"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SubmissionLineItems" xlink:to="RegnFileNb" use="optional" priority="10" order="4.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FormTp" xlink:label="FormTp"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SubmissionLineItems" xlink:to="FormTp" use="optional" priority="10" order="5.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_SubmissnTp" xlink:label="SubmissnTp"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SubmissionLineItems" xlink:to="SubmissnTp" use="optional" priority="10" order="6.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeExhibitTp" xlink:label="FeeExhibitTp"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SubmissionLineItems" xlink:to="FeeExhibitTp" use="optional" priority="10" order="7.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrNm" xlink:label="IssrNm"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SubmissionLineItems" xlink:to="IssrNm" use="optional" priority="10" order="8.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrStrt1" xlink:label="IssrBizAdrStrt1"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SubmissionLineItems" xlink:to="IssrBizAdrStrt1" use="optional" priority="10" order="9.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrStrt2" xlink:label="IssrBizAdrStrt2"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SubmissionLineItems" xlink:to="IssrBizAdrStrt2" use="optional" priority="10" order="10.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrCity" xlink:label="IssrBizAdrCity"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SubmissionLineItems" xlink:to="IssrBizAdrCity" use="optional" priority="10" order="11.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrStatOrCtryCd" xlink:label="IssrBizAdrStatOrCtryCd"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SubmissionLineItems" xlink:to="IssrBizAdrStatOrCtryCd" use="optional" priority="10" order="12.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrZipCd" xlink:label="IssrBizAdrZipCd"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SubmissionLineItems" xlink:to="IssrBizAdrZipCd" use="optional" priority="10" order="13.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CeasedOprsDt" xlink:label="CeasedOprsDt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SubmissionLineItems" xlink:to="CeasedOprsDt" use="optional" priority="10" order="14.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_RptgFsclYrEndDt" xlink:label="RptgFsclYrEndDt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SubmissionLineItems" xlink:to="RptgFsclYrEndDt" use="optional" priority="10" order="15.0"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/feesOfferingTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingLineItems" xlink:label="OfferingLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_GnlInstrIIhiFlg" xlink:label="GnlInstrIIhiFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="GnlInstrIIhiFlg" priority="10" order="24.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeNoteMaxAggtOfferingPric" xlink:label="FeeNoteMaxAggtOfferingPric"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="FeeNoteMaxAggtOfferingPric" use="optional" priority="10" order="30.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingNote" xlink:label="OfferingNote"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="OfferingNote" use="optional" priority="10" order="31.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457fFlg" xlink:label="Rule457fFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="Rule457fFlg" use="optional" priority="10" order="23.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AmtSctiesRcvd" xlink:label="AmtSctiesRcvd"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="AmtSctiesRcvd" use="optional" priority="10" order="25.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_ValSctiesRcvdPerShr" xlink:label="ValSctiesRcvdPerShr"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="ValSctiesRcvdPerShr" use="optional" priority="10" order="26.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_ValSctiesRcvd" xlink:label="ValSctiesRcvd"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="ValSctiesRcvd" use="optional" priority="10" order="27.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CshPdByRegistrantInTx" xlink:label="CshPdByRegistrantInTx"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="CshPdByRegistrantInTx" use="optional" priority="10" order="28.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CshRcvdByRegistrantInTx" xlink:label="CshRcvdByRegistrantInTx"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="CshRcvdByRegistrantInTx" use="optional" priority="10" order="29.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingSctyTitl" xlink:label="OfferingSctyTitl"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="OfferingSctyTitl" use="optional" priority="10" order="12.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingSctyTp" xlink:label="OfferingSctyTp"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="OfferingSctyTp" use="optional" priority="10" order="11.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457aFlg" xlink:label="Rule457aFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="Rule457aFlg" use="optional" priority="10" order="3.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457oFlg" xlink:label="Rule457oFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="Rule457oFlg" use="optional" priority="10" order="4.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule415a6Flg" xlink:label="Rule415a6Flg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="Rule415a6Flg" use="optional" priority="10" order="10.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457rFlg" xlink:label="Rule457rFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="Rule457rFlg" use="optional" priority="10" order="6.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457uFlg" xlink:label="Rule457uFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="Rule457uFlg" use="optional" priority="10" order="5.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule011Flg" xlink:label="Rule011Flg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="Rule011Flg" use="optional" priority="10" order="8.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeesOthrRuleFlg" xlink:label="FeesOthrRuleFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="FeesOthrRuleFlg" use="optional" priority="10" order="9.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_PrevslyPdFlg" xlink:label="PrevslyPdFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="PrevslyPdFlg" use="optional" priority="10" order="2.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AmtSctiesRegd" xlink:label="AmtSctiesRegd"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="AmtSctiesRegd" use="optional" priority="10" order="13.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_MaxOfferingPricPerScty" xlink:label="MaxOfferingPricPerScty"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="MaxOfferingPricPerScty" use="optional" priority="10" order="14.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_MaxAggtOfferingPric" xlink:label="MaxAggtOfferingPric"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="MaxAggtOfferingPric" use="optional" priority="10" order="15.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeRate" xlink:label="FeeRate"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="FeeRate" use="optional" priority="10" order="17.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeAmt" xlink:label="FeeAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="FeeAmt" use="optional" priority="10" order="18.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CfwdFormTp" xlink:label="CfwdFormTp"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="CfwdFormTp" use="optional" priority="10" order="19.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CfwdPrrFileNb" xlink:label="CfwdPrrFileNb"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="CfwdPrrFileNb" use="optional" priority="10" order="20.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CfwdPrrFctvDt" xlink:label="CfwdPrrFctvDt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="CfwdPrrFctvDt" use="optional" priority="10" order="21.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CfwdPrevslyPdFee" xlink:label="CfwdPrevslyPdFee"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="CfwdPrevslyPdFee" use="optional" priority="10" order="22.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457sFlg" xlink:label="Rule457sFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="Rule457sFlg" use="optional" priority="10" order="7.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TxValtn" xlink:label="TxValtn"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="OfferingLineItems" xlink:to="TxValtn" use="optional" priority="10" order="16.0"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/feesOfferingTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingLineItems" xlink:label="OfferingLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingTable" xlink:label="OfferingTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="OfferingLineItems" xlink:to="OfferingTable" use="optional" priority="10" order="1.0" xbrldt:closed="true" xbrldt:contextElement="segment"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/feesOfferingTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingTable" xlink:label="OfferingTable"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingAxis" xlink:label="OfferingAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="OfferingTable" xlink:to="OfferingAxis" priority="10" order="1.0"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/feesSummaryTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_FeesSummaryLineItems" xlink:label="FeesSummaryLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeesSummaryTable" xlink:label="FeesSummaryTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="FeesSummaryLineItems" xlink:to="FeesSummaryTable" priority="10" order="1.0" xbrldt:contextElement="segment" xbrldt:closed="true"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlOfferingAmt" xlink:label="TtlOfferingAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="TtlOfferingAmt" priority="10" order="2.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlPrevslyPdAmt" xlink:label="TtlPrevslyPdAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="TtlPrevslyPdAmt" priority="10" order="3.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlFeeAmt" xlink:label="TtlFeeAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="TtlFeeAmt" priority="10" order="4.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlTxValtn" xlink:label="TtlTxValtn"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="TtlTxValtn" priority="10" order="5.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeIntrstAmt" xlink:label="FeeIntrstAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="FeeIntrstAmt" priority="10" order="6.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlOffsetAmt" xlink:label="TtlOffsetAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="TtlOffsetAmt" priority="10" order="7.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NrrtvDsclsr" xlink:label="NrrtvDsclsr"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="NrrtvDsclsr" priority="10" order="8.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NetFeeAmt" xlink:label="NetFeeAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="NetFeeAmt" priority="10" order="9.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NrrtvMaxAggtOfferingPric" xlink:label="NrrtvMaxAggtOfferingPric"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="NrrtvMaxAggtOfferingPric" priority="10" order="10.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NrrtvMaxAggtAmt" xlink:label="NrrtvMaxAggtAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="NrrtvMaxAggtAmt" priority="10" order="11.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingTableNa" xlink:label="OfferingTableNa"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="OfferingTableNa" priority="10" order="12.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetTableNa" xlink:label="OffsetTableNa"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="OffsetTableNa" priority="10" order="13.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CombinedProspectusTableNa" xlink:label="CombinedProspectusTableNa"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="CombinedProspectusTableNa" priority="10" order="14.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Securities424iTableNa" xlink:label="Securities424iNa"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="Securities424iNa" priority="10" order="15.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FnlPrspctsFlg" xlink:label="FnlPrspctsFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="FnlPrspctsFlg" priority="10" order="16.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlFeeAndIntrstAmt" xlink:label="TtlFeeAndIntrstAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="FeesSummaryLineItems" xlink:to="TtlFeeAndIntrstAmt" priority="10" order="17.0"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/feesByCmbndPrspctsTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_CmbndPrspctsLineItems" xlink:label="CmbndPrspctsLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429CmbndPrspctsFlg" xlink:label="Rule429CmbndPrspctsFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429CmbndPrspctsFlg" priority="10" order="2.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429SctyTp" xlink:label="Rule429SctyTp"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429SctyTp" priority="10" order="3.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429SctyTitl" xlink:label="Rule429SctyTitl"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429SctyTitl" priority="10" order="4.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429NbOfUnsoldScties" xlink:label="Rule429NbOfUnsoldScties"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429NbOfUnsoldScties" priority="10" order="5.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429AggtOfferingAmt" xlink:label="Rule429AggtOfferingAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429AggtOfferingAmt" priority="10" order="6.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429EarlierFormTp" xlink:label="Rule429EarlierFormTp"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429EarlierFormTp" priority="10" order="7.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429EarlierFileNb" xlink:label="Rule429EarlierFileNb"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429EarlierFileNb" priority="10" order="8.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429InitlFctvDt" xlink:label="Rule429InitlFctvDt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429InitlFctvDt" priority="10" order="9.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429PrspctsNote" xlink:label="Rule429PrspctsNote"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429PrspctsNote" use="optional" priority="10" order="10.0"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/feesByCmbndPrspctsTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_CmbndPrspctsLineItems" xlink:label="CmbndPrspctsLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CmbndPrspctsTable" xlink:label="CmbndPrspctsTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="CmbndPrspctsLineItems" xlink:to="CmbndPrspctsTable" use="optional" priority="10" order="1.0" xbrldt:closed="true" xbrldt:contextElement="segment"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/feesByCmbndPrspctsTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_CmbndPrspctsTable" xlink:label="CmbndPrspctsTable"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CmbndPrspctsItemAxis" xlink:label="CmbndPrspctsItemAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="CmbndPrspctsTable" xlink:to="CmbndPrspctsItemAxis" use="optional" priority="10" order="1.0"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/securities424iTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_Scties424iLineItems" xlink:label="Scties424iLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Scties424iTable" xlink:label="Scties424iTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="Scties424iLineItems" xlink:to="Scties424iTable" priority="10" order="1.0" xbrldt:contextElement="segment" xbrldt:closed="true"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/securities424iTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_Scties424iLineItems" xlink:label="Scties424iLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_PrevslyPdFlg" xlink:label="PrevslyPdFlg"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="Scties424iLineItems" xlink:to="PrevslyPdFlg" use="optional" priority="10" order="2.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingSctyTitl" xlink:label="OfferingSctyTitl"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="Scties424iLineItems" xlink:to="OfferingSctyTitl" use="optional" priority="10" order="3.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AggtSalesPricFsclYr" xlink:label="AggtSalesPricFsclYr"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="Scties424iLineItems" xlink:to="AggtSalesPricFsclYr" use="optional" priority="10" order="4.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AggtRedRpPricPrrFsclYr" xlink:label="AggtRedRpPricPrrFsclYr"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="Scties424iLineItems" xlink:to="AggtRedRpPricPrrFsclYr" use="optional" priority="10" order="6.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AmtRedCdts" xlink:label="AmtRedCdts"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="Scties424iLineItems" xlink:to="AmtRedCdts" use="optional" priority="10" order="7.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NetSalesAmt" xlink:label="NetSalesAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="Scties424iLineItems" xlink:to="NetSalesAmt" use="optional" priority="10" order="8.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeRate" xlink:label="FeeRate"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="Scties424iLineItems" xlink:to="FeeRate" use="optional" priority="10" order="9.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeAmt" xlink:label="FeeAmt"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="Scties424iLineItems" xlink:to="FeeAmt" use="optional" priority="10" order="10.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeNote" xlink:label="FeeNote"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="Scties424iLineItems" xlink:to="FeeNote" use="optional" priority="10" order="11.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AggtRedRpPricFsclYr" xlink:label="AggtRedRpPricFsclYr"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="Scties424iLineItems" xlink:to="AggtRedRpPricFsclYr" use="optional" priority="10" order="5.0"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/securities424iTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_Scties424iTable" xlink:label="Scties424iTable"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Scties424iAxis" xlink:label="Scties424iAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="Scties424iTable" xlink:to="Scties424iAxis" use="optional" priority="10" order="1.0"/>
+</link:definitionLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/feesSummaryTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_FeesSummaryLineItems" xlink:label="FeesSummaryLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlOfferingAmt" xlink:label="TtlOfferingAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="TtlOfferingAmt" priority="10" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlPrevslyPdAmt" xlink:label="TtlPrevslyPdAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="TtlPrevslyPdAmt" priority="10" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlFeeAmt" xlink:label="TtlFeeAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="TtlFeeAmt" priority="10" order="3.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlTxValtn" xlink:label="TtlTxValtn"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="TtlTxValtn" priority="10" order="4.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeIntrstAmt" xlink:label="FeeIntrstAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="FeeIntrstAmt" priority="10" order="5.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlOffsetAmt" xlink:label="TtlOffsetAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="TtlOffsetAmt" priority="10" order="6.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NrrtvDsclsr" xlink:label="NrrtvDsclsr"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="NrrtvDsclsr" priority="10" order="7.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NetFeeAmt" xlink:label="NetFeeAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="NetFeeAmt" priority="10" order="8.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NrrtvMaxAggtOfferingPric" xlink:label="NrrtvMaxAggtOfferingPric"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="NrrtvMaxAggtOfferingPric" priority="10" order="9.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NrrtvMaxAggtAmt" xlink:label="NrrtvMaxAggtAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="NrrtvMaxAggtAmt" priority="10" order="10.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FnlPrspctsFlg" xlink:label="FnlPrspctsFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="FnlPrspctsFlg" priority="10" order="15.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingTableNa" xlink:label="OfferingTableNa"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="OfferingTableNa" priority="10" order="11.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetTableNa" xlink:label="OffsetTableNa"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="OffsetTableNa" priority="10" order="12.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CombinedProspectusTableNa" xlink:label="CombinedProspectusTableNa"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="CombinedProspectusTableNa" priority="10" order="13.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Securities424iTableNa" xlink:label="Securities424iNa"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="Securities424iNa" priority="10" order="14.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlFeeAndIntrstAmt" xlink:label="TtlFeeAndIntrstAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="FeesSummaryLineItems" xlink:to="TtlFeeAndIntrstAmt" priority="10" order="16.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/securities424iTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_Scties424iLineItems" xlink:label="Scties424iLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Scties424iTable" xlink:label="Scties424iTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="Scties424iLineItems" xlink:to="Scties424iTable" priority="10" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Scties424iAxis" xlink:label="Scties424iAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="Scties424iTable" xlink:to="Scties424iAxis" priority="10" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_PrevslyPdFlg" xlink:label="PrevslyPdFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="Scties424iLineItems" xlink:to="PrevslyPdFlg" priority="10" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingSctyTitl" xlink:label="OfferingSctyTitl"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="Scties424iLineItems" xlink:to="OfferingSctyTitl" priority="10" order="3.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AggtSalesPricFsclYr" xlink:label="AggtSalesPricFsclYr"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="Scties424iLineItems" xlink:to="AggtSalesPricFsclYr" priority="10" order="4.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AggtRedRpPricFsclYr" xlink:label="AggtRedRpPricFsclYr"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="Scties424iLineItems" xlink:to="AggtRedRpPricFsclYr" priority="10" order="5.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AggtRedRpPricPrrFsclYr" xlink:label="AggtRedRpPricPrrFsclYr"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="Scties424iLineItems" xlink:to="AggtRedRpPricPrrFsclYr" priority="10" order="6.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AmtRedCdts" xlink:label="AmtRedCdts"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="Scties424iLineItems" xlink:to="AmtRedCdts" priority="10" order="7.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NetSalesAmt" xlink:label="NetSalesAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="Scties424iLineItems" xlink:to="NetSalesAmt" priority="10" order="8.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeRate" xlink:label="FeeRate"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="Scties424iLineItems" xlink:to="FeeRate" priority="10" order="9.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeAmt" xlink:label="FeeAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="Scties424iLineItems" xlink:to="FeeAmt" priority="10" order="10.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeNote" xlink:label="FeeNote"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="Scties424iLineItems" xlink:to="FeeNote" priority="10" order="11.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/feesByCmbndPrspctsTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_CmbndPrspctsLineItems" xlink:label="CmbndPrspctsLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CmbndPrspctsTable" xlink:label="CmbndPrspctsTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmbndPrspctsLineItems" xlink:to="CmbndPrspctsTable" priority="10" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CmbndPrspctsItemAxis" xlink:label="CmbndPrspctsItemAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmbndPrspctsTable" xlink:to="CmbndPrspctsItemAxis" priority="10" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429CmbndPrspctsFlg" xlink:label="Rule429CmbndPrspctsFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429CmbndPrspctsFlg" priority="10" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429EarlierFileNb" xlink:label="Rule429EarlierFileNb"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429EarlierFileNb" priority="10" order="8.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429EarlierFormTp" xlink:label="Rule429EarlierFormTp"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429EarlierFormTp" priority="10" order="7.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429InitlFctvDt" xlink:label="Rule429InitlFctvDt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429InitlFctvDt" priority="10" order="9.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429SctyTp" xlink:label="Rule429SctyTp"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429SctyTp" priority="10" order="3.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429SctyTitl" xlink:label="Rule429SctyTitl"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429SctyTitl" priority="10" order="4.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429NbOfUnsoldScties" xlink:label="Rule429NbOfUnsoldScties"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429NbOfUnsoldScties" priority="10" order="5.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429AggtOfferingAmt" xlink:label="Rule429AggtOfferingAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429AggtOfferingAmt" priority="10" order="6.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429PrspctsNote" xlink:label="Rule429PrspctsNote"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="CmbndPrspctsLineItems" xlink:to="Rule429PrspctsNote" priority="10" order="10.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/feesOffsetTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetLineItems" xlink:label="OffsetLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetTable" xlink:label="OffsetTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetTable" priority="10" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetAxis" xlink:label="OffsetAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetTable" xlink:to="OffsetAxis" priority="10" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetClmdInd" xlink:label="OffsetClmdInd"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetClmdInd" priority="10" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457bOffsetFlg" xlink:label="Rule457bOffsetFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="Rule457bOffsetFlg" priority="10" order="3.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule011a2OffsetFlg" xlink:label="Rule011a2OffsetFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="Rule011a2OffsetFlg" priority="10" order="4.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457pOffsetFlg" xlink:label="Rule457pOffsetFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="Rule457pOffsetFlg" priority="10" order="5.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrFilerNm" xlink:label="OffsetPrrFilerNm"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetPrrFilerNm" priority="10" order="6.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrFormTp" xlink:label="OffsetPrrFormTp"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetPrrFormTp" priority="10" order="7.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrFileNb" xlink:label="OffsetPrrFileNb"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetPrrFileNb" priority="10" order="8.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetClmInitlFilgDt" xlink:label="OffsetClmInitlFilgDt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetClmInitlFilgDt" priority="10" order="9.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetSrcFilgDt" xlink:label="OffsetSrcFilgDt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetSrcFilgDt" priority="10" order="10.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetClmdAmt" xlink:label="OffsetClmdAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetClmdAmt" priority="10" order="11.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrSctyTp" xlink:label="OffsetPrrSctyTp"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetPrrSctyTp" priority="10" order="12.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrSctyTitl" xlink:label="OffsetPrrSctyTitl"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetPrrSctyTitl" priority="10" order="13.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrNbOfUnsoldScties" xlink:label="OffsetPrrNbOfUnsoldScties"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetPrrNbOfUnsoldScties" priority="10" order="14.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrUnsoldOfferingAmt" xlink:label="OffsetPrrUnsoldOfferingAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetPrrUnsoldOfferingAmt" priority="10" order="15.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrFeeAmt" xlink:label="OffsetPrrFeeAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetPrrFeeAmt" priority="10" order="16.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetExpltnForClmdAmt" xlink:label="OffsetExpltnForClmdAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetExpltnForClmdAmt" priority="10" order="17.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetNote" xlink:label="OffsetNote"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="OffsetNote" priority="10" order="18.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TermntnCmpltnWdrwl" xlink:label="TermntnCmpltnWdrwl"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OffsetLineItems" xlink:to="TermntnCmpltnWdrwl" priority="10" order="19.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/feesOfferingTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingLineItems" xlink:label="OfferingLineItems"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingTable" xlink:label="OfferingTable"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="OfferingTable" priority="10" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingAxis" xlink:label="OfferingAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingTable" xlink:to="OfferingAxis" priority="10" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_PrevslyPdFlg" xlink:label="PrevslyPdFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="PrevslyPdFlg" priority="10" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457aFlg" xlink:label="Rule457aFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="Rule457aFlg" priority="10" order="3.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457oFlg" xlink:label="Rule457oFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="Rule457oFlg" priority="10" order="4.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457uFlg" xlink:label="Rule457uFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="Rule457uFlg" priority="10" order="5.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457rFlg" xlink:label="Rule457rFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="Rule457rFlg" priority="10" order="6.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457sFlg" xlink:label="Rule457sFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="Rule457sFlg" priority="10" order="7.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule011Flg" xlink:label="Rule011Flg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="Rule011Flg" priority="10" order="8.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeesOthrRuleFlg" xlink:label="FeesOthrRuleFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="FeesOthrRuleFlg" priority="10" order="9.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule415a6Flg" xlink:label="Rule415a6Flg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="Rule415a6Flg" priority="10" order="10.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingSctyTp" xlink:label="OfferingSctyTp"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="OfferingSctyTp" priority="10" order="11.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingSctyTitl" xlink:label="OfferingSctyTitl"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="OfferingSctyTitl" priority="10" order="12.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AmtSctiesRegd" xlink:label="AmtSctiesRegd"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="AmtSctiesRegd" priority="10" order="13.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_MaxOfferingPricPerScty" xlink:label="MaxOfferingPricPerScty"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="MaxOfferingPricPerScty" priority="10" order="14.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_MaxAggtOfferingPric" xlink:label="MaxAggtOfferingPric"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="MaxAggtOfferingPric" priority="10" order="15.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TxValtn" xlink:label="TxValtn"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="TxValtn" priority="10" order="16.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeRate" xlink:label="FeeRate"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="FeeRate" priority="10" order="17.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeAmt" xlink:label="FeeAmt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="FeeAmt" priority="10" order="18.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CfwdPrrFileNb" xlink:label="CfwdPrrFileNb"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="CfwdPrrFileNb" priority="10" order="20.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CfwdFormTp" xlink:label="CfwdFormTp"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="CfwdFormTp" priority="10" order="19.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CfwdPrrFctvDt" xlink:label="CfwdPrrFctvDt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="CfwdPrrFctvDt" priority="10" order="21.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CfwdPrevslyPdFee" xlink:label="CfwdPrevslyPdFee"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="CfwdPrevslyPdFee" priority="10" order="22.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457fFlg" xlink:label="Rule457fFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="Rule457fFlg" priority="10" order="23.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_GnlInstrIIhiFlg" xlink:label="GnlInstrIIhiFlg"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="GnlInstrIIhiFlg" priority="10" order="24.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AmtSctiesRcvd" xlink:label="AmtSctiesRcvd"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="AmtSctiesRcvd" priority="10" order="25.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_ValSctiesRcvdPerShr" xlink:label="ValSctiesRcvdPerShr"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="ValSctiesRcvdPerShr" priority="10" order="26.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_ValSctiesRcvd" xlink:label="ValSctiesRcvd"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="ValSctiesRcvd" priority="10" order="27.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CshPdByRegistrantInTx" xlink:label="CshPdByRegistrantInTx"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="CshPdByRegistrantInTx" priority="10" order="28.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CshRcvdByRegistrantInTx" xlink:label="CshRcvdByRegistrantInTx"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="CshRcvdByRegistrantInTx" priority="10" order="29.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeNoteMaxAggtOfferingPric" xlink:label="FeeNoteMaxAggtOfferingPric"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="FeeNoteMaxAggtOfferingPric" priority="10" order="30.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingNote" xlink:label="OfferingNote"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="OfferingLineItems" xlink:to="OfferingNote" priority="10" order="31.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/ffd/role/document/submissionTable">
+<link:loc xlink:type="locator" xlink:href="#ffd_SubmissionLineItems" xlink:label="SubmissionLineItems"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_EntityCentralIndexKey" xlink:label="EntityCentralIndexKey"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SubmissionLineItems" xlink:to="EntityCentralIndexKey" priority="10" order="1.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_EntityRegistrantName" xlink:label="EntityRegistrantName"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SubmissionLineItems" xlink:to="EntityRegistrantName" priority="10" order="2.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_RegnFileNb" xlink:label="RegnFileNb"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SubmissionLineItems" xlink:to="RegnFileNb" priority="10" order="3.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FormTp" xlink:label="FormTp"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SubmissionLineItems" xlink:to="FormTp" priority="10" order="4.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_SubmissnTp" xlink:label="SubmissnTp"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SubmissionLineItems" xlink:to="SubmissnTp" priority="10" order="5.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeExhibitTp" xlink:label="FeeExhibitTp"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SubmissionLineItems" xlink:to="FeeExhibitTp" priority="10" order="6.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrNm" xlink:label="IssrNm"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SubmissionLineItems" xlink:to="IssrNm" priority="10" order="7.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrStrt1" xlink:label="IssrBizAdrStrt1"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SubmissionLineItems" xlink:to="IssrBizAdrStrt1" priority="10" order="8.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrStrt2" xlink:label="IssrBizAdrStrt2"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SubmissionLineItems" xlink:to="IssrBizAdrStrt2" priority="10" order="9.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrCity" xlink:label="IssrBizAdrCity"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SubmissionLineItems" xlink:to="IssrBizAdrCity" priority="10" order="10.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrStatOrCtryCd" xlink:label="IssrBizAdrStatOrCtryCd"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SubmissionLineItems" xlink:to="IssrBizAdrStatOrCtryCd" priority="10" order="11.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrZipCd" xlink:label="IssrBizAdrZipCd"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SubmissionLineItems" xlink:to="IssrBizAdrZipCd" priority="10" order="12.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CeasedOprsDt" xlink:label="CeasedOprsDt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SubmissionLineItems" xlink:to="CeasedOprsDt" priority="10" order="13.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_RptgFsclYrEndDt" xlink:label="RptgFsclYrEndDt"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SubmissionLineItems" xlink:to="RptgFsclYrEndDt" priority="10" order="14.0" preferredLabel="http://www.xbrl.org/2003/role/terseLabel"/>
+</link:presentationLink>
+<link:labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetLineItems" xlink:label="OffsetLineItems"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetLineItems" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Offset:</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetLineItems" xlink:to="label_OffsetLineItems" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetLineItems_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset [Line Items]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetLineItems" xlink:to="label_OffsetLineItems_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetExpltnForClmdAmt" xlink:label="OffsetExpltnForClmdAmt"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetExpltnForClmdAmt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Explanation for Claimed Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetExpltnForClmdAmt" xlink:to="label_OffsetExpltnForClmdAmt" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetExpltnForClmdAmt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Explanation for Claimed Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetExpltnForClmdAmt" xlink:to="label_OffsetExpltnForClmdAmt_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetNote" xlink:label="OffsetNote"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetNote" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Note</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetNote" xlink:to="label_OffsetNote" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetNote_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Offset Note</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetNote" xlink:to="label_OffsetNote_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429PrspctsNote" xlink:label="Rule429PrspctsNote"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429PrspctsNote" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 429 Prospectus Note</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429PrspctsNote" xlink:to="label_Rule429PrspctsNote" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429PrspctsNote_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Combined Prospectus Note</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429PrspctsNote" xlink:to="label_Rule429PrspctsNote_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlOfferingAmt" xlink:label="TtlOfferingAmt"/>
+<link:label xlink:type="resource" xlink:label="label_TtlOfferingAmt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Total Offering Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TtlOfferingAmt" xlink:to="label_TtlOfferingAmt" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_TtlOfferingAmt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Total Offering</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TtlOfferingAmt" xlink:to="label_TtlOfferingAmt_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingNote" xlink:label="OfferingNote"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingNote" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offering Note</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingNote" xlink:to="label_OfferingNote" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingNote_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Offering Note</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingNote" xlink:to="label_OfferingNote_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_SubmissionTable" xlink:label="SubmissionTable"/>
+<link:label xlink:type="resource" xlink:label="label_SubmissionTable" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Submission [Table]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SubmissionTable" xlink:to="label_SubmissionTable" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_SubmissionTable_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Submission</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SubmissionTable" xlink:to="label_SubmissionTable_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_SubmissionLineItems" xlink:label="SubmissionLineItems"/>
+<link:label xlink:type="resource" xlink:label="label_SubmissionLineItems" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Submission [Line Items]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SubmissionLineItems" xlink:to="label_SubmissionLineItems" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_SubmissionLineItems_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Items</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SubmissionLineItems" xlink:to="label_SubmissionLineItems_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TermntnCmpltnWdrwl" xlink:label="TermntnCmpltnWdrwl"/>
+<link:label xlink:type="resource" xlink:label="label_TermntnCmpltnWdrwl" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Termination / Completion / Withdrawal Statement</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TermntnCmpltnWdrwl" xlink:to="label_TermntnCmpltnWdrwl" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_TermntnCmpltnWdrwl_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Termination / Withdrawal Statement</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TermntnCmpltnWdrwl" xlink:to="label_TermntnCmpltnWdrwl_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeesSummaryTable" xlink:label="FeesSummaryTable"/>
+<link:label xlink:type="resource" xlink:label="label_FeesSummaryTable" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Fees Summary [Table]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeesSummaryTable" xlink:to="label_FeesSummaryTable" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_FeesSummaryTable_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Fees Summary</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeesSummaryTable" xlink:to="label_FeesSummaryTable_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429AggtOfferingAmt" xlink:label="Rule429AggtOfferingAmt"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429AggtOfferingAmt_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 429 Aggregate Offering Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429AggtOfferingAmt" xlink:to="label_Rule429AggtOfferingAmt_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429AggtOfferingAmt_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Maximum Aggregate Offering Price of Securities Previously Registered</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429AggtOfferingAmt" xlink:to="label_Rule429AggtOfferingAmt_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeAmt" xlink:label="FeeAmt"/>
+<link:label xlink:type="resource" xlink:label="label_FeeAmt_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Fee Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeeAmt" xlink:to="label_FeeAmt_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_FeeAmt_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Amount of Registration Fee</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeeAmt" xlink:to="label_FeeAmt_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeRate" xlink:label="FeeRate"/>
+<link:label xlink:type="resource" xlink:label="label_FeeRate_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Fee Rate</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeeRate" xlink:to="label_FeeRate_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_FeeRate_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Fee Rate</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeeRate" xlink:to="label_FeeRate_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingAxis" xlink:label="OfferingAxis"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingAxis_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offering [Axis]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingAxis" xlink:to="label_OfferingAxis_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingAxis_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Offering</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingAxis" xlink:to="label_OfferingAxis_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingSctyTp" xlink:label="OfferingSctyTp"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingSctyTp_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offering Security Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingSctyTp" xlink:to="label_OfferingSctyTp_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingSctyTp_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Security Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingSctyTp" xlink:to="label_OfferingSctyTp_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingSctyTitl" xlink:label="OfferingSctyTitl"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingSctyTitl_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offering Security Title</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingSctyTitl" xlink:to="label_OfferingSctyTitl_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingSctyTitl_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Security Class Title</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingSctyTitl" xlink:to="label_OfferingSctyTitl_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457aFlg" xlink:label="Rule457aFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457aFlg_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 457(a) [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457aFlg" xlink:to="label_Rule457aFlg_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457aFlg_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Rule 457(a)</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457aFlg" xlink:to="label_Rule457aFlg_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457fFlg" xlink:label="Rule457fFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457fFlg_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 457(f) [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457fFlg" xlink:to="label_Rule457fFlg_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457fFlg_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Rule 457(f)</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457fFlg" xlink:to="label_Rule457fFlg_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457oFlg" xlink:label="Rule457oFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457oFlg_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 457(o) [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457oFlg" xlink:to="label_Rule457oFlg_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457oFlg_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Rule 457(o)</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457oFlg" xlink:to="label_Rule457oFlg_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457uFlg" xlink:label="Rule457uFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457uFlg_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 457(u) [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457uFlg" xlink:to="label_Rule457uFlg_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457uFlg_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Rule 457(u)</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457uFlg" xlink:to="label_Rule457uFlg_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AmtSctiesRegd" xlink:label="AmtSctiesRegd"/>
+<link:label xlink:type="resource" xlink:label="label_AmtSctiesRegd_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Amount of Securities Registered</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AmtSctiesRegd" xlink:to="label_AmtSctiesRegd_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_AmtSctiesRegd_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Amount Registered</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AmtSctiesRegd" xlink:to="label_AmtSctiesRegd_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_MaxOfferingPricPerScty" xlink:label="MaxOfferingPricPerScty"/>
+<link:label xlink:type="resource" xlink:label="label_MaxOfferingPricPerScty_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Maximum Offering Price per Security</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="MaxOfferingPricPerScty" xlink:to="label_MaxOfferingPricPerScty_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_MaxOfferingPricPerScty_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Proposed Maximum Offering Price per Unit</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="MaxOfferingPricPerScty" xlink:to="label_MaxOfferingPricPerScty_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_MaxAggtOfferingPric" xlink:label="MaxAggtOfferingPric"/>
+<link:label xlink:type="resource" xlink:label="label_MaxAggtOfferingPric_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Maximum Aggregate Offering Price</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="MaxAggtOfferingPric" xlink:to="label_MaxAggtOfferingPric_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_MaxAggtOfferingPric_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Maximum Aggregate Offering Price</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="MaxAggtOfferingPric" xlink:to="label_MaxAggtOfferingPric_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule415a6Flg" xlink:label="Rule415a6Flg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule415a6Flg_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 415(a)(6) [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule415a6Flg" xlink:to="label_Rule415a6Flg_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule415a6Flg_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Rule 415(a)(6)</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule415a6Flg" xlink:to="label_Rule415a6Flg_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CfwdFormTp" xlink:label="CfwdFormTp"/>
+<link:label xlink:type="resource" xlink:label="label_CfwdFormTp_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Carry Forward Form Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CfwdFormTp" xlink:to="label_CfwdFormTp_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_CfwdFormTp_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Carry Forward Form Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CfwdFormTp" xlink:to="label_CfwdFormTp_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CfwdPrrFileNb" xlink:label="CfwdPrrFileNb"/>
+<link:label xlink:type="resource" xlink:label="label_CfwdPrrFileNb_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Carry Forward File Number</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CfwdPrrFileNb" xlink:to="label_CfwdPrrFileNb_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_CfwdPrrFileNb_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Carry Forward File Number</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CfwdPrrFileNb" xlink:to="label_CfwdPrrFileNb_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CfwdPrrFctvDt" xlink:label="CfwdPrrFctvDt"/>
+<link:label xlink:type="resource" xlink:label="label_CfwdPrrFctvDt_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Carry Forward Prior Effective Date</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CfwdPrrFctvDt" xlink:to="label_CfwdPrrFctvDt_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_CfwdPrrFctvDt_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Carry Forward Initial Effective Date</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CfwdPrrFctvDt" xlink:to="label_CfwdPrrFctvDt_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CfwdPrevslyPdFee" xlink:label="CfwdPrevslyPdFee"/>
+<link:label xlink:type="resource" xlink:label="label_CfwdPrevslyPdFee_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Carry Forward Previously Paid Fee</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CfwdPrevslyPdFee" xlink:to="label_CfwdPrevslyPdFee_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_CfwdPrevslyPdFee_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Filing Fee Previously Paid in Connection with Unsold Securities to be Carried Forward</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CfwdPrevslyPdFee" xlink:to="label_CfwdPrevslyPdFee_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetAxis" xlink:label="OffsetAxis"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetAxis_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset [Axis]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetAxis" xlink:to="label_OffsetAxis_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetAxis_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Offset</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetAxis" xlink:to="label_OffsetAxis_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CmbndPrspctsItemAxis" xlink:label="CmbndPrspctsItemAxis"/>
+<link:label xlink:type="resource" xlink:label="label_CmbndPrspctsItemAxis_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Combined Prospectus Item [Axis]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmbndPrspctsItemAxis" xlink:to="label_CmbndPrspctsItemAxis_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_CmbndPrspctsItemAxis_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Combined Prospectus</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmbndPrspctsItemAxis" xlink:to="label_CmbndPrspctsItemAxis_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457pOffsetFlg" xlink:label="Rule457pOffsetFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457pOffsetFlg_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 457(p) Offset [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457pOffsetFlg" xlink:to="label_Rule457pOffsetFlg_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457pOffsetFlg_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Rule 457(p) Offset</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457pOffsetFlg" xlink:to="label_Rule457pOffsetFlg_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457bOffsetFlg" xlink:label="Rule457bOffsetFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457bOffsetFlg_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 457(b) Offset [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457bOffsetFlg" xlink:to="label_Rule457bOffsetFlg_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457bOffsetFlg_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Rule 457(b) Offset</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457bOffsetFlg" xlink:to="label_Rule457bOffsetFlg_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AmtSctiesRcvd" xlink:label="AmtSctiesRcvd"/>
+<link:label xlink:type="resource" xlink:label="label_AmtSctiesRcvd_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Amount of Securities Received</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AmtSctiesRcvd" xlink:to="label_AmtSctiesRcvd_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_AmtSctiesRcvd_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Amount of Securities Received</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AmtSctiesRcvd" xlink:to="label_AmtSctiesRcvd_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_ValSctiesRcvdPerShr" xlink:label="ValSctiesRcvdPerShr"/>
+<link:label xlink:type="resource" xlink:label="label_ValSctiesRcvdPerShr_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Value of Securities Received, Per Share</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ValSctiesRcvdPerShr" xlink:to="label_ValSctiesRcvdPerShr_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_ValSctiesRcvdPerShr_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Value of Securities Received, Per Share</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ValSctiesRcvdPerShr" xlink:to="label_ValSctiesRcvdPerShr_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_ValSctiesRcvd" xlink:label="ValSctiesRcvd"/>
+<link:label xlink:type="resource" xlink:label="label_ValSctiesRcvd_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Value of Securities Received</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ValSctiesRcvd" xlink:to="label_ValSctiesRcvd_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_ValSctiesRcvd_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Value of Securities Received</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ValSctiesRcvd" xlink:to="label_ValSctiesRcvd_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CshPdByRegistrantInTx" xlink:label="CshPdByRegistrantInTx"/>
+<link:label xlink:type="resource" xlink:label="label_CshPdByRegistrantInTx_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Cash Paid by Registrant in Transaction</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CshPdByRegistrantInTx" xlink:to="label_CshPdByRegistrantInTx_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_CshPdByRegistrantInTx_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Cash Consideration Paid</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CshPdByRegistrantInTx" xlink:to="label_CshPdByRegistrantInTx_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CshRcvdByRegistrantInTx" xlink:label="CshRcvdByRegistrantInTx"/>
+<link:label xlink:type="resource" xlink:label="label_CshRcvdByRegistrantInTx_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Cash Received by Registrant in Transaction</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CshRcvdByRegistrantInTx" xlink:to="label_CshRcvdByRegistrantInTx_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_CshRcvdByRegistrantInTx_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Cash Consideration Received</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CshRcvdByRegistrantInTx" xlink:to="label_CshRcvdByRegistrantInTx_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429CmbndPrspctsFlg" xlink:label="Rule429CmbndPrspctsFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429CmbndPrspctsFlg_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 429 Combined Prospectus [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429CmbndPrspctsFlg" xlink:to="label_Rule429CmbndPrspctsFlg_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429CmbndPrspctsFlg_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Rule 429</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429CmbndPrspctsFlg" xlink:to="label_Rule429CmbndPrspctsFlg_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429EarlierFileNb" xlink:label="Rule429EarlierFileNb"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429EarlierFileNb_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 429 Earlier File Number</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429EarlierFileNb" xlink:to="label_Rule429EarlierFileNb_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429EarlierFileNb_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">File Number</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429EarlierFileNb" xlink:to="label_Rule429EarlierFileNb_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429EarlierFormTp" xlink:label="Rule429EarlierFormTp"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429EarlierFormTp_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 429 Earlier Form Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429EarlierFormTp" xlink:to="label_Rule429EarlierFormTp_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429EarlierFormTp_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Form Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429EarlierFormTp" xlink:to="label_Rule429EarlierFormTp_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429InitlFctvDt" xlink:label="Rule429InitlFctvDt"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429InitlFctvDt_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 429 Initial Effective Date</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429InitlFctvDt" xlink:to="label_Rule429InitlFctvDt_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429InitlFctvDt_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Initial Effective Date</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429InitlFctvDt" xlink:to="label_Rule429InitlFctvDt_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429NbOfUnsoldScties" xlink:label="Rule429NbOfUnsoldScties"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429NbOfUnsoldScties_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 429 Number Of Unsold Securities</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429NbOfUnsoldScties" xlink:to="label_Rule429NbOfUnsoldScties_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429NbOfUnsoldScties_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Amount of Securities Previously Registered</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429NbOfUnsoldScties" xlink:to="label_Rule429NbOfUnsoldScties_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrFilerNm" xlink:label="OffsetPrrFilerNm"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrFilerNm_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Prior Filer Name</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrFilerNm" xlink:to="label_OffsetPrrFilerNm_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrFilerNm_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Registrant or Filer Name</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrFilerNm" xlink:to="label_OffsetPrrFilerNm_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrFormTp" xlink:label="OffsetPrrFormTp"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrFormTp_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Prior Form Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrFormTp" xlink:to="label_OffsetPrrFormTp_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrFormTp_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Form or Filing Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrFormTp" xlink:to="label_OffsetPrrFormTp_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrFileNb" xlink:label="OffsetPrrFileNb"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrFileNb_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Prior File Number</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrFileNb" xlink:to="label_OffsetPrrFileNb_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrFileNb_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">File Number</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrFileNb" xlink:to="label_OffsetPrrFileNb_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetClmInitlFilgDt" xlink:label="OffsetClmInitlFilgDt"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetClmInitlFilgDt_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Claim Initial Filing Date</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetClmInitlFilgDt" xlink:to="label_OffsetClmInitlFilgDt_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetClmInitlFilgDt_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Initial Filing Date</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetClmInitlFilgDt" xlink:to="label_OffsetClmInitlFilgDt_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetClmdAmt" xlink:label="OffsetClmdAmt"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetClmdAmt_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Claimed Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetClmdAmt" xlink:to="label_OffsetClmdAmt_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetClmdAmt_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Fee Offset Claimed</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetClmdAmt" xlink:to="label_OffsetClmdAmt_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrUnsoldOfferingAmt" xlink:label="OffsetPrrUnsoldOfferingAmt"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrUnsoldOfferingAmt_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Prior Unsold Offering Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrUnsoldOfferingAmt" xlink:to="label_OffsetPrrUnsoldOfferingAmt_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrUnsoldOfferingAmt_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Unsold Aggregate Offering Amount Associated with Fee Offset Claimed</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrUnsoldOfferingAmt" xlink:to="label_OffsetPrrUnsoldOfferingAmt_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetSrcFilgDt" xlink:label="OffsetSrcFilgDt"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetSrcFilgDt_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Source Filing Date</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetSrcFilgDt" xlink:to="label_OffsetSrcFilgDt_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetSrcFilgDt_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Filing Date</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetSrcFilgDt" xlink:to="label_OffsetSrcFilgDt_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrFeeAmt" xlink:label="OffsetPrrFeeAmt"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrFeeAmt_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Prior Fee Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrFeeAmt" xlink:to="label_OffsetPrrFeeAmt_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrFeeAmt_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Fee Paid with Fee Offset Source</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrFeeAmt" xlink:to="label_OffsetPrrFeeAmt_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrNbOfUnsoldScties" xlink:label="OffsetPrrNbOfUnsoldScties"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrNbOfUnsoldScties_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Prior Unsold Number of Securities</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrNbOfUnsoldScties" xlink:to="label_OffsetPrrNbOfUnsoldScties_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrNbOfUnsoldScties_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Unsold Securities Associated with Fee Offset Claimed</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrNbOfUnsoldScties" xlink:to="label_OffsetPrrNbOfUnsoldScties_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeesOthrRuleFlg" xlink:label="FeesOthrRuleFlg"/>
+<link:label xlink:type="resource" xlink:label="label_FeesOthrRuleFlg_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Fees, Other Rule [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeesOthrRuleFlg" xlink:to="label_FeesOthrRuleFlg_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_FeesOthrRuleFlg_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Other Rule</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeesOthrRuleFlg" xlink:to="label_FeesOthrRuleFlg_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrSctyTp" xlink:label="OffsetPrrSctyTp"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrSctyTp_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Prior Security Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrSctyTp" xlink:to="label_OffsetPrrSctyTp_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrSctyTp_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Security Type Associated with Fee Offset Claimed</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrSctyTp" xlink:to="label_OffsetPrrSctyTp_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetPrrSctyTitl" xlink:label="OffsetPrrSctyTitl"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrSctyTitl_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Prior Security Title</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrSctyTitl" xlink:to="label_OffsetPrrSctyTitl_2" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetPrrSctyTitl_3" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Security Title Associated with Fee Offset Claimed</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetPrrSctyTitl" xlink:to="label_OffsetPrrSctyTitl_3" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrNm" xlink:label="IssrNm"/>
+<link:label xlink:type="resource" xlink:label="label_IssrNm" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Issuer Name</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="IssrNm" xlink:to="label_IssrNm" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_IssrNm_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Issuer Name</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="IssrNm" xlink:to="label_IssrNm_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrStrt1" xlink:label="IssrBizAdrStrt1"/>
+<link:label xlink:type="resource" xlink:label="label_IssrBizAdrStrt1" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Issuer Business Address, Street 1</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="IssrBizAdrStrt1" xlink:to="label_IssrBizAdrStrt1" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_IssrBizAdrStrt1_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Street 1</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="IssrBizAdrStrt1" xlink:to="label_IssrBizAdrStrt1_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CeasedOprsDt" xlink:label="CeasedOprsDt"/>
+<link:label xlink:type="resource" xlink:label="label_CeasedOprsDt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Ceased Operations Date</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CeasedOprsDt" xlink:to="label_CeasedOprsDt" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CeasedOprsDt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Ceased Operations Date</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CeasedOprsDt" xlink:to="label_CeasedOprsDt_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_RptgFsclYrEndDt" xlink:label="RptgFsclYrEndDt"/>
+<link:label xlink:type="resource" xlink:label="label_RptgFsclYrEndDt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Reporting Fiscal Year End Date</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="RptgFsclYrEndDt" xlink:to="label_RptgFsclYrEndDt" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_RptgFsclYrEndDt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Reporting FY End Date</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="RptgFsclYrEndDt" xlink:to="label_RptgFsclYrEndDt_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlFeeAndIntrstAmt" xlink:label="TtlFeeAndIntrstAmt"/>
+<link:label xlink:type="resource" xlink:label="label_TtlFeeAndIntrstAmt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Total Fee and Interest Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TtlFeeAndIntrstAmt" xlink:to="label_TtlFeeAndIntrstAmt" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_TtlFeeAndIntrstAmt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Total Fee and Interest Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TtlFeeAndIntrstAmt" xlink:to="label_TtlFeeAndIntrstAmt_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Scties424iLineItems" xlink:label="Scties424iLineItems"/>
+<link:label xlink:type="resource" xlink:label="label_Scties424iLineItems" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Securities, 424I [Line Items]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Scties424iLineItems" xlink:to="label_Scties424iLineItems" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_Scties424iLineItems_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Securities, 424I:</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Scties424iLineItems" xlink:to="label_Scties424iLineItems_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Scties424iTable" xlink:label="Scties424iTable"/>
+<link:label xlink:type="resource" xlink:label="label_Scties424iTable" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Securities, 424I [Table]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Scties424iTable" xlink:to="label_Scties424iTable" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_Scties424iTable_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Securities, 424I Table</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Scties424iTable" xlink:to="label_Scties424iTable_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AggtSalesPricFsclYr" xlink:label="AggtSalesPricFsclYr"/>
+<link:label xlink:type="resource" xlink:label="label_AggtSalesPricFsclYr" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Aggregate Sales Price, Fiscal Year</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AggtSalesPricFsclYr" xlink:to="label_AggtSalesPricFsclYr" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_AggtSalesPricFsclYr_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Aggregate Sales Price</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AggtSalesPricFsclYr" xlink:to="label_AggtSalesPricFsclYr_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Scties424iAxis" xlink:label="Scties424iAxis"/>
+<link:label xlink:type="resource" xlink:label="label_Scties424iAxis" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Securities, 424I [Axis]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Scties424iAxis" xlink:to="label_Scties424iAxis" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_Scties424iAxis_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Securities, 424I</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Scties424iAxis" xlink:to="label_Scties424iAxis_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AggtRedRpPricPrrFsclYr" xlink:label="AggtRedRpPricPrrFsclYr"/>
+<link:label xlink:type="resource" xlink:label="label_AggtRedRpPricPrrFsclYr" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Aggregate Redeemed or Repurchased Price, Prior Fiscal Year</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AggtRedRpPricPrrFsclYr" xlink:to="label_AggtRedRpPricPrrFsclYr" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_AggtRedRpPricPrrFsclYr_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Aggregate Redeemed or Repurchased, Prior FY</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AggtRedRpPricPrrFsclYr" xlink:to="label_AggtRedRpPricPrrFsclYr_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NetSalesAmt" xlink:label="NetSalesAmt"/>
+<link:label xlink:type="resource" xlink:label="label_NetSalesAmt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Net Sales Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NetSalesAmt" xlink:to="label_NetSalesAmt" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_NetSalesAmt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Net Sales</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NetSalesAmt" xlink:to="label_NetSalesAmt_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AmtRedCdts" xlink:label="AmtRedCdts"/>
+<link:label xlink:type="resource" xlink:label="label_AmtRedCdts" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Amount of Redemption Credits</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AmtRedCdts" xlink:to="label_AmtRedCdts" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_AmtRedCdts_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Redemption Credits</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AmtRedCdts" xlink:to="label_AmtRedCdts_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeNote" xlink:label="FeeNote"/>
+<link:label xlink:type="resource" xlink:label="label_FeeNote" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Fee Note</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeeNote" xlink:to="label_FeeNote" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_FeeNote_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Fee Note</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeeNote" xlink:to="label_FeeNote_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_AggtRedRpPricFsclYr" xlink:label="AggtRedRpPricFsclYr"/>
+<link:label xlink:type="resource" xlink:label="label_AggtRedRpPricFsclYr" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Aggregate Redeemed or Repurchased Price, Fiscal Year</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AggtRedRpPricFsclYr" xlink:to="label_AggtRedRpPricFsclYr" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_AggtRedRpPricFsclYr_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Aggregate Redeemed or Repurchased, FY</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AggtRedRpPricFsclYr" xlink:to="label_AggtRedRpPricFsclYr_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrStrt2" xlink:label="IssrBizAdrStrt2"/>
+<link:label xlink:type="resource" xlink:label="label_IssrBizAdrStr2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Issuer Business Address, Street 2</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="IssrBizAdrStrt2" xlink:to="label_IssrBizAdrStr2" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_IssrBizAdrStr2_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Street 2</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="IssrBizAdrStrt2" xlink:to="label_IssrBizAdrStr2_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrStatOrCtryCd" xlink:label="IssrBizAdrStatOrCtryCd"/>
+<link:label xlink:type="resource" xlink:label="label_IssrBizAdrStatOrCtryCd" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Issuer Business Address, State or Country Code</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="IssrBizAdrStatOrCtryCd" xlink:to="label_IssrBizAdrStatOrCtryCd" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_IssrBizAdrStatOrCtryCd_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">State or Country Code</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="IssrBizAdrStatOrCtryCd" xlink:to="label_IssrBizAdrStatOrCtryCd_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrCity" xlink:label="IssrBizAdrCity"/>
+<link:label xlink:type="resource" xlink:label="label_IssrBizAdrCity" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Issuer Business Address, City</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="IssrBizAdrCity" xlink:to="label_IssrBizAdrCity" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_IssrBizAdrCity_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">City</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="IssrBizAdrCity" xlink:to="label_IssrBizAdrCity_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_IssrBizAdrZipCd" xlink:label="IssrBizAdrZipCd"/>
+<link:label xlink:type="resource" xlink:label="label_IssrBizAdrZipCd" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Issuer Business Address, Zip Code</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="IssrBizAdrZipCd" xlink:to="label_IssrBizAdrZipCd" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_IssrBizAdrZipCd_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Zip Code</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="IssrBizAdrZipCd" xlink:to="label_IssrBizAdrZipCd_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingTableNa" xlink:label="OfferingTableNa"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingTableNa" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offering Table [N/A]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingTableNa" xlink:to="label_OfferingTableNa" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingTableNa_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Offering Table N/A</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingTableNa" xlink:to="label_OfferingTableNa_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetTableNa" xlink:label="OffsetTableNa"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetTableNa" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Table [N/A]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetTableNa" xlink:to="label_OffsetTableNa" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetTableNa_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Offset Table N/A</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetTableNa" xlink:to="label_OffsetTableNa_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CombinedProspectusTableNa" xlink:label="CombinedProspectusTableNa"/>
+<link:label xlink:type="resource" xlink:label="label_CombinedProspectusTableNa" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Combined Prospectus Table [N/A]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CombinedProspectusTableNa" xlink:to="label_CombinedProspectusTableNa" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_CombinedProspectusTableNa_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Combined Prospectus Table N/A</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CombinedProspectusTableNa" xlink:to="label_CombinedProspectusTableNa_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Securities424iTableNa" xlink:label="Securities424iNa"/>
+<link:label xlink:type="resource" xlink:label="label_Securities424iNa" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Securities 424I [N/A]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Securities424iNa" xlink:to="label_Securities424iNa" priority="10"/>
+<link:label xlink:type="resource" xlink:label="label_Securities424iNa_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Securities 424I N/A</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Securities424iNa" xlink:to="label_Securities424iNa_2" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_EntityCentralIndexKey" xlink:label="EntityCentralIndexKey"/>
+<link:label xlink:type="resource" xlink:label="label_EntityCentralIndexKey" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Entity Central Index Key</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="EntityCentralIndexKey" xlink:to="label_EntityCentralIndexKey" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_EntityCentralIndexKey_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Central Index Key</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="EntityCentralIndexKey" xlink:to="label_EntityCentralIndexKey_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_EntityRegistrantName" xlink:label="EntityRegistrantName"/>
+<link:label xlink:type="resource" xlink:label="label_EntityRegistrantName" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Entity Registrant Name</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="EntityRegistrantName" xlink:to="label_EntityRegistrantName" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_EntityRegistrantName_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Registrant Name</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="EntityRegistrantName" xlink:to="label_EntityRegistrantName_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlFeeAmt" xlink:label="TtlFeeAmt"/>
+<link:label xlink:type="resource" xlink:label="label_TtlFeeAmt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Total Fee Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TtlFeeAmt" xlink:to="label_TtlFeeAmt" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_TtlFeeAmt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Total Fee Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TtlFeeAmt" xlink:to="label_TtlFeeAmt_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NetFeeAmt" xlink:label="NetFeeAmt"/>
+<link:label xlink:type="resource" xlink:label="label_NetFeeAmt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Net Fee Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NetFeeAmt" xlink:to="label_NetFeeAmt" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_NetFeeAmt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Net Fee</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NetFeeAmt" xlink:to="label_NetFeeAmt_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457rFlg" xlink:label="Rule457rFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457rFlg" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 457(r) [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457rFlg" xlink:to="label_Rule457rFlg" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457rFlg_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Rule 457(r)</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457rFlg" xlink:to="label_Rule457rFlg_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule011Flg" xlink:label="Rule011Flg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule011Flg" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 0-11 [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule011Flg" xlink:to="label_Rule011Flg" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule011Flg_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Rule 0-11</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule011Flg" xlink:to="label_Rule011Flg_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CmbndPrspctsLineItems" xlink:label="CmbndPrspctsLineItems"/>
+<link:label xlink:type="resource" xlink:label="label_CmbndPrspctsLineItems" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Combined Prospectus [Line Items]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmbndPrspctsLineItems" xlink:to="label_CmbndPrspctsLineItems" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_CmbndPrspctsLineItems_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Combined Prospectus:</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmbndPrspctsLineItems" xlink:to="label_CmbndPrspctsLineItems_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_CmbndPrspctsTable" xlink:label="CmbndPrspctsTable"/>
+<link:label xlink:type="resource" xlink:label="label_CmbndPrspctsTable" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Combined Prospectus [Table]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmbndPrspctsTable" xlink:to="label_CmbndPrspctsTable" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_CmbndPrspctsTable_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Combined Prospectus Table</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CmbndPrspctsTable" xlink:to="label_CmbndPrspctsTable_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_SubmissnTp" xlink:label="SubmissnTp"/>
+<link:label xlink:type="resource" xlink:label="label_SubmissnTp" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Submission Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SubmissnTp" xlink:to="label_SubmissnTp" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_SubmissnTp_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Submission Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SubmissnTp" xlink:to="label_SubmissnTp_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeExhibitTp" xlink:label="FeeExhibitTp"/>
+<link:label xlink:type="resource" xlink:label="label_FeeExhibitTp" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Fee Exhibit Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeeExhibitTp" xlink:to="label_FeeExhibitTp" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_FeeExhibitTp_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Fee Exhibit Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeeExhibitTp" xlink:to="label_FeeExhibitTp_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_RegnFileNb" xlink:label="RegnFileNb"/>
+<link:label xlink:type="resource" xlink:label="label_RegnFileNb" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Registration File Number</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="RegnFileNb" xlink:to="label_RegnFileNb" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_RegnFileNb_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Registration File Number</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="RegnFileNb" xlink:to="label_RegnFileNb_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingTable" xlink:label="OfferingTable"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingTable" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offering [Table]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingTable" xlink:to="label_OfferingTable" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingTable_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Offering:</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingTable" xlink:to="label_OfferingTable_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeesSummaryLineItems" xlink:label="FeesSummaryLineItems"/>
+<link:label xlink:type="resource" xlink:label="label_FeesSummaryLineItems" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Fees Summary [Line Items]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeesSummaryLineItems" xlink:to="label_FeesSummaryLineItems" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_FeesSummaryLineItems_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Fees Summary:</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeesSummaryLineItems" xlink:to="label_FeesSummaryLineItems_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OfferingLineItems" xlink:label="OfferingLineItems"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingLineItems" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offering [Line Items]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingLineItems" xlink:to="label_OfferingLineItems" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OfferingLineItems_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Offering:</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OfferingLineItems" xlink:to="label_OfferingLineItems_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetTable" xlink:label="OffsetTable"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetTable" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Offset Payment:</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetTable" xlink:to="label_OffsetTable" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetTable_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset [Table]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetTable" xlink:to="label_OffsetTable_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlOffsetAmt" xlink:label="TtlOffsetAmt"/>
+<link:label xlink:type="resource" xlink:label="label_TtlOffsetAmt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Total Offset Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TtlOffsetAmt" xlink:to="label_TtlOffsetAmt" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_TtlOffsetAmt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Total Offset Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TtlOffsetAmt" xlink:to="label_TtlOffsetAmt_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlPrevslyPdAmt" xlink:label="TtlPrevslyPdAmt"/>
+<link:label xlink:type="resource" xlink:label="label_TtlPrevslyPdAmt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Total Previously Paid Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TtlPrevslyPdAmt" xlink:to="label_TtlPrevslyPdAmt" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_TtlPrevslyPdAmt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Previously Paid Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TtlPrevslyPdAmt" xlink:to="label_TtlPrevslyPdAmt_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule011a2OffsetFlg" xlink:label="Rule011a2OffsetFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule011a2OffsetFlg" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Rule 0-11(a)(2) Offset</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule011a2OffsetFlg" xlink:to="label_Rule011a2OffsetFlg" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule011a2OffsetFlg_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 0-11(a)(2) Offset [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule011a2OffsetFlg" xlink:to="label_Rule011a2OffsetFlg_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429SctyTp" xlink:label="Rule429SctyTp"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429SctyTp" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 429 Security Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429SctyTp" xlink:to="label_Rule429SctyTp" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429SctyTp_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Security Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429SctyTp" xlink:to="label_Rule429SctyTp_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule429SctyTitl" xlink:label="Rule429SctyTitl"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429SctyTitl" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 429 Security Title</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429SctyTitl" xlink:to="label_Rule429SctyTitl" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule429SctyTitl_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Security Class Title</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule429SctyTitl" xlink:to="label_Rule429SctyTitl_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TxValtn" xlink:label="TxValtn"/>
+<link:label xlink:type="resource" xlink:label="label_TxValtn" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Transaction Valuation</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TxValtn" xlink:to="label_TxValtn" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_TxValtn_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Transaction Valuation</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TxValtn" xlink:to="label_TxValtn_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_TtlTxValtn" xlink:label="TtlTxValtn"/>
+<link:label xlink:type="resource" xlink:label="label_TtlTxValtn" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Total Transaction Valuation</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TtlTxValtn" xlink:to="label_TtlTxValtn" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_TtlTxValtn_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Total Transaction Valuation</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TtlTxValtn" xlink:to="label_TtlTxValtn_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FormTp" xlink:label="FormTp"/>
+<link:label xlink:type="resource" xlink:label="label_FormTp" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Form Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FormTp" xlink:to="label_FormTp" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_FormTp_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Form Type</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FormTp" xlink:to="label_FormTp_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_PrevslyPdFlg" xlink:label="PrevslyPdFlg"/>
+<link:label xlink:type="resource" xlink:label="label_PrevslyPdFlg" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Fee Previously Paid [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PrevslyPdFlg" xlink:to="label_PrevslyPdFlg" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_PrevslyPdFlg_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Fee Previously Paid</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PrevslyPdFlg" xlink:to="label_PrevslyPdFlg_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_Rule457sFlg" xlink:label="Rule457sFlg"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457sFlg" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Rule 457(s) Flag</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457sFlg" xlink:to="label_Rule457sFlg" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_Rule457sFlg_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Rule 457(s)</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Rule457sFlg" xlink:to="label_Rule457sFlg_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_OffsetClmdInd" xlink:label="OffsetClmdInd"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetClmdInd" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Offset Claimed Indicator</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetClmdInd" xlink:to="label_OffsetClmdInd" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_OffsetClmdInd_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Offset Claimed</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="OffsetClmdInd" xlink:to="label_OffsetClmdInd_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeIntrstAmt" xlink:label="FeeIntrstAmt"/>
+<link:label xlink:type="resource" xlink:label="label_FeeIntrstAmt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Fee Interest Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeeIntrstAmt" xlink:to="label_FeeIntrstAmt" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_FeeIntrstAmt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Interest Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeeIntrstAmt" xlink:to="label_FeeIntrstAmt_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_GnlInstrIIhiFlg" xlink:label="GnlInstrIIhiFlg"/>
+<link:label xlink:type="resource" xlink:label="label_GnlInstrIIhiFlg" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">General Instruction II.H,I [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="GnlInstrIIhiFlg" xlink:to="label_GnlInstrIIhiFlg" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_GnlInstrIIhiFlg_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">General Instruction II.H,I</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="GnlInstrIIhiFlg" xlink:to="label_GnlInstrIIhiFlg_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NrrtvDsclsr" xlink:label="NrrtvDsclsr"/>
+<link:label xlink:type="resource" xlink:label="label_NrrtvDsclsr" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Narrative Disclosure</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NrrtvDsclsr" xlink:to="label_NrrtvDsclsr" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_NrrtvDsclsr_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Narrative Disclosure</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NrrtvDsclsr" xlink:to="label_NrrtvDsclsr_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NrrtvMaxAggtOfferingPric" xlink:label="NrrtvMaxAggtOfferingPric"/>
+<link:label xlink:type="resource" xlink:label="label_NrrtvMaxAggtOfferingPric" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Narrative Disclosure, Maximum Aggregate Offering Price</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NrrtvMaxAggtOfferingPric" xlink:to="label_NrrtvMaxAggtOfferingPric" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_NrrtvMaxAggtOfferingPric_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Narrative - Max Aggregate Offering Price</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NrrtvMaxAggtOfferingPric" xlink:to="label_NrrtvMaxAggtOfferingPric_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_NrrtvMaxAggtAmt" xlink:label="NrrtvMaxAggtAmt"/>
+<link:label xlink:type="resource" xlink:label="label_NrrtvMaxAggtAmt" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Narrative Disclosure, Maximum Aggregate Offering Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NrrtvMaxAggtAmt" xlink:to="label_NrrtvMaxAggtAmt" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_NrrtvMaxAggtAmt_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Narrative - Max Aggregate Offering Amount</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="NrrtvMaxAggtAmt" xlink:to="label_NrrtvMaxAggtAmt_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FnlPrspctsFlg" xlink:label="FnlPrspctsFlg"/>
+<link:label xlink:type="resource" xlink:label="label_FnlPrspctsFlg" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Final Prospectus [Flag]</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FnlPrspctsFlg" xlink:to="label_FnlPrspctsFlg" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_FnlPrspctsFlg_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Final Prospectus</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FnlPrspctsFlg" xlink:to="label_FnlPrspctsFlg_2" use="optional" priority="10" order="1.0"/>
+<link:loc xlink:type="locator" xlink:href="#ffd_FeeNoteMaxAggtOfferingPric" xlink:label="FeeNoteMaxAggtOfferingPric"/>
+<link:label xlink:type="resource" xlink:label="label_FeeNoteMaxAggtOfferingPric" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en-US">Fee Note Maximum Aggregate Offering Price</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeeNoteMaxAggtOfferingPric" xlink:to="label_FeeNoteMaxAggtOfferingPric" use="optional" priority="10" order="1.0"/>
+<link:label xlink:type="resource" xlink:label="label_FeeNoteMaxAggtOfferingPric_2" xlink:role="http://www.xbrl.org/2003/role/terseLabel" xml:lang="en-US">Fee Note MAOP</link:label>
+<link:labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="FeeNoteMaxAggtOfferingPric" xlink:to="label_FeeNoteMaxAggtOfferingPric_2" use="optional" priority="10" order="1.0"/>
+</link:labelLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+<xs:element name="SubmissionLineItems" id="ffd_SubmissionLineItems" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="SubmissionTable" id="ffd_SubmissionTable" type="xbrli:stringItemType" substitutionGroup="xbrldt:hypercubeItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="RegnFileNb" id="ffd_RegnFileNb" type="ffd:fileNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="FormTp" id="ffd_FormTp" type="ffd:submissionTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="SubmissnTp" id="ffd_SubmissnTp" type="ffd:submissionTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="FeeExhibitTp" id="ffd_FeeExhibitTp" type="ffd:feeExhibitTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="IssrNm" id="ffd_IssrNm" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="IssrBizAdrStrt1" id="ffd_IssrBizAdrStrt1" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="IssrBizAdrStrt2" id="ffd_IssrBizAdrStrt2" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="IssrBizAdrCity" id="ffd_IssrBizAdrCity" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="IssrBizAdrStatOrCtryCd" id="ffd_IssrBizAdrStatOrCtryCd" type="ffd:stateOrCountryCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="IssrBizAdrZipCd" id="ffd_IssrBizAdrZipCd" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CeasedOprsDt" id="ffd_CeasedOprsDt" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="RptgFsclYrEndDt" id="ffd_RptgFsclYrEndDt" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OfferingTableNa" id="ffd_OfferingTableNa" type="ffd:naItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetTableNa" id="ffd_OffsetTableNa" type="ffd:naItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CombinedProspectusTableNa" id="ffd_CombinedProspectusTableNa" type="ffd:naItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Securities424iNa" id="ffd_Securities424iTableNa" type="ffd:naItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OfferingLineItems" id="ffd_OfferingLineItems" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OfferingTable" id="ffd_OfferingTable" type="xbrli:stringItemType" substitutionGroup="xbrldt:hypercubeItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OfferingAxis" id="ffd_OfferingAxis" type="xbrli:stringItemType" xbrldt:typedDomainRef="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_lineNo" substitutionGroup="xbrldt:dimensionItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="PrevslyPdFlg" id="ffd_PrevslyPdFlg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule457aFlg" id="ffd_Rule457aFlg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule457oFlg" id="ffd_Rule457oFlg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule457uFlg" id="ffd_Rule457uFlg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule457rFlg" id="ffd_Rule457rFlg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule457sFlg" id="ffd_Rule457sFlg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule011Flg" id="ffd_Rule011Flg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="FeesOthrRuleFlg" id="ffd_FeesOthrRuleFlg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule415a6Flg" id="ffd_Rule415a6Flg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OfferingSctyTp" id="ffd_OfferingSctyTp" type="ffd:securityTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OfferingSctyTitl" id="ffd_OfferingSctyTitl" type="ffd:securityTitleItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="AmtSctiesRegd" id="ffd_AmtSctiesRegd" type="ffd:nonNegativeDecimal2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="MaxOfferingPricPerScty" id="ffd_MaxOfferingPricPerScty" type="ffd:nonNegativeDecimal4lItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="MaxAggtOfferingPric" id="ffd_MaxAggtOfferingPric" type="ffd:nonNegative100TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="TxValtn" id="ffd_TxValtn" type="ffd:nonNegative100TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="FeeRate" id="ffd_FeeRate" type="dtr-types:percentItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="FeeAmt" id="ffd_FeeAmt" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CfwdFormTp" id="ffd_CfwdFormTp" type="ffd:formTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CfwdPrrFileNb" id="ffd_CfwdPrrFileNb" type="ffd:fileNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CfwdPrrFctvDt" id="ffd_CfwdPrrFctvDt" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CfwdPrevslyPdFee" id="ffd_CfwdPrevslyPdFee" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule457fFlg" id="ffd_Rule457fFlg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="GnlInstrIIhiFlg" id="ffd_GnlInstrIIhiFlg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="AmtSctiesRcvd" id="ffd_AmtSctiesRcvd" type="ffd:nonNegativeDecimal2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="ValSctiesRcvdPerShr" id="ffd_ValSctiesRcvdPerShr" type="ffd:nonNegativeDecimal4lItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="ValSctiesRcvd" id="ffd_ValSctiesRcvd" type="ffd:nonNegative100TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CshPdByRegistrantInTx" id="ffd_CshPdByRegistrantInTx" type="ffd:nonNegative100TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CshRcvdByRegistrantInTx" id="ffd_CshRcvdByRegistrantInTx" type="ffd:nonNegative100TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="FeeNoteMaxAggtOfferingPric" id="ffd_FeeNoteMaxAggtOfferingPric" type="ffd:nonNegative100TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OfferingNote" id="ffd_OfferingNote" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetLineItems" id="ffd_OffsetLineItems" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetTable" id="ffd_OffsetTable" type="xbrli:stringItemType" substitutionGroup="xbrldt:hypercubeItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetAxis" id="ffd_OffsetAxis" type="xbrli:stringItemType" xbrldt:typedDomainRef="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_lineNo" substitutionGroup="xbrldt:dimensionItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetClmdInd" id="ffd_OffsetClmdInd" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule457bOffsetFlg" id="ffd_Rule457bOffsetFlg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule011a2OffsetFlg" id="ffd_Rule011a2OffsetFlg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule457pOffsetFlg" id="ffd_Rule457pOffsetFlg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetPrrFilerNm" id="ffd_OffsetPrrFilerNm" type="ffd:filerNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetPrrFormTp" id="ffd_OffsetPrrFormTp" type="ffd:formTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetPrrFileNb" id="ffd_OffsetPrrFileNb" type="ffd:fileNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetClmInitlFilgDt" id="ffd_OffsetClmInitlFilgDt" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetSrcFilgDt" id="ffd_OffsetSrcFilgDt" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetClmdAmt" id="ffd_OffsetClmdAmt" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetPrrSctyTp" id="ffd_OffsetPrrSctyTp" type="ffd:securityTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetPrrSctyTitl" id="ffd_OffsetPrrSctyTitl" type="ffd:securityTitleItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetPrrNbOfUnsoldScties" id="ffd_OffsetPrrNbOfUnsoldScties" type="ffd:nonNegativeDecimal8ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetPrrUnsoldOfferingAmt" id="ffd_OffsetPrrUnsoldOfferingAmt" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetPrrFeeAmt" id="ffd_OffsetPrrFeeAmt" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetExpltnForClmdAmt" id="ffd_OffsetExpltnForClmdAmt" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="OffsetNote" id="ffd_OffsetNote" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="TermntnCmpltnWdrwl" id="ffd_TermntnCmpltnWdrwl" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmbndPrspctsLineItems" id="ffd_CmbndPrspctsLineItems" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmbndPrspctsTable" id="ffd_CmbndPrspctsTable" type="xbrli:stringItemType" substitutionGroup="xbrldt:hypercubeItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="CmbndPrspctsItemAxis" id="ffd_CmbndPrspctsItemAxis" type="xbrli:stringItemType" xbrldt:typedDomainRef="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_lineNo" substitutionGroup="xbrldt:dimensionItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule429CmbndPrspctsFlg" id="ffd_Rule429CmbndPrspctsFlg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule429SctyTp" id="ffd_Rule429SctyTp" type="ffd:securityTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule429SctyTitl" id="ffd_Rule429SctyTitl" type="ffd:securityTitleItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule429NbOfUnsoldScties" id="ffd_Rule429NbOfUnsoldScties" type="ffd:nonNegativeDecimal2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule429AggtOfferingAmt" id="ffd_Rule429AggtOfferingAmt" type="ffd:nonNegative100TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule429EarlierFormTp" id="ffd_Rule429EarlierFormTp" type="ffd:formTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule429EarlierFileNb" id="ffd_Rule429EarlierFileNb" type="ffd:fileNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule429InitlFctvDt" id="ffd_Rule429InitlFctvDt" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Rule429PrspctsNote" id="ffd_Rule429PrspctsNote" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Scties424iLineItems" id="ffd_Scties424iLineItems" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Scties424iTable" id="ffd_Scties424iTable" type="xbrli:stringItemType" substitutionGroup="xbrldt:hypercubeItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="Scties424iAxis" id="ffd_Scties424iAxis" type="xbrli:stringItemType" xbrldt:typedDomainRef="https://xbrl.sec.gov/dei/2026/dei-2026.xsd#dei_lineNo" substitutionGroup="xbrldt:dimensionItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="AggtSalesPricFsclYr" id="ffd_AggtSalesPricFsclYr" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="AggtRedRpPricFsclYr" id="ffd_AggtRedRpPricFsclYr" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="AggtRedRpPricPrrFsclYr" id="ffd_AggtRedRpPricPrrFsclYr" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="AmtRedCdts" id="ffd_AmtRedCdts" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="NetSalesAmt" id="ffd_NetSalesAmt" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="FeeNote" id="ffd_FeeNote" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="FeesSummaryLineItems" id="ffd_FeesSummaryLineItems" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="FeesSummaryTable" id="ffd_FeesSummaryTable" type="xbrli:stringItemType" substitutionGroup="xbrldt:hypercubeItem" abstract="true" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="TtlOfferingAmt" id="ffd_TtlOfferingAmt" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="TtlPrevslyPdAmt" id="ffd_TtlPrevslyPdAmt" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="TtlFeeAmt" id="ffd_TtlFeeAmt" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="TtlTxValtn" id="ffd_TtlTxValtn" type="ffd:nonNegative100TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="FeeIntrstAmt" id="ffd_FeeIntrstAmt" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="TtlOffsetAmt" id="ffd_TtlOffsetAmt" type="ffd:nonNegative1TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="NetFeeAmt" id="ffd_NetFeeAmt" type="xbrli:monetaryItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="NrrtvDsclsr" id="ffd_NrrtvDsclsr" type="dtr-types:textBlockItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="NrrtvMaxAggtOfferingPric" id="ffd_NrrtvMaxAggtOfferingPric" type="ffd:nonNegative100TMonetary2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="NrrtvMaxAggtAmt" id="ffd_NrrtvMaxAggtAmt" type="ffd:nonNegativeDecimal2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="FnlPrspctsFlg" id="ffd_FnlPrspctsFlg" type="xbrli:booleanItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:element name="TtlFeeAndIntrstAmt" id="ffd_TtlFeeAndIntrstAmt" type="ffd:nonNegativeDecimal2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="duration"/>
+<xs:complexType name="submissionTypeItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:tokenItemType">
+<xs:attributeGroup ref="xbrli:nonNumericItemAttrs"/>
+</xs:restriction>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="formTypeItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:tokenItemType">
+<xs:attributeGroup ref="xbrli:nonNumericItemAttrs"/>
+</xs:restriction>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="filerNameItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:normalizedStringItemType">
+<xs:attributeGroup ref="xbrli:nonNumericItemAttrs"/>
+</xs:restriction>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="feeExhibitTypeItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:tokenItemType">
+<xs:attributeGroup ref="xbrli:nonNumericItemAttrs"/>
+</xs:restriction>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="nonNegativeDecimal2ItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:decimalItemType"/>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="nonNegativeDecimal4lItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:decimalItemType"/>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="nonNegativeDecimal8ItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:decimalItemType"/>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="nonNegativeIntegerItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:integerItemType"/>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="nonNegative1TMonetary2ItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:monetaryItemType"/>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="nonNegative100TMonetary2ItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:monetaryItemType"/>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="securityTypeItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:stringItemType">
+<xs:attributeGroup ref="xbrli:nonNumericItemAttrs"/>
+</xs:restriction>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="securityTitleItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:normalizedStringItemType">
+<xs:minLength value="1"/>
+<xs:maxLength value="250"/>
+<xs:attributeGroup ref="xbrli:nonNumericItemAttrs"/>
+</xs:restriction>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="paymentTypeItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:stringItemType">
+<xs:attributeGroup ref="xbrli:nonNumericItemAttrs"/>
+</xs:restriction>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="indicatorTypeItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:booleanItemType">
+<xs:attributeGroup ref="xbrli:nonNumericItemAttrs"/>
+</xs:restriction>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="stateOrCountryCodeItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:stringItemType">
+<xs:attributeGroup ref="xbrli:nonNumericItemAttrs"/>
+</xs:restriction>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="naItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:tokenItemType">
+<xs:enumeration value="N/A"/>
+<xs:attributeGroup ref="xbrli:nonNumericItemAttrs"/>
+</xs:restriction>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="fileNumberItemType">
+<xs:simpleContent>
+<xs:restriction base="xbrli:stringItemType">
+<xs:pattern value="\d{1,3}-\d{1,8}-[a-zA-Z0-9]{1,4}|\d{1,3}-\d{1,8}|24R-\d{1,8}-[a-zA-Z0-9]{1,4}|24R-\d{1,8}"/>
+<xs:attributeGroup ref="xbrli:nonNumericItemAttrs"/>
+</xs:restriction>
+</xs:simpleContent>
+</xs:complexType>
+</xs:schema>

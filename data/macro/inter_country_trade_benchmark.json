@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "source": "IMF World Economic Outlook, OECD Inter-Country Input-Output (ICIO) & WTO Global Trade Data",
+    "benchmark_year": 2024,
+    "framework": "Open Economy Multi-Country Trade Balance & Bilateral Flow System",
+    "world_nominal_gdp_trillion_usd": 110.0,
+    "global_gross_trade_trillion_usd": 34.50,
+    "global_trade_openness_ratio": 0.3136,
+    "world_net_exports_sum_trillion_usd": 0.0
+  },
+  "regions": [
+    {
+      "region_id": "US",
+      "region_name_zh": "美国",
+      "region_name_en": "United States",
+      "nominal_gdp_trillion_usd": 28.80,
+      "gdp_share_pct": 26.18,
+      "gross_exports_trillion_usd": 3.10,
+      "gross_imports_trillion_usd": 4.00,
+      "net_exports_trillion_usd": -0.90,
+      "export_openness_pct": 10.76,
+      "import_penetration_pct": 13.89,
+      "currency": "USD",
+      "trade_regime": "Structural Current Account Deficit / Global Reserve Currency"
+    },
+    {
+      "region_id": "JP",
+      "region_name_zh": "日本",
+      "region_name_en": "Japan",
+      "nominal_gdp_trillion_usd": 4.20,
+      "gdp_share_pct": 3.82,
+      "gross_exports_trillion_usd": 0.85,
+      "gross_imports_trillion_usd": 0.90,
+      "net_exports_trillion_usd": -0.05,
+      "export_openness_pct": 20.24,
+      "import_penetration_pct": 21.43,
+      "currency": "JPY",
+      "trade_regime": "High Tech & High Value Capital Goods Exporter / Energy Importer"
+    },
+    {
+      "region_id": "EU",
+      "region_name_zh": "欧盟及欧元区",
+      "region_name_en": "European Union",
+      "nominal_gdp_trillion_usd": 19.50,
+      "gdp_share_pct": 17.73,
+      "gross_exports_trillion_usd": 9.20,
+      "gross_imports_trillion_usd": 8.80,
+      "net_exports_trillion_usd": 0.40,
+      "export_openness_pct": 47.18,
+      "import_penetration_pct": 45.13,
+      "currency": "EUR",
+      "trade_regime": "High Trade Openness / Advanced Manufacturing & Luxury Brand Exporter"
+    },
+    {
+      "region_id": "CN",
+      "region_name_zh": "中国",
+      "region_name_en": "China",
+      "nominal_gdp_trillion_usd": 18.60,
+      "gdp_share_pct": 16.91,
+      "gross_exports_trillion_usd": 3.60,
+      "gross_imports_trillion_usd": 2.70,
+      "net_exports_trillion_usd": 0.90,
+      "export_openness_pct": 19.35,
+      "import_penetration_pct": 14.52,
+      "currency": "CNY",
+      "trade_regime": "Global Manufacturing Factory / Structural Trade Surplus"
+    },
+    {
+      "region_id": "ROW",
+      "region_name_zh": "世界其余地区",
+      "region_name_en": "Rest of the World",
+      "nominal_gdp_trillion_usd": 38.90,
+      "gdp_share_pct": 35.36,
+      "gross_exports_trillion_usd": 17.75,
+      "gross_imports_trillion_usd": 18.10,
+      "net_exports_trillion_usd": -0.35,
+      "export_openness_pct": 45.63,
+      "import_penetration_pct": 46.53,
+      "currency": "MULTIPLE",
+      "trade_regime": "Resource, Intermediate Goods, Energy & Emerging Consumer Markets"
+    }
+  ],
+  "bilateral_trade_flows_matrix_trillion_usd": {
+    "columns_destination_importers": ["US", "JP", "EU", "CN", "ROW"],
+    "rows_origin_exporters": {
+      "US": [0.00, 0.12, 0.68, 0.20, 2.10],
+      "JP": [0.18, 0.00, 0.10, 0.17, 0.40],
+      "EU": [0.75, 0.12, 0.00, 0.38, 7.95],
+      "CN": [0.65, 0.18, 0.62, 0.00, 2.15],
+      "ROW": [2.42, 0.48, 7.40, 1.95, 5.50]
+    }
+  },
+  "trade_elasticities": {
+    "us_dollar_depreciation_trade_boost_elasticity": 0.65,
+    "japanese_yen_depreciation_export_volume_elasticity": 0.45,
+    "japanese_yen_depreciation_export_jpy_revenue_elasticity": 0.95,
+    "global_tariff_transmission_pass_through": 0.78
+  }
+}

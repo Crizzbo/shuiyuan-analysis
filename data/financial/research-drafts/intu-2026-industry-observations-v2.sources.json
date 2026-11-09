@@ -1,0 +1,18 @@
+{
+  "financial-5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f": {
+    "revision": 1,
+    "source_id": "financial:intu-2026-10k-v1:b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+  },
+  "financial-651c3903d462dce36b6bb8a577e93b19f3ab681a2e6f622b37996453660bb021": {
+    "revision": 1,
+    "source_id": "financial:intu-2026-10k-v1:b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+  },
+  "financial-7ce8a85c76eb1ad5e122bab85315c8c3ac8d047e6ee3b027277514c562218b8b": {
+    "revision": 1,
+    "source_id": "financial:intu-2026-10k-v1:b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34"
+  },
+  "mapping-execution-b1c9e6bb06bb3bf6c09c273d9f40f5dfd7d037e87272e7493d310ae258bec120": {
+    "source_id": "mapping-execution-b1c9e6bb06bb3bf6c09c273d9f40f5dfd7d037e87272e7493d310ae258bec120",
+    "revision": 1
+  }
+}

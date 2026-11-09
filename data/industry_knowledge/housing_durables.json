@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "housing_durables",
+    "industry_name_zh": "住宅建设与耐用消费品",
+    "sector_id": "consumer_discretionary",
+    "sector_name_zh": "可选消费",
+    "macro_sector_id": "CONS_GOODS",
+    "macro_sector_name_zh": "耐用消费品、纺织服饰与通用轻工业制造",
+    "description_zh": "涵盖独栋及联排住宅建造商、大型家用白色家电、智能厨电及家居耐用消费品制造企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.76,
+    "typical_markup_ratio": 1.07,
+    "capex_intensity": "中等偏高",
+    "operating_leverage_exposure": "中等偏高经营杠杆",
+    "typical_gross_margin_range": [0.18, 0.32]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 95.0,
+    "dio_warning_days": 160.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.15,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "核心都市圈高流动性住宅建设用地期权配额与基础设施管网接入许可",
+      "结构级建筑规格木材、工业大宗阴极铜管、冷轧镀锌钢板及发泡聚氨酯原料",
+      "高效变频压缩机、直流无刷电机与微控制单元 (MCU) 芯片供应链"
+    ],
+    "downstream_profile": "刚需首套置业家庭、改善型住房置换人群、大型家居建材零售连锁及家电全国家电卖场电商",
+    "pricing_power_verdict": "拥有规模化土地期权储备的全国性住宅建筑龙头享有较强精细化成本控制溢价；家电一线龙头享有核心自主品牌与技术能效溢价",
+    "channel_inversion_sensitivity": "新房净签约订单数量 (Net New Orders) 与订单取消率 (Cancellation Rate) 是全产业链景气度最前置的核心指针"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "存量二手房市场受低利率房贷锁定效应导致供给极度枯竭，购房需求全面涌向新房建筑商驱动签约订单爆发式增长",
+      "建筑商创新推出房贷利率买断 (Rate Buydown) 强力促销工具，有效降低购房月供门槛带动去化顺畅且取消率处于低位",
+      "高能效绿色变频家电出海拓展顺畅，海外自主高端品牌占比攀升有效对冲内销波动并增厚毛利"
+    ],
+    "leading_bear_defenses": [
+      "长期高房贷利率严重侵蚀居民购房支付可承受能力，潜在买家持币观望引发签约订单萎缩与订单取消率恶化",
+      "建筑商为消化庞大在建库存被迫采取直接大额降价与高额让利促销，导致单套住宅销售综合毛利大幅承压",
+      "大宗原材料铜材与钢板价格短期大幅飙升，下游家电终端竞争激烈难以全额顺价导致制造成本大幅侵蚀毛利率"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度新房净新签订单套数 (Net New Orders) 与订单取消率 (Cancellation Rate)",
+      "平均房屋销售毛利率 (Homebuilding Gross Margin) 与在手积压房屋规模 (Backlog)",
+      "全美住宅建筑商协会 (NAHB) 住房市场信心指数与新屋开工数据",
+      "大宗阴极铜期货走势与核心白色家电月度全渠道零售出货量"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "对处于滞销去化困难、市场实际售价严重下滑区域的土地与在建住宅推迟计提存货跌价减值准备 (Impairment)",
+      "推迟将新房保修与质量返修责任确认为预计负债以人为压低当期销售营业成本",
+      "在住宅房屋尚未实质通过最终验收移交钥匙并完成过户前激进提前确认全额售房收入"
+    ],
+    "channel_and_revenue_checks": [
+      "向购房客户提供的房贷利率买断补贴与直接成交折让冲减营业收入的会计处理充分性审查",
+      "家电向大型渠道经销商压货时约定的保价返利协议与滞销退货风险责任核验"
+    ]
+  }
+}

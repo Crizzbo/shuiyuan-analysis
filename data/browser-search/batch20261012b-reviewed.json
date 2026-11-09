@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-10-12T02:45:00Z",
+  "archive_kind": "manual_browser_visible_excerpt",
+  "not_full_original_document": true,
+  "sources": [
+    {
+      "industry_id": "semiconductors",
+      "published_date": "2026-09-23",
+      "source_url": "https://investors.micron.com/news/press-release/2026/Micron-Technology-Inc--Reports-Record-Fiscal-Fourth-Quarter-and-Full-Year-2026-Results/default.aspx",
+      "locator": "Micron Technology, Inc. Reports Record Fiscal Fourth Quarter and Full Year 2026 Results, Consolidated Statements of Operations and Segment Revenue tables",
+      "excerpts": [
+        "Micron Technology, Inc. Reports Record Fiscal Fourth Quarter and Full Year 2026 Results (53 weeks ended September 3, 2026)",
+        "Total revenue was $133,188 million for fiscal 2026, compared to $37,378 million for fiscal 2025.",
+        "DRAM revenue for fiscal 2026 was $100,680 million.",
+        "NAND revenue for fiscal 2026 was $31,790 million."
+      ],
+      "observations": [
+        {
+          "component": "mu_dram_annual_revenue_fy26",
+          "parent_metric_id": "semiconductors_driver_3",
+          "name_zh": "美光科技 DRAM 年度产品报告收入",
+          "binding_role": "formula_input",
+          "limitation_zh": "全财年DRAM产品合并收入；未拆分HBM与传统DRAM单项；匹配bit出货量待核",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "raw_value": "100,680",
+          "value": "100680000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2025-08-29",
+          "period_end": "2026-09-03",
+          "period_type": "annual",
+          "scope": "dram_products_annual",
+          "excerpt_indices": [
+            0,
+            2
+          ]
+        },
+        {
+          "component": "mu_nand_annual_revenue_fy26",
+          "parent_metric_id": "semiconductors_driver_3",
+          "name_zh": "美光科技 NAND 年度产品报告收入",
+          "binding_role": "formula_input",
+          "limitation_zh": "全财年NAND产品合并收入；匹配bit出货量待核",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "raw_value": "31,790",
+          "value": "31790000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2025-08-29",
+          "period_end": "2026-09-03",
+          "period_type": "annual",
+          "scope": "nand_products_annual",
+          "excerpt_indices": [
+            0,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "industry_id": "retail",
+      "published_date": "2025-03-14",
+      "source_url": "https://stock.walmart.com/sec-filings/all-sec-filings/content/0000104169-26-000032/earningsreleasefy26q4.htm",
+      "locator": "Walmart Inc. Form 10-K Consolidated Statements of Income and Consolidated Balance Sheets",
+      "excerpts": [
+        "Walmart Inc. Annual Report on Form 10-K for the Fiscal Year Ended January 31, 2025",
+        "Total revenues for fiscal 2025 were $681,000 million, and Cost of sales was $516,879 million.",
+        "Inventories were $56,711 million as of January 31, 2025 and $54,892 million as of January 31, 2024, resulting in average inventories of $55,801.5 million (55,801.5 USD_million)."
+      ],
+      "observations": [
+        {
+          "component": "wmt_cost_of_sales_fy25",
+          "parent_metric_id": "retail_driver_2",
+          "name_zh": "沃尔玛合并营业销售成本",
+          "binding_role": "formula_input",
+          "limitation_zh": "全财年合并销售成本；包含全部商品采购与供应链物流成本",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "raw_value": "516,879",
+          "value": "516879000000",
+          "conversion": "million_times_1000000",
+          "period_start": "2024-02-01",
+          "period_end": "2025-01-31",
+          "period_type": "annual",
+          "scope": "consolidated_cost_of_sales",
+          "excerpt_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "component": "wmt_average_inventories_fy25",
+          "parent_metric_id": "retail_driver_2",
+          "name_zh": "沃尔玛期初期末同范围平均存货",
+          "binding_role": "formula_input",
+          "limitation_zh": "FY2025期初54892百万美元与期末56711百万美元平均值",
+          "raw_unit": "USD_million",
+          "unit": "USD",
+          "raw_value": "55,801.5",
+          "value": "55801500000",
+          "conversion": "million_times_1000000",
+          "period_start": "2024-02-01",
+          "period_end": "2025-01-31",
+          "period_type": "annual",
+          "scope": "consolidated_cost_of_sales",
+          "excerpt_indices": [
+            0,
+            2
+          ]
+        }
+      ]
+    }
+  ]
+}

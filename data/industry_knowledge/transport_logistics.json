@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "transport_logistics",
+    "industry_name_zh": "全球交通运输与现代综合物流",
+    "sector_id": "industrials",
+    "sector_name_zh": "工业",
+    "macro_sector_id": "TRADE_LOG",
+    "macro_sector_name_zh": "全球物流航运、仓储分拨与批发零售贸易",
+    "description_zh": "涵盖全球远洋集装箱海运、干线干散货航运、航空货运快递机队、跨境公路干线及现代智能保税仓储企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.82,
+    "typical_markup_ratio": 1.06,
+    "capex_intensity": "极高重资产",
+    "operating_leverage_exposure": "极高经营杠杆",
+    "typical_gross_margin_range": [0.08, 0.20]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 0.0,
+    "dio_warning_days": 0.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.25,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "国际低硫船用保税燃料油与航空重油煤油价格波动及绿色替代甲醇供给",
+      "全球枢纽深水港口泊位作业靠泊窗口与装卸引航配额",
+      "大型集装箱货轮造船船坞建造船位排期 (锁单周期通常长达 2 至 3 年)"
+    ],
+    "downstream_profile": "全球跨国制造业进出口货主、跨境电商平台卖家、国际大宗贸易商及超大型零售连锁商超",
+    "pricing_power_verdict": "属于强周期运价接受者，全球班轮联盟通过跨航线动态调控航速、停航跳港控制有效运力供给以稳定长协签约运价",
+    "channel_inversion_sensitivity": "上海出口集装箱运价指数 (SCFI) 与波罗的海干散货运价指数 (BDI) 周度运价是全球贸易景气与物流供需平衡最敏锐的晴雨表"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "地缘冲突导致咽喉海峡航线大范围被迫绕行好望角，有效运力被动大幅抽干驱动即期运价与年度长协价非理性暴涨",
+      "跨境电商外贸直邮与高货值消费电子出海需求强劲，航空全货机腹舱装载率维持高位拉升单公斤运力综合收益",
+      "全球干线枢纽自动化多层分拣转运中心全面投产，单票包裹干线履约及中转操作成本显著下行拓宽毛利空间"
+    ],
+    "leading_bear_defenses": [
+      "历史高位集中下单的巨型新船迎来集中下水交付潮，叠加全球贸易总需求走弱，严重运力过剩引发运价断崖式阴跌",
+      "国际航运燃油与航空煤油价格单向暴涨，且油价联动燃油附加费未能足额向货主全额顺价传导导致利润遭遇严重侵蚀",
+      "枢纽深水港发生码头装卸工人大规模罢工或关键运河枯水期通航管制，导致船舶大面积严重压港滞留产生巨额滞期损失"
+    ],
+    "core_catalyst_dimensions": [
+      "上海航运交易所发布的上海出口集装箱运价指数 (SCFI) 周度数据",
+      "波罗的海交易所波罗的海干散货指数 (BDI) 与原油轮运价指数 (BDTI)",
+      "新加坡保税船用低硫燃油 (VLSFO) 与国际航空煤油现货即期价格",
+      "全球造船在手积压订单占现有船队运力比例 (Orderbook-to-Fleet Ratio) 交付预测"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "在集运运价高位雪崩周期推迟对高成本期租船舶使用权资产 (Right-of-Use Assets) 进行审慎减值测试计提",
+      "对已履约完成承运但货主陷入经营危机的长周期挂账应收账款未充分计提预期信用损失准备",
+      "通过人为修改船舶和全货机的预计使用年限与残值率假设以减少当期折旧折耗虚增账面利润"
+    ],
+    "channel_and_revenue_checks": [
+      "大型集装箱货轮售后回租 (Sale and Leaseback) 业务中隐藏的巨额表外刚性杠杆负债穿透",
+      "集装箱超期滞箱费 (Demurrage & Detention) 与港口代理规费代收代付的跨期确认真实性核查"
+    ]
+  }
+}

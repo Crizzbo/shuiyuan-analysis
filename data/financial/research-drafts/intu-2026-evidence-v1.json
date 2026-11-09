@@ -1,0 +1,180 @@
+{
+  "schema_version": "1.1.0",
+  "research_id": "intu-2026-financial-evidence-draft",
+  "revision": 1,
+  "is_fictional": false,
+  "as_of": "2026-10-11T02:18:05+00:00",
+  "recorded_at": "2026-10-11T02:18:05+00:00",
+  "market_session_date": "2026-10-09",
+  "investment_horizon_months": 12,
+  "subject": {
+    "company_id": "US:INTU:CIK896878",
+    "security_ids": [
+      "US:INTU"
+    ],
+    "segments": [
+      {
+        "id": "segment_software",
+        "name": "公司整体临时分析范围",
+        "industry_ids": [
+          "software"
+        ],
+        "business_model_ids": [
+          "subscription"
+        ],
+        "classification_evidence_refs": [],
+        "subindustry_description": "软件/订阅为原有计算绑定的待审核分类占位；真实分部及商业模式需另行取证。",
+        "weight_basis": "unknown",
+        "weight": null,
+        "weight_period": null,
+        "weight_evidence_refs": []
+      }
+    ],
+    "is_adr": false,
+    "is_reit": false,
+    "classification_status": "unreviewed",
+    "unallocated_or_elimination_notes": "测试没有真实分部权重"
+  },
+  "evidence": [
+    {
+      "id": "registered-5da358740c47d3afa3e39c79491eaf176d417af8b4f5ae68008b3210c8ef881f",
+      "source_path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+      "locator": "intu-20260731.htm#f-60 context=c-1",
+      "source_kind": "primary",
+      "published_at": null,
+      "published_date": "2026-09-09",
+      "publication_precision": "date",
+      "available_at": "2026-10-11T01:37:03+00:00",
+      "acquired_at": "2026-10-11T01:37:03+00:00",
+      "excerpt_or_summary": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:Revenues\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-60\">21,448</ix:nonFraction>",
+      "limitations": [
+        "来自已登记财报的派生原文证据；原 ZIP 版本及解析执行材料由正式事实登记追溯。",
+        "仅核实发布日期，研究可得时点采用本项目首次实际观察；行业分类及六步分析未完成。"
+      ]
+    },
+    {
+      "id": "registered-7ce8a85c76eb1ad5e122bab85315c8c3ac8d047e6ee3b027277514c562218b8b",
+      "source_path": "data/financial/objects/b3/b35fc1599f5dd4e923cc04e82b9a3c147d24cbd98f93d6509b5f7421b4e4ac34.txt",
+      "locator": "intu-20260731.htm#f-90 context=c-1",
+      "source_kind": "primary",
+      "published_at": null,
+      "published_date": "2026-09-09",
+      "publication_precision": "date",
+      "available_at": "2026-10-11T01:37:03+00:00",
+      "acquired_at": "2026-10-11T01:37:03+00:00",
+      "excerpt_or_summary": "<ix:nonFraction unitRef=\"usd\" contextRef=\"c-1\" decimals=\"-6\" name=\"us-gaap:OperatingIncomeLoss\" format=\"ixt:num-dot-decimal\" scale=\"6\" id=\"f-90\">5,884</ix:nonFraction>",
+      "limitations": [
+        "来自已登记财报的派生原文证据；原 ZIP 版本及解析执行材料由正式事实登记追溯。",
+        "仅核实发布日期，研究可得时点采用本项目首次实际观察；行业分类及六步分析未完成。"
+      ]
+    }
+  ],
+  "observations": [],
+  "claims": [],
+  "calculations": [],
+  "steps": [
+    {
+      "id": "S1",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-11T02:18:05+00:00",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "已接入正式财报证据；尚未开始本步骤分析。"
+      ]
+    },
+    {
+      "id": "S2",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-11T02:18:05+00:00",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "已接入正式财报证据；尚未开始本步骤分析。"
+      ]
+    },
+    {
+      "id": "S3",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-11T02:18:05+00:00",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "已接入正式财报证据；尚未开始本步骤分析。"
+      ]
+    },
+    {
+      "id": "S4",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-11T02:18:05+00:00",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "已接入正式财报证据；尚未开始本步骤分析。"
+      ]
+    },
+    {
+      "id": "S5",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-11T02:18:05+00:00",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "已接入正式财报证据；尚未开始本步骤分析。"
+      ]
+    },
+    {
+      "id": "S6",
+      "version": 1,
+      "status": "pending",
+      "updated_at": "2026-10-11T02:18:05+00:00",
+      "inputs": {
+        "dependencies": [],
+        "evidence_refs": [],
+        "observation_refs": [],
+        "claim_refs": []
+      },
+      "gates": [],
+      "output": null,
+      "notes": [
+        "已接入正式财报证据；尚未开始本步骤分析。"
+      ]
+    }
+  ],
+  "invalidation_events": []
+}

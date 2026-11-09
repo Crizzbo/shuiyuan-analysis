@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "household_personal",
+    "industry_name_zh": "家庭清洁与个人护理日化",
+    "sector_id": "consumer_staples",
+    "sector_name_zh": "必需消费",
+    "macro_sector_id": "CONS_GOODS",
+    "macro_sector_name_zh": "耐用消费品、纺织服饰与通用轻工业制造",
+    "description_zh": "涵盖洗发护发、护肤彩妆、口腔护理牙膏、织物洗涤护理及生活用纸等日用快消品制造企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.50,
+    "typical_markup_ratio": 1.28,
+    "capex_intensity": "中等",
+    "operating_leverage_exposure": "中等经营杠杆",
+    "typical_gross_margin_range": [0.45, 0.60]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 55.0,
+    "dio_warning_days": 95.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.20,
+    "debt_covenant_buffer_minimum_ratio": 0.15
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "天然棕榈油脂肪酸原料、高级绿色温和表面活性剂及专利微胶囊香精香料",
+      "高阻隔环保轻量化注塑瓶胚、精密微米级乳液喷泵及软管包材产能",
+      "全球一线品牌代言人与主流社交媒体黄金曝光公域流量资源"
+    ],
+    "downstream_profile": "全球广大城镇居民终端家庭消费者、大型跨国连锁零售超市、电商平台品牌官方自营店及日化专营连锁",
+    "pricing_power_verdict": "拥有百年超级品牌矩阵的龙头企业享有极强跨周期自主直接提价权与通胀顺价能力，无品牌白牌产品受制于极致价格内卷",
+    "channel_inversion_sensitivity": "内生有机销售增速 (Organic Sales Growth) 中剔除提价因素后的真实产品销量变动 (Volume Growth) 是品牌护城河是否松动的唯一核心领先指标"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "高端抗衰护肤与功效洗护等高附加值升级品类持续放量，量价双轮驱动推动有机销售额超预期加速增长",
+      "上游棕榈油、纸浆及塑料包装材料采购成本高位回落，前期终端提价红利沉淀推动主营毛利率持续修复",
+      "数字化直营电商与内容兴趣电商渠道渗透率提升，渠道层级压缩优化终端渠道综合费率"
+    ],
+    "leading_bear_defenses": [
+      "长期单向提价过度透支消费者接受度，导致中低端大众品类销量呈现加速下滑且市场份额被竞品与平替蚕食",
+      "老旧核心品牌发生形象老化且无法有效触达年轻主力客群，海量新兴白牌与小众新锐品牌分流核心基本盘",
+      "核心产品被曝出含有潜在刺激性禁用添加成分或虚假功能宣传，遭受市场监管严厉处罚并引爆全国消费者公关危机"
+    ],
+    "core_catalyst_dimensions": [
+      "季度内生有机销售额增速 (Organic Sales Growth) 与销量/价格分拆贡献明细",
+      "国际大宗棕榈油期货价格、漂白针叶木浆与高密度聚乙烯包装树脂即期走势",
+      "核心细分优势品类 (洗护/口腔/纸品) 全球重点区域终端市场占有率变动",
+      "全渠道营销推广与品牌广告费用率 (A&P Expense Ratio) 变动走向"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "在季度考核截点向大型渠道经销商违规提供过度信用账期与超额返利进行非正常提前塞货",
+      "历史上重大品牌并购形成的巨额商誉及商标无形资产在品牌盈利能力恶化后推迟计提商誉减值",
+      "将产品换季促销赠送搭售与渠道赞助支出计入存货成本以人为少计当期销售费用"
+    ],
+    "channel_and_revenue_checks": [
+      "向大型商超客户支付的年度阶梯销售返利 (Rebates) 冲减营业收入的会计处理充分性与合规性",
+      "电商大促爆发期虚假刷单退货与实际留存签收率的真实性核验"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "media_entertainment",
+    "industry_name_zh": "数字媒体、影视流媒体与互动娱乐",
+    "sector_id": "communication_services",
+    "sector_name_zh": "通信服务",
+    "macro_sector_id": "INFO_SOFT",
+    "macro_sector_name_zh": "企业级软件、超大规模云服务与数字通信网络",
+    "description_zh": "涵盖全球流媒体视频平台、3A 级互动游戏研发发行、主题公园度假区及全球超级影视 IP 授权企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.58,
+    "typical_markup_ratio": 1.18,
+    "capex_intensity": "中等",
+    "operating_leverage_exposure": "极高经营杠杆",
+    "typical_gross_margin_range": [0.35, 0.55]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 0.0,
+    "dio_warning_days": 0.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.15,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "全球顶级好莱坞主创团队、知名编剧公会核心成员与奥斯卡级一线主演档期",
+      "全球现象级跨世代动漫文学超级 IP 独家全版权特许改编授权",
+      "主机平台硬件商与全球主流移动应用分发渠道的准入与佣金分成规则"
+    ],
+    "downstream_profile": "全球广大流媒体订阅家庭、主机 PC 核心重度玩家群体、休闲移动游戏受众及主题度假乐园游客",
+    "pricing_power_verdict": "拥有经久不衰超级跨代 IP 资产的内容龙头享有绝对门票溢价与订阅自主提价权；缺乏 IP 资产的普通代工制作方在买方市场被严重压榨利润",
+    "channel_inversion_sensitivity": "流媒体单季度全球付费净增订阅用户数 (Paid Net Adds) 与平均单客付费 (ARM) 是流媒体业务成长性与估值重构的核心主导指针"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "自制独播现象级爆款影视或旗舰 3A 游戏首发即创历史纪录，驱动流媒体付费净增用户与游戏净利润超预期井喷",
+      "依托超级超级 IP 打造的实景主题度假区客流量与人均二次消费 (衍生手办/特色餐饮) 创历史最高峰值",
+      "广告支持型低价订阅模式 (Ad Tier) 商业化放量顺畅，带动高利润率程序化品牌广告营收翻倍增长"
+    ],
+    "leading_bear_defenses": [
+      "数部年度高预算重磅大片上映后遭遇票房严重崩盘，巨额制作宣发沉没成本全额计提影视资产损失",
+      "平台自制内容出现断档导致用户大面积退订流失，被迫降价竞争引发平均单客付费收益 (ARM) 恶化",
+      "主力游戏新作版号审批遭遇不可抗力受阻或海外重点市场对游戏内购出台严厉监管限制引发流水腰斩"
+    ],
+    "core_catalyst_dimensions": [
+      "单季度全球流媒体付费订阅用户净增量 (Paid Net Additions) 与月度用户流失率 (Churn Rate)",
+      "主力院线电影全球首周末票房产出与知名影评聚合网口碑评价",
+      "旗舰级大型游戏首周全平台销售量与在线同时活跃玩家峰值数据",
+      "未来财年自制内容资产投资规模与无形资产内容折耗摊销节奏"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "为了粉饰当期账面盈利，对票房与点播严重落后于预期的失败大片推迟计提已资本化制作内容资产减值准备",
+      "人为调高影视作品在流媒体平台上的使用寿命以拉长折耗摊销年限虚减当期营业成本",
+      "将常规成熟游戏的日常版本补丁维护支出违规进行无形资产资本化以减少当期研发费用"
+    ],
+    "channel_and_revenue_checks": [
+      "联合出品影视投资协议中保底分成与发行垫付资金结算合规性核查",
+      "流媒体预付费年费订阅与游戏未消耗虚拟道具递延收入权责发生制摊销审查"
+    ]
+  }
+}

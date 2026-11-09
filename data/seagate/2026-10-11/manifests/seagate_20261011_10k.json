@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.1.0",
+  "source_id": "seagate_20261011_10k",
+  "revision": 1,
+  "source_path": "data/seagate/2026-10-11/sec-10k-excerpt.md",
+  "source_kind": "primary",
+  "dataset_kind": "financial",
+  "published_at": null,
+  "published_date": null,
+  "publication_precision": "unknown",
+  "available_at": "2026-10-11T10:06:39Z",
+  "acquired_at": "2026-10-11T10:06:39Z",
+  "effective_period": null,
+  "license_notes": "项目内研究使用；不代表再分发授权",
+  "quality_notes": [
+    "SEC身份、单分部、EB出货、客户集中度与风险"
+  ],
+  "supersedes_revision": null
+}

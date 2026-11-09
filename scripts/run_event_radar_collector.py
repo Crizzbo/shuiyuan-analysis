@@ -24,7 +24,6 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from finance_tools.event_radar_collector import EventRadarCollector
-from finance_tools.alert_dispatcher import AlertDispatcher
 from scripts.generate_radar_dashboard import generate_dashboard_html as generate_radar_dashboard
 from scripts.generate_radar_browser_checklist import generate_radar_browser_checklist
 
@@ -45,37 +44,23 @@ class EventRadarService:
         config_path: str = "config/event_radar_sources.json",
         auto_generate_reports: bool = True,
         collector: Optional[EventRadarCollector] = None,
-        alert_dispatcher: Optional[AlertDispatcher] = None,
     ):
         cfg_p = Path(config_path)
         self.config_path = str(cfg_p if cfg_p.is_absolute() else (PROJECT_ROOT / config_path))
         self.auto_generate_reports = auto_generate_reports
         self.collector = collector or EventRadarCollector(config_path=self.config_path)
-        self.alert_dispatcher = alert_dispatcher or AlertDispatcher()
-        self._sotp_analyzer = None
         self._is_running = True
 
         # 注册优雅停机信号
         signal.signal(signal.SIGINT, self._handle_shutdown)
         signal.signal(signal.SIGTERM, self._handle_shutdown)
 
-    @property
-    def sotp_analyzer(self):
-        """惰性加载 SOTP 因果分析器，避免无事件时产生多余开销."""
-        if self._sotp_analyzer is None:
-            try:
-                from finance_tools.sotp_event_analyzer import SotpEventAnalyzer
-                self._sotp_analyzer = SotpEventAnalyzer()
-            except Exception as e:
-                logger.debug("SotpEventAnalyzer 惰性初始化失败 (回退至内置沙箱): %s", e)
-        return self._sotp_analyzer
-
     def _handle_shutdown(self, signum: int, frame: Any) -> None:
         logger.info("捕获停机信号 (%s)，正在安全停止事件雷达服务...", signum)
         self._is_running = False
 
     def run_single_cycle(self, raw_feed_items: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
-        """执行单次巡检并联动生成报表看板与实时告警分发."""
+        """执行单次巡检并联动生成报表看板."""
         logger.info(">>> 启动新一轮突发事件巡检与因果门禁核验...")
         cycle_result = self.collector.run_collection_cycle(raw_feed_items=raw_feed_items)
 
@@ -94,18 +79,6 @@ class EventRadarService:
             p0_p1,
             tokens,
         )
-
-        # 触发实时多通道告警分发与 SOTP 自动联动
-        if status == "SUCCESS" and p0_p1 > 0:
-            try:
-                critical_events = self.collector.db_mgr.list_critical_events(limit=p0_p1)
-                for ev in critical_events:
-                    self.alert_dispatcher.dispatch_event_alert(
-                        event_dict=ev,
-                        sotp_analyzer=self.sotp_analyzer,
-                    )
-            except Exception as e:
-                logger.error("自动触发重大事件告警分发异常: %s", e)
 
         if self.auto_generate_reports and status == "SUCCESS":
             try:
@@ -215,30 +188,6 @@ class EventRadarService:
         print(f"鉴真核验备考    : {ev.get('verification_note')}")
         print("=" * 75 + "\n")
 
-    def trigger_test_alert(self, severity: str = "P0") -> Dict[str, Any]:
-        """触发单次模拟真实重大突发事件告警，检验多通道通知与 SOTP 联动链路."""
-        test_event = {
-            "event_id": f"EVT_TEST_ALERT_{int(time.time())}",
-            "title": "鹿特丹核心特种单体与光刻胶前驱体化工厂突发火灾爆炸全线停工",
-            "category": "Physical_Plant_Disruption",
-            "severity_level": severity.upper(),
-            "source_name": "Reuters_Global_Industrial",
-            "credibility_tier": "Tier3_Mainstream_Wire",
-            "credibility_score": 0.8,
-            "verification_status": "Confirmed_Fact",
-            "requires_deep_analysis": True,
-            "micro_physical_impact": "全球EUV光刻胶专用核心前驱体单体供应骤降35%，现存晶圆厂库存天数仅剩约45天",
-            "involved_entities": ["TSMC", "ASML", "NVDA"],
-            "affected_business_segments": ["先进制程晶圆代工分部", "光刻机组装与配套服务分部"],
-            "estimated_duration": "6-12周",
-            "published_at": datetime.now(timezone.utc).isoformat(),
-        }
-        logger.info(">>> 启动突发重大事件告警打样分发测试 (烈度: %s)...", severity)
-        return self.alert_dispatcher.dispatch_event_alert(
-            event_dict=test_event,
-            sotp_analyzer=self.sotp_analyzer,
-        )
-
 
 def main():
     parser = argparse.ArgumentParser(description="突发事件雷达定时收集与调度服务 CLI")
@@ -249,15 +198,12 @@ def main():
     parser.add_argument("--inspect", type=str, default=None, help="穿透查看指定事件ID的详细因果链与信源底账")
     parser.add_argument("--interval-seconds", type=int, default=None, help="覆盖守护进程休眠间隔秒数(调试用)")
     parser.add_argument("--no-reports", action="store_true", help="禁用巡检完成后自动更新看板与清单")
-    parser.add_argument("--test-alert", action="store_true", help="触发单次突发重大事件告警打样测试 (检验弹窗、终端卡片与SOTP联动)")
 
     args = parser.parse_args()
 
     service = EventRadarService(auto_generate_reports=not args.no_reports)
 
-    if args.test_alert:
-        service.trigger_test_alert()
-    elif args.status:
+    if args.status:
         service.print_status()
     elif args.list_critical:
         service.print_critical_events()

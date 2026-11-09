@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/industry_knowledge.schema.json",
+  "meta": {
+    "industry_id": "mining",
+    "industry_name_zh": "金属与大宗矿业开采",
+    "sector_id": "materials",
+    "sector_name_zh": "原材料",
+    "macro_sector_id": "ENERGY_MIN",
+    "macro_sector_name_zh": "能源采掘、矿产开采与大宗原材料",
+    "description_zh": "涵盖铁矿石、精炼铜、铝土矿、锂钴新能源金属及贵金属大型露天与地下矿山开采企业。"
+  },
+  "economic_structure": {
+    "typical_cogs_ratio": 0.60,
+    "typical_markup_ratio": 1.20,
+    "capex_intensity": "极高重资产",
+    "operating_leverage_exposure": "极高经营杠杆",
+    "typical_gross_margin_range": [0.25, 0.50]
+  },
+  "financial_guardrails": {
+    "dio_healthy_days": 55.0,
+    "dio_warning_days": 95.0,
+    "rd_capitalization_max_allowed": 0.05,
+    "top_customer_concentration_redline": 0.35,
+    "debt_covenant_buffer_minimum_ratio": 0.20
+  },
+  "supply_chain_dynamics": {
+    "upstream_bottlenecks": [
+      "全球优质高品位富矿带开采特许权审批与地缘政治国有化风险",
+      "超大型矿用挖掘机、重载矿卡运输车队与大型半自磨机关键成套装备",
+      "高海拔干旱矿区工业淡水处理及长途高压输变电绿色能源供给"
+    ],
+    "downstream_profile": "全球钢铁冶炼集团、精炼铜杆加工商、动力电池正极材料企业与工业铝型材加工厂",
+    "pricing_power_verdict": "属于全球基准大宗商品价格接受者，全维持成本 (AISC) 处于全球成本曲线前 25% 分位的优质矿企享有跨周期超额利润",
+    "channel_inversion_sensitivity": "伦敦金属交易所 (LME) 与上海期货交易所注册仓单库存与现货对期货升贴水是实体供需平衡领先指标"
+  },
+  "causal_scenarios": {
+    "leading_bull_triggers": [
+      "全球电网改造升级与新能源装机共振，工业金属供需格局紧缺驱动大宗现货价格超预期大涨",
+      "主力矿山入选品位提升与浮选回收率突破，全维持成本显著压降拓宽单吨产品利润安全边际",
+      "矿业巨头严格恪守资本开支纪律，将充裕经营现金流优先转化为高额股息分红与股份注销回购"
+    ],
+    "leading_bear_defenses": [
+      "宏观经济步入下行周期与房地产基建开工萎缩，工业金属表观消费需求骤降拖累大宗价格大幅回落",
+      "资源国政府大幅上调矿产资源特许权税负或强制要求股权国有化引发境外资产重大减值",
+      "极端恶劣气象引发尾矿库溃决或矿坑滑坡重大事故导致停产整顿与天价环境生态赔偿"
+    ],
+    "core_catalyst_dimensions": [
+      "伦敦金属交易所 (LME) 官方库存仓单周度变化与现货溢价 (Cash to 3-Month)",
+      "国际矿业巨头季度矿石产量快报与单吨全维持成本 (AISC) 指引",
+      "主要工业制造大国单月制造业采购经理人指数 (PMI) 与粗钢/电解铝产量",
+      "海外核心主力矿山劳工薪酬集体谈判与采矿许可延期仲裁进展"
+    ]
+  },
+  "forensic_audit_rules": {
+    "red_flag_rules": [
+      "滥用剥离成本资本化 (Stripping Costs) 将正常开采生产性当期剥离费用违规递延为非流动资产虚增利润",
+      "矿山复垦与环境闭坑复原负债 (Asset Retirement Obligations, ARO) 折现率假设过高导致负债计提严重不足",
+      "在大宗商品价格暴跌周期推迟计提资源储量与采矿权无形资产减值损失"
+    ],
+    "channel_and_revenue_checks": [
+      "向大客户销售大宗矿石时采用暂定作价 (Provisional Pricing) 条款未及时按期末市价公允调整",
+      "保税区与在途矿石现货质押融资及代销合规穿透"
+    ]
+  }
+}

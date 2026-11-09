@@ -1,0 +1,118 @@
+{
+  "batch_id": "Phase2-Batch-2",
+  "description": "第二阶段拓展第二批 (高价值高成长领军企业 10 家) 矢量PDF生成及云端同步",
+  "executed_at": "2026-11-05T10:57:36.593624+00:00",
+  "total_tackled": 10,
+  "results": [
+    {
+      "ticker": "ARM",
+      "company_name": "安谋控股 (Arm Holdings plc)",
+      "market": "US",
+      "file_name": "ARM_安谋控股全球半导体指令集架构垄断深度分析.pdf",
+      "pdf_size_bytes": 466904,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:57:23.532091+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "PLTR",
+      "company_name": "帕兰提尔科技 (Palantir Technologies Inc.)",
+      "market": "US",
+      "file_name": "PLTR_帕兰提尔全球企业级与国防AI操作系统霸主深度分析.pdf",
+      "pdf_size_bytes": 474640,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:57:25.042038+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "VRT",
+      "company_name": "维谛技术公司 (Vertiv Holdings Co)",
+      "market": "US",
+      "file_name": "VRT_维谛技术全球AI算力中心液冷温控基础设施先锋深度分析.pdf",
+      "pdf_size_bytes": 480466,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:57:26.441308+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "CRWD",
+      "company_name": "CrowdStrike控股 (CrowdStrike Holdings, Inc.)",
+      "market": "US",
+      "file_name": "CRWD_CrowdStrike全球云原生终端安全与AI威胁防御深度分析.pdf",
+      "pdf_size_bytes": 463075,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:57:27.821365+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "NET",
+      "company_name": "Cloudflare公司 (Cloudflare, Inc.)",
+      "market": "US",
+      "file_name": "NET_Cloudflare全球分布式边缘网络与WorkersAI深度分析.pdf",
+      "pdf_size_bytes": 452254,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:57:29.333517+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "DDOG",
+      "company_name": "Datadog公司 (Datadog, Inc.)",
+      "market": "US",
+      "file_name": "DDOG_Datadog全球云原生全栈可观测性与大模型监控先驱深度分析.pdf",
+      "pdf_size_bytes": 453889,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:57:30.947988+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "MSTR",
+      "company_name": "微策投资公司 (MicroStrategy Incorporated)",
+      "market": "US",
+      "file_name": "MSTR_微策投资企业级比特币国库运营航母深度分析.pdf",
+      "pdf_size_bytes": 481354,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:57:32.335527+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "ASTS",
+      "company_name": "AST SpaceMobile公司 (AST SpaceMobile, Inc.)",
+      "market": "US",
+      "file_name": "ASTS_AST全球手机直连天基低轨宽带蜂窝网络先驱深度分析.pdf",
+      "pdf_size_bytes": 481689,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:57:33.710952+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "JOBY",
+      "company_name": "Joby航空 (Joby Aviation, Inc.)",
+      "market": "US",
+      "file_name": "JOBY_Joby全球eVTOL低空经济商业化领头羊深度分析.pdf",
+      "pdf_size_bytes": 481770,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:57:35.225201+00:00",
+      "status": "COMPLETED_EXPANDED"
+    },
+    {
+      "ticker": "RKLB",
+      "company_name": "火箭实验室 (Rocket Lab USA, Inc.)",
+      "market": "US",
+      "file_name": "RKLB_火箭实验室商业航天发射与卫星系统制造一体化深度分析.pdf",
+      "pdf_size_bytes": 475615,
+      "cloud_status": "LOCAL_DELIVERED",
+      "new_file_id": "LOCAL_ARCHIVED_NO_CLOUD_TARGET",
+      "upload_timestamp": "2026-11-05T10:57:36.591615+00:00",
+      "status": "COMPLETED_EXPANDED"
+    }
+  ]
+}

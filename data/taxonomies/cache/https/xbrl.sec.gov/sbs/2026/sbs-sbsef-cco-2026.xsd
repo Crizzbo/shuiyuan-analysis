@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This schema was created by staff of the U.S. Securities and Exchange Commission. -->
+<!-- Data and content created by government employees within the scope of their employment -->
+<!-- are not subject to domestic copyright protection. 17 U.S.C. 105. -->
+<xs:schema
+xmlns:link="http://www.xbrl.org/2003/linkbase"
+xmlns:sbs-sbsef-cco="http://xbrl.sec.gov/sbs-sbsef-cco/2026"
+xmlns:xbrldt="http://xbrl.org/2005/xbrldt"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://xbrl.sec.gov/sbs-sbsef-cco/2026"
+elementFormDefault="qualified">
+<xs:import namespace="http://xbrl.sec.gov/sbs-sbsef-com/2026" schemaLocation="sbs-sbsef-com-2026.xsd"/>
+<xs:annotation>
+<xs:appinfo>
+<link:linkbase id="lnk">
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#hypercube-dimension"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/all" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#all"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/domain-member" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#domain-member"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/dimension-default" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#dimension-default"/>
+<link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/dimension-domain" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#dimension-domain"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/sbsef/role/SbsefCcoReport" xlink:type="simple" xlink:href="sbs-2026.xsd#SbsefCcoReport"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/sbsef/role/SbsefCcoReportMaterialNonComplianceMatters" xlink:type="simple" xlink:href="sbs-2026.xsd#SbsefCcoReportMaterialNonComplianceMatters"/>
+<link:roleRef roleURI="http://xbrl.sec.gov/sbsef/role/SbsefCcoReportCertification" xlink:type="simple" xlink:href="sbs-2026.xsd#SbsefCcoReportCertification"/>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/SbsefCcoReport">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefCcoReportLineItems" xlink:label="SbsefCcoReportLineItems"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefDescriptionPoliciesProceduresTextBlock" xlink:label="SbsefDescriptionPoliciesProceduresTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefDescriptionPoliciesProceduresTextBlock" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefSelfAssessmentEffectivenessPoliciesProceduresTextBlock" xlink:label="SbsefSelfAssessmentEffectivenessPoliciesProceduresTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefSelfAssessmentEffectivenessPoliciesProceduresTextBlock" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefDescriptionCodeEthicsTextBlock" xlink:label="SbsefDescriptionCodeEthicsTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefDescriptionCodeEthicsTextBlock" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefSelfAssessmentEffectivenessCodeEthicsTextBlock" xlink:label="SbsefSelfAssessmentEffectivenessCodeEthicsTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefSelfAssessmentEffectivenessCodeEthicsTextBlock" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefDescriptionConflictInterestPolicyTextBlock" xlink:label="SbsefDescriptionConflictInterestPolicyTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefDescriptionConflictInterestPolicyTextBlock" order="5.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefSelfAssessmentEffectivenessConflictInterestPolicyTextBlock" xlink:label="SbsefSelfAssessmentEffectivenessConflictInterestPolicyTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefSelfAssessmentEffectivenessConflictInterestPolicyTextBlock" order="6.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefMaterialChangesToCompliancePoliciesProceduresTextBlock" xlink:label="SbsefMaterialChangesToCompliancePoliciesProceduresTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefMaterialChangesToCompliancePoliciesProceduresTextBlock" order="7.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefAreasImprovementComplianceProgramTextBlock" xlink:label="SbsefAreasImprovementComplianceProgramTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefAreasImprovementComplianceProgramTextBlock" order="8.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefRecommendedChangesToComplianceProgramTextBlock" xlink:label="SbsefRecommendedChangesToComplianceProgramTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefRecommendedChangesToComplianceProgramTextBlock" order="9.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefDescriptionResourcesSetAsideComplianceTextBlock" xlink:label="SbsefDescriptionResourcesSetAsideComplianceTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefDescriptionResourcesSetAsideComplianceTextBlock" order="10.0" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/SbsefCcoReportMaterialNonComplianceMatters">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefMaterialNonComplianceMatterLineItems" xlink:label="SbsefMaterialNonComplianceMatterLineItems"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefMaterialNonComplianceMatterTable" xlink:label="SbsefMaterialNonComplianceMatterTable"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="SbsefMaterialNonComplianceMatterLineItems" xlink:to="SbsefMaterialNonComplianceMatterTable" order="1.0" xbrldt:contextElement="segment" xbrldt:closed="true" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefMaterialNonComplianceMatterAxis" xlink:label="SbsefMaterialNonComplianceMatterAxis"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/hypercube-dimension" xlink:from="SbsefMaterialNonComplianceMatterTable" xlink:to="SbsefMaterialNonComplianceMatterAxis" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefMaterialNonComplianceMatterTextBlock" xlink:label="SbsefMaterialNonComplianceMatterTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefMaterialNonComplianceMatterLineItems" xlink:to="SbsefMaterialNonComplianceMatterTextBlock" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefMaterialNonComplianceMatterResolutionTextBlock" xlink:label="SbsefMaterialNonComplianceMatterResolutionTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefMaterialNonComplianceMatterLineItems" xlink:to="SbsefMaterialNonComplianceMatterResolutionTextBlock" order="3.0" priority="10"/>
+</link:definitionLink>
+<link:definitionLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/SbsefCcoReportCertification">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefCcoCertificationLineItems" xlink:label="SbsefCcoCertificationLineItems"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefCcoCertificationTextBlock" xlink:label="SbsefCcoCertificationTextBlock"/>
+<link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="SbsefCcoCertificationLineItems" xlink:to="SbsefCcoCertificationTextBlock" order="1.0" priority="10"/>
+</link:definitionLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/SbsefCcoReport">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefCcoReportLineItems" xlink:label="SbsefCcoReportLineItems"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefSelfAssessmentEffectivenessPoliciesProceduresTextBlock" xlink:label="SbsefSelfAssessmentEffectivenessPoliciesProceduresTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefSelfAssessmentEffectivenessPoliciesProceduresTextBlock" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefDescriptionPoliciesProceduresTextBlock" xlink:label="SbsefDescriptionPoliciesProceduresTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefDescriptionPoliciesProceduresTextBlock" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefDescriptionCodeEthicsTextBlock" xlink:label="SbsefDescriptionCodeEthicsTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefDescriptionCodeEthicsTextBlock" order="3.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefSelfAssessmentEffectivenessCodeEthicsTextBlock" xlink:label="SbsefSelfAssessmentEffectivenessCodeEthicsTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefSelfAssessmentEffectivenessCodeEthicsTextBlock" order="4.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefDescriptionConflictInterestPolicyTextBlock" xlink:label="SbsefDescriptionConflictInterestPolicyTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefDescriptionConflictInterestPolicyTextBlock" order="5.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefSelfAssessmentEffectivenessConflictInterestPolicyTextBlock" xlink:label="SbsefSelfAssessmentEffectivenessConflictInterestPolicyTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefSelfAssessmentEffectivenessConflictInterestPolicyTextBlock" order="6.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefMaterialChangesToCompliancePoliciesProceduresTextBlock" xlink:label="SbsefMaterialChangesToCompliancePoliciesProceduresTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefMaterialChangesToCompliancePoliciesProceduresTextBlock" order="7.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefAreasImprovementComplianceProgramTextBlock" xlink:label="SbsefAreasImprovementComplianceProgramTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefAreasImprovementComplianceProgramTextBlock" order="8.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefRecommendedChangesToComplianceProgramTextBlock" xlink:label="SbsefRecommendedChangesToComplianceProgramTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefRecommendedChangesToComplianceProgramTextBlock" order="9.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefDescriptionResourcesSetAsideComplianceTextBlock" xlink:label="SbsefDescriptionResourcesSetAsideComplianceTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefCcoReportLineItems" xlink:to="SbsefDescriptionResourcesSetAsideComplianceTextBlock" order="10.0" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/SbsefCcoReportMaterialNonComplianceMatters">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefMaterialNonComplianceMatterTable" xlink:label="SbsefMaterialNonComplianceMatterTable"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefMaterialNonComplianceMatterAxis" xlink:label="SbsefMaterialNonComplianceMatterAxis"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefMaterialNonComplianceMatterTable" xlink:to="SbsefMaterialNonComplianceMatterAxis" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefMaterialNonComplianceMatterLineItems" xlink:label="SbsefMaterialNonComplianceMatterLineItems"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefMaterialNonComplianceMatterTable" xlink:to="SbsefMaterialNonComplianceMatterLineItems" order="2.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefMaterialNonComplianceMatterTextBlock" xlink:label="SbsefMaterialNonComplianceMatterTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefMaterialNonComplianceMatterLineItems" xlink:to="SbsefMaterialNonComplianceMatterTextBlock" order="1.0" priority="10"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefMaterialNonComplianceMatterResolutionTextBlock" xlink:label="SbsefMaterialNonComplianceMatterResolutionTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefMaterialNonComplianceMatterLineItems" xlink:to="SbsefMaterialNonComplianceMatterResolutionTextBlock" order="2.0" priority="10"/>
+</link:presentationLink>
+<link:presentationLink xlink:type="extended" xlink:role="http://xbrl.sec.gov/sbsef/role/SbsefCcoReportCertification">
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefCcoCertificationLineItems" xlink:label="SbsefCcoCertificationLineItems"/>
+<link:loc xlink:type="locator" xlink:href="sbs-2026.xsd#sbs_SbsefCcoCertificationTextBlock" xlink:label="SbsefCcoCertificationTextBlock"/>
+<link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SbsefCcoCertificationLineItems" xlink:to="SbsefCcoCertificationTextBlock" order="1.0" priority="10"/>
+</link:presentationLink>
+</link:linkbase>
+</xs:appinfo>
+</xs:annotation>
+</xs:schema>
