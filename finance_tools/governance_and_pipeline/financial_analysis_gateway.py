@@ -647,13 +647,21 @@ class FinancialAnalysisGateway:
         data = ranker.aggregate_and_rank_candidates()
         pivots = data.get("pivot_ready_candidates", [])
         watchlists = data.get("watchlist_candidates", [])
+        m_breakdown = data.get("market_chunks_breakdown", {"US": 0, "JP": 0})
+        m_upper = market.upper()
 
-        if market.upper() != "ALL":
-            pivots = [c for c in pivots if c.get("market") == market.upper()]
-            watchlists = [c for c in watchlists if c.get("market") == market.upper()]
+        if m_upper != "ALL":
+            pivots = [c for c in pivots if c.get("market") == m_upper]
+            watchlists = [c for c in watchlists if c.get("market") == m_upper]
+            market_chunks = m_breakdown.get(m_upper, 0)
+        else:
+            market_chunks = data.get("source_result_chunks_count", 0)
 
         return {
-            "source_result_chunks_count": data.get("source_result_chunks_count", 0),
+            "market": m_upper,
+            "global_chunks_count": data.get("source_result_chunks_count", 0),
+            "market_chunks_count": market_chunks,
+            "source_result_chunks_count": market_chunks,  # 向下兼容
             "total_qualified_count": len(pivots) + len(watchlists),
             "tier0_pivot_ready_count": len(pivots),
             "tier1_watchlist_count": len(watchlists),

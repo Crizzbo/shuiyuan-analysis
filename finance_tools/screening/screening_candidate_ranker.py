@@ -69,9 +69,17 @@ class ScreeningCandidateRanker:
         pivot_ready_list: List[QualifiedCandidate] = []
         watchlist_list: List[QualifiedCandidate] = []
         processed_files = 0
+        us_chunks_count = 0
+        jp_chunks_count = 0
 
         for result_file in sorted(self.results_dir.glob("screened_*.json")):
             processed_files += 1
+            fname = result_file.name
+            if "us_" in fname:
+                us_chunks_count += 1
+            elif "jp_" in fname:
+                jp_chunks_count += 1
+
             try:
                 content = json.loads(result_file.read_text(encoding="utf-8"))
             except Exception:
@@ -125,6 +133,10 @@ class ScreeningCandidateRanker:
             "title": "全盘初筛准入优质候选池总账 (Qualified Screening Candidates)",
             "updated_at": datetime.now(timezone.utc).isoformat(),
             "source_result_chunks_count": processed_files,
+            "market_chunks_breakdown": {
+                "US": us_chunks_count,
+                "JP": jp_chunks_count,
+            },
             "total_qualified_count": len(pivot_ready_list) + len(watchlist_list),
             "tier0_pivot_ready_count": len(pivot_ready_list),
             "tier1_watchlist_count": len(watchlist_list),

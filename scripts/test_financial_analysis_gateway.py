@@ -181,6 +181,8 @@ class FinancialAnalysisGatewayTests(unittest.TestCase):
         """测试全盘初筛准入优质候选池聚合与排序."""
         data = self.gateway.get_top_screening_candidates(top_n=5, market="ALL")
         self.assertIn("source_result_chunks_count", data)
+        self.assertIn("market_chunks_count", data)
+        self.assertIn("global_chunks_count", data)
         self.assertIn("total_qualified_count", data)
         self.assertIn("tier0_pivot_ready_count", data)
         self.assertIn("top_pivot_ready_candidates", data)
@@ -188,10 +190,20 @@ class FinancialAnalysisGatewayTests(unittest.TestCase):
         self.assertIsInstance(data["top_pivot_ready_candidates"], list)
         self.assertLessEqual(len(data["top_pivot_ready_candidates"]), 5)
 
-        # 测试市场过滤
+        # 1. 测试美股市场过滤与分块计数
         data_us = self.gateway.get_top_screening_candidates(top_n=5, market="US")
+        self.assertEqual(data_us["market"], "US")
+        self.assertTrue(data_us["market_chunks_count"] >= 20)
         for c in data_us["top_pivot_ready_candidates"]:
             self.assertEqual(c["market"], "US")
+
+        # 2. 测试日股市场过滤与分块计数
+        data_jp = self.gateway.get_top_screening_candidates(top_n=5, market="JP")
+        self.assertEqual(data_jp["market"], "JP")
+        self.assertTrue(data_jp["market_chunks_count"] >= 45)
+        self.assertTrue(len(data_jp["top_pivot_ready_candidates"]) > 0)
+        for c in data_jp["top_pivot_ready_candidates"]:
+            self.assertEqual(c["market"], "JP")
 
 
 if __name__ == "__main__":

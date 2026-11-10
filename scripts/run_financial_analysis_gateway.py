@@ -220,17 +220,45 @@ def main() -> None:
         print("=" * 72)
         if args.mode == "screening":
             d = result.get("data", {})
-            print(f"全盘初筛聚合统计: 已完成分块 {d.get('source_result_chunks_count')} 批 | 枢轴突破就绪标的 {d.get('tier0_pivot_ready_count')} 家")
+            m_label = d.get("market", args.market)
+            m_chunks = d.get("market_chunks_count", d.get("source_result_chunks_count", 0))
+            g_chunks = d.get("global_chunks_count", m_chunks)
+            print(
+                f"全盘初筛聚合统计 [{m_label}]: 已完成分块 {m_chunks} 批 (全盘总计 {g_chunks} 批) | "
+                f"枢轴就绪 {d.get('tier0_pivot_ready_count')} 家 | 观察池 {d.get('tier1_watchlist_count')} 家"
+            )
             print("-" * 72)
-            print("★ 核心旗舰买点池 · 枢轴突破就绪 (Top 标的):")
-            for idx, c in enumerate(d.get("top_pivot_ready_candidates", []), 1):
-                print(
-                    f"  {idx:>2}. [{c.get('market')}] {c.get('ticker'):<6} ({c.get('company_name')[:20]:<20}) "
-                    f"| 现价: ${c.get('latest_price', 0.0):>7.2f} "
-                    f"| 突破买点: ${c.get('pivot_price', 0.0):>7.2f} "
-                    f"| VCP: {c.get('vcp_code'):<12} "
-                    f"| 抽干比: {c.get('dryup_ratio', 1.0) * 100:>4.1f}%"
-                )
+
+            pivots = d.get("top_pivot_ready_candidates", [])
+            print(f"★ 核心旗舰买点池 · 枢轴突破就绪 (Top {len(pivots)} 标的):")
+            if pivots:
+                for idx, c in enumerate(pivots, 1):
+                    curr_sym = "¥" if c.get("market") == "JP" else "$"
+                    print(
+                        f"  {idx:>2}. [{c.get('market')}] {c.get('ticker'):<6} ({c.get('company_name')[:20]:<20}) "
+                        f"| 现价: {curr_sym}{c.get('latest_price', 0.0):>7.2f} "
+                        f"| 突破买点: {curr_sym}{c.get('pivot_price', 0.0):>7.2f} "
+                        f"| VCP: {c.get('vcp_code'):<12} "
+                        f"| 抽干比: {c.get('dryup_ratio', 1.0) * 100:>4.1f}%"
+                    )
+            else:
+                print("  (暂无完全突破就绪标的，建议关注下方主升浪观察池)")
+
+            print("-" * 72)
+            watches = d.get("top_watchlist_candidates", [])
+            print(f"☆ 主升浪观察池 · 形态收敛中 (Top {len(watches)} 标的):")
+            if watches:
+                for idx, c in enumerate(watches, 1):
+                    curr_sym = "¥" if c.get("market") == "JP" else "$"
+                    print(
+                        f"  {idx:>2}. [{c.get('market')}] {c.get('ticker'):<6} ({c.get('company_name')[:20]:<20}) "
+                        f"| 现价: {curr_sym}{c.get('latest_price', 0.0):>7.2f} "
+                        f"| 突破买点: {curr_sym}{c.get('pivot_price', 0.0):>7.2f} "
+                        f"| VCP: {c.get('vcp_code'):<12} "
+                        f"| 末端收敛: {c.get('last_contraction_pct', 0.0):>4.1f}%"
+                    )
+            else:
+                print("  (暂无观察池标的)")
         elif args.mode == "all":
             print(result.get("executive_summary_zh", ""))
             print("-" * 72)
