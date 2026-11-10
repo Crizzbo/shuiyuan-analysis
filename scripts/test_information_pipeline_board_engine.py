@@ -23,9 +23,13 @@ from financial_core.pipeline.information_pipeline_board_engine import (
     PipelineMessageItem,
     PipelineSeverity,
     ProcessStageStatus,
+    collect_pipeline_events,
+    MACRO_INDICATORS_TEMPLATE_SPECS,
+    EQUITIES_SUMMARY_DEFAULT,
 )
 from finance_tools.governance_and_pipeline.information_pipeline_board_engine import (
     InformationPipelineBoardEngine as ToolInformationPipelineBoardEngine,
+    collect_pipeline_events as tool_collect_pipeline_events,
 )
 
 
@@ -238,6 +242,131 @@ class TestInformationPipelineBoardEngine(unittest.TestCase):
         2. 业务断言：ToolInformationPipelineBoardEngine is InformationPipelineBoardEngine。
         """
         self.assertIs(ToolInformationPipelineBoardEngine, InformationPipelineBoardEngine)
+        self.assertIs(tool_collect_pipeline_events, collect_pipeline_events)
+
+    def test_pipeline_start_stop_and_toggle(self):
+        """【测试八：流水线全局启动与关闭/挂起状态控制断言】
+
+        1. 测试目标：验证全局 start_pipeline()、stop_pipeline() 与 toggle_pipeline() 状态流转。
+        2. 业务断言：
+           - 初始状态为运行中 (is_running == True)；
+           - stop_pipeline 后 is_running == False，记录停机原因；
+           - get_pipeline_status 返回结构化指标；
+           - toggle_pipeline 能精准翻转状态。
+        """
+        self.assertTrue(self.engine.is_running)
+
+        # 测试暂停
+        stop_res = self.engine.stop_pipeline(reason="系统例行维护")
+        self.assertFalse(self.engine.is_running)
+        self.assertFalse(stop_res["is_running"])
+        self.assertEqual(stop_res["status_label"], "已暂停")
+
+        status_info = self.engine.get_pipeline_status()
+        self.assertEqual(status_info["status_code"], "PAUSED")
+        self.assertEqual(status_info["stop_reason"], "系统例行维护")
+
+        # 测试切换
+        toggle_res = self.engine.toggle_pipeline()
+        self.assertTrue(self.engine.is_running)
+        self.assertTrue(toggle_res["is_running"])
+
+        # 测试重新启动
+        start_res = self.engine.start_pipeline()
+        self.assertTrue(start_res["is_running"])
+        self.assertEqual(start_res["status_label"], "运行中")
+
+    def test_reusable_collect_pipeline_events(self):
+        """【测试九：独立可复用事件收集函数断言】
+
+        1. 测试目标：验证独立函数 collect_pipeline_events 能被外部独立调用并支持标的与模块过滤。
+        2. 业务断言：
+           - 不依赖特定策略上下文，可独立运行；
+           - 过滤 NVDA 仅返回 NVDA 标的事件；
+           - 返回事件结果严格保证时间戳降序；
+           - 支持自动注册至引擎。
+        """
+        events = collect_pipeline_events(tickers=["NVDA"], max_items=10, register_to_engine=True, engine=self.engine)
+        self.assertGreaterEqual(len(events), 1)
+        for ev in events:
+            self.assertEqual(ev.ticker, "NVDA")
+            self.assertIn("equities_summary", ev.payload)
+            self.assertIn("macro_indicators_template", ev.payload)
+
+        # 检查时间戳降序
+        for i in range(len(events) - 1):
+            self.assertGreaterEqual(events[i].timestamp, events[i + 1].timestamp)
+
+    def test_non_blocking_and_fault_isolation(self):
+        """【测试十：非阻塞安全推进与单任务异常故障隔离断言】
+
+        1. 测试目标：验证单任务处理异常时绝不中断或抛出未捕获异常阻塞全盘流水线，而是安全捕获并标记为 BLOCKED。
+        2. 业务断言：
+           - safe_dispatch_item 遇到内部崩溃时不抛出异常；
+           - 出错任务被安全标记为 BLOCKED 状态并记录隔离日志；
+           - batch_advance_non_blocking 能批量平滑流转。
+        """
+        item_id = "TASK-FAULT-ISOLATION"
+        self.engine.register_message(
+            item_id=item_id,
+            title="故障隔离防护测试任务",
+            category=PipelineCategory.QUANT_VALUATION.value,
+            severity=PipelineSeverity.HIGH.value,
+        )
+
+        def buggy_handler(item):
+            raise ZeroDivisionError("模拟量化计算分母除零崩溃")
+
+        # 断言 safe_dispatch_item 绝不向外抛出 ZeroDivisionError
+        result_item = self.engine.safe_dispatch_item(item_id, step_handler=buggy_handler)
+        self.assertEqual(result_item.stage_status, ProcessStageStatus.BLOCKED.value)
+        self.assertIn("故障隔离", result_item.error_message)
+
+        # 批量无阻塞推进
+        advanced_items = self.engine.batch_advance_non_blocking(max_batch_size=5)
+        self.assertIsInstance(advanced_items, list)
+
+    def test_equities_summary_and_macro_template_payload(self):
+        """【测试十一：股票数量状态概览与宏观指标参数模板说明底账断言】
+
+        1. 测试目标：断言数据 Payload 中不再冗长堆砌全量表，而是精准包含股票数量与状态概览、以及指数指标参数与模板说明。
+        2. 业务断言：
+           - equities_summary 包含 total_tracked_count, ready_count, pending_count 与 status_distribution；
+           - macro_indicators_template 包含 6 大核心买方指标 (^VIX, ^TNX, DXY, PCR, OU_HalfLife, Panic_Calming)；
+           - 每项宏观指标包含参数名称、当前数值、正常区间、状态与模板商业说明。
+        """
+        item_id = "TASK-PAYLOAD-CHECK"
+        item = self.engine.register_message(
+            item_id=item_id,
+            title="数据底账契约校验任务",
+            category=PipelineCategory.EVENT_RADAR.value,
+            severity=PipelineSeverity.LOW.value,
+        )
+
+        payload = item.payload
+        self.assertIn("equities_summary", payload)
+        eq_summary = payload["equities_summary"]
+        self.assertIn("total_tracked_count", eq_summary)
+        self.assertIn("ready_count", eq_summary)
+        self.assertIn("status_distribution", eq_summary)
+        self.assertEqual(eq_summary["total_tracked_count"], 14)
+
+        self.assertIn("macro_indicators_template", payload)
+        macro_specs = payload["macro_indicators_template"]
+        self.assertEqual(len(macro_specs), 6)
+        symbols = [m["symbol"] for m in macro_specs]
+        self.assertIn("^VIX", symbols)
+        self.assertIn("^TNX", symbols)
+        self.assertIn("DXY", symbols)
+        self.assertIn("PCR", symbols)
+        self.assertIn("OU_HalfLife", symbols)
+        self.assertIn("Panic_Calming", symbols)
+
+        for m in macro_specs:
+            self.assertIn("parameter_name", m)
+            self.assertIn("current_value", m)
+            self.assertIn("normal_range", m)
+            self.assertIn("template_description", m)
 
 
 if __name__ == "__main__":

@@ -22,6 +22,7 @@
 - [五、 全盘万家资产池与流式批处理调度体系](#五-全盘万家资产池与流式批处理调度体系)
 - [六、 四道架构防劣变验收硬门禁 (Non-Regression Gates)](#六-四道架构防劣变验收硬门禁-non-regression-gates)
 - [七、 附录：12 本专责核心设计典籍 SSOT 地图](#七-附录12-本专责核心设计典籍-ssot-地图)
+- [八、 工程全量依赖规范与环境配置指引 (System Dependencies & Environment Guide)](#八-工程全量依赖规范与环境配置指引-system-dependencies--environment-guide)
 
 ---
 
@@ -456,3 +457,59 @@ python scripts/serve_radar_dashboard.py --port 8899 --open-browser
 | **SPEC-10** | [`SPEC_10_千家资产池流式建档与公司深度档案生成流水线.md`](docs/SPEC_10_千家资产池流式建档与公司深度档案生成流水线.md) | 万家企业资产池、流式分批建档流水线、5-Sheet Excel | **全盘资产池管理与流式建档流水线 SSOT** |
 | **SPEC-11** | [`SPEC_11_云端无头每日行情与研报自动化调度流水线.md`](docs/SPEC_11_云端无头每日行情与研报自动化调度流水线.md) | 美股/日股每日定时无头调度、行情时效核验门禁 | **云端无头自动化与定时调度流水线 SSOT** |
 | **SPEC-12** | [`SPEC_12_系统质量工程密码学账本与全息测试验收标准.md`](docs/SPEC_12_系统质量工程密码学账本与全息测试验收标准.md) | SHA-256 密码学不可篡改预测账本、四道架构验收硬门禁 | **质量工程、密码学验签与验收门禁 SSOT** |
+
+---
+
+## 八、 工程全量依赖规范与环境配置指引 (System Dependencies & Environment Guide)
+
+系统遵循《CLAUDE.md》与《AGENTS.md》之“**单一事实来源 (SSOT) 与极致做减法**”原则，全量生产与投研开发依赖统一收敛于项目根目录的 [`requirements.txt`](requirements.txt)。
+
+### 1. 运行环境基准 (Python Runtime Baseline)
+- **推荐版本**：`Python 3.10.x` 或 `Python 3.11.x`（生产稳定版）；
+- **兼容范围**：`Python 3.10 ~ 3.13`（全量代码严格通过语法树解析与类型断言）；
+- **运行哲学**：**0-Token 纯本地物理计算**。所有量化计算、均线、期权二叉树、情景 DCF 估值与财报平账检验 100% 在本地执行，绝不向大模型盲目注入无用长文本，无外部付费 API 密钥依赖。
+
+### 2. 五大功能域依赖矩阵 (Dependency Matrix)
+
+| 功能分类 (Domain) | 核心依赖包 (Packages) | 版本约束 (Constraint) | 核心业务专责与应用场景 (Business Purpose) |
+| :--- | :--- | :--- | :--- |
+| **一、 核心科学计算与数值基石** | `numpy`<br>`scipy`<br>`pandas`<br>`scikit-learn` | `>=1.26.0,<2.3.0`<br>`>=1.12.0,<1.15.0`<br>`>=2.1.0,<2.4.0`<br>`>=1.3.0,<1.6.0` | 标的 250 日 OHLCV 向量化计算、SEPA 50/150/200 日移动均线、卡尔曼滤波、极值分布拟合、HMM 隐马尔可夫大盘牛熊总阀门识别。 |
+| **二、 金融量化、估值与组合回测** | `numpy-financial`<br>`pyxirr`<br>`quantstats`<br>`financetoolkit` | `>=1.0.0,<=1.1.0`<br>`>=0.10.0,<=0.10.8`<br>`>=0.0.60,<=0.0.86`<br>`>=2.1.0,<=2.2.1` | 不规则现金流高精度 XIRR 贴现（DCF 估值矩阵与所有者收益）、买方夏普比率/最大回撤/尾部风险归因、官方财报杜邦分析。 |
+| **三、 官方数据采集与时钟门禁** | `requests`<br>`urllib3`<br>`aiohttp`<br>`yfinance`<br>`python-dateutil`<br>`pytz` | `>=2.31.0,<=2.34.2`<br>`>=2.0.0,<3.0.0`<br>`>=3.9.0,<3.12.0`<br>`>=0.2.35,<=1.7.0`<br>`>=2.8.2,<=3.0.0`<br>`>=2024.1,<=2026.6` | 官方监管页面数据提取、行情时效新鲜度门禁（`verify_quote_freshness`）时钟核对、交易日历计算与日期降序时序索引。 |
+| **四、 财报法证与研报多模态呈现** | `arelle-release`<br>`lxml`<br>`openpyxl`<br>`pymupdf`<br>`pypdf`<br>`reportlab` | `>=2.45.0,<=2.46.1`<br>`>=5.1.0,<=6.1.3`<br>`>=3.1.2,<=3.1.5`<br>`>=1.24.0,<=1.28.2`<br>`>=4.0.0,<=6.10.2`<br>`>=4.1.0,<=4.4.0` | SEC EDGAR 官方原始 10-K/10-Q XBRL 格式底稿解析、买方 5-Sheet Excel 动态公式建造、A4 矢量 PDF 研报双语无截断排版。 |
+| **五、 架构治理、Schema与质量工程** | `jsonschema`<br>`PyYAML`<br>`typing_extensions` | `>=4.20.0,<=4.25.1`<br>`>=6.0.1,<=6.0.3`<br>`>=4.10.0,<=4.16.0` | 深度档案与每日研报 JSON Schema 刚性契约核验、系统全局配置字典解析、SHA-256 不可篡改时间账本验签。 |
+
+### 3. 环境初始化与一键安装指引 (Quick Installation)
+
+#### 模式 A：本机标准环境安装 (推荐)
+```bash
+# 1. 升级 pip 安装器至最新
+python -m pip install --upgrade pip
+
+# 2. 一键安装全盘依赖 (单一事实来源)
+pip install -r requirements.txt
+```
+
+#### 模式 B：项目内置隔离环境自动化初始化
+工程内置自动引导脚本，可一键在项目目录内建立干净隔离的 `.venv-ci` 环境并完成依赖闭环验证：
+```bash
+# 自动建立隔离环境并安装锁定依赖 (仅限 Python 3.10)
+python scripts/bootstrap_ci.py
+```
+
+### 4. 依赖合规与全息测试验收门禁 (Verification Gates)
+依赖安装或升级完成后，必须执行以下命令确保全盘架构与单元测试 100% PASS：
+
+```bash
+# 1. 架构完整性全息巡检 (零逆向依赖、纯相对导入核验)
+python scripts/verify_architecture_integrity.py
+
+# 2. 全量单元测试套件回归 (包含流水线看板引擎测试)
+python -m unittest discover -s scripts -p "test_*.py"
+
+# 3. 四大治理回归全绿断言
+python scripts/test_data_store.py
+python scripts/validate_knowledge_structure.py
+python scripts/test_research_contract.py
+python scripts/test_industry_mapping.py
+```

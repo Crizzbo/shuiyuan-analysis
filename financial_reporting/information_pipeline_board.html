@@ -719,13 +719,15 @@
     </div>
 
     <div class="header-actions">
-      <div class="system-clock">
-        <span class="clock-pulse"></span>
-        <span id="liveClockText">2026-11-10 03:45:12 UTC</span>
-        <span style="color: var(--success); font-weight: 600;">[在线健康]</span>
+      <div class="system-clock" id="pipelineStatusPill">
+        <span class="clock-pulse" id="pipelinePulse"></span>
+        <span id="pipelineStatusText" style="color: var(--success); font-weight: 700;">🟢 实时运转中 (Active)</span>
       </div>
+      <button class="btn" id="pipelineToggleBtn" style="border-color: var(--warning); color: var(--warning); font-weight: 600;">⏸ 暂停流水线</button>
+      <button class="btn" id="triggerCollectorBtn" style="border-color: var(--cyan); color: var(--cyan); font-weight: 600;">⚡ 触发事件收集器</button>
+      <button class="btn" id="batchAdvanceBtn" style="border-color: var(--primary); color: var(--primary-light); font-weight: 600;">⏩ 批量推进 (防阻塞)</button>
       <button class="btn" id="themeToggleBtn" title="切换暗色/亮色主题">🌓 主题</button>
-      <button class="btn btn-primary" id="refreshBtn">🔄 刷新流水线</button>
+      <button class="btn btn-primary" id="refreshBtn">🔄 刷新数据</button>
     </div>
   </header>
 
@@ -868,6 +870,39 @@
           <button class="btn" id="drawerActionRetry">🔄 手动重试 (Retry)</button>
           <button class="btn" id="drawerActionAdvance" style="background: var(--primary-bg); color: var(--primary-light); border-color: var(--primary);">⏩ 推进至下一工序</button>
           <button class="btn" id="drawerActionKill" style="background: var(--danger-bg); color: var(--danger); border-color: var(--danger);">🛑 强制熔断终止 (Kill)</button>
+        </div>
+      </div>
+
+      <!-- Section: Equities Count & Status Distribution (做减法，极简概览) -->
+      <div>
+        <div class="drawer-section-title">📊 股票数据覆盖与状态概览</div>
+        <div style="background: var(--surface-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px;">
+          <div style="display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 100px; background: var(--surface-hover); padding: 10px; border-radius: var(--radius-sm); text-align: center;">
+              <div style="font-size: 11px; color: var(--fg-muted);">覆盖标的总数</div>
+              <div style="font-size: 20px; font-weight: 700; color: var(--primary-light); font-family: var(--font-mono);" id="drawerEquitiesTotal">14</div>
+            </div>
+            <div style="flex: 1; min-width: 100px; background: var(--surface-hover); padding: 10px; border-radius: var(--radius-sm); text-align: center;">
+              <div style="font-size: 11px; color: var(--fg-muted);">正常已就绪</div>
+              <div style="font-size: 20px; font-weight: 700; color: var(--success); font-family: var(--font-mono);" id="drawerEquitiesReady">12</div>
+            </div>
+            <div style="flex: 1; min-width: 100px; background: var(--surface-hover); padding: 10px; border-radius: var(--radius-sm); text-align: center;">
+              <div style="font-size: 11px; color: var(--fg-muted);">待补数/校准</div>
+              <div style="font-size: 20px; font-weight: 700; color: var(--warning); font-family: var(--font-mono);" id="drawerEquitiesPending">2</div>
+            </div>
+          </div>
+          <div style="font-size: 11px; color: var(--fg-subtle); margin-bottom: 6px;">跟踪标的状态分布：</div>
+          <div id="drawerEquitiesBadges" style="display: flex; flex-wrap: wrap; gap: 6px;">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Macro Indices Parameters & Institutional Template Specs -->
+      <div>
+        <div class="drawer-section-title">🧭 核心指数与宏观指标参数模板说明</div>
+        <div id="drawerMacroTemplates" style="display: flex; flex-direction: column; gap: 10px;">
+          <!-- Populated dynamically -->
         </div>
       </div>
 
@@ -1301,6 +1336,102 @@
     document.getElementById("drawerProgressBar").style.width = `${it.progress_pct}%`;
     document.getElementById("drawerFingerprint").textContent = it.sha256_fingerprint;
 
+    // 1. 渲染股票数据概览 (极简做减法)
+    const eqSummary = it.payload.equities_summary || {
+      total_tracked_count: 14,
+      ready_count: 12,
+      pending_count: 2,
+      status_distribution: {
+        NVDA: "正常已就绪", AAPL: "正常已就绪", MSFT: "正常已就绪", GOOGL: "正常已就绪",
+        AMZN: "正常已就绪", META: "正常已就绪", TSM: "正常已就绪", AVGO: "正常已就绪",
+        AMD: "正常已就绪", "8035": "正常已就绪", "6857": "正常已就绪", "9984": "正常已就绪",
+        PLTR: "待补数校准", STX: "待补数校准"
+      }
+    };
+    document.getElementById("drawerEquitiesTotal").textContent = eqSummary.total_tracked_count;
+    document.getElementById("drawerEquitiesReady").textContent = eqSummary.ready_count;
+    document.getElementById("drawerEquitiesPending").textContent = eqSummary.pending_count;
+
+    const badgesContainer = document.getElementById("drawerEquitiesBadges");
+    badgesContainer.innerHTML = Object.entries(eqSummary.status_distribution || {}).map(([sym, st]) => {
+      const isReady = st.includes("就绪");
+      const bg = isReady ? "var(--success-bg)" : "var(--warning-bg)";
+      const color = isReady ? "var(--success)" : "var(--warning)";
+      return `<span style="padding: 2px 8px; border-radius: 4px; font-size: 11px; font-family: var(--font-mono); background: ${bg}; color: ${color}; border: 1px solid ${color}40;">${sym}: ${st}</span>`;
+    }).join('');
+
+    // 2. 渲染核心指数与宏观指标参数模板说明
+    const macroSpecs = it.payload.macro_indicators_template || [
+      {
+        symbol: "^VIX",
+        parameter_name: "标普 500 波动率指数 (VIX)",
+        current_value: "16.12",
+        normal_range: "12.0 ~ 20.0",
+        status: "情绪平稳健康",
+        template_description: "衡量期权市场未来 30 天预期年化波动率。低于 20 代表市场处于理性平稳状态；突破 28 则自动触发吊灯移动止盈与激进仓位熔断保护。"
+      },
+      {
+        symbol: "^TNX",
+        parameter_name: "10 年期美国国债收益率",
+        current_value: "4.39%",
+        normal_range: "3.80% ~ 4.50%",
+        status: "中枢健康震荡",
+        template_description: "全球无风险折现率 (Risk-Free Rate) 定价锚。贴现率每上升 50 个基点，长久期科技股现金流折现理论估值中枢下移约 8%~12%。"
+      },
+      {
+        symbol: "DXY",
+        parameter_name: "全球美元流动性指数 (DXY)",
+        current_value: "104.28",
+        normal_range: "100.0 ~ 106.0",
+        status: "温和强势",
+        template_description: "衡量美元相对一篮子主要货币强弱。强美元会收紧离岸美元流动性，并对大型跨国科技巨头的海外营收形成汇兑折损拖累。"
+      },
+      {
+        symbol: "PCR",
+        parameter_name: "期权多空资金力量比 (PCR)",
+        current_value: "0.70",
+        normal_range: "0.60 ~ 0.90",
+        status: "多头显著主导",
+        template_description: "看跌期权与看涨期权成交量比值。低于 0.70 明确代表买方主力看涨期权资金大单密集扫货，多方主导权强劲。"
+      },
+      {
+        symbol: "OU_HalfLife",
+        parameter_name: "价格均值回归反弹半衰期",
+        current_value: "6.8 天",
+        normal_range: "3.0 ~ 15.0 天",
+        status: "回归动能充沛",
+        template_description: "商业物理动力学指标，测算股价偏离内在价值后的平复修复周期。天数越短，表明资金承接力越强、均值回归弹力越充沛。"
+      },
+      {
+        symbol: "Panic_Calming",
+        parameter_name: "黑天鹅冲击平息吸收天数",
+        current_value: "4.2 天",
+        normal_range: "2.0 ~ 8.0 天",
+        status: "吸收衰减顺畅",
+        template_description: "突发外部负面舆情或财报异动在订单流微观结构中的衰减周期。若平息天数超过 8 天，说明负面基本面发生实质恶化，需止损离场。"
+      }
+    ];
+
+    const macroContainer = document.getElementById("drawerMacroTemplates");
+    macroContainer.innerHTML = macroSpecs.map(m => `
+      <div style="background: var(--surface-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span class="ticker-pill">${m.symbol}</span>
+            <span style="font-weight: 600; color: var(--fg); font-size: 13px;">${m.parameter_name}</span>
+          </div>
+          <span style="font-size: 11px; padding: 2px 6px; border-radius: 4px; background: var(--primary-bg); color: var(--primary-light);">${m.status}</span>
+        </div>
+        <div style="display: flex; gap: 14px; font-size: 12px; margin-bottom: 6px; color: var(--fg-muted);">
+          <span>当前实测值: <strong style="color: var(--fg); font-family: var(--font-mono);">${m.current_value}</strong></span>
+          <span>基准区间: <span style="font-family: var(--font-mono);">${m.normal_range}</span></span>
+        </div>
+        <div style="font-size: 11px; color: var(--fg-subtle); line-height: 1.4; border-top: 1px dashed var(--border-subtle); padding-top: 6px;">
+          ${m.template_description}
+        </div>
+      </div>
+    `).join('');
+
     // Populate logs
     const logConsole = document.getElementById("drawerLogConsole");
     logConsole.innerHTML = it.logs.map(line => `<div class="log-line">${line}</div>`).join('');
@@ -1426,6 +1557,103 @@
   });
   document.getElementById("drawerActionAdvance").addEventListener("click", () => {
     if (activeSelectedItemId) handleAdvance(activeSelectedItemId);
+  });
+
+  // 1. 流水线全局启停开关逻辑
+  let isPipelineRunning = true;
+  const pipelineToggleBtn = document.getElementById("pipelineToggleBtn");
+  const pipelineStatusText = document.getElementById("pipelineStatusText");
+  const pipelinePulse = document.getElementById("pipelinePulse");
+
+  pipelineToggleBtn.addEventListener("click", () => {
+    isPipelineRunning = !isPipelineRunning;
+    if (isPipelineRunning) {
+      pipelineToggleBtn.textContent = "⏸ 暂停流水线";
+      pipelineToggleBtn.style.color = "var(--warning)";
+      pipelineToggleBtn.style.borderColor = "var(--warning)";
+      pipelineStatusText.textContent = "🟢 实时运转中 (Active)";
+      pipelineStatusText.style.color = "var(--success)";
+      pipelinePulse.style.background = "var(--success)";
+      pipelinePulse.style.boxShadow = "0 0 0 0 rgba(16, 185, 129, 0.7)";
+    } else {
+      pipelineToggleBtn.textContent = "▶ 启动流水线";
+      pipelineToggleBtn.style.color = "var(--success)";
+      pipelineToggleBtn.style.borderColor = "var(--success)";
+      pipelineStatusText.textContent = "🟡 已挂起已暂停 (Paused)";
+      pipelineStatusText.style.color = "var(--warning)";
+      pipelinePulse.style.background = "var(--warning)";
+      pipelinePulse.style.boxShadow = "0 0 0 0 rgba(245, 158, 11, 0.7)";
+    }
+  });
+
+  // 2. 独立可复用事件收集函数触发 (Simulating collect_pipeline_events)
+  document.getElementById("triggerCollectorBtn").addEventListener("click", () => {
+    const nowIso = new Date().toISOString();
+    const newItems = [
+      {
+        item_id: `EVT-${Date.now().toString().slice(-6)}-01`,
+        title: "【独立事件收集】谷歌 (GOOGL) Gemini 2.0 原生多模态芯片算力集群调度实测",
+        category: "event_radar",
+        category_name: "突发舆情雷达",
+        severity: "medium",
+        stage_status: isPipelineRunning ? "processing" : "pending",
+        timestamp: nowIso,
+        ticker: "GOOGL",
+        company_name_zh: "谷歌母公司",
+        source: "Independent Event Collector",
+        progress_pct: isPipelineRunning ? 60 : 0,
+        duration_ms: 680,
+        payload: {
+          sentiment_score: 0.88,
+          tpu_utilization_pct: 94.2,
+          equities_summary: {
+            total_tracked_count: 14,
+            ready_count: 13,
+            pending_count: 1,
+            status_distribution: {
+              NVDA: "正常已就绪", AAPL: "正常已就绪", MSFT: "正常已就绪", GOOGL: "正常已就绪",
+              AMZN: "正常已就绪", META: "正常已就绪", TSM: "正常已就绪", AVGO: "正常已就绪",
+              AMD: "正常已就绪", "8035": "正常已就绪", "6857": "正常已就绪", "9984": "正常已就绪",
+              PLTR: "正常已就绪", STX: "待补数校准"
+            }
+          }
+        },
+        logs: [
+          `[${nowIso}] 独立事件收集函数 collect_pipeline_events 提取入库`,
+          isPipelineRunning ? `[${nowIso}] 流水线处于运行状态，自动进入特征计算工位` : `[${nowIso}] 流水线处于挂起状态，排队就绪`
+        ],
+        sha256_fingerprint: "e1a2b3c4d5f67890"
+      }
+    ];
+
+    pipelineData.unshift(...newItems);
+    renderCurrentView();
+  });
+
+  // 3. 非阻塞流转与任务隔离执行 (Simulating batch_advance_non_blocking)
+  document.getElementById("batchAdvanceBtn").addEventListener("click", () => {
+    let advancedCount = 0;
+    const stages = ["pending", "ingesting", "processing", "completed"];
+    pipelineData.forEach(item => {
+      // 故障隔离保护：异常阻断任务绝不盲推，处于流转中的顺畅平滑推进
+      if (item.stage_status !== "completed" && item.stage_status !== "blocked") {
+        try {
+          const idx = stages.indexOf(item.stage_status);
+          if (idx !== -1 && idx < stages.length - 1) {
+            item.stage_status = stages[idx + 1];
+            item.progress_pct = item.stage_status === "completed" ? 100 : Math.min(95, item.progress_pct + 35);
+            item.logs.push(`[${new Date().toISOString()}] 非阻塞执行流转: 进入 ${getStatusLabel(item.stage_status)} 工位`);
+            advancedCount++;
+          }
+        } catch (err) {
+          // 单任务异常沙箱捕获，绝不阻断全盘流水线
+          item.stage_status = "blocked";
+          item.error_message = `单任务流转异常拦截 (故障隔离保护): ${err.message}`;
+          item.logs.push(`[${new Date().toISOString()}] 拦截故障并安全隔离`);
+        }
+      }
+    });
+    renderCurrentView();
   });
 
   document.getElementById("refreshBtn").addEventListener("click", () => {
