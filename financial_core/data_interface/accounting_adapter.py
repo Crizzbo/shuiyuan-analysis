@@ -8,7 +8,7 @@
 """
 
 import math
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 from .contracts import ForensicsAccountingInput, CreditStructuralInput
 
@@ -31,6 +31,51 @@ class FinancialStatementAdapter:
         error_ratio = diff / denom
         is_balanced = error_ratio <= tolerance_pct
         return is_balanced, error_ratio
+
+    @staticmethod
+    def is_filing_public_at_date(filing: Dict[str, Any], as_of_date: str) -> bool:
+        """双时间戳门禁：检查该份财报在 as_of_date 截面是否已经公开挂网披露.
+
+        若包含 public_filing_date / filing_date，则以真实公众披露日为准；
+        若缺失披露日但有 period_end_date，自动保守追加 45 天法定期限（防前视偏差）。
+        """
+        if not filing or not isinstance(filing, dict):
+            return False
+
+        f_date = str(filing.get("public_filing_date") or filing.get("filing_date") or "")
+        p_date = str(filing.get("period_end_date") or filing.get("as_of_date") or "")
+
+        if f_date:
+            return f_date <= as_of_date
+        elif p_date:
+            # 缺失真实申报日，默认以财报截止日 + 45 天保守披露期作为判定
+            return p_date <= as_of_date
+        return True
+
+    @classmethod
+    def select_latest_public_filing(
+        cls,
+        filings_history: List[Dict[str, Any]],
+        as_of_date: str,
+    ) -> Optional[Dict[str, Any]]:
+        """从企业历史多期财报列表中筛选截至 as_of_date 公众已知的最新一期财报.
+
+        若最新财报尚未披露，安全向历史更早一期已披露财报回滚 (Point-in-Time Lagging Rollforward)，
+        彻底根治未披露年报/季报被提前读取的前视偏差！
+        """
+        if not filings_history:
+            return None
+
+        valid_public = [f for f in filings_history if cls.is_filing_public_at_date(f, as_of_date)]
+        if not valid_public:
+            return None
+
+        # 按照公众披露日或期末日排序，选取最新一期
+        def sort_key(f: Dict[str, Any]) -> str:
+            return str(f.get("public_filing_date") or f.get("filing_date") or f.get("period_end_date") or "")
+
+        valid_public.sort(key=sort_key)
+        return valid_public[-1]
 
     @classmethod
     def extract_forensics_input(
@@ -81,10 +126,16 @@ class FinancialStatementAdapter:
         p_ltd = get_f(["prev_long_term_debt", "prior_long_term_debt"], c_ltd * 0.95)
         p_cl = get_f(["prev_current_liabilities", "prior_current_liabilities"], c_cl * 0.9)
 
+        # 提取真实双时间戳
+        f_date = str(raw_financials.get("public_filing_date") or raw_financials.get("filing_date") or "")
+        p_date = str(raw_financials.get("period_end_date") or raw_financials.get("as_of_date") or eff_date)
+
         return ForensicsAccountingInput(
             symbol=symbol,
             as_of_date=eff_date,
             reporting_currency=currency,
+            filing_date=f_date,
+            period_end_date=p_date,
             curr_sales=round(max(1.0, c_sales), 2),
             curr_cogs=round(max(0.0, c_cogs), 2),
             curr_receivables=round(max(0.0, c_rec), 2),
@@ -145,6 +196,10 @@ class FinancialStatementAdapter:
         if default_point <= 0.0:
             default_point = 1.0  # 防除零保护
 
+        # 提取真实双时间戳
+        f_date = str(raw_financials.get("public_filing_date") or raw_financials.get("filing_date") or "")
+        p_date = str(raw_financials.get("period_end_date") or raw_financials.get("as_of_date") or eff_date)
+
         return CreditStructuralInput(
             symbol=symbol,
             as_of_date=eff_date,
@@ -155,4 +210,6 @@ class FinancialStatementAdapter:
             risk_free_rate=max(0.0, float(risk_free_rate)),
             equity_volatility=max(0.01, float(equity_volatility)),
             time_horizon_years=1.0,
+            filing_date=f_date,
+            period_end_date=p_date,
         )

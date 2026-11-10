@@ -46,6 +46,7 @@ class MarketDataFeatureInput:
     highest_22d: float
     lowest_22d: float
     atr22: float
+    lot_size: int = 1               # 交易整手 (美股 1 股，日股通常 100 股)
 
 
 @dataclass(frozen=True)
@@ -54,32 +55,35 @@ class ForensicsAccountingInput:
     symbol: str
     as_of_date: str
     reporting_currency: str
+    # 双时间戳点时隔离 (Dual-Timestamp Point-in-Time)
+    filing_date: str = ""           # SEC EDGAR 或官方真实公众披露日 (只有 <= as_of_date 才能被调仓读取)
+    period_end_date: str = ""       # 财报会计报告期末日 (如 2023-12-31)
     # 当期财务指标
-    curr_sales: float
-    curr_cogs: float
-    curr_receivables: float
-    curr_current_assets: float
-    curr_ppe_net: float
-    curr_securities: float
-    curr_total_assets: float
-    curr_depreciation: float
-    curr_sga: float
-    curr_long_term_debt: float
-    curr_current_liabilities: float
-    curr_net_income: float
-    curr_cfo: float
+    curr_sales: float = 100.0
+    curr_cogs: float = 60.0
+    curr_receivables: float = 20.0
+    curr_current_assets: float = 80.0
+    curr_ppe_net: float = 50.0
+    curr_securities: float = 10.0
+    curr_total_assets: float = 150.0
+    curr_depreciation: float = 5.0
+    curr_sga: float = 15.0
+    curr_long_term_debt: float = 30.0
+    curr_current_liabilities: float = 25.0
+    curr_net_income: float = 15.0
+    curr_cfo: float = 18.0
     # 上年同期财务指标
-    prev_sales: float
-    prev_cogs: float
-    prev_receivables: float
-    prev_current_assets: float
-    prev_ppe_net: float
-    prev_securities: float
-    prev_total_assets: float
-    prev_depreciation: float
-    prev_sga: float
-    prev_long_term_debt: float
-    prev_current_liabilities: float
+    prev_sales: float = 90.0
+    prev_cogs: float = 55.0
+    prev_receivables: float = 18.0
+    prev_current_assets: float = 75.0
+    prev_ppe_net: float = 48.0
+    prev_securities: float = 10.0
+    prev_total_assets: float = 140.0
+    prev_depreciation: float = 4.8
+    prev_sga: float = 14.0
+    prev_long_term_debt: float = 28.0
+    prev_current_liabilities: float = 22.0
 
 
 @dataclass(frozen=True)
@@ -94,6 +98,8 @@ class CreditStructuralInput:
     risk_free_rate: float         # 无风险基准利率 r (如 10Y 国债)
     equity_volatility: float      # 股权历史年化波动率 sigma_E
     time_horizon_years: float = 1.0
+    filing_date: str = ""         # 财报公众披露日
+    period_end_date: str = ""     # 财报报告期末日
 
 
 @dataclass(frozen=True)

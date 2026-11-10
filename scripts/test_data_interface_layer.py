@@ -207,6 +207,63 @@ class DataInterfaceLayerTests(unittest.TestCase):
         beneish_res = self.facade.execute_beneish_forensics(bundle.forensics_input)
         self.assertFalse(beneish_res.is_manipulation_suspect)
 
+    def test_filing_dual_timestamp_pit_lagging_rollforward(self) -> None:
+        """测试财报双时间戳拦截未来财报并安全向历史回退 (解决张力1)."""
+        filings_history = [
+            {
+                "period_end_date": "2023-09-30",
+                "public_filing_date": "2023-11-05", # Q3 真实在11月5日披露
+                "TotalRevenue": 100.0,
+            },
+            {
+                "period_end_date": "2023-12-31",
+                "public_filing_date": "2024-02-28", # Q4 年报在次年2月28日才披露！
+                "TotalRevenue": 150.0,
+            },
+        ]
+
+        # 场景 A: 在 2024-01-15 截面调仓时，Q4年报尚未挂网披露 (2024-02-28 > 2024-01-15)
+        # 系统必须且只能读取 2023-11-05 披露的 Q3 财报，严禁提前窥探 Q4 年报！
+        selected = FinancialStatementAdapter.select_latest_public_filing(filings_history, as_of_date="2024-01-15")
+        self.assertIsNotNone(selected)
+        self.assertEqual(selected["period_end_date"], "2023-09-30")
+        self.assertEqual(selected["TotalRevenue"], 100.0)
+
+        # 场景 B: 在 2024-03-01 截面调仓时，Q4年报已经合法挂网 (2024-02-28 <= 2024-03-01)
+        selected_q4 = FinancialStatementAdapter.select_latest_public_filing(filings_history, as_of_date="2024-03-01")
+        self.assertIsNotNone(selected_q4)
+        self.assertEqual(selected_q4["period_end_date"], "2023-12-31")
+        self.assertEqual(selected_q4["TotalRevenue"], 150.0)
+
+    def test_amihud_liquidity_cap_and_dynamic_slippage_binding(self) -> None:
+        """测试 Amihud 流动性上限截断买入金额与非线性滑点 (解决张力2)."""
+        # 构造一只浅池小盘股历史日线 (日均成交额仅 10,000 美元)
+        thin_bars = [
+            {"date": f"2024-01-{i:02d}", "close": 5.0, "volume": 2000.0, "turnover": 10000.0}
+            for i in range(1, 25)
+        ]
+        amihud_input = MarketDataAdapter.extract_liquidity_input("MICRO", thin_bars, as_of_date="2024-01-24")
+        amihud_res = self.facade.execute_amihud_liquidity(amihud_input)
+
+        # 单笔建议最大金额通常为 ADV 的 1%~2% (即 $10,000 * 2% = $200)
+        self.assertTrue(amihud_res.recommended_max_order_size < 1000.0)
+        # 对浅池大买单施加的非线性冲击滑点显著高于基准 10 bps
+        self.assertTrue(amihud_res.market_impact_penalty_bps > 10.0)
+
+    def test_cross_currency_fx_and_lot_size_alignment(self) -> None:
+        """测试跨币种汇率统一折算与日股 100 股整手规整 (解决张力3)."""
+        # 1. 整手规整测试
+        # 美股按 1 股向下规整
+        self.assertEqual(MarketDataAdapter.round_to_lot_size(15.8, lot_size=1), 15.0)
+        # 日股按 100 股整手向下规整，杜绝出现碎股
+        self.assertEqual(MarketDataAdapter.round_to_lot_size(258.0, lot_size=100), 200.0)
+        self.assertEqual(MarketDataAdapter.round_to_lot_size(95.0, lot_size=100), 0.0)
+
+        # 2. 汇率折算测试 (以 USD 为组合记账基准币)
+        # 1,500,000 日元按 1 USD = 150 JPY 折算为 10,000 美元
+        amt_usd = MarketDataAdapter.convert_currency(1_500_000.0, from_curr="JPY", to_curr="USD")
+        self.assertAlmostEqual(amt_usd, 10005.0, delta=10.0) # 0.00667 汇率系数附近
+
 
 if __name__ == "__main__":
     unittest.main()

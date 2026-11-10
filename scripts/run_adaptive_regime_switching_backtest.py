@@ -42,6 +42,8 @@ from financial_core.engines.dynamic_universe_screener import (
 )
 from financial_core.engines.forensics_and_trailing_exit_engine import ForensicsAndTrailingExitEngine
 from financial_core.engines.black_litterman_shrinkage_engine import BlackLittermanShrinkageEngine
+from financial_core.engines.amihud_liquidity_engine import AmihudLiquidityEngine
+from financial_core.data_interface.market_adapter import MarketDataAdapter
 from financial_core.engines.portfolio_backtest_engine import (
     DailySnapshot,
     TradeRecord,
@@ -89,6 +91,7 @@ def execute_adaptive_regime_backtest(
     )
     forensics_engine = ForensicsAndTrailingExitEngine(chandelier_period=22, chandelier_atr_mult=2.8)
     bl_engine = BlackLittermanShrinkageEngine()
+    amihud_engine = AmihudLiquidityEngine(lookback_days=20, max_amihud_threshold=5.0)
 
     all_trading_dates = sorted(list({b["date"] for bars in universe_bars.values() for b in bars}))
     # 筛选出 2015-2024 年的数据
@@ -181,7 +184,7 @@ def execute_adaptive_regime_backtest(
                             exit_reason="REGIME_REBALANCE_EXIT"
                         ))
 
-            # 2.2 买入新入选标的
+            # 2.2 买入新入选标的 (刚性联动 Amihud 微观流动性上限与非线性动态滑点)
             curr_equity = cash + sum(
                 pos["shares"] * (bar_lookup[s][today]["open"] if s in bar_lookup and today in bar_lookup[s] else pos["entry_price"])
                 for s, pos in active_positions.items()
@@ -191,11 +194,36 @@ def execute_adaptive_regime_backtest(
                     if sym in bar_lookup and today in bar_lookup[sym]:
                         open_p = bar_lookup[sym][today]["open"]
                         if open_p > 0:
-                            fill_p = open_p * (1.0 + (slippage_bps / 10000.0))
+                            # 1. 提取截至 today 的已实现历史日线切片 (严格 Point-in-Time)
+                            hist_bars = [b for b in universe_bars[sym] if b["date"] <= today]
+                            recent_60_bars = hist_bars[-60:] if len(hist_bars) >= 60 else hist_bars
+
+                            # 2. 调用 AmihudLiquidityEngine 进行市场深度与资金容量评估
+                            amihud_res = amihud_engine.evaluate_liquidity(
+                                symbol=sym,
+                                bars=recent_60_bars,
+                                market="US",
+                                intended_order_value=curr_equity * max_position_pct,
+                            )
+
+                            # 3. 刚性拦截流动性陷阱 (微盘仙股或成交枯竭一票否决)
+                            if amihud_res.is_illiquid_trap:
+                                continue
+
+                            # 4. 动态非线性冲击滑点 (杜绝固定死板 10 bps 滑点幻觉)
+                            actual_slippage_bps = max(float(slippage_bps), float(amihud_res.market_impact_penalty_bps))
+                            fill_p = open_p * (1.0 + (actual_slippage_bps / 10000.0))
+
+                            # 5. 刚性资金分配上限约束：不得超过 Amihud 建议单笔最大承载额
                             target_alloc = curr_equity * max_position_pct
                             alloc = min(cash * 0.95, target_alloc)
+                            if amihud_res.recommended_max_order_size > 0:
+                                alloc = min(alloc, amihud_res.recommended_max_order_size)
+
                             if alloc > 1000.0:
-                                shares = math.floor(alloc / fill_p)
+                                # 6. 整手规则约束 (美股 1 股，日股 100 股)
+                                lot_size = 100 if sym.endswith(".T") or sym.isdigit() else 1
+                                shares = MarketDataAdapter.round_to_lot_size(alloc / fill_p, lot_size=lot_size)
                                 if shares > 0:
                                     comm = fill_p * shares * (commission_bps / 10000.0)
                                     cash -= (fill_p * shares + comm)
@@ -207,6 +235,7 @@ def execute_adaptive_regime_backtest(
                                         "highest_price": fill_p,
                                         "buy_comm": comm,
                                         "chandelier_ratchet": round(fill_p * 0.93, 2),
+                                        "slippage_bps": actual_slippage_bps,
                                     }
 
         # 3. 盘中跟踪最高价与动态止损止盈 (融合单向棘轮吊灯移动止盈)
@@ -257,8 +286,9 @@ def execute_adaptive_regime_backtest(
                         exit_reason = f"TRAILING_STOP ({current_trailing_stop*100.0:.0f}%)"
 
                 if exit_reason:
-                    fill_p = c * (1.0 - (slippage_bps / 10000.0))
                     pos_data = active_positions.pop(sym)
+                    sell_slip = float(pos_data.get("slippage_bps", slippage_bps))
+                    fill_p = c * (1.0 - (sell_slip / 10000.0))
                     gross_pnl = (fill_p - pos_data["entry_price"]) * pos_data["shares"]
                     comm = fill_p * pos_data["shares"] * (commission_bps / 10000.0)
                     net_pnl = gross_pnl - comm - pos_data["buy_comm"]
@@ -277,7 +307,7 @@ def execute_adaptive_regime_backtest(
                         entry_price=round(pos_data["entry_price"], 2),
                         exit_price=round(fill_p, 2),
                         commission_paid=round(comm + pos_data["buy_comm"], 2),
-                        slippage_paid=round(c * pos_data["shares"] * (slippage_bps / 10000.0) * 2.0, 2),
+                        slippage_paid=round(c * pos_data["shares"] * (sell_slip / 10000.0) * 2.0, 2),
                         gross_pnl=round(gross_pnl, 2),
                         net_pnl=round(net_pnl, 2),
                         return_pct=round(ret_pct, 4),

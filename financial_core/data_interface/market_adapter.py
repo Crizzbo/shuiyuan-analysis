@@ -213,3 +213,50 @@ class MarketDataAdapter:
             intended_order_value=float(intended_order_value),
             average_daily_turnover_20d=round(adv_20d, 2),
         )
+
+    @staticmethod
+    def round_to_lot_size(shares: float, lot_size: int = 1) -> float:
+        """根据市场整手约束规整交易股数 (美股 1 股，日股通常 100 股)."""
+        lot = max(1, int(lot_size))
+        s = max(0.0, float(shares))
+        if lot == 1:
+            return float(math.floor(s))
+        # 整手向下取整，严禁出现不可成交的碎股
+        rounded_lots = math.floor(s / lot)
+        return float(rounded_lots * lot)
+
+    @staticmethod
+    def convert_currency(
+        amount: float,
+        from_curr: str,
+        to_curr: str,
+        as_of_date: str = "",
+        fx_rates_to_usd: Optional[Dict[str, float]] = None,
+    ) -> float:
+        """多币种资产价值折算基准汇率中枢 (以 USD 为组合统一记账基准币).
+
+        fx_rates_to_usd: 币种对美元的汇率，例如 {"USD": 1.0, "JPY": 0.0065} (即 1 JPY = 0.0065 USD 或 1 USD = 153.8 JPY)
+        """
+        amt = float(amount)
+        fc = from_curr.upper()
+        tc = to_curr.upper()
+        if fc == tc:
+            return amt
+
+        default_fx = {
+            "USD": 1.0,
+            "JPY": 0.00667, # 默认 1 USD = 150 JPY
+            "EUR": 1.08,
+            "HKD": 0.128,
+        }
+        lookup = dict(default_fx)
+        if fx_rates_to_usd:
+            lookup.update(fx_rates_to_usd)
+
+        from_to_usd = lookup.get(fc, 1.0)
+        to_to_usd = lookup.get(tc, 1.0)
+
+        # 折算为 USD 再转为目标币种
+        amt_usd = amt * from_to_usd
+        amt_target = amt_usd / max(1e-6, to_to_usd)
+        return round(amt_target, 4)
