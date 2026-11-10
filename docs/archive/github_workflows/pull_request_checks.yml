@@ -1,0 +1,41 @@
+name: Source and synthetic contract checks [已归档/已下线]
+# 历史归档说明：全量金融契约与治理回归已完全由本地测试套件承接，不再在 GitHub Actions 公共云端执行。
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: source-checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  portable-contracts:
+    name: Portable contracts (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        cache: pip
+        cache-dependency-path: requirements-ci.lock.txt
+      - name: Install isolated verification dependencies
+        run: python scripts/bootstrap_ci.py
+      - name: Run portable contracts
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            .venv-ci/Scripts/python.exe -X utf8 scripts/run_ci.py
+          else
+            .venv-ci/bin/python -X utf8 scripts/run_ci.py
+          fi
