@@ -1,18 +1,18 @@
 ---
 name: shuiyuan-analysis
-version: 6.2.0
-description: 水源分析——买方机构级股票量化投研、全市场趋势选股、九大硬核数学计算公式体系与产业链涟漪因果穿透 Agent Skill。覆盖全市场资产池（美股10,000+/日股4,400+/核心567）商业物理动力学动量逃逸模型、法务会计Beneish M-Score八维Probit防舞弊、KMV-Merton信用破产违约距离、Amihud微观流动性冲击与非线性滑点、期权偏度与异动流、宏观3状态高斯HMM、SEPA趋势模板选股、行情时效硬核验门禁、官方财报三表平账与多情景DCF估值、SOTP多业务分部损益穿透、多标的产业链上下游因果传导矩阵（DIO缓冲/转嫁权/有限责任下界）、突发事件雷达全天候守护与法定信源防伪鉴真、本地买方交易室推流交互大屏、以及 finance_tools 6 大高内聚子目录分包架构。
+version: 6.3.0
+description: 水源分析——买方机构级股票量化投研、全市场趋势选股、十大硬核数学计算公式体系、小资金非对称高爆发倒金字塔加仓与产业链涟漪因果穿透 Agent Skill。覆盖全市场资产池（美股10,000+/日股4,400+/核心567）商业物理动力学动量逃逸模型、小资金极紧止损(-3.5%)与6:1盈亏比加仓计划、法务会计Beneish M-Score八维Probit防舞弊、KMV-Merton信用破产违约距离、Amihud微观流动性冲击与非线性滑点、期权偏度与异动流、宏观3状态高斯HMM、SEPA趋势模板选股、行情时效硬核验门禁、官方财报三表平账与多情景DCF估值、SOTP多业务分部损益穿透、多标的产业链上下游因果传导矩阵（DIO缓冲/转嫁权/有限责任下界）、突发事件雷达全天候守护与法定信源防伪鉴真、本地买方交易室推流交互大屏、以及 finance_tools 6 大高内聚子目录分包架构。
 license: Proprietary
 metadata:
   author: Shuiyuan Quant Research Architecture Team
-  version: "6.2.0"
+  version: "6.3.0"
   domain: quantitative-equity-research-and-supply-chain-ripple
-  triggers: 选股, 股票分析, 研报生成, 突发事件, 产业链涟漪, 产业链分析, SOTP, 业务分部拆解, 事件雷达, 行情时效, 财务估值, 趋势选股, DCF估值, 买点推演, 交易室大屏, 金融计算, 数学公式, 物理动力学, Beneish, Merton, Amihud, 期权偏度, 宏观状态机, shuiyuan-analysis
+  triggers: 选股, 股票分析, 研报生成, 突发事件, 产业链涟漪, 产业链分析, SOTP, 业务分部拆解, 事件雷达, 行情时效, 财务估值, 趋势选股, DCF估值, 买点推演, 交易室大屏, 金融计算, 数学公式, 物理动力学, Beneish, Merton, Amihud, 期权偏度, 宏观状态机, 小资金高爆发, 倒金字塔加仓, 极紧止损, 翻倍, shuiyuan-analysis
   role: buy-side-chief-quant-strategist
   scope: full-stack-equity-research-and-ripple-dynamics
 ---
 
-# 水源分析 Agent Skill (v6.2.0 买方数学量化计算、物理动力学与分包架构版)
+# 水源分析 Agent Skill (v6.3.0 买方数学量化计算、物理动力学、小资金高爆发与分包架构版)
 
 买方机构级股票量化选股、微观法证审计、SOTP 业务分部穿透、多标的产业链涟漪传导矩阵、全天候事件雷达推流大屏与 6 大业务工具子包架构。
 
@@ -52,6 +52,7 @@ metadata:
 | **期权偏度与主力大单异动** | “看下某股票期权偏度”、“期权主力异动”、“排查隔夜暴跌对冲大单” | `finance_tools.financial_analysis_gateway`<br>`scripts.run_financial_analysis_gateway --mode options` | 25-Delta 风险反转偏度、近远月波动率比值、交易量 PCR、Gamma 做市商状态 |
 | **宏观状态机与配置总预算** | “当前宏观是大牛市还是震荡”、“市场状态机识别”、“建议总仓位多少” | `finance_tools.financial_analysis_gateway`<br>`scripts.run_financial_analysis_gateway --mode regime` | 3 状态高斯 HMM 识别 (牛市/震荡/危机)、总仓位预算上限与主导策略模型 |
 | **全景金融多模型融合诊断** | “全面诊断 NVDA”、“一键多模型诊断”、“全息买方评级” | `finance_tools.financial_analysis_gateway`<br>`scripts.run_financial_analysis_gateway --mode all` | 串联行业/物理/法务/信用/流动性/期权/宏观的结构化全景买方决策档案 |
+| **小资金高爆发加仓计划** | “小资金怎么做”、“高爆发加仓计划”、“非对称买点”、“极紧止损” | `financial_core.engines.sepa_buy_signal_engine`<br>`scripts.run_financial_analysis_gateway --mode timing --small-cap` | 3.5%极限硬止损、6:1盈亏比目标、1.5R无风险平保 (Free-Roll)、倒金字塔 50%->30%->20% 加仓指令 |
 | **本地买方交易室推流看板** | “打开监控大屏”、“启动交易室推流服务”、“查看拓扑大屏” | `scripts.serve_radar_dashboard`<br>`scripts.generate_radar_dashboard` | 本地轻量推流 HTTP 服务 (`http://127.0.0.1:8899`)、交互拓扑大屏 |
 
 ---
@@ -302,6 +303,26 @@ $$\frac{\Delta \text{EBIT}_i}{\text{EBIT}_i} = \sum_{k=1}^m \epsilon_{i, k} \cdo
 - 半导体行业：$\epsilon_{\text{CapEx}} = +1.35, \epsilon_{\text{WaferPrice}} = +0.85$；
 - 航空与海运航运：$\epsilon_{\text{BrentCrude}} = -1.20, \epsilon_{\text{Tariff}} = -0.90$；
 - 银行与商业金融：$\epsilon_{\text{NIM}} = +2.10, \epsilon_{\text{NonPerformingLoan}} = -1.80$。
+
+### 10. 小资金非对称高爆发倒金字塔加仓与极速保本模型 (Small-Cap Asymmetric Execution & Pyramiding)
+专为小体量、追求非对称暴利与高爆发资金设计的执行方程，打破大机构平庸宽止损与平均持仓约束：
+- **极限压紧硬止损方程 (Ultra-Tight Risk Pivot)**：
+  $$\text{StopLossPrice} = \text{PivotPrice} \times (1.0 - 0.035)$$
+  单笔硬止损压紧至 $-3.5\%$，基准单股风险敞口：
+  $$R = \text{PivotPrice} - \text{StopLossPrice} = 0.035 \times \text{PivotPrice}$$
+- **跃升非对称盈亏比目标方程 (6:1 Asymmetric Payoff Target)**：
+  $$\text{TargetProfitPrice} = \text{PivotPrice} + 6.0 \times R = \text{PivotPrice} \times (1.0 + 0.21)$$
+  以 $-3.5\%$ 的极窄试错成本博取 $+21.0\% \sim +30.0\%$ 的主升浪爆发靶心。
+- **极速零风险保本平仓机制 (Free-Roll Breakeven Valve at 1.5R)**：
+  $$\text{BreakevenTriggerPrice} = \text{PivotPrice} + 1.5 \times R = \text{PivotPrice} \times (1.0 + 0.0525)$$
+  当浮盈达到 $1.5R$（约 $+5.0\%$）时，系统强制触发平保指令，将止损价上移至买入成本价，达成**绝对零风险白嫖（Free-Roll）**状态，本金立于不败之地。
+- **倒金字塔顺势加仓调度梯队 (Inverted Pyramiding Ladder)**：
+  $$\text{Stage 1: 首次试探性突破进场} \implies 50\% \text{ 基础头寸}$$
+  $$\text{Stage 2: 浮盈达 } +5.0\% \text{ 突破次级平台加仓} \implies +30\% \text{ 顺势追加}$$
+  $$\text{Stage 3: 浮盈达 } +10.0\% \text{ 主升浪加速锁定全仓} \implies +20\% \text{ 锁死头寸}$$
+- **物理逃逸动能真伪核验门禁 (Rocket Escape Velocity Verification)**：
+  $$R_E = \frac{E_k}{E_p + \epsilon} \times \left( \frac{\text{Volume}_{\text{breakout}}}{\overline{\text{Volume}}_{50}} \right)^{0.5} \ge 1.0$$
+  若 $R_E \ge 1.0$，确认为强动能真突破，准入小资金主升浪做多；若 $R_E < 1.0$，拦截冲高回落假突破。
 
 ---
 

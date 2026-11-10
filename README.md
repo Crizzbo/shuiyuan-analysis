@@ -1,118 +1,394 @@
-# 水源智能投研系统 · 全盘设计典籍地图与单一事实来源 (SSOT) 总索引
+# 水源智能量化投研系统 (Shuiyuan Quant Research & Intelligence System)
 
-> **文件代号**：`SPEC_00_MASTER_INDEX`  
-> **生效基准日**：2026-11-06  
-> **核心使命**：确立全盘系统 6 大核心功能域与 12 本专责核心设计典籍（`SPEC-01` 至 `SPEC-12`）的权威单一事实来源（SSOT），彻底清理历史设计冗余，合并同类项，建立精确清晰的专责分工与追溯链条。
-
----
-
-## 一、 顶层专责典籍矩阵 (12 Core Design Specifications)
-
-为根治过去设计文档散落、职责边界不清与多处重复定义的缺陷，系统全量业务与技术规范统一收敛为 **12 本独立且专责的核心设计典籍**。每本典籍拥有绝对排他的单一事实来源权威性：
-
-| 典籍编号 | 典籍代号与文件路径 | 核心业务专责 (Responsibility Scope) | 核心代码实现映射 (Code Mapping) | 权威单一事实来源 (SSOT) |
-| :--- | :--- | :--- | :--- | :--- |
-| **SPEC-01** | [`SPEC_01_系统总体架构与分层工程总纲.md`](docs/SPEC_01_系统总体架构与分层工程总纲.md) | 系统总体架构愿景、六大功能域全景地图、四层单向物理依赖铁律、零逆向依赖与全栈命名规范。 | `financial_core/`, `financial_reporting/`, `scripts/` | **系统顶层工程架构与分层铁律 SSOT** |
-| **SPEC-02** | [`SPEC_02_多模态视觉呈现与研报Token设计规范.md`](docs/SPEC_02_多模态视觉呈现与研报Token设计规范.md) | 买方研报视觉设计规范、设计令牌 (Design Tokens)、去工程符号化自然中文命名规则、A4 矢量无截断排版规程、零 Emoji 商务合规。 | `financial_reporting/briefing_pdf_renderer.py`, `deep_pdf_renderer.py` | **研报排版、Token 与视觉契约 SSOT** |
-| **SPEC-03** | [`SPEC_03_行业知识中枢与微观商业机器解构规格书.md`](docs/SPEC_03_行业知识中枢与微观商业机器解构规格书.md) | 11 大宏观板块与 41 个法定标准化行业知识中枢、微观商业机器解构、所有者收益 (Owner Earnings) 穿透器、五维动态护城河结构与行业指标体系。 | `knowledge/industry_knowledge_hub.py`, `business_quality_and_moat_engine.py` | **行业知识、商业模式与护城河解构 SSOT** |
-| **SPEC-04** | [`SPEC_04_六步研究法与官方财报三表契约规范.md`](docs/SPEC_04_六步研究法与官方财报三表契约规范.md) | 买方投研六步法（假设、证据、平账、估值、压力、复盘）、官方财报三表强勾稽契约、现金跑道与营运资本循环（DIO/DSO/DPO）。 | `integrated_three_statement_engine.py`, `schemas/deep_dossier.schema.json` | **六步研究法与官方三表动态勾稽 SSOT** |
-| **SPEC-05** | [`SPEC_05_数据采集AI浏览器补数与证据治理规范.md`](docs/SPEC_05_数据采集AI浏览器补数与证据治理规范.md) | 官方原始数据采集中枢、AI 浏览器补数与定向取数 SOP、本地密码学证据目录、资产负债表刚性平账自检门禁（资产 = 负债 + 股东权益 100% 验算）。 | `data_collection_gateway.py`, `data_catalog.py`, `data/audits/` | **数据治理、AI 补数与平账证据链 SSOT** |
-| **SPEC-06** | [`SPEC_06_核心金融计算与多情景DCF估值引擎设计书.md`](docs/SPEC_06_核心金融计算与多情景DCF估值引擎设计书.md) | 纯净底层金融计算引擎、跨周期三态情景 DCF 估值走廊（悲观底价、中性公允、乐观靶心）、Merton 结构化信用违约模型、Altman Z-Score 破产预警。 | `financial_core/engines/`, `monte_carlo_engine.py`, `credit_risk_engine.py` | **金融数学公式、DCF 走廊与信用风险 SSOT** |
-| **SPEC-07** | [`SPEC_07_买方时机决策与技术足迹分析引擎设计书.md`](docs/SPEC_07_买方时机决策与技术足迹分析引擎设计书.md) | 米奈尔维尼 SEPA 买入信号引擎、8 大趋势模板硬性门禁、四大生命周期阶段状态机、VCP 波动收缩形态递归收敛判定与价格买点卡片。 | `sepa_buy_signal_engine.py`, `scripts/test_sepa_buy_signal_engine.py` | **技术足迹分析与 SEPA 买入时机 SSOT** |
-| **SPEC-08** | [`SPEC_08_期权全周期因果分析与仓位风控引擎设计书.md`](docs/SPEC_08_期权全周期因果分析与仓位风控引擎设计书.md) | 期权全周期因果推导、二叉树与 Black-Scholes 定价、隐含波动率曲面与无套利边界、1/4 凯利仓位公式与下行归零排雷警告。 | `american_option_tree_engine.py`, `volatility_surface_engine.py` | **期权定价因果链与仓位风控 SSOT** |
-| **SPEC-09** | [`SPEC_09_全球宏观流动性与跨资产配置体系设计书.md`](docs/SPEC_09_全球宏观流动性与跨资产配置体系设计书.md) | 全球宏观流动性雷达、美联储资产负债表与期限利差、日元套息平仓风险、黑天鹅冲击传导、跨资产大资金避险迁徙路径（超短债/黄金大宗/实体牛）。 | `macro_elastic_margin_engine.py`, `black_swan_deep_analyzer.py` | **宏观流动性传导与黑天鹅风控 SSOT** |
-| **SPEC-10** | [`SPEC_10_千家资产池流式建档与公司深度档案生成流水线.md`](docs/SPEC_10_千家资产池流式建档与公司深度档案生成流水线.md) | 全市场数千家上市企业分级资产池（Tier 0/1/2/3）、流式分批建档流水线（Chunk-and-Stream）、公司深度档案合成、买方 5-Sheet Excel 自动化建造。 | `run_567_universe_batch_pipeline.py`, `build_institutional_workbook.py` | **全盘资产池管理与流式建档流水线 SSOT** |
-| **SPEC-11** | [`SPEC_11_云端无头每日行情与研报自动化调度流水线.md`](docs/SPEC_11_云端无头每日行情与研报自动化调度流水线.md) | 云端无头自动化每日行情流水线、美股（07:00）与日股（16:00）定时调度、行情时效新鲜度门禁、现代化交互 HTML 与矢量 PDF 编译云端交付。 | `cloud_daily_pipeline.py`, `.github/workflows/daily_market_pipeline.yml` | **云端无头自动化与定时调度流水线 SSOT** |
-| **SPEC-12** | [`SPEC_12_系统质量工程密码学账本与全息测试验收标准.md`](docs/SPEC_12_系统质量工程密码学账本与全息测试验收标准.md) | SHA-256 密码学不可篡改预测账本（PredictionLedger）、前置预测锁死与盘后结果对账、四道后置架构验收硬门禁、全量单元测试与回归套件标准。 | `prediction_ledger.py`, `verify_architecture_integrity.py`, `test_*.py` | **质量工程、密码学验签与验收门禁 SSOT** |
+> **版本**：`v6.3.0`  
+> **定位**：买方机构级全市场量化趋势选股、商业物理动力学动量逃逸、法务会计与信用风控、SOTP分部与多标的产业链因果穿透、小资金非对称高爆发倒金字塔加仓、全天候交易室推流大屏与 AI Agent Skill 一体化投研系统。  
+> **核心原则**：程序负责坚硬客观的数据骨架（0-Token 本地数学计算、时效硬核验门禁、三表刚性平账），AI 负责赋予六维立体的买方认知血肉（反身性、对手盘、因果穿透、非对称凸性）。
 
 ---
 
-## 二、 六大核心功能域与设计典籍对应图谱
+## 目录 (Table of Contents)
+- [一、 系统核心工程哲学与分层架构](#一-系统核心工程哲学与分层架构)
+- [二、 十大硬核数学计算模型与金融物理动力学公式全集](#二-十大硬核数学计算模型与金融物理动力学公式全集)
+- [三、 【核心专章】AI 使用与 Skills 技能调用指南 (AI Agent & Skill Invocation Guide)](#三-核心专章ai-使用与-skills-技能调用指南-ai-agent--skill-invocation-guide)
+  - [1. 技能定位与工程位置](#1-技能定位与工程位置)
+  - [2. AI 意图识别与场景触发路由矩阵](#2-ai-意图识别与场景触发路由矩阵)
+  - [3. 调用方式一：Claude Code / AI Agent Slash Command (`/shuiyuan-analysis`)](#3-调用方式一claude-code--ai-agent-slash-command-shuiyuan-analysis)
+  - [4. 调用方式二：Python API 级统一网关调用 (`FinancialAnalysisGateway`)](#4-调用方式二python-api-级统一网关调用-financialanalysisgateway)
+  - [5. 调用方式三：终端 CLI 统一调度入口 (`run_financial_analysis_gateway.py`)](#5-调用方式三终端-cli-统一调度入口-run_financial_analysis_gatewaypy)
+  - [6. 资金画像模式切换：机构稳健 vs 小资金高爆发](#6-资金画像模式切换机构稳健-vs-小资金高爆发)
+  - [7. AI 规范 Prompt 与结构化交付物模板](#7-ai-规范-prompt-与结构化交付物模板)
+- [四、 本地买方交易室推流服务与交互拓扑大屏](#四-本地买方交易室推流服务与交互拓扑大屏)
+- [五、 全盘万家资产池与流式批处理调度体系](#五-全盘万家资产池与流式批处理调度体系)
+- [六、 四道架构防劣变验收硬门禁 (Non-Regression Gates)](#六-四道架构防劣变验收硬门禁-non-regression-gates)
+- [七、 附录：12 本专责核心设计典籍 SSOT 地图](#七-附录12-本专责核心设计典籍-ssot-地图)
+
+---
+
+## 一、 系统核心工程哲学与分层架构
+
+系统严格遵循买方机构高标准研发规范，彻底破除“保守打补丁、层层套 fallback、死代码硬编码绝对路径、无校准虚假数字”的工程弊端：
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│ [第六域] 自动化调度与云端交付域 (Cloud Headless Pipeline & Delivery)     │
-│   ├── SPEC-10: 千家资产池流式建档与公司深度档案生成流水线                 │
-│   └── SPEC-11: 云端无头每日行情与研报自动化调度流水线                     │
+│ [应用与调度层] scripts/                                                  │
+│   ├── run_financial_analysis_gateway.py (统一多模式金融网关 CLI)          │
+│   ├── run_10k_universe_pipeline.py (全市场万家资产池批处理调度流水线)    │
+│   ├── serve_radar_dashboard.py (交易室轻量推流 HTTP 调度服务)            │
+│   └── verify_architecture_integrity.py (架构防劣变全息巡检)             │
 └───────────────────────────────────┬────────────────────────────────────┘
-                                    ▼
+                                    ▼ 依赖
 ┌────────────────────────────────────────────────────────────────────────┐
-│ [第五域] 买方研报编译与呈现多模态域 (Reporting & Multimodal Presentation) │
-│   ├── SPEC-02: 多模态视觉呈现与研报Token设计规范                       │
-│   └── SPEC-04: 六步研究法与官方财报三表契约规范                         │
+│ [报告呈现与时效门禁层] financial_reporting/                             │
+│   ├── quote_freshness_gateway.py (行情时钟与交易时效硬核验门禁)         │
+│   ├── briefing_pdf_renderer.py / deep_pdf_renderer.py (矢量报告渲染器)   │
+│   └── reports/event_radar_dashboard.html (交易室交互拓扑大屏)            │
 └───────────────────────────────────┬────────────────────────────────────┘
-                                    ▼
+                                    ▼ 依赖
 ┌────────────────────────────────────────────────────────────────────────┐
-│ [第四域] 行业商业机器知识中枢域 (Industry Knowledge & Graph Hub)        │
-│   └── SPEC-03: 行业知识中枢与微观商业机器解构规格书                     │
+│ [中继与专业工具分包层] finance_tools/ (6 大高内聚子目录 + 兼容 Facade)  │
+│   ├── screening/ (全市场选股、SEPA 8 大指标、VCP 4T 收缩)                │
+│   ├── forensics_and_valuation/ (法务 Beneish、三表平账、DCF 估值)        │
+│   ├── risk_and_derivatives/ (期权偏度、KMV-Merton 信用违约、VaR 预算)    │
+│   ├── macro_and_ripple/ (宏观 HMM、SOTP 分部穿透、多标的产业链涟漪)      │
+│   ├── events_and_verification/ (0-Token 初筛、SHA-256 密码学法定鉴真)    │
+│   └── governance_and_pipeline/ (数据完备度追踪、统一金融网关、账本管理)  │
 └───────────────────────────────────┬────────────────────────────────────┘
-                                    ▼
+                                    ▼ 依赖
 ┌────────────────────────────────────────────────────────────────────────┐
-│ [第三域] 金融纯净计算核心引擎域 (Pure Financial Core & Valuation)       │
-│   ├── SPEC-06: 核心金融计算与多情景DCF估值引擎设计书                   │
-│   ├── SPEC-07: 买方时机决策与技术足迹分析引擎设计书                     │
-│   ├── SPEC-08: 期权全周期因果分析与仓位风控引擎设计书                   │
-│   └── SPEC-09: 全球宏观流动性与跨资产配置体系设计书                     │
-└───────────────────────────────────┬────────────────────────────────────┘
-                                    ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│ [第二域] 官方原始数据采集中枢与证据治理域 (Data Ingestion & Governance)  │
-│   └── SPEC-05: 数据采集AI浏览器补数与证据治理规范                       │
-└───────────────────────────────────┬────────────────────────────────────┘
-                                    ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│ [第一域] 底层系统治理、法证存证与防劣变基石域 (Governance & Ledger)      │
-│   ├── SPEC-01: 系统总体架构与分层工程总纲                               │
-│   └── SPEC-12: 系统质量工程密码学账本与全息测试验收标准                 │
+│ [底层纯净金融核心引擎层] financial_core/ (零外层依赖、纯相对导入)         │
+│   ├── engines/universal_physical_dynamics_engine.py (商业物理动力学)    │
+│   ├── engines/sepa_buy_signal_engine.py (SEPA 买点与倒金字塔加仓)        │
+│   ├── engines/supply_chain_ripple_engine.py (产业链涟漪因果传导)        │
+│   ├── engines/prediction_ledger.py (SHA-256 密码学时间链条账本)         │
+│   └── engines/credit_risk_engine.py (KMV-Merton 结构化违约距离)          │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
+### 三大刚性工程铁律：
+1. **0-Token 纯本地物理计算铁律**：初筛仅依赖标的过去 1 年客观日 K 线价量时序 (OHLCV)，由 `sepa_buy_signal_engine` 执行 50/150/200 日移动均线、52 周高低点及 VCP 波动收缩计算。初筛阶段严禁向大语言模型注入全量原始数据，实现 0-Token 秒级万家标的扫描。
+2. **行情时效与交易时钟核验硬门禁 (`verify_quote_freshness`)**：在输出任何分析、估值或期权定价前，强制对齐交易所时区（美股 EDT/EST、日股 JST），区分盘前 (Pre-Market)、盘中 (Regular)、盘后 (After-Hours) 与前收盘价，未来时间戳硬性拦截，旧日缓存自动降级并显式告警。
+3. **官方三表刚性平账自检**：录入主管道的财报底账必须经由 `OfficialFilingMapper` 转换非标字符串，并通过 $Assets = Liabilities + Equity$ 刚性平账自检，不平账严禁直传估值模型。
+
 ---
 
-## 三、 历史设计文档合并同类项与归档映射表 (Historical Legacy Mapping)
+## 二、 十大硬核数学计算模型与金融物理动力学公式全集
 
-遵循全局规范“**增量安全留存，严禁物理删除**”，历史遗留的编号设计文档全部完成同类项合并与权责交接，其历史价值已完全被 12 本专责典籍吸收覆盖。开发者在阅读与维护时，统一以 **SPEC-01 至 SPEC-12** 为准：
+系统全部投研判断、买卖时机与风控边界均建立在纯本地硬核数学推导之上，**严禁大模型主观臆造数字**：
 
-| 历史文档编号与名称 | 历史业务定位 | 归并合并去向 | 状态说明 (Status) |
+### 1. 通用商业物理动力学方程 (Universal Physical Dynamics)
+- **商业质量 (Business Mass)**：
+  $$m = \ln(1 + \text{TotalAssets}) \times (1 + \text{MoatScore}), \quad \text{MoatScore} \in [0.0, 1.0]$$
+- **趋势速度与加速度**：$v_t = \frac{P_t - P_{t-k}}{k}, \quad a_t = \frac{v_t - v_{t-k}}{k}$
+- **动量与动能**：$p = m \cdot v_t, \quad E_k = \frac{1}{2} m v_t^2$
+- **重力势能与动能势能比 (火箭逃逸速度准则)**：
+  $$E_p = m \cdot g_{\text{market}} \cdot \max(0, P_{\text{resistance}} - P_t), \quad \text{Ratio}_E = \frac{E_k}{E_p + \epsilon}$$
+  - $\text{Ratio}_E \ge 1.0 \implies$ 达成逃逸速度，突破有效；$\text{Ratio}_E < 1.0 \implies$ 假突破冲高回落。
+- **阻尼振荡半衰期 (恐慌平复周期)**：$t_{1/2} = \frac{\ln 2}{\gamma}, \quad \gamma = \frac{\beta_{\text{down}} \cdot \sigma_{\text{daily}}}{\text{CashBufferRatio}}$
+- **零增长停滞底价 (绝对铁底)**：$P_{\text{floor}} = \frac{\text{Normalized Owner Earnings}}{WACC}$
+
+### 2. 法务会计 Beneish M-Score 八维 Probit 概率模型
+$$M = -4.84 + 0.920 \cdot DSRI + 0.528 \cdot GMI + 0.404 \cdot AQI + 0.892 \cdot SGI + 0.115 \cdot DEPI - 0.172 \cdot SGAI + 4.037 \cdot TATA + 0.0327 \cdot LVGI$$
+- **防舞弊门禁**：$M > -1.78$ 判定存在财务操纵粉饰嫌疑，**一票否决淘汰出选股池**；$M \le -2.22$ 为健康报表。
+
+### 3. KMV-Merton 结构化信用违约与破产风险模型
+股权作为以资产为标的的欧式看涨期权（Merton 1974）：
+$$E = V_A \mathcal{N}(d_1) - D e^{-r T} \mathcal{N}(d_2), \quad \sigma_E E = \mathcal{N}(d_1) \sigma_A V_A$$
+- **违约触发点**：$D = \text{ShortTermDebt} + 0.5 \times \text{LongTermDebtNoncurrent}$
+- **违约距离与预期违约率**：$DD = \frac{\ln(V_A / D) + (\mu_A - 0.5 \sigma_A^2)T}{\sigma_A \sqrt{T}}, \quad EDF = \mathcal{N}(-DD)$
+- **风控阈值**：$DD > 3.0$ 安全；$DD < 2.0$ 或 $EDF > 5.0\%$ 触发破产黑天鹅告警，禁止持仓。
+
+### 4. Amihud 微观流动性冲击与动态非线性滑点模型
+$$\text{ILLIQ} = \frac{1}{N} \sum_{t=1}^N \frac{|R_t|}{\text{Volume}_t \times P_t}$$
+$$\text{Slippage}(bps) = \text{BaseSpread} + \lambda \times \left( \frac{\text{OrderValue}}{\text{ADV}_{20}} \right)^{0.6} \times \sigma_{\text{daily}} \times 10000$$
+- **建议单笔最大容量上限**：$\text{Capacity}_{\max} = \text{ADV}_{20} \times \left( \frac{\text{MaxAllowableSlippage} - \text{BaseSpread}}{\lambda \cdot \sigma_{\text{daily}} \times 10000} \right)^{1 / 0.6}$
+- **流动性陷阱门禁**：$\text{ADV}_{20} < \$5\text{M}$ 或计算滑点 $> 50\text{ bps}$ 强制打上 `ILLIQUID_TRAP` 标签。
+
+### 5. 期权波动率偏度与主力大单异动模型
+- **25-Delta 风险反转偏度**：$Skew_{25D} = IV_{25D, \text{put}} - IV_{25D, \text{call}}$（$>0.08$ 预警机构隔夜跳水对冲大单）；
+- **期限结构倒挂比**：$TS = \frac{IV_{\text{front}, ATM}}{IV_{\text{back}, ATM}}$（$>1.15$ 预警近期财报或监管黑天鹅）；
+- **做市商 Gamma 状态**：$S > \text{GammaFlip} \implies$ Long Gamma（震荡抑制）；$S < \text{GammaFlip} \implies$ Short Gamma（加速踩踏）。
+
+### 6. 宏观 3-状态高斯隐马尔可夫模型 (Gaussian HMM)
+$$S_t \in \{1: \text{BULL\_MOMENTUM (牛市)}, 2: \text{RANGE\_BOUND\_VALUE (震荡)}, 3: \text{CRISIS\_DEFENSE (危机)}\}$$
+- **总仓位自适应预算**：$\text{GrossExposure} = \sum_{k=1}^3 P(S_t = k \mid \mathcal{F}_t) \times \text{ExposureCap}_k$
+  - $\text{ExposureCap} = \{ \text{BULL}: 100\%, \text{RANGE}: 60\%, \text{CRISIS}: 0\%\sim 20\% \}$
+
+### 7. SEPA 趋势模板八大数学不等式与 Minervini VCP 收缩方程
+1. $P_t > MA50_t > MA150_t > MA200_t$
+2. $MA200_t > MA200_{t-20}$（200日均线斜率维持正值至少 1 个月）
+3. $P_t \ge 1.25 \times \min(P_{52W})$
+4. $P_t \ge 0.75 \times \max(P_{52W})$
+5. 相对强弱 $RS_{\text{score}} \ge 80$
+- **VCP 4T 收缩序列方程**：$\Delta \text{Range}_1 \approx 20\% \to \Delta \text{Range}_2 \approx 10\% \to \Delta \text{Range}_3 \approx 5\% \to \Delta \text{Range}_4 \le 2.5\%$
+- **成交量枯竭判定**：$\text{Volume}_{\text{pivot}} \le 0.50 \times \overline{\text{Volume}}_{50}$
+
+### 8. 多阶段情景 DCF 估值矩阵与 WACC 资本成本方程
+$$PV = \sum_{t=1}^{N_1} \frac{\text{FCFF}_t}{(1+WACC)^t} + \sum_{j=N_1+1}^{N_2} \frac{\text{FCFF}_j}{(1+WACC)^j} + \frac{\text{FCFF}_{N_2} (1+g)}{(WACC - g)(1+WACC)^{N_2}}$$
+- 悲观底价（$WACC+200\text{bps}, g=1.5\%$）、中性公允（基准参数）、乐观靶心（护城河扩张）。
+
+### 9. 41 大细分行业因果敏感性弹性系数模型
+$$\frac{\Delta \text{EBIT}_i}{\text{EBIT}_i} = \sum_{k=1}^m \epsilon_{i, k} \cdot \frac{\Delta X_k}{X_k}$$
+（覆盖半导体、软件、工业机械、汽车、能源、银行等 41 个行业专属边际弹性系数）。
+
+### 10. 小资金非对称高爆发倒金字塔加仓与极速保本模型 (Small-Cap Asymmetric Execution)
+针对非机构小资金定制的爆发型量化数学体系：
+- **极限硬止损方程**：$\text{StopLossPrice} = \text{PivotPrice} \times (1.0 - 0.035)$（单笔试错成本硬锁在 $-3.5\%$，定义单股风险 $R = 0.035 \times \text{PivotPrice}$）；
+- **6:1 跃升盈亏比目标**：$\text{TargetProfitPrice} = \text{PivotPrice} + 6.0 \times R = \text{PivotPrice} \times (1.0 + 0.21)$（目标 $+21.0\% \sim +30.0\%$ 爆发靶心）；
+- **1.5R 极速零风险保本机制 (Free-Roll Breakeven Valve)**：当浮盈达到 $1.5R$（约 $+5.0\%$）时，强制将止损线上移至买入成本价，达成**绝对零风险（Free-Roll）**；
+- **倒金字塔顺势加仓梯队**：首次突破试探建仓 $50\%$ ➔ 浮盈 $+5\%$ 顺势加仓 $30\%$ ➔ 浮盈 $+10\%$ 主升浪锁仓 $20\%$；
+- **物理逃逸动能真伪核验门禁**：$R_E = \frac{E_k}{E_p + \epsilon} \times (\text{Vol}/\overline{\text{Vol}}_{50})^{0.5} \ge 1.0$，过滤冲高回落诱多假突破。
+
+---
+
+## 三、 【核心专章】AI 使用与 Skills 技能调用指南 (AI Agent & Skill Invocation Guide)
+
+本章节为大语言模型（Claude、ChatGPT、本地开源模型等）以及各种自主 Agent 体系（Claude Code、AutoGPT、LangChain、CrewAI、AutoGen）提供标准化的技能识别、调用契约与输出规范。
+
+### 1. 技能定位与工程位置
+本工程已将完整的量化投研体系原生打包为 Agent Skill：
+- **项目专属技能路径**：`.claude/skills/shuiyuan-analysis/SKILL.md`（Git 版本受控）
+- **根目录技能路径**：`SKILL.md`
+- **技能名称**：`shuiyuan-analysis` (v6.3.0)
+- **技能角色**：买方首席量化策略师 (Buy-Side Chief Quant Strategist)
+
+### 2. AI 意图识别与场景触发路由矩阵
+当用户在对话中表达以下意图或关键词时，AI Agent 必须主动识别并路由调用本技能：
+
+| 用户自然语言意图 | 典型关键词 / 触发句 | 对应执行模式 | 核心调用底层模块 |
 | :--- | :--- | :--- | :--- |
-| `00-水源投研系统产品设计总纲与分层工程方法论.md` | 初始总纲设计 | 完整吸收至 **SPEC-01** 与 **SPEC-04** | 已被吸收归并 (SUPERSEDED) |
-| `00a-买方投研业务场景需求调研与一二期边界划分书.md` | 需求与边界调研 | 完整吸收至 **SPEC-01** (系统愿景) | 已被吸收归并 (SUPERSEDED) |
-| `00b-买方研报多模态呈现规范与视觉Token设计说明书.md` | 视觉与Token规范 | 完整吸收至 **SPEC-02** | 已被吸收归并 (SUPERSEDED) |
-| `01-项目范围与总体框架.md` | 项目范围基线 | 完整吸收至 **SPEC-01** | 已被吸收归并 (SUPERSEDED) |
-| `03-六步分析Schema与流程规则.md` | 六步法初始规范 | 完整吸收至 **SPEC-04** 与 **SPEC-12** | 已被吸收归并 (SUPERSEDED) |
-| `04-数据与证据管理.md` | 早期数据证据规范 | 完整吸收至 **SPEC-05** | 已被吸收归并 (SUPERSEDED) |
-| `06-行业知识契约与软件样板.md` | 行业契约样板 | 完整吸收至 **SPEC-03** | 已被吸收归并 (SUPERSEDED) |
-| `07-开源金融计算库选型与缺口.md` | 金融公式选型 | 完整吸收至 **SPEC-06** | 已被吸收归并 (SUPERSEDED) |
-| `08-全栈工程命名架构与状态空间规范.md` | 命名空间规范 | 完整吸收至 **SPEC-01** 与 **SPEC-02** | 已被吸收归并 (SUPERSEDED) |
-| `09-金融计算工具功能设计.md` | 早期金融工具设计 | 完整吸收至 **SPEC-06** | 已被吸收归并 (SUPERSEDED) |
-| `09b-高阶金融定价与风控算法子说明书.md` | 期权与风控算法 | 完整吸收至 **SPEC-06** 与 **SPEC-08** | 已被吸收归并 (SUPERSEDED) |
-| `10-指标计算接入与行业样板.md` | 指标计算样板 | 完整吸收至 **SPEC-03** | 已被吸收归并 (SUPERSEDED) |
-| `12-免费数据接入功能设计.md` | 数据来源规范 | 完整吸收至 **SPEC-05** | 已被吸收归并 (SUPERSEDED) |
-| `14b-数据转换与汇率清洗程序设计文档.md` | 数据清洗与汇率 | 完整吸收至 **SPEC-05** | 已被吸收归并 (SUPERSEDED) |
-| `15-研究证据时间契约升级与迁移.md` | 证据时间戳规范 | 完整吸收至 **SPEC-04** 与 **SPEC-05** | 已被吸收归并 (SUPERSEDED) |
-| `16-正式事实到行业指标观测映射.md` | 指标观测映射 | 完整吸收至 **SPEC-03** | 已被吸收归并 (SUPERSEDED) |
-| `17-通用财务指标类与行业特定指标架构设计文档.md` | 财务与行业指标 | 完整吸收至 **SPEC-03** 与 **SPEC-06** | 已被吸收归并 (SUPERSEDED) |
-| `18-美股与日股核心标的归档与分析规范设计文档.md` | 标的归档规范 | 完整吸收至 **SPEC-10** | 已被吸收归并 (SUPERSEDED) |
-| `19-每日大盘研报工程化规范与生成程序设计文档.md` | 每日研报设计 | 完整吸收至 **SPEC-11** 与 **SPEC-02** | 已被吸收归并 (SUPERSEDED) |
-| `21-公司深度档案全息生成与契约设计文档.md` | 深度档案规范 | 完整吸收至 **SPEC-04** 与 **SPEC-10** | 已被吸收归并 (SUPERSEDED) |
-| `22-核心指数ETF与黄金大宗商品研究体系设计文档.md` | ETF 与黄金资产 | 完整吸收至 **SPEC-09** | 已被吸收归并 (SUPERSEDED) |
-| `23-微观基础宏观传导与制度风险引擎设计文档.md` | 宏观传导引擎 | 完整吸收至 **SPEC-09** | 已被吸收归并 (SUPERSEDED) |
-| `24-全球宏观生产总量与微观增加值闭环核算设计文档.md` | 增加值与平衡核算 | 完整吸收至 **SPEC-09** | 已被吸收归并 (SUPERSEDED) |
-| `25-市场自适应参数体系与买方量化因果推导网络设计文档.md` | 因果推导网络 | 完整吸收至 **SPEC-08** | 已被吸收归并 (SUPERSEDED) |
-| `26-千家全量资产池批量平账与流式建档技术设计文档.md` | 批量平账与建档 | 完整吸收至 **SPEC-10** 与 **SPEC-05** | 已被吸收归并 (SUPERSEDED) |
-| `27-买方机构级5-Sheet Excel深度研报建造器技术文档.md` | Excel 研报建造器 | 完整吸收至 **SPEC-02** 与 **SPEC-10** | 已被吸收归并 (SUPERSEDED) |
-| `28-多资产横向拓展流水线与4-Sheet联动工作簿技术文档.md` | 多资产拓展流水线 | 完整吸收至 **SPEC-09** 与 **SPEC-10** | 已被吸收归并 (SUPERSEDED) |
-| `29-AI智能投研代理与深度档案合成器技术与功能设计文档.md` | 深度档案合成器 | 完整吸收至 **SPEC-10** | 已被吸收归并 (SUPERSEDED) |
-| `30-数据治理闭环：AI浏览器定向补数中枢与官方归档SOP文档.md` | AI 补数中枢 SOP | 完整吸收至 **SPEC-05** | 已被吸收归并 (SUPERSEDED) |
-| `31-千家资产池顶层动态雷达与价值洼地主看板技术文档.md` | 顶层雷达与看板 | 完整吸收至 **SPEC-10** 与 **SPEC-02** | 已被吸收归并 (SUPERSEDED) |
-| `32-自动化买方投委会决策简报与每日大盘早报联动流水线技术文档.md` | 决策简报与联动 | 完整吸收至 **SPEC-11** | 已被吸收归并 (SUPERSEDED) |
-| `33-米奈尔维尼SEPA买入信号与价格时机引擎产品设计与字段契约规范.md` | SEPA 时机引擎 | 完整吸收至 **SPEC-07** | 已被吸收归并 (SUPERSEDED) |
-| `35-金融工具核心函数边界与测试数据业务场景全息说明书.md` | 函数边界与测试场景 | 完整吸收至 **SPEC-06** 与 **SPEC-12** | 已被吸收归并 (SUPERSEDED) |
+| **小资金高爆发加仓** | “小资金怎么做”、“高爆发策略”、“翻倍加仓计划”、“非对称买点”、“极紧止损” | `timing` (`--small-cap`) | `financial_core.engines.sepa_buy_signal_engine`<br>`FinancialAnalysisGateway.analyze_timing_and_execution` |
+| **机构稳健选股与时机** | “帮我选股”、“挑几只趋势突破标的”、“测一下某股票买点走廊” | `timing` | `finance_tools.screening.sepa_buy_signal_engine` |
+| **商业物理动力学分析** | “测一下某股票物理动量”、“动能势能比多少”、“是否达到逃逸速度” | `physics` | `financial_core.engines.universal_physical_dynamics_engine` |
+| **法务会计防舞弊核查** | “排查某公司财务造假”、“算一下 Beneish M-Score”、“排查应收账款粉饰” | `forensics` | `finance_tools.forensics_and_valuation.forensics_and_valuation` |
+| **破产违约距离测算** | “排查某公司债务违约风险”、“KMV-Merton 信用测算”、“暴雷排查” | `credit` | `financial_core.engines.credit_risk_engine` |
+| **流动性冲击与滑点** | “测算这只股票的买入容量”、“Amihud 滑点多少”、“排查微盘流动性陷阱” | `liquidity` | `finance_tools.risk_and_derivatives.risk_and_derivatives` |
+| **期权偏度与异动流** | “看下某股票期权偏度”、“期权主力异动”、“排查隔夜暴跌对冲大单” | `options` | `finance_tools.risk_and_derivatives.risk_and_derivatives` |
+| **宏观状态机与仓位预算**| “当前宏观是大牛市还是震荡”、“市场状态机识别”、“建议总仓位多少” | `regime` | `financial_core.engines.market_regime_switching_engine` |
+| **细分行业因果画像** | “分析半导体行业”、“软件行业驱动指标是什么”、“白酒行业催化与风险” | `industry` | `finance_tools.governance_and_pipeline.financial_analysis_gateway` |
+| **全景多模型综合诊断** | “全面诊断 NVDA”、“一键多模型诊断”、“全息买方评级” | `all` | `FinancialAnalysisGateway.analyze_comprehensive` |
+| **产业链涟漪传导推演** | “台积电停电影响苹果和ASML多少”、“代工厂断供上下游如何传导” | `ripple` | `scripts/run_supply_chain_ripple_analysis.py` |
+| **多业务分部 (SOTP) 穿透**| “某公司云业务停机损失多少”、“SOTP 因果穿透” | `sotp` | `scripts/run_sotp_event_penetration.py` |
 
 ---
 
-## 四、 维护与演进契约 (Evolution Protocol)
+### 3. 调用方式一：Claude Code / AI Agent Slash Command (`/shuiyuan-analysis`)
+在支持 Claude Code 或 Agent SDK 的终端中，AI 或用户可以直接输入斜杠命令调用：
+```bash
+/shuiyuan-analysis
+```
+或带参数传递具体诉求：
+```bash
+/shuiyuan-analysis 帮我用小资金高爆发模式分析 NVDA 的当前买点与倒金字塔加仓计划
+```
 
-1. **唯一入口原则**：后续任何业务逻辑变更、算法升级或数据模型调整，必须直接修订对应的 `SPEC-01` 至 `SPEC-12` 典籍，严禁随意新增孤立的单篇设计文件。
-2. **单一事实来源一致性**：若代码实现与设计规范发生分歧，必须依据实际业务因果链审阅并由代码通过全量单元测试与架构完整性门禁后，同步更新对应 SPEC 典籍。
-3. **版本可审计性**：所有 SPEC 修订均通过 Git 密码学提交进行原子留存，确保每项设计变更均具备清晰的历史因果与上下文线索。
+---
+
+### 4. 调用方式二：Python API 级统一网关调用 (`FinancialAnalysisGateway`)
+在 Python 脚本或 Agent 代码内部，直接通过单一事实来源网关执行 0-Token 纯本地计算：
+
+```python
+from finance_tools.governance_and_pipeline.financial_analysis_gateway import (
+    FinancialAnalysisGateway,
+)
+
+gateway = FinancialAnalysisGateway.get_instance()
+
+# 示例 1: 小资金非对称高爆发加仓计划与时机分析
+timing_result = gateway.analyze_timing_and_execution(
+    symbol="NVDA",
+    raw_bars=daily_bars_list,  # 包含 date, open, high, low, close, volume, turnover 的字典列表
+    profile="Aggressive_Small_Cap",  # 关键：指定小资金画像
+)
+print("小资金硬止损线:", timing_result["small_cap_plan"]["hard_stop_loss_price"])
+print("1.5R 零风险平保触发价:", timing_result["small_cap_plan"]["breakeven_trigger_price"])
+print("6:1 目标盈利靶心:", timing_result["small_cap_plan"]["target_profit_price"])
+print("倒金字塔第一加仓位:", timing_result["small_cap_plan"]["first_pyramid_price"])
+
+# 示例 2: 细分行业因果敏感性查询
+industry_report = gateway.analyze_industry("NVDA")  # 自动映射至 semiconductors
+print("行业核心驱动因子:", industry_report.key_drivers)
+print("会计关注点:", industry_report.accounting_focus)
+print("因果敏感性矩阵:", industry_report.causal_sensitivities)
+
+# 示例 3: 一键全景买方金融与行业融合诊断 (全模型联动)
+comp_report = gateway.analyze_comprehensive(
+    symbol="NVDA",
+    raw_bars=daily_bars_list,
+    market="US",
+    profile="Aggressive_Small_Cap",
+)
+print("终局行动裁决:", comp_report.actionable_verdict)
+print("结构化中文买方日记:", comp_report.executive_summary_zh)
+```
+
+---
+
+### 5. 调用方式三：终端 CLI 统一调度入口 (`run_financial_analysis_gateway.py`)
+AI 可以在系统后台或由用户通过 Bash/PowerShell 直接运行 CLI：
+
+```bash
+# 1. 小资金高爆发加仓与逃逸动能分析 (最常用)
+python scripts/run_financial_analysis_gateway.py --mode timing --target NVDA --small-cap
+
+# 2. 机构标准稳健选股与时机分析
+python scripts/run_financial_analysis_gateway.py --mode timing --target NVDA
+
+# 3. 细分行业知识与因果敏感性分析 (支持股票代码或行业名称)
+python scripts/run_financial_analysis_gateway.py --mode industry --target semiconductors
+python scripts/run_financial_analysis_gateway.py --mode industry --target 软件
+
+# 4. 商业物理动力学分析 (质量/动量/动能势能比/逃逸速度)
+python scripts/run_financial_analysis_gateway.py --mode physics --target NVDA
+
+# 5. 法务会计 Beneish M-Score 防舞弊核算
+python scripts/run_financial_analysis_gateway.py --mode forensics --target NVDA
+
+# 6. KMV-Merton 结构化信用违约与破产风险
+python scripts/run_financial_analysis_gateway.py --mode credit --target NVDA
+
+# 7. Amihud 微观流动性冲击与非线性动态滑点
+python scripts/run_financial_analysis_gateway.py --mode liquidity --target NVDA --order-value 100000
+
+# 8. 期权偏度与异动流
+python scripts/run_financial_analysis_gateway.py --mode options --target NVDA
+
+# 9. 宏观 3-状态高斯 HMM 识别
+python scripts/run_financial_analysis_gateway.py --mode regime --target SPY
+
+# 10. 全景买方融合综合诊断 (输出格式可选 text 或 json)
+python scripts/run_financial_analysis_gateway.py --mode all --target NVDA --small-cap --format text
+```
+
+---
+
+### 6. 资金画像模式切换：机构稳健 vs 小资金高爆发
+系统提供两种截然不同风险收益特征的执行画像，AI Agent 必须根据用户资金属性自适应切换：
+
+| 对比维度 | 机构稳健画像 (`Standard_Institutional`) | 小资金高爆发画像 (`Aggressive_Small_Cap`) |
+| :--- | :--- | :--- |
+| **设计核心目标** | 规避大幅回撤、兼顾容量、平滑净值曲线 | **极限非对称盈亏比、以窄止损博爆发翻倍** |
+| **硬止损阈值** | $-7.0\% \sim -8.0\%$ 宽止损缓冲 | **$-3.5\%$ 极限压紧硬止损**（严禁深套） |
+| **目标盈亏比 (R:R)** | $2.5:1 \sim 3.0:1$ 稳健获利目标 | **$6.0:1$ 非对称暴利靶心** ($+21.0\% \sim +30.0\%$) |
+| **保本平保机制** | 浮盈 $+10\%$ 或 $2.0R$ 触发平保 | **浮盈达到 $1.5R$ ($+5.0\%$) 立即无风险保本 (Free-Roll)** |
+| **加仓策略** | 单笔全额建仓或均分仓位 | **倒金字塔顺势加仓：50% ➔ +30% ➔ +20%** |
+| **物理逃逸门禁** | 仅作为参考动量指标 | **硬门禁：$R_E = E_k / E_p \ge 1.0$，拦截冲高回落** |
+| **适用人群** | 养老金、险资、大体量专户 | **小资金成长账户、追求高资本周转率与爆发力账户** |
+
+---
+
+### 7. AI 规范 Prompt 与结构化交付物模板
+
+#### A. AI Agent 必须遵守的 Prompt 约束规范：
+1. **前置行情时效与数据完备度声明**：每次回复开头，强制声明数据基准时间戳、交易时钟状态（盘前/盘中/盘后/前收盘），严禁模糊引用。
+2. **拒绝大表刷屏**：必须以清晰的“独立卡片”呈现买点走廊、阻力位、支撑位与执行价格。
+3. **严禁臆造数字**：所有财务指标、止损位、目标位必须由底层网关计算产出。
+4. **强制买方日记**：在输出末尾必须包含 `### 📝 【AI 投研日记与定性归纳】`，从微观流动性反身性、跨期因果、对手盘画像、非对称凸性四个维度进行深度思辨。
+
+#### B. 标准富文本交付卡片模板：
+```markdown
+### 🛡️ 【行情时效与数据完备度前置声明】
+- **基准时间戳**：2026-11-10 16:00:00 EDT (美股盘后结算价基准)
+- **数据新鲜度状态**：已完成官方历史日 K 线落盘核验，非未来虚假数据。
+
+---
+
+### 🎯 【标的买方量化诊断卡片：NVDA (英伟达)】
+- **资金画像模式**：【小资金高爆发非对称画像 (Aggressive_Small_Cap)】
+- **趋势形态判定**：SEPA 第二阶段主升浪已确立 | VCP 波动收缩 3T 收敛就绪
+- **物理逃逸动能比率 ($R_E$)**：`1.38` (达成火箭逃逸速度，突破有效，非冲高假突破)
+
+#### 🚀 【小资金非对称倒金字塔执行计划】
+| 阶梯阶段 | 触发条件 | 执行价格 | 仓位调度 | 风控与止损约束 |
+| :--- | :--- | :--- | :--- | :--- |
+| **Stage 1: 突破首建仓** | 突破 Pivot 枢轴点 | **$135.00** | **50%** 底仓 | **硬止损 $130.28 (-3.5%)**，风险敞口 $R = $4.72 |
+| **Stage 2: 顺势初加仓** | 突破次级平台 (+5.0%) | **$142.08** | **+30%** | **触发 1.5R 极速平保，止损线上移至成本价 $135.00 (Free-Roll 零风险)** |
+| **Stage 3: 主升浪锁仓** | 加速脱离成本 (+10.0%) | **$148.50** | **+20%** | **锁死全额仓位，追踪止盈** |
+| **Target: 终极爆发靶心**| 达成 6:1 盈亏比目标 | **$163.35** | **锁定利润** | **全仓实现 +21.00% 暴利靶心** |
+
+---
+
+### 📝 【AI 投研日记与定性归纳】
+1. **微观流动性与反身性**：NVDA 在 $135 枢轴点处换手率骤降至历史 50 日均量的 42%，筹码呈现高纯度锁定。买方大单在盘口不留痕迹，空头无法通过砸盘触发被动止损盘。
+2. **对手盘画像**：上方套牢盘在经历 3 次 VCP 收缩清洗后已彻底出清，当前主要对手盘为场外等待回调上车的踏空资金，一旦突破 $135 将引发空头挤压 (Gamma Squeeze)。
+3. **非对称凸性工程**：小资金绝不参与震荡磨损。以 -3.5% 的极窄试错成本去博取 6:1 的爆发空间，并在 +5% 处利用 1.5R 机制将下行风险彻底清零，实现纯白嫖式利润奔跑。
+```
+
+---
+
+## 四、 本地买方交易室推流服务与交互拓扑大屏
+
+系统内置纯标准库实现的轻量交易室推流服务 (`scripts/serve_radar_dashboard.py`)，零外部网络框架依赖：
+
+### 启动推流服务：
+```bash
+python scripts/serve_radar_dashboard.py --port 8899 --open-browser
+```
+服务将在本地 `http://127.0.0.1:8899` 启动并自动在浏览器中唤起大屏。
+
+### 交易室推流 REST API：
+- `GET /api/stream`: 提供心跳检测与增量未核实传闻事件流；
+- `GET /api/events`: 导出全量事件雷达底账与分级状态；
+- `GET /api/receipts`: 导出官方公报 SHA-256 密码学防伪鉴真收据；
+- `GET /api/supply-chain/topologies`: 获取当前注册的产业链拓扑架构；
+- `GET /api/supply-chain/ripple`: 动态执行断供冲击天数推演，推流上下游损益矩阵；
+- `POST /api/verify`: 接收官方下载文件路径，现场验签并解除传闻熔断限制。
+
+---
+
+## 五、 全盘万家资产池与流式批处理调度体系
+
+针对美股全市场（10,000+ 家）与东证全市场（4,400+ 家）共计全量数千家上市主体，系统采用分级资产池架构与流式调度管道：
+- **Tier 0 (P0)**：核心旗舰蓝筹（三表全息底稿、多情景 DCF、库存周转 DIO）；
+- **Tier 1 (P1)**：主线成长股（定期情景更新与买点跟踪）；
+- **Tier 2 / Tier 3 (P2/P3)**：全市场数千家上市公司的全息索引与 0-Token 极速初筛。
+- **流式分批管道 (Chunk-and-Stream)**：以 50~150 家企业为批次切片，边计算边落盘边推流，支持意外中断断点续传。
+
+---
+
+## 六、 四道架构防劣变验收硬门禁 (Non-Regression Gates)
+
+任何代码与文档变更，必须依次通过四道硬门禁方可交付：
+
+1. **架构完整性全息巡检**：
+   ```bash
+   python scripts/verify_architecture_integrity.py
+   ```
+   - 验证底层纯净金融核心零污染、全量模块导入零环路、门面与底账就绪。
+2. **全量单元测试与便携 CI 零失败**：
+   ```bash
+   python scripts/run_ci.py
+   python -m unittest discover -s scripts -p "test_*.py"
+   ```
+   - 保证测试数量只增不减，100% PASS。
+3. **四大治理回归全绿**：
+   ```bash
+   python scripts/test_data_store.py
+   python scripts/validate_knowledge_structure.py
+   python scripts/test_research_contract.py
+   python scripts/test_industry_mapping.py
+   ```
+4. **不可篡改密码学账本验签**：
+   ```bash
+   python -c "from financial_core.engines.prediction_ledger import PredictionLedger; assert PredictionLedger().verify_integrity()['tampered'] == False"
+   ```
+
+---
+
+## 七、 附录：12 本专责核心设计典籍 SSOT 地图
+
+系统深层规范收敛为 12 本专责设计典籍，确立排他的单一事实来源：
+
+| 典籍编号 | 典籍代号与文件路径 | 核心业务专责 (Responsibility Scope) | 权威单一事实来源 (SSOT) |
+| :--- | :--- | :--- | :--- |
+| **SPEC-01** | [`SPEC_01_系统总体架构与分层工程总纲.md`](docs/SPEC_01_系统总体架构与分层工程总纲.md) | 系统愿景、六大功能域全景、四层单向依赖与命名规范 | **系统顶层工程架构与分层铁律 SSOT** |
+| **SPEC-02** | [`SPEC_02_多模态视觉呈现与研报Token设计规范.md`](docs/SPEC_02_多模态视觉呈现与研报Token设计规范.md) | 买方研报排版、设计令牌、自然中文语义与无截断打印 | **研报排版、Token 与视觉契约 SSOT** |
+| **SPEC-03** | [`SPEC_03_行业知识中枢与微观商业机器解构规格书.md`](docs/SPEC_03_行业知识中枢与微观商业机器解构规格书.md) | 11 大板块 41 个行业知识中枢、所有者收益与动态护城河 | **行业知识、商业模式与护城河解构 SSOT** |
+| **SPEC-04** | [`SPEC_04_六步研究法与官方财报三表契约规范.md`](docs/SPEC_04_六步研究法与官方财报三表契约规范.md) | 六步研究法、官方三表强勾稽、营运资本循环 (DIO/DSO) | **六步研究法与官方三表动态勾稽 SSOT** |
+| **SPEC-05** | [`SPEC_05_数据采集AI浏览器补数与证据治理规范.md`](docs/SPEC_05_数据采集AI浏览器补数与证据治理规范.md) | 数据采集中枢、AI 浏览器补数 SOP、三表平账自检门禁 | **数据治理、AI 补数与平账证据链 SSOT** |
+| **SPEC-06** | [`SPEC_06_核心金融计算与多情景DCF估值引擎设计书.md`](docs/SPEC_06_核心金融计算与多情景DCF估值引擎设计书.md) | 纯净金融核心计算、三态情景 DCF、KMV-Merton 破产模型 | **金融数学公式、DCF 走廊与信用风险 SSOT** |
+| **SPEC-07** | [`SPEC_07_买方时机决策与技术足迹分析引擎设计书.md`](docs/SPEC_07_买方时机决策与技术足迹分析引擎设计书.md) | SEPA 买入信号引擎、8 大趋势硬指标、VCP 递归收敛 | **技术足迹分析与 SEPA 买入时机 SSOT** |
+| **SPEC-08** | [`SPEC_08_期权全周期因果分析与仓位风控引擎设计书.md`](docs/SPEC_08_期权全周期因果分析与仓位风控引擎设计书.md) | 期权因果推导、波动率曲面、无套利边界与 1/4 凯利仓位 | **期权定价因果链与仓位风控 SSOT** |
+| **SPEC-09** | [`SPEC_09_全球宏观流动性与跨资产配置体系设计书.md`](docs/SPEC_09_全球宏观流动性与跨资产配置体系设计书.md) | 宏观流动性雷达、美联储资产负债表、跨资产迁徙路径 | **宏观流动性传导与黑天鹅风控 SSOT** |
+| **SPEC-10** | [`SPEC_10_千家资产池流式建档与公司深度档案生成流水线.md`](docs/SPEC_10_千家资产池流式建档与公司深度档案生成流水线.md) | 万家企业资产池、流式分批建档流水线、5-Sheet Excel | **全盘资产池管理与流式建档流水线 SSOT** |
+| **SPEC-11** | [`SPEC_11_云端无头每日行情与研报自动化调度流水线.md`](docs/SPEC_11_云端无头每日行情与研报自动化调度流水线.md) | 美股/日股每日定时无头调度、行情时效核验门禁 | **云端无头自动化与定时调度流水线 SSOT** |
+| **SPEC-12** | [`SPEC_12_系统质量工程密码学账本与全息测试验收标准.md`](docs/SPEC_12_系统质量工程密码学账本与全息测试验收标准.md) | SHA-256 密码学不可篡改预测账本、四道架构验收硬门禁 | **质量工程、密码学验签与验收门禁 SSOT** |
