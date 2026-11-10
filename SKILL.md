@@ -1,18 +1,9 @@
 ---
 name: shuiyuan-analysis
-version: 6.3.0
-description: 水源分析——买方机构级股票量化投研、全市场趋势选股、十大硬核数学计算公式体系、小资金非对称高爆发倒金字塔加仓与产业链涟漪因果穿透 Agent Skill。覆盖全市场资产池（美股10,000+/日股4,400+/核心567）商业物理动力学动量逃逸模型、小资金极紧止损(-3.5%)与6:1盈亏比加仓计划、法务会计Beneish M-Score八维Probit防舞弊、KMV-Merton信用破产违约距离、Amihud微观流动性冲击与非线性滑点、期权偏度与异动流、宏观3状态高斯HMM、SEPA趋势模板选股、行情时效硬核验门禁、官方财报三表平账与多情景DCF估值、SOTP多业务分部损益穿透、多标的产业链上下游因果传导矩阵（DIO缓冲/转嫁权/有限责任下界）、突发事件雷达全天候守护与法定信源防伪鉴真、本地买方交易室推流交互大屏、以及 finance_tools 6 大高内聚子目录分包架构。
-license: Proprietary
-metadata:
-  author: Shuiyuan Quant Research Architecture Team
-  version: "6.3.0"
-  domain: quantitative-equity-research-and-supply-chain-ripple
-  triggers: 选股, 股票分析, 研报生成, 突发事件, 产业链涟漪, 产业链分析, SOTP, 业务分部拆解, 事件雷达, 行情时效, 财务估值, 趋势选股, DCF估值, 买点推演, 交易室大屏, 金融计算, 数学公式, 物理动力学, Beneish, Merton, Amihud, 期权偏度, 宏观状态机, 小资金高爆发, 倒金字塔加仓, 极紧止损, 翻倍, shuiyuan-analysis
-  role: buy-side-chief-quant-strategist
-  scope: full-stack-equity-research-and-ripple-dynamics
+description: 买方机构级股票量化投研、全市场趋势选股、十大硬核数学计算公式体系、AI防呆心智模型与刚性防走弯路决策树、小资金非对称高爆发倒金字塔加仓与产业链涟漪因果穿透 Agent Skill。覆盖全市场资产池（美股10,000+/日股4,400+/核心567）商业物理动力学动量逃逸模型、小资金极紧止损(-3.5%)与6:1盈亏比加仓计划、法务会计Beneish M-Score八维Probit防舞弊、KMV-Merton信用破产违约距离、Amihud微观流动性冲击与非线性滑点、期权偏度与异动流、宏观3状态高斯HMM、SEPA趋势模板选股、行情时效硬核验门禁、官方财报三表平账与多情景DCF估值、SOTP多业务分部损益穿透、多标的产业链上下游因果传导矩阵（DIO缓冲/转嫁权/有限责任下界）、突发事件雷达全天候守护与法定信源防伪鉴真、本地买方交易室推流交互大屏、以及 finance_tools 6 大高内聚子目录分包架构。当用户提出选股、股票诊断、买卖时机、宏观利率影响、产业链影响或小资金加仓方案时触发。
 ---
 
-# 水源分析 Agent Skill (v6.3.0 买方数学量化计算、物理动力学、小资金高爆发与分包架构版)
+# 水源分析 Agent Skill (买方数学量化计算、AI防走弯路决策树与小资金高爆发版)
 
 买方机构级股票量化选股、微观法证审计、SOTP 业务分部穿透、多标的产业链涟漪传导矩阵、全天候事件雷达推流大屏与 6 大业务工具子包架构。
 
@@ -30,6 +21,44 @@ metadata:
 > 3. **系统闭环复盘与贝叶斯自我演进 (Retrospective Reflection & Bayesian Evolution)**：
 >    - 每日对账前期预测走廊与今日真实结算，从流动性踩踏、预期差反转、对手盘被迫平仓等深层机理执行四维法证归因；
 >    - 动态联合校准贝叶斯先验矩阵（更新波动率溢价、安全边际缓冲与仓位分配分布）。
+
+---
+
+## 第零章：AI 防呆心智模型与刚性防走弯路决策树 (Anti-Detour Protocol)
+
+为了杜绝大模型在面对用户提问时“凭经验随意选股、违抗一票否决、乱走弯路”的通病，AI Agent 在激活本技能后，**必须严格按照以下刚性状态机决策树推进，严禁抄近道或跨越阶段**：
+
+```mermaid
+flowchart TD
+    UserQuery["用户输入需求"] --> IntentRouter{"意图类别识别"}
+
+    %% 分支 A: 选股场景
+    IntentRouter -- "【A. 选股/推荐/买哪个/找主升浪】" --> GateScreening["【第一步：调用全盘初筛网关】\nFinancialAnalysisGateway.get_top_screening_candidates\n(纯本地 0-Token 扫描 14,892 家全盘资产池)"]
+    GateScreening --> ScreenCheck{"全票通过 Stage_2_Pivot_Ready?"}
+    ScreenCheck -- "无标的通过" --> FallbackReport["坦诚输出：当前大盘震荡，全盘 0 家突破就绪，建议耐心空仓盯盘"]
+    ScreenCheck -- "有标的通过" --> TopCandidates["提取 Top 1~3 真实合规候选标的\n(如 AVGO, JNJ 等 VCP 4T 地量收敛标的)"]
+    TopCandidates --> TripleDefense["【第二步：微观法证三道硬门禁】\n1. Beneish M-Score <= -1.78 (防造假)\n2. KMV-Merton DD > 3.0 (防破产)\n3. Amihud 滑点合格 (防微盘流动性陷阱)"]
+    TripleDefense --> EscapeCheck{"【第三步：物理逃逸动能比率】\nR_E = E_k / E_p >= 1.0 ?"}
+    EscapeCheck -- "通过 (强动能真突破)" --> SmallCapPlan["【第四步：小资金倒金字塔加仓计划】\n- 突破买入枢轴价 (Pivot)\n- -3.5% 极限硬止损\n- 1.5R (+5%) 极速无风险平保 (Free-Roll)\n- 6:1 跃升盈利目标 (+21%)\n- 变现周期 (1-3天止损 / 3-6周主升浪)"]
+    EscapeCheck -- "未通过 (R_E < 1.0)" --> WatchlistWarning["警示：动能蓄势中，阻力势能未破，必须设条件停损单，严禁市价追涨"]
+
+    %% 分支 B: 单股体检场景
+    IntentRouter -- "【B. 指定具体股票体检 (如'分析 NVDA')】" --> FreshnessGate["【第一步：时效与平账门禁】\n1. verify_quote_freshness (声明时钟时效)\n2. OfficialFilingMapper (A = L + E 平账自检)"]
+    FreshnessGate --> SEPACheck["【第二步：SEPA 8 大趋势与生命周期测算】\nsepa_buy_signal_engine"]
+    SEPACheck --> TrendVerdict{"buy_signal == Out_Of_Trend 或非 Stage 2?"}
+    TrendVerdict -- "是 (一票否决/筑底期/出货期)" --> HardReject["🛑 【刚性驳回与警示】\n必须明确声明：'该标的处于第一阶段筑底期/第四阶段破位期，趋势一票否决，严禁买入，移出交易计划！'\n严禁私自包装成买入推荐！"]
+    TrendVerdict -- "否 (Stage 2 确立)" --> FullDiagnosis["进入全景多模型诊断与加仓卡片输出"]
+```
+
+> [!CAUTION]
+> **AI 必须严格执行的四大绝对禁令 (Four Non-Negotiable Prohibitions)**：
+> 1. **严禁凭空主观“选美”与单股硬套**：面对任何“今天买哪个、挑几只股票、有什么好股票”等选股请求，**严禁从脑海中或局部缓存中随意挑选耳熟能详的大股票（如 NVDA, AAPL）直接推荐**！必须强制调用全盘初筛网关 (`FinancialAnalysisGateway.get_top_screening_candidates` 或 `--mode screening`)，从全盘 14,892 家企业的客观数学扫描结果中提取真正 `Stage_2_Pivot_Ready`（第二阶段主升浪且 VCP 4T 收缩）的 Top 标的！
+> 2. **严禁公然违抗底层引擎的“一票否决”判定**：当底层 SEPA 时机引擎输出 `Out_Of_Trend`（趋势一票否决）或 `trend_stage_zh` 为“第一阶段筑底期”或“第四阶段出货期”时，**必须无条件亮红灯驳回并明确劝阻用户，严禁私自包装成挂单或抄底计划推给用户**！
+> 3. **严格区分“全市场选股漏斗”与“单标的被动诊断”**：
+>    - 意图 A（选股）：自下而上漏斗初筛 ➔ Top 1 过滤 ➔ 法务信用排雷 ➔ 动能逃逸验证 ➔ 小资金加仓卡片；
+>    - 意图 B（指定单股诊断，如“分析 NVDA”）：时效核验 ➔ 三表平账 ➔ 全景诊断 ➔ 给出纯客观诊断结论（若非主升浪直接警告一票否决）。
+> 4. **小资金执行方案必须五要素闭环锁死**：
+>    必须同时输出：买入枢轴价 (Pivot)、-3.5% 极限硬止损价、1.5R 极速平保价 (Free-Roll)、6:1 跃升盈利靶心价 (+21%)、以及预计变现持有周期（假突破 1~3 天，保本 1~2 周，主升浪 3~6 周）。
 
 ---
 
@@ -417,7 +446,7 @@ python scripts/serve_radar_dashboard.py --port 8899 --open-browser
 | `scripts/generate_deep_dossier.py` | 公司深度投研档案自动化生成 | `python scripts/generate_deep_dossier.py --ticker NVDA` |
 | `scripts/generate_daily_briefing.py` | 美股/日股大盘每日研报生成 | `python scripts/generate_daily_briefing.py --market US` |
 | `scripts/run_10k_universe_pipeline.py` | 全盘资产池批处理调度流水线 | `python scripts/run_10k_universe_pipeline.py --chunk-size 50` |
-| `scripts/run_financial_analysis_gateway.py` | 金融计算与细分行业分析统一调度入口 (行业/物理/法务/信用/流动性/期权/宏观/全景) | `python scripts/run_financial_analysis_gateway.py --mode all --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode industry --target semiconductors`<br>`python scripts/run_financial_analysis_gateway.py --mode physics --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode forensics --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode credit --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode liquidity --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode options --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode regime --ticker SPY` |
+| `scripts/run_financial_analysis_gateway.py` | 金融计算与细分行业分析统一调度入口 (初筛/行业/物理/法务/信用/流动性/期权/宏观/时机/全景) | `python scripts/run_financial_analysis_gateway.py --mode screening --top 10`<br>`python scripts/run_financial_analysis_gateway.py --mode timing --ticker AVGO --small-cap`<br>`python scripts/run_financial_analysis_gateway.py --mode all --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode industry --target semiconductors`<br>`python scripts/run_financial_analysis_gateway.py --mode physics --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode forensics --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode credit --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode liquidity --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode options --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode regime --ticker SPY` |
 
 ---
 
@@ -447,23 +476,3 @@ python scripts/serve_radar_dashboard.py --port 8899 --open-browser
    ```bash
    python -c "from financial_core.engines.prediction_ledger import PredictionLedger; assert PredictionLedger().verify_integrity()['tampered'] == False"
    ```
-
----
-
-## 七、 版本演进记录 (CHANGELOG)
-
-- **v6.2.0 (2026-11-10)**: **核心数学计算模型与金融物理公式库全面入典**。
-  - 将通用商业物理动力学（质量/动量/动能势能比/逃逸速度/阻尼振荡半衰期）、法务会计 Beneish M-Score 八维 Probit 概率方程、KMV-Merton 结构化信用违约方程、Amihud 微观流动性冲击与动态非线性滑点模型、期权偏度与异动流、宏观 3-状态高斯 HMM、SEPA 8 大硬指标、多情景 DCF 及 41 大细分行业因果弹性模型完整植入 Skill 规范。
-- **v6.1.0 (2026-11-08)**: **实测风控评估报告归档、失效场景防御体系设计与 finance_tools 6 大高内聚子目录分包重构**。
-  - **实测风控报告正式归档**：将 10 年 826 标的跨周期对撞回测评估与五大模型实测报告归档入典 (`docs/36-量化交易系统全息评估与风控架构实测报告.md`)；
-  - **失效场景防御与增量中枢设计**：落地 Amihud 流动性门禁、Merton 信用破产距离、Beneish M-Score 法证及央行流动性脉冲等系统化防御体系技术设计 (`docs/37-实测失效场景系统化防御体系与增量信息中枢架构设计文档.md`)；
-  - **金融工具模块分包重组**：将 `finance_tools/` 扁平膨胀的 42 个模块彻底按业务职能解耦为 `screening/`、`forensics_and_valuation/`、`risk_and_derivatives/`、`macro_and_ripple/`、`events_and_verification/`、`governance_and_pipeline/` 六大高内聚子包，并在根目录提供 100% 向下兼容门面，既有导入零破坏直接复用。
-- **v6.0.0 (2026-11-08)**: **全市场选股、SOTP 因果穿透、多标的产业链涟漪矩阵与交易室推流大屏全面封装合流**。
-  - **SEPA 趋势选股与时效门禁合流**：整合全市场资产池（美股10k+/日股4.4k+/核心567）扫描、SEPA 8 大硬指标、VCP 4T 收缩、价格走廊与 `verify_quote_freshness` 硬核门禁；
-  - **SOTP 多业务分部因果穿透**：上线综合巨头跨业务分部微观物理损益折算模型，告别单一标签粗糙估值；
-  - **多标的产业链上下游涟漪效应传导矩阵**：建立存货周转天数 (DIO) 吸收周期、议价转嫁冲销、下游大客户二级传导与有限责任区间数学边界防御机制；
-  - **突发事件雷达与法定防伪鉴真**：上线 0-Token 本地初筛、AI 浏览器定向核验助手、SHA-256 密码学公报防伪鉴真流水线与传闻熔断解除机制；
-  - **本地买方交易室推流服务**：基于 Python 标准库构建轻量 HTTP推流服务 (`serve_radar_dashboard.py`)，提供 `/api/stream`、`/api/events`、`/api/supply-chain/ripple` 等 REST 接口与交互拓扑大屏。
-- **v5.0.0 (2026-10-15)**: 买方高阶投研认知模型与投研闭环复盘反思体系全面上线。
-- **v4.1.0 (2026-10-15)**: 官方三表刚性平账自检与交易时钟区间核验上线。
-- **v4.0.0 (2026-10-14)**: 金融分析核心与 Skill 网关彻底物理解耦。

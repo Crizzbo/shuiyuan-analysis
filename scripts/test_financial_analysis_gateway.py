@@ -177,6 +177,22 @@ class FinancialAnalysisGatewayTests(unittest.TestCase):
         self.assertIn("3.50%", comp.executive_summary_zh)
         self.assertIn("倒金字塔梯队", comp.executive_summary_zh)
 
+    def test_screening_candidates_aggregation(self) -> None:
+        """测试全盘初筛准入优质候选池聚合与排序."""
+        data = self.gateway.get_top_screening_candidates(top_n=5, market="ALL")
+        self.assertIn("source_result_chunks_count", data)
+        self.assertIn("total_qualified_count", data)
+        self.assertIn("tier0_pivot_ready_count", data)
+        self.assertIn("top_pivot_ready_candidates", data)
+        self.assertIn("top_watchlist_candidates", data)
+        self.assertIsInstance(data["top_pivot_ready_candidates"], list)
+        self.assertLessEqual(len(data["top_pivot_ready_candidates"]), 5)
+
+        # 测试市场过滤
+        data_us = self.gateway.get_top_screening_candidates(top_n=5, market="US")
+        for c in data_us["top_pivot_ready_candidates"]:
+            self.assertEqual(c["market"], "US")
+
 
 if __name__ == "__main__":
     unittest.main()

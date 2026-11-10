@@ -56,8 +56,12 @@ class ScreeningCandidateRanker:
         """扫描所有已筛分块，聚合并排序 Stage_2_Pivot_Ready 与 Watchlist_Forming 标的."""
         if not self.results_dir.exists():
             return {
+                "title": "全盘初筛准入优质候选池总账 (Qualified Screening Candidates)",
                 "updated_at": datetime.now(timezone.utc).isoformat(),
-                "total_screened_files": 0,
+                "source_result_chunks_count": 0,
+                "total_qualified_count": 0,
+                "tier0_pivot_ready_count": 0,
+                "tier1_watchlist_count": 0,
                 "pivot_ready_candidates": [],
                 "watchlist_candidates": [],
             }

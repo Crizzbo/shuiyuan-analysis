@@ -52,10 +52,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="水源分析 - 金融计算与行业因果分析统一网关")
     parser.add_argument(
         "--mode",
-        choices=["industry", "physics", "forensics", "credit", "liquidity", "options", "regime", "timing", "all"],
+        choices=["screening", "industry", "physics", "forensics", "credit", "liquidity", "options", "regime", "timing", "all"],
         default="all",
-        help="分析模式选择",
+        help="分析模式选择 (screening: 全盘初筛准入池优选; timing: 买方时机与倒金字塔加仓; all: 全景综合诊断)",
     )
+    parser.add_argument("--top", type=int, default=10, help="展示前 N 名核心标的 (针对 screening 模式)")
     parser.add_argument("--ticker", "--target", dest="target", default="NVDA", help="股票代码或行业名称/ID")
     parser.add_argument("--market", default="US", choices=["US", "JP"], help="交易所市场")
     parser.add_argument("--format", choices=["text", "json"], default="text", help="输出格式")
@@ -85,7 +86,15 @@ def main() -> None:
 
     result: Dict[str, Any] = {}
 
-    if args.mode == "industry":
+    if args.mode == "screening":
+        data = gateway.get_top_screening_candidates(top_n=args.top, market=args.market)
+        result = {
+            "mode": "screening",
+            "market": args.market,
+            "data": data,
+        }
+
+    elif args.mode == "industry":
         report = gateway.analyze_industry(target)
         result = {
             "mode": "industry",
@@ -209,7 +218,20 @@ def main() -> None:
         print("=" * 72)
         print(f"【水源买方金融与行业分析网关】执行模式: {args.mode.upper()} | 目标: {target}")
         print("=" * 72)
-        if args.mode == "all":
+        if args.mode == "screening":
+            d = result.get("data", {})
+            print(f"全盘初筛聚合统计: 已完成分块 {d.get('source_result_chunks_count')} 批 | 枢轴突破就绪标的 {d.get('tier0_pivot_ready_count')} 家")
+            print("-" * 72)
+            print("★ 核心旗舰买点池 · 枢轴突破就绪 (Top 标的):")
+            for idx, c in enumerate(d.get("top_pivot_ready_candidates", []), 1):
+                print(
+                    f"  {idx:>2}. [{c.get('market')}] {c.get('ticker'):<6} ({c.get('company_name')[:20]:<20}) "
+                    f"| 现价: ${c.get('latest_price', 0.0):>7.2f} "
+                    f"| 突破买点: ${c.get('pivot_price', 0.0):>7.2f} "
+                    f"| VCP: {c.get('vcp_code'):<12} "
+                    f"| 抽干比: {c.get('dryup_ratio', 1.0) * 100:>4.1f}%"
+                )
+        elif args.mode == "all":
             print(result.get("executive_summary_zh", ""))
             print("-" * 72)
             print(f"终局行动裁决: 【{result.get('actionable_verdict')}】")

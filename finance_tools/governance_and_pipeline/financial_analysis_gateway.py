@@ -637,3 +637,27 @@ class FinancialAnalysisGateway:
             executive_summary_zh=summary,
             actionable_verdict=verdict,
         )
+
+    def get_top_screening_candidates(
+        self, top_n: int = 10, market: str = "ALL"
+    ) -> Dict[str, Any]:
+        """单一事实来源：获取全盘初筛准入的顶级优质候选标的 (Stage_2_Pivot_Ready 与 Watchlist)."""
+        from finance_tools.screening.screening_candidate_ranker import ScreeningCandidateRanker
+        ranker = ScreeningCandidateRanker()
+        data = ranker.aggregate_and_rank_candidates()
+        pivots = data.get("pivot_ready_candidates", [])
+        watchlists = data.get("watchlist_candidates", [])
+
+        if market.upper() != "ALL":
+            pivots = [c for c in pivots if c.get("market") == market.upper()]
+            watchlists = [c for c in watchlists if c.get("market") == market.upper()]
+
+        return {
+            "source_result_chunks_count": data.get("source_result_chunks_count", 0),
+            "total_qualified_count": len(pivots) + len(watchlists),
+            "tier0_pivot_ready_count": len(pivots),
+            "tier1_watchlist_count": len(watchlists),
+            "top_pivot_ready_candidates": pivots[:top_n],
+            "top_watchlist_candidates": watchlists[:top_n],
+        }
+

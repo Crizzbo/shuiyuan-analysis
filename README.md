@@ -1,6 +1,6 @@
 # 水源智能量化投研系统 (Shuiyuan Quant Research & Intelligence System)
 
-> **版本**：`v6.3.0`  
+> **版本**：`v6.4.0`  
 > **定位**：买方机构级全市场量化趋势选股、商业物理动力学动量逃逸、法务会计与信用风控、SOTP分部与多标的产业链因果穿透、小资金非对称高爆发倒金字塔加仓、全天候交易室推流大屏与 AI Agent Skill 一体化投研系统。  
 > **核心原则**：程序负责坚硬客观的数据骨架（0-Token 本地数学计算、时效硬核验门禁、三表刚性平账），AI 负责赋予六维立体的买方认知血肉（反身性、对手盘、因果穿透、非对称凸性）。
 
@@ -10,6 +10,7 @@
 - [一、 系统核心工程哲学与分层架构](#一-系统核心工程哲学与分层架构)
 - [二、 十大硬核数学计算模型与金融物理动力学公式全集](#二-十大硬核数学计算模型与金融物理动力学公式全集)
 - [三、 【核心专章】AI 使用与 Skills 技能调用指南 (AI Agent & Skill Invocation Guide)](#三-核心专章ai-使用与-skills-技能调用指南-ai-agent--skill-invocation-guide)
+  - [0. AI 防呆心智模型与刚性防走弯路决策树 (Anti-Detour Protocol)](#0-ai-防呆心智模型与刚性防走弯路决策树-anti-detour-protocol)
   - [1. 技能定位与工程位置](#1-技能定位与工程位置)
   - [2. AI 意图识别与场景触发路由矩阵](#2-ai-意图识别与场景触发路由矩阵)
   - [3. 调用方式一：Claude Code / AI Agent Slash Command (`/shuiyuan-analysis`)](#3-调用方式一claude-code--ai-agent-slash-command-shuiyuan-analysis)
@@ -144,11 +145,62 @@ $$\frac{\Delta \text{EBIT}_i}{\text{EBIT}_i} = \sum_{k=1}^m \epsilon_{i, k} \cdo
 
 本章节为大语言模型（Claude、ChatGPT、本地开源模型等）以及各种自主 Agent 体系（Claude Code、AutoGPT、LangChain、CrewAI、AutoGen）提供标准化的技能识别、调用契约与输出规范。
 
+### 0. AI 防呆心智模型与刚性防走弯路决策树 (Anti-Detour Protocol)
+
+> **核心戒律：程序负责坚硬客观的数据骨架，AI 负责六维立体的认知血肉。严禁直觉先行、严禁无据荐股。**
+
+#### 决策树分流状态机 (Deterministic Cognitive State Machine)
+```
+                    [用户输入意图判定]
+                            │
+        ┌───────────────────┴───────────────────┐
+        ▼                                       ▼
+  【意图 A: 选股 / 推荐股票】             【意图 B: 指定标的诊断】
+  ("买哪个" / "选股" / "找标的")          ("分析NVDA" / "AAPL买点")
+        │                                       │
+        ▼                                       ▼
+[步骤 1: 物理全盘初筛准入池获取]        [步骤 1: 行情时效硬门禁核查]
+python scripts/run_financial_analysis_gateway.py  verify_quote_freshness
+  --mode screening --top 10                       ↓ 显式声明时间戳与盘段
+        │                               [步骤 2: 财报三表平衡自检]
+        ▼                               Assets == Liabilities + Equity
+[步骤 2: 纯客观候选池排名锁定]                  ↓ 严禁未平账脏数据入模
+严格锁定 Stage_2_Pivot_Ready 标的       [步骤 3: SEPA 趋势模板客观计算]
+严禁从自身记忆中随机挑选热门大票!               ↓ 50/150/200日均线与RS评分
+        │                                       ├─ Out_Of_Trend? ──► [一票硬否决 终止]
+        ▼                                       └─ Stage_2_Uptrend ──► 准入
+[步骤 3: 标的法务会计与破产排查]                        │
+Beneish M-Score & KMV 违约距离                  ▼
+        │                               [步骤 4: 六大模型与物理动量全息推演]
+        ▼                               逃逸动能比 RE、期权偏度、Amihud滑点
+[步骤 4: 小资金/机构操盘要素锁定]                       │
+开仓枢轴 + 紧止损 + 6:1盈亏比 + 周期                    ▼
+        │                               [步骤 5: 结构化买方研报日记交付]
+        └───────────────────────┬───────────────┘
+                                ▼
+                    【规范化买方决策输出】
+```
+
+#### 四大绝对禁令 (Four Non-Negotiable Prohibitions)
+1. **禁令一：严禁不调网关、凭直觉脑补推荐热门股票**
+   - 凡遇到用户询问“买哪个”、“推荐股票”、“今天买什么”等选股请求，**严禁**直接从模型记忆中挑选熟知的大票（如毫无理由直接推 NVDA、AAPL、TSLA）；
+   - **必须物理执行** `FinancialAnalysisGateway.get_top_screening_candidates()` 或 CLI `--mode screening`，从美日 14,892 家全盘资产池初筛准入的客观名单中输出。
+2. **禁令二：严禁推翻量化引擎的“一票否决权”**
+   - 若 SEPA 引擎判定股票处于 Stage 4（阴跌期）或 Stage 1（筑底震荡期），或趋势判定为 `Out_Of_Trend`，AI **严禁**为了讨好用户或主观找理由将其包装为“具备投资价值”；
+   - 必须坚决执行 `HARD_REJECT_DISQUALIFIED` 否决评级并给出警示。
+3. **禁令三：严格区分“全盘初筛 (Inward)”与“个股体检 (Outward)”认知路径**
+   - 寻找标的走 **全盘初筛路径**：全盘底账 $\to$ 突破就绪标的 $\to$ 行业与法务过滤 $\to$ 输出执行计划；
+   - 诊断指定股票走 **深度体检路径**：时效门禁 $\to$ 三表平账 $\to$ 趋势准入 $\to$ 物理逃逸 $\to$ 估值与加仓。
+4. **禁令四：小资金操盘五要素硬锁定 (Five-Element Small-Cap Lock)**
+   - 凡涉及小资金高爆发方案，必须在报告首段显式锁死：① 开仓突破枢轴价 ($P_{pivot}$)、② -3.5% 刚性硬止损价 ($P_{stop}$)、③ 1.5R (+5.0%) 零风险平保触发价 ($P_{breakeven}$)、④ 6:1 目标盈利靶心 ($P_{target}$)、⑤ 预期持有兑现时间周期 (2~8 周)。缺失任何一要素均属严重违规。
+
+---
+
 ### 1. 技能定位与工程位置
 本工程已将完整的量化投研体系原生打包为 Agent Skill：
 - **项目专属技能路径**：`.claude/skills/shuiyuan-analysis/SKILL.md`（Git 版本受控）
 - **根目录技能路径**：`SKILL.md`
-- **技能名称**：`shuiyuan-analysis` (v6.3.0)
+- **技能名称**：`shuiyuan-analysis` (v6.4.0)
 - **技能角色**：买方首席量化策略师 (Buy-Side Chief Quant Strategist)
 
 ### 2. AI 意图识别与场景触发路由矩阵
@@ -156,8 +208,9 @@ $$\frac{\Delta \text{EBIT}_i}{\text{EBIT}_i} = \sum_{k=1}^m \epsilon_{i, k} \cdo
 
 | 用户自然语言意图 | 典型关键词 / 触发句 | 对应执行模式 | 核心调用底层模块 |
 | :--- | :--- | :--- | :--- |
+| **全市场选股与买点初筛** | “今天买哪个股票”、“帮我选股”、“全盘筛选突破标的”、“有什么值得买” | `screening` | `finance_tools.screening.screening_candidate_ranker`<br>`FinancialAnalysisGateway.get_top_screening_candidates` |
 | **小资金高爆发加仓** | “小资金怎么做”、“高爆发策略”、“翻倍加仓计划”、“非对称买点”、“极紧止损” | `timing` (`--small-cap`) | `financial_core.engines.sepa_buy_signal_engine`<br>`FinancialAnalysisGateway.analyze_timing_and_execution` |
-| **机构稳健选股与时机** | “帮我选股”、“挑几只趋势突破标的”、“测一下某股票买点走廊” | `timing` | `finance_tools.screening.sepa_buy_signal_engine` |
+| **机构稳健选股与时机** | “测一下某股票买点走廊”、“第二阶段主升浪判断”、“VCP 收敛度” | `timing` | `financial_core.engines.sepa_buy_signal_engine` |
 | **商业物理动力学分析** | “测一下某股票物理动量”、“动能势能比多少”、“是否达到逃逸速度” | `physics` | `financial_core.engines.universal_physical_dynamics_engine` |
 | **法务会计防舞弊核查** | “排查某公司财务造假”、“算一下 Beneish M-Score”、“排查应收账款粉饰” | `forensics` | `finance_tools.forensics_and_valuation.forensics_and_valuation` |
 | **破产违约距离测算** | “排查某公司债务违约风险”、“KMV-Merton 信用测算”、“暴雷排查” | `credit` | `financial_core.engines.credit_risk_engine` |
@@ -193,6 +246,13 @@ from finance_tools.governance_and_pipeline.financial_analysis_gateway import (
 
 gateway = FinancialAnalysisGateway.get_instance()
 
+# 示例 0: 全盘初筛准入优质候选池聚合与排序 (选股唯一事实来源，严禁主观凭空推荐!)
+screening_result = gateway.get_top_screening_candidates(top_n=10, market="ALL")  # 支持 ALL / US / JP
+print("全盘初筛准入标的总数:", screening_result["total_qualified_count"])
+print("核心旗舰买点池 (Pivot Ready):", len(screening_result["top_pivot_ready_candidates"]))
+for cand in screening_result["top_pivot_ready_candidates"]:
+    print(f"[{cand['market']}] {cand['ticker']} ({cand['company_name']}) | 现价: {cand['latest_price']} | 突破枢轴: {cand['pivot_price']}")
+
 # 示例 1: 小资金非对称高爆发加仓计划与时机分析
 timing_result = gateway.analyze_timing_and_execution(
     symbol="NVDA",
@@ -227,6 +287,10 @@ print("结构化中文买方日记:", comp_report.executive_summary_zh)
 AI 可以在系统后台或由用户通过 Bash/PowerShell 直接运行 CLI：
 
 ```bash
+# 0. 全盘初筛准入池优选排序 (选股第一步：获取 Stage_2_Pivot_Ready 突破就绪榜单)
+python scripts/run_financial_analysis_gateway.py --mode screening --top 10 --market US
+python scripts/run_financial_analysis_gateway.py --mode screening --top 10 --market JP
+
 # 1. 小资金高爆发加仓与逃逸动能分析 (最常用)
 python scripts/run_financial_analysis_gateway.py --mode timing --target NVDA --small-cap
 
