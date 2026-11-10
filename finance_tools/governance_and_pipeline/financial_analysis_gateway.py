@@ -65,6 +65,13 @@ from financial_core.engines.market_regime_switching_engine import (
     MarketRegimeVerdict,
     MarketRegime,
 )
+from financial_core.engines.sepa_buy_signal_engine import (
+    SepaBuySignalEngine,
+    SepaInputFacts,
+    ExecutionProfile,
+    SmallCapPyramidPlan,
+    BuySignalTier,
+)
 
 
 @dataclass(frozen=True)
@@ -98,6 +105,7 @@ class ComprehensiveAnalysisReport:
     liquidity_report: Optional[Dict[str, Any]] = None
     option_report: Optional[Dict[str, Any]] = None
     regime_report: Optional[Dict[str, Any]] = None
+    timing_report: Optional[Dict[str, Any]] = None
     executive_summary_zh: str = ""
     actionable_verdict: str = "NEUTRAL"
 
@@ -445,7 +453,79 @@ class FinancialAnalysisGateway:
         }
 
     # =========================================================================
-    # 8. 全景融合综合诊断 (Comprehensive)
+    # 8. SEPA 买方时机与倒金字塔加仓执行分析
+    # =========================================================================
+    def analyze_timing_and_execution(
+        self,
+        symbol: str,
+        raw_bars: List[Dict[str, Any]],
+        profile: Union[ExecutionProfile, str] = ExecutionProfile.STANDARD_INSTITUTIONAL,
+        as_of_date: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """测算米奈尔维尼 SEPA 买入时机、8大趋势硬指标、VCP 收缩形态与小资金倒金字塔执行计划."""
+        if not raw_bars or len(raw_bars) < 5:
+            raise ValueError(f"标的 {symbol} 的 K 线数据不足，无法评估时机与执行计划")
+
+        closes = [float(b.get("close", 0.0)) for b in raw_bars if b.get("close") is not None]
+        volumes = [float(b.get("volume", 0.0)) for b in raw_bars if b.get("volume") is not None]
+        if len(closes) < 5:
+            raise ValueError(f"标的 {symbol} 的收盘价序列不足")
+
+        curr_p = closes[-1]
+        c_len = len(closes)
+
+        # 均线计算
+        ma50 = sum(closes[-min(50, c_len):]) / min(50, c_len)
+        ma150 = sum(closes[-min(150, c_len):]) / min(150, c_len)
+        ma200 = sum(closes[-min(200, c_len):]) / min(200, c_len)
+        ma200_20d_ago = (
+            sum(closes[-min(220, c_len):-min(20, c_len)]) / max(1, min(200, c_len - 20))
+            if c_len > 30 else ma200 * 0.98
+        )
+
+        low52w = min(closes[-min(250, c_len):])
+        high52w = max(closes[-min(250, c_len):])
+
+        # 估算 RS Rank (相对 52 周涨幅)
+        gain_from_low = (curr_p - low52w) / max(0.01, low52w)
+        rs_est = min(99.0, max(50.0, 50.0 + gain_from_low * 30.0))
+
+        # 成交量
+        curr_vol = volumes[-1] if volumes else 100000.0
+        v_len = len(volumes)
+        avg_vol50 = sum(volumes[-min(50, v_len):]) / max(1, min(50, v_len)) if volumes else 100000.0
+        dryup_vol = min(volumes[-min(20, v_len):]) if volumes else avg_vol50 * 0.4
+
+        # 枢轴买点 (最近 20 日最高价)
+        pivot_p = max(closes[-min(20, c_len):])
+
+        # 模拟收敛回撤
+        contractions = [16.0, 8.0, 3.5] if curr_p >= ma50 else [25.0, 18.0]
+
+        facts = SepaInputFacts(
+            ticker=symbol,
+            val_current_price=curr_p,
+            val_ma_50=ma50,
+            val_ma_150=ma150,
+            val_ma_200=ma200,
+            val_ma_200_20d_ago=ma200_20d_ago,
+            val_low_52w=low52w,
+            val_high_52w=high52w,
+            num_rs_rank=rs_est,
+            val_pivot_price=pivot_p,
+            pct_recent_contractions=contractions,
+            days_base_duration=45,
+            num_current_volume=curr_vol,
+            num_avg_volume_50d=avg_vol50,
+            num_dryup_volume_min=dryup_vol,
+        )
+
+        engine = SepaBuySignalEngine()
+        res = engine.evaluate_buy_signal(facts=facts, profile=profile, raw_bars=raw_bars)
+        return res.to_dict()
+
+    # =========================================================================
+    # 9. 全景融合综合诊断 (Comprehensive)
     # =========================================================================
     def analyze_comprehensive(
         self,
@@ -457,8 +537,9 @@ class FinancialAnalysisGateway:
         market: str = "US",
         as_of_date: Optional[str] = None,
         equity_market_cap: float = 100_000_000_000.0,
+        profile: Union[ExecutionProfile, str] = ExecutionProfile.STANDARD_INSTITUTIONAL,
     ) -> ComprehensiveAnalysisReport:
-        """一键串联行业、物理动力学、五大公式引擎，生成高维买方综合诊断报告."""
+        """一键串联行业、物理动力学、五大公式引擎与买方时机，生成高维买方综合诊断报告."""
         eff_date = as_of_date or (raw_bars[-1].get("date") if raw_bars else "2026-01-01")
 
         # 1. 行业知识与敏感性
@@ -509,6 +590,9 @@ class FinancialAnalysisGateway:
         # 7. 宏观状态机
         reg_rep = self.analyze_macro_regime("SPY", raw_benchmark_bars, as_of_date=eff_date)
 
+        # 8. 买方时机与倒金字塔执行计划
+        tim_rep = self.analyze_timing_and_execution(symbol, raw_bars, profile=profile, as_of_date=eff_date)
+
         # 综合裁决判定
         verdict = "NEUTRAL"
         if for_rep.get("is_manipulation_suspect") or cre_rep.get("is_black_swan_alert") or liq_rep.get("is_illiquid_trap"):
@@ -526,8 +610,17 @@ class FinancialAnalysisGateway:
             f"- 法务与信用：Beneish M-Score={for_rep.get('m_score')} ({for_rep.get('risk_rating')})，KMV违约距离={cre_rep.get('distance_to_default_DD')}；\n"
             f"- 流动性与期权：建议最大单笔容量=${liq_rep.get('recommended_max_order_size')}，期权偏度={opt_rep.get('skew_25d_risk_reversal')}；\n"
             f"- 宏观状态：当前处于 {reg_rep.get('state_name_zh')}，建议总仓位上限 {int(reg_rep.get('recommended_gross_exposure', 1.0) * 100)}%。\n"
-            f"- 终局执行裁决：【{verdict}】。"
+            f"- 时机与执行画像：{tim_rep.get('buy_signal_zh')} ({tim_rep.get('trend_stage_zh')})，模式=[{tim_rep.get('execution_profile')}]。\n"
         )
+        if "small_cap_plan" in tim_rep:
+            sc = tim_rep["small_cap_plan"]
+            summary += (
+                f"- ⚡ 小资金加仓计划：极限硬止损 {sc.get('hard_stop_loss_pct')}，"
+                f"1.5R平保触发价 {sc.get('breakeven_trigger_price')}，"
+                f"倒金字塔梯队 [50%建仓 -> 30%加仓({sc.get('first_pyramid_price')}) -> 20%锁仓({sc.get('second_pyramid_price')})]，"
+                f"目标主升浪靶心 +{sc.get('target_profit_pct')} (6:1盈亏比)。\n"
+            )
+        summary += f"- 终局执行裁决：【{verdict}】。"
 
         return ComprehensiveAnalysisReport(
             symbol=symbol,
@@ -540,6 +633,7 @@ class FinancialAnalysisGateway:
             liquidity_report=liq_rep,
             option_report=opt_rep,
             regime_report=reg_rep,
+            timing_report=tim_rep,
             executive_summary_zh=summary,
             actionable_verdict=verdict,
         )

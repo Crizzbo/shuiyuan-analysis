@@ -139,6 +139,43 @@ class FinancialAnalysisGatewayTests(unittest.TestCase):
         self.assertIsNotNone(comp.industry_report)
         self.assertIsNotNone(comp.physics_report)
         self.assertIsNotNone(comp.forensics_report)
+        self.assertIsNotNone(comp.timing_report)
+
+    def test_timing_and_execution_analysis(self) -> None:
+        """测试 SEPA 买方时机与倒金字塔加仓执行分析."""
+        # 1. 机构稳健模式
+        res_inst = self.gateway.analyze_timing_and_execution("NVDA", self.sample_bars)
+        self.assertEqual(res_inst["ticker"], "NVDA")
+        self.assertIn("trend_stage_zh", res_inst)
+        self.assertIn("buy_signal_zh", res_inst)
+        self.assertEqual(res_inst["execution_profile"], "Standard_Institutional")
+
+        # 2. 小资金高爆发模式
+        res_small = self.gateway.analyze_timing_and_execution(
+            "NVDA", self.sample_bars, profile="Aggressive_Small_Cap"
+        )
+        self.assertEqual(res_small["execution_profile"], "Aggressive_Small_Cap")
+        self.assertIn("small_cap_plan", res_small)
+        sc = res_small["small_cap_plan"]
+        self.assertEqual(sc["hard_stop_loss_pct"], "3.50%")
+        self.assertEqual(sc["target_profit_pct"], "21.00%")
+        self.assertIn("breakeven_trigger_price", sc)
+        self.assertIn("first_pyramid_price", sc)
+        self.assertIn("second_pyramid_price", sc)
+
+    def test_comprehensive_analysis_with_small_cap_profile(self) -> None:
+        """测试全景综合诊断在小资金模式下的自适应输出."""
+        comp = self.gateway.analyze_comprehensive(
+            symbol="NVDA",
+            raw_bars=self.sample_bars,
+            profile="Aggressive_Small_Cap",
+        )
+        self.assertIsInstance(comp, ComprehensiveAnalysisReport)
+        self.assertIsNotNone(comp.timing_report)
+        self.assertIn("small_cap_plan", comp.timing_report)
+        self.assertIn("小资金加仓计划", comp.executive_summary_zh)
+        self.assertIn("3.50%", comp.executive_summary_zh)
+        self.assertIn("倒金字塔梯队", comp.executive_summary_zh)
 
 
 if __name__ == "__main__":

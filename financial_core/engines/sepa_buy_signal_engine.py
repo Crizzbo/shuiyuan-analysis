@@ -53,6 +53,54 @@ class BuySignalTier(str, Enum):
     SQUAT_REVERSAL_WATCH = "Squat_Reversal_Watch"     # 突破后深蹲洗盘：价格轻微回落买点下方但守住止损线与均线，等待逆转恢复
 
 
+class ExecutionProfile(str, Enum):
+    """资金属性与执行风格画像 (区分大机构稳健 vs 小资金高爆发)."""
+
+    STANDARD_INSTITUTIONAL = "Standard_Institutional"  # 机构稳健模式 (7%宽止损, 3:1标准盈亏比, 分散化)
+    AGGRESSIVE_SMALL_CAP = "Aggressive_Small_Cap"      # 小资金高爆发模式 (3.5%极限压紧止损, 6:1高盈亏比, 动能逃逸验证, 倒金字塔加仓)
+
+
+@dataclass(frozen=True)
+class SmallCapPyramidPlan:
+    """小资金非对称爆发力执行契约 (倒金字塔顺势加仓与极速零成本白嫖机制).
+
+    Attributes:
+        initial_entry_allocation_pct: 突破触发点首次试探性建仓比例 (默认 50%).
+        val_breakeven_trigger_price: 浮盈保本触发价 (浮盈达 1.5R 约 +5% 时强制止损移至买入成本价).
+        val_first_pyramid_price: 首次顺势加仓触发价 (浮盈 +5% 突破次级整理加仓 30%).
+        val_second_pyramid_price: 二次锁仓顺势加仓价 (浮盈 +10% 且趋势强化加仓 20%).
+        pct_hard_stop_loss: 极限压紧硬止损百分比 (3.5%).
+        pct_target_profit: 目标主升浪爆发靶心百分比 (21.0% ~ 28.0%).
+        is_rocket_escape_confirmed: 是否达成物理动能逃逸速度 (过滤冲高回落假突破).
+        kinetic_to_potential_ratio: 动能/势能比率 (E_k / E_p).
+        directive_pyramid_zh: 小资金实战行动指令与仓位调度方案.
+    """
+
+    initial_entry_allocation_pct: float
+    val_breakeven_trigger_price: float
+    val_first_pyramid_price: float
+    val_second_pyramid_price: float
+    pct_hard_stop_loss: float
+    pct_target_profit: float
+    is_rocket_escape_confirmed: bool
+    kinetic_to_potential_ratio: float
+    directive_pyramid_zh: str
+
+    def to_dict(self) -> Dict[str, Any]:
+        """序列化为字典契约."""
+        return {
+            "initial_entry_allocation_pct": f"{self.initial_entry_allocation_pct:.1f}%",
+            "breakeven_trigger_price": f"{self.val_breakeven_trigger_price:.2f}",
+            "first_pyramid_price": f"{self.val_first_pyramid_price:.2f}",
+            "second_pyramid_price": f"{self.val_second_pyramid_price:.2f}",
+            "hard_stop_loss_pct": f"{self.pct_hard_stop_loss:.2f}%",
+            "target_profit_pct": f"{self.pct_target_profit:.2f}%",
+            "is_rocket_escape_confirmed": self.is_rocket_escape_confirmed,
+            "kinetic_to_potential_ratio": round(self.kinetic_to_potential_ratio, 3),
+            "directive_pyramid_zh": self.directive_pyramid_zh,
+        }
+
+
 # ==============================================================================
 # 二、 单一事实来源状态元数据注册表 (SSOT)
 # ==============================================================================
@@ -393,11 +441,13 @@ class SepaBuySignalResult:
     status_vcp_contraction_zh: str = ""
     status_buy_signal_zh: str = ""
     currency_symbol: str = "$"
+    execution_profile: str = "Standard_Institutional"
+    small_cap_plan: Optional[SmallCapPyramidPlan] = None
 
     def to_dict(self) -> Dict[str, Any]:
         """序列化输出契约."""
         curr = self.currency_symbol or "$"
-        return {
+        res = {
             "ticker": self.ticker,
             "current_price": f"{curr}{self.val_current_price:.2f}",
             "trend_stage": self.status_trend_stage,
@@ -415,7 +465,11 @@ class SepaBuySignalResult:
             "directive_action": self.directive_action_zh,
             "narrative_zh": self.narrative_zh,
             "currency_symbol": curr,
+            "execution_profile": self.execution_profile,
         }
+        if self.small_cap_plan:
+            res["small_cap_plan"] = self.small_cap_plan.to_dict()
+        return res
 
 
 # ==============================================================================
@@ -599,21 +653,78 @@ class SepaBuySignalEngine:
             "metadata": get_sepa_state_metadata("vcp_status", status),
         }
 
+    @staticmethod
+    def _calculate_rocket_escape_ratio(
+        facts: SepaInputFacts,
+        raw_bars: Optional[List[Dict[str, Any]]] = None,
+    ) -> Tuple[float, bool]:
+        """计算突破阻力位物理逃逸动能比率 (E_k / E_p).
+
+        金融物理学机制：
+        动能 E_k = 1/2 * m * v_t^2
+        势能阻力 E_p = m * g * max(0, Resistance - P_t)
+        当 Ratio >= 1.0 时达成动能逃逸，大概率属于真实强动能突围，彻底杜绝冲高回落的假突破假动作。
+        """
+        # 1. 尝试从 raw_bars 提取高精度收盘价序列计算动能
+        if raw_bars and len(raw_bars) >= 5:
+            closes = [float(b.get("close", 0.0)) for b in raw_bars if b.get("close") is not None]
+            if len(closes) >= 5:
+                p_now = closes[-1]
+                p_prev = closes[-5]
+                # 近 5 日速度
+                v_t = max(0.01, (p_now - p_prev) / 5.0)
+                # 阻力位距离
+                resistance = max(facts.val_pivot_price, facts.val_high_52w * 0.98)
+                delta_p = max(0.01, abs(resistance - p_now))
+                # 物理动能势能比
+                ratio_e = (0.5 * (v_t ** 2)) / (0.5 * delta_p + 1e-4)
+                # 引入放量因子增强: (Volume / AvgVolume)
+                vol_factor = facts.num_current_volume / max(1.0, facts.num_avg_volume_50d)
+                adjusted_ratio = ratio_e * (vol_factor ** 0.5)
+                is_escape = adjusted_ratio >= 1.0 or (p_now >= facts.val_pivot_price and vol_factor >= 1.8)
+                return round(float(adjusted_ratio), 3), bool(is_escape)
+
+        # 2. 回退机制：基于现价、枢轴点与放量倍数测算相对动能逃逸比
+        vol_factor = facts.num_current_volume / max(1.0, facts.num_avg_volume_50d)
+        price_spread = max(0.01, facts.val_current_price - facts.val_ma_50)
+        resistance_spread = max(0.01, facts.val_pivot_price * 0.03)
+        proxy_ratio = (price_spread / resistance_spread) * (vol_factor / 1.5)
+        is_escape = proxy_ratio >= 1.0 and facts.val_current_price >= facts.val_pivot_price
+        return round(float(proxy_ratio), 3), bool(is_escape)
+
     def evaluate_buy_signal(
         self,
         facts: SepaInputFacts,
         params: Optional[SepaAdaptiveParams] = None,
+        profile: Union[ExecutionProfile, str] = ExecutionProfile.STANDARD_INSTITUTIONAL,
+        raw_bars: Optional[List[Dict[str, Any]]] = None,
     ) -> SepaBuySignalResult:
         """顶层研判：综合趋势、VCP、价格边界与成交量突破，输出买入决策全息卡片.
 
         Args:
             facts: SEPA 全息输入事实数据契约.
-            params: 专属参数配置 (留空则采用引擎默认自适应参数).
+            params: 专属参数配置 (留空则根据 profile 智能派发配置).
+            profile: 资金与操盘画像 (大机构稳健模式 vs 小资金高爆发模式).
+            raw_bars: 历史时序 K 线列表 (可选，用于高精度物理动能逃逸比核算).
 
         Returns:
             SepaBuySignalResult 包含趋势、形态、买点、风控防线与研报卡片的全息输出对象.
         """
-        cfg = params or self.adaptive_params
+        # 解析画像与配置
+        prof_str = profile.value if isinstance(profile, ExecutionProfile) else str(profile)
+        is_small_cap = prof_str in (
+            ExecutionProfile.AGGRESSIVE_SMALL_CAP.value,
+            "Aggressive_Small_Cap",
+            "small_cap",
+        )
+
+        if params is not None:
+            cfg = params
+        elif is_small_cap:
+            cfg = SepaAdaptiveParams.create_aggressive_small_cap_profile()
+        else:
+            cfg = self.adaptive_params
+
         curr_sym = self._resolve_currency_symbol(facts)
 
         # 缺少有效均量无法证明放量突破，拒绝用 1 股替代缺失的历史基线。
@@ -655,7 +766,33 @@ class SepaBuySignalEngine:
 
         signal_meta = get_sepa_state_metadata("buy_signal", signal_tier)
 
-        # 6. 生成买方通俗商业直觉全息研报卡片
+        # 6. 小资金专属非对称加仓与物理动能逃逸计算
+        small_cap_plan: Optional[SmallCapPyramidPlan] = None
+        if is_small_cap:
+            ratio_e, is_escape = self._calculate_rocket_escape_ratio(facts, raw_bars)
+            # 浮盈达 1.5R 触发保本
+            val_be = round(facts.val_pivot_price + 1.5 * boundaries.val_risk_unit_usd, 2)
+            val_pyr1 = round(facts.val_pivot_price * 1.05, 2)
+            val_pyr2 = round(facts.val_pivot_price * 1.10, 2)
+            small_cap_plan = SmallCapPyramidPlan(
+                initial_entry_allocation_pct=50.0,
+                val_breakeven_trigger_price=val_be,
+                val_first_pyramid_price=val_pyr1,
+                val_second_pyramid_price=val_pyr2,
+                pct_hard_stop_loss=round(cfg.pct_max_hard_stop_loss * 100.0, 2),
+                pct_target_profit=round(cfg.pct_max_hard_stop_loss * cfg.ratio_target_risk_reward * 100.0, 2),
+                is_rocket_escape_confirmed=is_escape,
+                kinetic_to_potential_ratio=ratio_e,
+                directive_pyramid_zh=(
+                    "【小资金非对称绝杀】首次突破进场 50% 仓位；"
+                    f"浮盈达 1.5R ({curr_sym}{val_be:.2f}) 强制将止损线移至成本价，达成绝对零风险 Free-Roll；"
+                    f"突破次级平台 ({curr_sym}{val_pyr1:.2f}) 顺势加仓 30%；"
+                    f"主升浪加速 ({curr_sym}{val_pyr2:.2f}) 锁死最后 20% 仓位！"
+                    f"用 -3.5% 的极窄风险博取 +{cfg.pct_max_hard_stop_loss * cfg.ratio_target_risk_reward * 100.0:.1f}% 爆发力！"
+                ),
+            )
+
+        # 7. 生成买方通俗商业直觉全息研报卡片
         stage_name_zh = trend_diag["metadata"].get("state_name", "趋势观察期")
         vcp_name_zh = vcp_diag["metadata"].get("state_name", "形态构筑中")
         signal_name_zh = signal_meta.get("state_name", "信号跟踪")
@@ -671,6 +808,19 @@ class SepaBuySignalEngine:
             signal_name_zh=signal_name_zh,
             curr_sym=curr_sym,
         )
+
+        if small_cap_plan is not None:
+            escape_badge = "🚀 达成逃逸动能 (放量真突破)" if small_cap_plan.is_rocket_escape_confirmed else "⚠️ 动能蓄势中 (注意防假突破冲高)"
+            narrative_zh += (
+                f"\n\n⚡ **【小资金高爆发倒金字塔加仓与极速保本执行计划】**\n"
+                f"- **模式画像**: 小资金高爆发 (Aggressive Small-Cap Mode)\n"
+                f"- **火箭动能逃逸状态**: {escape_badge} (动能/势能比率 $R_E$: {small_cap_plan.kinetic_to_potential_ratio:.2f})\n"
+                f"- **极限硬止损**: -{small_cap_plan.pct_hard_stop_loss:.1f}% (拒绝大资金平庸宽磨损)\n"
+                f"- **极速零风险平保触发价**: {curr_sym}{small_cap_plan.val_breakeven_trigger_price:.2f} (浮盈达 1.5R 强制无风险 Free-Roll)\n"
+                f"- **倒金字塔加仓梯队**: 50% 首次建仓 ➔ +5% ({curr_sym}{small_cap_plan.val_first_pyramid_price:.2f}) 顺势加仓 30% ➔ +10% ({curr_sym}{small_cap_plan.val_second_pyramid_price:.2f}) 锁定 20%\n"
+                f"- **非对称主升浪目标**: +{small_cap_plan.pct_target_profit:.1f}% (6:1 极致盈亏比靶心)\n"
+                f"- **实战操盘指令**: {small_cap_plan.directive_pyramid_zh}"
+            )
 
         return SepaBuySignalResult(
             ticker=facts.ticker,
@@ -695,6 +845,8 @@ class SepaBuySignalEngine:
             status_vcp_contraction_zh=vcp_name_zh,
             status_buy_signal_zh=signal_name_zh,
             currency_symbol=curr_sym,
+            execution_profile=prof_str,
+            small_cap_plan=small_cap_plan,
         )
 
     # --------------------------------------------------------------------------

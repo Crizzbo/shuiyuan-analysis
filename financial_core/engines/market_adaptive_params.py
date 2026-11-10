@@ -105,6 +105,45 @@ class SepaAdaptiveParams:
 
     data_source: str = "Minervini_SEPA_Official_Trend_Template_Specification"
 
+    @classmethod
+    def create_institutional_profile(cls) -> "SepaAdaptiveParams":
+        """机构稳健型配置 (适合大体量资金：分散化持仓、宽止损容忍正常波动)."""
+        return cls(
+            pct_max_hard_stop_loss=0.07,
+            pct_recommended_stop_loss=0.05,
+            ratio_breakeven_trailing_r=3.0,
+            pct_extended_chase_limit=0.05,
+            ratio_target_risk_reward=3.0,
+            num_min_rs_rank=70.0,
+            pct_vcp_tight_threshold=0.05,
+            ratio_contraction_decay_max=0.75,
+            ratio_volume_breakout_surge=1.50,
+            ratio_dryup_volume_max=0.50,
+        )
+
+    @classmethod
+    def create_aggressive_small_cap_profile(cls) -> "SepaAdaptiveParams":
+        """小资金高爆发型配置 (适合小资金追求非对称高胜率、极紧止损与爆发力).
+
+        核心参数哲学：
+        1. 极紧硬止损 (-3.5%)：绝不承受大资金的平庸宽回撤，将试错成本降到极限；
+        2. 跃升盈亏比 (6:1)：以 3.5% 的极窄风险博取 20%~30% 的主升浪；
+        3. 极速保本 (Free-Roll at 1.5R)：浮盈达到 +5% 强制将止损线拉平至成本价，本金零风险；
+        4. 极限地量与紧致度：要求 VCP 收缩振幅 <= 3.0%、突破放量 >= 1.80倍，确保击球即爆发。
+        """
+        return cls(
+            pct_max_hard_stop_loss=0.035,
+            pct_recommended_stop_loss=0.025,
+            ratio_breakeven_trailing_r=1.5,
+            pct_extended_chase_limit=0.03,
+            ratio_target_risk_reward=6.0,
+            num_min_rs_rank=80.0,
+            pct_vcp_tight_threshold=0.03,
+            ratio_contraction_decay_max=0.65,
+            ratio_volume_breakout_surge=1.80,
+            ratio_dryup_volume_max=0.40,
+        )
+
 
 @dataclass
 class MarketAdaptiveParamsRegistry:

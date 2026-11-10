@@ -52,7 +52,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="水源分析 - 金融计算与行业因果分析统一网关")
     parser.add_argument(
         "--mode",
-        choices=["industry", "physics", "forensics", "credit", "liquidity", "options", "regime", "all"],
+        choices=["industry", "physics", "forensics", "credit", "liquidity", "options", "regime", "timing", "all"],
         default="all",
         help="分析模式选择",
     )
@@ -60,10 +60,28 @@ def main() -> None:
     parser.add_argument("--market", default="US", choices=["US", "JP"], help="交易所市场")
     parser.add_argument("--format", choices=["text", "json"], default="text", help="输出格式")
     parser.add_argument("--order-value", type=float, default=50_000.0, help="拟买入金额 ($)")
+    parser.add_argument(
+        "--profile",
+        choices=["institutional", "small_cap"],
+        default="institutional",
+        help="操盘与资金属性画像 (institutional: 机构稳健; small_cap: 小资金高爆发极紧止损与倒金字塔加仓)",
+    )
+    parser.add_argument(
+        "--small-cap",
+        dest="small_cap_flag",
+        action="store_true",
+        help="快捷开关：启用小资金高爆发倒金字塔加仓与 1.5R 极速保本模式",
+    )
 
     args = parser.parse_args()
     gateway = FinancialAnalysisGateway.get_instance()
     target = args.target.strip()
+
+    # 解析资金画像模式
+    if args.small_cap_flag or args.profile == "small_cap":
+        profile_mode = "Aggressive_Small_Cap"
+    else:
+        profile_mode = "Standard_Institutional"
 
     result: Dict[str, Any] = {}
 
@@ -144,6 +162,15 @@ def main() -> None:
         res = gateway.analyze_macro_regime("SPY")
         result = {"mode": "regime", "data": res}
 
+    elif args.mode == "timing":
+        bars = _generate_synthetic_bars(target, 60, 130.0)
+        res = gateway.analyze_timing_and_execution(
+            symbol=target,
+            raw_bars=bars,
+            profile=profile_mode,
+        )
+        result = {"mode": "timing", "target": target, "profile": profile_mode, "data": res}
+
     elif args.mode == "all":
         bars = _generate_synthetic_bars(target, 60, 130.0)
         comp = gateway.analyze_comprehensive(
@@ -151,12 +178,14 @@ def main() -> None:
             raw_bars=bars,
             market=args.market,
             equity_market_cap=2_500_000_000_000.0,
+            profile=profile_mode,
         )
         result = {
             "mode": "all",
             "symbol": comp.symbol,
             "as_of_date": comp.as_of_date,
             "market": comp.market,
+            "profile": profile_mode,
             "actionable_verdict": comp.actionable_verdict,
             "executive_summary_zh": comp.executive_summary_zh,
             "industry": {
@@ -170,6 +199,7 @@ def main() -> None:
             "liquidity": comp.liquidity_report,
             "options": comp.option_report,
             "regime": comp.regime_report,
+            "timing": comp.timing_report,
         }
 
     # 呈现结果

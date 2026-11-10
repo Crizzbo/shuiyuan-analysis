@@ -30,6 +30,8 @@ from financial_core.engines.sepa_buy_signal_engine import (
     TrendStageState,
     VcpContractionStatus,
     BuySignalTier,
+    ExecutionProfile,
+    SmallCapPyramidPlan,
     SEPA_SIGNAL_STATE_REGISTRY,
     get_sepa_state_metadata,
 )
@@ -497,6 +499,73 @@ class TestSepaBuySignalEngine(unittest.TestCase):
         self.assertIn("hard_stop_loss_price", d["price_boundaries"])
         self.assertIn("$", d["price_boundaries"]["hard_stop_loss_price"])
         self.assertIn("narrative_zh", d)
+
+    def test_ut_sepa_13_aggressive_small_cap_profile(self):
+        """【UT-SEPA-13: 小资金高爆发画像与倒金字塔加仓计划全息断言】
+
+        一、测试功能与测试点:
+            1. 验证 ExecutionProfile.AGGRESSIVE_SMALL_CAP 小资金高爆发画像调度;
+            2. 验证极限压紧硬止损 (-3.5%) 与 6:1 跃升盈亏比目标 (+21.0%);
+            3. 验证 1.5R 极速无风险平保机制 (Free-Roll) 触发价;
+            4. 验证倒金字塔加仓梯队契约 (50% 建仓, +5% 加仓 30%, +10% 锁定 20%);
+            5. 验证突破物理动能逃逸速度比率 (E_k / E_p) 与火箭逃逸状态断言;
+            6. 验证 to_dict() 包含 small_cap_plan 且研报卡片包含小资金实战绝杀指南。
+
+        二、测试数据与模拟场景说明:
+            基于健康的 Stage 2 突破标的 NVDA (Pivot=200.00, 现价=204.64)，
+            模拟 1.85 倍突破放量，传入近 5 日上升价格 K 线序列。
+
+        三、预期断言与结果验证:
+            - hard_stop_loss_pct 为 3.5%
+            - hard_stop_loss_price 为 $193.00 (200 * (1 - 0.035))
+            - target_profit_price 为 $242.00 (盈亏比 6:1)
+            - small_cap_plan 存在且 is_rocket_escape_confirmed 为 True
+            - breakeven_trigger_price 为 $210.50 (200 + 1.5 * 7.00)
+            - first_pyramid_price 为 $210.00 (+5%)
+            - second_pyramid_price 为 $220.00 (+10%)
+            - narrative_zh 包含 "小资金高爆发" 与 "倒金字塔加仓"
+        """
+        sample_bars = [
+            {"date": f"2024-01-0{i}", "close": 195.0 + i * 2.0, "volume": 60000000.0}
+            for i in range(1, 6)
+        ]
+        res = self.engine.evaluate_buy_signal(
+            facts=self.healthy_facts,
+            profile=ExecutionProfile.AGGRESSIVE_SMALL_CAP,
+            raw_bars=sample_bars,
+        )
+
+        self.assertEqual(res.execution_profile, ExecutionProfile.AGGRESSIVE_SMALL_CAP.value)
+        self.assertIsNotNone(res.small_cap_plan)
+        plan = res.small_cap_plan
+
+        # 1. 验证 3.5% 极限压紧止损与 6:1 目标
+        self.assertEqual(res.price_boundaries.pct_hard_stop_loss, 3.5)
+        self.assertEqual(res.price_boundaries.val_stop_loss_price, 193.00)
+        self.assertEqual(plan.pct_hard_stop_loss, 3.5)
+        self.assertEqual(plan.pct_target_profit, 21.0)
+
+        # 2. 验证保本触发价与加仓梯队
+        self.assertEqual(plan.initial_entry_allocation_pct, 50.0)
+        self.assertEqual(plan.val_breakeven_trigger_price, 210.50)
+        self.assertEqual(plan.val_first_pyramid_price, 210.00)
+        self.assertEqual(plan.val_second_pyramid_price, 220.00)
+
+        # 3. 验证物理动能逃逸判定
+        self.assertTrue(plan.is_rocket_escape_confirmed)
+        self.assertTrue(plan.kinetic_to_potential_ratio > 0.0)
+
+        # 4. 验证字典序列化
+        d = res.to_dict()
+        self.assertIn("small_cap_plan", d)
+        self.assertEqual(d["small_cap_plan"]["hard_stop_loss_pct"], "3.50%")
+        self.assertEqual(d["small_cap_plan"]["target_profit_pct"], "21.00%")
+        self.assertTrue(d["small_cap_plan"]["is_rocket_escape_confirmed"])
+
+        # 5. 验证研报通俗买方卡片
+        self.assertIn("小资金高爆发倒金字塔加仓与极速保本执行计划", res.narrative_zh)
+        self.assertIn("达成逃逸动能", res.narrative_zh)
+        self.assertIn("倒金字塔加仓梯队", res.narrative_zh)
 
 
 if __name__ == "__main__":
