@@ -1,0 +1,1460 @@
+<title>信息流水线主看板</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+
+<style>
+  :root {
+    --bg: #090d16;
+    --surface: #111827;
+    --surface-hover: #1f2937;
+    --surface-card: #151e2e;
+    --border: #243042;
+    --border-subtle: #1c2635;
+    --fg: #f3f4f6;
+    --fg-muted: #94a3b8;
+    --fg-subtle: #64748b;
+    --primary: #3b82f6;
+    --primary-light: #60a5fa;
+    --primary-bg: rgba(59, 130, 246, 0.12);
+    --success: #10b981;
+    --success-bg: rgba(16, 185, 129, 0.12);
+    --warning: #f59e0b;
+    --warning-bg: rgba(245, 158, 11, 0.12);
+    --danger: #ef4444;
+    --danger-bg: rgba(239, 68, 68, 0.14);
+    --purple: #8b5cf6;
+    --purple-bg: rgba(139, 92, 246, 0.12);
+    --cyan: #06b6d4;
+    --cyan-bg: rgba(6, 182, 212, 0.12);
+    --font-sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', Consolas, monospace;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-hover: #f1f5f9;
+      --surface-card: #ffffff;
+      --border: #e2e8f0;
+      --border-subtle: #edf2f7;
+      --fg: #0f172a;
+      --fg-muted: #475569;
+      --fg-subtle: #94a3b8;
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --primary-bg: rgba(37, 99, 235, 0.08);
+      --success: #059669;
+      --success-bg: rgba(5, 150, 105, 0.08);
+      --warning: #d97706;
+      --warning-bg: rgba(217, 119, 6, 0.08);
+      --danger: #dc2626;
+      --danger-bg: rgba(220, 38, 38, 0.08);
+      --purple: #7c3aed;
+      --purple-bg: rgba(124, 58, 237, 0.08);
+      --cyan: #0891b2;
+      --cyan-bg: rgba(8, 145, 178, 0.08);
+      --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+      color-scheme: light;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #090d16;
+    --surface: #111827;
+    --surface-hover: #1f2937;
+    --surface-card: #151e2e;
+    --border: #243042;
+    --border-subtle: #1c2635;
+    --fg: #f3f4f6;
+    --fg-muted: #94a3b8;
+    --fg-subtle: #64748b;
+    --primary: #3b82f6;
+    --primary-light: #60a5fa;
+    --primary-bg: rgba(59, 130, 246, 0.12);
+    --success: #10b981;
+    --success-bg: rgba(16, 185, 129, 0.12);
+    --warning: #f59e0b;
+    --warning-bg: rgba(245, 158, 11, 0.12);
+    --danger: #ef4444;
+    --danger-bg: rgba(239, 68, 68, 0.14);
+    --purple: #8b5cf6;
+    --purple-bg: rgba(139, 92, 246, 0.12);
+    --cyan: #06b6d4;
+    --cyan-bg: rgba(6, 182, 212, 0.12);
+    --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    font-size: 14px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 20px;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Header & Pulse Bar */
+  .header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+
+  .brand-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--primary), var(--purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow: 0 0 16px rgba(59, 130, 246, 0.4);
+  }
+
+  .brand-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .brand-subtitle {
+    font-size: 12px;
+    color: var(--fg-muted);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .system-clock {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 6px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--fg-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .clock-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 8px var(--success);
+    animation: pulse-ring 2s infinite;
+  }
+
+  @keyframes pulse-ring {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--fg);
+    user-select: none;
+  }
+
+  .btn:hover {
+    background: var(--surface-hover);
+    border-color: var(--fg-subtle);
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-light);
+    border-color: var(--primary-light);
+  }
+
+  /* Metric KPI Cards Grid */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .metric-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+
+  .metric-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  .metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--fg-muted);
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .metric-value {
+    font-size: 26px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--fg);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .metric-sub {
+    font-size: 12px;
+    color: var(--fg-muted);
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Filter Console Toolbar */
+  .control-toolbar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .toolbar-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .search-box-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 260px;
+    max-width: 460px;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 9px 12px 9px 36px;
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--fg);
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+
+  .search-input:focus {
+    border-color: var(--primary);
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--fg-subtle);
+    pointer-events: none;
+  }
+
+  .view-toggles {
+    display: flex;
+    align-items: center;
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 2px;
+  }
+
+  .view-toggle-btn {
+    padding: 6px 14px;
+    font-size: 13px;
+    border: none;
+    background: transparent;
+    color: var(--fg-muted);
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.15s ease;
+  }
+
+  .view-toggle-btn.active {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .sort-indicator-pill {
+    padding: 6px 12px;
+    background: var(--primary-bg);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: var(--radius-sm);
+    color: var(--primary-light);
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  .filter-tabs-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .filter-tab {
+    padding: 5px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--surface-card);
+    color: var(--fg-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+
+  .filter-tab:hover {
+    border-color: var(--primary-light);
+    color: var(--fg);
+  }
+
+  .filter-tab.active {
+    background: var(--primary-bg);
+    border-color: var(--primary);
+    color: var(--primary-light);
+    font-weight: 600;
+  }
+
+  /* Timeline Stream List View */
+  .timeline-stream-view {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stream-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.15s ease;
+    cursor: pointer;
+  }
+
+  .stream-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow);
+    transform: translateX(2px);
+  }
+
+  .card-status-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 80px;
+  }
+
+  .status-badge {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .status-pending { background: rgba(148, 163, 184, 0.16); color: #94a3b8; border: 1px solid #475569; }
+  .status-ingesting { background: var(--cyan-bg); color: var(--cyan); border: 1px solid var(--cyan); }
+  .status-processing { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple); }
+  .status-completed { background: var(--success-bg); color: var(--success); border: 1px solid var(--success); }
+  .status-blocked { background: var(--danger-bg); color: var(--danger); border: 1px solid var(--danger); }
+  .status-retrying { background: var(--warning-bg); color: var(--warning); border: 1px solid var(--warning); }
+
+  .stream-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .card-top-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--fg-muted);
+    flex-wrap: wrap;
+  }
+
+  .ticker-pill {
+    padding: 2px 7px;
+    background: var(--surface-hover);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--fg);
+    font-size: 11px;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--fg);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-bottom-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--fg-subtle);
+    flex-wrap: wrap;
+  }
+
+  .progress-bar-bg {
+    width: 120px;
+    height: 6px;
+    background: var(--surface-hover);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--cyan));
+    transition: width 0.3s ease;
+  }
+
+  .stream-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Kanban Swimlane Board View */
+  .kanban-board-view {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(250px, 1fr));
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+  }
+
+  .kanban-column {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    height: 680px;
+  }
+
+  .kanban-col-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .kanban-counter {
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    background: var(--surface-hover);
+    color: var(--fg-muted);
+  }
+
+  .kanban-cards-container {
+    padding: 12px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .kanban-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .kanban-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .kanban-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--fg);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Detail Drawer / Modal */
+  .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .drawer-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .drawer-content {
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.6);
+  }
+
+  .drawer-overlay.active .drawer-content {
+    transform: translateX(0);
+  }
+
+  .drawer-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .drawer-body {
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+  }
+
+  .drawer-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .log-console {
+    background: #030712;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: #38bdf8;
+    line-height: 1.6;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .log-line {
+    margin-bottom: 4px;
+    word-break: break-all;
+  }
+
+  .raw-json-box {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg-muted);
+    overflow-x: auto;
+    max-height: 180px;
+  }
+
+  /* Responsive breakpoints */
+  @media (max-width: 860px) {
+    .stream-card {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .stream-card-actions {
+      justify-content: flex-end;
+    }
+    .kanban-board-view {
+      grid-template-columns: repeat(5, 280px);
+    }
+  }
+</style>
+
+<div class="container">
+  <!-- Header Bar -->
+  <header class="header-bar">
+    <div class="brand-group">
+      <div class="brand-badge">水</div>
+      <div>
+        <div class="brand-title">
+          信息流水线全息看板
+          <span style="font-size: 11px; padding: 2px 6px; border-radius: 4px; background: var(--primary-bg); color: var(--primary-light); font-weight: 600;">v6.2 实时中枢</span>
+        </div>
+        <div class="brand-subtitle">多维消息筛选 · 绝对日期降序时序 · 进程状态生命周期管理</div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <div class="system-clock">
+        <span class="clock-pulse"></span>
+        <span id="liveClockText">2026-11-10 03:45:12 UTC</span>
+        <span style="color: var(--success); font-weight: 600;">[在线健康]</span>
+      </div>
+      <button class="btn" id="themeToggleBtn" title="切换暗色/亮色主题">🌓 主题</button>
+      <button class="btn btn-primary" id="refreshBtn">🔄 刷新流水线</button>
+    </div>
+  </header>
+
+  <!-- Metrics KPI Cards -->
+  <section class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-header">
+        <span>全盘接入消息总数</span>
+        <span style="color: var(--primary-light);">📊</span>
+      </div>
+      <div class="metric-value" id="kpiTotalCount">8</div>
+      <div class="metric-sub">今日新增 8 条事件入库</div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-header">
+        <span>活跃流转中任务</span>
+        <span style="color: var(--cyan);">⚡</span>
+      </div>
+      <div class="metric-value" id="kpiActiveCount" style="color: var(--cyan);">2</div>
+      <div class="metric-sub">抓取中 1 | 特征清洗中 1</div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-header">
+        <span>异常阻断与熔断</span>
+        <span style="color: var(--danger);">🛑</span>
+      </div>
+      <div class="metric-value" id="kpiBlockedCount" style="color: var(--danger);">1</div>
+      <div class="metric-sub">VIX 恐慌指数突破 28 预警</div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-header">
+        <span>端到端流转成功率</span>
+        <span style="color: var(--success);">🎯</span>
+      </div>
+      <div class="metric-value" id="kpiSuccessRate" style="color: var(--success);">83.3%</div>
+      <div class="metric-sub">已完成 5 笔 | 阻断 1 笔</div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-header">
+        <span>平均流转处理延迟</span>
+        <span style="color: var(--purple);">⏱️</span>
+      </div>
+      <div class="metric-value" id="kpiAvgDuration">937 ms</div>
+      <div class="metric-sub">0-Token 纯本地物理秒级计算</div>
+    </div>
+  </section>
+
+  <!-- Control & Filter Toolbar -->
+  <section class="control-toolbar">
+    <div class="toolbar-top-row">
+      <div class="search-box-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="searchInput" placeholder="搜索标的代码 (NVDA/AAPL/8035)、标题、日志关键词...">
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <!-- Sort Order Pill -->
+        <div class="sort-indicator-pill" id="sortToggleBtn" title="点击切换升降序">
+          <span>📅 排序：按发生日期降序 (最新在前)</span>
+          <span id="sortArrow">⬇️</span>
+        </div>
+
+        <!-- View Switcher -->
+        <div class="view-toggles">
+          <button class="view-toggle-btn active" id="viewTimelineBtn">流转时序列表</button>
+          <button class="view-toggle-btn" id="viewKanbanBtn">看板泳道视图</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="filter-tabs-row" id="categoryTabs">
+      <button class="filter-tab active" data-category="ALL">全部模块 (8)</button>
+      <button class="filter-tab" data-category="event_radar">突发舆情雷达 (1)</button>
+      <button class="filter-tab" data-category="market_quote">行情时钟门禁 (2)</button>
+      <button class="filter-tab" data-category="filing_audit">财报法证对账 (2)</button>
+      <button class="filter-tab" data-category="quant_valuation">商业物理估值 (2)</button>
+      <button class="filter-tab" data-category="report_dispatch">研报云端流式 (1)</button>
+    </div>
+
+    <!-- Process State Filters -->
+    <div class="filter-tabs-row" id="statusTabs" style="border-top: 1px dashed var(--border); padding-top: 10px;">
+      <span style="font-size: 11px; color: var(--fg-subtle); margin-right: 4px;">进程状态：</span>
+      <button class="filter-tab active" data-status="ALL">全部状态</button>
+      <button class="filter-tab" data-status="pending">待接入排队</button>
+      <button class="filter-tab" data-status="ingesting">数据抓取中</button>
+      <button class="filter-tab" data-status="processing">运算清洗中</button>
+      <button class="filter-tab" data-status="completed">已完成落盘</button>
+      <button class="filter-tab" data-status="blocked">异常阻断熔断</button>
+    </div>
+  </section>
+
+  <!-- View 1: Timeline Stream List View -->
+  <main id="timelineView" class="timeline-stream-view">
+    <!-- Stream Cards Rendered Dynamically -->
+  </main>
+
+  <!-- View 2: Kanban Swimlane Board View -->
+  <main id="kanbanView" class="kanban-board-view" style="display: none;">
+    <!-- 5 Columns Rendered Dynamically -->
+  </main>
+</div>
+
+<!-- Holographic Detail Drawer -->
+<div class="drawer-overlay" id="detailDrawer">
+  <div class="drawer-content">
+    <div class="drawer-header">
+      <div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+          <span class="ticker-pill" id="drawerTicker">NVDA</span>
+          <span id="drawerStatusBadge" class="status-badge status-processing">处理中</span>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle);" id="drawerItemId">PIPE-20261110-001</span>
+        </div>
+        <h3 id="drawerTitle" style="font-size: 16px; font-weight: 700; color: var(--fg); line-height: 1.4;"></h3>
+      </div>
+      <button class="btn" id="drawerCloseBtn" style="padding: 4px 10px;">✕</button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Section: Status & Progress -->
+      <div>
+        <div class="drawer-section-title">⚡ 进程生命周期与流转进度</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; font-size: 12px;">
+          <span id="drawerStageName" style="color: var(--primary-light); font-weight: 600;">正在执行因果网络推演</span>
+          <span id="drawerProgressText" style="font-family: var(--font-mono); font-weight: 700;">65%</span>
+        </div>
+        <div class="progress-bar-bg" style="width: 100%; height: 8px;">
+          <div class="progress-bar-fill" id="drawerProgressBar" style="width: 65%;"></div>
+        </div>
+      </div>
+
+      <!-- Section: Process Control Actions -->
+      <div>
+        <div class="drawer-section-title">🕹️ 进程状态控制与干预</div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="btn" id="drawerActionRetry">🔄 手动重试 (Retry)</button>
+          <button class="btn" id="drawerActionAdvance" style="background: var(--primary-bg); color: var(--primary-light); border-color: var(--primary);">⏩ 推进至下一工序</button>
+          <button class="btn" id="drawerActionKill" style="background: var(--danger-bg); color: var(--danger); border-color: var(--danger);">🛑 强制熔断终止 (Kill)</button>
+        </div>
+      </div>
+
+      <!-- Section: Execution Logs -->
+      <div>
+        <div class="drawer-section-title">📜 实时工位执行日志 Stream</div>
+        <div class="log-console" id="drawerLogConsole">
+          <!-- Logs will populate here -->
+        </div>
+      </div>
+
+      <!-- Section: Payload & Facts -->
+      <div>
+        <div class="drawer-section-title">📦 业务入参与平账核验底账 (Payload)</div>
+        <pre class="raw-json-box" id="drawerPayloadBox"></pre>
+      </div>
+
+      <!-- Section: Cryptographic Fingerprint -->
+      <div style="padding-top: 10px; border-top: 1px solid var(--border); font-size: 11px; color: var(--fg-subtle); display: flex; justify-content: space-between;">
+        <span>SHA-256 密码学防伪指纹:</span>
+        <span style="font-family: var(--font-mono); color: var(--primary-light);" id="drawerFingerprint">a1b2c3d4e5f6...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Initial Seed Pipeline State (Single Source of Truth)
+  let pipelineData = [
+    {
+      item_id: "PIPE-20261110-001",
+      title: "英伟达 (NVDA) 算力机柜高频能耗传导与 CoWoS 封装良率突发异动",
+      category: "event_radar",
+      category_name: "突发舆情雷达",
+      severity: "high",
+      stage_status: "processing",
+      timestamp: "2026-11-10T03:25:12Z",
+      ticker: "NVDA",
+      company_name_zh: "英伟达",
+      source: "Bloomberg & NewsWire",
+      progress_pct: 65,
+      duration_ms: 1420,
+      payload: { temperature_c: 82, cowos_yield_pct: 89.4, sentiment_score: 0.72 },
+      logs: [
+        "[2026-11-10T03:25:12Z] 突发事件接入：监测到半导体封装线热力异常报告",
+        "[2026-11-10T03:25:13Z] 启动因果网络推演：正在评估台积电代工传导系数"
+      ],
+      sha256_fingerprint: "7f8a9b2c3d4e5f61"
+    },
+    {
+      item_id: "PIPE-20261110-002",
+      title: "标普 500 ETF (SPY) 盘前时钟门禁校验与价格新鲜度检验",
+      category: "market_quote",
+      category_name: "行情时钟门禁",
+      severity: "low",
+      stage_status: "completed",
+      timestamp: "2026-11-10T03:20:00Z",
+      ticker: "SPY",
+      company_name_zh: "标普500指数 ETF",
+      source: "Google Finance MCP",
+      progress_pct: 100,
+      duration_ms: 320,
+      payload: { price: 735.34, session: "previous_close_baseline", freshness_pass: true },
+      logs: [
+        "[2026-11-10T03:20:00Z] 发起 Google Finance 行情表核验请求",
+        "[2026-11-10T03:20:01Z] 判定为前一交易日收盘价基准，新鲜度门禁通过落盘"
+      ],
+      sha256_fingerprint: "1a2b3c4d5e6f7a8b"
+    },
+    {
+      item_id: "PIPE-20261110-003",
+      title: "苹果公司 (AAPL) 官方 10-K 三表平衡与负营运资金 (-80.5天) 刚性对账",
+      category: "filing_audit",
+      category_name: "财报法证对账",
+      severity: "low",
+      stage_status: "completed",
+      timestamp: "2026-11-10T03:15:45Z",
+      ticker: "AAPL",
+      company_name_zh: "苹果公司",
+      source: "SEC EDGAR",
+      progress_pct: 100,
+      duration_ms: 890,
+      payload: { assets: 364980, liabilities_equity: 364980, ccc_days: -80.5 },
+      logs: [
+        "[2026-11-10T03:15:45Z] SEC 10-K 财报底稿拉取成功",
+        "[2026-11-10T03:15:46Z] 刚性平账方程 Assets == Liabilities + Equity 断言 PASS"
+      ],
+      sha256_fingerprint: "3c4d5e6f7a8b9c0d"
+    },
+    {
+      item_id: "PIPE-20261110-004",
+      title: "东京电子 (8035.T) 极端停滞底价 (¥9295) 与当前股价深度低估黄金安全边际重测",
+      category: "quant_valuation",
+      category_name: "商业物理估值",
+      severity: "medium",
+      stage_status: "completed",
+      timestamp: "2026-11-10T03:10:10Z",
+      ticker: "8035",
+      company_name_zh: "东京电子",
+      source: "Universal Dynamics Engine",
+      progress_pct: 100,
+      duration_ms: 650,
+      payload: { floor_price: 9295.38, current_price: 4837.0, gap_pct: -48.0 },
+      logs: [
+        "[2026-11-10T03:10:10Z] 启动通用商业物理动力学分析",
+        "[2026-11-10T03:10:11Z] 发现现价较零增长底价折价 -48%，标记为黄金安全垫状态"
+      ],
+      sha256_fingerprint: "5e6f7a8b9c0d1e2f"
+    },
+    {
+      item_id: "PIPE-20261110-005",
+      title: "美股大盘波动率指数 (^VIX) 突破 28 警戒线，触发组合吊灯移动止盈风控策略",
+      category: "market_quote",
+      category_name: "行情时钟门禁",
+      severity: "critical",
+      stage_status: "blocked",
+      timestamp: "2026-11-10T03:05:30Z",
+      ticker: "^VIX",
+      company_name_zh: "标普波动率指数",
+      source: "CBOE Option Flow",
+      progress_pct: 40,
+      duration_ms: 1100,
+      error_message: "恐慌指数突破 28 警戒上限，自动触发激进加仓熔断",
+      payload: { vix: 28.18, threshold: 25.0, circuit_breaker: "ACTIVE" },
+      logs: [
+        "[2026-11-10T03:05:30Z] 接收到期权大单成交流脉冲",
+        "[2026-11-10T03:05:31Z] [阻断拦截] VIX=28.18 超过 25 阈值，系统自动冻结顺势做多通道"
+      ],
+      sha256_fingerprint: "7a8b9c0d1e2f3a4b"
+    },
+    {
+      item_id: "PIPE-20261110-006",
+      title: "SpaceX 星链 450 万用户订阅现金流与星舰复用成本模型分批对账",
+      category: "quant_valuation",
+      category_name: "商业物理估值",
+      severity: "medium",
+      stage_status: "ingesting",
+      timestamp: "2026-11-10T03:00:00Z",
+      ticker: "SPACEX",
+      company_name_zh: "太空探索技术公司",
+      source: "Secondary Tender Offer",
+      progress_pct: 30,
+      duration_ms: 780,
+      payload: { subscribers: 4500000, launch_cost_m: 28.0, valuation_b: 2300 },
+      logs: [
+        "[2026-11-10T03:00:00Z] 从非公开市场估值撮合池载入最新出价",
+        "[2026-11-10T03:00:01Z] 正在核算猎鹰 9 号单次发射 $2800 万真实复用边际成本"
+      ],
+      sha256_fingerprint: "9c0d1e2f3a4b5c6d"
+    },
+    {
+      item_id: "PIPE-20261110-007",
+      title: "微软 (MSFT) Azure AI 基础设施资本开支与云计算现金流季度折现评估",
+      category: "filing_audit",
+      category_name: "财报法证对账",
+      severity: "low",
+      stage_status: "pending",
+      timestamp: "2026-11-10T02:50:00Z",
+      ticker: "MSFT",
+      company_name_zh: "微软",
+      source: "Scheduler Batch",
+      progress_pct: 0,
+      duration_ms: 0,
+      payload: { capex_m: 44477, fcf_m: 74071 },
+      logs: [
+        "[2026-11-10T02:50:00Z] 定时调度入队，等待可用并发计算槽位"
+      ],
+      sha256_fingerprint: "1e2f3a4b5c6d7e8f"
+    },
+    {
+      item_id: "PIPE-20261110-008",
+      title: "今日美日大盘总研报 (Daily Briefing) 买方矢量 HTML 编译与云端流式推送",
+      category: "report_dispatch",
+      category_name: "研报云端流式",
+      severity: "low",
+      stage_status: "completed",
+      timestamp: "2026-11-10T02:40:00Z",
+      ticker: "MACRO",
+      company_name_zh: "全球跨资产宏观",
+      source: "Daily Briefing Engine",
+      progress_pct: 100,
+      duration_ms: 2350,
+      payload: { report_id: "DB-20261110", drive_sync: "SUCCESS" },
+      logs: [
+        "[2026-11-10T02:40:00Z] Schema 契约校验 100% PASS",
+        "[2026-11-10T02:40:02Z] Google Drive 云端研报库流式同步完成"
+      ],
+      sha256_fingerprint: "3a4b5c6d7e8f9a0b"
+    }
+  ];
+
+  // Filters and Sorting State
+  let currentCategory = "ALL";
+  let currentStatus = "ALL";
+  let currentSearch = "";
+  let sortOrder = "desc"; // Default strictly Date Descending (最新在前)
+  let currentView = "timeline"; // 'timeline' or 'kanban'
+  let activeSelectedItemId = null;
+
+  // DOM Elements
+  const timelineViewEl = document.getElementById("timelineView");
+  const kanbanViewEl = document.getElementById("kanbanView");
+  const searchInput = document.getElementById("searchInput");
+  const sortToggleBtn = document.getElementById("sortToggleBtn");
+  const sortArrow = document.getElementById("sortArrow");
+  const viewTimelineBtn = document.getElementById("viewTimelineBtn");
+  const viewKanbanBtn = document.getElementById("viewKanbanBtn");
+  const themeToggleBtn = document.getElementById("themeToggleBtn");
+  const detailDrawer = document.getElementById("detailDrawer");
+  const drawerCloseBtn = document.getElementById("drawerCloseBtn");
+
+  // KPI Elements
+  const kpiTotalCount = document.getElementById("kpiTotalCount");
+  const kpiActiveCount = document.getElementById("kpiActiveCount");
+  const kpiBlockedCount = document.getElementById("kpiBlockedCount");
+  const kpiSuccessRate = document.getElementById("kpiSuccessRate");
+  const kpiAvgDuration = document.getElementById("kpiAvgDuration");
+
+  // Format Helper
+  function getRelativeTime(isoString) {
+    const now = new Date("2026-11-10T03:50:00Z");
+    const d = new Date(isoString);
+    const diffSec = Math.floor((now - d) / 1000);
+    if (diffSec < 60) return "刚刚";
+    if (diffSec < 3600) return `${Math.floor(diffSec / 60)} 分钟前`;
+    if (diffSec < 86400) return `${Math.floor(diffSec / 3600)} 小时前`;
+    return isoString.replace("T", " ").replace("Z", "");
+  }
+
+  function getStatusLabel(status) {
+    const map = {
+      pending: "待接入",
+      ingesting: "抓取中",
+      processing: "清洗中",
+      completed: "已完成",
+      blocked: "异常阻断",
+      retrying: "重试中"
+    };
+    return map[status] || status;
+  }
+
+  function getSeverityPill(sev) {
+    if (sev === "critical") return `<span style="color: var(--danger); font-weight: 700;">● 致命</span>`;
+    if (sev === "high") return `<span style="color: var(--warning); font-weight: 600;">● 严重</span>`;
+    if (sev === "medium") return `<span style="color: var(--primary-light);">● 中度</span>`;
+    return `<span style="color: var(--fg-subtle);">● 常规</span>`;
+  }
+
+  // Filter & Sort Logic
+  function getFilteredItems() {
+    return pipelineData.filter(item => {
+      if (currentCategory !== "ALL" && item.category !== currentCategory) return false;
+      if (currentStatus !== "ALL" && item.stage_status !== currentStatus) return false;
+      if (currentSearch) {
+        const kw = currentSearch.toLowerCase();
+        const haystack = `${item.title} ${item.ticker || ''} ${item.company_name_zh || ''} ${item.source} ${item.logs.join(' ')}`.toLowerCase();
+        if (!haystack.includes(kw)) return false;
+      }
+      return true;
+    }).sort((a, b) => {
+      if (sortOrder === "desc") {
+        return b.timestamp.localeCompare(a.timestamp); // 最新时间在前
+      } else {
+        return a.timestamp.localeCompare(b.timestamp);
+      }
+    });
+  }
+
+  // Render KPI Metrics
+  function updateKPIs() {
+    const total = pipelineData.length;
+    const active = pipelineData.filter(d => ["ingesting", "processing", "retrying"].includes(d.stage_status)).length;
+    const blocked = pipelineData.filter(d => d.stage_status === "blocked").length;
+    const completed = pipelineData.filter(d => d.stage_status === "completed").length;
+    const terminal = completed + blocked;
+    const successRate = terminal > 0 ? ((completed / terminal) * 100).toFixed(1) : "100.0";
+    const avgDur = total > 0 ? Math.round(pipelineData.reduce((acc, c) => acc + c.duration_ms, 0) / total) : 0;
+
+    kpiTotalCount.textContent = total;
+    kpiActiveCount.textContent = active;
+    kpiBlockedCount.textContent = blocked;
+    kpiSuccessRate.textContent = `${successRate}%`;
+    kpiAvgDuration.textContent = `${avgDur} ms`;
+  }
+
+  // Render Stream List View
+  function renderTimelineView() {
+    const items = getFilteredItems();
+    if (items.length === 0) {
+      timelineViewEl.innerHTML = `
+        <div style="text-align: center; padding: 48px 16px; color: var(--fg-muted); background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius-lg);">
+          <div style="font-size: 28px; margin-bottom: 8px;">🔍</div>
+          <div style="font-size: 15px; font-weight: 600;">暂无匹配的流水线消息</div>
+          <div style="font-size: 12px; margin-top: 4px;">请尝试重置筛选分类或搜索词</div>
+        </div>
+      `;
+      return;
+    }
+
+    timelineViewEl.innerHTML = items.map(it => `
+      <div class="stream-card" onclick="openDrawer('${it.item_id}')">
+        <div class="card-status-indicator">
+          <span class="status-badge status-${it.stage_status}">
+            ${it.stage_status === 'processing' ? '⚡ ' : it.stage_status === 'blocked' ? '🛑 ' : it.stage_status === 'completed' ? '✓ ' : '⏳ '}
+            ${getStatusLabel(it.stage_status)}
+          </span>
+          <span style="font-size: 11px; font-family: var(--font-mono); color: var(--fg-subtle);" title="${it.timestamp}">
+            ${getRelativeTime(it.timestamp)}
+          </span>
+        </div>
+
+        <div class="stream-card-body">
+          <div class="card-top-meta">
+            ${it.ticker ? `<span class="ticker-pill">${it.ticker}</span>` : ''}
+            <span style="font-weight: 600; color: var(--fg);">${it.company_name_zh || ''}</span>
+            <span>·</span>
+            <span>${it.category_name}</span>
+            <span>·</span>
+            <span>信源: ${it.source}</span>
+            <span>·</span>
+            ${getSeverityPill(it.severity)}
+          </div>
+
+          <div class="card-title" title="${it.title}">${it.title}</div>
+
+          <div class="card-bottom-meta">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span>进度:</span>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" style="width: ${it.progress_pct}%;"></div>
+              </div>
+              <span style="font-family: var(--font-mono); font-weight: 600;">${it.progress_pct}%</span>
+            </div>
+            <span>流转耗时: <strong style="color: var(--fg);">${it.duration_ms} ms</strong></span>
+            ${it.error_message ? `<span style="color: var(--danger); font-weight: 500;">⚠️ ${it.error_message}</span>` : ''}
+          </div>
+        </div>
+
+        <div class="stream-card-actions" onclick="event.stopPropagation()">
+          ${it.stage_status === 'blocked' ? `
+            <button class="btn" style="border-color: var(--warning); color: var(--warning);" onclick="handleRetry('${it.item_id}')">🔄 重试</button>
+          ` : it.stage_status === 'processing' || it.stage_status === 'ingesting' ? `
+            <button class="btn" style="border-color: var(--danger); color: var(--danger);" onclick="handleKill('${it.item_id}')">🛑 终止</button>
+          ` : `
+            <button class="btn" onclick="openDrawer('${it.item_id}')">详情 ➔</button>
+          `}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Render Kanban Board View
+  function renderKanbanView() {
+    const items = getFilteredItems();
+    const columns = [
+      { key: "pending", title: "待接入排队", icon: "⏳", color: "var(--fg-muted)" },
+      { key: "ingesting", title: "数据抓取中", icon: "🌐", color: "var(--cyan)" },
+      { key: "processing", title: "运算清洗中", icon: "⚡", color: "var(--purple)" },
+      { key: "completed", title: "流转已完成", icon: "✅", color: "var(--success)" },
+      { key: "blocked", title: "异常阻断", icon: "🛑", color: "var(--danger)" }
+    ];
+
+    kanbanViewEl.innerHTML = columns.map(col => {
+      const colItems = items.filter(it => {
+        if (col.key === "ingesting" && it.stage_status === "retrying") return true;
+        return it.stage_status === col.key;
+      });
+
+      return `
+        <div class="kanban-column">
+          <div class="kanban-col-header">
+            <span style="color: ${col.color}; display: flex; align-items: center; gap: 6px;">
+              <span>${col.icon}</span> ${col.title}
+            </span>
+            <span class="kanban-counter">${colItems.length}</span>
+          </div>
+
+          <div class="kanban-cards-container">
+            ${colItems.map(it => `
+              <div class="kanban-card" onclick="openDrawer('${it.item_id}')">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span class="ticker-pill">${it.ticker || it.category}</span>
+                  <span style="font-size: 11px; font-family: var(--font-mono); color: var(--fg-subtle);" title="${it.timestamp}">
+                    ${getRelativeTime(it.timestamp)}
+                  </span>
+                </div>
+                <div class="kanban-card-title">${it.title}</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--fg-muted);">
+                  <span>${it.category_name}</span>
+                  ${getSeverityPill(it.severity)}
+                </div>
+                <div class="progress-bar-bg" style="width: 100%; height: 4px;">
+                  <div class="progress-bar-fill" style="width: ${it.progress_pct}%;"></div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderCurrentView() {
+    updateKPIs();
+    if (currentView === "timeline") {
+      timelineViewEl.style.display = "flex";
+      kanbanViewEl.style.display = "none";
+      renderTimelineView();
+    } else {
+      timelineViewEl.style.display = "none";
+      kanbanViewEl.style.display = "grid";
+      renderKanbanView();
+    }
+  }
+
+  // Drawer Open & Controls
+  function openDrawer(itemId) {
+    const it = pipelineData.find(d => d.item_id === itemId);
+    if (!it) return;
+    activeSelectedItemId = itemId;
+
+    document.getElementById("drawerItemId").textContent = it.item_id;
+    document.getElementById("drawerTicker").textContent = it.ticker || "MACRO";
+    document.getElementById("drawerTitle").textContent = it.title;
+
+    const badge = document.getElementById("drawerStatusBadge");
+    badge.className = `status-badge status-${it.stage_status}`;
+    badge.textContent = getStatusLabel(it.stage_status);
+
+    document.getElementById("drawerProgressText").textContent = `${it.progress_pct}%`;
+    document.getElementById("drawerProgressBar").style.width = `${it.progress_pct}%`;
+    document.getElementById("drawerFingerprint").textContent = it.sha256_fingerprint;
+
+    // Populate logs
+    const logConsole = document.getElementById("drawerLogConsole");
+    logConsole.innerHTML = it.logs.map(line => `<div class="log-line">${line}</div>`).join('');
+
+    // Populate Payload
+    document.getElementById("drawerPayloadBox").textContent = JSON.stringify(it.payload, null, 2);
+
+    detailDrawer.classList.add("active");
+  }
+
+  function closeDrawer() {
+    detailDrawer.classList.remove("active");
+    activeSelectedItemId = null;
+  }
+
+  // Interactive Action Handlers
+  function handleRetry(itemId) {
+    const item = pipelineData.find(d => d.item_id === itemId);
+    if (!item) return;
+    item.stage_status = "retrying";
+    item.error_message = null;
+    item.progress_pct = 20;
+    item.logs.push(`[${new Date().toISOString()}] 用户手动触发重新拉取重试`);
+    renderCurrentView();
+    if (activeSelectedItemId === itemId) openDrawer(itemId);
+  }
+
+  function handleKill(itemId) {
+    const item = pipelineData.find(d => d.item_id === itemId);
+    if (!item) return;
+    item.stage_status = "blocked";
+    item.error_message = "用户手动终止流转进程";
+    item.logs.push(`[${new Date().toISOString()}] 进程被人工手动终止熔断`);
+    renderCurrentView();
+    if (activeSelectedItemId === itemId) openDrawer(itemId);
+  }
+
+  function handleAdvance(itemId) {
+    const item = pipelineData.find(d => d.item_id === itemId);
+    if (!item) return;
+    const stages = ["pending", "ingesting", "processing", "completed"];
+    const idx = stages.indexOf(item.stage_status);
+    if (idx !== -1 && idx < stages.length - 1) {
+      item.stage_status = stages[idx + 1];
+      item.progress_pct = item.stage_status === "completed" ? 100 : Math.min(90, item.progress_pct + 30);
+      item.logs.push(`[${new Date().toISOString()}] 模拟流转: 进程状态推进至 ${getStatusLabel(item.stage_status)}`);
+      renderCurrentView();
+      if (activeSelectedItemId === itemId) openDrawer(itemId);
+    }
+  }
+
+  // Setup Event Listeners
+  document.querySelectorAll("#categoryTabs .filter-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll("#categoryTabs .filter-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      currentCategory = tab.dataset.category;
+      renderCurrentView();
+    });
+  });
+
+  document.querySelectorAll("#statusTabs .filter-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll("#statusTabs .filter-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      currentStatus = tab.dataset.status;
+      renderCurrentView();
+    });
+  });
+
+  searchInput.addEventListener("input", (e) => {
+    currentSearch = e.target.value.trim();
+    renderCurrentView();
+  });
+
+  sortToggleBtn.addEventListener("click", () => {
+    if (sortOrder === "desc") {
+      sortOrder = "asc";
+      sortArrow.textContent = "⬆️";
+      sortToggleBtn.querySelector("span:first-child").textContent = "📅 排序：按发生日期升序 (旧在前面)";
+    } else {
+      sortOrder = "desc";
+      sortArrow.textContent = "⬇️";
+      sortToggleBtn.querySelector("span:first-child").textContent = "📅 排序：按发生日期降序 (最新在前)";
+    }
+    renderCurrentView();
+  });
+
+  viewTimelineBtn.addEventListener("click", () => {
+    viewTimelineBtn.classList.add("active");
+    viewKanbanBtn.classList.remove("active");
+    currentView = "timeline";
+    renderCurrentView();
+  });
+
+  viewKanbanBtn.addEventListener("click", () => {
+    viewKanbanBtn.classList.add("active");
+    viewTimelineBtn.classList.remove("active");
+    currentView = "kanban";
+    renderCurrentView();
+  });
+
+  themeToggleBtn.addEventListener("click", () => {
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark" ||
+                   (!document.documentElement.getAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    if (isDark) {
+      document.documentElement.setAttribute("data-theme", "light");
+    } else {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  });
+
+  drawerCloseBtn.addEventListener("click", closeDrawer);
+  detailDrawer.addEventListener("click", (e) => {
+    if (e.target === detailDrawer) closeDrawer();
+  });
+
+  document.getElementById("drawerActionRetry").addEventListener("click", () => {
+    if (activeSelectedItemId) handleRetry(activeSelectedItemId);
+  });
+  document.getElementById("drawerActionKill").addEventListener("click", () => {
+    if (activeSelectedItemId) handleKill(activeSelectedItemId);
+  });
+  document.getElementById("drawerActionAdvance").addEventListener("click", () => {
+    if (activeSelectedItemId) handleAdvance(activeSelectedItemId);
+  });
+
+  document.getElementById("refreshBtn").addEventListener("click", () => {
+    // Add a new mock real-time message to show date descending in action!
+    const newId = `PIPE-20261110-${String(pipelineData.length + 1).padStart(3, '0')}`;
+    const nowIso = new Date().toISOString();
+    pipelineData.unshift({
+      item_id: newId,
+      title: "【实时触发】超微半导体 (AMD) MI350/MI400 算力矩阵时效门禁通过",
+      category: "market_quote",
+      category_name: "行情时钟门禁",
+      severity: "low",
+      stage_status: "completed",
+      timestamp: nowIso,
+      ticker: "AMD",
+      company_name_zh: "超微半导体",
+      source: "Google Finance Ingestion",
+      progress_pct: 100,
+      duration_ms: 210,
+      payload: { price: 449.04, session: "previous_close_baseline" },
+      logs: [
+        `[${nowIso}] 自动化流转接入成功`,
+        `[${nowIso}] 新鲜度核验完成已落盘`
+      ],
+      sha256_fingerprint: "bf9a8b7c6d5e4f3a"
+    });
+    renderCurrentView();
+  });
+
+  // Initial Render
+  renderCurrentView();
+</script>

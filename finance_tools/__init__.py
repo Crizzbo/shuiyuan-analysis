@@ -58,6 +58,7 @@ _MODULE_TO_SUBPACKAGE: Dict[str, str] = {
     "data_readiness_tracker": "governance_and_pipeline",
     "financial_analysis_gateway": "governance_and_pipeline",
     "industry_knowledge_manager": "governance_and_pipeline",
+    "information_pipeline_board_engine": "governance_and_pipeline",
     "knowledge_repository": "governance_and_pipeline",
     "market_quote_verifier": "governance_and_pipeline",
     "metric_pipeline": "governance_and_pipeline",

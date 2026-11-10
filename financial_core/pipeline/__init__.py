@@ -21,6 +21,13 @@ from .canyon_linear_pipeline import (
     QuoteFreshnessError,
     BalanceSheetInvariantError,
 )
+from .information_pipeline_board_engine import (
+    InformationPipelineBoardEngine,
+    PipelineMessageItem,
+    ProcessStageStatus,
+    PipelineCategory,
+    PipelineSeverity,
+)
 
 __all__ = [
     "SystemicCompanyInput",
@@ -31,4 +38,9 @@ __all__ = [
     "CanyonLinearPipeline",
     "QuoteFreshnessError",
     "BalanceSheetInvariantError",
+    "InformationPipelineBoardEngine",
+    "PipelineMessageItem",
+    "ProcessStageStatus",
+    "PipelineCategory",
+    "PipelineSeverity",
 ]

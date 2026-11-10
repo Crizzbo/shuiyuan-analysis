@@ -51,20 +51,27 @@ jobs:
           cache: 'pip'
           cache-dependency-path: requirements-ci.lock.txt
 
-      - name: 安装工程核心依赖与无头 Chromium 渲染器
+      - name: 安装工程核心依赖与渲染字体库 (使用 GitHub Runner 预装 Chrome)
         run: |
           sudo apt-get update
-          sudo apt-get install -y chromium-browser fonts-noto-cjk fonts-noto-color-emoji
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-color-emoji
           python scripts/bootstrap_ci.py
 
-      - name: 验证无头 Chromium 可用性
+      - name: 探测并验证无头 Chrome/Chromium 渲染器
+        id: detect-browser
         run: |
-          which chromium-browser || which chromium || echo "Chromium path check"
-          chromium-browser --version || true
+          CHROME_BIN=$(which google-chrome || which google-chrome-stable || which chromium-browser || which chromium || true)
+          echo "Found Chrome binary at: $CHROME_BIN"
+          if [ -n "$CHROME_BIN" ]; then
+            $CHROME_BIN --version || true
+            echo "CHROME_PATH=$CHROME_BIN" >> $GITHUB_ENV
+          else
+            echo "CHROME_PATH=" >> $GITHUB_ENV
+          fi
 
       - name: 执行买方无头大盘行情与决策流水线
         env:
-          BROWSER_HEADLESS_PATH: /usr/bin/chromium-browser
+          BROWSER_HEADLESS_PATH: ${{ env.CHROME_PATH }}
           INPUT_MARKET: ${{ inputs.market }}
           INPUT_AS_OF: ${{ inputs.as_of }}
           INPUT_RENDER_PDF: ${{ inputs.render_pdf }}
