@@ -1,18 +1,18 @@
 ---
 name: shuiyuan-analysis
-version: 6.1.0
-description: 水源分析——买方机构级股票量化投研、全市场趋势选股与产业链涟漪因果穿透 Agent Skill。覆盖全市场资产池（美股10,000+/日股4,400+/核心567）SEPA趋势模板选股、行情时效硬核验门禁、官方财报三表平账与多情景DCF估值、SOTP多业务分部损益穿透、多标的产业链上下游因果传导矩阵（DIO缓冲/转嫁权/有限责任下界）、突发事件雷达全天候守护与法定信源防伪鉴真、本地买方交易室推流交互大屏、以及 finance_tools 6 大高内聚子目录分包架构。
+version: 6.2.0
+description: 水源分析——买方机构级股票量化投研、全市场趋势选股、九大硬核数学计算公式体系与产业链涟漪因果穿透 Agent Skill。覆盖全市场资产池（美股10,000+/日股4,400+/核心567）商业物理动力学动量逃逸模型、法务会计Beneish M-Score八维Probit防舞弊、KMV-Merton信用破产违约距离、Amihud微观流动性冲击与非线性滑点、期权偏度与异动流、宏观3状态高斯HMM、SEPA趋势模板选股、行情时效硬核验门禁、官方财报三表平账与多情景DCF估值、SOTP多业务分部损益穿透、多标的产业链上下游因果传导矩阵（DIO缓冲/转嫁权/有限责任下界）、突发事件雷达全天候守护与法定信源防伪鉴真、本地买方交易室推流交互大屏、以及 finance_tools 6 大高内聚子目录分包架构。
 license: Proprietary
 metadata:
   author: Shuiyuan Quant Research Architecture Team
-  version: "6.1.0"
+  version: "6.2.0"
   domain: quantitative-equity-research-and-supply-chain-ripple
-  triggers: 选股, 股票分析, 研报生成, 突发事件, 产业链涟漪, 产业链分析, SOTP, 业务分部拆解, 事件雷达, 行情时效, 财务估值, 趋势选股, DCF估值, 买点推演, 交易室大屏, shuiyuan-analysis
+  triggers: 选股, 股票分析, 研报生成, 突发事件, 产业链涟漪, 产业链分析, SOTP, 业务分部拆解, 事件雷达, 行情时效, 财务估值, 趋势选股, DCF估值, 买点推演, 交易室大屏, 金融计算, 数学公式, 物理动力学, Beneish, Merton, Amihud, 期权偏度, 宏观状态机, shuiyuan-analysis
   role: buy-side-chief-quant-strategist
   scope: full-stack-equity-research-and-ripple-dynamics
 ---
 
-# 水源分析 Agent Skill (v6.1.0 买方全景量化、失效防御与分包架构版)
+# 水源分析 Agent Skill (v6.2.0 买方数学量化计算、物理动力学与分包架构版)
 
 买方机构级股票量化选股、微观法证审计、SOTP 业务分部穿透、多标的产业链涟漪传导矩阵、全天候事件雷达推流大屏与 6 大业务工具子包架构。
 
@@ -44,6 +44,14 @@ metadata:
 | **多业务分部 (SOTP) 穿透** | “某公司云业务停机损失多少”、“分部拆解公司估值”、“SOTP 因果穿透” | `finance_tools.sotp_event_analyzer`<br>`scripts.run_sotp_event_penetration` | SOTP 分部加总估值表、微观物理损益穿透报告、净利冲击百分比 |
 | **产业链上下游涟漪效应推演** | “台积电停电影响苹果和ASML多少”、“某代工厂断供上下游如何传导”、“产业链涟漪分析” | `financial_core.engines.supply_chain_ripple_engine`<br>`scripts.run_supply_chain_ripple_analysis` | 产业链非对称涟漪传导矩阵、DIO 吸收周期、议价转嫁冲销、各标的 $\Delta EBIT$ 测算 |
 | **突发事件监控与法定鉴真** | “最近有什么重大消息”、“排查某传闻真伪”、“启动事件雷达” | `finance_tools.event_radar_collector`<br>`finance_tools.evidence_verification_pipeline` | 0-Token 事件初筛底账、AI 浏览器核验清单、SHA-256 法定鉴真防伪收据 |
+| **细分行业因果与知识画像** | “分析半导体行业”、“软件行业驱动指标是什么”、“白酒行业催化与风险” | `finance_tools.financial_analysis_gateway`<br>`scripts.run_financial_analysis_gateway --mode industry` | 细分行业买方画像、驱动指标、会计关注点、敏感性因果链与对标标的 |
+| **商业物理动力学与动能突破** | “测一下某股票物理动量”、“动能势能比多少”、“是否达到逃逸速度” | `finance_tools.financial_analysis_gateway`<br>`scripts.run_financial_analysis_gateway --mode physics` | 商业质量、反弹半衰期、趋势推进速度、零增长停滞底价、动能/势能比率 |
+| **法务会计防舞弊 (Beneish)** | “排查某公司财务造假”、“Beneish M-Score 测算”、“排查应收账款粉饰” | `finance_tools.financial_analysis_gateway`<br>`scripts.run_financial_analysis_gateway --mode forensics` | Beneish 八维指标卡片 (DSRI/GMI/AQI/SGI等)、舞弊嫌疑红线一票否决判定 |
+| **KMV 信用违约与破产预警** | “测算某公司破产违约距离”、“Merton 信用风险”、“债务暴雷排查” | `finance_tools.financial_analysis_gateway`<br>`scripts.run_financial_analysis_gateway --mode credit` | 违约距离 DD (标准差倍数)、预期违约率 EDF、破产黑天鹅前瞻告警 |
+| **Amihud 流动性与冲击滑点** | “测算这只股票的买入容量”、“Amihud 滑点多少”、“排查微盘流动性陷阱” | `finance_tools.financial_analysis_gateway`<br>`scripts.run_financial_analysis_gateway --mode liquidity` | Amihud 不流动性比率、单笔建议最大容量上限、非线性动态冲击滑点惩罚 |
+| **期权偏度与主力大单异动** | “看下某股票期权偏度”、“期权主力异动”、“排查隔夜暴跌对冲大单” | `finance_tools.financial_analysis_gateway`<br>`scripts.run_financial_analysis_gateway --mode options` | 25-Delta 风险反转偏度、近远月波动率比值、交易量 PCR、Gamma 做市商状态 |
+| **宏观状态机与配置总预算** | “当前宏观是大牛市还是震荡”、“市场状态机识别”、“建议总仓位多少” | `finance_tools.financial_analysis_gateway`<br>`scripts.run_financial_analysis_gateway --mode regime` | 3 状态高斯 HMM 识别 (牛市/震荡/危机)、总仓位预算上限与主导策略模型 |
+| **全景金融多模型融合诊断** | “全面诊断 NVDA”、“一键多模型诊断”、“全息买方评级” | `finance_tools.financial_analysis_gateway`<br>`scripts.run_financial_analysis_gateway --mode all` | 串联行业/物理/法务/信用/流动性/期权/宏观的结构化全景买方决策档案 |
 | **本地买方交易室推流看板** | “打开监控大屏”、“启动交易室推流服务”、“查看拓扑大屏” | `scripts.serve_radar_dashboard`<br>`scripts.generate_radar_dashboard` | 本地轻量推流 HTTP 服务 (`http://127.0.0.1:8899`)、交互拓扑大屏 |
 
 ---
@@ -172,7 +180,132 @@ flowchart TD
 
 ---
 
-## 三、 标准操作流程 (SOP 五步闭环)
+## 三、 核心数学模型与金融计算公式全集 (Mathematical Formulation & Quant Engines)
+
+本技能的全部投研判断、买卖时机与风控边界均建立在纯本地硬核数学推导之上，**严禁大模型主观臆造数字**。Agent 在生成研报、推演买点与撰写买方投研日记时，必须严格引用并遵循以下数学模型：
+
+### 1. 通用商业物理动力学方程 (Universal Physical Dynamics)
+将企业在商业世界中的竞争与股价运行抽象为牛顿物理学运动体系：
+- **商业质量 (Business Mass)**：
+  $$m = \ln(1 + \text{TotalAssets}) \times (1 + \text{MoatScore})$$
+  其中 $\text{MoatScore} \in [0.0, 1.0]$ 为企业护城河评分（品牌、转换成本、网络效应、规模优势）。
+- **趋势推进速度与加速度 (Velocity & Acceleration)**：
+  $$v_t = \frac{P_t - P_{t-k}}{k}, \quad a_t = \frac{v_t - v_{t-k}}{k} \quad (k \text{ 通常取 20 交易日})$$
+- **商业动量定理 (Momentum)**：
+  $$p = m \cdot v_t$$
+- **动能与势能比率 (Kinetic-to-Potential Energy Ratio & Escape Velocity)**：
+  $$E_k = \frac{1}{2} m v_t^2, \quad E_p = m \cdot g_{\text{market}} \cdot \max(0, P_{\text{resistance}} - P_t)$$
+  $$\text{Ratio}_{E} = \frac{E_k}{E_p + \epsilon}$$
+  - **火箭逃逸速度判定准则**：若 $\text{Ratio}_E \ge 1.0$，判定动能足以克服上方套牢盘引力势能，达成**逃逸速度 (Escape Velocity)**，确认为高胜率主升浪突破；若 $\text{Ratio}_E < 1.0$，判定为虚假诱多冲高回落。
+- **阻尼振荡半衰期 (Damped Harmonic Oscillation Half-Life，恐慌平复周期)**：
+  $$t_{1/2} = \frac{\ln 2}{\gamma}, \quad \text{其中阻尼系数 } \gamma = \frac{\beta_{\text{down}} \cdot \sigma_{\text{daily}}}{\text{CashBufferRatio}}$$
+  度量黑天鹅冲击后，市场恐慌振幅衰减至一半所需的交易日天数。
+- **稳态公允价值与零增长停滞底价 (Zero-Growth Stagnation Floor)**：
+  $$P_{\text{floor}} = \frac{\text{Normalized Owner Earnings}}{WACC}$$
+  作为极端悲观情景下的绝对估值铁底。
+
+### 2. 法务会计 Beneish M-Score 八维 Probit 概率模型
+用于在财报出具后或季报分析中，以统计概率严密识别财务粉饰与舞弊造假：
+- **八维财务异动指数**：
+  1. 应收账款指数：$DSRI = \frac{\text{AR}_t / \text{Sales}_t}{\text{AR}_{t-1} / \text{Sales}_{t-1}}$
+  2. 毛利率恶化指数：$GMI = \frac{(\text{Sales}_{t-1} - \text{COGS}_{t-1})/\text{Sales}_{t-1}}{(\text{Sales}_t - \text{COGS}_t)/\text{Sales}_t}$
+  3. 资产质量指数：$AQI = \frac{1 - (\text{CA}_t + \text{PPE}_t + \text{Sec}_t)/\text{TA}_t}{1 - (\text{CA}_{t-1} + \text{PPE}_{t-1} + \text{Sec}_{t-1})/\text{TA}_{t-1}}$
+  4. 营业收入增长指数：$SGI = \frac{\text{Sales}_t}{\text{Sales}_{t-1}}$
+  5. 折旧率变动指数：$DEPI = \frac{\text{Depr}_{t-1} / (\text{PPE}_{t-1} + \text{Depr}_{t-1})}{\text{Depr}_t / (\text{PPE}_t + \text{Depr}_t)}$
+  6. 销售与管理费用指数：$SGAI = \frac{\text{SGA}_t / \text{Sales}_t}{\text{SGA}_{t-1} / \text{Sales}_{t-1}}$
+  7. 财务杠杆异动指数：$LVGI = \frac{(\text{LTD}_t + \text{CL}_t)/\text{TA}_t}{(\text{LTD}_{t-1} + \text{CL}_{t-1})/\text{TA}_{t-1}}$
+  8. 总应计利润与总资产比率：$TATA = \frac{\text{NetIncome}_t - \text{OperatingCashFlow}_t}{\text{TA}_t}$
+- **M-Score 综合 Probit 方程**：
+  $$M = -4.84 + 0.920 \cdot DSRI + 0.528 \cdot GMI + 0.404 \cdot AQI + 0.892 \cdot SGI + 0.115 \cdot DEPI - 0.172 \cdot SGAI + 4.037 \cdot TATA + 0.0327 \cdot LVGI$$
+- **硬核防舞弊门禁**：
+  - 若 $M > -1.78$，判定标的存在严重操纵利润嫌疑，**一票否决淘汰出选股池**；
+  - 若 $M \le -2.22$，判定为健康高质财务报表。
+
+### 3. KMV-Merton 结构化信用违约与破产风险模型
+将公司股权视为以公司底层资产价值为标的的欧式看涨期权（Merton 1974），计算违约距离与黑天鹅破产概率：
+- **股权期权定价联立方程**：
+  $$E = V_A \mathcal{N}(d_1) - D e^{-r T} \mathcal{N}(d_2)$$
+  $$\sigma_E E = \frac{\partial E}{\partial V_A} \sigma_A V_A = \mathcal{N}(d_1) \sigma_A V_A$$
+  $$d_1 = \frac{\ln(V_A / D) + (r + 0.5 \sigma_A^2)T}{\sigma_A \sqrt{T}}, \quad d_2 = d_1 - \sigma_A \sqrt{T}$$
+  其中 $E$ 为股权总市值，$\sigma_E$ 为股权年化波动率，$V_A$ 为底层资产价值，$\sigma_A$ 为资产波动率。
+- **违约触发点 (Default Point, DP)**：
+  $$D = \text{ShortTermDebt} + 0.5 \times \text{LongTermDebtNoncurrent}$$
+- **违约距离 (Distance-to-Default, DD) 与预期违约率 (Expected Default Frequency, EDF)**：
+  $$DD = \frac{\ln(V_A / D) + (\mu_A - 0.5 \sigma_A^2)T}{\sigma_A \sqrt{T}}, \quad EDF = \mathcal{N}(-DD)$$
+- **买方风控阈值**：$DD > 3.0$ 为安全稳健标的；$DD < 2.0$ 或 $EDF > 5.0\%$ 强制触发破产黑天鹅告警，禁止持仓。
+
+### 4. Amihud 微观流动性冲击与动态非线性滑点模型
+防范微盘股与流动性幻觉（Paper Profit Trap），计算实战交易摩擦：
+- **Amihud 非流动性指标 (ILLIQ)**：
+  $$\text{ILLIQ} = \frac{1}{N} \sum_{t=1}^N \frac{|R_t|}{\text{Volume}_t \times P_t}$$
+- **动态非线性滑点冲击方程 (Square-Root / 0.6 幂律冲击)**：
+  $$\text{Slippage}(bps) = \text{BaseSpread} + \lambda \times \left( \frac{\text{OrderValue}}{\text{ADV}_{20}} \right)^{0.6} \times \sigma_{\text{daily}} \times 10000$$
+  其中 $\text{BaseSpread}$ 为基础买卖价差（如大盘美股取 2 bps，日股取 5 bps），$\lambda$ 为市场冲击系数，$\text{ADV}_{20}$ 为20日日均成交额。
+- **建议最大单笔订单容量上限 (Order Capacity Ceiling)**：
+  $$\text{Capacity}_{\max} = \text{ADV}_{20} \times \left( \frac{\text{MaxAllowableSlippage} - \text{BaseSpread}}{\lambda \cdot \sigma_{\text{daily}} \times 10000} \right)^{1 / 0.6}$$
+- **流动性陷阱硬门禁**：若 $\text{ADV}_{20} < \$5\text{M}$ 或计算滑点 $> 50\text{ bps}$，标的打上 `ILLIQUID_TRAP`，严禁重仓。
+
+### 5. 期权波动率偏度与异动流模型 (Option Volatility Skew & Order Flow)
+利用衍生品聪明资金前瞻性识别正股暴跌或挤压风险：
+- **25-Delta 风险反转偏度 (Risk Reversal Skew)**：
+  $$Skew_{25D} = IV_{25D, \text{put}} - IV_{25D, \text{call}}$$
+  度量下行看跌期权相对于上行看涨期权的溢价程度。$Skew_{25D} > 0.08$ 预警机构资金正在重金采购隔夜跳水对冲。
+- **期限结构倒挂比 (Term Structure Ratio)**：
+  $$TS = \frac{IV_{\text{front}, ATM}}{IV_{\text{back}, ATM}}$$
+  $TS > 1.15$ 预警近期存在极高确定性财报暴雷或监管突发调查。
+- **认沽/认购成交量与持仓量比率 (Put-Call Ratio, PCR)**：
+  $$PCR_{\text{vol}} = \frac{\text{Volume}_{\text{put}}}{\text{Volume}_{\text{call}}}, \quad PCR_{\text{oi}} = \frac{\text{OpenInterest}_{\text{put}}}{\text{OpenInterest}_{\text{call}}}$$
+- **做市商 Gamma 状态判定 (Dealer Gamma Exposure)**：
+  $$S > \text{GammaFlip} \implies \text{Long Gamma} \quad (\text{市场波动受做市商反向对冲抑制，处于高胜率震荡区间})$$
+  $$S < \text{GammaFlip} \implies \text{Short Gamma} \quad (\text{做市商追涨杀跌，破位时将引发非线性加速踩踏})$$
+
+### 6. 宏观 3-状态高斯隐马尔可夫模型 (Gaussian HMM Regime Switching)
+动态识别大盘宏观所处的物理运行阶段并分配总风险预算：
+- **状态空间**：
+  $$S_t \in \{1: \text{BULL\_MOMENTUM (牛市主升)}, 2: \text{RANGE\_BOUND\_VALUE (震荡低吸)}, 3: \text{CRISIS\_DEFENSE (危机避险)}\}$$
+- **状态转移概率矩阵**：
+  $$A_{ij} = P(S_t = j \mid S_{t-1} = i), \quad \sum_{j=1}^3 A_{ij} = 1$$
+- **观测收益率条件正态发射概率**：
+  $$P(R_t \mid S_t = k) = \frac{1}{\sqrt{2\pi \sigma_k^2}} \exp\left( - \frac{(R_t - \mu_k)^2}{2\sigma_k^2} \right)$$
+- **自适应仓位预算分配方程**：
+  $$\text{GrossExposure} = \sum_{k=1}^3 P(S_t = k \mid \mathcal{F}_t) \times \text{ExposureCap}_k$$
+  $$\text{其中 } \text{ExposureCap} = \{ \text{BULL}: 100\%, \text{RANGE}: 60\%, \text{CRISIS}: 0\%\sim 20\% \}$$
+
+### 7. SEPA 趋势模板八大数学不等式与 Minervini VCP 收缩方程
+严格执行 0-Token 纯本地筛选的 8 大客观数学硬条件：
+- **趋势模板八大数学不等式**：
+  1. $P_t > MA50_t > MA150_t > MA200_t$
+  2. $MA200_t > MA200_{t-20}$（200日均线斜率维持正值至少 1 个月）
+  3. $P_t \ge 1.25 \times \min_{\tau \in [t-250, t]} (P_\tau)$（股价高于52周最低价至少25%）
+  4. $P_t \ge 0.75 \times \max_{\tau \in [t-250, t]} (P_\tau)$（距离52周最高价回撤不超过25%）
+  5. 相对强弱排名指标：$RS_{\text{score}} \ge 80$（处于全市场前20%强势龙头股序列）
+- **Minervini VCP 4T 波动收缩率收敛序列方程**：
+  $$\Delta \text{Range}_k = \frac{\text{High}_k - \text{Low}_k}{\text{Pivot}_k}$$
+  收敛判别条件：$\Delta \text{Range}_1 \approx 20\% \to \Delta \text{Range}_2 \approx 10\% \to \Delta \text{Range}_3 \approx 5\% \to \Delta \text{Range}_4 \le 2.5\%$
+  成交量枯竭判定：$\text{Volume}_{\text{pivot}} \le 0.50 \times \overline{\text{Volume}}_{50}$（浮筹彻底清洗完毕）。
+
+### 8. 多阶段情景 DCF 估值矩阵与 WACC 资本成本方程
+- **加权平均资本成本 (WACC)**：
+  $$WACC = \frac{E}{V} K_e + \frac{D}{V} K_d (1 - t_c)$$
+  $$K_e = R_f + \beta (R_m - R_f) + \text{SizePremium}$$
+- **多阶段自由现金流折现方程**：
+  $$PV = \sum_{t=1}^{N_1} \frac{\text{FCFF}_t}{(1+WACC)^t} + \sum_{j=N_1+1}^{N_2} \frac{\text{FCFF}_j}{(1+WACC)^j} + \frac{\text{FCFF}_{N_2} (1+g)}{(WACC - g)(1+WACC)^{N_2}}$$
+- **三情景差异化估值走廊**：
+  - **悲观底价 (Pessimistic Floor)**：$WACC + 200\text{bps}, g = 1.5\%$，叠加净流动资产破产清算折让 (NCAV)；
+  - **中性公允 (Neutral Anchor)**：行业基准 WACC 与公允永续增长率 $g$；
+  - **乐观靶心 (Optimistic Target)**：护城河扩张溢价与资本回报提升。
+
+### 9. 41 大细分行业因果敏感性弹性系数模型
+细分行业营业利润与核心驱动因子的因果传导数学方程：
+$$\frac{\Delta \text{EBIT}_i}{\text{EBIT}_i} = \sum_{k=1}^m \epsilon_{i, k} \cdot \frac{\Delta X_k}{X_k}$$
+其中 $\epsilon_{i, k}$ 为行业 $i$ 对因子 $k$ 的边际敏感性弹性系数。例如：
+- 半导体行业：$\epsilon_{\text{CapEx}} = +1.35, \epsilon_{\text{WaferPrice}} = +0.85$；
+- 航空与海运航运：$\epsilon_{\text{BrentCrude}} = -1.20, \epsilon_{\text{Tariff}} = -0.90$；
+- 银行与商业金融：$\epsilon_{\text{NIM}} = +2.10, \epsilon_{\text{NonPerformingLoan}} = -1.80$。
+
+---
+
+## 四、 标准操作流程 (SOP 五步闭环)
 
 ```mermaid
 sequenceDiagram
@@ -247,7 +380,7 @@ python scripts/serve_radar_dashboard.py --port 8899 --open-browser
 
 ---
 
-## 四、 核心工具脚本与命令行调度清单 (CLI Registry)
+## 五、 核心工具脚本与命令行调度清单 (CLI Registry)
 
 | 脚本路径 | 业务核心功能 | 常用命令示例 |
 | :--- | :--- | :--- |
@@ -263,10 +396,11 @@ python scripts/serve_radar_dashboard.py --port 8899 --open-browser
 | `scripts/generate_deep_dossier.py` | 公司深度投研档案自动化生成 | `python scripts/generate_deep_dossier.py --ticker NVDA` |
 | `scripts/generate_daily_briefing.py` | 美股/日股大盘每日研报生成 | `python scripts/generate_daily_briefing.py --market US` |
 | `scripts/run_10k_universe_pipeline.py` | 全盘资产池批处理调度流水线 | `python scripts/run_10k_universe_pipeline.py --chunk-size 50` |
+| `scripts/run_financial_analysis_gateway.py` | 金融计算与细分行业分析统一调度入口 (行业/物理/法务/信用/流动性/期权/宏观/全景) | `python scripts/run_financial_analysis_gateway.py --mode all --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode industry --target semiconductors`<br>`python scripts/run_financial_analysis_gateway.py --mode physics --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode forensics --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode credit --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode liquidity --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode options --ticker NVDA`<br>`python scripts/run_financial_analysis_gateway.py --mode regime --ticker SPY` |
 
 ---
 
-## 五、 四道架构防劣变验收硬门禁 (Non-Regression Gates)
+## 六、 四道架构防劣变验收硬门禁 (Non-Regression Gates)
 
 任何代码与文档改修完成后，必须按顺序执行并通过以下四道硬门禁方可交付：
 
@@ -295,8 +429,10 @@ python scripts/serve_radar_dashboard.py --port 8899 --open-browser
 
 ---
 
-## 六、 版本演进记录 (CHANGELOG)
+## 七、 版本演进记录 (CHANGELOG)
 
+- **v6.2.0 (2026-11-10)**: **核心数学计算模型与金融物理公式库全面入典**。
+  - 将通用商业物理动力学（质量/动量/动能势能比/逃逸速度/阻尼振荡半衰期）、法务会计 Beneish M-Score 八维 Probit 概率方程、KMV-Merton 结构化信用违约方程、Amihud 微观流动性冲击与动态非线性滑点模型、期权偏度与异动流、宏观 3-状态高斯 HMM、SEPA 8 大硬指标、多情景 DCF 及 41 大细分行业因果弹性模型完整植入 Skill 规范。
 - **v6.1.0 (2026-11-08)**: **实测风控评估报告归档、失效场景防御体系设计与 finance_tools 6 大高内聚子目录分包重构**。
   - **实测风控报告正式归档**：将 10 年 826 标的跨周期对撞回测评估与五大模型实测报告归档入典 (`docs/36-量化交易系统全息评估与风控架构实测报告.md`)；
   - **失效场景防御与增量中枢设计**：落地 Amihud 流动性门禁、Merton 信用破产距离、Beneish M-Score 法证及央行流动性脉冲等系统化防御体系技术设计 (`docs/37-实测失效场景系统化防御体系与增量信息中枢架构设计文档.md`)；
@@ -306,7 +442,7 @@ python scripts/serve_radar_dashboard.py --port 8899 --open-browser
   - **SOTP 多业务分部因果穿透**：上线综合巨头跨业务分部微观物理损益折算模型，告别单一标签粗糙估值；
   - **多标的产业链上下游涟漪效应传导矩阵**：建立存货周转天数 (DIO) 吸收周期、议价转嫁冲销、下游大客户二级传导与有限责任区间数学边界防御机制；
   - **突发事件雷达与法定防伪鉴真**：上线 0-Token 本地初筛、AI 浏览器定向核验助手、SHA-256 密码学公报防伪鉴真流水线与传闻熔断解除机制；
-  - **本地买方交易室推流服务**：基于 Python 标准库构建轻量 HTTP 推流服务 (`serve_radar_dashboard.py`)，提供 `/api/stream`、`/api/events`、`/api/supply-chain/ripple` 等 REST 接口与交互拓扑大屏。
+  - **本地买方交易室推流服务**：基于 Python 标准库构建轻量 HTTP推流服务 (`serve_radar_dashboard.py`)，提供 `/api/stream`、`/api/events`、`/api/supply-chain/ripple` 等 REST 接口与交互拓扑大屏。
 - **v5.0.0 (2026-10-15)**: 买方高阶投研认知模型与投研闭环复盘反思体系全面上线。
 - **v4.1.0 (2026-10-15)**: 官方三表刚性平账自检与交易时钟区间核验上线。
 - **v4.0.0 (2026-10-14)**: 金融分析核心与 Skill 网关彻底物理解耦。
