@@ -299,6 +299,16 @@ from .universal_physical_dynamics_engine import (
     TerminalValuationDistribution,
     UniversalDynamicsProfile,
 )
+from .data_lifecycle_engine import (
+    DataTier,
+    TIER_METADATA_REGISTRY,
+    LifecyclePolicyConfig,
+    TieredFilingSplitResult,
+    CompactionReport,
+    RestoreVerificationResult,
+    DataLeakCheckResult,
+    DataLifecycleEngine,
+)
 
 __all__ = [
     # 7 大业务领域高内聚子包
@@ -474,4 +484,13 @@ __all__ = [
     "FundamentalSupplyChainMetrics",
     "TerminalValuationDistribution",
     "UniversalDynamicsProfile",
+    # 冷热数据分层与无损生命周期引擎
+    "DataTier",
+    "TIER_METADATA_REGISTRY",
+    "LifecyclePolicyConfig",
+    "TieredFilingSplitResult",
+    "CompactionReport",
+    "RestoreVerificationResult",
+    "DataLeakCheckResult",
+    "DataLifecycleEngine",
 ]

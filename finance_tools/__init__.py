@@ -55,6 +55,7 @@ _MODULE_TO_SUBPACKAGE: Dict[str, str] = {
     # 3. 数据底账、时效门禁与基础设施 (governance_and_pipeline)
     "basic": "governance_and_pipeline",
     "canyon_linear_pipeline": "governance_and_pipeline",
+    "data_lifecycle_manager": "governance_and_pipeline",
     "data_readiness_tracker": "governance_and_pipeline",
     "financial_analysis_gateway": "governance_and_pipeline",
     "industry_knowledge_manager": "governance_and_pipeline",

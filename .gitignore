@@ -3,8 +3,23 @@
 .cache/
 __pycache__/
 *.pyc
+# 数据层极致减法与云端隔离边界 (Cloud Tools Only, Never Push Data)
+# GitHub 云端只放处理冷热数据的工具、脚本与算法契约；任何本地冷/温/热数据实体全量隔离
 data/
+data/hot/
+data/warm/
+data/cold/
 reports/
+scratch/
+*.tar.gz
+*.tgz
+*.gz
+*.sqlite
+*.sqlite3
+*.db
+*.blob
+*.parquet
+CIK*.json
 
 # 数据层极致减法设计 (Data Layer Subtraction & Windows Safety)
 # 本地保留完整 10 年高频日线缓存 (2.89GB)，供量化计算高频秒级读取

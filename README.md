@@ -23,6 +23,7 @@
 - [六、 四道架构防劣变验收硬门禁 (Non-Regression Gates)](#六-四道架构防劣变验收硬门禁-non-regression-gates)
 - [七、 附录：12 本专责核心设计典籍 SSOT 地图](#七-附录12-本专责核心设计典籍-ssot-地图)
 - [八、 工程全量依赖规范与环境配置指引 (System Dependencies & Environment Guide)](#八-工程全量依赖规范与环境配置指引-system-dependencies--environment-guide)
+- [九、 冷热数据分层生命周期与云端防泄露架构 (Hot/Warm/Cold Data Lifecycle)](#九-冷热数据分层生命周期与云端防泄露架构-hotwarmcold-data-lifecycle)
 
 ---
 
@@ -512,4 +513,30 @@ python scripts/test_data_store.py
 python scripts/validate_knowledge_structure.py
 python scripts/test_research_contract.py
 python scripts/test_industry_mapping.py
+```
+
+---
+
+## 九、 冷热数据分层生命周期与云端防泄露架构 (Hot/Warm/Cold Data Lifecycle)
+
+系统严格贯彻**“GitHub 云端只放冷热加工工具与方法，本地工作站物理隔离留存数据本体”**的架构边界。详细设计请查阅专著文档：[冷热数据分层生命周期与云端防泄露架构说明书](docs/HOT_WARM_COLD_DATA_ARCHITECTURE.md)。
+
+### 1. 三层本地数据定位
+- **🔥 热数据 (`data/hot/`)**：近 30 天行情与近 1~2 年高频财报快照，零压缩毫秒直读，直通盘前 3 分钟决策与看板大屏；
+- **🌤️ 温数据 (`data/warm/`)**：30 天 ~ 3 年标准 K 线与近 3 年（12 季度）财报切片，附带轻量索引清单，服务形态收敛与 DCF 估值；
+- **❄️ 冷数据 (`data/cold/`)**：3 年以上历史全周期底稿通过 Gzip 高倍压缩下沉（节省 **85% ~ 93%** 空间），并携带 SHA-256 指纹清单支持秒级无损唤醒还原。
+
+### 2. 常用冷热加工与防泄露门禁指令
+```bash
+# 查看本地冷/温/热数据磁盘空间分布
+python scripts/compact_cold_data.py --status
+
+# 对单只标的执行无损冷热分层打样 (默认保留原文件)
+python scripts/compact_cold_data.py --sample-ticker NVDA
+
+# 验证冷数据压缩包秒级唤醒与 SHA-256 完整性校验
+python scripts/compact_cold_data.py --restore-check NVDA
+
+# 执行云端 GitHub 防数据泄露物理检查（并可选挂载 git pre-commit 钩子）
+python scripts/verify_no_data_leak_guard.py
 ```
