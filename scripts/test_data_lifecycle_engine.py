@@ -51,7 +51,13 @@ def _build_synthetic_sec_company_facts() -> dict:
                             {"val": 999, "note": "missing date boundary"},
                         ]
                     },
-                }
+                },
+                # 边界测试：SEC ffd/dei 常见空数组字段 (units={"USD": []})，不得影响无损指纹验签
+                "EmptyUnitEdgeCase": {
+                    "label": "Empty Unit Edge Case",
+                    "description": "Real-world SEC filing edge case with empty array",
+                    "units": {"USD": []},
+                },
             }
         },
     }

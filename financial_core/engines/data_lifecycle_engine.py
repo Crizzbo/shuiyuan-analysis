@@ -225,7 +225,7 @@ def _canonical_fact_multiset_digest(sec_data: Dict[str, Any]) -> Tuple[int, str]
             units = cobj.get("units") or {}
             unit_dict: Dict[str, List[Any]] = {}
             for uname, items in sorted(units.items()):
-                if not isinstance(items, list):
+                if not isinstance(items, list) or not items:
                     continue
                 total_count += len(items)
                 # 对同一 unit 下的条目按规范化字符串排序，屏蔽列表重排影响
