@@ -143,9 +143,9 @@
       "enabled": true,
       "schedule": {
         "type": "CRON",
-        "cron_expr": "0 7 * * 2-6",
-        "timezone": "Asia/Tokyo",
-        "display_zh": "周二至周六 07:00 JST (美股收盘)"
+        "cron_expr": "0 8 * * 1-5",
+        "timezone": "America/New_York",
+        "display_zh": "工作日 08:00（纽约）"
       },
       "params": {
         "market": "US",
@@ -162,11 +162,11 @@
           "DXY"
         ],
         "sec_universe_json": "data/universe/sec_company_tickers.json",
-        "time_window": "DAILY_CLOSE",
+        "time_window": "PREOPEN_PRIOR_DAILY",
         "sha256_audit": true
       },
-      "description_zh": "美股早 07:00 (JST) 收盘后全盘抽取覆盖 SEC 官方登记全量 10,445 家企业标的池（105 批次流式分块），核验时效并归档写入账本。",
-      "throughput_label": "10,445 只美股全盘标的池 (105 分块)"
+      "description_zh": "按全量标的库轮询，归档盘前可用的历史日线，实际覆盖受配置源额度限制。",
+      "throughput_label": "本轮归档 / 全库标的"
     },
     "JP_DAILY": {
       "id": "JP_DAILY",
@@ -176,9 +176,9 @@
       "enabled": true,
       "schedule": {
         "type": "CRON",
-        "cron_expr": "0 16 * * 1-5",
+        "cron_expr": "30 7 * * 1-5",
         "timezone": "Asia/Tokyo",
-        "display_zh": "周一至周五 16:00 JST (日股收盘)"
+        "display_zh": "工作日 07:30（东京）"
       },
       "params": {
         "market": "JP",
@@ -191,11 +191,11 @@
           "USDJPY"
         ],
         "jpx_universe_json": "data/universe/jpx_company_tickers.json",
-        "time_window": "DAILY_CLOSE",
+        "time_window": "PREOPEN_PRIOR_DAILY",
         "sha256_audit": true
       },
-      "description_zh": "东京下午 16:00 (JST) 日股收盘后全盘抽取覆盖东证 Prime/Standard/Growth 全量 4,447 家企业标的池（45 批次流式分块），校验时效与归档。",
-      "throughput_label": "4,447 只东证全盘标的池 (45 分块)"
+      "description_zh": "按全量标的库轮询，归档盘前可用的历史日线，实际覆盖受配置源额度限制。",
+      "throughput_label": "本轮归档 / 全库标的"
     },
     "LOCAL_AUDIT": {
       "id": "LOCAL_AUDIT",

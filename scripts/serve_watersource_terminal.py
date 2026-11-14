@@ -30,7 +30,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from financial_reporting.watersource_terminal_service import WatersourceTerminalService
 from scripts import env_discovery
-from scripts.terminal_scheduler import TASKS, TerminalScheduler
+from scripts.terminal_scheduler import AUTOMATIC_TASKS, TASKS, TerminalScheduler
 
 
 def _inspect_env() -> Dict[str, Any]:
@@ -210,6 +210,14 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 else:
                     if path.endswith("/tasks"):
                         data = scheduler.snapshot()
+                    elif path.endswith("/market-archives"):
+                        data = {
+                            "items": scheduler.market_archives(),
+                            "reconciliation": {
+                                "us": scheduler.reconciliation_summary("US"),
+                                "jp": scheduler.reconciliation_summary("JP"),
+                            },
+                        }
                     else:
                         records = scheduler.news if path.endswith("/news") else scheduler.market_archives
                         data = {"items": records()}
@@ -395,6 +403,20 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 self._send_json(*svc.auto_calculate_company_valuation(ticker, adjustments=adjustments))
                 return
 
+            if path in ("/api/terminal/tasks/start", "/api/terminal/tasks/automatic"):
+                scheduler = getattr(svc, "scheduler", None)
+                if scheduler is None:
+                    self._send_json(*svc.error_envelope("SCHEDULER_UNAVAILABLE", "调度器未启动", 503))
+                elif path.endswith("/start"):
+                    batch = scheduler.start_batch()
+                    self._send_json(202, svc._envelope(batch, as_of="", source="terminal_scheduler", status="QUEUED"))
+                elif not isinstance(body.get("enabled"), bool) or not scheduler.scheduled:
+                    self._send_json(*svc.error_envelope("INVALID_SCHEDULE", "当前服务不能启用定时调度", 400))
+                else:
+                    scheduler.set_enabled("__automatic__", body["enabled"])
+                    self._send_json(200, svc._envelope(scheduler.snapshot(), as_of="", source="terminal_scheduler", status="OK"))
+                return
+
             if path in ("/api/terminal/tasks/run", "/api/terminal/tasks/schedule"):
                 scheduler = getattr(svc, "scheduler", None)
                 task = body.get("task")
@@ -403,12 +425,9 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 elif scheduler is None:
                     self._send_json(*svc.error_envelope("SCHEDULER_UNAVAILABLE", "调度器未启动", 503))
                 elif path.endswith("/run"):
-                    run_id = scheduler.submit(task)
-                    svc._broadcast_sse("collection_update", {"task": task, "run_id": run_id, "status": "QUEUED"})
-                    svc._broadcast_sse("pipeline_status", svc.get_pipeline_status()["data"])
-                    svc._append_log("INFO", "terminal_scheduler", f"任务 [{task}] 已手动提交运行，运行 ID: {run_id}", run_id=run_id)
-                    self._send_json(200, svc._envelope({"run_id": run_id, "status": "QUEUED", "task": task}, as_of="", source="terminal_scheduler", status="QUEUED", run_id=run_id))
-                elif task == "LOCAL_AUDIT" or not isinstance(body.get("enabled"), bool):
+                    run_id, status = scheduler.submit_with_status(task)
+                    self._send_json(200, svc._envelope({"run_id": run_id, "status": status, "task": task}, as_of="", source="terminal_scheduler", status=status, run_id=run_id))
+                elif task not in AUTOMATIC_TASKS or not isinstance(body.get("enabled"), bool):
                     self._send_json(*svc.error_envelope("INVALID_SCHEDULE", "请指定支持定时的任务及启用状态", 400))
                 else:
                     scheduler.set_enabled(task, body["enabled"])
@@ -506,19 +525,7 @@ def main() -> None:
     server = create_terminal_server(host=args.host, port=args.port)
 
     def _on_scheduler_status(run_id: str, task: str, status: str, result: Dict[str, Any]) -> None:
-        try:
-            server.service._broadcast_sse("collection_update", {"task": task, "run_id": run_id, "status": status, "result": result})
-            server.service._broadcast_sse("pipeline_status", server.service.get_pipeline_status()["data"])
-            server.service._broadcast_sse("snapshot", server.service.get_dashboard_summary()["data"])
-            msg = result.get("message") if isinstance(result, dict) else ""
-            server.service._append_log(
-                "INFO" if status in ("SUCCESS", "PARTIAL_SUCCESS") else "WARN" if status == "RUNNING" else "ERROR",
-                "terminal_scheduler",
-                f"任务 [{task}] 状态变更: {status}{' · ' + msg if msg else ''}",
-                run_id=run_id,
-            )
-        except Exception:
-            pass
+        server.service._broadcast_sse("collection_update", {"task": task, "run_id": run_id, "status": status})
 
     scheduler = TerminalScheduler(
         PROJECT_ROOT / ".cache/terminal",

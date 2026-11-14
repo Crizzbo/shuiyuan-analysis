@@ -57,6 +57,8 @@ export const CHINESE_LABELS: Record<string, string> = {
   BLOCKED: '待补数',
   CANCELLED: '已取消',
   WAITING_DEPENDENCY: '等待前置任务',
+  CONFIGURED: '配置已更新',
+  SUBMITTED: '已提交',
   scheduled: '定时触发',
   manual: '手动触发',
 
@@ -83,6 +85,7 @@ export const CHINESE_LABELS: Record<string, string> = {
   Confirmed_Fact: '官方权威核实',
   Corroborated_Report: '多源佐证采信',
   Unverified_Rumor: '待核实传闻隔离',
+  Pending_Verification: '待核验',
   ARCHIVED: '已归档',
 
   // 4. 财务与审计平账
@@ -97,13 +100,16 @@ export const CHINESE_LABELS: Record<string, string> = {
   UPLOAD_FAILED: '上传失败',
 
   // 5. 核心任务名称
-  US_DAILY: '美股核心日线与宏观',
-  JP_DAILY: '日股核心日线',
+  US_DAILY: '美股全市场盘前日线与宏观',
+  JP_DAILY: '日股全市场盘前日线',
   OFFICIAL_NEWS: '官方财经资讯分时采集',
   STOCK_SCREENING: '股票收集与形态初筛',
   INDICATOR_UPDATE: '金融指标与市场宽度',
   FINANCE_CALC: '金融计算与估值走廊',
   LOCAL_AUDIT: '本地数据与账本核验',
+  QUOTE_COLLECT: '授权行情归档核对',
+  INCREMENTAL_COLLECT: '官方原文补数清单',
+  MASTER: '总启动',
   GF_MARKET_READINESS: '行情时效与交易时段',
   SEPA_UNIVERSE_SCREENER: '全市场趋势形态初筛',
   SEC_10K_BALANCED_AUDIT: '官方财报平账自检',

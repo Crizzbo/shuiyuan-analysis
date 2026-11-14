@@ -47,7 +47,8 @@ class Providers:
         classification = {}
         mapping = {("sec", "tickers"): "classification", ("sec", "submissions"): "company_action",
                    ("alpha_vantage", "daily"): "market", ("alpha_vantage", "news"): "news",
-                   ("jquants", "master"): "classification", ("jquants", "summary"): "financial"}
+                   ("jquants", "master"): "classification", ("jquants", "summary"): "financial",
+                   ("jpx_daily", "daily_quotations"): "market"}
         if (provider, self.dataset) in mapping:
             classification["dataset_kind"] = mapping[provider, self.dataset]
         if provider == "rss":
@@ -374,13 +375,21 @@ class Providers:
             metadata = ticker.history_metadata
             if frame.empty:
                 raise ValueError("empty frame")
-            rows = json_response(frame.reset_index().to_json(orient="records", date_format="iso").encode())
+            frame = frame.reset_index()
+            frame["Date"] = frame["Date"].dt.strftime("%Y-%m-%dT%H:%M:%S%z")
+            rows = json_response(frame.to_json(orient="records").encode())
         except Exception:
             # yfinance 库内部未带浏览器标头导致 401 时，使用标准 HTTP 直连公开图表端点获取真实 OHLCV
             try:
+                import urllib.error
                 import urllib.request
                 import datetime as dt_mod
-                url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range=380d"
+                from zoneinfo import ZoneInfo
+                zone = ZoneInfo("Asia/Tokyo" if symbol.endswith(".T") or symbol == "^N225" else "America/New_York")
+                period1, period2 = (int(dt_mod.datetime.fromisoformat(day).replace(tzinfo=zone).timestamp())
+                                    for day in (start, end))
+                url = (f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
+                       f"?interval=1d&period1={period1}&period2={period2}")
                 req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"})
                 with urllib.request.urlopen(req, timeout=12) as resp:
                     payload = json_response(resp.read())
@@ -391,15 +400,17 @@ class Providers:
                 adjclose = res.get("indicators", {}).get("adjclose", [{}])[0].get("adjclose", [])
                 records = []
                 for i, ts in enumerate(timestamps):
-                    dt_str = dt_mod.datetime.fromtimestamp(ts, dt_mod.timezone.utc).isoformat()
+                    dt_str = dt_mod.datetime.fromtimestamp(ts, zone).isoformat()
+                    if not start <= dt_str[:10] < end:
+                        continue
                     c = quotes.get("close", [])[i] if i < len(quotes.get("close", [])) else None
                     if c is None:
                         continue
-                    o = quotes.get("open", [])[i] if i < len(quotes.get("open", [])) else c
-                    h = quotes.get("high", [])[i] if i < len(quotes.get("high", [])) else c
-                    l = quotes.get("low", [])[i] if i < len(quotes.get("low", [])) else c
-                    v = quotes.get("volume", [])[i] if i < len(quotes.get("volume", [])) else 0
-                    ac = adjclose[i] if i < len(adjclose) else c
+                    o = quotes.get("open", [])[i] if i < len(quotes.get("open", [])) else None
+                    h = quotes.get("high", [])[i] if i < len(quotes.get("high", [])) else None
+                    l = quotes.get("low", [])[i] if i < len(quotes.get("low", [])) else None
+                    v = quotes.get("volume", [])[i] if i < len(quotes.get("volume", [])) else None
+                    ac = adjclose[i] if i < len(adjclose) else None
                     records.append({
                         "Date": dt_str, "Open": o, "High": h, "Low": l, "Close": c, "Adj Close": ac, "Volume": v
                     })
@@ -408,8 +419,15 @@ class Providers:
                 rows = records
             except IngestionError:
                 raise
+            except urllib.error.HTTPError as exc:
+                if exc.code == 429:
+                    raise IngestionError("rate_limited", "Yahoo 日线接口返回 HTTP 429") from None
+                raise IngestionError("upstream_error", f"Yahoo 日线接口返回 HTTP {exc.code}") from None
             except Exception:
                 raise IngestionError("upstream_error", "yfinance 查询失败，未切换到付费源或填入假数据") from None
+        rows = [row for row in rows if start <= str(row.get("Date", ""))[:10] < end]
+        if not rows:
+            raise IngestionError("no_data", "所请求交易日期窗口没有可归档日线")
         info = self.http.archive.save("yfinance", request_id, encode(rows),
             {"origin_url": f"https://finance.yahoo.com/quote/{symbol}/history/", "source_kind": "secondary",
              "dataset_kind": "market", "published_at": None, "quality_status": "unreviewed",
@@ -418,3 +436,16 @@ class Providers:
              "raw_transport": "yfinance_library_dataframe_snapshot"})
         self.artifacts.append(info)
         return rows, ["第三方个人研究用途，无官方稳定性承诺；不是交易所实时行情", "保留 OHLC、Adj Close、分红拆股；OHLC 是否已按拆股调整须按供应商定义核对，不能宣称原始成交价", "此处归档库返回表格，未声称保存 Yahoo HTTP 原文；交易日、币种及行情新鲜度需核验"]
+
+    def source_jpx_daily(self, dataset, args):
+        if dataset != "daily_quotations":
+            raise IngestionError("unsupported", "jpx_daily 仅支持 daily_quotations 数据集")
+        session_date = iso_date(args.get("session_date", date.today().isoformat()))
+        rows = args.get("rows", [])
+        from financial_core.engines.jpx_official_quotations_parser import JpxOfficialQuotationsParser
+        bars = JpxOfficialQuotationsParser.parse_rows(rows, session_date)
+        records = [b.to_dict() for b in bars]
+        return records, [
+            "东证公开日刊株式相场表；按全天有效时段金融合成 OHLCV",
+            "停牌无成交标的已标记 is_suspended 并计入对账底账",
+        ]

@@ -813,6 +813,11 @@ export function AnalyticsTab({ refreshKey }: { refreshKey?: number }) {
               {/* ========================================================================= */}
               {/* 2. 自动带入数据多阶段 DCF 估值走廊 (核心金融计算模块) */}
               {/* ========================================================================= */}
+              {!activeValuation && analysis?.automated_valuation_issue && (
+                <p className="rounded-lg border border-[var(--border-color)] px-4 py-3 text-sm text-[var(--text-muted)]">
+                  {analysis.automated_valuation_issue}
+                </p>
+              )}
               {activeValuation && corridor && (
                 <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-5">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 border-b border-[var(--border-color)]">
@@ -1258,8 +1263,14 @@ export function AnalyticsTab({ refreshKey }: { refreshKey?: number }) {
                       </div>
                     </div>
                     <div className="text-[11px] text-[var(--text-muted)] mt-2 pt-2 border-t border-[var(--border-color)]/40 truncate">
-                      原档: {probes?.financial_audit?.source_filing || '本地已核验证明'}
+                      原档：{probes?.financial_audit?.source_filing || '等待官方原档'}
                     </div>
+                    {probes?.financial_audit?.scheduled_calculation && (
+                      <div className="text-xs text-[var(--text-muted)] mt-2" title={probes.financial_audit.scheduled_calculation.source_path}>
+                        期末资产收益率 <strong className="text-[var(--text-primary)]">{(probes.financial_audit.scheduled_calculation.roa * 100).toFixed(2)}%</strong>
+                        <span className="ml-2">报告期 {probes.financial_audit.scheduled_calculation.period}</span>
+                      </div>
+                    )}
                   </div>
 
                   {/* 2. 信用风险与偿债能力 (KMV-Merton) */}

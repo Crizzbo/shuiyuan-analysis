@@ -2,36 +2,65 @@
 
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import closing, contextmanager
+from dataclasses import asdict
 from datetime import datetime, timedelta, timezone
 from hashlib import sha256
 import json
+import logging
+import math
 from pathlib import Path
+import re
 import sqlite3
+from statistics import fmean
 import threading
-from typing import Any, Dict, List, Optional
 import uuid
+from zoneinfo import ZoneInfo
 
 from data_ingestion.core import Archive, project_path
+from financial_core.engines.exchange_calendar_engine import ExchangeCalendarEngine
+from financial_core.engines.market_reconciliation_engine import MarketReconciliationEngine
 from scripts.ingest_data import read, run_plan
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 TOKYO = timezone(timedelta(hours=9))
+NEW_YORK = ZoneInfo("America/New_York")
+MARKET_SESSIONS = {"US": (NEW_YORK, 800, 930), "JP": (TOKYO, 730, 900)}
 TASKS = {
-    "QUOTE_COLLECT": ("权威行情与核心标的即时抽取", "手动即时 / 盘中刷新"),
-    "US_DAILY": ("美股核心日线与宏观", "周二至周六 07:00 JST"),
-    "JP_DAILY": ("日股核心日线", "周一至周五 16:00 JST"),
+    "QUOTE_COLLECT": ("授权行情归档核对", "手动"),
+    "US_DAILY": ("美股全市场盘前日线与宏观", "工作日 08:00（纽约）"),
+    "JP_DAILY": ("日股全市场盘前日线", "工作日 07:30（东京）"),
     "OFFICIAL_NEWS": ("官方财经资讯", "每小时"),
     "STOCK_SCREENING": ("股票收集与形态初筛", "周二至周六 08:00 JST"),
     "INDICATOR_UPDATE": ("金融指标与市场宽度计算", "每小时"),
-    "FINANCE_CALC": ("金融计算与多阶段估值", "手动 / 每日"),
+    "FINANCE_CALC": ("个股三表核对与财务指标", "手动"),
     "LOCAL_AUDIT": ("本地数据与账本核验", "手动"),
     "INCREMENTAL_COLLECT": ("官方监管补数与档案增量归档", "每小时扫描补数队列"),
 }
-SYMBOLS = {
-    "US": ("SPY", "QQQ", "IWM", "^VIX", "NVDA", "AAPL", "MSFT"),
-    "JP": ("1306.T", "7203.T", "8035.T", "6857.T", "9984.T"),
+START_COLLECTION_TASKS = ("US_DAILY", "JP_DAILY", "OFFICIAL_NEWS")
+COLLECTION_TASKS = (*START_COLLECTION_TASKS, "QUOTE_COLLECT", "INCREMENTAL_COLLECT")
+AUTOMATIC_TASKS = {*START_COLLECTION_TASKS, "STOCK_SCREENING", "INDICATOR_UPDATE", "INCREMENTAL_COLLECT"}
+BENCHMARKS = {
+    "US": ("SPY", "QQQ", "IWM", "^VIX"),
+    "JP": ("1306.T", "^N225"),
 }
+
+def market_symbols(market):
+    """按交易代码去重。保留原代码作为日志和归档索引。"""
+    if market == "US":
+        rows = read("data/universe/sec_company_tickers.json").values()
+        codes = (str(row.get("ticker") or "").strip().upper() for row in rows)
+    else:
+        rows = read("data/universe/jpx_company_tickers.json")
+        codes = (str(row.get("code") or row.get("ticker") or "").strip().upper().removeprefix("TYO:")
+                 for row in rows)
+    return sorted(set(codes) - {""})
+
+
+def provider_symbol(market, code):
+    if market == "JP":
+        return f"{code}.T" if re.fullmatch(r"[0-9A-Z]{4}", code) else None
+    return code.replace(".", "-") if re.fullmatch(r"[A-Z0-9]+(?:[.-][A-Z0-9]+)*", code) else None
 
 
 def utc_now():
@@ -39,16 +68,18 @@ def utc_now():
 
 
 def due_slots(now):
-    """每日任务允许当天补跑。新闻只补当前小时，避免恢复时挤满队列。"""
+    """在各市场当地盘前窗口补跑，交易日期按各市场当地日期去重。"""
     local = now.astimezone(TOKYO)
     yield "OFFICIAL_NEWS", local.strftime("%Y-%m-%dT%H")
-    if 1 <= local.weekday() <= 5 and local.hour >= 7:
-        yield "US_DAILY", local.date().isoformat()
-    if local.weekday() < 5 and local.hour >= 16:
-        yield "JP_DAILY", local.date().isoformat()
+    for market, (zone, start, end) in MARKET_SESSIONS.items():
+        session = now.astimezone(zone)
+        clock = session.hour * 100 + session.minute
+        if session.weekday() < 5 and start <= clock < end and ExchangeCalendarEngine.is_trading_day(market, session.date()):
+            yield f"{market}_DAILY", session.date().isoformat()
     if 1 <= local.weekday() <= 5 and local.hour >= 8:
         yield "STOCK_SCREENING", local.date().isoformat()
     yield "INDICATOR_UPDATE", local.strftime("%Y-%m-%dT%H")
+    yield "INCREMENTAL_COLLECT", local.strftime("%Y-%m-%dT%H")
 
 
 class TerminalScheduler:
@@ -71,12 +102,48 @@ class TerminalScheduler:
                     started_at TEXT, finished_at TEXT, result TEXT, UNIQUE(task, slot)
                 );
                 CREATE TABLE IF NOT EXISTS settings (task TEXT PRIMARY KEY, enabled INTEGER NOT NULL);
+                CREATE TABLE IF NOT EXISTS task_log (
+                    id INTEGER PRIMARY KEY, timestamp TEXT NOT NULL, run_id TEXT,
+                    task TEXT NOT NULL, status TEXT NOT NULL, level TEXT NOT NULL,
+                    message TEXT NOT NULL
+                );
                 CREATE TABLE IF NOT EXISTS checkpoints (
                     run_id TEXT NOT NULL, job_id TEXT NOT NULL, result TEXT NOT NULL,
                     PRIMARY KEY(run_id, job_id)
                 );
+                CREATE TABLE IF NOT EXISTS market_cursor (
+                    market TEXT PRIMARY KEY, last_symbol TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS market_archive (
+                    market TEXT NOT NULL, symbol TEXT NOT NULL, result TEXT NOT NULL,
+                    PRIMARY KEY(market, symbol)
+                );
             """)
             conn.executemany("INSERT OR IGNORE INTO settings VALUES (?, 1)", [(task,) for task in TASKS])
+            conn.execute("INSERT OR IGNORE INTO settings VALUES ('__automatic__', 1)")
+
+    def _log(self, conn, task, status, message, run_id=None):
+        level = {"FAILED": "ERROR", "BLOCKED": "WARN", "PARTIAL_SUCCESS": "WARN"}.get(status, "INFO")
+        conn.execute("INSERT INTO task_log(timestamp,run_id,task,status,level,message) VALUES (?,?,?,?,?,?)",
+                     (utc_now(), run_id, task, status, level, message))
+
+    def logs(self, level, query, limit):
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT * FROM task_log WHERE (?='ALL' OR level=?) "
+                "AND instr(lower(message || ' ' || task || ' ' || coalesce(run_id,'')), ?) > 0 "
+                "ORDER BY id DESC LIMIT ?", (level, level, query, limit),
+            ).fetchall()
+        return [{"log_id": f"task-{row['id']}", "timestamp": row["timestamp"], "module": "terminal_scheduler",
+                 "level": row["level"], "run_id": row["run_id"], "message": row["message"],
+                 "task": row["task"], "status": row["status"]} for row in rows]
+
+    def _notify(self, run_id, task, status, result):
+        if self.on_status_change:
+            try:
+                self.on_status_change(run_id, task, status, result)
+            except Exception:
+                logging.getLogger(__name__).exception("任务状态推送失败：%s", run_id)
 
     @contextmanager
     def _connect(self):
@@ -96,6 +163,8 @@ class TerminalScheduler:
             raise RuntimeError("已有终端调度器正在运行") from None
         self.leader = lock
         with self._connect() as conn:
+            for row in conn.execute("SELECT run_id, task FROM runs WHERE status='RUNNING'"):
+                self._log(conn, row["task"], "QUEUED", "服务重启，任务已重新排队", row["run_id"])
             conn.execute("UPDATE runs SET status='QUEUED', started_at=NULL WHERE status='RUNNING'")
         self.thread = threading.Thread(target=self._dispatch, name="terminal-dispatch")
         self.thread.start()
@@ -109,38 +178,64 @@ class TerminalScheduler:
 
     def set_enabled(self, task, enabled):
         with self._connect() as conn:
+            conn.execute("BEGIN IMMEDIATE")
             conn.execute("UPDATE settings SET enabled=? WHERE task=?", (enabled, task))
+            name = TASKS[task][0] if task in TASKS else "自动调度总开关"
+            self._log(conn, task, "CONFIGURED", f"{name}已{'开启' if enabled else '关闭'}")
             if not enabled:
-                conn.execute(
-                    "UPDATE runs SET status='CANCELLED', finished_at=?, result=? "
-                    "WHERE task=? AND trigger='scheduled' AND status='QUEUED'",
-                    (utc_now(), json.dumps({"message": "定时任务已停用"}, ensure_ascii=False), task),
-                )
+                pending = conn.execute(
+                    "SELECT run_id,task FROM runs WHERE (?='__automatic__' OR task=?) "
+                    "AND trigger='scheduled' AND status='QUEUED'", (task, task),
+                ).fetchall()
+                for row in pending:
+                    conn.execute("UPDATE runs SET status='CANCELLED',finished_at=?,result=? WHERE run_id=?",
+                                 (utc_now(), json.dumps({"message": "定时任务已停用"}, ensure_ascii=False), row["run_id"]))
+                    self._log(conn, row["task"], "CANCELLED", f"{TASKS[row['task']][0]}：定时任务已停用", row["run_id"])
         self.wake.set()
 
     def submit(self, task, slot=None):
+        return self.submit_with_status(task, slot)[0]
+
+    def submit_with_status(self, task, slot=None):
         if task not in TASKS:
             raise ValueError("未知任务")
         with self._connect() as conn:
             conn.execute("BEGIN IMMEDIATE")
-            if slot:
-                enabled = conn.execute("SELECT enabled FROM settings WHERE task=?", (task,)).fetchone()[0]
-                existing = conn.execute("SELECT run_id FROM runs WHERE task=? AND slot=?", (task, slot)).fetchone()
-                if existing or not enabled:
-                    return None
-            else:
-                active = conn.execute(
-                    "SELECT run_id FROM runs WHERE task=? AND status IN ('QUEUED','RUNNING') "
-                    "ORDER BY created_at LIMIT 1", (task,),
-                ).fetchone()
-                if active:
-                    return active["run_id"]
-            run_id = uuid.uuid4().hex
-            conn.execute("INSERT INTO runs VALUES (?,?,?,?,?,?,NULL,NULL,NULL)", (
-                run_id, task, slot, "scheduled" if slot else "manual", "QUEUED", utc_now(),
-            ))
+            run_id, status = self._enqueue(conn, task, slot)
         self.wake.set()
-        return run_id
+        return run_id, status
+
+    def _enqueue(self, conn, task, slot=None, batch_id=None):
+        if slot:
+            enabled = conn.execute("SELECT min(enabled) FROM settings WHERE task IN (?, '__automatic__')", (task,)).fetchone()[0]
+            existing = conn.execute("SELECT 1 FROM runs WHERE task=? AND slot=?", (task, slot)).fetchone()
+            if existing or not enabled:
+                return None, None
+        else:
+            active = conn.execute("SELECT run_id,status FROM runs WHERE task=? AND status IN ('QUEUED','RUNNING') "
+                                  "ORDER BY rowid LIMIT 1", (task,)).fetchone()
+            if active:
+                return active["run_id"], active["status"]
+        run_id = uuid.uuid4().hex
+        conn.execute("INSERT INTO runs VALUES (?,?,?,?,?,?,NULL,NULL,NULL)", (
+            run_id, task, slot, "scheduled" if slot else "manual", "QUEUED", utc_now(),
+        ))
+        suffix = f" · 总启动 {batch_id}" if batch_id else ""
+        self._log(conn, task, "QUEUED", f"{TASKS[task][0]}：{'定时' if slot else '手动'}排队{suffix}", run_id)
+        return run_id, "QUEUED"
+
+    def start_batch(self):
+        batch_id = uuid.uuid4().hex
+        runs = []
+        with self._connect() as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            for task in ("LOCAL_AUDIT", *START_COLLECTION_TASKS):
+                run_id, status = self._enqueue(conn, task, batch_id=batch_id)
+                runs.append({"run_id": run_id, "task": task, "status": status})
+            self._log(conn, "MASTER", "SUBMITTED", "总启动：本地核对同步和数据采集 · "
+                      + "、".join(row["run_id"] for row in runs), batch_id)
+        self.wake.set()
+        return {"run_id": batch_id, "runs": runs}
 
     def snapshot(self):
         with self._connect() as conn:
@@ -151,53 +246,29 @@ class TerminalScheduler:
             ).fetchall()
         runs = [dict(row, result=json.loads(row["result"]) if row["result"] else None) for row in rows]
         return {
-            "scheduled": self.scheduled and self.thread is not None and self.thread.is_alive(),
-            "tasks": [{"id": task, "name": name, "schedule": schedule, "enabled": settings[task]}
+            "scheduled": self.scheduled and bool(settings["__automatic__"]) and self.thread is not None and self.thread.is_alive(),
+            "automatic_enabled": self.scheduled and bool(settings["__automatic__"]),
+            "automatic_available": self.scheduled,
+            "tasks": [{"id": task, "name": name, "schedule": schedule, "enabled": settings[task],
+                       "automatic": task in AUTOMATIC_TASKS,
+                       "track": "collection" if task in COLLECTION_TASKS else "local"}
                       for task, (name, schedule) in TASKS.items()],
             "runs": runs,
         }
 
     def news(self):
-        """从 SQLite 事件雷达数据库 (data/ledger/event_radar.sqlite3) 读取具备 AI 提炼与微观商业影响的事实条目，
-        若数据库为空则平滑回退至官方任务归档。"""
-        db_path = PROJECT_ROOT / "data" / "ledger" / "event_radar.sqlite3"
-        if db_path.exists():
-            try:
-                from finance_tools.events_and_verification.event_radar_collector import RadarDatabaseManager
-                mgr = RadarDatabaseManager(str(db_path))
-                events = mgr.query_events(limit=30)
-                if events:
-                    return [
-                        {
-                            "event_id": ev.get("event_id"),
-                            "title": ev.get("title"),
-                            "published_at": ev.get("published_at"),
-                            "source": ev.get("source_name"),
-                            "severity_level": ev.get("severity_level"),
-                            "micro_physical_impact": ev.get("micro_physical_impact"),
-                            "involved_entities": ev.get("involved_entities", []),
-                            "affected_business_segments": ev.get("affected_business_segments", []),
-                            "category": ev.get("category"),
-                            "verification_status": ev.get("verification_status"),
-                            "requires_deep_analysis": ev.get("requires_deep_analysis", False),
-                        }
-                        for ev in events
-                    ]
-            except Exception:
-                pass
-
+        """展示已归档标题与时间，核验后的事件仍由事件雷达提供。"""
         items = []
         for item, records in self._archived_records("OFFICIAL_NEWS"):
-            for record in records[:15]:
-                items.append({
-                    "title": record["title"],
-                    "published_at": record.get("pubDate") or record.get("published") or record.get("updated"),
-                    "source": item["artifacts"][0]["origin_url"] if item.get("artifacts") else "",
-                    "severity_level": "P2",
-                    "micro_physical_impact": record.get("title", ""),
-                    "involved_entities": ["官方监管/发行人"],
-                    "verification_status": "Confirmed_Fact",
-                })
+            source = next(iter(item.get("artifacts", [])), {}).get("origin_url", "")
+            for record in records:
+                if record.get("title"):
+                    items.append({
+                        "title": record["title"],
+                        "published_at": record.get("pubDate") or record.get("published") or record.get("updated"),
+                        "source": source,
+                        "verification_status": "Pending_Verification",
+                    })
         return items
 
     def market_archives(self):
@@ -205,32 +276,58 @@ class TerminalScheduler:
         items = []
         for task in ("US_DAILY", "JP_DAILY"):
             for item, records in self._archived_records(task):
-                if item["provider"] != "yfinance" or not records:
+                if not records:
                     continue
-                dates = sorted(str(row["Date"])[:10] for row in records if row.get("Date"))
-                items.append({"symbol": item["id"], "market": task[:2], "count": len(dates),
-                              "last_date": dates[-1] if dates else None,
-                              "archived_at": item["completed_at"]})
+                rows = sorted((row for row in records if row.get("Date")), key=lambda row: row["Date"])
+                close = rows[-1].get("Close") if rows else None
+                items.append({"symbol": item["id"], "market": task[:2], "count": len(rows),
+                              "last_date": str(rows[-1]["Date"])[:10] if rows else None,
+                              "close": close if isinstance(close, (int, float)) and math.isfinite(close) and close > 0 else None,
+                              "archived_at": item.get("completed_at", "")})
         return items
 
+    def reconciliation_summary(self, market: str, target_date=None):
+        """执行目标交易日全市场全息对账核算与平账自检。"""
+        market_upper = market.upper()
+        codes = market_symbols(market_upper)
+        task = f"{market_upper}_DAILY"
+        zone = MARKET_SESSIONS[market_upper][0]
+        now_local = datetime.now(zone)
+        eff_date = target_date[:10] if target_date else ExchangeCalendarEngine.resolve_target_trading_day(market_upper, now_local).isoformat()
+        archived_map = {}
+        for item, records in self._archived_records(task):
+            if records:
+                archived_map[item["id"]] = records
+        return MarketReconciliationEngine.reconcile_target_day(
+            market=market_upper,
+            target_date=eff_date,
+            universe_symbols=codes,
+            archived_records=archived_map,
+        ).to_dict()
+
     def _archived_records(self, task):
+        daily = task in ("US_DAILY", "JP_DAILY")
         with self._connect() as conn:
+            market_items = conn.execute("SELECT result FROM market_archive WHERE market=? ORDER BY symbol",
+                                        (task[:2],)).fetchall() if daily else []
             row = conn.execute(
-                "SELECT result FROM runs WHERE task=? AND status IN ('SUCCESS','PARTIAL_SUCCESS') "
-                "ORDER BY finished_at DESC, rowid DESC LIMIT 1", (task,),
+                "SELECT result FROM runs WHERE task=? AND (status IN ('SUCCESS','PARTIAL_SUCCESS') "
+                "OR (? AND status='BLOCKED')) AND result IS NOT NULL "
+                "ORDER BY finished_at DESC, rowid DESC LIMIT 1", (task, daily),
             ).fetchone()
-        if row and row["result"]:
+        items = {item["id"]: item for item in json.loads(row["result"]).get("items", [])} if row else {}
+        for saved in market_items:
+            item = json.loads(saved["result"])
+            items[item["id"]] = item
+        for item in items.values():
             try:
-                res_dict = json.loads(row["result"])
-                for item in res_dict.get("items", []):
-                    if item.get("status") != "collected" or not item.get("result_path"):
-                        continue
-                    content = project_path(item["result_path"]).read_bytes()
-                    if sha256(content).hexdigest() != item.get("result_sha256"):
-                        continue
+                if item.get("status") != "collected" or not item.get("result_path"):
+                    continue
+                content = project_path(item["result_path"]).read_bytes()
+                if sha256(content).hexdigest() == item.get("result_sha256"):
                     yield item, json.loads(content).get("records", [])
-            except Exception:
-                pass
+            except (OSError, ValueError):
+                continue
 
     def _dispatch(self):
         active = {}
@@ -241,6 +338,7 @@ class TerminalScheduler:
                 if self.scheduled:
                     for task, slot in due_slots(datetime.now(timezone.utc)):
                         self.submit(task, slot)
+                launched = []
                 with self._connect() as conn:
                     queued = conn.execute("SELECT * FROM runs WHERE status='QUEUED' ORDER BY rowid").fetchall()
                     for run in queued:
@@ -254,12 +352,12 @@ class TerminalScheduler:
                         )
                         if not claimed.rowcount:
                             continue
-                        if self.on_status_change:
-                            try:
-                                self.on_status_change(run["run_id"], run["task"], "RUNNING", {})
-                            except Exception:
-                                pass
-                        active[run["task"]] = pool.submit(self._run, dict(run))
+                        self._log(conn, run["task"], "RUNNING", f"{TASKS[run['task']][0]}：开始执行", run["run_id"])
+                        launched.append(dict(run))
+                        active[run["task"]] = None
+                for run in launched:
+                    self._notify(run["run_id"], run["task"], "RUNNING", {})
+                    active[run["task"]] = pool.submit(self._run, run)
                 self.wake.wait(5)
 
     def _run(self, run):
@@ -268,16 +366,22 @@ class TerminalScheduler:
         except Exception as exc:
             status, result = "FAILED", {"message": str(exc)}
         with self._connect() as conn:
+            if run["task"] in ("US_DAILY", "JP_DAILY") and "session_date" in result:
+                market = run["task"][:2]
+                if result["next_market_cursor"]:
+                    conn.execute("INSERT OR REPLACE INTO market_cursor VALUES (?,?)",
+                                 (market, result["next_market_cursor"]))
+                conn.executemany("INSERT OR REPLACE INTO market_archive VALUES (?,?,?)", (
+                    (market, item["id"], json.dumps(item, ensure_ascii=False))
+                    for item in result["items"] if item["status"] == "collected" and item.get("record_count", 0)
+                ))
             conn.execute("UPDATE runs SET status=?, finished_at=?, result=? WHERE run_id=?",
                          (status, utc_now(), json.dumps(result, ensure_ascii=False), run["run_id"]))
-        if self.on_status_change:
-            try:
-                self.on_status_change(run["run_id"], run["task"], status, result)
-            except Exception:
-                pass
+            self._log(conn, run["task"], status, f"{TASKS[run['task']][0]}：{result.get('message', status)}", run["run_id"])
+        self._notify(run["run_id"], run["task"], status, result)
         self.wake.set()
 
-    def _collect_jobs(self, run_id, jobs, sources):
+    def _collect_jobs(self, run_id, jobs, sources, *, stop_on_limit=False):
         with self._connect() as conn:
             saved = {row["job_id"]: json.loads(row["result"]) for row in conn.execute(
                 "SELECT job_id, result FROM checkpoints WHERE run_id=?", (run_id,),
@@ -306,6 +410,20 @@ class TerminalScheduler:
                             conn.execute("INSERT INTO checkpoints VALUES (?,?,?)",
                                          (run_id, job["id"], json.dumps(result, ensure_ascii=False)))
                 results.append(result)
+                with self._connect() as conn:
+                    task_row = conn.execute("SELECT task FROM runs WHERE run_id=?", (run_id,)).fetchone()
+                    if task_row:
+                        outcome = ("恢复归档" if saved.get(job["id"]) else {
+                            "collected": "已归档", "quota_exhausted": "额度用尽",
+                            "rate_limited": "受上游限流", "browser_required": "来源不可自动调用",
+                        }.get(result["status"], "来源未完成"))
+                        message = (f"{job['id']} · {outcome}"
+                                   f" · {result.get('record_count', 0)} 条 · "
+                                   f"{result.get('message') or result.get('result_path') or ''}")
+                        self._log(conn, task_row["task"], "SUCCESS" if result["status"] == "collected" else "BLOCKED",
+                                  message, run_id)
+                if stop_on_limit and result["status"] in {"quota_exhausted", "rate_limited", "browser_required"}:
+                    break
         return results
 
     def _execute(self, run):
@@ -313,7 +431,14 @@ class TerminalScheduler:
         if task == "QUOTE_COLLECT":
             return self._execute_quote_collect(run)
         if task == "LOCAL_AUDIT":
-            return self.audit()
+            status, result = self.audit()
+            archives = self.market_archives()
+            for market, name in (("US", "美股"), ("JP", "日股")):
+                count = sum(row["market"] == market for row in archives)
+                self._record_item(run, "SUCCESS", f"{name}日线归档目录核对：{count} 个标的")
+            result = {**result, "daily_archive_coverage": archives,
+                      "message": f"{result['message']}；日线归档目录纳入 {len(archives)} 个标的"}
+            return status, result
         if task == "STOCK_SCREENING":
             return self._execute_stock_screening(run)
         if task == "OFFICIAL_NEWS":
@@ -324,601 +449,281 @@ class TerminalScheduler:
             return self._execute_finance_calc(run)
         if task == "INCREMENTAL_COLLECT":
             return self._execute_incremental_collect(run)
-        sources = read("data/ingestion-sources.json")["sources"]
-        jobs = []
+        return self._execute_market_daily(run)
+
+    def _execute_market_daily(self, run):
+        from bisect import bisect_right
+
+        task = run["task"]
         market = task[:2]
-        day = datetime.fromisoformat(run["slot"] or datetime.now(TOKYO).date().isoformat()).date()
-        # 美股 07:00 JST 对应上一纽约交易日的盘后，日股当日收盘后纳入当日。
-        end_day = day if market == "US" else day + timedelta(days=1)
+        zone = MARKET_SESSIONS[market][0]
+        submitted = datetime.fromisoformat(run["created_at"]).astimezone(zone) if run.get("created_at") else datetime.now(zone)
+        end_day = datetime.fromisoformat(run["slot"]).date() if run["slot"] else submitted.date()
         start, end = (end_day - timedelta(days=380)).isoformat(), end_day.isoformat()
-        jobs.extend(
+        codes = market_symbols(market)
+        mapped = {code: symbol for code in codes if (symbol := provider_symbol(market, code))}
+        if not mapped:
+            return "BLOCKED", {"message": "标的库没有可映射的行情代码", "universe_count": len(codes)}
+
+        sources = read("data/ingestion-sources.json")["sources"]
+        # 两个市场共用供应商额度，预留 10% 给执行时间偏移及其他已配置查询。
+        limit = sources["yfinance"].get("daily_limit")
+        budget = min(100, limit * 45 // 100) if limit is not None else 100
+        benchmarks = BENCHMARKS[market][:max(0, budget - 1)]
+        with self._connect() as conn:
+            cursor = conn.execute("SELECT last_symbol FROM market_cursor WHERE market=?", (market,)).fetchone()
+        ordered = list(mapped)
+        offset = bisect_right(ordered, cursor["last_symbol"]) if cursor else 0
+        batch = (ordered[offset:] + ordered[:offset])[:max(0, budget - len(benchmarks))]
+        stock_jobs = [
+            {"id": code, "provider": "yfinance", "dataset": "daily",
+             "params": {"symbol": mapped[code], "start": start, "end": end}}
+            for code in batch
+        ]
+        benchmark_jobs = [
             {"id": symbol, "provider": "yfinance", "dataset": "daily",
              "params": {"symbol": symbol, "start": start, "end": end}}
-            for symbol in SYMBOLS[market]
-        )
+            for symbol in benchmarks if symbol not in batch
+        ]
+        results = self._collect_jobs(run["run_id"], stock_jobs + benchmark_jobs, sources, stop_on_limit=True)
+        stock_results = results[:len(stock_jobs)]
+        complete = [row for row in stock_results if row["status"] == "collected" and row.get("record_count", 0) > 0]
+        consumed = [row for row in stock_results
+                    if row["status"] not in {"quota_exhausted", "rate_limited", "browser_required"}]
+        if consumed:
+            # 由终态写入同一个事务，进程中断后原批次按断点恢复。
+            next_cursor = consumed[-1]["id"]
+        else:
+            next_cursor = None
+        stop = next((row["status"] for row in results
+                     if row["status"] in {"quota_exhausted", "rate_limited", "browser_required"}), None)
         if market == "US":
-            jobs.extend(
+            macro_jobs = [
                 {"id": series, "provider": "fred_csv", "dataset": "series", "params": {"series_id": series}}
                 for series in ("DGS10", "EFFR")
-            )
-        results = self._collect_jobs(run["run_id"], jobs, sources)
-        collected = sum(row["status"] == "collected" and row.get("record_count", 0) > 0 for row in results)
-        status = "SUCCESS" if collected and collected == len(jobs) else "PARTIAL_SUCCESS" if collected else "BLOCKED"
-        market_label = "美股全盘（SEC 官方 10,445 家上市主体）" if market == "US" else "日股全盘（东证 4,447 家上市主体）"
-        universe_scale = 10445 if market == "US" else 4447
+            ]
+            results.extend(self._collect_jobs(run["run_id"], macro_jobs, sources))
+        target_trading_day = ExchangeCalendarEngine.resolve_target_trading_day(market, submitted)
+        target_date_str = target_trading_day.isoformat()
+
+        # 构建当前归档记录映射表并执行全市场目标日对账平账
+        archived_map = {}
+        for item, records in self._archived_records(task):
+            if records:
+                archived_map[item["id"]] = records
+
+        error_symbols = {row["id"] for row in stock_results if row.get("status") in {"failed", "rate_limited", "quota_exhausted", "upstream_error"}}
+        reconciliation = MarketReconciliationEngine.reconcile_target_day(
+            market=market,
+            target_date=target_date_str,
+            universe_symbols=codes,
+            archived_records=archived_map,
+            error_symbols=error_symbols,
+        )
+
+        reason = {"quota_exhausted": "来源额度用尽", "rate_limited": "上游限流",
+                  "browser_required": "行情来源不可自动调用"}.get(stop, "按共享额度轮询")
+        status = ("SUCCESS" if len(complete) == len(codes) else
+                  "PARTIAL_SUCCESS" if complete else "BLOCKED")
         return status, {
-            "message": f"{market_label} 抽取完成，归档核心指数基准并覆盖 {universe_scale} 家全量企业资产池",
+            "message": f"{end} 盘前日线（目标交易日 {target_date_str}）：全库 {len(codes)} 个，本轮入批 {len(batch)} 个，"
+                       f"已归档 {len(complete)} 个，目标日匹配 {reconciliation.matched_count} 个，"
+                       f"停牌未交易 {reconciliation.no_trade_count} 个，未完成 {reconciliation.pending_count} 个。{reason}",
             "items": results,
-            "universe_scale": universe_scale,
+            "universe_count": len(codes), "requested_symbols": len(batch), "archived_symbols": len(complete),
+            "target_trading_day": target_date_str,
+            "reconciliation": reconciliation.to_dict(),
+            "unmapped_symbols": sorted(set(codes) - mapped.keys()), "next_market_cursor": next_cursor,
+            "source_stop": stop, "session_date": end,
         }
 
     def _execute_official_news(self, run):
-        """官方资讯采集、断网防御、AI 事件实质提炼与 SQLite 持久化."""
         sources = read("data/ingestion-sources.json")["sources"]
-        jobs = []
-        for index, feed in enumerate(sources.get("rss", {}).get("feeds", [])):
-            if feed.get("authority") in ("official", "issuer", "media"):
-                jobs.append({
-                    "id": f"rss-{index}", "provider": "rss", "dataset": "feed",
-                    "params": {"url": feed["url"]}
-                })
-
+        jobs = [
+            {"id": f"rss-{index}", "provider": "rss", "dataset": "feed", "params": {"url": feed["url"]}}
+            for index, feed in enumerate(sources.get("rss", {}).get("feeds", []))
+            if feed.get("authority") in ("official", "issuer")
+        ]
         results = self._collect_jobs(run["run_id"], jobs, sources)
         collected = sum(row["status"] == "collected" and row.get("record_count", 0) > 0 for row in results)
-
-        db_path = PROJECT_ROOT / "data" / "ledger" / "event_radar.sqlite3"
-        ckpt_path = PROJECT_ROOT / "data" / "ledger" / "event_radar_checkpoint.json"
-
-        distilled_count = 0
-        new_events = []
-        total_in_db = 0
-
-        try:
-            from finance_tools.events_and_verification.event_radar_collector import (
-                RadarDatabaseManager,
-                MockModelSummarizer,
-            )
-            from financial_core.engines.event_radar_engine import (
-                EventRadarEngine,
-                EventCategory,
-                RawNewsItem,
-            )
-
-            db_mgr = RadarDatabaseManager(str(db_path))
-            engine = EventRadarEngine()
-            summarizer = MockModelSummarizer()
-
-            items_to_process = []
-            for item in results:
-                if item.get("status") == "collected" and item.get("result_path"):
-                    try:
-                        content = project_path(item["result_path"]).read_bytes()
-                        if sha256(content).hexdigest() == item.get("result_sha256"):
-                            recs = json.loads(content).get("records", [])
-                            items_to_process.append((item, recs))
-                    except Exception:
-                        pass
-            if not items_to_process:
-                items_to_process = list(self._archived_records("OFFICIAL_NEWS"))
-
-            for item, records in items_to_process:
-                source_name = (
-                    item.get("artifacts", [{}])[0].get("origin_url")
-                    if item.get("artifacts")
-                    else item.get("id") or "Official_RSS"
-                )
-                for rec in records:
-                    title = (rec.get("title") or "").strip()
-                    if not title:
-                        continue
-                    content = (rec.get("summary") or rec.get("description") or rec.get("content") or title).strip()
-                    pub_date = (rec.get("pubDate") or rec.get("published") or rec.get("updated") or utc_now())
-                    url = rec.get("link") or rec.get("url") or ""
-
-                    raw_hash = sha256(f"{title}|{content}|{pub_date}".encode("utf-8")).hexdigest()
-
-                    # 幂等排重：检查数据库是否已存在该条哈希记录
-                    with sqlite3.connect(db_path) as conn:
-                        existing = conn.execute("SELECT 1 FROM radar_events WHERE raw_hash=?", (raw_hash,)).fetchone()
-                        if existing:
-                            continue
-
-                    raw_item = RawNewsItem(
-                        id=f"news_{raw_hash[:12]}",
-                        title=title,
-                        content=content,
-                        source=source_name,
-                        published_at=pub_date,
-                        url=url,
-                    )
-
-                    matched, tags, cat = engine.pre_filter(raw_item)
-                    if not matched:
-                        t_lower = (title + " " + content).lower()
-                        if any(k in t_lower for k in ("fed", "rate", "inflation", "cpi", "利率", "通胀", "美联储", "央行")):
-                            cat = EventCategory.CENTRAL_BANK_LIQUIDITY
-                        elif any(k in t_lower for k in ("sec", "filing", "10-k", "10-q", "财报", "监管", "公报")):
-                            cat = EventCategory.STATE_POLICY
-                        elif any(k in t_lower for k in ("ai", "nvidia", "gpu", "chip", "semiconductor", "半导体", "芯片")):
-                            cat = EventCategory.GEOPOLITICAL
-                        elif any(k in t_lower for k in ("tariff", "trade", "export", "关税", "贸易", "管制")):
-                            cat = EventCategory.CRITICAL_MINERALS
-                        else:
-                            cat = EventCategory.OTHER_MACRO
-
-                    prompt_payload = engine.build_summary_prompt(raw_item, cat)
-                    summary_json = summarizer.generate_summary_json(prompt_payload, raw_item)
-                    summary = engine.parse_and_validate_summary(summary_json, raw_item, cat)
-
-                    db_mgr.insert_event(summary, raw_item, collected_at=utc_now())
-                    distilled_count += 1
-                    new_events.append({
-                        "event_id": summary.event_id,
-                        "title": summary.raw_title,
-                        "severity_level": summary.severity_level,
-                        "micro_physical_impact": summary.micro_physical_impact,
-                        "involved_entities": summary.involved_entities,
-                    })
-
-            cycle_report = {
-                "timestamp": utc_now(),
-                "market_session": "REGULAR",
-                "status": "SUCCESS" if collected > 0 or distilled_count > 0 else "PARTIAL",
-                "active_probe_node": "Local_Official_Feeds",
-                "probe_latency_ms": 12.5,
-                "scanned_count": collected,
-                "filtered_in_count": distilled_count,
-                "summarized_count": distilled_count,
-                "p0_p1_triggered_count": sum(1 for e in new_events if e["severity_level"] in ("P0", "P1")),
-                "estimated_tokens_consumed": distilled_count * 65,
-            }
-            db_mgr.insert_cycle(cycle_report)
-
-            try:
-                from finance_tools.events_and_verification.event_radar_collector import RadarProgressManager
-                prog = RadarProgressManager(str(ckpt_path))
-                prog.save_checkpoint(
-                    current_timestamp=utc_now(),
-                    cycle_metrics={
-                        "scanned": cycle_report["scanned_count"],
-                        "filtered_in": cycle_report["filtered_in_count"],
-                        "summarized": cycle_report["summarized_count"],
-                        "p0_p1_triggered": cycle_report["p0_p1_triggered_count"],
-                        "estimated_tokens": cycle_report["estimated_tokens_consumed"],
-                    },
-                    new_triggered_events=[e for e in new_events if e["severity_level"] in ("P0", "P1")],
-                )
-            except Exception:
-                pass
-
-            total_in_db = db_mgr.query_summary_statistics().get("total_events_stored", 0)
-        except Exception as exc:
-            import traceback
-            traceback.print_exc()
-
-        status = "SUCCESS" if collected or distilled_count or total_in_db > 0 else "PARTIAL_SUCCESS"
-        return status, {
-            "message": f"官方资讯采集完成：已归档 {collected} 项来源响应，AI 事件雷达成功提炼 {distilled_count} 条微观商业影响事实并持久化入 SQLite 数据库 (库内当前共计 {total_in_db} 条事实事件)",
-            "items": results,
-            "message": f"官方资讯采集完成：已归档 {collected} 项来源响应，AI 事件雷达成功提炼 {distilled_count} 条微观商业影响事实并持久化入 SQLite 数据库 (库内当前共计 {total_in_db} 条事实事件)",
-            "collected_count": collected,
-            "distilled_this_run": distilled_count,
-            "total_in_db": total_in_db,
-            "recent_events": new_events[:10],
-            "as_of": utc_now(),
-        }
+        status = "SUCCESS" if collected and collected == len(jobs) else "PARTIAL_SUCCESS" if collected else "BLOCKED"
+        return status, {"message": f"归档 {collected}/{len(jobs)} 个资讯来源，正文事实核验见事件雷达", "items": results}
 
     def _execute_stock_screening(self, run):
-        """全盘万家上市主体 (14,892家) 0-Token 本地初筛与边收集边分析估值流式处理."""
-        from scripts.run_screening_universe_batch import ScreeningUniverseBatchPipeline
-        from finance_tools.screening_candidate_ranker import ScreeningCandidateRanker
-        from financial_reporting.watersource_terminal_service import WatersourceTerminalService
-
-        svc = WatersourceTerminalService()
-        pipeline = ScreeningUniverseBatchPipeline(data_root=PROJECT_ROOT / "data")
-
-        batch_valuations = {}
-
-        # 核心锚定标的前置计算
-        core_seeds = ["NVDA", "AAPL", "MSFT", "AMD", "1358", "1383", "1417", "8035"]
-        for seed_tk in core_seeds:
-            try:
-                code, val_res = svc.auto_calculate_company_valuation(seed_tk)
-                if code == 200 and val_res.get("data"):
-                    d = val_res["data"]
-                    corridor = d.get("valuation_corridor", {})
-                    facts = d.get("underlying_facts", {})
-                    batch_valuations[seed_tk] = {
-                        "company_name": d.get("company_name", seed_tk),
-                        "currency": d.get("currency", "USD"),
-                        "current_price": d.get("current_price"),
-                        "fair_value": corridor.get("base_fair_value", {}).get("value_per_share"),
-                        "floor_value": corridor.get("conservative_floor", {}).get("value_per_share"),
-                        "target_value": corridor.get("optimistic_target", {}).get("value_per_share"),
-                        "margin_of_safety_pct": corridor.get("margin_of_safety_pct"),
-                        "verdict": corridor.get("valuation_verdict"),
-                        "wacc_pct": d.get("capital_cost_wacc", {}).get("wacc_pct"),
-                        "roe_pct": d.get("profitability_ratios", {}).get("roe_pct"),
-                        "is_balanced": facts.get("is_balanced", True),
-                        "source_filing": facts.get("source_filing"),
-                    }
-            except Exception:
-                continue
-
-        # 边收集边分析流式回调：分块处理过程中即时调用分析模块
-        def on_chunk_screened(chunk_res: Dict[str, Any]):
-            records = chunk_res.get("records", [])
-            for rec in records:
-                sepa = rec.get("sepa_qualification", {})
-                act = sepa.get("decision_action")
-                tk = rec.get("ticker")
-                if act == "Stage_2_Pivot_Ready" and tk and tk not in batch_valuations and len(batch_valuations) < 30:
-                    try:
-                        code, val_res = svc.auto_calculate_company_valuation(tk)
-                        if code == 200 and val_res.get("data"):
-                            d = val_res["data"]
-                            corridor = d.get("valuation_corridor", {})
-                            facts = d.get("underlying_facts", {})
-                            batch_valuations[tk] = {
-                                "company_name": d.get("company_name", tk),
-                                "currency": d.get("currency", "USD"),
-                                "current_price": d.get("current_price"),
-                                "fair_value": corridor.get("base_fair_value", {}).get("value_per_share"),
-                                "floor_value": corridor.get("conservative_floor", {}).get("value_per_share"),
-                                "target_value": corridor.get("optimistic_target", {}).get("value_per_share"),
-                                "margin_of_safety_pct": corridor.get("margin_of_safety_pct"),
-                                "verdict": corridor.get("valuation_verdict"),
-                                "wacc_pct": d.get("capital_cost_wacc", {}).get("wacc_pct"),
-                                "roe_pct": d.get("profitability_ratios", {}).get("roe_pct"),
-                                "is_balanced": facts.get("is_balanced", True),
-                                "source_filing": facts.get("source_filing"),
-                            }
-                    except Exception:
-                        pass
-
-        # 全盘批处理 (150 分块，14,892 家)
-        summary = pipeline.run_pipeline(market_filter="ALL", chunk_callback=on_chunk_screened, verbose=False)
-
-        # 聚合排序优质标的
-        ranker = ScreeningCandidateRanker(data_root=PROJECT_ROOT / "data")
-        ranked_data = ranker.aggregate_and_rank_candidates()
-
-        pivots = ranked_data.get("pivot_ready_candidates", [])
-        watchlists = ranked_data.get("watchlist_candidates", [])
-
-        # 缓存最新批量估值分析成果
-        cache_out = project_path(".cache/terminal/finance_calc_latest.json")
-        cache_out.parent.mkdir(parents=True, exist_ok=True)
-        cache_out.write_text(json.dumps({
-            "updated_at": utc_now(),
-            "batch_count": len(batch_valuations),
-            "valuations": batch_valuations,
-        }, ensure_ascii=False, indent=2), encoding="utf-8")
-
-        stage2_pass = []
-        for p in pivots[:15]:
-            tk = p["ticker"]
-            val_info = batch_valuations.get(tk)
-            stage2_pass.append({
-                "symbol": tk,
-                "ticker": tk,
-                "market": p["market"],
-                "company_name": p.get("company_name", tk),
-                "price": p["latest_price"],
-                "pivot_price": p.get("pivot_price"),
-                "stage": "Stage 2 (主升浪趋势模板 · 枢轴就绪)",
-                "criteria": p.get("business_rationale_zh") or "均线多头排列且波动收缩，枢轴买点就绪",
-                "valuation_verdict": val_info.get("verdict") if val_info else "待深度估值模型更新",
-                "fair_value": val_info.get("fair_value") if val_info else None,
-                "floor_value": val_info.get("floor_value") if val_info else None,
-                "target_value": val_info.get("target_value") if val_info else None,
-            })
-
-        forming_watchlist = []
-        for w in watchlists[:15]:
-            forming_watchlist.append({
-                "symbol": w["ticker"],
-                "ticker": w["ticker"],
-                "market": w["market"],
-                "company_name": w.get("company_name", w["ticker"]),
-                "price": w["latest_price"],
-                "stage": "Stage 1 (底部构筑整理期 · 观察池)",
-                "criteria": w.get("business_rationale_zh") or "多空震荡，等待放量突破时机",
-            })
-
-        total_scanned = summary.get("total_processed_companies", 14892)
-        total_universe = summary.get("total_universe_scale", 14892)
-
-        return "SUCCESS", {
-            "message": f"全盘 {total_universe} 家上市企业（美股 10,445 + 日股 4,447）初筛与流式估值分析完成：累计扫描 150 个分块，发现 {len(pivots)} 只第二阶段枢轴买点标的与 {len(watchlists)} 只形态收敛标的，已边收集边完成实时估值走廊核算。",
-            "scanned_count": total_scanned,
-            "total_universe_scale": total_universe,
-            "chunks_count": summary.get("total_completed_chunks", 150),
-            "stage2_count": len(pivots),
-            "watchlist_count": len(watchlists),
-            "analyzed_count": len(batch_valuations),
-            "stage_2_candidates": stage2_pass,
-            "forming_watchlist": forming_watchlist,
-            "batch_valuations": batch_valuations,
-            "as_of": utc_now(),
+        diagnostics = {}
+        for market in ("US", "JP"):
+            for item, records in self._archived_records(f"{market}_DAILY"):
+                if item["provider"] != "yfinance" or item["id"] in {"SPY", "QQQ", "IWM", "^VIX", "1306.T"}:
+                    continue
+                bars = {}
+                for row in records:
+                    day = str(row.get("Date", ""))[:10]
+                    values = [row.get(field) for field in ("Open", "High", "Low", "Close", "Volume")]
+                    if day and all(isinstance(value, (int, float)) and math.isfinite(value) and value > 0
+                                   for value in values):
+                        bars[day] = values
+                symbol = item["id"]
+                if len(bars) < 250:
+                    self._record_item(run, "BLOCKED", f"{symbol} · 有效日线 {len(bars)}/250")
+                    continue
+                days = sorted(bars)[-250:]
+                series = [bars[day] for day in days]
+                closes = [row[3] for row in series]
+                diagnostics[symbol] = {
+                    "as_of": days[-1], "close": closes[-1],
+                    "ma_50": fmean(closes[-50:]), "ma_150": fmean(closes[-150:]),
+                    "ma_200": fmean(closes[-200:]), "ma_200_20d_ago": fmean(closes[-220:-20]),
+                    "low_52w": min(row[2] for row in series),
+                    "high_52w": max(row[1] for row in series),
+                    "volume_vs_prior_50d": series[-1][4] / fmean(row[4] for row in series[-51:-1]),
+                }
+                self._record_item(run, "SUCCESS", f"{symbol} · 截至 {days[-1]} 的日线技术输入已计算")
+        return ("PARTIAL_SUCCESS" if diagnostics else "BLOCKED"), {
+            "message": f"计算 {len(diagnostics)} 个合格日线样本的趋势输入，正式初筛等待相对强度与形态输入适配",
+            "history_ready": len(diagnostics), "trend_inputs": diagnostics,
         }
 
     def _execute_indicator_update(self, run):
-        """核心宏观流动性利率、汇率走廊与全市场趋势宽度测算与落盘."""
-        now_iso = utc_now()
-        screening_sum_file = PROJECT_ROOT / "data" / "screening" / "screening_summary.json"
-        total_u = 14892
-        pivot_cnt = 327
-        if screening_sum_file.exists():
-            try:
-                s_data = json.loads(screening_sum_file.read_text(encoding="utf-8"))
-                total_u = int(s_data.get("total_universe_scale", 14892) or 14892)
-                cls_r = s_data.get("classification_results", {})
-                pivot_cnt = int(cls_r.get("stage_2_pivot_ready_count", 327) or 327)
-            except Exception:
-                pass
+        from financial_reporting.watersource_terminal_service import WatersourceTerminalService
 
-        breadth_pct = round((pivot_cnt / total_u) * 100.0, 2) if total_u else 2.20
-
-        indicators_data = [
-            {
-                "id": "^VIX",
-                "name_zh": "标普500恐慌指数 (VIX)",
-                "value": 14.80,
-                "display_value": "14.80",
-                "unit": "点",
-                "signal": "NORMAL",
-                "signal_zh": "平稳区间 (正常监控)",
-                "data_status": "PREVIOUS_CLOSE",
-                "as_of": now_iso,
-                "source": "Google Finance 授权行情",
-            },
-            {
-                "id": "^TNX",
-                "name_zh": "10年期美债收益率 (^TNX)",
-                "value": 4.35,
-                "display_value": "4.35%",
-                "unit": "%",
-                "signal": "ELEVATED_RATE",
-                "signal_zh": "无风险利率锚 (高息压制估值)",
-                "data_status": "PREVIOUS_CLOSE",
-                "as_of": now_iso,
-                "source": "Google Finance 授权行情",
-            },
-            {
-                "id": "T10Y2Y",
-                "name_zh": "10Y-2Y 美债期限利差 (FRED)",
-                "value": 0.27,
-                "display_value": "+0.27% (2Y=4.15%)",
-                "unit": "%",
-                "signal": "POSITIVE_SLOPE",
-                "signal_zh": "官方归档基准 (2025-12-31)",
-                "data_status": "ARCHIVED_BASELINE",
-                "as_of": "2025-12-31",
-                "source": "美联储官方经济数据归档",
-            },
-            {
-                "id": "DXY",
-                "name_zh": "美元指数 (DXY)",
-                "value": 105.80,
-                "display_value": "105.80",
-                "unit": "点",
-                "signal": "FX_WATCH",
-                "signal_zh": "全球美元流动性松紧锚",
-                "data_status": "PREVIOUS_CLOSE",
-                "as_of": now_iso,
-                "source": "全球金融基准行情",
-            },
-            {
-                "id": "USDJPY",
-                "name_zh": "美元兑日元 (USD/JPY)",
-                "value": 153.20,
-                "display_value": "¥153.20",
-                "unit": "JPY/USD",
-                "signal": "FX_WATCH",
-                "signal_zh": "前收盘基准 (汇率时效核验)",
-                "data_status": "PREVIOUS_CLOSE",
-                "as_of": now_iso,
-                "source": "公开交易所时效行情",
-            },
-            {
-                "id": "SEPA_BREADTH",
-                "name_zh": "SEPA 全市场第二阶段宽度",
-                "value": breadth_pct,
-                "display_value": f"{pivot_cnt} / {total_u:,} ({breadth_pct:.2f}%)",
-                "unit": "家",
-                "signal": "BREADTH_REFINED",
-                "signal_zh": "全盘分块纯本地初筛测算",
-                "data_status": "ARCHIVED_BASELINE",
-                "as_of": now_iso,
-                "source": "全市场趋势初筛总账 (美股 105批 + 日股 45批)",
-            },
-            {
-                "id": "^N225VI",
-                "name_zh": "日经225波动率指数 (^N225VI)",
-                "value": 19.40,
-                "display_value": "19.40",
-                "unit": "点",
-                "signal": "JP_VOL_WATCH",
-                "signal_zh": "东京市场风险溢价监测",
-                "data_status": "PREVIOUS_CLOSE",
-                "as_of": now_iso,
-                "source": "Google Finance 授权行情",
-            },
-            {
-                "id": "US_U3_ARCHIVED",
-                "name_zh": "美国官方失业率 (U-3) / 人民币汇率",
-                "value": 4.1,
-                "display_value": "4.1% | CNY 7.24",
-                "unit": "%",
-                "signal": "ARCHIVED_MACRO",
-                "signal_zh": "BLS/FRED 官方归档期 2025-12-31",
-                "data_status": "ARCHIVED_BASELINE",
-                "as_of": "2025-12-31",
-                "source": "BLS & FRED 官方归档",
-            },
-        ]
-
-        # 写入持久化存储
-        ind_dir = PROJECT_ROOT / "data" / "indicators"
-        ind_dir.mkdir(parents=True, exist_ok=True)
-        ind_file = ind_dir / "latest_indicators.json"
-        payload = {
-            "updated_at": now_iso,
-            "as_of": now_iso,
-            "indicators": indicators_data,
+        snapshot = WatersourceTerminalService().get_latest_indicators()["data"]
+        indicators = [item for item in snapshot["indicators"]
+                      if item["value"] is not None and item["id"] != "SEPA_BREADTH"]
+        indicators.extend(self.macro_indicators())
+        indicators.extend(self._market_width())
+        for item in indicators:
+            self._record_item(run, "SUCCESS", f"{item['name_zh']} · 数据时点 {item['as_of']} · {item['source']}")
+        status = "PARTIAL_SUCCESS" if indicators else "BLOCKED"
+        return status, {
+            "message": f"核对或计算 {len(indicators)} 项有归档依据的指标，覆盖范围见各项底稿",
+            "indicators": indicators, "updated_count": len(indicators),
         }
-        ind_file.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
-        return "SUCCESS", {
-            "message": f"成功计算并持久化 8 项核心宏观流动性与市场趋势宽度走廊 (10Y美债: 4.35%, VIX: 14.80, 全市场主升宽度: {pivot_cnt}/{total_u} [{breadth_pct:.2f}%])",
-            "indicators": indicators_data,
-            "updated_count": len(indicators_data),
-            "as_of": now_iso,
-        }
+    def _market_width(self):
+        """按同一交易日统计具备足够日线的普通股样本。"""
+        indicators = []
+        for market in ("US", "JP"):
+            samples = {}
+            for item, records in self._archived_records(f"{market}_DAILY"):
+                if item["provider"] != "yfinance" or item["id"] in {"SPY", "QQQ", "IWM", "^VIX", "1306.T"}:
+                    continue
+                closes = {str(row["Date"])[:10]: row["Close"] for row in records
+                          if row.get("Date") and isinstance(row.get("Close"), (int, float))
+                          and math.isfinite(row["Close"]) and row["Close"] > 0}
+                if closes:
+                    samples[item["id"]] = closes
+            if not samples:
+                continue
+            day = max(max(closes) for closes in samples.values())
+            for window in (50, 200):
+                eligible = [sorted(closes.items())[-window:] for closes in samples.values()
+                            if day in closes and len(closes) >= window]
+                if not eligible:
+                    continue
+                above = sum(series[-1][1] > fmean(close for _, close in series) for series in eligible)
+                percent = round(100 * above / len(eligible), 2)
+                indicators.append({
+                    "id": f"{market}_BREADTH_{window}", "name_zh": f"{'美股' if market == 'US' else '日股'}样本 {window} 日均线宽度",
+                    "value": percent, "display_value": f"{percent}%", "unit": "%", "as_of": day,
+                    "data_status": "ARCHIVED_BASELINE", "signal_zh": f"{above}/{len(eligible)} 个合格样本位于均线上方",
+                    "source": f"{market}_DAILY 日线归档", "signal": "SAMPLE_BREADTH",
+                })
+        return indicators
+
+    def latest_sample_width(self):
+        with self._connect() as conn:
+            row = conn.execute("SELECT result FROM runs WHERE task='INDICATOR_UPDATE' "
+                               "AND status='PARTIAL_SUCCESS' ORDER BY rowid DESC LIMIT 1").fetchone()
+        return [item for item in json.loads(row["result"]).get("indicators", [])
+                if item.get("signal") == "SAMPLE_BREADTH"] if row else []
+
+    def macro_indicators(self):
+        """把已校验摘要的 FRED 序列投影到首页的宏观指标契约。"""
+        labels = {"DGS10": "美国 10 年期国债收益率", "EFFR": "美国有效联邦基金利率"}
+        for item, records in self._archived_records("US_DAILY"):
+            series = item["id"]
+            if item["provider"] != "fred_csv" or series not in labels or not records:
+                continue
+            for row in reversed(records):
+                date = row.get("observation_date") or row.get("DATE")
+                try:
+                    value = float(row.get(series))
+                except (TypeError, ValueError):
+                    continue
+                if not date or not math.isfinite(value):
+                    continue
+                yield {"id": series, "name_zh": labels[series], "value": value, "display_value": f"{value:.2f}%",
+                       "unit": "%", "as_of": date, "data_status": "ARCHIVED_BASELINE", "source": "FRED 时序归档"}
+                break
+
+    def latest_company_financial_metric(self, ticker):
+        with self._connect() as conn:
+            row = conn.execute("SELECT result FROM runs WHERE task='FINANCE_CALC' "
+                               "AND status='PARTIAL_SUCCESS' ORDER BY rowid DESC LIMIT 1").fetchone()
+        return json.loads(row["result"]).get("calculations", {}).get(ticker) if row else None
+
+    def _record_item(self, run, status, message):
+        with self._connect() as conn:
+            self._log(conn, run["task"], status, message, run["run_id"])
 
     def _execute_finance_calc(self, run):
-        """全自动带入官方财报底账、最新行情与宏观收益率，批量执行多阶段 DCF 估值走廊、WACC 与杜邦平账核算."""
-        try:
-            from finance_tools.governance_and_pipeline.service import calculate
-            from financial_reporting.watersource_terminal_service import WatersourceTerminalService
-            svc = WatersourceTerminalService()
+        from finance_tools.governance_and_pipeline.service import calculate
+        from financial_core.engines.sec_edgar_collector import OfficialSecEdgarCollector
+        from financial_reporting.data_collection_gateway import UnifiedDataCollectionGateway
 
-            core_tickers = ["NVDA", "AAPL", "MSFT", "AMD", "GOOGL", "META", "TSM", "8035"]
-            batch_valuations = {}
-            for ticker in core_tickers:
-                try:
-                    code, res = svc.auto_calculate_company_valuation(ticker)
-                    if code == 200 and res.get("data"):
-                        d = res["data"]
-                        corridor = d.get("valuation_corridor", {})
-                        facts = d.get("underlying_facts", {})
-                        batch_valuations[ticker] = {
-                            "company_name": d.get("company_name", ticker),
-                            "currency": d.get("currency", "USD"),
-                            "current_price": d.get("current_price"),
-                            "fair_value": corridor.get("base_fair_value", {}).get("value_per_share"),
-                            "floor_value": corridor.get("conservative_floor", {}).get("value_per_share"),
-                            "target_value": corridor.get("optimistic_target", {}).get("value_per_share"),
-                            "margin_of_safety_pct": corridor.get("margin_of_safety_pct"),
-                            "verdict": corridor.get("valuation_verdict"),
-                            "wacc_pct": d.get("capital_cost_wacc", {}).get("wacc_pct"),
-                            "roe_pct": d.get("profitability_ratios", {}).get("roe_pct"),
-                            "is_balanced": facts.get("is_balanced", True),
-                            "source_filing": facts.get("source_filing"),
-                        }
-                except Exception:
-                    continue
-
-            # 保持对既有单键断言的向下兼容
-            dcf_nvda = calculate("multistage_dcf", {
-                "cash_flow": 60000, "shares": 24500, "growth_rates": [0.10, 0.08, 0.05],
-                "net_debt": -25000, "discount_rate": 0.095, "terminal_growth": 0.025, "scope": "FCFF"
-            })
-            wacc_nvda = calculate("wacc", {
-                "market_equity": 3000000, "market_debt": 10000, "risk_free_rate": 0.0435,
-                "beta": 1.45, "market_return": 0.095, "cost_of_debt": 0.052, "tax_rate": 0.21
-            })
-            ratio_nvda = calculate("financial_ratio", {
-                "operation": "roe", "numerator": 53000, "denominator": 78000
-            })
-            calcs = {
-                "NVDA_DCF": dcf_nvda["result"],
-                "NVDA_WACC": wacc_nvda["result"],
-                "NVDA_ROE": ratio_nvda["result"],
-                "batch_valuations": batch_valuations,
-            }
-
+        audit_status, audit_result = self.audit()
+        if audit_status != "SUCCESS":
+            return audit_status, audit_result
+        records = read("data/pipeline_state/sec_collection_progress.json").get("records", {})
+        results = {}
+        gaps = 0
+        for ticker, record in records.items():
+            if not isinstance(record, dict) or not record.get("source_filing"):
+                gaps += 1
+                self._record_item(run, "BLOCKED", f"{ticker} · 进度表缺少官方原档引用")
+                continue
             try:
-                from financial_reporting.comprehensive_finance_suite import run_all_24_financial_models
-                suite_res = run_all_24_financial_models(ticker="NVDA")
-                calcs["suite_24_models"] = {
-                    "total_models": suite_res.get("total_models", 24),
-                    "executed_count": suite_res.get("executed_count", 24),
-                    "execution_ms": suite_res.get("total_execution_ms", 0),
-                }
-            except Exception:
-                pass
-
-            # 持久化批量计算结果到缓存
-            cache_out = project_path(".cache/terminal/finance_calc_latest.json")
-            cache_out.parent.mkdir(parents=True, exist_ok=True)
-            cache_out.write_text(json.dumps({
-                "updated_at": utc_now(),
-                "batch_count": len(batch_valuations),
-                "valuations": batch_valuations,
-            }, ensure_ascii=False, indent=2), encoding="utf-8")
-
-        except Exception as exc:
-            calcs = {
-                "NVDA_DCF": {"value_per_share": 192.45, "enterprise_value": 4735000, "equity_value": 4760000},
-                "NVDA_WACC": {"wacc": 0.0965, "cost_of_equity": 0.0968, "after_tax_cost_of_debt": 0.0411},
-                "NVDA_ROE": {"value": 0.6795},
-                "error": str(exc),
-            }
-        completed_count = len(calcs.get("batch_valuations", {})) or 1
-        return "SUCCESS", {
-            "message": f"全量 24 大专业量化金融模型与三表刚性平账核算完成（{completed_count} 家核心标的 DCF 走廊，24 模型 100% 验证通过）",
-            "calculations": calcs,
-            "as_of": utc_now(),
-        }
+                cik = str(record.get("cik", ""))
+                if not cik.isdigit():
+                    raise ValueError("缺少有效 CIK")
+                path = f"data/official_filings/sec/CIK{cik.zfill(10)}.json"
+                raw = read(path)
+                filing = OfficialSecEdgarCollector.extract_aligned_financial_facts(raw, ticker)
+                facts = UnifiedDataCollectionGateway.ingest_company_financials(ticker, "US", asdict(filing))
+                if facts["net_income"] is None:
+                    raise ValueError("缺少同一财报期净利润")
+                result = calculate("financial_ratio", {
+                    "operation": "roa", "numerator": facts["net_income"], "denominator": facts["total_assets"],
+                })
+            except (ValueError, TypeError, KeyError, FileNotFoundError) as exc:
+                gaps += 1
+                self._record_item(run, "BLOCKED", f"{ticker} · {exc}")
+                continue
+            results[ticker] = {"roa": result["result"]["value"], "source_filing": facts["source_filing"],
+                               "period": filing.fiscal_year_end, "source_path": path, "input_sha256": result["input_sha256"]}
+            self._record_item(run, "SUCCESS", f"{ticker} · 三表平账及期末资产收益率计算完成")
+        status = "PARTIAL_SUCCESS" if results else "BLOCKED"
+        return status, {"message": f"已算出 {len(results)} 家期末资产收益率，{gaps} 家本地财报输入不足；情景估值等待经核对的专用输入",
+                        "calculations": results, "missing_count": gaps}
 
     def _execute_incremental_collect(self, run):
-        """官方监管补数与增量归档：扫描补数队列与官方披露底账，执行增量对账与 SHA-256 完整性验签."""
-        try:
-            gap_manifest = project_path("data/browser-search/replenishment_tasks.json")
-            catalog_path = project_path("data/data_catalog.json")
-
-            queue_tasks = []
-            if gap_manifest.exists():
-                try:
-                    data = json.loads(gap_manifest.read_text(encoding="utf-8"))
-                    queue_tasks = data if isinstance(data, list) else data.get("tasks", [])
-                except Exception:
-                    pass
-
-            catalog_entries = 0
-            if catalog_path.exists():
-                try:
-                    catalog_data = json.loads(catalog_path.read_text(encoding="utf-8"))
-                    catalog_entries = len(catalog_data.get("sources", catalog_data.get("items", [])))
-                except Exception:
-                    catalog_entries = 0
-
-            ledger_verified = False
-            ledger_path = project_path("data/ledger/event_radar.sqlite3")
-            if ledger_path.exists():
-                ledger_verified = True
-
-            scanned_count = len(queue_tasks)
-            return "SUCCESS", {
-                "message": f"增量补数队列扫描完成: 发现 {scanned_count} 项补数待办, 已索引底账 {catalog_entries} 份, 账本链条校验正常",
-                "queue_pending_count": scanned_count,
-                "catalog_indexed_count": catalog_entries,
-                "ledger_verified": ledger_verified,
-                "as_of": utc_now(),
-            }
-        except Exception as exc:
-            return "SUCCESS", {
-                "message": f"增量补数扫描完成 (安全回退模式): {exc}",
-                "queue_pending_count": 0,
-                "as_of": utc_now(),
-            }
+        path = project_path("data/browser-search/replenishment_tasks.json")
+        if not path.is_file():
+            return "BLOCKED", {"message": "缺少官方原文补数清单"}
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+        tasks = manifest if isinstance(manifest, list) else manifest.get("tasks", [])
+        count = len(tasks)
+        return ("PARTIAL_SUCCESS" if count else "SUCCESS"), {
+            "message": f"本地补数清单已核对，{count} 项等待官方原文",
+            "queue_pending_count": count,
+        }
 
     def _execute_quote_collect(self, run):
-        """权威市场行情、核心指数与AI产业链标的即时抽取与美分级精度归档."""
-        try:
-            from scripts.collect_index_and_ai_quotes import collect_and_verify_all
-            res = collect_and_verify_all()
-            total = res.get("total_count", 0)
-            verified_at = res.get("verified_at", utc_now())
-            return "SUCCESS", {
-                "message": f"权威行情与指数标的抽取完成：共计 {total} 项核心资产标的已 100% 通过时效与美分级精度门禁并完成本地不可篡改归档",
-                "total_count": total,
-                "as_of": verified_at,
-            }
-        except Exception as exc:
-            return "FAILED", {
-                "message": f"行情抽取异常: {exc}",
-                "error": str(exc),
-            }
+        from financial_reporting.watersource_terminal_service import WatersourceTerminalService
+
+        data = WatersourceTerminalService().get_market_quotes()["data"]
+        valid = sum(bool(quote.get("is_valid")) for quote in data["all_quotes"])
+        return ("PARTIAL_SUCCESS" if valid else "BLOCKED"), {
+            "message": f"本地归档中有 {valid} 项通过行情时效门禁，实时采集需要已授权宿主",
+            "verified_count": valid, "blocked_count": len(data["stale_blocked_tickers"]),
+        }

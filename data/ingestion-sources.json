@@ -229,6 +229,21 @@
       "enabled": true,
       "disabled_reason": null
     },
+    "jpx_daily": {
+      "hosts": [
+        "www.jpx.co.jp"
+      ],
+      "source_kind": "primary",
+      "dataset_kind": "market",
+      "interval_seconds": 3,
+      "daily_limit": 50,
+      "ttl_seconds": 86400,
+      "env": null,
+      "docs": "https://www.jpx.co.jp/markets/statistics-equities/daily/index.html",
+      "notes": "JPX 东证日刊《株式相場表》公开批量日线原档，按全天有效成交金融合成 OHLCV，零 API Key 依赖。",
+      "enabled": true,
+      "disabled_reason": null
+    },
     "issuer_ir": {
       "hosts": [
         "investors.intuit.com",

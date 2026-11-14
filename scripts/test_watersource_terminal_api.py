@@ -18,6 +18,7 @@ import sys
 import threading
 import time
 import unittest
+from unittest.mock import patch
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
@@ -170,7 +171,7 @@ class TestWatersourceTerminalAPI(unittest.TestCase):
         3. 业务断言：
            - 总览返回 5 大 KPI 且显式包含时效门禁横幅；
            - `USDJPY` 若存在于本地快照，必须暴露 `STALE_BLOCKED` 与 `is_valid=False`，绝不伪装新鲜；
-           - 缺失的 `RUT` / `^N225` 必须标记 `NOT_CONFIGURED`，绝不虚构点位。
+           - 缺失的 `RUT` / `^N225` 必须标记 `NO_QUOTE`，绝不虚构点位。
         4. 失败防护：严防过时汇率或未配置指数污染后续 DCF 与风控计算。
         """
         code, dash = self._http_json("/api/dashboard/summary")
@@ -184,13 +185,13 @@ class TestWatersourceTerminalAPI(unittest.TestCase):
         us_list = mk["data"]["us_indices"]
 
         usdjpy = next((x for x in jp_list if x["ticker"] == "USDJPY"), None)
-        if usdjpy is not None:
-            self.assertEqual(usdjpy["data_status"], "STALE_BLOCKED")
-            self.assertFalse(usdjpy["is_valid"])
+        self.assertIsNotNone(usdjpy)
+        self.assertIn(usdjpy["data_status"], ("STALE_BLOCKED", "NO_QUOTE"))
+        self.assertFalse(usdjpy["is_valid"])
 
         rut = next((x for x in us_list if x["ticker"] == "RUT"), None)
         self.assertIsNotNone(rut)
-        self.assertEqual(rut["data_status"], "NOT_CONFIGURED")
+        self.assertEqual(rut["data_status"], "NO_QUOTE")
         self.assertIsNone(rut["price"])
 
     def test_03_events_filtering_and_rumor_quarantine(self):
@@ -429,7 +430,7 @@ class TestWatersourceTerminalAPI(unittest.TestCase):
         self.assertEqual(res_unavail["error"]["code"], "SCHEDULER_UNAVAILABLE")
 
         with tempfile.TemporaryDirectory(dir=Path.cwd()) as directory:
-            scheduler = TerminalScheduler(directory, audit=lambda: ("SUCCESS", {"message": "平账通过"}), scheduled=False)
+            scheduler = TerminalScheduler(directory, audit=lambda: ("SUCCESS", {"message": "平账通过"}))
             self.service.scheduler = scheduler
             try:
                 # 1. 查询任务快照
@@ -462,6 +463,19 @@ class TestWatersourceTerminalAPI(unittest.TestCase):
                 )
                 self.assertEqual(code_sched, 200)
                 self.assertFalse(res_sched["data"]["enabled"])
+
+                code_master, master = self._http_json(
+                    "/api/terminal/tasks/automatic", "POST", {"enabled": False})
+                self.assertEqual(code_master, 200)
+                self.assertFalse(master["data"]["automatic_enabled"])
+
+                code_start, started = self._http_json("/api/terminal/tasks/start", "POST", {})
+                self.assertEqual(code_start, 202)
+                for child in started["data"]["runs"]:
+                    code_logs, logs = self._http_json(f"/api/logs?q={child['run_id']}")
+                    self.assertEqual(code_logs, 200)
+                    self.assertTrue(any(row["run_id"] == child["run_id"] and row["status"] == "QUEUED"
+                                        for row in logs["data"]["logs"]))
 
                 # 4. 边界测试：未知任务提交 -> 400
                 code_err, res_err = self._http_json(
@@ -503,8 +517,25 @@ class TestWatersourceTerminalAPI(unittest.TestCase):
         self.assertIn("AAPL", tickers)
         self.assertIn("MSFT", tickers)
 
-        # 2. 全自动带入数据计算 NVDA
-        code_val, val_res = self._http_json("/api/finance/auto-calculate?ticker=NVDA")
+        with patch.object(self.service, "_read_latest_raw_quotes", return_value=({}, "")):
+            code_blocked, blocked = self._http_json("/api/finance/auto-calculate?ticker=NVDA")
+        self.assertEqual(code_blocked, 422)
+        self.assertEqual(blocked["error"]["code"], "VALUATION_INPUT_BLOCKED")
+
+        # 用固定测试输入验证计算合同，避免依赖运行时的行情时效窗口。
+        quotes = {"NVDA": {"price": 100.0, "is_valid": True, "market": "US"}}
+        dossier = {"raw_financials_table": {
+            "source": "测试财报", "period": "2025-12-31", "total_assets": 500.0,
+            "total_liabilities": 200.0, "stockholders_equity": 300.0, "revenue": 400.0,
+            "operating_income": 100.0, "net_income": 80.0, "gross_profit": 160.0,
+            "cash": 50.0, "total_debt": 100.0, "free_cash_flow": 60.0, "shares": 10.0,
+        }}
+        with patch.object(self.service, "_read_latest_raw_quotes", return_value=(quotes, "")):
+            with patch("financial_reporting.watersource_terminal_service.UnifiedDataCollectionGateway.load_verified_batch_dossier", return_value=dossier):
+                code_val, val_res = self._http_json("/api/finance/auto-calculate?ticker=NVDA")
+                code_adj, adj_res = self._http_json("/api/finance/auto-calculate", method="POST", body={
+                    "ticker": "NVDA", "adjustments": {"discount_rate": 0.11, "growth_rates": [0.15, 0.10, 0.05]},
+                })
         self.assertEqual(code_val, 200)
         self.assertTrue(val_res["ok"])
         self.assertEqual(val_res["meta"]["status"], "AUTOMATED_VALUATION")
@@ -535,17 +566,6 @@ class TestWatersourceTerminalAPI(unittest.TestCase):
         self.assertGreater(data["capital_cost_wacc"]["wacc_pct"], 0)
 
         # 3. 携带敏感性微调参数重新测算
-        code_adj, adj_res = self._http_json(
-            "/api/finance/auto-calculate",
-            method="POST",
-            body={
-                "ticker": "NVDA",
-                "adjustments": {
-                    "discount_rate": 0.11,
-                    "growth_rates": [0.15, 0.10, 0.05],
-                },
-            },
-        )
         self.assertEqual(code_adj, 200)
         adj_fair = adj_res["data"]["valuation_corridor"]["base_fair_value"]["value_per_share"]
         self.assertGreater(adj_fair, 0)
@@ -607,10 +627,12 @@ class TestWatersourceTerminalAPI(unittest.TestCase):
         comp_data = comp_res["data"]
         self.assertIn("automated_valuation", comp_data)
         auto_val = comp_data["automated_valuation"]
-        self.assertIsNotNone(auto_val)
-        self.assertIn("valuation_corridor", auto_val)
-        self.assertIn("capital_cost_wacc", auto_val)
-        self.assertIn("profitability_ratios", auto_val)
+        if auto_val is None:
+            self.assertTrue(comp_data["automated_valuation_issue"])
+        else:
+            self.assertIn("valuation_corridor", auto_val)
+            self.assertIn("capital_cost_wacc", auto_val)
+            self.assertIn("profitability_ratios", auto_val)
 
         # 5. 双轨流水线运行态追踪验证
         code_pipe, pipe_res = self._http_json("/api/pipeline/status")

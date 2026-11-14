@@ -309,6 +309,18 @@ from .data_lifecycle_engine import (
     DataLeakCheckResult,
     DataLifecycleEngine,
 )
+from .exchange_calendar_engine import (
+    ExchangeCalendarEngine,
+    TradingDayStatus,
+)
+from .market_reconciliation_engine import (
+    MarketReconciliationEngine,
+    ReconciliationSummary,
+)
+from .jpx_official_quotations_parser import (
+    JpxOfficialQuotationsParser,
+    JpxDailyBar,
+)
 
 __all__ = [
     # 7 大业务领域高内聚子包
@@ -493,4 +505,11 @@ __all__ = [
     "RestoreVerificationResult",
     "DataLeakCheckResult",
     "DataLifecycleEngine",
+    # 官方交易日历与盘前覆盖对账引擎
+    "ExchangeCalendarEngine",
+    "TradingDayStatus",
+    "MarketReconciliationEngine",
+    "ReconciliationSummary",
+    "JpxOfficialQuotationsParser",
+    "JpxDailyBar",
 ]

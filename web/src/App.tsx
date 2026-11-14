@@ -58,9 +58,7 @@ export default function App() {
     <>
       <Header
         health={health}
-        pipelineStatus={pipelineStatus}
         sseConnected={connected}
-        onPipelineStatusChange={setPipelineStatus}
         onPipelineStarted={() => {
           setTab('collection')
         }}
@@ -102,7 +100,7 @@ export default function App() {
         )}
 
         {tab === 'collection' && (
-          <CollectionTab pipelineStatus={pipelineStatus} />
+          <CollectionTab pipelineStatus={pipelineStatus} refreshKey={refreshKey} />
         )}
 
         {tab === 'analytics' && (
@@ -110,7 +108,7 @@ export default function App() {
         )}
 
         {tab === 'logs' && (
-          <LogsTab realtimeLogs={realtimeLogs} />
+          <LogsTab realtimeLogs={realtimeLogs} refreshKey={refreshKey} />
         )}
 
         {tab === 'settings' && (

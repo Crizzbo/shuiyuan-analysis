@@ -96,6 +96,8 @@ export interface TaskSchedulerTask {
   name: string
   schedule: string
   enabled: boolean
+  automatic: boolean
+  track: 'local' | 'collection'
 }
 
 export interface TaskSchedulerRun {
@@ -116,6 +118,8 @@ export interface TaskSchedulerRun {
 
 export interface TaskSchedulerInfo {
   scheduled: boolean
+  automatic_enabled: boolean
+  automatic_available: boolean
   tasks: TaskSchedulerTask[]
   active_runs?: TaskSchedulerRun[]
   recent_runs?: TaskSchedulerRun[]
@@ -127,7 +131,31 @@ export interface MarketArchiveItem {
   market: string
   count: number
   last_date: string | null
+  close?: number | null
   archived_at: string
+}
+
+export interface MarketReconciliationItem {
+  market: 'US' | 'JP' | string
+  target_trading_day: string
+  as_of: string
+  universe_count: number
+  matched_count: number
+  no_trade_count: number
+  pending_count: number
+  unmapped_count: number
+  error_count: number
+  coverage_rate_pct: number
+  active_trade_rate_pct: number
+  unmapped_symbols: string[]
+  is_balanced: boolean
+  balance_diff: number
+  narrative_zh: string
+}
+
+export interface MarketReconciliationMap {
+  us?: MarketReconciliationItem | null
+  jp?: MarketReconciliationItem | null
 }
 
 export interface DashboardSummaryData {
@@ -137,6 +165,9 @@ export interface DashboardSummaryData {
   task_scheduler?: TaskSchedulerInfo | null
   kpis: KpiItem[]
   markets: {
+    all_quotes?: MarketQuoteItem[]
+    daily_archives?: MarketArchiveItem[]
+    reconciliation?: MarketReconciliationMap | null
     us_indices: MarketQuoteItem[]
     jp_indices: MarketQuoteItem[]
     jp_core_equities: MarketQuoteItem[]
@@ -397,6 +428,7 @@ export interface CompanyAnalysisData {
       metrics?: Record<string, number>
       balance_sheet_abs_diff?: number
       balance_sheet_rel_pct?: number
+      scheduled_calculation?: { roa: number; period: string; source_filing: string; source_path: string; input_sha256: string } | null
     }
     credit_kmv_probe: {
       status: string
@@ -415,6 +447,7 @@ export interface CompanyAnalysisData {
     }
   }
   automated_valuation?: AutomatedValuationData | null
+  automated_valuation_issue?: string | null
 }
 
 export interface PipelineSubFlow {
@@ -467,6 +500,8 @@ export interface PipelineRunItem {
 
 // 9. 系统日志
 export interface LogItem {
+  task?: string
+  status?: string
   log_id: string
   timestamp: string
   level: 'INFO' | 'WARN' | 'ERROR' | 'DEBUG' | string

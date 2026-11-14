@@ -391,7 +391,7 @@ class WatersourceTerminalService:
 
         formatted_quotes: Dict[str, Dict[str, Any]] = {}
         for ticker, (_, obj, acq) in latest_by_ticker.items():
-            market = "JP" if (ticker.isdigit() or ticker in ("^N225VI", "USDJPY")) else "US"
+            market = "JP" if (ticker.isdigit() or ticker.endswith(".T") or ticker in ("^N225", "^N225VI", "USDJPY")) else "US"
             currency = obj.get("currency", "JPY" if market == "JP" else "USD")
             timestamp = str(obj.get("timestamp_iso") or "")
             price = obj.get("current_price")
@@ -446,7 +446,8 @@ class WatersourceTerminalService:
             return "BLOCKED", {"message": "缺少预测账本", "readiness": readiness}
         valid, error = PredictionLedger(db_path=path).verify_integrity()
         return ("SUCCESS" if valid else "FAILED"), {
-            "message": "预测账本验签通过" if valid else f"预测账本验签失败：{error}",
+            "message": (f"预测账本验签通过，行情归档覆盖 {readiness['total_completed_count']} 个标的"
+                        if valid else f"预测账本验签失败：{error}"),
             "readiness": readiness,
         }
 
@@ -559,84 +560,43 @@ class WatersourceTerminalService:
 
         # 2. 从官方财报底账提取三表事实
         dossier = UnifiedDataCollectionGateway.load_verified_batch_dossier(clean_ticker)
-        sec_prog = _safe_read_json(self.data_dir / "pipeline_state" / "sec_collection_progress.json", {})
-        sec_rec = (sec_prog.get("records", {}) if isinstance(sec_prog, dict) else {}).get(clean_ticker)
-
         raw_table = (dossier or {}).get("raw_financials_table") or {}
-        facts = (dossier or {}).get("facts") or {}
 
-        # 3. 提取核心指标与事实
-        assets = float(raw_table.get("total_assets") or (sec_rec or {}).get("total_assets") or 0.0)
-        liabilities = float(raw_table.get("total_liabilities") or 0.0)
-        equity = float(raw_table.get("stockholders_equity") or facts.get("equity") or 0.0)
-        rev = float(raw_table.get("revenue") or (sec_rec or {}).get("revenue") or 0.0)
-        op_inc = float(raw_table.get("operating_income") or 0.0)
-        net_inc = float(raw_table.get("net_income") or 0.0)
-        gross_prof = float(raw_table.get("gross_profit") or (rev * 0.45 if rev else 0.0))
-        cash = float(raw_table.get("cash") or facts.get("reported_cash") or 0.0)
-        debt = float(raw_table.get("total_debt") or 0.0)
-        net_debt = debt - cash
-
-        # 自由现金流 FCF 优先级提取
-        fcf = raw_table.get("free_cash_flow")
-        if fcf is None or float(fcf) == 0.0:
-            cfo = raw_table.get("operating_cash_flow") or facts.get("cfo_2026")
-            capex = raw_table.get("capex") or facts.get("capex_2026")
-            if cfo is not None:
-                fcf = float(cfo) - float(capex or 0.0)
-            elif facts.get("annual_fcf_million"):
-                fcf = float(facts["annual_fcf_million"]) * 1_000_000.0
-            elif net_inc > 0:
-                fcf = net_inc * 0.88
-            elif rev > 0:
-                fcf = rev * 0.20
-            else:
-                fcf = 10_000_000_000.0 if clean_ticker in ("NVDA", "AAPL", "MSFT") else 1_000_000_000.0
-        fcf = float(fcf)
-
-        # 稀释总股数提取
-        shares = raw_table.get("shares") or facts.get("shares_outstanding")
-        if not shares or float(shares) <= 0.0:
-            if cur_price and cur_price > 0 and net_inc > 0:
-                shares = max(10_000_000.0, (net_inc * 25.0) / cur_price)
-            else:
-                shares = 24_500_000_000.0 if clean_ticker == "NVDA" else 15_000_000_000.0 if clean_ticker == "AAPL" else 7_400_000_000.0 if clean_ticker == "MSFT" else 1_000_000_000.0
-        shares = float(shares)
-
-        # 现价备选对齐
         if cur_price is None or cur_price <= 0:
-            if clean_ticker == "NVDA":
-                cur_price = 186.64
-            elif clean_ticker == "AAPL":
-                cur_price = 228.10
-            elif clean_ticker == "MSFT":
-                cur_price = 420.50
-            elif clean_ticker == "AMD":
-                cur_price = 145.20
-            elif clean_ticker == "8035":
-                cur_price = 25400.0
-            else:
-                cur_price = round(max(10.0, (fcf / shares) * 22.0), 2)
+            return self.error_envelope("VALUATION_INPUT_BLOCKED", "等待通过时效核验的行情，暂缓自动估值", 422)
 
-        # 资产负债平账自检
-        if assets > 0 and liabilities > 0 and equity > 0:
-            is_balanced = abs(assets - (liabilities + equity)) / max(assets, 1.0) <= 0.005
-            balance_diff = round(assets - (liabilities + equity), 2)
-        elif sec_rec and sec_rec.get("is_balanced") is not None:
-            is_balanced = bool(sec_rec.get("is_balanced"))
-            balance_diff = float(sec_rec.get("balance_sheet_diff") or 0.0)
-        else:
-            is_balanced = True
-            balance_diff = 0.0
+        # 财报事实、平账与估值假设分别核对。缺字段时保留原因供个股页展示。
+        try:
+            filing = UnifiedDataCollectionGateway.ingest_company_financials(clean_ticker, market, {
+                **raw_table, "cash_and_equivalents": raw_table.get("cash"),
+                "source_filing": raw_table.get("source"),
+            })
+            assets, liabilities, equity = (filing[key] for key in (
+                "total_assets", "total_liabilities", "stockholders_equity"))
+            rev, op_inc, net_inc, gross_prof, cash, debt, fcf = (filing[key] for key in (
+                "revenue", "operating_income", "net_income", "gross_profit",
+                "cash_and_equivalents", "total_debt", "free_cash_flow"))
+            if fcf is None and filing["operating_cash_flow"] is not None and filing["capex"] is not None:
+                fcf = filing["operating_cash_flow"] - abs(filing["capex"])
+            shares = OfficialFilingMapper.parse_optional_financial_number(raw_table.get("shares"), "shares")
+            if any(value is None for value in (op_inc, net_inc, gross_prof, cash, debt, fcf, shares)) or shares <= 0:
+                raise ValueError("等待补全现金流、资本结构或股本")
+            source_filing = filing["source_filing"]
+            period_end = raw_table.get("period")
+            if not source_filing or not period_end:
+                raise ValueError("缺少财报原档引用或财报期")
+            ledger_valid, ledger_error = PredictionLedger(
+                db_path=self.data_dir / "ledger" / "predictions_ledger.sqlite3").verify_integrity()
+            if not ledger_valid:
+                raise ValueError(f"预测账本验签失败：{ledger_error}")
+        except (ValueError, TypeError, KeyError) as exc:
+            return self.error_envelope("VALUATION_INPUT_BLOCKED", f"暂缓自动估值：{exc}", 422)
 
-        period_end = raw_table.get("period") or (sec_rec or {}).get("fiscal_year_end") or "2025-12-31"
-        source_filing = raw_table.get("source") or (sec_rec or {}).get("source_filing") or "SEC EDGAR 10-K 官方平账原档"
-        company_name = (
-            quote_info.get("company_name")
-            or (dossier or {}).get("overview", {}).get("company_name")
-            or (sec_rec or {}).get("company_name")
-            or TICKER_ZH_FALLBACK.get(clean_ticker, clean_ticker)
-        )
+        is_balanced = True
+        balance_diff = round(assets - liabilities - equity, 2)
+        net_debt = debt - cash
+        company_name = (TICKER_ZH_FALLBACK.get(clean_ticker) or quote_info.get("company_name")
+                        or (dossier or {}).get("overview", {}).get("company_name") or clean_ticker)
 
         # 4. 组装金融模型参数（支持用户敏感性微调覆盖）
         base_discount_rate = float(adjustments.get("discount_rate") or 0.095)
@@ -691,17 +651,23 @@ class WatersourceTerminalService:
 
         # 6. 执行 WACC 资本成本核算
         market_equity = cur_price * shares
-        market_debt = max(debt, 100_000.0)
+        market_debt = debt
         beta = float(adjustments.get("beta") or (1.45 if clean_ticker in ("NVDA", "AMD", "PLTR") else 1.20 if clean_ticker in ("AAPL", "MSFT", "GOOGL", "META") else 1.10))
-        risk_free_rate = 0.0435  # FRED 10Y UST (DGS10) 归档基准
+        baseline = self._read_macro_archive_observations()["items"].get("us_treasury_10y_yield", {})
+        scheduler = getattr(self, "scheduler", None)
+        series = next((row for row in scheduler.macro_indicators() if row["id"] == "DGS10"), {}) if scheduler else {}
+        if market != "US" or (series.get("value") is None and baseline.get("raw_value") is None):
+            return self.error_envelope("VALUATION_INPUT_BLOCKED", "等待与标的币种匹配的无风险利率归档", 422)
+        risk_free_rate = float(series.get("value", baseline.get("raw_value"))) / 100.0
+        rate_as_of = series.get("as_of", baseline.get("period_end"))
         try:
             wacc_calc = calculate("wacc", {
                 "market_equity": market_equity, "market_debt": market_debt,
                 "risk_free_rate": risk_free_rate, "beta": beta, "market_return": 0.095,
                 "cost_of_debt": 0.05, "tax_rate": 0.21,
             })
-        except Exception:
-            wacc_calc = {"result": {"wacc": 0.095, "cost_of_equity": 0.098, "after_tax_cost_of_debt": 0.0395, "equity_weight": 0.98, "debt_weight": 0.02}}
+        except (ValueError, TypeError, ArithmeticError) as exc:
+            return self.error_envelope("WACC_CALCULATION_FAILED", f"资本成本计算失败：{exc}", 422)
 
         # 7. 执行杜邦比率核算
         ratios_dict = {}
@@ -777,7 +743,7 @@ class WatersourceTerminalService:
                 "balance_sheet_diff": balance_diff,
                 "balance_sheet_status": "资产负债表严格平账 (Assets = Liabilities + Equity)" if is_balanced else f"平账偏差 {balance_diff}",
                 "risk_free_rate": risk_free_rate,
-                "risk_free_rate_label": "4.35% (FRED 10年期美债 DGS10 归档)",
+                "risk_free_rate_label": f"{risk_free_rate:.2%}（FRED DGS10 · {rate_as_of}）",
                 "market_equity": market_equity,
                 "market_debt": market_debt,
             },
@@ -1045,35 +1011,16 @@ class WatersourceTerminalService:
         else:
             filtered = all_items
 
-        us_indices = [quotes_map[t] for t in US_INDEX_TICKERS if t in quotes_map]
-        # 显式暴露未配置基准，严禁造假
-        us_missing = [
-            {
-                "ticker": "RUT",
-                "market": "US",
-                "company_name": "罗素2000指数 (未配置本地行情源)",
-                "price": None,
-                "currency": "USD",
-                "formatted_price": "N/A",
-                "data_status": "NOT_CONFIGURED",
-                "is_valid": False,
-                "staleness_status": "not_configured",
-            }
-        ]
-        jp_indices = [quotes_map[t] for t in JP_INDEX_TICKERS if t in quotes_map]
-        jp_missing = [
-            {
-                "ticker": "^N225",
-                "market": "JP",
-                "company_name": "日经225现货指数 (当前以 1306 TOPIX 与 ^N225VI 替代追踪)",
-                "price": None,
-                "currency": "JPY",
-                "formatted_price": "N/A",
-                "data_status": "NOT_CONFIGURED",
-                "is_valid": False,
-                "staleness_status": "not_configured",
-            }
-        ]
+        index_names = {"RUT": "罗素2000指数", "^N225": "日经225指数", "IWM": "罗素2000 ETF"}
+
+        def index_rows(tickers, market):
+            return [quotes_map.get(ticker) or {
+                "ticker": ticker, "market": market,
+                "company_name": index_names.get(ticker) or TICKER_ZH_FALLBACK.get(ticker, ticker),
+                "price": None, "currency": "USD" if market == "US" else "JPY",
+                "formatted_price": "—", "data_status": "NO_QUOTE", "is_valid": False,
+                "staleness_status": "missing",
+            } for ticker in tickers]
 
         blocked_count = sum(1 for x in filtered if x["data_status"] == "STALE_BLOCKED")
         overall_status = "PARTIAL" if blocked_count > 0 else "PREVIOUS_CLOSE"
@@ -1084,10 +1031,10 @@ class WatersourceTerminalService:
             {
                 "market_filter": m_filter,
                 "market_status": "CLOSED",
-                "market_session_note": readiness.get("market_session_note", "前一交易日收盘价基准"),
+                "market_session_note": (readiness.get("market_session_note") if filtered else "等待已核验行情"),
                 "latest_timestamp_utc": readiness.get("latest_timestamp_utc"),
-                "us_indices": us_indices + us_missing,
-                "jp_indices": jp_indices + jp_missing,
+                "us_indices": index_rows((*US_INDEX_TICKERS, "RUT", "IWM"), "US"),
+                "jp_indices": index_rows((*JP_INDEX_TICKERS, "^N225"), "JP"),
                 "jp_core_equities": [quotes_map[t] for t in JP_CORE_EQUITIES if t in quotes_map],
                 "all_quotes": sorted(filtered, key=lambda x: (x["market"], x["ticker"])),
                 "stale_blocked_tickers": [x["ticker"] for x in all_items if x["data_status"] == "STALE_BLOCKED"],
@@ -1101,38 +1048,6 @@ class WatersourceTerminalService:
     def get_latest_indicators(self) -> Dict[str, Any]:
         quotes_map, as_of_iso = self._read_latest_raw_quotes()
         macro_archive = self._read_macro_archive_observations()
-        screening_sum = _safe_read_json(self.data_dir / "screening" / "screening_summary.json", {})
-
-        cls_res = screening_sum.get("classification_results", {}) if isinstance(screening_sum, dict) else {}
-        total_u = int(screening_sum.get("total_universe_scale", 14892) or 14892)
-        pivot_cnt = int(cls_res.get("stage_2_pivot_ready_count", 327) or 327)
-        watch_cnt = int(cls_res.get("watchlist_forming_count", 1215) or 1215)
-        disq_cnt = int(cls_res.get("trend_disqualified_count", 13350) or 13350)
-
-        # 优先读取调度与计算持久化总账 (SSOT)
-        ind_file = self.data_dir / "indicators" / "latest_indicators.json"
-        if ind_file.exists():
-            try:
-                payload = json.loads(ind_file.read_text(encoding="utf-8"))
-                stored_indicators = payload.get("indicators", [])
-                if stored_indicators and len(stored_indicators) >= 6:
-                    return self._envelope(
-                        {
-                            "indicators": stored_indicators,
-                            "sepa_breadth": {
-                                "total_universe_scale": total_u,
-                                "stage_2_pivot_ready_count": pivot_cnt,
-                                "watchlist_forming_count": watch_cnt,
-                                "trend_disqualified_count": disq_cnt,
-                                "updated_at": payload.get("as_of", as_of_iso),
-                            },
-                        },
-                        as_of=payload.get("as_of", as_of_iso),
-                        source="data/indicators/latest_indicators.json",
-                        status="FRESH",
-                    )
-            except Exception:
-                pass
 
         vix_q = quotes_map.get("^VIX", {})
         tnx_q = quotes_map.get("^TNX", {})
@@ -1145,12 +1060,6 @@ class WatersourceTerminalService:
         dgs2 = arch.get("us_treasury_2y_yield", {})
         u3 = arch.get("us_unemployment_rate_u3", {})
         dexchus = arch.get("usd_cny_exchange_rate", {})
-
-        cls_res = screening_sum.get("classification_results", {}) if isinstance(screening_sum, dict) else {}
-        total_u = int(screening_sum.get("total_universe_scale", 0) or 0)
-        pivot_cnt = int(cls_res.get("stage_2_pivot_ready_count", 0) or 0)
-        watch_cnt = int(cls_res.get("watchlist_forming_count", 0) or 0)
-        disq_cnt = int(cls_res.get("trend_disqualified_count", 0) or 0)
 
         vix_val = float(vix_q.get("price") or 0.0)
         indicators = [
@@ -1221,14 +1130,14 @@ class WatersourceTerminalService:
             {
                 "id": "SEPA_BREADTH",
                 "name_zh": "SEPA 全市场第二阶段宽度",
-                "value": round((pivot_cnt / total_u) * 100.0, 2) if total_u > 0 else 0.0,
-                "display_value": f"{pivot_cnt} / {total_u:,} ({(pivot_cnt / total_u * 100.0):.2f}%)" if total_u else "0",
+                "value": None,
+                "display_value": "待正式初筛",
                 "unit": "家",
                 "signal": "PENDING_OHLCV",
-                "signal_zh": "历史模拟统计 · 正式初筛待补日线",
-                "data_status": "ARCHIVED_BASELINE" if screening_sum else "EMPTY",
-                "as_of": screening_sum.get("updated_at", as_of_iso),
-                "source": "全市场趋势初筛总账 (美股 105批 + 日股 45批)",
+                "signal_zh": "等待全市场日线、相对强度与形态输入",
+                "data_status": "EMPTY",
+                "as_of": "",
+                "source": "正式初筛运行记录",
             },
             {
                 "id": "^N225VI",
@@ -1256,23 +1165,27 @@ class WatersourceTerminalService:
             },
         ]
 
+        scheduler = getattr(self, "scheduler", None)
+        if scheduler is not None:
+            indicators.extend(scheduler.macro_indicators())
+            indicators.extend(scheduler.latest_sample_width())
         return self._envelope(
             {
                 "indicators": indicators,
                 "sepa_breadth": {
-                    "total_universe_scale": total_u,
-                    "stage_2_pivot_ready_count": pivot_cnt,
-                    "watchlist_forming_count": watch_cnt,
-                    "trend_disqualified_count": disq_cnt,
-                    "us_chunks": screening_sum.get("market_status", {}).get("US_completed_chunks", 0),
-                    "jp_chunks": screening_sum.get("market_status", {}).get("JP_completed_chunks", 0),
-                    "elapsed_seconds": screening_sum.get("performance_metrics", {}).get("elapsed_seconds", 0),
-                    "updated_at": screening_sum.get("updated_at"),
+                    "total_universe_scale": 0,
+                    "stage_2_pivot_ready_count": 0,
+                    "watchlist_forming_count": 0,
+                    "trend_disqualified_count": 0,
+                    "us_chunks": 0,
+                    "jp_chunks": 0,
+                    "elapsed_seconds": 0,
+                    "updated_at": None,
                 },
                 "pipeline_macro_templates": MACRO_INDICATORS_TEMPLATE_SPECS,
             },
             as_of=as_of_iso,
-            source="google-finance/raw + macro-reviewed-20261012 + screening_summary",
+            source="google-finance/raw + macro-reviewed-20261012 + terminal_scheduler",
             status="PARTIAL",
         )
 
@@ -1328,15 +1241,10 @@ class WatersourceTerminalService:
 
     def get_collection_overview(self) -> Dict[str, Any]:
         readiness = self._read_readiness_snapshot()
-        screening_sum = _safe_read_json(self.data_dir / "screening" / "screening_summary.json", {})
-        sec_prog = _safe_read_json(self.data_dir / "pipeline_state" / "sec_collection_progress.json", {})
-        u567_prog = _safe_read_json(self.data_dir / "pipeline_state" / "567_universe_progress.json", {})
         repl_tasks = _safe_read_json(self.data_dir / "browser-search" / "replenishment_tasks.json", {})
         radar = self._read_radar_events_and_cycles(limit=20)
         ckpt = _safe_read_json(self.data_dir / "ledger" / "event_radar_checkpoint.json", {})
 
-        sec_sum = sec_prog.get("summary", {}) if isinstance(sec_prog, dict) else {}
-        u567_sum = u567_prog.get("summary", {}) if isinstance(u567_prog, dict) else {}
 
         hot_files = len(list((self.data_dir / "hot").rglob("*.*"))) if (self.data_dir / "hot").exists() else 0
         warm_files = len(list((self.data_dir / "warm").rglob("*.*"))) if (self.data_dir / "warm").exists() else 0
@@ -1347,162 +1255,36 @@ class WatersourceTerminalService:
             else 0
         )
 
-        # 读取任务参数化 JSON 配置 (SSOT)
-        cfg_file = ROOT / "config" / "terminal_tasks.json"
-        task_cfgs = {}
-        if cfg_file.exists():
-            try:
-                task_cfgs = json.loads(cfg_file.read_text(encoding="utf-8")).get("tasks", {})
-            except Exception:
-                pass
-
-        pipelines = [
-            {
-                "pipeline_id": "STOCK_SCREENING",
-                "name_zh": task_cfgs.get("STOCK_SCREENING", {}).get("name_zh", "全盘万家标的初筛与流式估值"),
-                "category": "SCREENING_AND_ANALYSIS",
-                "track": "DATA_COLLECTION",
-                "enabled": self._pipeline_task_toggles.get("STOCK_SCREENING", task_cfgs.get("STOCK_SCREENING", {}).get("enabled", True)),
-                "completed": screening_sum.get("total_processed_companies", 14892),
-                "total": screening_sum.get("total_universe_scale", 14892),
-                "failed": 0,
-                "status_zh": f"全盘 14,892 家分块初筛完成 · 发现 {screening_sum.get('classification_results', {}).get('stage_2_pivot_ready_count', 327)} 只第二阶段枢轴买点与流式估值",
-                "updated_at": screening_sum.get("updated_at"),
-                "schedule_zh": task_cfgs.get("STOCK_SCREENING", {}).get("schedule", {}).get("display_zh", "周二至周六 08:00 JST"),
-                "schedule_display": task_cfgs.get("STOCK_SCREENING", {}).get("schedule", {}).get("display_zh", "周二至周六 08:00 JST"),
-                "throughput_label": task_cfgs.get("STOCK_SCREENING", {}).get("throughput_label", "14,892 只全量上市主体 (150 分块)"),
-                "data_status": "PREVIOUS_CLOSE" if screening_sum.get("total_processed_companies", 0) > 0 else "PARTIAL",
-            },
-            {
-                "pipeline_id": "OFFICIAL_NEWS",
-                "name_zh": task_cfgs.get("OFFICIAL_NEWS", {}).get("name_zh", "官方资讯采集与AI商业实质提炼"),
-                "category": "NEWS_RADAR",
-                "track": "DATA_COLLECTION",
-                "enabled": self._pipeline_task_toggles.get("OFFICIAL_NEWS", task_cfgs.get("OFFICIAL_NEWS", {}).get("enabled", True)),
-                "completed": radar.get("total_cycles", 2) or 2,
-                "total": radar.get("total_cycles", 2) or 2,
-                "failed": 0,
-                "status_zh": f"SQLite 库内持久化 {radar.get('total_events', 13)} 条微观商业影响事实 · 传闻隔离机制运行中",
-                "updated_at": ckpt.get("last_cycle_at") or radar.get("checkpoint", {}).get("last_cycle_at"),
-                "schedule_zh": task_cfgs.get("OFFICIAL_NEWS", {}).get("schedule", {}).get("display_zh", "分时间采集: 每小时脉冲"),
-                "schedule_display": task_cfgs.get("OFFICIAL_NEWS", {}).get("schedule", {}).get("display_zh", "分时间采集: 每小时脉冲"),
-                "throughput_label": task_cfgs.get("OFFICIAL_NEWS", {}).get("throughput_label", "SQLite 持久化事件雷达库"),
-                "data_status": "ARCHIVED_BASELINE",
-            },
-            {
-                "pipeline_id": "INDICATOR_UPDATE",
-                "name_zh": task_cfgs.get("INDICATOR_UPDATE", {}).get("name_zh", "核心宏观流动性与趋势宽度指标"),
-                "category": "MACRO_INDICATORS",
-                "track": "LOCAL_AUDIT_SYNC",
-                "enabled": self._pipeline_task_toggles.get("INDICATOR_UPDATE", task_cfgs.get("INDICATOR_UPDATE", {}).get("enabled", True)),
-                "completed": 8,
-                "total": 8,
-                "failed": 0,
-                "status_zh": "8 项核心宏观流动性、恐慌指数 VIX、美债利差与全市场趋势宽度走廊已核算落盘",
-                "updated_at": _utc_now_iso(),
-                "schedule_zh": task_cfgs.get("INDICATOR_UPDATE", {}).get("schedule", {}).get("display_zh", "分时间采集: 每小时自动计算"),
-                "schedule_display": task_cfgs.get("INDICATOR_UPDATE", {}).get("schedule", {}).get("display_zh", "分时间采集: 每小时自动计算"),
-                "throughput_label": task_cfgs.get("INDICATOR_UPDATE", {}).get("throughput_label", "8 项核心宏观与市场宽度走廊"),
-                "data_status": "FRESH",
-            },
-            {
-                "pipeline_id": "FINANCE_CALC",
-                "name_zh": task_cfgs.get("FINANCE_CALC", {}).get("name_zh", "24大专业量化估值模型与三表刚性平账"),
-                "category": "VALUATION_AUDIT",
-                "track": "LOCAL_AUDIT_SYNC",
-                "enabled": self._pipeline_task_toggles.get("FINANCE_CALC", task_cfgs.get("FINANCE_CALC", {}).get("enabled", True)),
-                "completed": 24,
-                "total": 24,
-                "failed": 0,
-                "status_zh": "全量 24 大专业量化金融估值模型与 Luca Pacioli 资产负债表刚性平账 100% 验证通过",
-                "updated_at": sec_prog.get("last_updated") or _utc_now_iso(),
-                "schedule_zh": task_cfgs.get("FINANCE_CALC", {}).get("schedule", {}).get("display_zh", "手动即时 / 每日核算"),
-                "schedule_display": task_cfgs.get("FINANCE_CALC", {}).get("schedule", {}).get("display_zh", "手动即时 / 每日核算"),
-                "throughput_label": task_cfgs.get("FINANCE_CALC", {}).get("throughput_label", "24 大专业量化金融模型群"),
-                "data_status": "FRESH",
-            },
-            {
-                "pipeline_id": "US_DAILY",
-                "name_zh": task_cfgs.get("US_DAILY", {}).get("name_zh", "美股全盘标的时序抽取与归档"),
-                "category": "MARKET_DATA",
-                "track": "DATA_COLLECTION",
-                "enabled": self._pipeline_task_toggles.get("US_DAILY", task_cfgs.get("US_DAILY", {}).get("enabled", True)),
-                "completed": 10445,
-                "total": 10445,
-                "failed": 0,
-                "status_zh": "美股全盘 10,445 家上市主体（SEC 官方登记 105 批次流式分块）时序与核心底账抽取完成",
-                "updated_at": readiness.get("latest_timestamp_utc"),
-                "schedule_zh": task_cfgs.get("US_DAILY", {}).get("schedule", {}).get("display_zh", "周二至周六 07:00 JST (收盘)"),
-                "schedule_display": task_cfgs.get("US_DAILY", {}).get("schedule", {}).get("display_zh", "周二至周六 07:00 JST (收盘)"),
-                "throughput_label": task_cfgs.get("US_DAILY", {}).get("throughput_label", "10,445 只美股全盘标的池 (105 分块)"),
-                "data_status": "PREVIOUS_CLOSE",
-            },
-            {
-                "pipeline_id": "JP_DAILY",
-                "name_zh": task_cfgs.get("JP_DAILY", {}).get("name_zh", "日股全盘标的时序抽取与归档"),
-                "category": "MARKET_DATA",
-                "track": "DATA_COLLECTION",
-                "enabled": self._pipeline_task_toggles.get("JP_DAILY", task_cfgs.get("JP_DAILY", {}).get("enabled", True)),
-                "completed": 4447,
-                "total": 4447,
-                "failed": 0,
-                "status_zh": "日股全盘 4,447 家上市主体（东证 Prime/Standard/Growth 45 批次流式分块）时序与核心底账抽取完成",
-                "updated_at": readiness.get("latest_timestamp_utc"),
-                "schedule_zh": task_cfgs.get("JP_DAILY", {}).get("schedule", {}).get("display_zh", "周一至周五 16:00 JST (收盘)"),
-                "schedule_display": task_cfgs.get("JP_DAILY", {}).get("schedule", {}).get("display_zh", "周一至周五 16:00 JST (收盘)"),
-                "throughput_label": task_cfgs.get("JP_DAILY", {}).get("throughput_label", "4,447 只东证全盘标的池 (45 分块)"),
-                "data_status": "PREVIOUS_CLOSE",
-            },
-            {
-                "pipeline_id": "LOCAL_AUDIT",
-                "name_zh": task_cfgs.get("LOCAL_AUDIT", {}).get("name_zh", "本地三表平账与密码学账本核验"),
-                "category": "DATA_GOVERNANCE",
-                "track": "LOCAL_AUDIT_SYNC",
-                "enabled": self._pipeline_task_toggles.get("LOCAL_AUDIT", task_cfgs.get("LOCAL_AUDIT", {}).get("enabled", True)),
-                "completed": 100,
-                "total": 100,
-                "failed": 0,
-                "status_zh": f"官方 10-K 原档 ({sec_raw_files} 份) 100% 刚性勾稽自检通过，PredictionLedger 时间链条 SHA-256 验签就绪",
-                "updated_at": sec_prog.get("last_updated") or _utc_now_iso(),
-                "schedule_zh": task_cfgs.get("LOCAL_AUDIT", {}).get("schedule", {}).get("display_zh", "手动即时校验 / 每30分钟轮巡"),
-                "schedule_display": task_cfgs.get("LOCAL_AUDIT", {}).get("schedule", {}).get("display_zh", "手动即时校验 / 每30分钟轮巡"),
-                "throughput_label": task_cfgs.get("LOCAL_AUDIT", {}).get("throughput_label", "100% 刚性平账与密码学验签"),
-                "data_status": "FRESH",
-            },
-            {
-                "pipeline_id": "INCREMENTAL_COLLECT",
-                "name_zh": task_cfgs.get("INCREMENTAL_COLLECT", {}).get("name_zh", "官方监管补数与档案增量归档"),
-                "category": "DATA_GOVERNANCE",
-                "track": "DATA_COLLECTION",
-                "enabled": self._pipeline_task_toggles.get("INCREMENTAL_COLLECT", task_cfgs.get("INCREMENTAL_COLLECT", {}).get("enabled", True)),
-                "completed": 0,
-                "total": repl_tasks.get("total_pending_companies", 72),
-                "failed": 0,
-                "status_zh": f"待进入官方监管或交易所页面核实原文 {repl_tasks.get('total_pending_companies', 72)} 家，已核对本地补数清单",
-                "updated_at": repl_tasks.get("created_at") or _utc_now_iso(),
-                "schedule_zh": task_cfgs.get("INCREMENTAL_COLLECT", {}).get("schedule", {}).get("display_zh", "每小时扫描补数队列"),
-                "schedule_display": task_cfgs.get("INCREMENTAL_COLLECT", {}).get("schedule", {}).get("display_zh", "每小时扫描补数队列"),
-                "throughput_label": task_cfgs.get("INCREMENTAL_COLLECT", {}).get("throughput_label", "72 家官方原文补数队列"),
-                "data_status": "PARTIAL",
-            },
-        ]
-
-        with self._lock:
-            cur_active_task = self._active_pipeline_task
-            cur_stock = self._current_processing_stock
-            is_pipe_running = self._pipeline_state == "RUNNING"
-            completed_set = set(self._completed_pipeline_tasks)
-
-        for p in pipelines:
-            pid = p["pipeline_id"]
-            if is_pipe_running and cur_active_task == pid:
-                p["data_status"] = "RUNNING"
-                p["is_running"] = True
-                p["current_stock"] = cur_stock or "正在执行批次扫描..."
-                p["status_zh"] = f"【正在执行】{cur_stock or p['status_zh']}"
-            elif pid in completed_set:
-                p["data_status"] = "FRESH"
-                p["is_running"] = False
+        cfg = _safe_read_json(ROOT / "config" / "terminal_tasks.json", {}).get("tasks", {})
+        scheduler = getattr(self, "scheduler", None)
+        snapshot = scheduler.snapshot() if scheduler else {}
+        runs = {}
+        for run in snapshot.get("runs", []):
+            runs.setdefault(run["task"], run)
+        tasks = {task["id"]: task for task in snapshot.get("tasks", [])}
+        pipelines = []
+        for task_id, config in cfg.items():
+            task = tasks.get(task_id, {})
+            run = runs.get(task_id) or {}
+            result = run.get("result") or {}
+            items = result.get("items", [])
+            status = run.get("status", "IDLE")
+            pipelines.append({
+                "pipeline_id": task_id,
+                "name_zh": task.get("name") or config.get("name_zh") or task_id,
+                "category": config.get("category", "DATA_GOVERNANCE"),
+                "track": "DATA_COLLECTION" if task.get("track") == "collection" else "LOCAL_AUDIT_SYNC",
+                "enabled": task.get("enabled", self._pipeline_task_toggles.get(task_id, config.get("enabled", True))),
+                "completed": result.get("archived_symbols", sum(
+                    item["status"] == "collected" and item.get("record_count", 0) > 0 for item in items)),
+                "total": result.get("universe_count", len(items)),
+                "failed": sum(item["status"] != "collected" for item in items),
+                "status_zh": result.get("message") or ("等待任务开始" if run else "暂无执行记录"),
+                "updated_at": run.get("finished_at") or run.get("created_at"),
+                "schedule_display": task.get("schedule"),
+                "data_status": status,
+                "is_running": status == "RUNNING",
+            })
 
         repl_preview = [
             {
@@ -1646,6 +1428,17 @@ class WatersourceTerminalService:
             "UNIVERSE_567_BATCH": "STOCK_SCREENING",
         }
         canonical_id = task_aliases.get(pipeline_id, pipeline_id)
+        scheduler = getattr(self, "scheduler", None)
+        if scheduler is not None:
+            task = next((row for row in scheduler.snapshot()["tasks"] if row["id"] == canonical_id), None)
+            if task and task["automatic"]:
+                current_state = not task["enabled"] if enabled is None else bool(enabled)
+                scheduler.set_enabled(canonical_id, current_state)
+                return 200, self._envelope(
+                    {"pipeline_id": pipeline_id, "enabled": current_state,
+                     "state_zh": "已启用" if current_state else "已停用"},
+                    as_of=_utc_now_iso(), source="terminal_scheduler", status="OK",
+                )
         with self._lock:
             current = self._pipeline_task_toggles.get(canonical_id, True)
             if enabled is None:
@@ -1926,6 +1719,9 @@ class WatersourceTerminalService:
             "debt_to_equity_pct": round((float(debt) / float(eq)) * 100.0, 2) if (debt is not None and eq) else None,
         }
         financial_probe["metrics"] = metrics_dict
+        scheduler = getattr(self, "scheduler", None)
+        if scheduler is not None:
+            financial_probe["scheduled_calculation"] = scheduler.latest_company_financial_metric(clean_ticker)
 
         # 5. KMV-Merton 信用违约探针（仅当资产/负债/现价/股本俱全时实算，不硬编参数）
         cur_price = quote_info["price"] if quote_info and quote_info["is_valid"] else None
@@ -2048,12 +1844,15 @@ class WatersourceTerminalService:
 
         # 9. 嵌入全自动带入底层事实的多阶段 DCF、WACC 与杜邦估值模型
         auto_val_res = None
+        auto_valuation_issue = None
         try:
             val_code, val_payload = self.auto_calculate_company_valuation(clean_ticker)
-            if val_code == 200 and isinstance(val_payload, dict) and val_payload.get("ok"):
+            if val_code == 200 and val_payload.get("ok"):
                 auto_val_res = val_payload.get("data")
+            else:
+                auto_valuation_issue = (val_payload.get("error") or {}).get("message")
         except Exception:
-            auto_val_res = None
+            auto_valuation_issue = "自动估值执行失败"
 
         return self._envelope(
             {
@@ -2096,6 +1895,7 @@ class WatersourceTerminalService:
                     "timing_and_ohlcv_probe": ohlcv_probe,
                 },
                 "automated_valuation": auto_val_res,
+                "automated_valuation_issue": auto_valuation_issue,
             },
             as_of=(quote_info or {}).get("timestamp_iso", as_of_iso),
             source="FinancialAnalysisGateway + AIEngineAdapter + AIDossierSynthesizer + SEC",
@@ -2393,6 +2193,10 @@ class WatersourceTerminalService:
 
         with self._lock:
             all_logs = list(self._logs)
+        scheduler = getattr(self, "scheduler", None)
+        if scheduler is not None and mod_f in ("", "all", "terminal_scheduler"):
+            all_logs = scheduler.logs(lvl, kw, max(1, limit)) + all_logs
+            all_logs.sort(key=lambda entry: str(entry["timestamp"]).replace("+00:00", "Z"), reverse=True)
 
         filtered: List[Dict[str, Any]] = []
         modules_seen = sorted({str(x.get("module", "")) for x in all_logs if x.get("module")})
@@ -2402,7 +2206,7 @@ class WatersourceTerminalService:
             if mod_f and mod_f != "all" and mod_f != str(entry.get("module", "")).lower():
                 continue
             if kw:
-                hay = f"{entry.get('module','')} {entry.get('message','')} {entry.get('run_id','')}".lower()
+                hay = " ".join(str(entry.get(key, "")) for key in ("module", "message", "run_id", "task")).lower()
                 if kw not in hay:
                     continue
             filtered.append(entry)
@@ -2559,6 +2363,8 @@ class WatersourceTerminalService:
                 snap = scheduler.snapshot()
                 scheduler_info = {
                     "scheduled": snap.get("scheduled", False),
+                    "automatic_enabled": snap["automatic_enabled"],
+                    "automatic_available": snap["automatic_available"],
                     "tasks": snap.get("tasks", []),
                     "active_runs": [r for r in snap.get("runs", []) if r.get("status") in ("QUEUED", "RUNNING")],
                     "recent_runs": snap.get("runs", [])[:8],
@@ -2571,8 +2377,8 @@ class WatersourceTerminalService:
                 "freshness_banner": col_data["readiness"].get("banner_text", ""),
                 "task_scheduler": scheduler_info,
                 "readiness": {
-                    "latest_date_str": col_data["readiness"].get("latest_date_str", "2026-11-07"),
-                    "latest_timestamp_utc": col_data["readiness"].get("latest_timestamp_utc", "2026-11-07 12:41:49 UTC"),
+                    "latest_date_str": col_data["readiness"].get("latest_date_str"),
+                    "latest_timestamp_utc": col_data["readiness"].get("latest_timestamp_utc"),
                     "macro_indices_completed": col_data["readiness"].get("macro_indices_completed", []),
                     "equities_completed": col_data["readiness"].get("equities_completed", []),
                     "total_completed_count": col_data["readiness"].get("total_completed_count", 0),
@@ -2586,6 +2392,12 @@ class WatersourceTerminalService:
                     "us_indices": q_data.get("us_indices", []),
                     "jp_indices": q_data.get("jp_indices", []),
                     "jp_core_equities": q_data.get("jp_core_equities", []),
+                    "all_quotes": q_data.get("all_quotes", []),
+                    "daily_archives": scheduler.market_archives() if scheduler else [],
+                    "reconciliation": {
+                        "us": scheduler.reconciliation_summary("US") if scheduler else None,
+                        "jp": scheduler.reconciliation_summary("JP") if scheduler else None,
+                    } if scheduler else None,
                 },
                 "indicators": ind_res["data"].get("indicators", []),
                 "sepa_breadth": sepa_b,

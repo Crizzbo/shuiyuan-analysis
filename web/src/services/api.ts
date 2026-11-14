@@ -17,6 +17,8 @@ import type {
   AutomatedValuationData,
   ValuationCompanyItem,
   MarketArchiveItem,
+  MarketReconciliationMap,
+  TaskSchedulerInfo,
 } from '../types/api'
 
 const BASE_URL = '' // 相对路径，由 Vite proxy 或 Python 网关同源处理
@@ -149,7 +151,17 @@ export const api = {
   getSettings: () => request<SettingsData>('/api/settings'),
 
   // 11. 终端后台任务与定时调度
-  getTerminalTasks: () => request<any>('/api/terminal/tasks'),
+  getTerminalTasks: () => request<TaskSchedulerInfo>('/api/terminal/tasks'),
+
+  startTerminalBatch: () => request<{ run_id: string }>('/api/terminal/tasks/start', {
+    method: 'POST',
+    body: '{}',
+  }),
+
+  setTerminalAutomatic: (enabled: boolean) => request<TaskSchedulerInfo>('/api/terminal/tasks/automatic', {
+    method: 'POST',
+    body: JSON.stringify({ enabled }),
+  }),
 
   runTerminalTask: (taskId: string) =>
     request<{ run_id: string; status: string; task: string }>('/api/terminal/tasks/run', {
@@ -164,7 +176,7 @@ export const api = {
     }),
 
   getMarketArchives: () =>
-    request<{ items: MarketArchiveItem[] }>('/api/terminal/market-archives'),
+    request<{ items: MarketArchiveItem[]; reconciliation?: MarketReconciliationMap }>('/api/terminal/market-archives'),
 
   getTerminalNews: () =>
     request<{ items: any[] }>('/api/terminal/news'),

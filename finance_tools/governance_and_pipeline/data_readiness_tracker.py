@@ -20,6 +20,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 def is_excluded_quote(path: Path, payload: Dict[str, Any]) -> bool:
     """识别曾写入正式目录的演示行情批次。"""
+    if payload.get("source") == "authoritative_macro_and_tech_universe_quotes":
+        return True
     if not path.name.startswith("20261113T060000_"):
         return False
     exclusions = json.loads((PROJECT_ROOT / "config/terminal-evidence-exclusions.json").read_text(encoding="utf-8"))

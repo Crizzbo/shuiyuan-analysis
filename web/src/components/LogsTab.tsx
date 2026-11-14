@@ -2,16 +2,18 @@ import { useState, useEffect, useMemo } from 'react'
 import type { LogItem } from '../types/api'
 import { api } from '../services/api'
 import { Pagination } from './Pagination'
-import { formatDeviceTime } from '../utils/format'
+import { formatDeviceTime, toChinese } from '../utils/format'
 
 interface LogsTabProps {
   realtimeLogs?: LogItem[]
+  refreshKey?: number
 }
 
-export function LogsTab({ realtimeLogs = [] }: LogsTabProps) {
+export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
   const [logs, setLogs] = useState<LogItem[]>([])
   const [levelFilter, setLevelFilter] = useState('ALL')
   const [searchQuery, setSearchQuery] = useState('')
+  const [appliedQuery, setAppliedQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 40
   const [loading, setLoading] = useState(true)
@@ -21,8 +23,8 @@ export function LogsTab({ realtimeLogs = [] }: LogsTabProps) {
       setLoading(true)
       const res = await api.getLogs({
         level: levelFilter,
-        q: searchQuery.trim() || undefined,
-        limit: 150,
+        q: appliedQuery || undefined,
+        limit: 500,
       })
       if (res.ok) {
         setLogs(res.data.logs)
@@ -37,14 +39,22 @@ export function LogsTab({ realtimeLogs = [] }: LogsTabProps) {
   useEffect(() => {
     setCurrentPage(1)
     loadLogs()
-  }, [levelFilter])
+  }, [levelFilter, appliedQuery])
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => void loadLogs(), 250)
+    return () => window.clearTimeout(timer)
+  }, [refreshKey])
 
   // 合并实时推流日志
   const combinedLogs = useMemo(() => {
-    return [...realtimeLogs, ...logs].filter((l, idx, self) => {
-      return self.findIndex((item) => item.log_id === l.log_id) === idx
-    })
-  }, [realtimeLogs, logs])
+    const query = appliedQuery.toLowerCase()
+    const entries = new Map([...logs, ...realtimeLogs].map(log => [log.log_id, log]))
+    return [...entries.values()]
+      .filter(log => (levelFilter === 'ALL' || log.level === levelFilter)
+        && [log.message, log.module, log.run_id, log.task].some(value => value?.toLowerCase().includes(query)))
+      .sort((a, b) => Date.parse(b.timestamp) - Date.parse(a.timestamp))
+  }, [realtimeLogs, logs, levelFilter, appliedQuery])
 
   const totalItems = combinedLogs.length
   const totalPages = Math.max(1, Math.ceil(totalItems / pageSize))
@@ -87,11 +97,11 @@ export function LogsTab({ realtimeLogs = [] }: LogsTabProps) {
             placeholder="搜索日志消息、模块、线程..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && loadLogs()}
+            onKeyDown={(e) => e.key === 'Enter' && setAppliedQuery(searchQuery.trim())}
             className="bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-lg px-3 py-1.5 text-xs w-60 focus:outline-none focus:border-[#3987e5]"
           />
           <button
-            onClick={loadLogs}
+            onClick={() => setAppliedQuery(searchQuery.trim())}
             className="px-3 py-1.5 bg-[#3987e5] text-white rounded-lg text-xs hover:bg-[#2a78d6] cursor-pointer"
           >
             筛选
@@ -99,7 +109,7 @@ export function LogsTab({ realtimeLogs = [] }: LogsTabProps) {
           <button
             onClick={() => {
               setSearchQuery('')
-              loadLogs()
+              setAppliedQuery('')
             }}
             className="px-2.5 py-1.5 bg-[var(--bg-card)] text-[var(--text-secondary)] rounded-lg text-xs hover:bg-[var(--border-color)] border border-[var(--border-color)] cursor-pointer"
           >
@@ -111,7 +121,7 @@ export function LogsTab({ realtimeLogs = [] }: LogsTabProps) {
       {/* 终端风格日志控制台 */}
       <div className="bg-[#090d16] border border-[#27354b] rounded-xl p-4 font-mono text-xs shadow-inner min-h-[500px] max-h-[70vh] overflow-y-auto">
         <div className="flex items-center justify-between pb-3 border-b border-gray-800 text-[11px] text-gray-500 mb-2">
-          <span>系统运行实时日志流（保留最近 500 条记录）</span>
+          <span>系统运行日志（最多显示 500 条匹配记录）</span>
           <span className="flex items-center gap-1.5 text-[#199e70]">
             <span className="w-2 h-2 rounded-full bg-[#199e70]" />
             实时流同步中
@@ -141,10 +151,15 @@ export function LogsTab({ realtimeLogs = [] }: LogsTabProps) {
                       : 'bg-[#3987e5]/20 text-[#3987e5]'
                   }`}
                 >
-                  {log.level}
+                  {{ INFO: '信息', WARN: '预警', ERROR: '异常' }[log.level] ?? log.level}
                 </span>
-                <span className="text-[#199e70] shrink-0 text-[11px]">[{log.module}]</span>
-                <span className="text-gray-200 break-words">{log.message}</span>
+                <span className="text-[#199e70] shrink-0 text-[11px]">{log.task ? toChinese(log.task) : log.module}</span>
+                <span className="min-w-0 text-gray-200 break-words">{log.status && `${toChinese(log.status)} · `}{log.message}
+                  {log.run_id && <button type="button" className="ml-2 text-sky-300 underline" title={log.run_id}
+                    onClick={() => { setSearchQuery(log.run_id!); setAppliedQuery(log.run_id!) }}>
+                    运行 {log.run_id.slice(0, 8)}
+                  </button>}
+                </span>
               </div>
             ))}
           </div>

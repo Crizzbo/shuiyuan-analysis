@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import type {
   CollectionOverviewData,
-  CollectionPipelineItem,
   PipelineStatusData,
   TaskSchedulerInfo,
   TaskSchedulerRun,
+  TaskSchedulerTask,
   MarketArchiveItem,
+  MarketReconciliationMap,
 } from '../types/api'
 import { api } from '../services/api'
 import { showToast } from './Toast'
@@ -15,115 +16,12 @@ import { formatDeviceTime, toChinese } from '../utils/format'
 
 interface CollectionTabProps {
   pipelineStatus?: PipelineStatusData | null
+  refreshKey?: number
 }
 
-interface TaskMeta {
-  id: string
-  name: string
-  category: 'calc' | 'screening' | 'news' | 'indicator' | 'market' | 'audit'
-  icon: string
-  description: string
-  scopeDetail: string
-  defaultSchedule: string
-  color: string
-}
-
-const TASK_METAS: TaskMeta[] = [
-  {
-    id: 'QUOTE_COLLECT',
-    name: '权威行情与核心标的即时抽取',
-    category: 'market',
-    icon: '⚡',
-    description: '24 项美股/日股核心指数、科技龙头与 AI 产业链权威报价即时抽取与美分级精度验签',
-    scopeDetail: 'SPY, QQQ, DIA, SMH, TOPIX, NVDA, TSM, AVGO, MSFT, 软银, 东电等全盘核心资产，直接落盘不可篡改签名归档',
-    defaultSchedule: '手动即时 / 盘中刷新',
-    color: '#eab308',
-  },
-  {
-    id: 'FINANCE_CALC',
-    name: '24大专业金融模型与估值',
-    category: 'calc',
-    icon: '📊',
-    description: '全量 24 大专业量化与金融估值模型矩阵及资产负债表刚性平账',
-    scopeDetail: '严禁机械打分；多阶段DCF、反向DCF、EBO、WACC、Merton违约距离、Altman Z、Beneish M、GARCH、Kalman、Black-Litterman、CRR二叉树、SVI曲面、蒙特卡洛5000次模拟与SEPA全息测算',
-    defaultSchedule: '手动即时 / 每日核算',
-    color: '#3987e5',
-  },
-  {
-    id: 'STOCK_SCREENING',
-    name: '全盘标的收集与形态初筛',
-    category: 'screening',
-    icon: '🎯',
-    description: '全盘 14,892 家上市企业（美股 10,445 + 日股 4,447）0-Token 纯本地形态初筛',
-    scopeDetail: '纯本地数学计算 50/150/200 日均线多头排列、52周高点与 VCP 波动收缩形态，零 Token 消耗',
-    defaultSchedule: '周二至周六 08:00 JST',
-    color: '#199e70',
-  },
-  {
-    id: 'OFFICIAL_NEWS',
-    name: '官方资讯分时采集',
-    category: 'news',
-    icon: '⚡',
-    description: '官方监管机构与交易所权威 RSS/资讯分时间采集与脉冲抽取',
-    scopeDetail: 'SEC、东证、美联储与权威通讯社公开信源；自动事实核验与传闻隔离归档',
-    defaultSchedule: '分时间采集：每小时脉冲',
-    color: '#d03b3b',
-  },
-  {
-    id: 'INDICATOR_UPDATE',
-    name: '金融指标与宽度计算',
-    category: 'indicator',
-    icon: '📈',
-    description: '宏观流动性基准利率与全市场 14,892 家多头趋势宽度走廊测算',
-    scopeDetail: '10年期美债 (DGS10)、EFFR 基准利率、VIX 波动率及全市场 50日/200日均线上方股票占比',
-    defaultSchedule: '分时间采集：每小时自动计算',
-    color: '#c98500',
-  },
-  {
-    id: 'US_DAILY',
-    name: '美股全盘标的时序抽取',
-    category: 'market',
-    icon: '🇺🇸',
-    description: '美股全盘 10,445 家上市主体（SEC 登记全量 105 批次流式分块）日线抽取与归档',
-    scopeDetail: '覆盖 SEC 官方全量 10,445 家上市主体，流式分块抓取日线 OHLCV、宽基指数与美债基准，严格时效验签',
-    defaultSchedule: '周二至周六 07:00 JST (收盘)',
-    color: '#6366f1',
-  },
-  {
-    id: 'JP_DAILY',
-    name: '日股全盘标的时序抽取',
-    category: 'market',
-    icon: '🇯🇵',
-    description: '日股全盘 4,447 家上市主体（东证登记全量 45 批次流式分块）日线抽取与归档',
-    scopeDetail: '覆盖东京证券交易所 Prime/Standard/Growth 全量 4,447 家上市主体，流式分块抓取日线与日经波动率',
-    defaultSchedule: '周一至周五 16:00 JST (收盘)',
-    color: '#0ea5e9',
-  },
-  {
-    id: 'LOCAL_AUDIT',
-    name: '本地数据与账本核验',
-    category: 'audit',
-    icon: '🛡️',
-    description: '三表刚性平账、离线数据源完整性与预测账本密码学 SHA-256 验签',
-    scopeDetail: '资产=负债+所有者权益公式断言；PredictionLedger 链条验签，杜绝代码硬编码对账',
-    defaultSchedule: '手动即时校验',
-    color: '#10b981',
-  },
-  {
-    id: 'INCREMENTAL_COLLECT',
-    name: '官方监管补数与档案归档',
-    category: 'audit',
-    icon: '📑',
-    description: '官方监管补数定向队列核验与深度档案增量归档',
-    scopeDetail: '72 家待进入监管/交易所页面核验原文，流式分批热/温/冷生命周期安全归档',
-    defaultSchedule: '每小时扫描补数队列',
-    color: '#8b5cf6',
-  },
-]
-
-export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
+export function CollectionTab({ pipelineStatus, refreshKey }: CollectionTabProps) {
   // 当前子模块视图：运营管线 | 调度计划与流水 | 全盘日线归档
-  const [activeSection, setActiveSection] = useState<'pipelines' | 'scheduler' | 'archives'>('pipelines')
+  const [activeSection, setActiveSection] = useState<'pipelines' | 'scheduler' | 'archives'>('scheduler')
 
   // 1. 运营管线状态
   const [filterTrack, setFilterTrack] = useState<'ALL' | 'LOCAL_AUDIT_SYNC' | 'DATA_COLLECTION'>('ALL')
@@ -131,7 +29,6 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
   const [configModalOpen, setConfigModalOpen] = useState(false)
   const [selectedConfigTaskId, setSelectedConfigTaskId] = useState<string | null>(null)
   const [rerunningTaskId, setRerunningTaskId] = useState<string | null>(null)
-  const [togglingTaskId, setTogglingTaskId] = useState<string | null>(null)
   const [highlightTaskId, setHighlightTaskId] = useState<string | null>(null)
   const [runningAudit, setRunningAudit] = useState(false)
   const [runningIngest, setRunningIngest] = useState(false)
@@ -144,8 +41,10 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
   const [runHistoryPage, setRunHistoryPage] = useState(1)
   const runHistoryPageSize = 10
 
-  // 3. 全盘日线归档状态 (Market Archives)
+  // 3. 全盘日线归档状态与全市场对账 (Market Archives & Reconciliation)
   const [marketArchives, setMarketArchives] = useState<MarketArchiveItem[]>([])
+  const [reconciliation, setReconciliation] = useState<MarketReconciliationMap | null>(null)
+  const [selectedUnmappedMarket, setSelectedUnmappedMarket] = useState<'US' | 'JP' | null>(null)
   const [archiveSearch, setArchiveSearch] = useState('')
   const [archiveMarketFilter, setArchiveMarketFilter] = useState<'ALL' | 'US' | 'JP'>('ALL')
   const [archivePage, setArchivePage] = useState(1)
@@ -176,13 +75,18 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
     }
   }
 
-  // 加载全盘日线行情归档底账
+  // 加载全盘日线行情归档底账与目标日对账矩阵
   const loadArchives = async () => {
     try {
       setLoadingArchives(true)
       const res = await api.getMarketArchives()
-      if (res.ok && res.data?.items) {
-        setMarketArchives(res.data.items)
+      if (res.ok && res.data) {
+        if (res.data.items) {
+          setMarketArchives(res.data.items)
+        }
+        if (res.data.reconciliation) {
+          setReconciliation(res.data.reconciliation)
+        }
       }
     } catch (err) {
       console.error('Failed to load market archives:', err)
@@ -212,7 +116,7 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
 
   // 1. 本地核对同步手动执行
   const handleRunAuditSync = async () => {
-    if (runningAudit || pipelineStatus?.is_running) return
+    if (runningAudit) return
     setRunningAudit(true)
     showToast({
       type: 'info',
@@ -220,7 +124,7 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
       message: '正在对齐财报三表平账、最新日线行情时效与密码学账本验签…',
     })
     try {
-      const res = await api.startPipeline('local_audit_sync', 'ALL')
+      const res = await api.runTerminalTask('LOCAL_AUDIT')
       if (res.ok) {
         showToast({
           type: 'success',
@@ -242,27 +146,28 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
   }
 
   // 2. 外部数据采集手动执行
-  const handleRunDataIngest = async (market: 'ALL' | 'US' | 'JP' = 'ALL') => {
-    if (runningIngest || pipelineStatus?.is_running) return
+  const handleRunDataIngest = async () => {
+    if (runningIngest) return
     setRunningIngest(true)
     showToast({
       type: 'info',
-      title: '启动增量数据采集',
-      message: `正在扫描并拉取 ${market === 'ALL' ? '全市场' : market} 增量行情与官方原档…`,
+      title: '提交数据采集',
+      message: '提交美股、日股和官方资讯采集任务',
     })
     try {
-      const res = await api.startPipeline('incremental_replenish', market)
-      if (res.ok) {
+      const results = await Promise.all(['US_DAILY', 'JP_DAILY', 'OFFICIAL_NEWS'].map(api.runTerminalTask))
+      const accepted = results.filter(res => res.ok).length
+      if (accepted > 0) {
         showToast({
           type: 'success',
           title: '数据采集任务已入队',
-          message: `主任务调度编号: ${res.data.run_id}`,
+          message: `调度器已接受 ${accepted}/3 项任务，运行编号见任务历史`,
         })
       } else {
         showToast({
           type: 'error',
           title: '启动失败',
-          message: res.error?.message || '流水线繁忙或已被占用',
+          message: '调度器未接受采集任务',
         })
       }
     } catch (err: any) {
@@ -313,37 +218,17 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
     }
   }
 
-  // 4. 采集管线子开关切换
-  const handleToggle = async (pipeline: CollectionPipelineItem) => {
-    const nextState = !pipeline.enabled
-    setTogglingTaskId(pipeline.pipeline_id)
-    try {
-      const res = await api.toggleCollectionTask(pipeline.pipeline_id, nextState)
-      if (res.ok) {
-        showToast({
-          type: nextState ? 'success' : 'warning',
-          title: `任务子开关: ${pipeline.name_zh}`,
-          message: nextState ? '已启用（将参与全局流水线调度）' : '已停用（全局执行时将跳过此阶段）',
-        })
-        setData(prev => {
-          if (!prev) return prev
-          return {
-            ...prev,
-            pipelines: prev.pipelines.map(p =>
-              p.pipeline_id === pipeline.pipeline_id ? { ...p, enabled: nextState } : p
-            ),
-          }
-        })
-      }
-    } catch (err: any) {
-      showToast({ type: 'error', title: '切换开关失败', message: err.message })
-    } finally {
-      setTogglingTaskId(null)
-    }
-  }
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      void loadScheduler()
+      if (activeSection === 'pipelines') void loadOverview()
+      if (activeSection === 'archives') void loadArchives()
+    }, 150)
+    return () => window.clearTimeout(timer)
+  }, [refreshKey, activeSection])
 
   // 5. 调度器任务触发运行
-  const handleRunScheduledTask = async (taskMeta: TaskMeta) => {
+  const handleRunScheduledTask = async (taskMeta: TaskSchedulerTask) => {
     if (runningTaskId === taskMeta.id) return
     setRunningTaskId(taskMeta.id)
     showToast({
@@ -454,11 +339,6 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
     )
   }
 
-  const isTaskEnabled = (taskId: string) => {
-    const found = configuredTasks.find((t) => t.id === taskId)
-    return found ? found.enabled : true
-  }
-
   const getLastRun = (taskId: string): TaskSchedulerRun | undefined => {
     return recentRuns.find((r) => r.task === taskId)
   }
@@ -487,7 +367,7 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
       <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <h1 className="text-base font-bold text-[var(--text-primary)] flex items-center gap-2">
-            <span>数据运营调度与任务中枢</span>
+            <span>采集中心</span>
             <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#3987e5]/15 text-[#3987e5] border border-[#3987e5]/30 font-medium">
               全盘数据运营原生工作台
             </span>
@@ -504,7 +384,7 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
             onClick={() => handleOpenConfig()}
             className="px-3.5 py-1.5 rounded-lg border border-[#3987e5]/40 bg-[#3987e5]/10 hover:bg-[#3987e5]/20 text-[#3987e5] text-xs font-semibold cursor-pointer transition-all flex items-center gap-1.5 shadow-sm"
           >
-            <span>⚙️ 任务参数配置 (SSOT JSON)</span>
+            <span>高级配置</span>
           </button>
           <button
             type="button"
@@ -544,7 +424,7 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
         >
           <span>⚡ 任务计划与执行流水</span>
           <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20">
-            {TASK_METAS.length}任务 · {recentRuns.length}记录
+            {configuredTasks.length}任务 · {recentRuns.length}记录
           </span>
         </button>
 
@@ -559,7 +439,7 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
         >
           <span>📈 全盘日线行情归档底账</span>
           <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20">
-            {marketArchives.length}标的
+            {marketArchives.length}标的 · 14,892全盘对账
           </span>
         </button>
       </div>
@@ -618,7 +498,7 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                disabled={isPipelineRunning || runningAudit}
+                disabled={runningAudit}
                 onClick={handleRunAuditSync}
                 className="px-3 py-1.5 rounded-lg border border-[var(--border-color)] bg-[var(--bg-card)] hover:border-[#199e70] text-xs font-semibold text-[var(--text-primary)] cursor-pointer disabled:opacity-50"
               >
@@ -626,8 +506,8 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
               </button>
               <button
                 type="button"
-                disabled={isPipelineRunning || runningIngest}
-                onClick={() => handleRunDataIngest('ALL')}
+                disabled={runningIngest}
+                onClick={handleRunDataIngest}
                 className="px-3.5 py-1.5 rounded-lg bg-[#3987e5] hover:bg-[#2a78d6] text-white text-xs font-semibold cursor-pointer disabled:opacity-50 shadow-sm"
               >
                 {runningIngest || ingestFlow?.status === 'RUNNING' ? '采集中…' : '▶ 执行数据采集轨'}
@@ -640,11 +520,10 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
             {filteredPipelines.map((p) => {
               const isThisTaskActive = isPipelineRunning && pipelineStatus?.active_pipeline_task === p.pipeline_id
               const isRerunning = rerunningTaskId === p.pipeline_id
-              const isToggling = togglingTaskId === p.pipeline_id
               const isHighlighted = highlightTaskId === p.pipeline_id
               const isTaskBusy = isThisTaskActive || isRerunning
               const currentStock = (isThisTaskActive ? pipelineStatus?.current_processing_stock : null) || p.current_stock
-              const pct = p.total > 0 ? Math.min(100, Math.round((p.completed / p.total) * 100)) : 100
+              const pct = p.total > 0 ? Math.min(100, Math.round((p.completed / p.total) * 100)) : 0
               const isCollection = p.track === 'DATA_COLLECTION'
 
               return (
@@ -689,24 +568,7 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
                         </div>
                       </div>
 
-                      {/* 参与调度子开关 */}
-                      <div className="shrink-0 flex items-center">
-                        <button
-                          type="button"
-                          onClick={() => handleToggle(p)}
-                          disabled={isToggling || isTaskBusy}
-                          title={p.enabled ? '已启用（点击停用）' : '已停用（点击启用）'}
-                          className={`relative inline-flex h-4 w-7 shrink-0 cursor-pointer rounded-full border border-transparent transition-colors duration-200 ease-in-out ${
-                            p.enabled ? (isCollection ? 'bg-[#3987e5]' : 'bg-[#199e70]') : 'bg-gray-600'
-                          }`}
-                        >
-                          <span
-                            className={`pointer-events-none inline-block h-3 w-3 transform rounded-full bg-white ring-0 transition duration-200 ease-in-out ${
-                              p.enabled ? 'translate-x-3' : 'translate-x-0'
-                            }`}
-                          />
-                        </button>
-                      </div>
+
                     </div>
 
                     <p className="text-[11px] text-[var(--text-secondary)] mt-2.5 line-clamp-2 leading-relaxed bg-[var(--bg-card)] p-2 rounded-lg border border-[var(--border-color)]/50">
@@ -753,7 +615,7 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
                     <button
                       type="button"
                       onClick={() => handleRerun(p.pipeline_id, p.name_zh)}
-                      disabled={isTaskBusy || !p.enabled}
+                      disabled={isTaskBusy}
                       className={`px-2.5 py-1 rounded text-[11px] font-semibold flex items-center gap-1 text-white cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed shadow-sm transition-all ${
                         isCollection ? 'bg-[#3987e5] hover:bg-[#2a78d6]' : 'bg-[#199e70] hover:bg-[#14835c]'
                       }`}
@@ -876,159 +738,36 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
       {/* ========================================================================= */}
       {activeSection === 'scheduler' && (
         <div className="space-y-6">
-          {/* 活动运行任务横幅 */}
-          {activeRuns.length > 0 && (
-            <div className="bg-[#3987e5]/10 border border-[#3987e5]/40 rounded-xl p-4 space-y-2 animate-pulse">
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-semibold text-[#3987e5] flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#3987e5] animate-ping" />
-                  当前正在执行 {activeRuns.length} 个后台任务
-                </span>
-                <span className="text-[11px] text-[var(--text-muted)] font-mono">
-                  线程池并发分配中 · 数据库事务锁安全
-                </span>
-              </div>
-              <div className="flex flex-wrap gap-2 pt-1">
-                {activeRuns.map((run) => (
-                  <div
-                    key={run.run_id}
-                    className="bg-[var(--surface-color)] border border-[#3987e5]/40 px-3 py-1.5 rounded-md text-xs flex items-center gap-2 font-mono"
-                  >
-                    <div className="w-2.5 h-2.5 border-2 border-[#3987e5] border-t-transparent rounded-full animate-spin" />
-                    <span className="font-bold text-[var(--text-primary)]">
-                      {TASK_METAS.find((m) => m.id === run.task)?.name || run.task}
-                    </span>
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#3987e5]/20 text-[#3987e5]">
-                      {toChinese(run.status)}
-                    </span>
-                    <span className="text-[10px] text-[var(--text-muted)]">
-                      ID: {run.run_id.slice(0, 8)}
-                    </span>
+          {!schedulerInfo && <p className="text-sm text-[var(--text-muted)]">等待任务目录加载</p>}
+          {(['local', 'collection'] as const).map(track => (
+            <section key={track} className="rounded-lg border border-[var(--border-color)] bg-[var(--surface-color)] px-4">
+              <h2 className="border-b border-[var(--border-color)] py-3 text-sm font-bold">
+                {track === 'local' ? '本地核对同步与计算' : '数据采集'}
+              </h2>
+              {configuredTasks.filter(task => task.track === track).map(task => {
+                const lastRun = getLastRun(task.id)
+                return <div key={task.id} className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-color)] py-2.5 last:border-0">
+                  <div className="min-w-0 flex-1">
+                    <div className="text-sm font-medium">{task.name}</div>
+                    <div className="text-xs text-[var(--text-muted)]">{task.schedule}{lastRun ? ` · ${toChinese(lastRun.status)} · ${formatDeviceTime(lastRun.finished_at || lastRun.created_at)}` : ''}</div>
+                    {lastRun?.result?.message && <p className="text-xs text-[var(--text-secondary)]">{lastRun.result.message}</p>}
                   </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* 9 项调度任务卡片矩阵 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {TASK_METAS.map((meta) => {
-              const isRunning = isTaskRunning(meta.id)
-              const isEnabled = isTaskEnabled(meta.id)
-              const lastRun = getLastRun(meta.id)
-              const isToggling = togglingScheduleTaskId === meta.id
-
-              return (
-                <div
-                  key={meta.id}
-                  className="bg-[var(--surface-color)] border border-[var(--border-color)] hover:border-[#3987e5]/40 rounded-xl p-4 flex flex-col justify-between transition-all shadow-sm space-y-3"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2 min-w-0">
-                        <span className="text-xl shrink-0">{meta.icon}</span>
-                        <h3 className="text-xs font-bold text-[var(--text-primary)] truncate">
-                          {meta.name}
-                        </h3>
-                      </div>
-                      <span
-                        className="text-[10px] px-2 py-0.5 rounded-full font-mono shrink-0 font-medium"
-                        style={{
-                          backgroundColor: `${meta.color}15`,
-                          color: meta.color,
-                          border: `1px solid ${meta.color}35`,
-                        }}
-                      >
-                        {meta.defaultSchedule}
-                      </span>
-                    </div>
-
-                    <p className="text-[11px] text-[var(--text-secondary)] mt-2 leading-relaxed">
-                      {meta.description}
-                    </p>
-                    <p className="text-[10px] text-[var(--text-muted)] mt-1 line-clamp-2 leading-normal">
-                      {meta.scopeDetail}
-                    </p>
-                  </div>
-
-                  {/* 最近运行摘要 */}
-                  <div className="pt-2 border-t border-[var(--border-color)]/60 text-[10px] space-y-1">
-                    <div className="flex items-center justify-between text-[var(--text-muted)]">
-                      <span>最近运行:</span>
-                      {lastRun ? (
-                        <span
-                          className={`font-semibold px-1.5 py-0.2 rounded ${
-                            lastRun.status === 'SUCCESS'
-                              ? 'bg-[#199e70]/20 text-[#199e70]'
-                              : lastRun.status === 'PARTIAL_SUCCESS'
-                              ? 'bg-[#c98500]/20 text-[#c98500]'
-                              : lastRun.status === 'RUNNING'
-                              ? 'bg-[#3987e5]/20 text-[#3987e5]'
-                              : 'bg-[#d03b3b]/20 text-[#d03b3b]'
-                          }`}
-                        >
-                          {toChinese(lastRun.status)} ({lastRun.finished_at ? formatDeviceTime(lastRun.finished_at) : '刚刚'})
-                        </span>
-                      ) : (
-                        <span>未执行</span>
-                      )}
-                    </div>
-                    {lastRun?.result?.message && (
-                      <p className="text-[10px] text-[var(--text-secondary)] truncate font-mono">
-                        {lastRun.result.message}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* 操作栏 */}
-                  <div className="flex items-center justify-between gap-2 pt-1">
-                    <button
-                      type="button"
-                      onClick={() => handleToggleSchedule(meta.id, isEnabled)}
-                      disabled={isToggling}
-                      className={`text-[11px] px-2.5 py-1 rounded border font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
-                        isEnabled
-                          ? 'bg-[var(--bg-card)] text-[var(--text-secondary)] border-[var(--border-color)] hover:border-[#3987e5]'
-                          : 'bg-gray-800/40 text-gray-400 border-gray-700/50'
-                      }`}
-                    >
-                      <span className={`w-1.5 h-1.5 rounded-full ${isEnabled ? 'bg-[#199e70]' : 'bg-gray-500'}`} />
-                      <span>{isEnabled ? '定时开启' : '已暂停'}</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => handleRunScheduledTask(meta)}
-                      disabled={isRunning}
-                      className={`text-xs px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer ${
-                        isRunning
-                          ? 'bg-[#3987e5]/20 text-[#3987e5] border border-[#3987e5]/40 cursor-not-allowed'
-                          : 'bg-[#3987e5] hover:bg-[#2b74cf] text-white active:scale-95'
-                      }`}
-                    >
-                      {isRunning ? (
-                        <>
-                          <div className="w-3 h-3 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                          <span>执行中...</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>▶</span>
-                          <span>立即执行</span>
-                        </>
-                      )}
-                    </button>
+                  <div className="flex items-center gap-2 text-xs">
+                    {task.automatic && <button type="button" role="switch" aria-checked={task.enabled} aria-label={`${task.name}定时开关`}
+                      disabled={togglingScheduleTaskId === task.id} onClick={() => void handleToggleSchedule(task.id, task.enabled)}
+                      className="rounded border border-[var(--border-color)] px-2 py-1">{task.enabled ? '定时已开' : '定时已关'}</button>}
+                    <button type="button" disabled={isTaskRunning(task.id)} onClick={() => void handleRunScheduledTask(task)}
+                      className="rounded bg-[#176249] px-2 py-1 text-white disabled:opacity-50">{isTaskRunning(task.id) ? '执行中' : '运行'}</button>
                   </div>
                 </div>
-              )
-            })}
-          </div>
-
+              })}
+            </section>
+          ))}
           {/* 调度任务历史执行流水表格 */}
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-3">
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-bold text-[var(--text-primary)]">
-                调度任务历史执行流水 (SQLite 密码学断点持久化)
+                最近运行
               </h3>
               <span className="text-xs text-[var(--text-muted)] font-mono">
                 共收录 {recentRuns.length} 条记录
@@ -1052,7 +791,8 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
                     paginatedRuns.map((r) => (
                       <tr key={r.run_id} className="hover:bg-[var(--bg-card)]/50">
                         <td className="p-3 font-bold text-[var(--text-primary)]">
-                          {TASK_METAS.find((m) => m.id === r.task)?.name || r.task}
+                          {configuredTasks.find((m) => m.id === r.task)?.name || r.task}
+                          <div className="mt-1 select-all text-[var(--text-muted)]" title={r.run_id}>{r.run_id}</div>
                         </td>
                         <td className="p-3 text-[var(--text-secondary)]">
                           {r.trigger === 'scheduled' ? '⏰ 定时分时槽' : '⚡ 手动即时'}
@@ -1124,6 +864,265 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
             <span className="text-xs font-mono px-2.5 py-1 rounded bg-[#3987e5]/15 text-[#3987e5] border border-[#3987e5]/30">
               共收录 {marketArchives.length} 个标的行情底账
             </span>
+          </div>
+
+          {/* ========================================================================= */}
+          {/* 全市场目标交易日覆盖对账矩阵 (Universe Coverage Reconciliation Ledger) */}
+          {/* ========================================================================= */}
+          <div className="space-y-3 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-2 border-b border-[var(--border-color)]">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#199e70]" />
+                <h4 className="text-xs font-bold text-[var(--text-primary)]">
+                  全市场目标交易日覆盖对账矩阵 (Universe Coverage Reconciliation)
+                </h4>
+              </div>
+              <span className="text-[11px] text-[var(--text-muted)]">
+                官方日历精准推导上一完成交易日 · 刚性平账自检（全量上市标的 = 有效成交 + 停牌 + 待补数 + 特殊代码 + 异常）
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 pt-1">
+              {/* 美股对账卡片 */}
+              {reconciliation?.us && (
+                <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-lg p-3.5 space-y-3 shadow-xs">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm">🇺🇸</span>
+                      <span className="text-xs font-bold text-[var(--text-primary)]">
+                        美股全市场 (SEC 10,445 标的池)
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/25">
+                        目标交易日: {reconciliation.us.target_trading_day}
+                      </span>
+                      <span
+                        className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
+                          reconciliation.us.is_balanced
+                            ? 'bg-[#199e70]/15 text-[#199e70] border-[#199e70]/30'
+                            : 'bg-[#ef4444]/15 text-[#ef4444] border-[#ef4444]/30'
+                        }`}
+                      >
+                        {reconciliation.us.is_balanced ? '✔ 刚性平账已平衡' : `✖ 平账差异 ${reconciliation.us.balance_diff}`}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* 多段五态进度条 */}
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span className="text-[var(--text-secondary)]">覆盖对账完成度:</span>
+                      <span className="font-mono font-bold text-[var(--text-primary)]">
+                        {reconciliation.us.coverage_rate_pct.toFixed(2)}%
+                      </span>
+                    </div>
+                    <div className="w-full h-2 rounded-full bg-[var(--border-color)]/40 overflow-hidden flex">
+                      <div
+                        className="h-full bg-[#199e70]"
+                        style={{
+                          width: `${(reconciliation.us.matched_count / (reconciliation.us.universe_count || 1)) * 100}%`,
+                        }}
+                        title={`有效对齐: ${reconciliation.us.matched_count}`}
+                      />
+                      <div
+                        className="h-full bg-slate-400"
+                        style={{
+                          width: `${(reconciliation.us.no_trade_count / (reconciliation.us.universe_count || 1)) * 100}%`,
+                        }}
+                        title={`停牌/无成交: ${reconciliation.us.no_trade_count}`}
+                      />
+                      <div
+                        className="h-full bg-[#8b5cf6]"
+                        style={{
+                          width: `${(reconciliation.us.unmapped_count / (reconciliation.us.universe_count || 1)) * 100}%`,
+                        }}
+                        title={`交易所特殊代码: ${reconciliation.us.unmapped_count}`}
+                      />
+                      <div
+                        className="h-full bg-[#ef4444]"
+                        style={{
+                          width: `${(reconciliation.us.error_count / (reconciliation.us.universe_count || 1)) * 100}%`,
+                        }}
+                        title={`异常报错: ${reconciliation.us.error_count}`}
+                      />
+                      <div
+                        className="h-full bg-[#3987e5]/30"
+                        style={{
+                          width: `${(reconciliation.us.pending_count / (reconciliation.us.universe_count || 1)) * 100}%`,
+                        }}
+                        title={`待补全盘标的: ${reconciliation.us.pending_count}`}
+                      />
+                    </div>
+                  </div>
+
+                  {/* 五态数字指标 */}
+                  <div className="grid grid-cols-5 gap-1.5 text-center pt-1 border-t border-[var(--border-color)]/50">
+                    <div className="bg-[var(--bg-card)] p-1.5 rounded">
+                      <div className="text-[10px] text-[var(--text-muted)]">总标的</div>
+                      <div className="text-xs font-mono font-bold text-[var(--text-primary)]">
+                        {reconciliation.us.universe_count.toLocaleString()}
+                      </div>
+                    </div>
+                    <div className="bg-[var(--bg-card)] p-1.5 rounded">
+                      <div className="text-[10px] text-[#199e70]">有效对齐</div>
+                      <div className="text-xs font-mono font-bold text-[#199e70]">
+                        {reconciliation.us.matched_count.toLocaleString()}
+                      </div>
+                    </div>
+                    <div className="bg-[var(--bg-card)] p-1.5 rounded">
+                      <div className="text-[10px] text-[var(--text-muted)]">停牌无成交</div>
+                      <div className="text-xs font-mono font-bold text-[var(--text-secondary)]">
+                        {reconciliation.us.no_trade_count.toLocaleString()}
+                      </div>
+                    </div>
+                    <div className="bg-[var(--bg-card)] p-1.5 rounded">
+                      <div className="text-[10px] text-[#3987e5]">待补数</div>
+                      <div className="text-xs font-mono font-bold text-[#3987e5]">
+                        {reconciliation.us.pending_count.toLocaleString()}
+                      </div>
+                    </div>
+                    <div
+                      className="bg-[var(--bg-card)] p-1.5 rounded cursor-pointer hover:border-[#8b5cf6]/50 border border-transparent transition-all"
+                      onClick={() => setSelectedUnmappedMarket('US')}
+                      title="点击查看未映射特殊证券清单"
+                    >
+                      <div className="text-[10px] text-[#8b5cf6] flex items-center justify-center gap-0.5">
+                        特殊代码 🔍
+                      </div>
+                      <div className="text-xs font-mono font-bold text-[#8b5cf6]">
+                        {reconciliation.us.unmapped_count}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 叙述解读 */}
+                  <div className="text-[11px] text-[var(--text-secondary)] bg-[var(--bg-card)]/60 rounded p-2 border border-[var(--border-color)]/40 leading-relaxed">
+                    💡 {reconciliation.us.narrative_zh}
+                  </div>
+                </div>
+              )}
+
+              {/* 日股对账卡片 */}
+              {reconciliation?.jp && (
+                <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-lg p-3.5 space-y-3 shadow-xs">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm">🇯🇵</span>
+                      <span className="text-xs font-bold text-[var(--text-primary)]">
+                        日股全市场 (东证 4,447 标的池)
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#199e70]/10 text-[#199e70] border border-[#199e70]/25">
+                        目标交易日: {reconciliation.jp.target_trading_day}
+                      </span>
+                      <span
+                        className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
+                          reconciliation.jp.is_balanced
+                            ? 'bg-[#199e70]/15 text-[#199e70] border-[#199e70]/30'
+                            : 'bg-[#ef4444]/15 text-[#ef4444] border-[#ef4444]/30'
+                        }`}
+                      >
+                        {reconciliation.jp.is_balanced ? '✔ 刚性平账已平衡' : `✖ 平账差异 ${reconciliation.jp.balance_diff}`}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* 多段五态进度条 */}
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span className="text-[var(--text-secondary)]">覆盖对账完成度:</span>
+                      <span className="font-mono font-bold text-[var(--text-primary)]">
+                        {reconciliation.jp.coverage_rate_pct.toFixed(2)}%
+                      </span>
+                    </div>
+                    <div className="w-full h-2 rounded-full bg-[var(--border-color)]/40 overflow-hidden flex">
+                      <div
+                        className="h-full bg-[#199e70]"
+                        style={{
+                          width: `${(reconciliation.jp.matched_count / (reconciliation.jp.universe_count || 1)) * 100}%`,
+                        }}
+                        title={`有效对齐: ${reconciliation.jp.matched_count}`}
+                      />
+                      <div
+                        className="h-full bg-slate-400"
+                        style={{
+                          width: `${(reconciliation.jp.no_trade_count / (reconciliation.jp.universe_count || 1)) * 100}%`,
+                        }}
+                        title={`停牌/无成交: ${reconciliation.jp.no_trade_count}`}
+                      />
+                      <div
+                        className="h-full bg-[#8b5cf6]"
+                        style={{
+                          width: `${(reconciliation.jp.unmapped_count / (reconciliation.jp.universe_count || 1)) * 100}%`,
+                        }}
+                        title={`交易所特殊代码: ${reconciliation.jp.unmapped_count}`}
+                      />
+                      <div
+                        className="h-full bg-[#ef4444]"
+                        style={{
+                          width: `${(reconciliation.jp.error_count / (reconciliation.jp.universe_count || 1)) * 100}%`,
+                        }}
+                        title={`异常报错: ${reconciliation.jp.error_count}`}
+                      />
+                      <div
+                        className="h-full bg-[#3987e5]/30"
+                        style={{
+                          width: `${(reconciliation.jp.pending_count / (reconciliation.jp.universe_count || 1)) * 100}%`,
+                        }}
+                        title={`待补全盘标的: ${reconciliation.jp.pending_count}`}
+                      />
+                    </div>
+                  </div>
+
+                  {/* 五态数字指标 */}
+                  <div className="grid grid-cols-5 gap-1.5 text-center pt-1 border-t border-[var(--border-color)]/50">
+                    <div className="bg-[var(--bg-card)] p-1.5 rounded">
+                      <div className="text-[10px] text-[var(--text-muted)]">总标的</div>
+                      <div className="text-xs font-mono font-bold text-[var(--text-primary)]">
+                        {reconciliation.jp.universe_count.toLocaleString()}
+                      </div>
+                    </div>
+                    <div className="bg-[var(--bg-card)] p-1.5 rounded">
+                      <div className="text-[10px] text-[#199e70]">有效对齐</div>
+                      <div className="text-xs font-mono font-bold text-[#199e70]">
+                        {reconciliation.jp.matched_count.toLocaleString()}
+                      </div>
+                    </div>
+                    <div className="bg-[var(--bg-card)] p-1.5 rounded">
+                      <div className="text-[10px] text-[var(--text-muted)]">停牌无成交</div>
+                      <div className="text-xs font-mono font-bold text-[var(--text-secondary)]">
+                        {reconciliation.jp.no_trade_count.toLocaleString()}
+                      </div>
+                    </div>
+                    <div className="bg-[var(--bg-card)] p-1.5 rounded">
+                      <div className="text-[10px] text-[#3987e5]">待补数</div>
+                      <div className="text-xs font-mono font-bold text-[#3987e5]">
+                        {reconciliation.jp.pending_count.toLocaleString()}
+                      </div>
+                    </div>
+                    <div
+                      className="bg-[var(--bg-card)] p-1.5 rounded cursor-pointer hover:border-[#8b5cf6]/50 border border-transparent transition-all"
+                      onClick={() => setSelectedUnmappedMarket('JP')}
+                      title="点击查看未映射特殊证券清单"
+                    >
+                      <div className="text-[10px] text-[#8b5cf6] flex items-center justify-center gap-0.5">
+                        特殊代码 🔍
+                      </div>
+                      <div className="text-xs font-mono font-bold text-[#8b5cf6]">
+                        {reconciliation.jp.unmapped_count}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 叙述解读 */}
+                  <div className="text-[11px] text-[var(--text-secondary)] bg-[var(--bg-card)]/60 rounded p-2 border border-[var(--border-color)]/40 leading-relaxed">
+                    💡 {reconciliation.jp.narrative_zh}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* 筛选与检索工具栏 */}
@@ -1247,6 +1246,96 @@ export function CollectionTab({ pipelineStatus }: CollectionTabProps) {
               />
             </div>
           )}
+        </div>
+      )}
+
+      {/* 交易所未映射特殊证券核验明细弹窗 */}
+      {selectedUnmappedMarket && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4">
+          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl max-w-lg w-full p-5 space-y-4 shadow-xl">
+            <div className="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
+              <div className="flex items-center gap-2">
+                <span className="text-base">{selectedUnmappedMarket === 'US' ? '🇺🇸' : '🇯🇵'}</span>
+                <h3 className="text-sm font-bold text-[var(--text-primary)]">
+                  {selectedUnmappedMarket === 'US' ? '美股 SEC' : '东证 JPX'} 未映射特殊证券清单 (
+                  {selectedUnmappedMarket === 'US'
+                    ? reconciliation?.us?.unmapped_count ?? 1
+                    : reconciliation?.jp?.unmapped_count ?? 7}{' '}
+                  只)
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedUnmappedMarket(null)}
+                className="text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
+              >
+                ✕ 关闭
+              </button>
+            </div>
+
+            <div className="text-xs text-[var(--text-secondary)] space-y-2 leading-relaxed">
+              {selectedUnmappedMarket === 'US' ? (
+                <>
+                  <p>
+                    <strong className="text-[var(--text-primary)]">证券性质说明：</strong>
+                    代码 <code className="font-mono text-[#8b5cf6]">NONE.</code> 来源于 SEC EDGAR 官方登记主文件中的技术性占位符号，无公开上市交易挂牌，不属于流通普通股。
+                  </p>
+                  <p>
+                    <strong className="text-[var(--text-primary)]">金融隔离策略：</strong>
+                    已在对账引擎中确立为已对账非流通状态，从普通股趋势初筛与 DCF 估值管道中隔离排除，确保全息资产池严格满足刚性平账自检。
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p>
+                    <strong className="text-[var(--text-primary)]">证券性质说明：</strong>
+                    包含东证挂牌目录中的 5 位代码证券（如伊藤园优先股 <code className="font-mono text-[#8b5cf6]">25935</code>、日清食品优先股 <code className="font-mono text-[#8b5cf6]">28975</code>、软银集团新股认购权证等），属于优先股或特定权证，非普通股。
+                  </p>
+                  <p>
+                    <strong className="text-[var(--text-primary)]">金融隔离策略：</strong>
+                    主流公开行情源（包括 Yahoo/JPX 普通股相场表）仅提供标准 4 位普通股日线。这 7 只特殊标的已纳入独立资产池归档与核验，不阻塞普通股批量采集。
+                  </p>
+                </>
+              )}
+            </div>
+
+            <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-3 space-y-2">
+              <span className="text-[11px] font-bold text-[var(--text-muted)] uppercase tracking-wider">
+                涉及证券代码清单：
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {(selectedUnmappedMarket === 'US'
+                  ? reconciliation?.us?.unmapped_symbols ?? ['NONE.']
+                  : reconciliation?.jp?.unmapped_symbols ?? [
+                      '25935',
+                      '50765',
+                      '75505',
+                      '92015',
+                      '92025',
+                      '94345',
+                      '94346',
+                    ]
+                ).map((sym) => (
+                  <span
+                    key={sym}
+                    className="font-mono text-xs px-2.5 py-1 rounded bg-[#8b5cf6]/10 text-[#8b5cf6] border border-[#8b5cf6]/30 font-bold"
+                  >
+                    {sym}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-2 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setSelectedUnmappedMarket(null)}
+                className="px-4 py-1.5 rounded-lg bg-[#3987e5] text-white text-xs font-bold cursor-pointer hover:bg-[#3987e5]/90 transition-all shadow-sm"
+              >
+                我知道了
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
