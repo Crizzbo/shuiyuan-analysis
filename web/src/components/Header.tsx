@@ -37,7 +37,7 @@ export function Header({
   sseConnected,
   onPipelineStarted,
 }: HeaderProps) {
-  const [selectedMode, setSelectedMode] = useState('local_audit_sync')
+  const [selectedAction, setSelectedAction] = useState('pipeline:local_audit_sync')
   const [isStarting, setIsStarting] = useState(false)
   const [isStopping, setIsStopping] = useState(false)
 
@@ -51,22 +51,44 @@ export function Header({
     if (isRunning) return
     setIsStarting(true)
     try {
-      const res = await api.startPipeline(selectedMode, 'ALL')
-      if (res.ok) {
-        showToast({
-          type: 'success',
-          title: '核验任务已启动',
-          message: res.data.message,
-        })
-        const st = await api.getPipelineStatus()
-        if (st.ok) onPipelineStatusChange(st.data)
-        onPipelineStarted?.()
-      } else {
-        showToast({
-          type: 'warning',
-          title: '启动未被接受',
-          message: res.error?.message || '流水线可能已在运行中',
-        })
+      if (selectedAction.startsWith('pipeline:')) {
+        const mode = selectedAction.replace('pipeline:', '')
+        const res = await api.startPipeline(mode, 'ALL')
+        if (res.ok) {
+          showToast({
+            type: 'success',
+            title: '全盘流水线已启动',
+            message: res.data.message,
+          })
+          const st = await api.getPipelineStatus()
+          if (st.ok) onPipelineStatusChange(st.data)
+          onPipelineStarted?.()
+        } else {
+          showToast({
+            type: 'warning',
+            title: '启动未被接受',
+            message: res.error?.message || '流水线可能已在运行中',
+          })
+        }
+      } else if (selectedAction.startsWith('task:')) {
+        const taskId = selectedAction.replace('task:', '')
+        const res = await api.runTerminalTask(taskId)
+        if (res.ok) {
+          showToast({
+            type: 'success',
+            title: '任务已提交至后台队列',
+            message: `任务 [${taskId}] 已由终端执行器独立线程池处理 (Run ID: ${res.data?.run_id?.slice(0, 8)})`,
+          })
+          const st = await api.getPipelineStatus()
+          if (st.ok) onPipelineStatusChange(st.data)
+          onPipelineStarted?.()
+        } else {
+          showToast({
+            type: 'error',
+            title: '启动任务失败',
+            message: res.error?.message || '未能排队执行该任务',
+          })
+        }
       }
     } catch (err: any) {
       showToast({
@@ -183,14 +205,27 @@ export function Header({
 
           {/* 运行模式选择 */}
           <select
-            value={selectedMode}
-            onChange={(e) => setSelectedMode(e.target.value)}
-            disabled={isRunning}
+            value={selectedAction}
+            onChange={(e) => setSelectedAction(e.target.value)}
+            disabled={isRunning || isStarting}
             className="text-xs bg-[var(--surface-color)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-[#3987e5] disabled:opacity-50 cursor-pointer"
           >
-            <option value="local_audit_sync">本地底账全量核对与同步</option>
-            <option value="full_market_screener">全市场标的趋势初筛</option>
-            <option value="incremental_replenish">增量数据查验与补数</option>
+            <optgroup label="🚀 全盘综合流水线">
+              <option value="pipeline:local_audit_sync">本地底账全量核对与同步</option>
+              <option value="pipeline:full_market_screener">全市场标的趋势初筛 (14,892只)</option>
+              <option value="pipeline:incremental_replenish">增量数据查验与补数</option>
+            </optgroup>
+            <optgroup label="⚡ 核心即时抽取与量化计算任务">
+              <option value="task:QUOTE_COLLECT">⚡ 权威行情抽取 (24只核心标的美分级验签)</option>
+              <option value="task:FINANCE_CALC">📊 24大金融模型估值与三表平账</option>
+              <option value="task:STOCK_SCREENING">🎯 全盘 14,892 只 0-Token 纯本地形态初筛</option>
+              <option value="task:OFFICIAL_NEWS">📰 官方资讯分时采集与 AI 影响提炼</option>
+              <option value="task:INDICATOR_UPDATE">📈 宏观基准利率与全市场多头趋势走廊</option>
+              <option value="task:US_DAILY">🇺🇸 美股全盘 10,445 家时序日线抽取</option>
+              <option value="task:JP_DAILY">🇯🇵 日股全盘 4,447 家时序日线抽取</option>
+              <option value="task:LOCAL_AUDIT">🛡️ 三表刚性平账与密码学账本验签</option>
+              <option value="task:INCREMENTAL_COLLECT">📑 官方监管补数定向队列核验与归档</option>
+            </optgroup>
           </select>
 
           {/* 启动与停止按钮 */}

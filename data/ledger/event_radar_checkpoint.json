@@ -1,18 +1,60 @@
 {
   "version": "1.0.0",
-  "last_successful_timestamp": "2026-11-14T13:49:46+00:00",
+  "last_successful_timestamp": "2026-11-14T14:19:13+00:00",
   "processed_hashes": [],
   "cumulative_metrics": {
-    "total_scanned": 203,
-    "total_filtered_in": 1165,
-    "total_summarized": 1165,
-    "total_p0_p1_triggered": 43,
-    "total_estimated_tokens": 75400
+    "total_scanned": 209,
+    "total_filtered_in": 1281,
+    "total_summarized": 1281,
+    "total_p0_p1_triggered": 47,
+    "total_estimated_tokens": 82940
   },
   "recent_triggered_events": [
     "EVT_20261113_001",
     "EVT_20261113_002",
     "EVT_20261113_003",
+    {
+      "event_id": "EVT_7E6E727B883E",
+      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
+      "severity_level": "P1",
+      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
+      "involved_entities": [
+        "国际码头工人协会(ILA)",
+        "美东各大港口海事联盟",
+        "集装箱航运枢纽"
+      ]
+    },
+    {
+      "event_id": "EVT_AD7BAAAF5A76",
+      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
+      "severity_level": "P0",
+      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
+      "involved_entities": [
+        "商务部出口管制局",
+        "关键芯片设计厂商"
+      ]
+    },
+    {
+      "event_id": "EVT_7E6E727B883E",
+      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
+      "severity_level": "P1",
+      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
+      "involved_entities": [
+        "国际码头工人协会(ILA)",
+        "美东各大港口海事联盟",
+        "集装箱航运枢纽"
+      ]
+    },
+    {
+      "event_id": "EVT_AD7BAAAF5A76",
+      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
+      "severity_level": "P0",
+      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
+      "involved_entities": [
+        "商务部出口管制局",
+        "关键芯片设计厂商"
+      ]
+    },
     {
       "event_id": "EVT_7E6E727B883E",
       "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",

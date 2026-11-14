@@ -117,8 +117,17 @@ export interface TaskSchedulerRun {
 export interface TaskSchedulerInfo {
   scheduled: boolean
   tasks: TaskSchedulerTask[]
-  active_runs: TaskSchedulerRun[]
-  recent_runs: TaskSchedulerRun[]
+  active_runs?: TaskSchedulerRun[]
+  recent_runs?: TaskSchedulerRun[]
+  runs?: TaskSchedulerRun[]
+}
+
+export interface MarketArchiveItem {
+  symbol: string
+  market: string
+  count: number
+  last_date: string | null
+  archived_at: string
 }
 
 export interface DashboardSummaryData {

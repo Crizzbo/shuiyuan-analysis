@@ -16,6 +16,7 @@ import type {
   SettingsData,
   AutomatedValuationData,
   ValuationCompanyItem,
+  MarketArchiveItem,
 } from '../types/api'
 
 const BASE_URL = '' // 相对路径，由 Vite proxy 或 Python 网关同源处理
@@ -161,6 +162,12 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ task: taskId, enabled }),
     }),
+
+  getMarketArchives: () =>
+    request<{ items: MarketArchiveItem[] }>('/api/terminal/market-archives'),
+
+  getTerminalNews: () =>
+    request<{ items: any[] }>('/api/terminal/news'),
 
   // 12. 自动带入数据金融估值与 24 大模型全息计算
   getFinanceCompanies: () =>
