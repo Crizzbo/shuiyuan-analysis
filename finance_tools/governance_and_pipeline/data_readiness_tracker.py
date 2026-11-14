@@ -13,9 +13,23 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 import re
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Set
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+
+def is_excluded_quote(path: Path, payload: Dict[str, Any]) -> bool:
+    """识别曾写入正式目录的演示行情批次。"""
+    if not path.name.startswith("20261113T060000_"):
+        return False
+    exclusions = json.loads((PROJECT_ROOT / "config/terminal-evidence-exclusions.json").read_text(encoding="utf-8"))
+    price = exclusions["quote_files"].get(path.name)
+    quotes = payload.get("quotes")
+    return (
+        price is not None and payload.get("source") == "google_finance_verified_quote"
+        and isinstance(quotes, dict) and len(quotes) == 1
+        and any(isinstance(row, dict) and row.get("current_price") == price for row in quotes.values())
+    )
 
 
 @dataclass(frozen=True)
@@ -84,6 +98,15 @@ class DataReadinessTracker:
             m = pattern.match(p.name)
             if not m:
                 continue
+            try:
+                payload = json.loads(p.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                continue
+            if not isinstance(payload, dict) or is_excluded_quote(p, payload):
+                continue
+            quotes = payload.get("quotes")
+            if not isinstance(quotes, dict) or not quotes:
+                continue
 
             date_part, time_part, _, ticker = m.groups()
             batch_key = f"{date_part}T{time_part}"
@@ -102,14 +125,14 @@ class DataReadinessTracker:
         if not batches:
             # 兼容历史无前缀格式如 20261014_market_quotes.json
             return DataReadinessSnapshot(
-                latest_date_str="2026-10-14",
-                latest_timestamp_utc="历史基准底账",
+                latest_date_str="未知",
+                latest_timestamp_utc="无可用批次",
                 macro_indices_completed=[],
-                equities_completed=["NVDA", "AAPL", "MSFT", "GOOGL"],
-                total_completed_count=4,
-                data_source_summary="历史静态底账",
-                market_session_note="前收盘基准",
-                banner_text="【数据时效底账提醒】当前采用历史基准落盘底账。",
+                equities_completed=[],
+                total_completed_count=0,
+                data_source_summary="暂无可识别的行情批次",
+                market_session_note="待补数",
+                banner_text="本地暂无可用的行情批次。",
             )
 
         # 按最新批次键排序获取最新批次
@@ -140,7 +163,7 @@ class DataReadinessTracker:
             f"- **已完成核心拉取标的**：共计 **{len(all_tickers)}** 只资产标的已完全落盘至 `data/google-finance/raw/`\n"
             f"  • **宏观与指数（{len(macro_indices)}只）**：{macro_str}\n"
             f"  • **核心美日个股（{len(equities)}只）**：{equities_str}\n"
-            f"- **数据完备度判定**：上述标的最新 OHLCV 现价与均线数据已就绪，支持 0-Token 极速初筛与深度分析；其余标的处于待增量同步或前收盘基准状态。"
+            f"- **覆盖范围**：上述数量仅统计行情快照归档。日线、成交量与三表需要分别核对。"
         )
 
         return DataReadinessSnapshot(
@@ -150,7 +173,7 @@ class DataReadinessTracker:
             equities_completed=equities,
             total_completed_count=len(all_tickers),
             data_source_summary="Google Finance 授权专用行情表与公开交易所归档",
-            market_session_note="前一交易日收盘价基准 (已核验新鲜度)",
+            market_session_note="交易时段以逐笔报价核验结果为准",
             banner_text=banner,
         )
 

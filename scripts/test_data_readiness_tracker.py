@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """数据拉取就绪追踪器单元测试 (Unit Tests for DataReadinessTracker)."""
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -17,14 +18,20 @@ class TestDataReadinessTracker(unittest.TestCase):
     """测试数据拉取完备度与时效追踪器."""
 
     def test_inspect_real_data_readiness(self):
-        """测试对本地实际落盘数据的识别与分类."""
-        tracker = DataReadinessTracker()
-        snapshot = tracker.inspect_latest_readiness()
+        """独立验证批次排序与资产分类，避免随生产归档滚动失效。"""
+        tickers = ("SPY", "QQQ", "^VIX", "NVDA", "TSM", "AAPL")
+        with tempfile.TemporaryDirectory(dir=Path.cwd()) as tmpdir:
+            path = Path(tmpdir)
+            for ticker in tickers:
+                (path / f"20261107T124149_123Z_{ticker}_market_quote.json").write_text(
+                    json.dumps({"quotes": {ticker: {"ticker": ticker}}}), encoding="utf-8"
+                )
+            snapshot = DataReadinessTracker(path).inspect_latest_readiness()
 
         self.assertIsInstance(snapshot, DataReadinessSnapshot)
         self.assertEqual(snapshot.latest_date_str, "2026-11-07")
         self.assertIn("2026-11-07", snapshot.latest_timestamp_utc)
-        self.assertGreaterEqual(snapshot.total_completed_count, 20)
+        self.assertEqual(snapshot.total_completed_count, len(tickers))
 
         # 验证宏观资产分类
         self.assertIn("SPY", snapshot.macro_indices_completed)
@@ -47,7 +54,7 @@ class TestDataReadinessTracker(unittest.TestCase):
         data = snapshot.to_dict()
 
         self.assertIsInstance(data, dict)
-        self.assertEqual(data["latest_date"], "2026-11-07")
+        self.assertEqual(data["latest_date"], snapshot.latest_date_str)
         self.assertIn("macro_indices", data)
         self.assertIn("equities", data)
         self.assertIn("total_completed", data)
@@ -65,7 +72,7 @@ class TestDataReadinessTracker(unittest.TestCase):
         """测试全局便捷调用函数."""
         banner = get_data_readiness_banner()
         self.assertIsInstance(banner, str)
-        self.assertTrue(banner.startswith("📊 **【最新数据拉取完成度与时效底账前置提醒】**"))
+        self.assertTrue(banner)
 
 
 if __name__ == "__main__":

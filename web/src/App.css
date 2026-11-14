@@ -1,0 +1,62 @@
+.container { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+.site-header { background: #fff; border-bottom: 1px solid var(--line); }
+.main-nav { display: flex; gap: 26px; min-height: 49px; overflow-x: auto; }
+.main-nav button { background: transparent; border: 0; border-bottom: 2px solid transparent; color: var(--ink-muted); padding: 0 2px; white-space: nowrap; }
+.main-nav button[aria-current] { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+.subnav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; margin-bottom: 16px; }
+.subnav button { padding: 7px 11px; border: 1px solid transparent; border-radius: 6px; color: var(--ink-muted); }
+.subnav button[aria-pressed="true"] { background: #e9f1ec; color: var(--accent); border-color: #d5e4da; font-weight: 650; }
+.terminal-top { padding: 14px 24px; background: #fff; border-bottom: 1px solid var(--line); }
+.terminal-top h1 { font-size: 1.12rem; }
+.terminal-top .terminal-status { background: #f8faf8; }
+main { padding-bottom: 48px; }
+.page-heading { padding: 38px 0 24px; }
+h1 { font-size: clamp(1.8rem, 3vw, 2.35rem); letter-spacing: -.045em; }
+h2 { font-size: 1rem; font-weight: 700; }
+.panel { padding: 24px; margin-bottom: 20px; background: #fff; border: 1px solid var(--line); border-radius: 12px; min-width: 0; }
+.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.metric { display: grid; justify-items: start; gap: 10px; }
+.metric h2 { font-size: .875rem; color: var(--ink-muted); }
+.metric strong { font-size: 1.65rem; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.metric p, .muted, .row p { color: var(--ink-muted); font-size: .875rem; line-height: 1.55; }
+.muted { margin: 8px 0; }
+.section-head, .row { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.rows { margin-top: 12px; }
+.row { min-height: 62px; padding: 10px 0; border-top: 1px solid var(--line); }
+.row p { margin-top: 3px; overflow-wrap: anywhere; }
+.row strong { font-size: .94rem; }
+.actions { display: flex; gap: 8px; flex: none; }
+.actions button, .primary { border: 1px solid var(--line); padding: 8px 12px; border-radius: 7px; background: #fff; color: #20372d; white-space: nowrap; }
+.primary { margin-top: 16px; color: white; background: var(--accent); border-color: var(--accent); }
+.text-button { border: 0; padding: 0; color: var(--accent); background: transparent; text-align: left; }
+.text-button:hover, summary:hover { text-decoration: underline; }
+.badge { flex: none; padding: 4px 9px; border-radius: 6px; background: #edf2ee; color: #30493d; font-size: .8rem; }
+.badge.success { background: #e6f7ef; color: #157953; border: 1px solid #c2ebd7; }
+.badge.warning { background: #fdf3e7; color: #9c5c16; border: 1px solid #f6d8b8; }
+.badge.info { background: #edf5fe; color: #1e62b3; border: 1px solid #cbe0fc; }
+.badge.running, .badge.queued { background: #eaf0f9; color: #254871; }
+.badge.failed, .badge.blocked, .badge.partial_success { background: #fbefe1; color: #824823; }
+.error { margin: 12px 0; color: #9d3224; }
+.calculator { display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px; }
+.field { display: grid; gap: 7px; margin-top: 14px; color: #31473c; font-size: .875rem; }
+.fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; }
+.field input, .field select { min-width: 0; width: 100%; padding: 9px 10px; border-radius: 6px; border: 1px solid #c9d7ce; color: #15231e; background: #fff; }
+.results dl > div { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+details { color: var(--ink-muted); font-size: .875rem; padding: 4px 0 8px; }
+summary { cursor: pointer; }
+pre { max-width: 100%; overflow: auto; font-size: .8rem; }
+li, code { overflow-wrap: anywhere; }
+@media (max-width: 720px) {
+  .container { width: calc(100% - 28px); }
+  .main-nav { gap: 16px; }
+  .terminal-top { padding: 12px 14px; }
+  .metrics, .calculator { grid-template-columns: 1fr; gap: 0; }
+  .panel { padding: 16px; }
+  .page-heading { padding-top: 24px; }
+  .row { align-items: flex-start; }
+}
+@media (max-width: 400px) {
+  .fields { grid-template-columns: 1fr; }
+  .actions { flex-direction: column; }
+}

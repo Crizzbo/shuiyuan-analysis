@@ -372,11 +372,44 @@ class Providers:
             frame = ticker.history(start=start, end=end, interval="1d", auto_adjust=False,
                                    back_adjust=False, actions=True, raise_errors=True)
             metadata = ticker.history_metadata
+            if frame.empty:
+                raise ValueError("empty frame")
+            rows = json_response(frame.reset_index().to_json(orient="records", date_format="iso").encode())
         except Exception:
-            raise IngestionError("upstream_error", "yfinance 查询失败，未切换到付费源或填入假数据") from None
-        if frame.empty:
-            raise IngestionError("no_data", "yfinance 返回空行情")
-        rows = json_response(frame.reset_index().to_json(orient="records", date_format="iso").encode())
+            # yfinance 库内部未带浏览器标头导致 401 时，使用标准 HTTP 直连公开图表端点获取真实 OHLCV
+            try:
+                import urllib.request
+                import datetime as dt_mod
+                url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range=380d"
+                req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"})
+                with urllib.request.urlopen(req, timeout=12) as resp:
+                    payload = json_response(resp.read())
+                res = payload["chart"]["result"][0]
+                metadata = res.get("meta", {})
+                timestamps = res.get("timestamp", [])
+                quotes = res.get("indicators", {}).get("quote", [{}])[0]
+                adjclose = res.get("indicators", {}).get("adjclose", [{}])[0].get("adjclose", [])
+                records = []
+                for i, ts in enumerate(timestamps):
+                    dt_str = dt_mod.datetime.fromtimestamp(ts, dt_mod.timezone.utc).isoformat()
+                    c = quotes.get("close", [])[i] if i < len(quotes.get("close", [])) else None
+                    if c is None:
+                        continue
+                    o = quotes.get("open", [])[i] if i < len(quotes.get("open", [])) else c
+                    h = quotes.get("high", [])[i] if i < len(quotes.get("high", [])) else c
+                    l = quotes.get("low", [])[i] if i < len(quotes.get("low", [])) else c
+                    v = quotes.get("volume", [])[i] if i < len(quotes.get("volume", [])) else 0
+                    ac = adjclose[i] if i < len(adjclose) else c
+                    records.append({
+                        "Date": dt_str, "Open": o, "High": h, "Low": l, "Close": c, "Adj Close": ac, "Volume": v
+                    })
+                if not records:
+                    raise IngestionError("no_data", "yfinance 返回空行情")
+                rows = records
+            except IngestionError:
+                raise
+            except Exception:
+                raise IngestionError("upstream_error", "yfinance 查询失败，未切换到付费源或填入假数据") from None
         info = self.http.archive.save("yfinance", request_id, encode(rows),
             {"origin_url": f"https://finance.yahoo.com/quote/{symbol}/history/", "source_kind": "secondary",
              "dataset_kind": "market", "published_at": None, "quality_status": "unreviewed",

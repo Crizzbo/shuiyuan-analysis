@@ -19,7 +19,7 @@ import os
 from pathlib import Path
 import sys
 import time
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 # 将项目根目录加入模块搜索路径
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -203,20 +203,22 @@ class ScreeningUniverseBatchPipeline:
         market_filter: str = "ALL",
         max_chunks: Optional[int] = None,
         verbose: bool = True,
+        chunk_callback: Optional[Callable[[Dict[str, Any]], None]] = None,
+        force_reprocess: bool = False,
     ) -> Dict[str, Any]:
-        """按批次流式执行初筛流水线."""
+        """按批次流式执行初筛流水线，支持分块回调 (边收集边分析)."""
         checkpoint = self.load_checkpoint()
 
         chunks_to_process: List[Tuple[Path, str]] = []
 
         if market_filter in ("US", "ALL") and self.us_chunk_dir.exists():
             for p in sorted(self.us_chunk_dir.glob("*.json")):
-                if p.name not in checkpoint["completed_chunks"]:
+                if force_reprocess or p.name not in checkpoint["completed_chunks"]:
                     chunks_to_process.append((p, "US"))
 
         if market_filter in ("JP", "ALL") and self.jp_chunk_dir.exists():
             for p in sorted(self.jp_chunk_dir.glob("*.json")):
-                if p.name not in checkpoint["completed_chunks"]:
+                if force_reprocess or p.name not in checkpoint["completed_chunks"]:
                     chunks_to_process.append((p, "JP"))
 
         total_pending = len(chunks_to_process)
@@ -235,6 +237,11 @@ class ScreeningUniverseBatchPipeline:
             dt = (time.time() - t0) * 1000
             self.save_checkpoint(checkpoint)
             processed_this_run += 1
+            if chunk_callback is not None:
+                try:
+                    chunk_callback(res)
+                except Exception:
+                    pass
 
             if verbose:
                 print(

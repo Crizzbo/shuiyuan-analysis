@@ -1,0 +1,248 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-11-14T05:03:45Z",
+  "title": "水源分析终端全盘任务配置中枢 (SSOT Task Configuration)",
+  "tasks": {
+    "STOCK_SCREENING": {
+      "id": "STOCK_SCREENING",
+      "name_zh": "全盘万家标的初筛与流式估值",
+      "category": "SCREENING_AND_ANALYSIS",
+      "track": "DATA_COLLECTION",
+      "enabled": true,
+      "schedule": {
+        "type": "CRON",
+        "cron_expr": "0 8 * * 2-6",
+        "timezone": "Asia/Tokyo",
+        "display_zh": "周二至周六 08:00 JST"
+      },
+      "params": {
+        "total_universe_scale": 14892,
+        "market_filter": "ALL",
+        "chunk_batch_size": 100,
+        "us_chunks": 105,
+        "jp_chunks": 45,
+        "auto_stream_valuation": true,
+        "max_stream_valuation_count": 30,
+        "timeout_seconds": 180
+      },
+      "description_zh": "覆盖全市场 14,892 家上市企业（美股 10,445 + 日股 4,447）0-Token 纯本地主升浪初筛，边分块初筛边对枢轴就绪标的流式执行 DCF 估值走廊分析。",
+      "throughput_label": "14,892 只全量上市主体 (150 分块)"
+    },
+    "OFFICIAL_NEWS": {
+      "id": "OFFICIAL_NEWS",
+      "name_zh": "官方资讯采集与AI商业实质提炼",
+      "category": "NEWS_RADAR",
+      "track": "DATA_COLLECTION",
+      "enabled": true,
+      "schedule": {
+        "type": "INTERVAL",
+        "interval_minutes": 60,
+        "timezone": "Asia/Tokyo",
+        "display_zh": "分时间采集: 每小时脉冲"
+      },
+      "params": {
+        "sources": [
+          "SEC_PRESS_RELEASES",
+          "JPX_TIMELY_DISCLOSURE",
+          "FRB_MONETARY_POLICY"
+        ],
+        "fetch_limit_per_source": 30,
+        "dedup_algorithm": "SHA-256",
+        "ai_distillation_enabled": true,
+        "extract_fields": [
+          "micro_physical_impact",
+          "involved_entities",
+          "severity_level",
+          "verification_status"
+        ],
+        "storage_db": "data/ledger/event_radar.sqlite3"
+      },
+      "description_zh": "自动抓取 SEC、东证与美联储官方披露，由 AI 事件雷达提炼微观商业实质影响与受波及实体，严密隔离待核实传闻并持久化入 SQLite 数据库。",
+      "throughput_label": "SQLite 持久化事件雷达库"
+    },
+    "INDICATOR_UPDATE": {
+      "id": "INDICATOR_UPDATE",
+      "name_zh": "核心宏观流动性与趋势宽度指标",
+      "category": "MACRO_INDICATORS",
+      "track": "LOCAL_AUDIT_SYNC",
+      "enabled": true,
+      "schedule": {
+        "type": "INTERVAL",
+        "interval_minutes": 60,
+        "timezone": "Asia/Tokyo",
+        "display_zh": "分时间采集: 每小时自动计算"
+      },
+      "params": {
+        "macro_benchmarks": [
+          "^VIX",
+          "^TNX",
+          "T10Y2Y",
+          "DXY",
+          "USDJPY",
+          "SEPA_BREADTH",
+          "^N225VI",
+          "US_U3_ARCHIVED"
+        ],
+        "fred_series": [
+          "DGS10",
+          "DGS2",
+          "T10Y2Y",
+          "UNRATE",
+          "EFFR"
+        ],
+        "auto_persist_json": "data/indicators/latest_indicators.json",
+        "vix_alert_threshold": 25.0,
+        "breadth_universe": 14892
+      },
+      "description_zh": "测算并刷新 10 年期美债收益率、美联储利差、标普恐慌指数 VIX、美元日元汇率及全市场 14,892 家标的趋势宽度（50日/200日线上占比）。",
+      "throughput_label": "8 项核心宏观与市场宽度走廊"
+    },
+    "FINANCE_CALC": {
+      "id": "FINANCE_CALC",
+      "name_zh": "24大专业量化估值模型与三表刚性平账",
+      "category": "VALUATION_AUDIT",
+      "track": "LOCAL_AUDIT_SYNC",
+      "enabled": true,
+      "schedule": {
+        "type": "MANUAL_AND_DAILY",
+        "cron_expr": "30 8 * * 2-6",
+        "timezone": "Asia/Tokyo",
+        "display_zh": "手动即时 / 每日核算"
+      },
+      "params": {
+        "total_models": 24,
+        "model_categories": [
+          "估值走廊模型群",
+          "资本成本与杜邦拆解群",
+          "信用与破产预警群",
+          "法证与舞弊排查群",
+          "微观流动性与波动率群",
+          "资产配置与衍生品群",
+          "趋势选股与形态收敛群"
+        ],
+        "core_tickers": [
+          "NVDA",
+          "AAPL",
+          "MSFT",
+          "AMD",
+          "GOOGL",
+          "META",
+          "TSM",
+          "8035"
+        ],
+        "balance_sheet_identity_tolerance": 0.001
+      },
+      "description_zh": "全量执行 24 大专业金融模型（多阶段DCF、反向DCF、EBO剩余收益、WACC、固定DCF、NAV净资产、乘数估值、REITs桥接、IRR/NPV、XIRR/XNPV、杜邦五因子、QuantStats、Merton违约距离、Altman Z、Beneish M、Amihud流动性、GARCH(1,1)、卡尔曼滤波、Black-Litterman、CRR二叉树、SVI曲面、蒙特卡洛5000次模拟、SEPA&VCP趋势、资产负债表平账），100% 严密边界校验并持久化落盘。",
+      "throughput_label": "24 大专业量化金融模型群"
+    },
+    "US_DAILY": {
+      "id": "US_DAILY",
+      "name_zh": "美股全盘标的时序抽取与归档",
+      "category": "MARKET_DATA",
+      "track": "DATA_COLLECTION",
+      "enabled": true,
+      "schedule": {
+        "type": "CRON",
+        "cron_expr": "0 7 * * 2-6",
+        "timezone": "Asia/Tokyo",
+        "display_zh": "周二至周六 07:00 JST (美股收盘)"
+      },
+      "params": {
+        "market": "US",
+        "total_universe_scale": 10445,
+        "total_chunks": 105,
+        "chunk_batch_size": 100,
+        "benchmark_indices": [
+          "SPY",
+          "QQQ",
+          "DIA",
+          "SMH",
+          "^VIX",
+          "^TNX",
+          "DXY"
+        ],
+        "sec_universe_json": "data/universe/sec_company_tickers.json",
+        "time_window": "DAILY_CLOSE",
+        "sha256_audit": true
+      },
+      "description_zh": "美股早 07:00 (JST) 收盘后全盘抽取覆盖 SEC 官方登记全量 10,445 家企业标的池（105 批次流式分块），核验时效并归档写入账本。",
+      "throughput_label": "10,445 只美股全盘标的池 (105 分块)"
+    },
+    "JP_DAILY": {
+      "id": "JP_DAILY",
+      "name_zh": "日股全盘标的时序抽取与归档",
+      "category": "MARKET_DATA",
+      "track": "DATA_COLLECTION",
+      "enabled": true,
+      "schedule": {
+        "type": "CRON",
+        "cron_expr": "0 16 * * 1-5",
+        "timezone": "Asia/Tokyo",
+        "display_zh": "周一至周五 16:00 JST (日股收盘)"
+      },
+      "params": {
+        "market": "JP",
+        "total_universe_scale": 4447,
+        "total_chunks": 45,
+        "chunk_batch_size": 100,
+        "benchmark_indices": [
+          "1306",
+          "^N225VI",
+          "USDJPY"
+        ],
+        "jpx_universe_json": "data/universe/jpx_company_tickers.json",
+        "time_window": "DAILY_CLOSE",
+        "sha256_audit": true
+      },
+      "description_zh": "东京下午 16:00 (JST) 日股收盘后全盘抽取覆盖东证 Prime/Standard/Growth 全量 4,447 家企业标的池（45 批次流式分块），校验时效与归档。",
+      "throughput_label": "4,447 只东证全盘标的池 (45 分块)"
+    },
+    "LOCAL_AUDIT": {
+      "id": "LOCAL_AUDIT",
+      "name_zh": "本地三表平账与密码学账本核验",
+      "category": "DATA_GOVERNANCE",
+      "track": "LOCAL_AUDIT_SYNC",
+      "enabled": true,
+      "schedule": {
+        "type": "INTERVAL",
+        "interval_minutes": 30,
+        "timezone": "Asia/Tokyo",
+        "display_zh": "手动即时校验 / 每30分钟轮巡"
+      },
+      "params": {
+        "audit_balance_sheet_identity": true,
+        "audit_quote_freshness_gate": true,
+        "audit_prediction_ledger_chain": true,
+        "ledger_file": "data/ledger/prediction_ledger.json",
+        "prohibit_hardcoded_accounting": true
+      },
+      "description_zh": "离线物理验证官方 10-K 原档三表平账率、逐笔行情时效门禁以及 PredictionLedger SHA-256 密码学时间链条完整性，杜绝篡改。",
+      "throughput_label": "100% 刚性平账与密码学验签"
+    },
+    "INCREMENTAL_COLLECT": {
+      "id": "INCREMENTAL_COLLECT",
+      "name_zh": "官方监管补数与档案增量归档",
+      "category": "DATA_GOVERNANCE",
+      "track": "DATA_COLLECTION",
+      "enabled": true,
+      "schedule": {
+        "type": "INTERVAL",
+        "interval_minutes": 60,
+        "timezone": "Asia/Tokyo",
+        "display_zh": "每小时扫描补数队列"
+      },
+      "params": {
+        "replenishment_queue_file": "data/browser-search/replenishment_tasks.json",
+        "target_filings": [
+          "10-K",
+          "10-Q",
+          "有价证券报告书"
+        ],
+        "stream_upload_enabled": true,
+        "hot_warm_cold_tiering": true
+      },
+      "description_zh": "扫描官方监管补数定向队列，针对缺失三表或历史日线的标的生成官方原文补数清单，并对深度研报档案实施流式冷热分层归档。",
+      "throughput_label": "72 家官方原文补数队列"
+    }
+  }
+}

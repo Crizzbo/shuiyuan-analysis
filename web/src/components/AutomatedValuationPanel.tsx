@@ -1,0 +1,480 @@
+import { useState, useEffect } from 'react'
+import type { FormEvent } from 'react'
+import type { AutomatedValuationData, ValuationCompanyItem } from '../types/api'
+import { api } from '../services/api'
+
+interface AutomatedValuationPanelProps {
+  onSelectTicker?: (ticker: string) => void
+}
+
+export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPanelProps) {
+  const [companies, setCompanies] = useState<ValuationCompanyItem[]>([])
+  const [selectedTicker, setSelectedTicker] = useState<string>('NVDA')
+  const [searchTicker, setSearchTicker] = useState('')
+  const [valuationData, setValuationData] = useState<AutomatedValuationData | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  // 敏感性情景微调状态
+  const [showSensitivity, setShowSensitivity] = useState(false)
+  const [customDiscountRate, setCustomDiscountRate] = useState<number>(9.5)
+  const [customTerminalGrowth, setCustomTerminalGrowth] = useState<number>(2.5)
+  const [customGrowthRates, setCustomGrowthRates] = useState<string>('18, 14, 10')
+  const [customBeta, setCustomBeta] = useState<number>(1.45)
+  const [tuning, setTuning] = useState(false)
+
+  // 1. 加载可用企业池
+  useEffect(() => {
+    async function loadCompanies() {
+      try {
+        const res = await api.getFinanceCompanies()
+        if (res.ok && res.data.companies) {
+          setCompanies(res.data.companies)
+        }
+      } catch (err) {
+        console.error('Failed to load valuation companies:', err)
+      }
+    }
+    void loadCompanies()
+  }, [])
+
+  // 2. 加载选定标的自动估值
+  const loadValuation = async (ticker: string, adjustments?: Record<string, any>) => {
+    setLoading(true)
+    setError(null)
+    try {
+      const res = adjustments
+        ? await api.calculateAutoValuation(ticker, adjustments)
+        : await api.getAutoValuation(ticker)
+      if (res.ok) {
+        setValuationData(res.data)
+        // 同步敏感性微调默认值
+        const baseCorridor = res.data.valuation_corridor.base_fair_value
+        setCustomDiscountRate(baseCorridor.discount_rate_pct)
+        setCustomTerminalGrowth(baseCorridor.terminal_growth_pct)
+        setCustomGrowthRates(baseCorridor.growth_rates_pct.join(', '))
+        setCustomBeta(res.data.capital_cost_wacc.beta)
+      } else {
+        setError(res.error?.message || '获取标的自动金融计算失败')
+      }
+    } catch (err: any) {
+      setError(err.message || '网络连接异常')
+    } finally {
+      setLoading(false)
+      setTuning(false)
+    }
+  }
+
+  useEffect(() => {
+    if (selectedTicker) {
+      void loadValuation(selectedTicker)
+    }
+  }, [selectedTicker])
+
+  const handleApplySensitivity = async (e: FormEvent) => {
+    e.preventDefault()
+    setTuning(true)
+    const parsedGrowths = customGrowthRates
+      .split(/[,，\s]+/)
+      .map(x => Number(x.trim()) / 100)
+      .filter(x => Number.isFinite(x))
+
+    await loadValuation(selectedTicker, {
+      discount_rate: customDiscountRate / 100,
+      terminal_growth: customTerminalGrowth / 100,
+      growth_rates: parsedGrowths.length ? parsedGrowths : undefined,
+      beta: customBeta,
+    })
+  }
+
+  const handleResetToBaseline = () => {
+    void loadValuation(selectedTicker)
+  }
+
+  const facts = valuationData?.underlying_facts
+  const corridor = valuationData?.valuation_corridor
+  const wacc = valuationData?.capital_cost_wacc
+  const ratios = valuationData?.profitability_ratios
+  const curPrice = valuationData?.current_price ?? 0
+  const sym = valuationData?.currency_symbol ?? '$'
+  const mos = corridor?.margin_of_safety_pct ?? 0
+
+  return (
+    <div className="space-y-6">
+      {/* 顶部标题与标的选择器 */}
+      <section className="panel">
+        <div className="section-head">
+          <div>
+            <h2>自动带入金融估值与多阶段 DCF 走廊</h2>
+            <p className="muted">
+              无需手动敲入基期数据 · 自动提取 SEC 官方平账原档、行情与 FRED 美债收益率 · 多阶段 DCF 走廊 · WACC 资本成本 · 杜邦比率
+            </p>
+          </div>
+          <span className="badge success">全自动底账代入</span>
+        </div>
+
+        {/* 标的快速切换按钮池 */}
+        <div className="flex flex-wrap items-center gap-2 mt-4">
+          {companies.map(c => (
+            <button
+              key={c.ticker}
+              type="button"
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 border ${
+                selectedTicker === c.ticker
+                  ? 'bg-[#3987e5] text-white border-[#3987e5] shadow-sm'
+                  : 'bg-[var(--bg-card)] text-[var(--text-secondary)] border-[var(--border-color)] hover:border-[#3987e5]'
+              }`}
+              onClick={() => {
+                setSelectedTicker(c.ticker)
+                if (onSelectTicker) onSelectTicker(c.ticker)
+              }}
+            >
+              <span>{c.ticker}</span>
+              <span className="opacity-80 font-normal">
+                {c.company_name.split(' ')[0]}
+              </span>
+              {c.price && <span className="opacity-75">{sym}{c.price}</span>}
+            </button>
+          ))}
+        </div>
+
+        {/* 自由输入查询框 */}
+        <form
+          className="flex items-center gap-2 mt-3"
+          onSubmit={e => {
+            e.preventDefault()
+            const t = searchTicker.trim().toUpperCase()
+            if (t) {
+              setSelectedTicker(t)
+              if (onSelectTicker) onSelectTicker(t)
+            }
+          }}
+        >
+          <input
+            placeholder="输入美股/日股代码 (如 NVDA, AAPL, 8035)"
+            value={searchTicker}
+            onChange={e => setSearchTicker(e.target.value)}
+            className="w-64 rounded-md border border-[var(--border-color)] px-3 py-1.5 text-sm"
+          />
+          <button type="submit" className="primary">自动调取底账计算</button>
+        </form>
+      </section>
+
+      {error && <div className="error" role="alert">{error}</div>}
+
+      {loading && !valuationData && (
+        <div className="panel p-8 text-center text-muted">
+          正在从官方 SEC 10-K 底账与实时行情中提取财务事实并自动测算估值...
+        </div>
+      )}
+
+      {valuationData && (
+        <>
+          {/* 1. 自动提取的官方底账事实卡片 */}
+          <section className="panel">
+            <div className="section-head">
+              <div>
+                <h2>官方财报三表与实时行情底账 (已自动平账代入)</h2>
+                <p className="muted">
+                  官方披露原档：{facts?.source_filing} · 报告期截止：{facts?.period_end} · 市场基准时点：{valuationData.quote_timestamp}
+                </p>
+              </div>
+              <span className="badge success">
+                {facts?.balance_sheet_status || '资产负债表严格平账'}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+              <div className="p-3 bg-[var(--bg-subtle)] rounded-lg border border-[var(--border-color)]">
+                <div className="text-xs text-muted">企业自由现金流 (FCF)</div>
+                <div className="text-base font-bold mt-1 text-[var(--text-primary)]">
+                  {facts?.free_cash_flow_formatted}
+                </div>
+                <div className="text-xs text-muted mt-0.5">三表内生经营净流入</div>
+              </div>
+
+              <div className="p-3 bg-[var(--bg-subtle)] rounded-lg border border-[var(--border-color)]">
+                <div className="text-xs text-muted">稀释后总股数 (Shares)</div>
+                <div className="text-base font-bold mt-1 text-[var(--text-primary)]">
+                  {facts?.shares_formatted}
+                </div>
+                <div className="text-xs text-muted mt-0.5">官方申报摊薄口径</div>
+              </div>
+
+              <div className="p-3 bg-[var(--bg-subtle)] rounded-lg border border-[var(--border-color)]">
+                <div className="text-xs text-muted">现金储备 vs 有息负债</div>
+                <div className="text-base font-bold mt-1 text-[var(--text-primary)]">
+                  {facts?.cash_formatted} / {facts?.debt_formatted}
+                </div>
+                <div className="text-xs text-emerald-600 mt-0.5 font-medium">
+                  {facts?.net_cash_status}
+                </div>
+              </div>
+
+              <div className="p-3 bg-[var(--bg-subtle)] rounded-lg border border-[var(--border-color)]">
+                <div className="text-xs text-muted">最新基准现价 (Market Price)</div>
+                <div className="text-base font-bold mt-1 text-[var(--text-primary)]">
+                  {sym}{curPrice.toFixed(2)}
+                </div>
+                <div className="text-xs text-muted mt-0.5">
+                  无风险利率 {facts?.risk_free_rate_label}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 2. 多阶段 DCF 估值走廊三态卡片 */}
+          <section className="panel">
+            <div className="section-head">
+              <div>
+                <h2>多阶段 DCF 估值走廊与安全边际 (Valuation Corridor)</h2>
+                <p className="muted">
+                  基于企业内生真实自由现金流、WACC 资本成本折现率及多情景增长推演
+                </p>
+              </div>
+              <span className={`badge ${mos >= 0 ? 'success' : 'warning'}`}>
+                安全边际 {mos >= 0 ? `+${mos.toFixed(1)}%` : `${mos.toFixed(1)}%`}
+              </span>
+            </div>
+
+            {/* 顶层通俗商业研判横幅 */}
+            <div className="p-4 rounded-xl my-4 border bg-[var(--bg-subtle)] flex items-start gap-3">
+              <span className="text-xl">🎯</span>
+              <div>
+                <div className="font-bold text-sm text-[var(--text-primary)]">
+                  投资直觉与估值结论
+                </div>
+                <div className="text-xs mt-1 text-[var(--text-secondary)] leading-relaxed">
+                  {corridor?.valuation_verdict}
+                </div>
+              </div>
+            </div>
+
+            {/* 三态情景卡片 */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* 悲观底线估值 */}
+              <div className="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-muted">【悲观底线估值】</span>
+                    <span className="badge warning">严苛情景</span>
+                  </div>
+                  <div className="text-2xl font-black mt-2 text-[var(--text-primary)]">
+                    {sym}{corridor?.conservative_floor.value_per_share.toFixed(2)}
+                  </div>
+                  <p className="text-xs text-muted mt-1">
+                    {corridor?.conservative_floor.description}
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[var(--border-color)] text-xs text-muted space-y-1">
+                  <div>折现率：{corridor?.conservative_floor.discount_rate_pct}%</div>
+                  <div>永续增长率：{corridor?.conservative_floor.terminal_growth_pct}%</div>
+                  <div>前3年预测增长：{corridor?.conservative_floor.growth_rates_pct.join('%, ')}%</div>
+                </div>
+              </div>
+
+              {/* 中性公允价值 (核心高亮) */}
+              <div className="p-4 rounded-xl border-2 border-[#3987e5] bg-[var(--surface-color)] shadow-sm flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-[#3987e5]">【中性公允价值 · 估值中枢】</span>
+                    <span className="badge success">基准公允</span>
+                  </div>
+                  <div className="text-3xl font-black mt-2 text-[#3987e5]">
+                    {sym}{corridor?.base_fair_value.value_per_share.toFixed(2)}
+                  </div>
+                  <p className="text-xs text-[var(--text-secondary)] mt-1">
+                    {corridor?.base_fair_value.description}
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[var(--border-color)] text-xs text-[var(--text-secondary)] space-y-1">
+                  <div>WACC 折现率：{corridor?.base_fair_value.discount_rate_pct}%</div>
+                  <div>永续增长率：{corridor?.base_fair_value.terminal_growth_pct}%</div>
+                  <div>前3年预测增长：{corridor?.base_fair_value.growth_rates_pct.join('%, ')}%</div>
+                  {corridor?.base_fair_value.forecast && (
+                    <details className="mt-2 text-xs">
+                      <summary className="cursor-pointer text-[#3987e5] font-medium">查看 3 年期折现预测明细</summary>
+                      <ul className="mt-1 pl-2 space-y-0.5 text-muted">
+                        {corridor.base_fair_value.forecast.map(row => (
+                          <li key={row.year}>第 {row.year} 年 FCF: {sym}{(row.cash_flow / 1e9).toFixed(2)}B (现值: {sym}{(row.present_value / 1e9).toFixed(2)}B)</li>
+                        ))}
+                      </ul>
+                    </details>
+                  )}
+                </div>
+              </div>
+
+              {/* 乐观成长靶心 */}
+              <div className="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-muted">【乐观成长靶心】</span>
+                    <span className="badge info">景气爆发</span>
+                  </div>
+                  <div className="text-2xl font-black mt-2 text-emerald-600">
+                    {sym}{corridor?.optimistic_target.value_per_share.toFixed(2)}
+                  </div>
+                  <p className="text-xs text-muted mt-1">
+                    {corridor?.optimistic_target.description}
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[var(--border-color)] text-xs text-muted space-y-1">
+                  <div>折现率：{corridor?.optimistic_target.discount_rate_pct}%</div>
+                  <div>永续增长率：{corridor?.optimistic_target.terminal_growth_pct}%</div>
+                  <div>前3年预测增长：{corridor?.optimistic_target.growth_rates_pct.join('%, ')}%</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 3. 资本成本 WACC 与杜邦盈利质量 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <section className="panel">
+              <div className="section-head">
+                <h2>加权平均资本成本 (WACC)</h2>
+                <span className="badge info">CAPM / 市场权重</span>
+              </div>
+              <div className="rows mt-3">
+                <div className="row">
+                  <div><strong>加权平均资本成本 (WACC)</strong><p>企业投资回报率的最低门槛折现率</p></div>
+                  <span className="text-base font-bold text-[var(--text-primary)]">{wacc?.wacc_pct}%</span>
+                </div>
+                <div className="row">
+                  <div><strong>股权资本成本 (Cost of Equity)</strong><p>基于无风险利率 4.35% 与 Beta {wacc?.beta}</p></div>
+                  <span className="font-semibold">{wacc?.cost_of_equity_pct}%</span>
+                </div>
+                <div className="row">
+                  <div><strong>税后债务成本 (After-Tax Debt Cost)</strong><p>税前成本 5.0% · 所得税率 21%</p></div>
+                  <span className="font-semibold">{wacc?.after_tax_cost_of_debt_pct}%</span>
+                </div>
+                <div className="row">
+                  <div><strong>资本结构权重 (Equity / Debt)</strong><p>基于真实股权市值与有息负债比重</p></div>
+                  <span className="font-semibold">{wacc?.equity_weight_pct}% / {wacc?.debt_weight_pct}%</span>
+                </div>
+              </div>
+            </section>
+
+            <section className="panel">
+              <div className="section-head">
+                <h2>杜邦分析与盈利质量透视</h2>
+                <span className="badge success">官方披露平账</span>
+              </div>
+              <div className="rows mt-3">
+                <div className="row">
+                  <div><strong>净资产收益率 (ROE)</strong><p>普通股股东真实内生资本回报率</p></div>
+                  <span className="text-base font-bold text-emerald-600">{ratios?.roe_pct != null ? `${ratios.roe_pct}%` : '—'}</span>
+                </div>
+                <div className="row">
+                  <div><strong>总资产收益率 (ROA)</strong><p>企业全量资产运营效率</p></div>
+                  <span className="font-semibold">{ratios?.roa_pct != null ? `${ratios.roa_pct}%` : '—'}</span>
+                </div>
+                <div className="row">
+                  <div><strong>营业利润率 (Operating Margin)</strong><p>扣除研发与销售后的核心主营溢价能力</p></div>
+                  <span className="font-semibold">{ratios?.operating_margin_pct != null ? `${ratios.operating_margin_pct}%` : '—'}</span>
+                </div>
+                <div className="row">
+                  <div><strong>自由现金流转化率 (FCF / NI)</strong><p>自由现金流占净利润比重（盈利含金量）</p></div>
+                  <span className="font-semibold">{ratios?.fcf_conversion_pct != null ? `${ratios.fcf_conversion_pct}%` : '—'}</span>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          {/* 4. 情景敏感性微调面板 (可展开折叠) */}
+          <section className="panel">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2>情景敏感性微调与压力测试</h2>
+                <p className="muted">
+                  支持在官方底账自动代入的基础上，微调折现率与逐年预期增长率进行敏感性推演
+                </p>
+              </div>
+              <button
+                type="button"
+                className="text-button text-xs font-semibold"
+                onClick={() => setShowSensitivity(!showSensitivity)}
+              >
+                {showSensitivity ? '收起微调面板 ▲' : '展开敏感性微调 ▼'}
+              </button>
+            </div>
+
+            {showSensitivity && (
+              <form onSubmit={handleApplySensitivity} className="mt-4 pt-4 border-t border-[var(--border-color)] space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <label className="field">
+                    <span>基准折现率 WACC (%)</span>
+                    <input
+                      type="number"
+                      step="0.1"
+                      min="4"
+                      max="20"
+                      value={customDiscountRate}
+                      onChange={e => setCustomDiscountRate(Number(e.target.value))}
+                      className="rounded-md border border-[var(--border-color)] px-3 py-1.5 text-sm"
+                    />
+                  </label>
+
+                  <label className="field">
+                    <span>永续增长率 (%)</span>
+                    <input
+                      type="number"
+                      step="0.1"
+                      min="0.5"
+                      max="5"
+                      value={customTerminalGrowth}
+                      onChange={e => setCustomTerminalGrowth(Number(e.target.value))}
+                      className="rounded-md border border-[var(--border-color)] px-3 py-1.5 text-sm"
+                    />
+                  </label>
+
+                  <label className="field">
+                    <span>逐年增长率（第1, 2, 3年，%）</span>
+                    <input
+                      type="text"
+                      value={customGrowthRates}
+                      placeholder="例如: 18, 14, 10"
+                      onChange={e => setCustomGrowthRates(e.target.value)}
+                      className="rounded-md border border-[var(--border-color)] px-3 py-1.5 text-sm"
+                    />
+                  </label>
+
+                  <label className="field">
+                    <span>标的 Beta 系数</span>
+                    <input
+                      type="number"
+                      step="0.05"
+                      min="0.5"
+                      max="3"
+                      value={customBeta}
+                      onChange={e => setCustomBeta(Number(e.target.value))}
+                      className="rounded-md border border-[var(--border-color)] px-3 py-1.5 text-sm"
+                    />
+                  </label>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <button type="submit" disabled={tuning} className="primary">
+                    {tuning ? '重新测算中…' : '应用微调并重新测算估值走廊'}
+                  </button>
+                  <button type="button" onClick={handleResetToBaseline} className="text-button text-xs">
+                    恢复官方原始基准数据
+                  </button>
+                </div>
+              </form>
+            )}
+          </section>
+
+          {/* 5. 校验摘要与算法底账溯源 */}
+          <div className="text-xs text-muted px-2 py-1 flex items-center justify-between">
+            <span>
+              计算算法版本：{valuationData.calculation_provenance.method_version} · 纯净金融引擎：{valuationData.calculation_provenance.implementation_path}
+            </span>
+            <span>
+              SHA-256 输入防篡改摘要：{valuationData.calculation_provenance.input_sha256?.slice(0, 16)}...
+            </span>
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
