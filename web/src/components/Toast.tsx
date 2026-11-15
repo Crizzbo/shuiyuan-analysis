@@ -47,12 +47,12 @@ export function ToastContainer() {
           key={t.id}
           className={`pointer-events-auto rounded-lg p-3.5 border backdrop-blur-md flex items-start gap-3 transition-all transform translate-y-0 ${
             t.type === 'success'
-              ? 'bg-[#102a1e]/90 border-[#199e70] text-[#e8f8f0]'
+              ? 'bg-[#102a1e]/90 border-[#176249] text-[#e8f8f0]'
               : t.type === 'error'
-              ? 'bg-[#331114]/90 border-[#d03b3b] text-[#fce8e8]'
+              ? 'bg-[#331114]/90 border-rose-500 text-[#fce8e8]'
               : t.type === 'warning'
-              ? 'bg-[#2d2208]/90 border-[#c98500] text-[#fdf6e6]'
-              : 'bg-[#141d30]/90 border-[#3987e5] text-[#e8eef8]'
+              ? 'bg-[#2d2208]/90 border-amber-500 text-[#fdf6e6]'
+              : 'bg-[#141d30]/90 border-slate-600 text-[#e8eef8]'
           }`}
         >
           <div className="text-lg leading-none mt-0.5">

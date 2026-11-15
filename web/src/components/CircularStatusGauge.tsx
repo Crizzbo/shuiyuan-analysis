@@ -23,39 +23,39 @@ export function CircularStatusGauge({ item, size = 56 }: CircularStatusGaugeProp
   // Tone colors following dataviz and project specifications
   const toneMap = {
     good: {
-      stroke: '#199e70',
-      text: 'text-[#199e70]',
-      badgeBg: 'bg-[#199e70]/15',
-      badgeBorder: 'border-[#199e70]/30',
-      badgeText: 'text-[#199e70]',
+      stroke: '#176249',
+      text: 'text-[#176249]',
+      badgeBg: 'bg-[#176249]/15',
+      badgeBorder: 'border-[#176249]/30',
+      badgeText: 'text-[#176249]',
     },
     accent: {
-      stroke: '#3987e5',
-      text: 'text-[#3987e5]',
-      badgeBg: 'bg-[#3987e5]/15',
-      badgeBorder: 'border-[#3987e5]/30',
-      badgeText: 'text-[#3987e5]',
+      stroke: '#176249',
+      text: 'text-[#176249]',
+      badgeBg: 'bg-[#176249]/10',
+      badgeBorder: 'border-[#176249]/25',
+      badgeText: 'text-[#176249]',
     },
     warning: {
-      stroke: '#c98500',
-      text: 'text-[#c98500]',
-      badgeBg: 'bg-[#c98500]/15',
-      badgeBorder: 'border-[#c98500]/30',
-      badgeText: 'text-[#c98500]',
+      stroke: '#d97706',
+      text: 'text-amber-600',
+      badgeBg: 'bg-amber-50',
+      badgeBorder: 'border-amber-200',
+      badgeText: 'text-amber-700',
     },
     critical: {
-      stroke: '#d03b3b',
-      text: 'text-[#d03b3b]',
-      badgeBg: 'bg-[#d03b3b]/15',
-      badgeBorder: 'border-[#d03b3b]/30',
-      badgeText: 'text-[#d03b3b]',
+      stroke: '#e11d48',
+      text: 'text-rose-600',
+      badgeBg: 'bg-rose-50',
+      badgeBorder: 'border-rose-200',
+      badgeText: 'text-rose-700',
     },
   }
 
   const currentTone = toneMap[item.tone] || toneMap.accent
 
   return (
-    <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-3 flex flex-col items-center justify-between hover:border-[#3987e5]/40 transition-all shadow-sm">
+    <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-3 flex flex-col items-center justify-between hover:border-slate-300 transition-all shadow-sm">
       {/* 顶部标签 */}
       <div className="text-[11px] font-semibold text-[var(--text-secondary)] text-center truncate w-full mb-1">
         {item.label}

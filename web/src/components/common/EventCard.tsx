@@ -48,7 +48,7 @@ export const EventCard: React.FC<EventCardProps> = ({
   return (
     <div
       onClick={onClick}
-      className={`bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#3987e5]/50 rounded-xl p-3.5 space-y-2 transition-all shadow-sm ${
+      className={`bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#176249]/50 rounded-xl p-3.5 space-y-2 transition-all shadow-sm ${
         onClick ? 'cursor-pointer' : ''
       } ${className}`}
     >
@@ -56,7 +56,7 @@ export const EventCard: React.FC<EventCardProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div className="flex items-center gap-2 min-w-0">
           <SeverityBadge level={severity} size={compact ? 'sm' : 'md'} />
-          <h4 className="text-xs font-bold text-[var(--text-primary)] hover:text-[#3987e5] leading-snug truncate">
+          <h4 className="text-xs font-bold text-[var(--text-primary)] hover:text-[#176249] leading-snug truncate">
             {title}
           </h4>
           {(() => {
@@ -74,10 +74,10 @@ export const EventCard: React.FC<EventCardProps> = ({
                 e.stopPropagation();
                 onViewRadarDetail();
               }}
-              className="text-[10px] px-2 py-0.2 rounded font-semibold bg-[#199e70]/15 hover:bg-[#199e70]/25 text-[#199e70] border border-[#199e70]/30 cursor-pointer transition-all flex items-center gap-1 shrink-0"
+              className="text-[10px] px-2 py-0.2 rounded font-semibold bg-[#176249]/15 hover:bg-[#176249]/25 text-[#176249] border border-[#176249]/30 cursor-pointer transition-all flex items-center gap-1 shrink-0"
               title="查看权威事件雷达研判档案"
             >
-              <TargetIcon className="w-3 h-3 text-[#199e70]" />
+              <TargetIcon className="w-3 h-3 text-[#176249]" />
               <span>已提炼 (查看研判 →)</span>
             </button>
           )}
@@ -85,8 +85,8 @@ export const EventCard: React.FC<EventCardProps> = ({
 
         <div className="flex items-center gap-2 shrink-0">
           {is_quarantined_rumor ? (
-            <span className="text-[11px] px-2 py-0.5 rounded bg-[#d03b3b]/20 text-[#d03b3b] border border-[#d03b3b]/40 font-semibold flex items-center gap-1">
-              <ShieldCheckIcon className="w-3 h-3 text-[#d03b3b]" />
+            <span className="text-[11px] px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 font-semibold flex items-center gap-1">
+              <ShieldCheckIcon className="w-3 h-3 text-rose-600" />
               <span>传闻隔离</span>
             </span>
           ) : (
@@ -119,7 +119,7 @@ export const EventCard: React.FC<EventCardProps> = ({
               {segments.slice(0, 3).map((seg, i) => (
                 <span
                   key={`seg-${i}`}
-                  className="px-1.5 py-0.2 rounded bg-[#199e70]/10 text-[#199e70] border border-[#199e70]/20 font-medium"
+                  className="px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200 font-medium"
                 >
                   {seg}
                 </span>

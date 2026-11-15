@@ -35,7 +35,7 @@ export function Pagination({
             type="button"
             disabled={safeCurrentPage <= 1}
             onClick={() => onPageChange(safeCurrentPage - 1)}
-            className="px-2 py-1 rounded border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-primary)] hover:border-[#3987e5] disabled:opacity-40 disabled:hover:border-[var(--border-color)] cursor-pointer disabled:cursor-not-allowed transition-all"
+            className="px-2 py-1 rounded border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-primary)] hover:border-[#176249] hover:text-[#176249] disabled:opacity-40 disabled:hover:border-[var(--border-color)] disabled:hover:text-[var(--text-primary)] cursor-pointer disabled:cursor-not-allowed transition-all"
           >
             上一页
           </button>
@@ -43,7 +43,7 @@ export function Pagination({
             type="button"
             disabled={safeCurrentPage >= safeTotalPages}
             onClick={() => onPageChange(safeCurrentPage + 1)}
-            className="px-2 py-1 rounded border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-primary)] hover:border-[#3987e5] disabled:opacity-40 disabled:hover:border-[var(--border-color)] cursor-pointer disabled:cursor-not-allowed transition-all"
+            className="px-2 py-1 rounded border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-primary)] hover:border-[#176249] hover:text-[#176249] disabled:opacity-40 disabled:hover:border-[var(--border-color)] disabled:hover:text-[var(--text-primary)] cursor-pointer disabled:cursor-not-allowed transition-all"
           >
             下一页
           </button>
@@ -66,7 +66,7 @@ export function Pagination({
           type="button"
           disabled={safeCurrentPage <= 1}
           onClick={() => onPageChange(1)}
-          className="px-2.5 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-[#3987e5] disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
+          className="px-2.5 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-[#176249] hover:text-[#176249] disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
         >
           首页
         </button>
@@ -74,7 +74,7 @@ export function Pagination({
           type="button"
           disabled={safeCurrentPage <= 1}
           onClick={() => onPageChange(safeCurrentPage - 1)}
-          className="px-3 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-primary)] font-medium hover:border-[#3987e5] disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
+          className="px-3 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-primary)] font-medium hover:border-[#176249] hover:text-[#176249] disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
         >
           上一页
         </button>
@@ -85,7 +85,7 @@ export function Pagination({
           type="button"
           disabled={safeCurrentPage >= safeTotalPages}
           onClick={() => onPageChange(safeCurrentPage + 1)}
-          className="px-3 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-primary)] font-medium hover:border-[#3987e5] disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
+          className="px-3 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-primary)] font-medium hover:border-[#176249] hover:text-[#176249] disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
         >
           下一页
         </button>
@@ -93,7 +93,7 @@ export function Pagination({
           type="button"
           disabled={safeCurrentPage >= safeTotalPages}
           onClick={() => onPageChange(safeTotalPages)}
-          className="px-2.5 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-[#3987e5] disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
+          className="px-2.5 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-[#176249] hover:text-[#176249] disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
         >
           末页
         </button>

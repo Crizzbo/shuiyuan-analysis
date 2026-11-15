@@ -143,25 +143,25 @@ export const numberFormatter = new Intl.NumberFormat('zh-CN', { maximumFractionD
 export function getStatusBadge(status?: string): { text: string; cls: string } {
   switch (status) {
     case 'RUNNING':
-      return { text: '运行中', cls: 'bg-[#3987e5]/20 text-[#3987e5] border border-[#3987e5]/40 animate-pulse' }
+      return { text: '运行中', cls: 'bg-[#176249]/15 text-[#176249] border border-[#176249]/30 animate-pulse' }
     case 'QUEUED':
-      return { text: '排队中', cls: 'bg-blue-100 text-blue-800 border border-blue-300' }
+      return { text: '排队中', cls: 'bg-slate-100 text-slate-700 border border-slate-200' }
     case 'SUCCESS':
-      return { text: '已完成', cls: 'bg-[#199e70]/15 text-[#199e70] border border-[#199e70]/40' }
+      return { text: '已完成', cls: 'bg-[#176249]/10 text-[#176249] border border-[#176249]/25' }
     case 'PARTIAL_SUCCESS':
-      return { text: '部分完成', cls: 'bg-[#c98500]/15 text-[#c98500] border border-[#c98500]/40' }
+      return { text: '部分完成', cls: 'bg-amber-50 text-amber-700 border border-amber-200' }
     case 'FAILED':
-      return { text: '执行失败', cls: 'bg-[#d03b3b]/15 text-[#d03b3b] border border-[#d03b3b]/40' }
+      return { text: '执行失败', cls: 'bg-rose-50 text-rose-700 border border-rose-200' }
     case 'STOPPED':
-      return { text: '已停止', cls: 'bg-gray-200 text-gray-700 border border-gray-400' }
+      return { text: '已停止', cls: 'bg-slate-100 text-slate-600 border border-slate-200' }
     case 'STOPPING':
-      return { text: '正在停止', cls: 'bg-[#c98500]/20 text-[#c98500] border border-[#c98500]/40' }
+      return { text: '正在停止', cls: 'bg-amber-50 text-amber-700 border border-amber-200' }
     case 'BLOCKED':
-      return { text: '待补数', cls: 'bg-amber-100 text-amber-800 border border-amber-300' }
+      return { text: '待补数', cls: 'bg-amber-50 text-amber-800 border border-amber-200' }
     case 'CANCELLED':
-      return { text: '已取消', cls: 'bg-gray-100 text-gray-600 border border-gray-300' }
+      return { text: '已取消', cls: 'bg-slate-100 text-slate-500 border border-slate-200' }
     default:
-      return { text: toChinese(status) || '待机就绪', cls: 'bg-gray-100 text-gray-700 border border-gray-300' }
+      return { text: toChinese(status) || '待机就绪', cls: 'bg-slate-100 text-slate-700 border border-slate-200' }
   }
 }
 
@@ -180,13 +180,13 @@ export function toList(val?: string[] | string | null): string[] {
 export function getSeverityBadge(sev?: string): { text: string; cls: string } {
   switch (String(sev || '').toUpperCase()) {
     case 'P0':
-      return { text: '极高影响', cls: 'bg-[#d03b3b]/20 text-[#d03b3b] border-[#d03b3b]/40' }
+      return { text: '极高影响', cls: 'bg-rose-50 text-rose-700 border border-rose-200' }
     case 'P1':
-      return { text: '重要关注', cls: 'bg-[#c98500]/20 text-[#c98500] border-[#c98500]/40' }
+      return { text: '重要关注', cls: 'bg-amber-50 text-amber-700 border border-amber-200' }
     case 'P2':
-      return { text: '行业动态', cls: 'bg-[#3987e5]/20 text-[#3987e5] border-[#3987e5]/40' }
+      return { text: '行业动态', cls: 'bg-slate-100 text-slate-700 border border-slate-200' }
     default:
-      return { text: '常规资讯', cls: 'bg-gray-600/20 text-gray-400 border-gray-600/30' }
+      return { text: '常规资讯', cls: 'bg-slate-100 text-slate-500 border border-slate-200' }
   }
 }
 
@@ -196,13 +196,13 @@ export function getSeverityBadge(sev?: string): { text: string; cls: string } {
 export function getVerificationBadge(status?: string): { text: string; cls: string } {
   switch (status) {
     case 'Confirmed_Fact':
-      return { text: '官方权威核实', cls: 'bg-[#199e70]/20 text-[#199e70] border-[#199e70]/40' }
+      return { text: '官方权威核实', cls: 'bg-emerald-50 text-emerald-700 border border-emerald-200' }
     case 'Corroborated_Report':
-      return { text: '主流媒体采信', cls: 'bg-[#3987e5]/20 text-[#3987e5] border-[#3987e5]/40' }
+      return { text: '主流媒体采信', cls: 'bg-slate-100 text-slate-700 border border-slate-200' }
     case 'Unverified_Rumor':
-      return { text: '待核实传闻隔离', cls: 'bg-[#d03b3b]/20 text-[#d03b3b] border-[#d03b3b]/40' }
+      return { text: '待核实传闻隔离', cls: 'bg-rose-50 text-rose-700 border border-rose-200' }
     default:
-      return { text: '已归档', cls: 'bg-gray-600/20 text-gray-400 border-gray-600/30' }
+      return { text: '已归档', cls: 'bg-slate-100 text-slate-500 border border-slate-200' }
   }
 }
 
@@ -242,15 +242,15 @@ export function formatCredibilityTier(tier?: string): { text: string; cls: strin
   const t = String(tier || '').trim()
   switch (t) {
     case 'Tier1_Official_Regulatory':
-      return { text: '官方原发 (一级)', cls: 'bg-[#199e70]/15 text-[#199e70] border-[#199e70]/30' }
+      return { text: '官方原发 (一级)', cls: 'bg-[#176249]/10 text-[#176249] border border-[#176249]/25' }
     case 'Tier2_Issuer_Direct':
-      return { text: '企业直发 (二级)', cls: 'bg-[#3987e5]/15 text-[#3987e5] border-[#3987e5]/30' }
+      return { text: '企业直发 (二级)', cls: 'bg-slate-100 text-slate-700 border border-slate-200' }
     case 'Tier3_Mainstream_Wire':
-      return { text: '主流财经 (三级)', cls: 'bg-[#c98500]/15 text-[#c98500] border-[#c98500]/30' }
+      return { text: '主流财经 (三级)', cls: 'bg-amber-50 text-amber-700 border border-amber-200' }
     case 'Tier4_Public_Flash_Social':
-      return { text: '公开快讯 (四级)', cls: 'bg-gray-600/20 text-gray-400 border-gray-600/30' }
+      return { text: '公开快讯 (四级)', cls: 'bg-slate-100 text-slate-500 border border-slate-200' }
     default:
-      return { text: t ? '已归档' : '', cls: 'bg-gray-600/20 text-gray-400 border-gray-600/30' }
+      return { text: t ? '已归档' : '', cls: 'bg-slate-100 text-slate-500 border border-slate-200' }
   }
 }
 

@@ -125,17 +125,17 @@ const DEFAULT_MARKET_STATS: MarketStatisticsData = {
 function getStatusBadge(status?: string) {
   switch (status) {
     case 'FRESH':
-      return { text: '盘中实时', cls: 'bg-[#199e70]/15 text-[#199e70] border-[#199e70]/30' }
+      return { text: '盘中实时', cls: 'bg-emerald-50 text-emerald-700 border-emerald-200' }
     case 'PREVIOUS_CLOSE':
-      return { text: '前收盘基准', cls: 'bg-[#3987e5]/10 text-[#3987e5] border-[#3987e5]/25' }
+      return { text: '前收盘基准', cls: 'bg-slate-100 text-slate-700 border-slate-200' }
     case 'STALE_BLOCKED':
-      return { text: '前收盘基准', cls: 'bg-[#3987e5]/10 text-[#3987e5] border-[#3987e5]/25' }
+      return { text: '前收盘基准', cls: 'bg-slate-100 text-slate-700 border-slate-200' }
     case 'NOT_CONFIGURED':
-      return { text: '待配置源', cls: 'bg-gray-700/20 text-gray-400 border-gray-700/40' }
+      return { text: '待配置源', cls: 'bg-slate-100 text-slate-500 border-slate-200' }
     case 'NO_QUOTE':
-      return { text: '待补行情', cls: 'bg-gray-700/20 text-gray-400 border-gray-700/40' }
+      return { text: '待补行情', cls: 'bg-slate-100 text-slate-500 border-slate-200' }
     default:
-      return { text: '前收盘基准', cls: 'bg-gray-700/20 text-gray-400 border-gray-700/40' }
+      return { text: '前收盘基准', cls: 'bg-slate-100 text-slate-500 border-slate-200' }
   }
 }
 
@@ -211,7 +211,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
     return (
       <div className="p-8 flex items-center justify-center min-h-[400px]">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-3 border-[#3987e5] border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-3 border-[#176249] border-t-transparent rounded-full animate-spin" />
           <div className="text-sm text-[var(--text-muted)]">正在汇集全市场每日量化统计、板块天梯与宏观指标...</div>
         </div>
       </div>
@@ -498,23 +498,23 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
   return (
     <div className="p-4 md:p-6 space-y-6 max-w-[1600px] mx-auto">
       {/* ========================================================================= */}
-      {/* 顶层交易时段与统计基准状态条 (买方专业交易时段感知，消除底账字眼) */}
+      {/* 顶层交易时段与统计基准状态条 */}
       {/* ========================================================================= */}
       <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs shadow-sm">
         <div className="flex flex-wrap items-center gap-2.5">
-          <span className="w-2 h-2 rounded-full bg-[#199e70] animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-[#176249] animate-pulse" />
           <span className="font-bold text-[var(--text-primary)]">双市场交易时段状态</span>
           <span className="text-[var(--text-muted)]">|</span>
           <div className="flex flex-wrap items-center gap-3 text-[var(--text-secondary)] font-mono">
             <span className="flex items-center gap-1.5">
               <span className="text-[var(--text-muted)]">美股:</span>
-              <span className="px-1.5 py-0.2 rounded bg-gray-500/10 text-[var(--text-secondary)] border border-gray-500/20 font-sans text-[11px]">
+              <span className="px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200 font-sans text-[11px]">
                 已收盘 (前收盘基准)
               </span>
             </span>
             <span className="flex items-center gap-1.5">
               <span className="text-[var(--text-muted)]">日股:</span>
-              <span className="px-1.5 py-0.2 rounded bg-gray-500/10 text-[var(--text-secondary)] border border-gray-500/20 font-sans text-[11px]">
+              <span className="px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200 font-sans text-[11px]">
                 已收盘 (前收盘基准)
               </span>
             </span>
@@ -535,7 +535,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           <button
             type="button"
             onClick={() => onNavigateTab('collection')}
-            className="px-2.5 py-1 rounded-md bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/30 hover:border-[#3987e5] font-medium cursor-pointer transition-all"
+            className="px-2.5 py-1 rounded-md bg-[var(--bg-card)] hover:bg-slate-100 text-slate-700 border border-slate-200 hover:text-[#176249] hover:border-[#176249]/40 font-medium cursor-pointer transition-all"
           >
             调度控制台 →
           </button>
@@ -555,22 +555,30 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       )}
 
       {/* ========================================================================= */}
-      {/* 核心投研主工作区 (Bento 双栏黄金分割: 左65%全市场统计与行业天梯，右35%SEPA漏斗与事件雷达) */}
+      {/* 核心投研主工作区 (Bento 双栏: 左65%宏观罗盘与行业天梯，右35%SEPA主升浪与资金情绪) */}
       {/* ========================================================================= */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-        {/* ==================== 左侧 65% (lg:col-span-8): 全市场统计、宏观罗盘与行业天梯 ==================== */}
+        {/* ==================== 左侧 65% (lg:col-span-8): 水凤宏观罗盘、市场广度与行业天梯 ==================== */}
         <div className="lg:col-span-8 space-y-5">
-          {/* 1. 顶层大盘体温罗盘 (买方顶层研判，结论先行) */}
+          {/* 1. 水凤宏观罗盘与大盘体温研判 */}
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
-              <div className="flex items-center gap-2.5">
-                <CompassIcon className="w-5 h-5 text-[#3987e5]" />
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#176249] to-[#0e3a2f] flex items-center justify-center text-white shadow-xs shrink-0 relative overflow-hidden">
+                  <CompassIcon className="w-5 h-5 text-emerald-200" />
+                  <span className="absolute bottom-0 right-0 w-2 h-2 bg-gradient-to-tl from-amber-400 to-rose-500 rounded-tl-sm opacity-90" title="水凤和鸣" />
+                </div>
                 <div>
-                  <h2 className="text-base font-bold text-[var(--text-primary)]">
-                    全球宏观罗盘与双市场体温研判
-                  </h2>
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-base font-bold text-[var(--text-primary)]">
+                      水凤宏观罗盘与大盘体温研判
+                    </h2>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full font-medium bg-[#176249]/10 text-[#176249] border border-[#176249]/20 font-mono">
+                      水凤·宏观罗盘
+                    </span>
+                  </div>
                   <p className="text-xs text-[var(--text-muted)] mt-0.5">
-                    纽约与东京双市场基准、无风险利率定价锚与全市场资金风险溢价
+                    水蕴深潭（流动性与价值底座）· 凤鸣朝阳（主升浪与突破动能）· 全球双市场宏观定价锚
                   </p>
                 </div>
               </div>
@@ -588,21 +596,21 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   <span className="text-xs font-bold text-[var(--text-primary)]">
                     大盘定性：{data?.market_regime?.regime_title || '高息中枢定价约束 · 结构性主升浪分化扩散'}
                   </span>
-                  <span className="text-[10px] px-2 py-0.5 rounded font-semibold bg-amber-500/15 text-amber-500 border border-amber-500/30">
+                  <span className="text-[10px] px-2 py-0.5 rounded font-semibold bg-amber-50 text-amber-700 border border-amber-200">
                     {data?.market_regime?.regime_status_zh || '波动警戒 (VIX 28.18)'}
                   </span>
                 </div>
                 <button
                   type="button"
                   onClick={() => onNavigateTab('intelligence')}
-                  className="text-xs text-[#3987e5] hover:underline cursor-pointer flex items-center gap-1 font-medium"
+                  className="text-xs text-slate-700 hover:text-slate-900 hover:underline cursor-pointer flex items-center gap-1 font-medium"
                 >
                   <span>驱动事件雷达</span>
                   <span>&rarr;</span>
                 </button>
               </div>
-              <div className="flex items-start gap-1.5 text-xs text-[#199e70] font-medium">
-                <LightBulbIcon className="w-4 h-4 shrink-0 text-amber-500 mt-0.5" />
+              <div className="flex items-start gap-1.5 text-xs text-slate-700 font-medium">
+                <LightBulbIcon className="w-4 h-4 shrink-0 text-amber-600 mt-0.5" />
                 <span>策略指引：{data?.market_regime?.strategy_guidance || '全市场涨跌比处于 1.8 偏多顺风区间，但宏观利率锚高位压制估值倍数；仓位上限维持 3-4 成精选布局，聚焦通过 SEPA 严筛的 VCP 紧绷收缩标的。'}</span>
               </div>
               <div className="text-[11px] text-[var(--text-muted)] font-mono pt-1 border-t border-[var(--border-color)]/40 flex flex-wrap gap-x-4 gap-y-1">
@@ -640,12 +648,12 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   return (
                     <div
                       key={idx.ticker}
-                      className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#3987e5]/50 rounded-xl p-3 flex flex-col justify-between transition-all shadow-sm group relative"
+                      className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-slate-300 rounded-xl p-3 flex flex-col justify-between transition-all shadow-sm group relative"
                     >
                       <div>
                         {/* 顶栏：代码 + 状态标签 + 聚焦感叹号按钮 */}
                         <div className="flex items-center justify-between gap-1">
-                          <span className="font-mono font-bold text-xs text-[var(--text-primary)] group-hover:text-[#3987e5] transition-colors">
+                          <span className="font-mono font-bold text-xs text-[var(--text-primary)] group-hover:text-[#176249] transition-colors">
                             {idx.ticker}
                           </span>
                           
@@ -671,10 +679,10 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                                 }}
                                 onFocus={() => setActiveTooltipTicker(idx.ticker)}
                                 onBlur={() => setActiveTooltipTicker(null)}
-                                className={`w-4 h-4 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                                className={`w-4 h-4 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-slate-400 ${
                                   activeTooltipTicker === idx.ticker
-                                    ? 'bg-[#3987e5] text-white shadow-sm'
-                                    : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
+                                    ? 'bg-slate-700 text-white shadow-sm'
+                                    : 'bg-[var(--surface-color)] hover:bg-slate-200 text-[var(--text-muted)] hover:text-slate-800 border border-[var(--border-color)]'
                                 }`}
                               >
                                 <InfoCircleIcon className="w-3 h-3" />
@@ -683,33 +691,33 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                               {/* 聚焦/悬停/点击展开详细信息浮层 */}
                               {activeTooltipTicker === idx.ticker && (
                                 <div
-                                  className={`absolute top-full mt-2 w-64 p-3 rounded-xl bg-[var(--surface-color)] border border-[var(--border-color)] shadow-2xl z-50 pointer-events-auto opacity-100 transition-all duration-200 ${alignClass}`}
+                                  className={`absolute top-full mt-2 w-64 p-3 rounded-xl bg-white border border-slate-200 shadow-xl z-50 pointer-events-auto opacity-100 transition-all duration-200 ${alignClass}`}
                                   onMouseEnter={() => setActiveTooltipTicker(idx.ticker)}
                                   onMouseLeave={() => setActiveTooltipTicker(null)}
                                 >
-                                  <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
+                                  <div className="flex items-center justify-between border-b border-slate-100 pb-1.5 mb-1.5">
                                     <div className="flex items-center gap-1.5 min-w-0">
-                                      <span className="font-mono font-bold text-xs text-[var(--text-primary)]">
+                                      <span className="font-mono font-bold text-xs text-slate-800">
                                         {idx.ticker}
                                       </span>
-                                      <span className="text-[11px] text-[var(--text-secondary)] font-medium truncate">
+                                      <span className="text-[11px] text-slate-700 font-medium truncate">
                                         {idx.nameZh}
                                       </span>
                                     </div>
-                                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/25 font-medium shrink-0">
+                                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200 font-medium shrink-0">
                                       {idx.desc}
                                     </span>
                                   </div>
-                                  <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                                  <p className="text-[11px] text-slate-600 leading-relaxed">
                                     {idx.detail}
                                   </p>
                                   {(idx as any).param_reflection && (
-                                    <div className="mt-2 p-2 rounded-lg bg-[var(--bg-card)]/80 border border-[var(--border-color)]/60 text-[10px] text-[var(--text-secondary)] leading-relaxed">
-                                      <span className="font-semibold text-[#3987e5]">【参数反映情况】：</span>
+                                    <div className="mt-2 p-2 rounded-lg bg-slate-50 border border-slate-100 text-[10px] text-slate-600 leading-relaxed">
+                                      <span className="font-semibold text-slate-800">【参数反映情况】：</span>
                                       {(idx as any).param_reflection}
                                     </div>
                                   )}
-                                  <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
+                                  <div className="mt-2 pt-1.5 border-t border-slate-100 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
                                     <span>市场: {idx.market}</span>
                                     <span>货币: {idx.currency}</span>
                                     <span>时效: {idx.data_status_zh || badge.text}</span>
@@ -730,12 +738,14 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                           {idx.formatted_price || q?.formatted_price || (q?.price != null ? `${idx.symbol}${q.price}` : '—')}
                         </div>
 
-                        {/* 涨跌幅：微型矢量箭头徽章 */}
+                        {/* 涨跌幅：微型矢量箭头徽章 (红涨蓝跌) */}
                         <div className="flex items-center gap-1 mt-1 text-[11px] font-mono font-bold">
-                          <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded ${
-                            isUp ? 'text-rose-500 bg-rose-500/10' : 'text-[#3987e5] bg-[#3987e5]/10'
+                          <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded border ${
+                            isUp
+                              ? 'text-rose-600 bg-rose-50 border-rose-200'
+                              : 'text-blue-600 bg-blue-50 border-blue-200'
                           }`}>
-                            {isUp ? <TrendUpIcon className="w-2.5 h-2.5 stroke-[3] text-rose-500" /> : <TrendDownIcon className="w-2.5 h-2.5 stroke-[3] text-[#3987e5]" />}
+                            {isUp ? <TrendUpIcon className="w-2.5 h-2.5 stroke-[3] text-rose-600" /> : <TrendDownIcon className="w-2.5 h-2.5 stroke-[3] text-blue-600" />}
                             <span>{chgPct}</span>
                           </span>
                         </div>
@@ -768,7 +778,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   return (
                     <div
                       key={g.id}
-                      className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 flex flex-col justify-between hover:border-[#3987e5]/40 transition-all relative group shadow-sm"
+                      className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 flex flex-col justify-between hover:border-slate-300 transition-all relative group shadow-sm"
                     >
                       <div>
                         {/* 顶栏：指标名称 + 感叹号展开浮层 */}
@@ -793,10 +803,10 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                               }}
                               onFocus={() => setActiveMacroTooltipId(g.id)}
                               onBlur={() => setActiveMacroTooltipId(null)}
-                              className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                              className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#176249] ${
                                 activeMacroTooltipId === g.id
-                                  ? 'bg-[#3987e5] text-white shadow-sm'
-                                  : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
+                                  ? 'bg-[#176249] text-white shadow-sm'
+                                  : 'bg-[var(--surface-color)] hover:bg-slate-100 text-[var(--text-muted)] hover:text-slate-700 border border-[var(--border-color)] hover:border-slate-300'
                               }`}
                             >
                               <InfoCircleIcon className="w-2.5 h-2.5" />
@@ -818,7 +828,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                                       {g.nameZh}
                                     </span>
                                   </div>
-                                  <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/25 font-medium shrink-0">
+                                  <span className="text-[9px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200 font-medium shrink-0">
                                     {g.role}
                                   </span>
                                 </div>
@@ -827,7 +837,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                                 </p>
                                 {(g as any).param_reflection && (
                                   <div className="mt-2 p-2 rounded-lg bg-[var(--bg-card)]/80 border border-[var(--border-color)]/60 text-[10px] text-[var(--text-secondary)] leading-relaxed">
-                                    <span className="font-semibold text-[#3987e5]">【参数读数反映情况】：</span>
+                                    <span className="font-semibold text-[#176249]">【参数读数反映情况】：</span>
                                     {(g as any).param_reflection}
                                   </div>
                                 )}
@@ -835,8 +845,8 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                                   <span>当前读数: <strong className="text-[var(--text-primary)]">{g.value}</strong></span>
                                   <span>状态: <span className={
                                     g.tone === 'warning' ? 'text-amber-500 font-semibold' :
-                                    g.tone === 'good' ? 'text-[#199e70] font-semibold' :
-                                    'text-[#3987e5] font-semibold'
+                                    g.tone === 'good' ? 'text-[#176249] font-semibold' :
+                                    'text-slate-700 font-semibold'
                                   }>{g.status}</span></span>
                                 </div>
                               </div>
@@ -853,10 +863,10 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                       {/* 底栏：代码 + 状态标签 */}
                       <div className="mt-1.5 flex items-center justify-between gap-1 pt-1 border-t border-[var(--border-color)]/40">
                         <span className="text-[9px] text-[var(--text-muted)] font-mono truncate">{g.id}</span>
-                        <span className={`text-[9px] px-1 py-0.2 rounded font-medium ${
-                          g.tone === 'warning' ? 'text-amber-500 bg-amber-500/10' :
-                          g.tone === 'good' ? 'text-[#199e70] bg-[#199e70]/10' :
-                          'text-[#3987e5] bg-[#3987e5]/10'
+                        <span className={`text-[9px] px-1 py-0.2 rounded font-medium border ${
+                          g.tone === 'warning' ? 'text-amber-700 bg-amber-50 border-amber-200' :
+                          g.tone === 'good' ? 'text-emerald-700 bg-emerald-50 border-emerald-200' :
+                          'text-slate-700 bg-slate-100 border-slate-200'
                         }`}>
                           {g.status}
                         </span>
@@ -872,7 +882,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
               <div className="flex items-center gap-2.5">
-                <BarChartIcon className="w-5 h-5 text-[#3987e5]" />
+                <BarChartIcon className="w-5 h-5 text-slate-700" />
                 <div>
                   <h2 className="text-base font-bold text-[var(--text-primary)]">
                     全市场每日股票涨跌分布统计
@@ -886,12 +896,12 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                 <span>全市场中位数涨幅:</span>
                 <div className="flex items-center gap-1.5 font-bold">
                   <span className={`px-2 py-0.5 rounded border ${
-                    !usAD.median_return_pct.startsWith('-') ? 'text-rose-500 bg-rose-500/10 border-rose-500/30' : 'text-[#3987e5] bg-[#3987e5]/10 border-[#3987e5]/30'
+                    !usAD.median_return_pct.startsWith('-') ? 'text-rose-600 bg-rose-50 border-rose-200' : 'text-blue-600 bg-blue-50 border-blue-200'
                   }`}>
                     美股 {usAD.median_return_pct}
                   </span>
                   <span className={`px-2 py-0.5 rounded border ${
-                    !jpAD.median_return_pct.startsWith('-') ? 'text-rose-500 bg-rose-500/10 border-rose-500/30' : 'text-[#3987e5] bg-[#3987e5]/10 border-[#3987e5]/30'
+                    !jpAD.median_return_pct.startsWith('-') ? 'text-rose-600 bg-rose-50 border-rose-200' : 'text-blue-600 bg-blue-50 border-blue-200'
                   }`}>
                     日股 {jpAD.median_return_pct}
                   </span>
@@ -905,39 +915,39 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3.5 space-y-2.5 shadow-sm">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                    <span className="px-1.5 py-0.2 rounded bg-[#3987e5]/10 text-[#3987e5] font-mono text-[10px] font-bold">US</span>
+                    <span className="px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200 font-mono text-[10px] font-bold">US</span>
                     <span>美股全市场涨跌统计 (10,000+ 标的)</span>
                   </span>
-                  <span className={`font-mono font-bold ${usAD.ad_ratio >= 1.0 ? 'text-rose-500' : 'text-[#3987e5]'}`}>
+                  <span className={`font-mono font-bold ${usAD.ad_ratio >= 1.0 ? 'text-rose-600' : 'text-blue-600'}`}>
                     涨跌比: {usAD.ad_ratio}
                   </span>
                 </div>
                 {/* 比例条 (红涨蓝跌) */}
-                <div className="h-3 w-full bg-gray-700/30 rounded-full overflow-hidden flex">
+                <div className="h-3 w-full bg-slate-200 rounded-full overflow-hidden flex">
                   <div
                     style={{ width: `${usAD.advancers_pct}%` }}
-                    className="bg-[#d03b3b] h-full transition-all"
+                    className="bg-rose-500 h-full transition-all"
                     title={`上涨: ${usAD.advancers} 家 (${usAD.advancers_pct}%)`}
                   />
                   <div
                     style={{ width: `${100 - usAD.advancers_pct - usAD.decliners_pct}%` }}
-                    className="bg-gray-500/40 h-full transition-all"
+                    className="bg-slate-300 h-full transition-all"
                     title={`平盘: ${usAD.unchanged} 家`}
                   />
                   <div
                     style={{ width: `${usAD.decliners_pct}%` }}
-                    className="bg-[#3987e5] h-full transition-all"
+                    className="bg-blue-500 h-full transition-all"
                     title={`下跌: ${usAD.decliners} 家 (${usAD.decliners_pct}%)`}
                   />
                 </div>
                 <div className="flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)] pt-0.5">
-                  <span className="text-rose-500 font-semibold inline-flex items-center gap-1">
-                    <TrendUpIcon className="w-2.5 h-2.5 stroke-[3] text-rose-500" />
+                  <span className="text-rose-600 font-semibold inline-flex items-center gap-1">
+                    <TrendUpIcon className="w-2.5 h-2.5 stroke-[3] text-rose-600" />
                     <span>上涨 {usAD.advancers.toLocaleString()} ({usAD.advancers_pct}%)</span>
                   </span>
-                  <span className="text-gray-400">━ 平盘 {usAD.unchanged.toLocaleString()}</span>
-                  <span className="text-[#3987e5] font-semibold inline-flex items-center gap-1">
-                    <TrendDownIcon className="w-2.5 h-2.5 stroke-[3] text-[#3987e5]" />
+                  <span className="text-slate-400">━ 平盘 {usAD.unchanged.toLocaleString()}</span>
+                  <span className="text-blue-600 font-semibold inline-flex items-center gap-1">
+                    <TrendDownIcon className="w-2.5 h-2.5 stroke-[3] text-blue-600" />
                     <span>下跌 {usAD.decliners.toLocaleString()} ({usAD.decliners_pct}%)</span>
                   </span>
                 </div>
@@ -951,39 +961,39 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3.5 space-y-2.5 shadow-sm">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                    <span className="px-1.5 py-0.2 rounded bg-rose-500/10 text-rose-500 font-mono text-[10px] font-bold">JP</span>
+                    <span className="px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200 font-mono text-[10px] font-bold">JP</span>
                     <span>东证全市场涨跌统计 (4,400+ 标的)</span>
                   </span>
-                  <span className={`font-mono font-bold ${jpAD.ad_ratio >= 1.0 ? 'text-rose-500' : 'text-[#3987e5]'}`}>
+                  <span className={`font-mono font-bold ${jpAD.ad_ratio >= 1.0 ? 'text-rose-600' : 'text-blue-600'}`}>
                     涨跌比: {jpAD.ad_ratio}
                   </span>
                 </div>
                 {/* 比例条 (红涨蓝跌) */}
-                <div className="h-3 w-full bg-gray-700/30 rounded-full overflow-hidden flex">
+                <div className="h-3 w-full bg-slate-200 rounded-full overflow-hidden flex">
                   <div
                     style={{ width: `${jpAD.advancers_pct}%` }}
-                    className="bg-[#d03b3b] h-full transition-all"
+                    className="bg-rose-500 h-full transition-all"
                     title={`上涨: ${jpAD.advancers} 家 (${jpAD.advancers_pct}%)`}
                   />
                   <div
                     style={{ width: `${100 - jpAD.advancers_pct - jpAD.decliners_pct}%` }}
-                    className="bg-gray-500/40 h-full transition-all"
+                    className="bg-slate-300 h-full transition-all"
                     title={`平盘: ${jpAD.unchanged} 家`}
                   />
                   <div
                     style={{ width: `${jpAD.decliners_pct}%` }}
-                    className="bg-[#3987e5] h-full transition-all"
+                    className="bg-blue-500 h-full transition-all"
                     title={`下跌: ${jpAD.decliners} 家 (${jpAD.decliners_pct}%)`}
                   />
                 </div>
                 <div className="flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)] pt-0.5">
-                  <span className="text-rose-500 font-semibold inline-flex items-center gap-1">
-                    <TrendUpIcon className="w-2.5 h-2.5 stroke-[3] text-rose-500" />
+                  <span className="text-rose-600 font-semibold inline-flex items-center gap-1">
+                    <TrendUpIcon className="w-2.5 h-2.5 stroke-[3] text-rose-600" />
                     <span>上涨 {jpAD.advancers.toLocaleString()} ({jpAD.advancers_pct}%)</span>
                   </span>
-                  <span className="text-gray-400">━ 平盘 {jpAD.unchanged.toLocaleString()}</span>
-                  <span className="text-[#3987e5] font-semibold inline-flex items-center gap-1">
-                    <TrendDownIcon className="w-2.5 h-2.5 stroke-[3] text-[#3987e5]" />
+                  <span className="text-slate-400">━ 平盘 {jpAD.unchanged.toLocaleString()}</span>
+                  <span className="text-blue-600 font-semibold inline-flex items-center gap-1">
+                    <TrendDownIcon className="w-2.5 h-2.5 stroke-[3] text-blue-600" />
                     <span>下跌 {jpAD.decliners.toLocaleString()} ({jpAD.decliners_pct}%)</span>
                   </span>
                 </div>
@@ -1005,12 +1015,12 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               <div className="grid grid-cols-7 gap-2 pt-1">
                 {histogram.map((bucket) => {
                   const isUp = bucket.tone === 'up'
-                  const barColor = isUp ? 'bg-[#d03b3b]' : 'bg-[#3987e5]'
-                  const textColor = isUp ? 'text-rose-500' : 'text-[#3987e5]'
+                  const barColor = isUp ? 'bg-rose-500' : 'bg-blue-500'
+                  const textColor = isUp ? 'text-rose-600' : 'text-blue-600'
                   return (
                     <div
                       key={bucket.range}
-                      className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 flex flex-col justify-between items-center text-center hover:border-[#3987e5]/40 transition-all"
+                      className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 flex flex-col justify-between items-center text-center hover:border-slate-300 transition-all"
                     >
                       <div className="text-[10px] text-[var(--text-muted)] font-mono font-semibold truncate w-full">
                         {bucket.range}
@@ -1041,7 +1051,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
               <div className="flex items-center gap-2.5">
-                <BarChartIcon className="w-5 h-5 text-[#3987e5]" />
+                <BarChartIcon className="w-5 h-5 text-slate-700" />
                 <div>
                   <h2 className="text-base font-bold text-[var(--text-primary)]">
                     GICS 全行业板块收益与成交动量天梯榜
@@ -1060,13 +1070,13 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               {sectors.map((sec) => (
                 <div
                   key={sec.id}
-                  className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#3987e5]/50 rounded-xl px-3.5 py-2.5 flex flex-wrap items-center justify-between gap-3 transition-all shadow-sm"
+                  className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-slate-300 rounded-xl px-3.5 py-2.5 flex flex-wrap items-center justify-between gap-3 transition-all shadow-sm"
                 >
                   {/* 左：排名与板块名称 */}
                   <div className="flex items-center gap-3 min-w-[200px]">
                     <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold font-mono ${
                       sec.strength_rank <= 3
-                        ? 'bg-[#3987e5] text-white'
+                        ? 'bg-[#176249] text-white'
                         : 'bg-[var(--surface-color)] text-[var(--text-muted)] border border-[var(--border-color)]'
                     }`}>
                       {sec.strength_rank}
@@ -1084,9 +1094,9 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   {/* 中：上涨个股比例微进度条 */}
                   <div className="hidden md:flex items-center gap-2 min-w-[150px]">
                     <span className="text-[10px] text-[var(--text-muted)] font-mono shrink-0">上涨率:</span>
-                    <div className="w-24 bg-gray-700/20 h-2 rounded-full overflow-hidden">
+                    <div className="w-24 bg-slate-200 h-2 rounded-full overflow-hidden">
                       <div
-                        className="bg-[#d03b3b] h-full rounded-full"
+                        className="bg-rose-500 h-full rounded-full"
                         style={{ width: `${sec.advancers_pct}%` }}
                       />
                     </div>
@@ -1104,8 +1114,8 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                       </div>
                     </div>
                     <div className="min-w-[80px] text-right">
-                      <span className={`inline-block px-2.5 py-1 rounded-lg text-xs font-black font-mono ${
-                        sec.is_up ? 'bg-rose-500/15 text-rose-500 border border-rose-500/30' : 'bg-[#3987e5]/15 text-[#3987e5] border border-[#3987e5]/30'
+                      <span className={`inline-block px-2.5 py-1 rounded-lg text-xs font-black font-mono border ${
+                        sec.is_up ? 'bg-rose-50 text-rose-600 border-rose-200' : 'bg-blue-50 text-blue-600 border-blue-200'
                       }`}>
                         {sec.return_formatted}
                       </span>
@@ -1180,7 +1190,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                 return (
                   <div
                     key={item.id}
-                    className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3 space-y-2 relative group shadow-sm hover:border-[#3987e5]/40 transition-all"
+                    className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3 space-y-2 relative group shadow-sm hover:border-slate-300 transition-all"
                   >
                     <div className="flex items-center justify-between gap-1">
                       <div className="text-[11px] text-[var(--text-muted)] font-medium truncate">
@@ -1204,10 +1214,10 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                           }}
                           onFocus={() => setActiveMaTooltipId(item.id)}
                           onBlur={() => setActiveMaTooltipId(null)}
-                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#176249] ${
                             activeMaTooltipId === item.id
-                              ? 'bg-[#3987e5] text-white border-[#3987e5]'
-                              : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
+                              ? 'bg-[#176249] text-white border-[#176249]'
+                              : 'bg-[var(--surface-color)] hover:bg-slate-100 text-[var(--text-muted)] hover:text-slate-700 border border-[var(--border-color)] hover:border-slate-300'
                           }`}
                         >
                           <InfoCircleIcon className="w-2.5 h-2.5" />
@@ -1223,7 +1233,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                               <span className="font-bold text-xs text-[var(--text-primary)]">
                                 {item.title}
                               </span>
-                              <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/25 font-medium shrink-0">
+                              <span className="text-[9px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200 font-medium shrink-0">
                                 {item.role}
                               </span>
                             </div>
@@ -1232,13 +1242,13 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                             </p>
                             {item.param_reflection && (
                               <div className="mt-2 p-2 rounded-lg bg-[var(--bg-card)]/80 border border-[var(--border-color)]/60 text-[10px] text-[var(--text-secondary)] leading-relaxed">
-                                <span className="font-semibold text-[#3987e5]">【参数反映情况】：</span>
+                                <span className="font-semibold text-[#176249]">【参数反映情况】：</span>
                                 {item.param_reflection}
                               </div>
                             )}
                             <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
                               <span>当前渗透率: <strong className="text-[var(--text-primary)]">{item.pct}%</strong></span>
-                              <span>基准: <span className={item.pct >= 50 ? 'text-[#199e70] font-semibold' : 'text-amber-500 font-semibold'}>{item.pct >= 50 ? '多头优势' : '空头承压'}</span></span>
+                              <span>基准: <span className={item.pct >= 50 ? 'text-[#176249] font-semibold' : 'text-amber-500 font-semibold'}>{item.pct >= 50 ? '多头优势' : '空头承压'}</span></span>
                             </div>
                           </div>
                         )}
@@ -1248,10 +1258,10 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                     <div className="text-xl font-black font-mono text-[var(--text-primary)]">
                       {item.pct}%
                     </div>
-                    <div className="w-full bg-gray-700/20 h-2 rounded-full overflow-hidden">
+                    <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
                       <div
                         className={`h-full rounded-full transition-all duration-500 ${
-                          item.pct >= 50 ? 'bg-[#199e70]' : 'bg-amber-500'
+                          item.pct >= 50 ? 'bg-[#176249]' : 'bg-amber-500'
                         }`}
                         style={{ width: `${item.pct}%` }}
                       />
@@ -1288,10 +1298,10 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                         }}
                         onFocus={() => setActiveTooltipTicker('NET_EXPANSION')}
                         onBlur={() => setActiveTooltipTicker(null)}
-                        className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                        className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#176249] ${
                           activeTooltipTicker === 'NET_EXPANSION'
-                            ? 'bg-[#3987e5] text-white shadow-sm'
-                            : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
+                            ? 'bg-[#176249] text-white shadow-sm'
+                            : 'bg-[var(--surface-color)] hover:bg-slate-100 text-[var(--text-muted)] hover:text-slate-700 border border-[var(--border-color)] hover:border-slate-300'
                         }`}
                       >
                         <InfoCircleIcon className="w-2.5 h-2.5" />
@@ -1307,7 +1317,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                             <span className="font-bold text-xs text-[var(--text-primary)]">
                               52 周新高净扩展
                             </span>
-                            <span className="text-[9px] px-1.5 py-0.2 rounded bg-rose-500/10 text-rose-500 border border-rose-500/25 font-medium shrink-0">
+                            <span className="text-[9px] px-1.5 py-0.2 rounded bg-rose-50 text-rose-600 border border-rose-200 font-medium shrink-0">
                               多头广度指标
                             </span>
                           </div>
@@ -1315,7 +1325,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                             新高持续压制新低，表明牛市趋势内部流动性宽裕，假跌风险低。
                           </p>
                           <div className="mt-2 p-2 rounded-lg bg-[var(--bg-card)]/80 border border-[var(--border-color)]/60 text-[10px] text-[var(--text-secondary)] leading-relaxed">
-                            <span className="font-semibold text-[#3987e5]">【参数反映情况】：</span>
+                            <span className="font-semibold text-[#176249]">【参数反映情况】：</span>
                             当前净扩展为 +{ma.high_low.net_expansion} 席（52周新高 {ma.high_low.new_52w_highs} 席 vs 52周新低 {ma.high_low.new_52w_lows} 席），新高持续处于净主导地位，反映市场整体赚钱效应充沛，属于典型多头进攻浪潮。
                           </div>
                           <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
@@ -1334,15 +1344,15 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               <div className="flex items-center gap-4 font-mono">
                 <div className="text-center">
                   <div className="text-[9px] text-[var(--text-muted)]">52周新高</div>
-                  <div className="text-sm font-black text-rose-500">+{ma.high_low.new_52w_highs} 席</div>
+                  <div className="text-sm font-black text-rose-600">+{ma.high_low.new_52w_highs} 席</div>
                 </div>
                 <div className="text-center">
                   <div className="text-[9px] text-[var(--text-muted)]">52周新低</div>
-                  <div className="text-sm font-black text-[#3987e5]">-{ma.high_low.new_52w_lows} 席</div>
+                  <div className="text-sm font-black text-blue-600">-{ma.high_low.new_52w_lows} 席</div>
                 </div>
                 <div className="text-center pl-3 border-l border-[var(--border-color)]">
                   <div className="text-[9px] text-[var(--text-muted)]">净扩展指数</div>
-                  <div className="text-base font-black text-rose-500">+{ma.high_low.net_expansion} 席</div>
+                  <div className="text-base font-black text-rose-600">+{ma.high_low.net_expansion} 席</div>
                 </div>
               </div>
             </div>
@@ -1351,34 +1361,36 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
 
         {/* ==================== 右侧 35% (lg:col-span-4): SEPA漏斗、资金情绪与突发事件雷达 ==================== */}
         <div className="lg:col-span-4 space-y-5">
-          {/* 1. 米纳尔维尼 SEPA 主升浪选股统计漏斗 */}
+          {/* 1. 凤鸣朝阳 · SEPA 主升浪选股统计漏斗 */}
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3.5">
             <div className="flex items-center justify-between pb-2.5 border-b border-[var(--border-color)]/60">
               <div className="flex items-center gap-2">
-                <FilterIcon className="w-4 h-4 text-[#3987e5]" />
+                <FilterIcon className="w-4 h-4 text-[#176249]" />
                 <h3 className="text-xs font-bold text-[var(--text-primary)]">
-                  SEPA 主升浪选股统计漏斗
+                  凤鸣朝阳 · SEPA 主升浪选股漏斗
                 </h3>
               </div>
-              <span className="text-[10px] text-[var(--text-muted)] font-mono">Mark Minervini 漏斗</span>
+              <span className="text-[10px] text-[var(--text-muted)] font-mono">趋势模板与收缩模型</span>
             </div>
 
             {/* 漏斗 5 阶层 */}
             <div className="space-y-2">
               {[
-                { stage: '全盘标的池扫描', count: funnel.total_screened, pct: '100%', bg: 'bg-[#3987e5]/20 text-[#3987e5]', barW: '100%' },
-                { stage: '站上 200 日牛熊线', count: funnel.stage_1_base_building, pct: '25.7%', bg: 'bg-[#3987e5]/30 text-[#3987e5]', barW: '75%' },
-                { stage: '第二阶段主升浪结构', count: funnel.stage_2_trend_aligned, pct: '7.5%', bg: 'bg-[#199e70]/30 text-[#199e70]', barW: '50%' },
-                { stage: '高相对强度 (RS ≥ 80)', count: funnel.stage_3_near_high, pct: '3.2%', bg: 'bg-[#199e70]/50 text-[#199e70]', barW: '32%' },
-                { stage: 'VCP 紧绷收缩突破候选', count: funnel.stage_4_vcp_candidates, pct: '0.12%', bg: 'bg-emerald-500 text-white font-bold', barW: '18%' },
+                { stage: '全盘标的池扫描', count: funnel.total_screened, pct: '100%', barW: '100%' },
+                { stage: '站上 200 日牛熊线', count: funnel.stage_1_base_building, pct: '25.7%', barW: '75%' },
+                { stage: '第二阶段主升浪结构', count: funnel.stage_2_trend_aligned, pct: '7.5%', barW: '50%' },
+                { stage: '高相对强度 (RS ≥ 80)', count: funnel.stage_3_near_high, pct: '3.2%', barW: '32%' },
+                { stage: '凤鸣突破 · VCP 临界收缩', count: funnel.stage_4_vcp_candidates, pct: '0.12%', barW: '18%' },
               ].map((f, i) => (
                 <div key={f.stage} className="space-y-1">
                   <div className="flex items-center justify-between text-[11px]">
                     <div className="flex items-center gap-1.5">
-                      <span className="w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold bg-[#3987e5]/15 text-[#3987e5]">
+                      <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold ${
+                        i === 4 ? 'bg-gradient-to-r from-amber-500 to-rose-600 text-white shadow-xs' : 'bg-slate-100 text-slate-700'
+                      }`}>
                         {i + 1}
                       </span>
-                      <span className="text-[var(--text-secondary)] font-medium">
+                      <span className={`font-medium ${i === 4 ? 'text-rose-600 font-bold' : 'text-[var(--text-secondary)]'}`}>
                         {f.stage}
                       </span>
                     </div>
@@ -1386,9 +1398,19 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                       {f.count.toLocaleString()} 家 <span className="text-[var(--text-muted)] text-[10px]">({f.pct})</span>
                     </span>
                   </div>
-                  <div className="w-full bg-gray-700/20 h-1.5 rounded-full overflow-hidden">
+                  <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
                     <div
-                      className={`h-full rounded-full transition-all duration-500 ${i === 4 ? 'bg-emerald-500' : 'bg-[#3987e5]'}`}
+                      className={`h-full rounded-full transition-all duration-500 ${
+                        i === 4
+                          ? 'bg-gradient-to-r from-amber-500 to-rose-600'
+                          : i === 0
+                          ? 'bg-slate-300'
+                          : i === 1
+                          ? 'bg-[#176249]/40'
+                          : i === 2
+                          ? 'bg-[#176249]/70'
+                          : 'bg-[#176249]'
+                      }`}
                       style={{ width: f.barW }}
                     />
                   </div>
@@ -1400,7 +1422,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
             <div className="space-y-2 pt-2 border-t border-[var(--border-color)]/60">
               <div className="flex items-center justify-between text-xs font-semibold text-[var(--text-secondary)]">
                 <span>临界突破 VCP 精选标的 ({funnel.top_candidates.length}席)</span>
-                <span className="text-[10px] text-[#3987e5]">点击直达分析</span>
+                <span className="text-[10px] text-[#176249] font-medium">点击进入分析 &rarr;</span>
               </div>
               <div className="space-y-2">
                 {funnel.top_candidates.map((c) => (
@@ -1410,14 +1432,14 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                       onSelectTicker?.(c.ticker)
                       onNavigateTab('analytics')
                     }}
-                    className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#3987e5] rounded-xl p-2.5 cursor-pointer transition-all flex items-center justify-between gap-3 group shadow-sm hover:shadow"
+                    className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#176249]/60 rounded-xl p-2.5 cursor-pointer transition-all flex items-center justify-between gap-3 group shadow-sm hover:shadow"
                   >
                     <div className="min-w-0">
                       <div className="flex items-center gap-1.5">
-                        <span className="font-mono font-bold text-xs text-[var(--text-primary)] group-hover:text-[#3987e5] transition-colors">
+                        <span className="font-mono font-bold text-xs text-[var(--text-primary)] group-hover:text-[#176249] transition-colors">
                           {c.ticker}
                         </span>
-                        <span className="text-[10px] px-1.5 py-0.2 rounded font-medium bg-[#199e70]/10 text-[#199e70] border border-[#199e70]/25">
+                        <span className="text-[10px] px-1.5 py-0.2 rounded font-medium bg-[#176249]/10 text-[#176249] border border-[#176249]/25">
                           {c.vcp_contraction_stages}次收缩 VCP
                         </span>
                         <span className="text-[11px] text-[var(--text-secondary)] font-medium truncate">
@@ -1433,7 +1455,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                       <div className="font-bold text-xs text-[var(--text-primary)]">
                         {c.price}
                       </div>
-                      <div className={`text-[10px] font-bold ${c.chg_pct?.startsWith('-') ? 'text-[#3987e5]' : 'text-rose-500'}`}>
+                      <div className={`text-[10px] font-bold ${c.chg_pct?.startsWith('-') ? 'text-blue-600' : 'text-rose-600'}`}>
                         {c.chg_pct}
                       </div>
                       <div className="text-[9px] text-[var(--text-muted)] mt-0.5">
@@ -1450,7 +1472,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3">
             <div className="flex items-center justify-between pb-2 border-b border-[var(--border-color)]/60">
               <div className="flex items-center gap-2">
-                <ZapIcon className="w-4 h-4 text-amber-500" />
+                <ZapIcon className="w-4 h-4 text-slate-700" />
                 <h3 className="text-xs font-bold text-[var(--text-primary)]">
                   宏观资金能级与期权情绪
                 </h3>
@@ -1465,7 +1487,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   title: 'Fear & Greed 恐慌贪婪',
                   value: sentiment.fear_greed_score,
                   sub: sentiment.fear_greed_gauge,
-                  valColor: 'text-emerald-500',
+                  valColor: 'text-rose-600',
                   detail: 'CNN 综合恐慌与贪婪指数（0-100）。综合市场动量、股票价格强度、避险需求与垃圾债利差。读数在 60-75 为健康贪婪蓄势，> 80 触发极度狂热警惕，< 25 为极端恐慌买点。',
                   param_reflection: '读数处于 60-75 温和贪婪区，反映市场情绪向上扩张且未见 80 以上非理性狂热，风险收益比适宜。',
                 },
@@ -1474,7 +1496,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   title: '期权看跌/看涨比 (PCR)',
                   value: sentiment.put_call_ratio,
                   sub: sentiment.put_call_signal,
-                  valColor: 'text-[#3987e5]',
+                  valColor: 'text-blue-600',
                   detail: '全市场看跌期权 (Put) 与看涨期权 (Call) 总成交量之比。PCR < 0.70 表明市场看多投机亢奋，0.70 - 0.90 为健康防御中性区间，> 1.0 表明对冲买盘沉重。',
                   param_reflection: 'PCR 0.70-0.90 处于健康中性区间，反映机构下行对冲买盘适度，认购期权未出现极端投机泡沫。',
                 },
@@ -1483,7 +1505,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   title: '主力机构资金净流入',
                   value: sentiment.institutional_net_inflow_str,
                   sub: '净买入防御权重',
-                  valColor: 'text-rose-500',
+                  valColor: 'text-rose-600',
                   detail: '基于交易所大单宗数 (Block Trades) 资金流向监测的大机构主力买方净流入。反映聪明钱 (Smart Money) 在核心权重指数及龙头防御板块的战略建仓意愿。',
                   param_reflection: '大额主力资金净流入呈现正向，反映顶级机构做市商与公募基金在核心蓝筹资产上正在持续吸筹建仓。',
                 },
@@ -1502,7 +1524,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                 return (
                   <div
                     key={item.id}
-                    className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 text-center relative group shadow-sm hover:border-[#3987e5]/40 transition-all"
+                    className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 text-center relative group shadow-sm hover:border-slate-300 transition-all"
                   >
                     <div className="flex items-center justify-between gap-1 mb-1">
                       <div className="text-[10px] text-[var(--text-muted)] truncate font-medium text-left">
@@ -1526,10 +1548,10 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                           }}
                           onFocus={() => setActiveSentimentTooltipId(item.id)}
                           onBlur={() => setActiveSentimentTooltipId(null)}
-                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#176249] ${
                             activeSentimentTooltipId === item.id
-                              ? 'bg-[#3987e5] text-white border-[#3987e5]'
-                              : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
+                              ? 'bg-[#176249] text-white border-[#176249]'
+                              : 'bg-[var(--surface-color)] hover:bg-slate-100 text-[var(--text-muted)] hover:text-slate-700 border border-[var(--border-color)] hover:border-slate-300'
                           }`}
                         >
                           <InfoCircleIcon className="w-2.5 h-2.5" />
@@ -1551,13 +1573,13 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                             </p>
                             {item.param_reflection && (
                               <div className="mt-2 p-2 rounded-lg bg-[var(--bg-card)]/80 border border-[var(--border-color)]/60 text-[10px] text-[var(--text-secondary)] leading-relaxed">
-                                <span className="font-semibold text-[#3987e5]">【参数反映情况】：</span>
+                                <span className="font-semibold text-[#176249]">【参数反映情况】：</span>
                                 {item.param_reflection}
                               </div>
                             )}
                             <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
                               <span>读数: <strong className="text-[var(--text-primary)]">{item.value}</strong></span>
-                              <span>定性: <span className="text-[#3987e5] font-semibold">{item.sub}</span></span>
+                              <span>定性: <span className="text-[#176249] font-semibold">{item.sub}</span></span>
                             </div>
                           </div>
                         )}
@@ -1580,7 +1602,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3">
             <div className="flex items-center justify-between pb-2.5 border-b border-[var(--border-color)]/60">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#d03b3b]" />
+                <span className="w-2 h-2 rounded-full bg-rose-500" />
                 <h3 className="text-xs font-bold text-[var(--text-primary)]">
                   权威事件雷达 ({data?.events_summary?.total_events || 0}篇)
                 </h3>
@@ -1590,16 +1612,16 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   type="button"
                   onClick={handleExtractNews}
                   disabled={isExtractingNews}
-                  className="text-[10px] px-2 py-0.5 rounded bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/30 cursor-pointer transition-all flex items-center gap-1"
+                  className="text-[10px] px-2 py-0.5 rounded bg-[var(--bg-card)] hover:bg-slate-100 text-slate-700 border border-slate-200 hover:text-[#176249] hover:border-[#176249]/40 cursor-pointer transition-all flex items-center gap-1"
                   title="即时核验与抽取官方最新公报"
                 >
-                  <ZapIcon className={`w-3 h-3 text-[#3987e5] ${isExtractingNews ? 'animate-spin' : ''}`} />
+                  <ZapIcon className={`w-3 h-3 text-slate-600 ${isExtractingNews ? 'animate-spin' : ''}`} />
                   <span>{isExtractingNews ? '抽取中...' : '即时抽取'}</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => onNavigateTab('intelligence')}
-                  className="text-[10px] text-[var(--text-secondary)] hover:text-[#3987e5] hover:underline cursor-pointer"
+                  className="text-[10px] text-[var(--text-secondary)] hover:text-[#176249] hover:underline cursor-pointer"
                 >
                   全部 &rarr;
                 </button>
