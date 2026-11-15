@@ -547,9 +547,19 @@ export interface LogItem {
   run_id?: string
 }
 
+export interface LogFileInfo {
+  filename: string
+  path: string
+  size_bytes: number
+  size_formatted: string
+  exists: boolean
+  last_modified: number | null
+}
+
 export interface LogsData {
   total_buffered: number
   available_modules: string[]
+  log_files?: LogFileInfo[]
   logs: LogItem[]
 }
 

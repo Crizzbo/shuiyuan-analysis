@@ -44,6 +44,7 @@ from financial_core.pipeline.information_pipeline_board_engine import (
 from finance_tools.governance_and_pipeline.data_readiness_tracker import DataReadinessTracker, is_excluded_quote
 from finance_tools.governance_and_pipeline.service import calculate
 from finance_tools.governance_and_pipeline.financial_analysis_gateway import FinancialAnalysisGateway
+from finance_tools.logging import setup_terminal_logging
 from financial_reporting.ai_research_agent import AIEngineAdapter, AIResearchAgent
 from financial_reporting.data_collection_gateway import UnifiedDataCollectionGateway
 import os
@@ -189,6 +190,12 @@ class WatersourceTerminalService:
         self._logs: deque = deque(maxlen=500)
         self._subscribers: List[queue.Queue] = []
         self._universe_cache: Optional[List[Dict[str, Any]]] = None
+
+        # 初始化工程专属物理日志落盘与 Python 日志桥接中枢 (RotatingFileHandler + SSE 实时推流)
+        self.logging_manager = setup_terminal_logging(
+            service_callback=self._append_log,
+            log_dir=self.data_dir / "logs",
+        )
         self._sub_runs: Dict[str, Dict[str, Any]] = {
             "local_audit_sync": {
                 "run_id": f"{self._last_run_id}-AUDIT",
@@ -2358,6 +2365,7 @@ class WatersourceTerminalService:
                 "logs": filtered,
                 "total_buffered": len(all_logs),
                 "available_modules": modules_seen,
+                "log_files": self.logging_manager.get_log_files_overview() if hasattr(self, "logging_manager") else [],
             },
             as_of=_utc_now_iso(),
             source="watersource_ring_log_buffer",

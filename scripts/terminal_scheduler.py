@@ -13,6 +13,7 @@ import re
 import sqlite3
 from statistics import fmean
 import threading
+from typing import Any, Dict, List, Optional
 import uuid
 from zoneinfo import ZoneInfo
 
@@ -128,6 +129,23 @@ class TerminalScheduler:
         conn.execute("INSERT INTO task_log(timestamp,run_id,task,status,level,message) VALUES (?,?,?,?,?,?)",
                      (utc_now(), run_id, task, status, level, message))
 
+    @staticmethod
+    def _task_to_module(task: Optional[str]) -> str:
+        t = (task or "").upper()
+        if "NEWS" in t:
+            return "event_radar"
+        if "DAILY" in t or "QUOTE" in t:
+            return "market_quotes"
+        if "SCREENING" in t:
+            return "screening_engine"
+        if "INDICATOR" in t:
+            return "indicators_engine"
+        if "FINANCE" in t:
+            return "finance_engine"
+        if "AUDIT" in t:
+            return "audit_ledger"
+        return "terminal_scheduler"
+
     def logs(self, level, query, limit):
         with self._connect() as conn:
             rows = conn.execute(
@@ -135,7 +153,8 @@ class TerminalScheduler:
                 "AND instr(lower(message || ' ' || task || ' ' || coalesce(run_id,'')), ?) > 0 "
                 "ORDER BY id DESC LIMIT ?", (level, level, query, limit),
             ).fetchall()
-        return [{"log_id": f"task-{row['id']}", "timestamp": row["timestamp"], "module": "terminal_scheduler",
+        return [{"log_id": f"task-{row['id']}", "timestamp": row["timestamp"],
+                 "module": self._task_to_module(row["task"]),
                  "level": row["level"], "run_id": row["run_id"], "message": row["message"],
                  "task": row["task"], "status": row["status"]} for row in rows]
 

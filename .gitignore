@@ -9,6 +9,8 @@ data/
 data/hot/
 data/warm/
 data/cold/
+data/logs/
+*.log
 reports/
 scratch/
 *.tar.gz

@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
+import logging
 import mimetypes
 from pathlib import Path
 import queue
@@ -78,8 +79,13 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
             self.close_connection = True
 
     def log_message(self, format: str, *args: Any) -> None:
-        # 静音默认 stderr 逐条请求刷屏，重要错误仍在服务内部日志记录
-        return
+        # 静音默认 stderr 逐条请求刷屏，但写入 terminal_service 专属日志
+        try:
+            msg = format % args
+            if "/api/stream" not in msg and "/assets/" not in msg:
+                logging.getLogger("WatersourceHTTPServer").info(f"{getattr(self, 'command', 'HTTP')} {getattr(self, 'path', '')} - {msg}")
+        except Exception:
+            pass
 
     def _send_cors_headers(self) -> None:
         self.send_header("Access-Control-Allow-Origin", "*")

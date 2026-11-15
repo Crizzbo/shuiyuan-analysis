@@ -48,6 +48,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
   const [newsItems, setNewsItems] = useState<NewsItem[]>([])
   const [newsLoading, setNewsLoading] = useState(false)
   const [newsSourceFilter, setNewsSourceFilter] = useState('ALL')
+  const [newsCategoryFilter, setNewsCategoryFilter] = useState('ALL')
   const [newsSearch, setNewsSearch] = useState('')
   const [newsPage, setNewsPage] = useState(1)
   const newsPageSize = 12
@@ -220,16 +221,26 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
     return Array.from(set)
   }, [newsItems])
 
+  const availableCategories = useMemo(() => {
+    const counts: Record<string, number> = {}
+    newsItems.forEach((n) => {
+      if (n.category) counts[n.category] = (counts[n.category] || 0) + 1
+    })
+    return counts
+  }, [newsItems])
+
   const filteredNews = useMemo(() => {
     return newsItems.filter((n) => {
       if (newsSourceFilter !== 'ALL' && n.source !== newsSourceFilter) return false
+      if (newsCategoryFilter !== 'ALL' && n.category !== newsCategoryFilter) return false
       if (newsSearch.trim()) {
         const q = newsSearch.trim().toLowerCase()
-        if (!n.title.toLowerCase().includes(q)) return false
+        const text = `${n.title} ${n.category || ''} ${n.micro_physical_impact || ''}`.toLowerCase()
+        if (!text.includes(q)) return false
       }
       return true
     })
-  }, [newsItems, newsSourceFilter, newsSearch])
+  }, [newsItems, newsSourceFilter, newsCategoryFilter, newsSearch])
 
   const totalNewsPages = Math.max(1, Math.ceil(filteredNews.length / newsPageSize))
   const pagedNews = useMemo(() => {
@@ -753,6 +764,41 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
               />
             </div>
           </div>
+
+          {/* 主题分类筛选药丸 */}
+          {Object.keys(availableCategories).length > 0 && (
+            <div className="flex flex-wrap items-center gap-1.5 p-3 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] text-xs">
+              <span className="text-[11px] text-[var(--text-muted)] mr-1">主题分类:</span>
+              <button
+                type="button"
+                onClick={() => setNewsCategoryFilter('ALL')}
+                className={`px-2.5 py-1 rounded text-xs font-medium cursor-pointer transition-all ${
+                  newsCategoryFilter === 'ALL'
+                    ? 'bg-[#199e70] text-white shadow-sm'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                }`}
+              >
+                全部类别 ({newsItems.length})
+              </button>
+              {Object.entries(availableCategories).map(([cat, count]) => (
+                <button
+                  type="button"
+                  key={cat}
+                  onClick={() => setNewsCategoryFilter(cat)}
+                  className={`px-2.5 py-1 rounded text-xs font-medium cursor-pointer transition-all flex items-center gap-1 ${
+                    newsCategoryFilter === cat
+                      ? 'bg-[#199e70] text-white shadow-sm'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--surface-color)] border border-[var(--border-color)]'
+                  }`}
+                >
+                  <span>{cat}</span>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${newsCategoryFilter === cat ? 'bg-white/20' : 'bg-gray-700/20 text-gray-400'}`}>
+                    {count}
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* 资讯流水表格列表 */}
           {newsLoading ? (
