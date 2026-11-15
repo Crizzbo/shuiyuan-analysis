@@ -448,6 +448,38 @@ export interface CompanyAnalysisData {
   }
   automated_valuation?: AutomatedValuationData | null
   automated_valuation_issue?: string | null
+  events_analysis?: {
+    ticker: string
+    matched_count?: number
+    total_events_count: number
+    recent_events: {
+      event_id: string
+      title: string
+      category: string
+      severity: string
+      published_at: string
+      published_date?: string
+      published_time?: string
+      source_name: string
+      verification_status: string
+      micro_physical_impact?: string
+      involved_entities: string[]
+      affected_business_segments: string[]
+      estimated_duration?: string
+    }[]
+    sotp_impact?: {
+      status?: string
+      total_events_evaluated?: number
+      affected_segments_count?: number
+      estimated_enterprise_value_delta_pct?: number
+      segment_impacts?: Array<{
+        segment_name: string
+        revenue_impact_pct: number
+        margin_impact_bps: number
+        qualitative_summary: string
+      }>
+    } | null
+  }
 }
 
 export interface PipelineSubFlow {

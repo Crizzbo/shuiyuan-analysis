@@ -87,6 +87,16 @@ export const api = {
   getEventDetail: (eventId: string) =>
     request<EventItem>(`/api/events/${encodeURIComponent(eventId)}`),
 
+  distillEvents: () =>
+    request<{
+      message: string
+      cycle_result?: any
+      total_events: number
+    }>('/api/events/distill', {
+      method: 'POST',
+      body: '{}',
+    }),
+
   // 6. 采集中心
   getCollectionOverview: () => request<CollectionOverviewData>('/api/collection/overview'),
 

@@ -165,7 +165,11 @@
         "www.federalreserve.gov",
         "www.boj.or.jp",
         "blogs.nvidia.com",
-        "feeds.a.dj.com"
+        "feeds.a.dj.com",
+        "www.sec.gov",
+        "blogs.microsoft.com",
+        "blog.google",
+        "www.apple.com"
       ],
       "source_kind": "secondary",
       "dataset_kind": "news",
@@ -182,8 +186,38 @@
           "status": "candidate"
         },
         {
+          "name": "SEC 官方要闻与监管公报",
+          "url": "https://www.sec.gov/news/pressreleases.rss",
+          "authority": "official",
+          "status": "candidate"
+        },
+        {
+          "name": "日本央行政策与决定 (BOJ)",
+          "url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+          "authority": "official",
+          "status": "candidate"
+        },
+        {
           "name": "NVIDIA 公司博客",
           "url": "https://blogs.nvidia.com/feed/",
+          "authority": "issuer",
+          "status": "candidate"
+        },
+        {
+          "name": "微软官方博客",
+          "url": "https://blogs.microsoft.com/feed/",
+          "authority": "issuer",
+          "status": "candidate"
+        },
+        {
+          "name": "Google 官方博客",
+          "url": "https://blog.google/rss/",
+          "authority": "issuer",
+          "status": "candidate"
+        },
+        {
+          "name": "Apple 官方新闻中心",
+          "url": "https://www.apple.com/newsroom/rss-feed.rss",
           "authority": "issuer",
           "status": "candidate"
         },

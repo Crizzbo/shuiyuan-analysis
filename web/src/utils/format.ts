@@ -163,3 +163,44 @@ export function getStatusBadge(status?: string): { text: string; cls: string } {
       return { text: toChinese(status) || '待机就绪', cls: 'bg-gray-100 text-gray-700 border border-gray-300' }
   }
 }
+
+/**
+ * 转换数组或按空白切分的字符串为字符串数组 (SSOT)
+ */
+export function toList(val?: string[] | string | null): string[] {
+  if (!val) return []
+  if (Array.isArray(val)) return val
+  return String(val).split(/\s+/).filter(Boolean)
+}
+
+/**
+ * 事件严重性徽章样式与自然中文文本映射 (SSOT)
+ */
+export function getSeverityBadge(sev?: string): { text: string; cls: string } {
+  switch (String(sev || '').toUpperCase()) {
+    case 'P0':
+      return { text: '极高影响', cls: 'bg-[#d03b3b]/20 text-[#d03b3b] border-[#d03b3b]/40' }
+    case 'P1':
+      return { text: '重要关注', cls: 'bg-[#c98500]/20 text-[#c98500] border-[#c98500]/40' }
+    case 'P2':
+      return { text: '行业动态', cls: 'bg-[#3987e5]/20 text-[#3987e5] border-[#3987e5]/40' }
+    default:
+      return { text: '常规资讯', cls: 'bg-gray-600/20 text-gray-400 border-gray-600/30' }
+  }
+}
+
+/**
+ * 事实核验与传闻隔离徽章样式与自然中文文本映射 (SSOT)
+ */
+export function getVerificationBadge(status?: string): { text: string; cls: string } {
+  switch (status) {
+    case 'Confirmed_Fact':
+      return { text: '官方权威核实', cls: 'bg-[#199e70]/20 text-[#199e70] border-[#199e70]/40' }
+    case 'Corroborated_Report':
+      return { text: '主流媒体采信', cls: 'bg-[#3987e5]/20 text-[#3987e5] border-[#3987e5]/40' }
+    case 'Unverified_Rumor':
+      return { text: '待核实传闻隔离', cls: 'bg-[#d03b3b]/20 text-[#d03b3b] border-[#d03b3b]/40' }
+    default:
+      return { text: '已归档', cls: 'bg-gray-600/20 text-gray-400 border-gray-600/30' }
+  }
+}

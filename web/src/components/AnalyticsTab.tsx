@@ -8,9 +8,16 @@ import type {
 } from '../types/api'
 import { api } from '../services/api'
 import { Pagination } from './Pagination'
-import { formatDeviceTime, toChinese } from '../utils/format'
+import { formatDeviceTime, toChinese, getSeverityBadge, getVerificationBadge } from '../utils/format'
 
-export function AnalyticsTab({ refreshKey }: { refreshKey?: number }) {
+interface AnalyticsTabProps {
+  refreshKey?: number
+  initialTicker?: string | null
+}
+
+// 使用 format.ts 统一导出的 getSeverityBadge, getVerificationBadge 单一事实来源 (SSOT)
+
+export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
   // 左侧标的资产池状态
   const [candidatesData, setCandidatesData] = useState<CandidatesData | null>(null)
   const [marketFilter, setMarketFilter] = useState<'ALL' | 'US' | 'JP'>('ALL')
@@ -175,6 +182,12 @@ export function AnalyticsTab({ refreshKey }: { refreshKey?: number }) {
       setCustomBeta(autoVal.capital_cost_wacc.beta)
     }
   }
+
+  useEffect(() => {
+    if (initialTicker && initialTicker !== selectedTicker) {
+      setSelectedTicker(initialTicker)
+    }
+  }, [initialTicker])
 
   useEffect(() => {
     void loadCandidates(currentPage, marketFilter, activeQuery)
@@ -1327,6 +1340,134 @@ export function AnalyticsTab({ refreshKey }: { refreshKey?: number }) {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              {/* ========================================================================= */}
+              {/* 5. 关联突发舆情与业务分部因果冲击 (News & Event Radar Impact) */}
+              {/* ========================================================================= */}
+              <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 border-b border-[var(--border-color)]">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#199e70]" />
+                    <h3 className="text-sm font-bold text-[var(--text-primary)]">
+                      关联突发舆情与业务分部因果冲击 (News & Event Radar Impact)
+                    </h3>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-[#3987e5]/15 text-[#3987e5] border border-[#3987e5]/30">
+                      已匹配 {analysis?.events_analysis?.matched_count ?? analysis?.events_analysis?.total_events_count ?? 0} 篇官方情报底账
+                    </span>
+                    {analysis?.events_analysis?.sotp_impact?.estimated_enterprise_value_delta_pct !== undefined && (
+                      <span className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded border ${
+                        analysis.events_analysis.sotp_impact.estimated_enterprise_value_delta_pct >= 0
+                          ? 'bg-[#199e70]/15 text-[#199e70] border-[#199e70]/30'
+                          : 'bg-[#d03b3b]/15 text-[#d03b3b] border-[#d03b3b]/30'
+                      }`}>
+                        企业价值预估变动: {analysis.events_analysis.sotp_impact.estimated_enterprise_value_delta_pct > 0 ? '+' : ''}
+                        {analysis.events_analysis.sotp_impact.estimated_enterprise_value_delta_pct.toFixed(2)}%
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* SOTP 分部因果冲击矩阵 */}
+                {analysis?.events_analysis?.sotp_impact?.segment_impacts && analysis.events_analysis.sotp_impact.segment_impacts.length > 0 && (
+                  <div className="space-y-2">
+                    <div className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#3987e5]" />
+                      <span>SOTP 业务分部因果冲击测算 (SOTP Business Segment Sensitivity)</span>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {analysis.events_analysis.sotp_impact.segment_impacts.map((seg: any, sIdx: number) => (
+                        <div key={sIdx} className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-3.5 space-y-2">
+                          <div className="flex items-center justify-between">
+                            <span className="font-bold text-xs text-[var(--text-primary)]">{seg.segment_name}</span>
+                            <div className="flex items-center gap-2 text-[10px] font-mono">
+                              <span className={seg.revenue_impact_pct >= 0 ? 'text-[#199e70]' : 'text-[#d03b3b]'}>
+                                营收冲击: {seg.revenue_impact_pct >= 0 ? '+' : ''}{seg.revenue_impact_pct.toFixed(1)}%
+                              </span>
+                              <span className={seg.margin_impact_bps >= 0 ? 'text-[#199e70]' : 'text-[#d03b3b]'}>
+                                利润率: {seg.margin_impact_bps >= 0 ? '+' : ''}{seg.margin_impact_bps} bps
+                              </span>
+                            </div>
+                          </div>
+                          <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                            {seg.qualitative_summary}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* 关联事件明细流 */}
+                {analysis?.events_analysis?.recent_events && analysis.events_analysis.recent_events.length > 0 ? (
+                  <div className="space-y-2.5">
+                    <div className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#199e70]" />
+                      <span>近期高关联突发事件与微观业务传导</span>
+                    </div>
+                    <div className="space-y-2">
+                      {analysis.events_analysis.recent_events.map((evt) => {
+                        const sevBadge = getSeverityBadge(evt.severity)
+                        const verBadge = getVerificationBadge(evt.verification_status)
+                        return (
+                          <div
+                            key={evt.event_id}
+                            className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#199e70]/40 rounded-xl p-3.5 space-y-2 transition-all"
+                          >
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                              <div className="flex items-center gap-2">
+                                <span className={`text-[10px] px-2 py-0.5 rounded font-semibold border ${sevBadge.cls}`}>
+                                  {sevBadge.text}
+                                </span>
+                                <h4 className="text-xs font-bold text-[var(--text-primary)] leading-tight">
+                                  {evt.title}
+                                </h4>
+                              </div>
+                              <div className="flex items-center gap-2 shrink-0">
+                                <span className={`text-[10px] px-2 py-0.5 rounded font-semibold border ${verBadge.cls}`}>
+                                  {verBadge.text}
+                                </span>
+                                {evt.published_at && (
+                                  <span className="text-[10px] text-[var(--text-muted)] font-mono">
+                                    {formatDeviceTime(evt.published_at)}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+
+                            {evt.micro_physical_impact && (
+                              <div className="p-2.5 rounded bg-[var(--surface-color)] border border-[var(--border-color)] text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                                <span className="font-semibold text-[#199e70] mr-1.5">⚡ 微观传导冲击:</span>
+                                {evt.micro_physical_impact}
+                              </div>
+                            )}
+
+                            {((evt.involved_entities && evt.involved_entities.length > 0) || (evt.affected_business_segments && evt.affected_business_segments.length > 0)) && (
+                              <div className="flex flex-wrap items-center gap-1.5 pt-1 text-[10px]">
+                                {evt.involved_entities?.map((ent, i) => (
+                                  <span key={`ent-${i}`} className="px-1.5 py-0.2 rounded bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/20 font-mono font-medium">
+                                    {ent}
+                                  </span>
+                                ))}
+                                {evt.affected_business_segments?.map((seg, i) => (
+                                  <span key={`seg-${i}`} className="px-1.5 py-0.2 rounded bg-[#199e70]/10 text-[#199e70] border border-[#199e70]/20 font-medium">
+                                    {seg}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="p-6 text-center text-xs text-[var(--text-muted)] bg-[var(--bg-card)] rounded-xl border border-[var(--border-color)]">
+                    未检测到针对当前标的的重大突发舆情或隔离事件，宏观与产业链传导保持平稳。
+                  </div>
+                )}
               </div>
             </>
           ) : null}

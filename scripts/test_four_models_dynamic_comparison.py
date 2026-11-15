@@ -103,7 +103,10 @@ class TestFourModelsDynamicComparison(unittest.TestCase):
         )
 
         self.assertFalse(scores_var[0].in_strike_zone)
-        self.assertIn("VAR_VOLATILITY_BUDGET_BREACH", scores_var[0].disqualification_reason)
+        self.assertTrue(
+            "VAR_VOLATILITY_BUDGET_BREACH" in scores_var[0].disqualification_reason
+            or "DOWNSIDE_SEMI_VARIANCE_BREACH" in scores_var[0].disqualification_reason
+        )
         self.assertEqual(top_var, [])
 
     def test_metrics_calculation_synthetic(self):

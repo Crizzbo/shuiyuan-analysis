@@ -611,6 +611,71 @@ class MockModelSummarizer:
             severity = "P1"
             duration = "中期流动性脉冲 1~3 个月"
             segments = ["银行间质押回购(Repo)", "高贝塔成长股估值", "跨国固定收益流动性"]
+        elif any(k in title_lower for k in ["federal reserve", "fomc", "interest rate", "rate cut", "rate hike", "monetary policy", "inflation", "cpi", "powell", "boj", "bank of japan", "央行", "加息", "降息"]):
+            category = "CentralBank_Liquidity_FX_Shock"
+            entities = ["美联储公开市场操作台", "联邦公开市场委员会(FOMC)", "全球主要央行"]
+            impact = f"全球央行货币政策决策与基准利率走廊变动：{fallback_item.title}"
+            severity = "P1"
+            duration = "中短期 1~3 个月"
+            segments = ["货币市场与固定收益", "商业银行信贷", "宏观跨资产流动性"]
+        elif any(k in title_lower for k in ["nvidia", "blackwell", "geforce", "gpu", "ai chip", "cuda", "dlss", "semiconductor", "tsmc", "英伟达", "算力"]):
+            category = "Supply_Chain_Chokepoint"
+            entities = ["英伟达 (NVDA)", "台积电 (TSM)", "先进半导体供应链"]
+            impact = f"先进AI算力芯片与核心半导体产业技术/产能进展：{fallback_item.title}"
+            severity = "P1"
+            duration = "中长期 6~12 个月"
+            segments = ["数据中心AI算力", "先进制程代工", "半导体先进封测"]
+        elif any(k in title_lower for k in ["microsoft", "azure", "copilot", "google", "gemini", "apple", "iphone", "ios", "微软", "谷歌", "苹果"]):
+            category = "State_Policy_Regulatory"
+            entities = ["科技巨头与超大规模云厂商", "生成式AI基础设施"]
+            impact = f"全球科技巨头关键业务战略与AI软件生态落地：{fallback_item.title}"
+            severity = "P2"
+            duration = "长期持续"
+            segments = ["云计算基础设施(IaaS/PaaS)", "企业级AI与SaaS", "消费电子生态"]
+        elif any(k in title_lower for k in ["sec", "edgar", "enforcement", "guidance", "监管", "指引", "合规"]):
+            category = "State_Policy_Regulatory"
+            entities = ["美国证监会(SEC)", "官方证券监管机构"]
+            impact = f"官方监管合规指引与市场透明度规则更新：{fallback_item.title}"
+            severity = "P2"
+            duration = "中期 1~6 个月"
+            segments = ["上市公司合规披露", "证券交易市场治理"]
+
+        # 智能实体识别扩展：检测标的股票代码或著名机构
+        ticker_map = {
+            "nvda": ["英伟达 (NVDA)", "NVDA"],
+            "nvidia": ["英伟达 (NVDA)", "NVDA"],
+            "blackwell": ["英伟达 (NVDA)", "NVDA"],
+            "msft": ["微软 (MSFT)", "MSFT"],
+            "microsoft": ["微软 (MSFT)", "MSFT"],
+            "aapl": ["苹果 (AAPL)", "AAPL"],
+            "apple": ["苹果 (AAPL)", "AAPL"],
+            "tsm": ["台积电 (TSM)", "TSM"],
+            "tsmc": ["台积电 (TSM)", "TSM"],
+            "amd": ["超微半导体 (AMD)", "AMD"],
+            "goog": ["谷歌 (GOOGL)", "GOOGL"],
+            "google": ["谷歌 (GOOGL)", "GOOGL"],
+            "alphabet": ["谷歌 (GOOGL)", "GOOGL"],
+            "amzn": ["亚马逊 (AMZN)", "AMZN"],
+            "amazon": ["亚马逊 (AMZN)", "AMZN"],
+            "meta": ["Meta (META)", "META"],
+            "intc": ["英特尔 (INTC)", "INTC"],
+            "intel": ["英特尔 (INTC)", "INTC"],
+            "8035": ["东京电子 (8035.T)", "8035.T"],
+            "6758": ["索尼 (6758.T)", "6758.T"],
+            "7203": ["丰田 (7203.T)", "7203.T"],
+            "federal reserve": ["美联储 (Federal Reserve)"],
+            "fomc": ["联邦公开市场委员会 (FOMC)"],
+            "sec": ["美国证监会 (SEC)"],
+            "boj": ["日本央行 (BoJ)"],
+            "bank of japan": ["日本央行 (BoJ)"],
+        }
+        for kw, ent_list in ticker_map.items():
+            if kw in title_lower or kw in content_lower:
+                for ent in ent_list:
+                    if ent not in entities:
+                        entities.append(ent)
+        if len(entities) > 1 and "未知实体" in entities:
+            entities.remove("未知实体")
 
         summary_dict = {
             "category": category,

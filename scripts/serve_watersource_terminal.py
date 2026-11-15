@@ -495,6 +495,11 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 self._send_json(*svc.update_terminal_tasks_config(body))
                 return
 
+            if path in ("/api/events/distill", "/api/terminal/events/distill"):
+                code, payload = svc.distill_events()
+                self._send_json(code, payload)
+                return
+
             code, err = svc.error_envelope("NOT_FOUND", f"未知 POST 接口路径: {path}", status_code=404)
             self._send_json(code, err)
         except Exception as exc:

@@ -257,17 +257,42 @@ class TerminalScheduler:
         }
 
     def news(self):
-        """展示已归档标题与时间，核验后的事件仍由事件雷达提供。"""
+        """展示已归档标题与时间，结合事件雷达提炼结果提供商业影响与实体标注。"""
         items = []
+        radar_map = {}
+        try:
+            radar_db = project_path("data/ledger/event_radar.sqlite3")
+            if radar_db.exists():
+                with closing(sqlite3.connect(f"file:{radar_db.as_posix()}?mode=ro", uri=True)) as conn:
+                    conn.row_factory = sqlite3.Row
+                    for row in conn.execute("SELECT title, category, severity_level, verification_status, involved_entities, micro_physical_impact FROM radar_events"):
+                        radar_map[row["title"]] = dict(row)
+        except Exception:
+            radar_map = {}
+
         for item, records in self._archived_records("OFFICIAL_NEWS"):
             source = next(iter(item.get("artifacts", [])), {}).get("origin_url", "")
             for record in records:
-                if record.get("title"):
+                t = record.get("title")
+                if t:
+                    distilled = radar_map.get(t) or {}
+                    ent = distilled.get("involved_entities")
+                    parsed_ent = []
+                    if ent:
+                        try:
+                            parsed_ent = json.loads(ent) if isinstance(ent, str) else ent
+                        except Exception:
+                            parsed_ent = [str(ent)]
                     items.append({
-                        "title": record["title"],
+                        "title": t,
                         "published_at": record.get("pubDate") or record.get("published") or record.get("updated"),
                         "source": source,
-                        "verification_status": "Pending_Verification",
+                        "verification_status": distilled.get("verification_status") or "Pending_Verification",
+                        "severity": distilled.get("severity_level") or "P3",
+                        "category": distilled.get("category"),
+                        "involved_entities": parsed_ent,
+                        "micro_physical_impact": distilled.get("micro_physical_impact"),
+                        "is_distilled": bool(distilled),
                     })
         return items
 
@@ -542,12 +567,53 @@ class TerminalScheduler:
         jobs = [
             {"id": f"rss-{index}", "provider": "rss", "dataset": "feed", "params": {"url": feed["url"]}}
             for index, feed in enumerate(sources.get("rss", {}).get("feeds", []))
-            if feed.get("authority") in ("official", "issuer")
+            if feed.get("authority") in ("official", "issuer", "media")
         ]
         results = self._collect_jobs(run["run_id"], jobs, sources)
         collected = sum(row["status"] == "collected" and row.get("record_count", 0) > 0 for row in results)
+
+        # 实时抽取抓取的资讯记录并无缝联动突发事件雷达
+        raw_items = []
+        for res in results:
+            if res.get("status") == "collected":
+                recs = res.get("records") or []
+                origin = next(iter(res.get("artifacts", [])), {}).get("origin_url", "")
+                for r in recs:
+                    if r.get("title"):
+                        raw_items.append({
+                            "id": r.get("id") or r.get("guid") or r.get("link") or r.get("title", ""),
+                            "title": r.get("title", ""),
+                            "content": r.get("description") or r.get("summary") or r.get("title", ""),
+                            "source": origin or "Official_RSS",
+                            "published_at": r.get("pubDate") or r.get("published") or r.get("updated") or "",
+                            "url": r.get("link") or origin or "",
+                        })
+
+        distill_count = 0
+        major_count = 0
+        if raw_items:
+            try:
+                from finance_tools.event_radar_collector import EventRadarCollector
+                collector = EventRadarCollector()
+                cycle_res = collector.run_collection_cycle(raw_feed_items=raw_items)
+                distill_count = cycle_res.get("summarized_count", 0)
+                major_count = cycle_res.get("p0_p1_triggered_count", 0)
+            except Exception:
+                pass
+
         status = "SUCCESS" if collected and collected == len(jobs) else "PARTIAL_SUCCESS" if collected else "BLOCKED"
-        return status, {"message": f"归档 {collected}/{len(jobs)} 个资讯来源，正文事实核验见事件雷达", "items": results}
+        message = (
+            f"归档 {collected}/{len(jobs)} 个信源 · 扫描 {len(raw_items)} 篇资讯 · "
+            f"提炼入雷达 {distill_count} 条 · 重大事件 {major_count} 条"
+            if raw_items
+            else f"归档 {collected}/{len(jobs)} 个资讯来源，正文事实核验见事件雷达"
+        )
+        return status, {
+            "message": message,
+            "items": results,
+            "distilled_count": distill_count,
+            "major_count": major_count,
+        }
 
     def _execute_stock_screening(self, run):
         diagnostics = {}

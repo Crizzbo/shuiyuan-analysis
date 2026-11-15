@@ -3,13 +3,16 @@ import type { DashboardSummaryData, MarketQuoteItem, IndicatorItem, EventItem } 
 import { api } from '../services/api'
 import { showToast } from './Toast'
 import { TaskDispatcherPanel } from './TaskDispatcherPanel'
-import { formatDeviceTime, toChinese } from '../utils/format'
+import { formatDeviceTime, toChinese, toList } from '../utils/format'
 
 interface DashboardTabProps {
   onNavigateTab: (tabId: string) => void
   onSelectEvent: (eventId: string) => void
+  onSelectTicker?: (ticker: string) => void
   refreshKey?: number
 }
+
+
 
 function getStatusBadge(status?: string) {
   switch (status) {
@@ -54,7 +57,7 @@ function getVerificationBadge(status: string) {
   }
 }
 
-export function DashboardTab({ onNavigateTab, onSelectEvent, refreshKey }: DashboardTabProps) {
+export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, refreshKey }: DashboardTabProps) {
   const [data, setData] = useState<DashboardSummaryData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -64,17 +67,17 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, refreshKey }: Dashb
     setIsExtractingNews(true)
     showToast({
       type: 'info',
-      title: '官方资讯采集',
-      message: '正在向后端发起新闻与突发情报即时抽取...',
+      title: '官方资讯分时采集与AI提炼',
+      message: '正在向后端发起新闻抓取与事件雷达因果提炼...',
     })
 
     try {
-      const res = await api.rerunCollectionTask('EVENT_RADAR_POLLING')
+      const res = await api.runTerminalTask('OFFICIAL_NEWS')
       if (res.ok) {
         showToast({
           type: 'success',
-          title: '官方资讯采集已提交',
-          message: '在采集中心的定时任务页查看运行结果。',
+          title: '官方资讯采集已完成',
+          message: '新资讯已采集并由事件雷达引擎完成提炼入库。',
         })
         await loadData()
       } else {
@@ -383,14 +386,47 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, refreshKey }: Dashb
                     <span className={`px-2 py-0.5 rounded text-xs font-bold shrink-0 border ${sBadge.cls}`}>
                       {sBadge.text}
                     </span>
-                    <div>
+                    <div className="space-y-1 min-w-0">
                       <div className="text-xs font-semibold text-[var(--text-primary)] hover:text-[#3987e5] flex items-center gap-2">
                         <span>{ev.title}</span>
                       </div>
+                      {ev.micro_physical_impact && (
+                        <div className="text-[11px] text-[#3987e5] bg-[#3987e5]/5 border border-[#3987e5]/20 rounded px-2.5 py-1 mt-1 leading-relaxed">
+                          <span className="font-bold mr-1">微观商业冲击:</span>
+                          {ev.micro_physical_impact}
+                        </div>
+                      )}
                       <div className="text-[11px] text-[var(--text-muted)] mt-1 flex flex-wrap items-center gap-2">
                         <span>信源: {ev.source_name}</span>
                         <span>·</span>
                         <span className="font-mono">{formatDeviceTime(ev.published_at)}</span>
+                        {toList(ev.involved_entities).length > 0 && (
+                          <>
+                            <span>·</span>
+                            <span className="text-[var(--text-secondary)]">关联标的:</span>
+                            {toList(ev.involved_entities).slice(0, 4).map((ent: string, i: number) => (
+                              <button
+                                key={i}
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  const m = ent.match(/\b([A-Z0-9.]+)\b/)
+                                  const ticker = m ? m[1] : ent
+                                  if (onSelectTicker) {
+                                    onSelectTicker(ticker)
+                                  } else {
+                                    onSelectEvent(ev.event_id)
+                                    onNavigateTab('intelligence')
+                                  }
+                                }}
+                                className="px-1.5 py-0.2 rounded text-[10px] bg-[var(--surface-color)] text-[#3987e5] border border-[#3987e5]/30 hover:bg-[#3987e5] hover:text-white transition-all font-mono font-medium cursor-pointer"
+                                title={`快速查看 ${ent} 的全息深度档案与估值走廊`}
+                              >
+                                {ent}
+                              </button>
+                            ))}
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>

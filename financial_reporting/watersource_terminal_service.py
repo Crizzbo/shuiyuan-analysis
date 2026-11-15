@@ -1462,6 +1462,46 @@ class WatersourceTerminalService:
             status="OK",
         )
 
+    def distill_events(self) -> Tuple[int, Dict[str, Any]]:
+        """即时触发未提炼资讯向突发事件雷达的因果抽取与落库."""
+        scheduler = getattr(self, "scheduler", None)
+        raw_items = []
+        if scheduler is not None:
+            news_items = scheduler.news()
+            for n in news_items:
+                raw_items.append({
+                    "id": n.get("title", ""),
+                    "title": n.get("title", ""),
+                    "content": n.get("title", ""),
+                    "source": n.get("source", "Official_RSS"),
+                    "published_at": n.get("published_at", ""),
+                    "url": n.get("source", ""),
+                })
+
+        if not raw_items:
+            radar = self._read_radar_events_and_cycles(limit=10)
+            return 200, self._envelope({
+                "message": "暂无待提炼的原始资讯，事件雷达已处于最新状态",
+                "scanned_count": 0,
+                "summarized_count": 0,
+                "total_events": radar.get("total_events", 0),
+            })
+
+        from finance_tools.event_radar_collector import EventRadarCollector
+        collector = EventRadarCollector()
+        cycle_res = collector.run_collection_cycle(raw_feed_items=raw_items)
+        radar = self._read_radar_events_and_cycles(limit=10)
+        self._broadcast_sse("radar_update", {
+            "action": "DISTILL_COMPLETED",
+            "summarized": cycle_res.get("summarized_count", 0),
+            "total_events": radar.get("total_events", 0),
+        })
+        return 200, self._envelope({
+            "message": f"提炼完成：扫描 {cycle_res.get('scanned_count', 0)} 篇 · 提炼入雷达 {cycle_res.get('summarized_count', 0)} 条 · 重大事件 {cycle_res.get('p0_p1_triggered_count', 0)} 条",
+            "cycle_result": cycle_res,
+            "total_events": radar.get("total_events", 0),
+        })
+
     def get_terminal_tasks_config(self) -> Dict[str, Any]:
         """获取全盘任务参数化 JSON 配置 (SSOT)."""
         cfg_file = ROOT / "config" / "terminal_tasks.json"
@@ -1634,6 +1674,76 @@ class WatersourceTerminalService:
             status="FRESH",
         )
 
+    def get_company_events(self, ticker: str, company_name: str = "") -> Dict[str, Any]:
+        """按标的与公司名称智能检索关联突发事件与微观商业冲击 (News & Event Radar Linkage)."""
+        clean_t = ticker.strip().upper()
+        db_path = self.data_dir / "ledger" / "event_radar.sqlite3"
+        if not db_path.exists():
+            return {"total_events_count": 0, "recent_events": [], "sotp_impact": None}
+
+        # 构建搜索别名集合
+        aliases = {clean_t}
+        if company_name and company_name.strip():
+            aliases.add(company_name.strip())
+        cn_aliases = {
+            "NVDA": ["英伟达", "NVIDIA", "BLACKWELL"],
+            "TSM": ["台积电", "TSMC"],
+            "MSFT": ["微软", "MICROSOFT", "AZURE"],
+            "AAPL": ["苹果", "APPLE", "IPHONE"],
+            "GOOGL": ["谷歌", "GOOGLE", "ALPHABET"],
+            "AMZN": ["亚马逊", "AMAZON", "AWS"],
+            "META": ["META", "FACEBOOK"],
+            "AMD": ["超微半导体", "AMD"],
+            "INTC": ["英特尔", "INTEL"],
+            "8035": ["东京电子", "TOKYO ELECTRON"],
+            "6758": ["索尼", "SONY"],
+            "7203": ["丰田", "TOYOTA"],
+        }
+        for alias in cn_aliases.get(clean_t, []):
+            aliases.add(alias)
+
+        # 单一事实来源 (SSOT)：直接复用已有的规范化雷达事件检索流水线，杜绝重复SQL查询与二次转换
+        radar_data = self._read_radar_events_and_cycles(limit=1000)
+        matched_events = []
+        for ev in radar_data.get("events", []):
+            entities_str = " ".join(ev.get("involved_entities") or [])
+            title_str = ev.get("title") or ""
+            impact_str = ev.get("micro_physical_impact") or ""
+            haystack = f"{entities_str} {title_str} {impact_str}".lower()
+            if any(a.lower() in haystack for a in aliases):
+                matched_events.append(ev)
+
+        # 尝试接入 SOTP 业务分部因果穿透
+        sotp_impact = None
+        try:
+            from finance_tools.sotp_event_analyzer import SotpEventAnalyzer
+            sotp_analyzer = SotpEventAnalyzer(db_path=db_path, allow_synthetic=False)
+            profile = sotp_analyzer.get_company_sotp_profile(clean_t)
+            if profile and matched_events:
+                top_evt = matched_events[0]
+                from financial_core.engines.event_radar_engine import StructuredEventSummary
+                evt_obj = StructuredEventSummary(
+                    event_id=top_evt["event_id"],
+                    timestamp=top_evt.get("published_at") or "",
+                    category=top_evt.get("category") or "",
+                    involved_entities=top_evt.get("involved_entities") or [],
+                    micro_physical_impact=top_evt.get("micro_physical_impact") or "",
+                    estimated_duration=top_evt.get("estimated_duration") or "",
+                    affected_business_segments=top_evt.get("affected_business_segments") or [],
+                    severity_level=top_evt.get("severity") or "P2",
+                )
+                res = sotp_analyzer.engine.analyze_company_impact(profile, evt_obj)
+                sotp_impact = res.to_dict()
+        except Exception:
+            sotp_impact = None
+
+        return {
+            "ticker": clean_t,
+            "total_events_count": len(matched_events),
+            "recent_events": matched_events[:6],
+            "sotp_impact": sotp_impact,
+        }
+
     def get_company_analysis(self, ticker: str) -> Dict[str, Any]:
         """新方法编排：定量诊断探针 + AI 质性商业解构 + 三态情景估值走廊（严禁机械打分）."""
         clean_ticker = ticker.strip().upper()
@@ -1678,6 +1788,18 @@ class WatersourceTerminalService:
             "metrics": {},
         }
 
+        def _safe_parse_num(val: Any) -> Optional[float]:
+            if val is None or val == "":
+                return None
+            try:
+                n = OfficialFilingMapper.parse_financial_number(val)
+                return float(n) if (n is not None and not math.isnan(n)) else None
+            except Exception:
+                try:
+                    return float(val)
+                except Exception:
+                    return None
+
         rev = raw_table.get("revenue") or (sec_rec or {}).get("revenue")
         gp = raw_table.get("gross_profit")
         ebit = raw_table.get("operating_income")
@@ -1691,11 +1813,24 @@ class WatersourceTerminalService:
         debt = raw_table.get("total_debt")
         shares = raw_table.get("shares") or facts.get("shares_outstanding")
 
-        if assets is not None and liab is not None and eq is not None and assets > 0:
+        num_rev = _safe_parse_num(rev)
+        num_gp = _safe_parse_num(gp)
+        num_ebit = _safe_parse_num(ebit)
+        num_ni = _safe_parse_num(ni)
+        num_ocf = _safe_parse_num(ocf)
+        num_fcf = _safe_parse_num(fcf)
+        num_assets = _safe_parse_num(assets)
+        num_liab = _safe_parse_num(liab)
+        num_eq = _safe_parse_num(eq)
+        num_cash = _safe_parse_num(cash)
+        num_debt = _safe_parse_num(debt)
+        num_shares = _safe_parse_num(shares)
+
+        if num_assets is not None and num_liab is not None and num_eq is not None and num_assets > 0:
             is_bal, abs_diff, rel_ratio = OfficialFilingMapper.verify_balance_sheet_identity(
-                total_assets=float(assets),
-                total_liabilities=float(liab),
-                stockholders_equity=float(eq),
+                total_assets=num_assets,
+                total_liabilities=num_liab,
+                stockholders_equity=num_eq,
             )
             financial_probe["balance_sheet_balanced"] = is_bal
             financial_probe["balance_sheet_abs_diff"] = round(abs_diff, 2)
@@ -1712,11 +1847,11 @@ class WatersourceTerminalService:
             "total_assets": assets,
             "total_debt": debt,
             "cash": cash,
-            "net_cash": (float(cash) - float(debt)) if (cash is not None and debt is not None) else None,
-            "gross_margin_pct": round((float(gp) / float(rev)) * 100.0, 2) if (gp and rev) else None,
-            "operating_margin_pct": round((float(ebit) / float(rev)) * 100.0, 2) if (ebit and rev) else None,
-            "fcf_conversion_pct": round((float(fcf) / float(ni)) * 100.0, 2) if (fcf is not None and ni) else None,
-            "debt_to_equity_pct": round((float(debt) / float(eq)) * 100.0, 2) if (debt is not None and eq) else None,
+            "net_cash": (num_cash - num_debt) if (num_cash is not None and num_debt is not None) else None,
+            "gross_margin_pct": round((num_gp / num_rev) * 100.0, 2) if (num_gp is not None and num_rev and num_rev > 0) else None,
+            "operating_margin_pct": round((num_ebit / num_rev) * 100.0, 2) if (num_ebit is not None and num_rev and num_rev > 0) else None,
+            "fcf_conversion_pct": round((num_fcf / num_ni) * 100.0, 2) if (num_fcf is not None and num_ni and num_ni != 0) else None,
+            "debt_to_equity_pct": round((num_debt / num_eq) * 100.0, 2) if (num_debt is not None and num_eq and num_eq > 0) else None,
         }
         financial_probe["metrics"] = metrics_dict
         scheduler = getattr(self, "scheduler", None)
@@ -1726,15 +1861,16 @@ class WatersourceTerminalService:
         # 5. KMV-Merton 信用违约探针（仅当资产/负债/现价/股本俱全时实算，不硬编参数）
         cur_price = quote_info["price"] if quote_info and quote_info["is_valid"] else None
         credit_probe: Dict[str, Any]
-        if cur_price and shares and assets and debt is not None and liab is not None:
+        if cur_price and num_shares and num_assets and num_debt is not None and num_liab is not None:
             try:
-                mkt_cap = float(cur_price) * float(shares)
-                st_debt = float(debt) * 0.35
-                lt_debt = float(debt) * 0.65
+                num_cur_price = _safe_parse_num(cur_price) or 0.0
+                mkt_cap = num_cur_price * num_shares
+                st_debt = num_debt * 0.35
+                lt_debt = num_debt * 0.65
                 cre = gw.analyze_credit(
                     symbol=clean_ticker,
                     raw_financials={
-                        "TotalAssets": float(assets),
+                        "TotalAssets": num_assets,
                         "ShortTermDebt": st_debt,
                         "LongTermDebtNoncurrent": lt_debt,
                     },
@@ -1854,6 +1990,9 @@ class WatersourceTerminalService:
         except Exception:
             auto_valuation_issue = "自动估值执行失败"
 
+        # 10. 关联突发舆情与业务冲击事件 (News & Event Radar Linkage)
+        events_analysis = self.get_company_events(clean_ticker, company_name)
+
         return self._envelope(
             {
                 "ticker": clean_ticker,
@@ -1896,6 +2035,7 @@ class WatersourceTerminalService:
                 },
                 "automated_valuation": auto_val_res,
                 "automated_valuation_issue": auto_valuation_issue,
+                "events_analysis": events_analysis,
             },
             as_of=(quote_info or {}).get("timestamp_iso", as_of_iso),
             source="FinancialAnalysisGateway + AIEngineAdapter + AIDossierSynthesizer + SEC",

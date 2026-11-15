@@ -28,6 +28,7 @@ export default function App() {
   const [health, setHealth] = useState<HealthData | null>(null)
   const [pipelineStatus, setPipelineStatus] = useState<PipelineStatusData | null>(null)
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null)
+  const [selectedTicker, setSelectedTicker] = useState<string | null>(null)
   const [realtimeLogs, setRealtimeLogs] = useState<LogItem[]>([])
   const [refreshKey, setRefreshKey] = useState(0)
 
@@ -88,6 +89,10 @@ export default function App() {
               setSelectedEventId(id)
               setTab('intelligence')
             }}
+            onSelectTicker={(ticker) => {
+              setSelectedTicker(ticker)
+              setTab('analytics')
+            }}
           />
         )}
 
@@ -96,6 +101,10 @@ export default function App() {
             selectedEventId={selectedEventId}
             onClearSelectedEvent={() => setSelectedEventId(null)}
             refreshKey={refreshKey}
+            onSelectTicker={(ticker) => {
+              setSelectedTicker(ticker)
+              setTab('analytics')
+            }}
           />
         )}
 
@@ -104,7 +113,7 @@ export default function App() {
         )}
 
         {tab === 'analytics' && (
-          <AnalyticsTab refreshKey={refreshKey} />
+          <AnalyticsTab refreshKey={refreshKey} initialTicker={selectedTicker} />
         )}
 
         {tab === 'logs' && (
