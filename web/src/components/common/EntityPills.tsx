@@ -34,7 +34,7 @@ export const EntityPills: React.FC<EntityPillsProps> = ({ entities, max = 3, onS
           }}
           title={onSelectTicker ? `在个股分析中查看 ${ent}` : undefined}
         >
-          🏢 {ent}
+          {ent}
         </span>
       ))}
     </div>

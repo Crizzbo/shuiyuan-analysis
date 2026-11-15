@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { api } from '../services/api'
 import { showToast } from './Toast'
+import { SettingsIcon } from './common'
 
 interface TaskConfigModalProps {
   isOpen: boolean
@@ -147,7 +148,7 @@ export function TaskConfigModal({
         {/* 顶部标题栏 */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--border-color)] bg-[var(--bg-card)]">
           <div className="flex items-center gap-3">
-            <span className="text-xl">⚙️</span>
+            <SettingsIcon className="w-5 h-5 text-[#3987e5]" />
             <div>
               <h2 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
                 <span>全盘运营任务参数化中枢 (SSOT JSON Config)</span>
@@ -254,8 +255,8 @@ export function TaskConfigModal({
                         <div className="text-[11px] text-[var(--text-muted)] font-medium">执行轨道</div>
                         <div className="text-xs font-semibold text-[var(--text-primary)] mt-0.5">
                           {currentTask.track === 'DATA_COLLECTION'
-                            ? '📡 外部增量数据采集 (Track 2)'
-                            : '🛡️ 本地核对与同步任务 (Track 1)'}
+                            ? '外部增量数据采集 (Track 2)'
+                            : '本地核对与同步任务 (Track 1)'}
                         </div>
                       </div>
 
@@ -270,7 +271,7 @@ export function TaskConfigModal({
                     {/* 核心参数字典 */}
                     <div className="p-4 bg-[var(--bg-card)] rounded-xl border border-[var(--border-color)]/80 space-y-3">
                       <div className="text-xs font-bold text-[var(--text-primary)] flex items-center justify-between">
-                        <span>🔧 业务运行参数 (Runtime Parameters)</span>
+                        <span>业务运行参数 (Runtime Parameters)</span>
                         <span className="text-[10px] text-[var(--text-muted)] font-mono">
                           {Object.keys(currentTask.params || {}).length} 项配置
                         </span>
@@ -349,7 +350,7 @@ export function TaskConfigModal({
                   <span>正在落盘...</span>
                 </>
               ) : (
-                <span>💾 保存任务配置</span>
+                <span>保存任务配置</span>
               )}
             </button>
           </div>

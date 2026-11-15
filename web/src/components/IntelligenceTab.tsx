@@ -10,8 +10,6 @@ import {
   EntityPills,
   MicroImpactBox,
   EventCard,
-  TargetIcon,
-  NewspaperIcon,
   ZapIcon,
   BrainIcon,
   CalendarIcon,
@@ -289,7 +287,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
   }, [filteredNews, newsPage, newsPageSize])
 
   return (
-    <div className="p-4 md:p-6 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 md:p-6 max-w-[1600px] mx-auto space-y-6">
       {/* 头部统计卡片 */}
       <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
         <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-3 text-center shadow-sm">
@@ -342,7 +340,6 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                 : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]'
             }`}
           >
-            <TargetIcon className="w-4 h-4" />
             <span>权威事件雷达</span>
             <span className="text-[10px] px-2 py-0.5 rounded-full font-mono bg-white/20">
               {data?.total_events ?? 0}
@@ -358,7 +355,6 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                 : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]'
             }`}
           >
-            <NewspaperIcon className="w-4 h-4" />
             <span>官方资讯流水</span>
             <span className="text-[10px] px-2 py-0.5 rounded-full font-mono bg-white/20">
               {newsItems.length}
@@ -577,11 +573,11 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                                 {/* 独立的日期与时间一级字段 */}
                                 <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[var(--bg-card)] border border-[var(--border-color)] text-[11px] font-mono">
                                   <span className="text-[#3987e5] font-bold">
-                                    📅 {ev.published_date || ev.published_at?.slice(0, 10)}
+                                    {ev.published_date || ev.published_at?.slice(0, 10)}
                                   </span>
                                   {ev.published_time && (
                                     <span className="text-[var(--text-secondary)] font-medium">
-                                      🕒 {ev.published_time}
+                                      {ev.published_time}
                                     </span>
                                   )}
                                 </div>
@@ -606,7 +602,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                           <div className="shrink-0">
                             {ev.is_quarantined_rumor ? (
                               <span className="px-2 py-0.5 rounded text-[11px] bg-[#d03b3b]/20 text-[#d03b3b] border border-[#d03b3b]/40 font-semibold flex items-center gap-1">
-                                ⚠ 传闻隔离
+                                传闻隔离
                               </span>
                             ) : (
                               <span className={`px-2 py-0.5 rounded text-[11px] border font-medium ${vBadge.cls}`}>
@@ -674,11 +670,11 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                       </h2>
                       <div className="text-xs text-[var(--text-muted)] mt-2.5 flex flex-wrap items-center gap-2">
                         <span className="px-2 py-0.5 rounded bg-[var(--bg-card)] border border-[var(--border-color)] font-mono text-[#3987e5] font-bold">
-                          📅 发布日期: {activeEvent.published_date || activeEvent.published_at?.slice(0, 10)}
+                          发布日期: {activeEvent.published_date || activeEvent.published_at?.slice(0, 10)}
                         </span>
                         {activeEvent.published_time && (
                           <span className="px-2 py-0.5 rounded bg-[var(--bg-card)] border border-[var(--border-color)] font-mono text-[var(--text-secondary)] font-medium">
-                            🕒 确切时间: {activeEvent.published_time}
+                            确切时间: {activeEvent.published_time}
                           </span>
                         )}
                         {activeEvent.source_name && (
@@ -697,7 +693,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                     {activeEvent.is_quarantined_rumor && (
                       <div className="bg-[#331114]/30 border border-[#d03b3b]/50 rounded-lg p-3 text-xs text-[#fce8e8] space-y-1.5">
                         <div className="font-bold text-[#d03b3b] flex items-center gap-1.5">
-                          <span>⚠ 未核实传闻已启动安全隔离</span>
+                          <span>未核实传闻已启动安全隔离</span>
                         </div>
                         <p className="text-[11px] opacity-90 leading-relaxed">
                           {activeEvent.verification_note ||
@@ -710,7 +706,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                       <MicroImpactBox
                         impact={activeEvent.micro_physical_impact || '暂无结构化微观业务传导分析'}
                         category={activeEvent.category}
-                        title="⚡ 业务冲击与微观传导分析"
+                        title="业务冲击与微观传导分析"
                       />
                     </div>
 

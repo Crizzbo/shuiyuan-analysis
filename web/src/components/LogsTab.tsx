@@ -9,15 +9,15 @@ interface LogsTabProps {
   refreshKey?: number
 }
 
-const MODULE_PRESETS: Array<{ id: string; label: string; icon: string }> = [
-  { id: 'ALL', label: '全部模块', icon: '📋' },
-  { id: 'event_radar', label: '事件雷达', icon: '⚡' },
-  { id: 'evidence_verification', label: '公报核验', icon: '🛡️' },
-  { id: 'terminal_scheduler', label: '任务调度', icon: '⏱️' },
-  { id: 'terminal_service', label: '终端服务', icon: '🌐' },
-  { id: 'alert_dispatcher', label: '告警分发', icon: '🚨' },
-  { id: 'market_quotes', label: '行情归档', icon: '📈' },
-  { id: 'pipeline_orchestrator', label: '信息流水线', icon: '🔄' },
+const MODULE_PRESETS: Array<{ id: string; label: string }> = [
+  { id: 'ALL', label: '全部模块' },
+  { id: 'event_radar', label: '事件雷达' },
+  { id: 'evidence_verification', label: '公报核验' },
+  { id: 'terminal_scheduler', label: '任务调度' },
+  { id: 'terminal_service', label: '终端服务' },
+  { id: 'alert_dispatcher', label: '告警分发' },
+  { id: 'market_quotes', label: '行情归档' },
+  { id: 'pipeline_orchestrator', label: '信息流水线' },
 ]
 
 const MODULE_ZH_MAP: Record<string, string> = {
@@ -120,12 +120,12 @@ export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
     const seen = new Set(MODULE_PRESETS.map(m => m.id))
     const extra = availableModules
       .filter(m => !seen.has(m))
-      .map(m => ({ id: m, label: MODULE_ZH_MAP[m] || m, icon: '📦' }))
+      .map(m => ({ id: m, label: MODULE_ZH_MAP[m] || m }))
     return [...MODULE_PRESETS, ...extra]
   }, [availableModules])
 
   return (
-    <div className="p-4 md:p-6 max-w-7xl mx-auto space-y-5">
+    <div className="p-4 md:p-6 max-w-[1600px] mx-auto space-y-5">
       {/* 1. 物理专属落盘日志文件状态总览 */}
       {logFiles.length > 0 && (
         <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm">
@@ -229,13 +229,12 @@ export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
               type="button"
               key={mod.id}
               onClick={() => setModuleFilter(mod.id)}
-              className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer flex items-center gap-1 ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                 moduleFilter === mod.id
                   ? 'bg-[#199e70] text-white shadow-sm'
                   : 'bg-[var(--bg-card)] text-[var(--text-secondary)] border border-[var(--border-color)] hover:border-[#199e70]'
               }`}
             >
-              <span>{mod.icon}</span>
               <span>{mod.label}</span>
             </button>
           ))}

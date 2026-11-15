@@ -313,7 +313,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
         {/* ========================================================================= */}
         {/* 左侧：标的资产全量索引与检索栏 (占 3~4 列) */}
         {/* ========================================================================= */}
-        <div className="lg:col-span-4 xl:col-span-3 bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl shadow-sm flex flex-col overflow-hidden">
+        <div className="lg:col-span-4 xl:col-span-3 bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl shadow-sm flex flex-col overflow-hidden lg:sticky lg:top-4 self-start">
           {/* 左栏头部：统计与市场切换 */}
           <div className="p-3.5 border-b border-[var(--border-color)] space-y-2.5 bg-[var(--bg-card)]">
             <div className="flex items-center justify-between">
@@ -378,7 +378,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                   onClick={() => void handleRecollectStock(searchQuery.trim().toUpperCase())}
                   className="px-2 py-0.5 rounded bg-[#3987e5]/10 text-[#3987e5] hover:bg-[#3987e5]/20 font-medium cursor-pointer border border-[#3987e5]/30 shrink-0"
                 >
-                  ⚡ 在调度中拉取数据
+                  在调度中拉取数据
                 </button>
               </div>
             )}
@@ -495,23 +495,23 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
               <button
                 type="button"
                 onClick={() => scrollToSection('sec-header')}
-                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[var(--text-secondary)] hover:text-[#3987e5] border border-[var(--border-color)] cursor-pointer transition-all flex items-center gap-1"
+                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[var(--text-secondary)] hover:text-[#3987e5] border border-[var(--border-color)] cursor-pointer transition-all flex items-center"
               >
-                <span>🏢 标的概览</span>
+                <span>标的概览</span>
               </button>
               <button
                 type="button"
                 onClick={() => scrollToSection('sec-dcf')}
-                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[var(--text-secondary)] hover:text-[#3987e5] border border-[var(--border-color)] cursor-pointer transition-all flex items-center gap-1"
+                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[var(--text-secondary)] hover:text-[#3987e5] border border-[var(--border-color)] cursor-pointer transition-all flex items-center"
               >
-                <span>⚡ 多阶段DCF走廊</span>
+                <span>多阶段DCF走廊</span>
               </button>
               <button
                 type="button"
                 onClick={() => scrollToSection('sec-models-25')}
                 className="px-2.5 py-1 rounded-lg text-xs font-bold bg-[#199e70]/15 hover:bg-[#199e70]/25 text-[#199e70] border border-[#199e70]/30 cursor-pointer transition-all flex items-center gap-1.5 shadow-sm"
               >
-                <span>📊 25项量化指标</span>
+                <span>25项量化指标</span>
                 <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-[#199e70] text-white">
                   {suite24Data?.total_models ? `${suite24Data.total_models}项` : '25项'}
                 </span>
@@ -519,30 +519,30 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
               <button
                 type="button"
                 onClick={() => scrollToSection('sec-financials')}
-                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[var(--text-secondary)] hover:text-[#3987e5] border border-[var(--border-color)] cursor-pointer transition-all flex items-center gap-1"
+                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[var(--text-secondary)] hover:text-[#3987e5] border border-[var(--border-color)] cursor-pointer transition-all flex items-center"
               >
-                <span>📑 官方三表底稿</span>
+                <span>官方三表底稿</span>
               </button>
               <button
                 type="button"
                 onClick={() => scrollToSection('sec-moat')}
-                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[var(--text-secondary)] hover:text-[#3987e5] border border-[var(--border-color)] cursor-pointer transition-all flex items-center gap-1"
+                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[var(--text-secondary)] hover:text-[#3987e5] border border-[var(--border-color)] cursor-pointer transition-all flex items-center"
               >
-                <span>🛡️ 护城河与供应链</span>
+                <span>护城河与供应链</span>
               </button>
               <button
                 type="button"
                 onClick={() => scrollToSection('sec-probes')}
-                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[var(--text-secondary)] hover:text-[#3987e5] border border-[var(--border-color)] cursor-pointer transition-all flex items-center gap-1"
+                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[var(--text-secondary)] hover:text-[#3987e5] border border-[var(--border-color)] cursor-pointer transition-all flex items-center"
               >
-                <span>🔍 财务与平账定量诊断</span>
+                <span>财务与平账定量诊断</span>
               </button>
               <button
                 type="button"
                 onClick={() => scrollToSection('sec-radar')}
-                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[var(--text-secondary)] hover:text-[#3987e5] border border-[var(--border-color)] cursor-pointer transition-all flex items-center gap-1"
+                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[var(--text-secondary)] hover:text-[#3987e5] border border-[var(--border-color)] cursor-pointer transition-all flex items-center"
               >
-                <span>📰 关联舆情雷达</span>
+                <span>关联舆情雷达</span>
               </button>
             </div>
 
@@ -591,7 +591,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                     </>
                   ) : (
                     <>
-                      <span>⚡ 在任务调度中拉取 [{selectedTicker}] 全量数据</span>
+                      <span>在任务调度中拉取 [{selectedTicker}] 全量数据</span>
                     </>
                   )}
                 </button>
@@ -1645,7 +1645,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                             <div className="p-3.5 rounded-lg bg-[var(--surface-color)] border border-[var(--border-color)]/60 space-y-2">
                               <div className="flex items-center justify-between font-bold text-[var(--text-primary)]">
                                 <span className="flex items-center gap-1.5">
-                                  <span className="text-[#3987e5]">🎯</span>
+                                  <span className="w-2 h-2 rounded-full bg-[#3987e5]" />
                                   <span>估值定价与市场预期差</span>
                                 </span>
                                 <span className="text-[10px] font-mono text-[#3987e5]">
@@ -1662,7 +1662,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                             <div className="p-3.5 rounded-lg bg-[var(--surface-color)] border border-[var(--border-color)]/60 space-y-2">
                               <div className="flex items-center justify-between font-bold text-[var(--text-primary)]">
                                 <span className="flex items-center gap-1.5">
-                                  <span className="text-rose-500">📈</span>
+                                  <span className="w-2 h-2 rounded-full bg-rose-500" />
                                   <span>资本效率与杜邦超额造血</span>
                                 </span>
                                 <span className="text-[10px] font-mono text-rose-500">
@@ -1679,7 +1679,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                             <div className="p-3.5 rounded-lg bg-[var(--surface-color)] border border-[var(--border-color)]/60 space-y-2">
                               <div className="flex items-center justify-between font-bold text-[var(--text-primary)]">
                                 <span className="flex items-center gap-1.5">
-                                  <span className="text-[#199e70]">🛡️</span>
+                                  <span className="w-2 h-2 rounded-full bg-[#199e70]" />
                                   <span>资产负债表健康与偿债信用</span>
                                 </span>
                                 <span className="text-[10px] font-mono text-[#199e70]">
@@ -1696,7 +1696,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                             <div className="p-3.5 rounded-lg bg-[var(--surface-color)] border border-[var(--border-color)]/60 space-y-2">
                               <div className="flex items-center justify-between font-bold text-[var(--text-primary)]">
                                 <span className="flex items-center gap-1.5">
-                                  <span className="text-amber-500">💰</span>
+                                  <span className="w-2 h-2 rounded-full bg-amber-500" />
                                   <span>巴菲特所有者收益与真实造血</span>
                                 </span>
                                 <span className="text-[10px] font-mono text-amber-500">

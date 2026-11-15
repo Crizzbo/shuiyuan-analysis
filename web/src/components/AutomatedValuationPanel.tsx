@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import type { FormEvent } from 'react'
 import type { AutomatedValuationData, ValuationCompanyItem } from '../types/api'
 import { api } from '../services/api'
+import { TargetIcon } from './common'
 
 interface AutomatedValuationPanelProps {
   onSelectTicker?: (ticker: string) => void
@@ -240,7 +241,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
 
             {/* 顶层通俗商业研判横幅 */}
             <div className="p-4 rounded-xl my-4 border bg-[var(--bg-subtle)] flex items-start gap-3">
-              <span className="text-xl">🎯</span>
+              <TargetIcon className="w-5 h-5 text-[#3987e5] mt-0.5 shrink-0" />
               <div>
                 <div className="font-bold text-sm text-[var(--text-primary)]">
                   投资直觉与估值结论

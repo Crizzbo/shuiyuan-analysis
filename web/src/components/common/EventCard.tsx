@@ -121,7 +121,7 @@ export const EventCard: React.FC<EventCardProps> = ({
                   key={`seg-${i}`}
                   className="px-1.5 py-0.2 rounded bg-[#199e70]/10 text-[#199e70] border border-[#199e70]/20 font-medium"
                 >
-                  📊 {seg}
+                  {seg}
                 </span>
               ))}
             </div>

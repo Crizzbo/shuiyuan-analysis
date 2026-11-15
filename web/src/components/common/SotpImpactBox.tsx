@@ -31,7 +31,7 @@ export const SotpImpactBox: React.FC<SotpImpactBoxProps> = ({ sotp, style }) => 
           marginBottom: 4,
         }}
       >
-        <span>🧩 SOTP 业务分部因果敏感性穿透:</span>
+        <span>SOTP 业务分部因果敏感性穿透:</span>
         <span style={{ color: '#fff' }}>{sotp.penetration_level || '直接核心业务冲击'}</span>
       </div>
       {sotp.affected_segments && sotp.affected_segments.length > 0 && (
@@ -47,7 +47,7 @@ export const SotpImpactBox: React.FC<SotpImpactBoxProps> = ({ sotp, style }) => 
                 borderRadius: 4,
               }}
             >
-              📊 {typeof seg === 'string' ? seg : (seg.segment_name || seg.segment || JSON.stringify(seg))}
+              {typeof seg === 'string' ? seg : (seg.segment_name || seg.segment || JSON.stringify(seg))}
             </span>
           ))}
         </div>

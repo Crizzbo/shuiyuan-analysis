@@ -172,7 +172,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                 <span>拉取中…</span>
               </>
             ) : (
-              <span>⚡ 单票拉取</span>
+              <span>单票拉取</span>
             )}
           </button>
         </div>
@@ -184,7 +184,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
             onClick={() => void submitMaster('start')}
             className="px-2.5 py-1 rounded-md bg-[#176249] hover:bg-[#14533e] text-white text-xs font-semibold cursor-pointer disabled:opacity-50 transition-all flex items-center gap-1 shadow-sm"
           >
-            <span>⚡ 全量核对</span>
+            <span>全量核对</span>
           </button>
 
           <button
@@ -223,13 +223,13 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
       {expanded && (
         <div className="space-y-4 pt-1">
           {/* ========================================================================= */}
-          {/* 重点一：🎯 指定个股全维度数据拉取与平账 (精准单票采集入口) */}
+          {/* 重点一：指定个股全维度数据拉取与平账 (精准单票采集入口) */}
           {/* ========================================================================= */}
           <div className="rounded-lg border border-[#3987e5]/30 bg-[#3987e5]/5 p-3.5 space-y-2.5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <span className="text-sm font-bold text-[#3987e5]">
-                  🎯 指定个股全维度数据拉取 (Single-Stock Pipeline)
+                  指定个股全维度数据拉取 (Single-Stock Pipeline)
                 </span>
                 <span className="text-[10px] text-[var(--text-muted)]">
                   一站式补齐：最新报价 · 官方三表平账 · 250日K线均线 · DCF估值
@@ -262,7 +262,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                   </>
                 ) : (
                   <>
-                    <span>⚡ 启动单票全量收集与平账核对</span>
+                    <span>启动单票全量收集与平账核对</span>
                   </>
                 )}
               </button>
@@ -292,7 +292,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
           <div>
             <div className="flex items-center justify-between pb-2">
               <span className="text-xs font-bold text-[var(--text-secondary)]">
-                🧱 个股分析必备 6 大核心数据基石（可分别独立触发更新）
+                个股分析必备 6 大核心数据基石（可分别独立触发更新）
               </span>
               <span className="text-[11px] text-[var(--text-muted)]">
                 {active.length > 0 ? `当前 ${active.length} 项任务执行中` : '所有数据通道就绪'}
@@ -305,7 +305,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                      <span>📊</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                       <span>最新行情与时效核验</span>
                     </span>
                     <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
@@ -334,7 +334,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                      <span>📑</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
                       <span>官方三表底稿与平账</span>
                     </span>
                     <span className="text-[10px] px-1.5 py-0.2 rounded bg-blue-500/10 text-blue-600 border border-blue-500/20">
@@ -363,7 +363,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                      <span>📈</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
                       <span>250日历史日K量价</span>
                     </span>
                     <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-600 border border-amber-500/20">
@@ -402,7 +402,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                      <span>🎯</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
                       <span>SEPA 主升浪与形态初筛</span>
                     </span>
                     <span className="text-[10px] px-1.5 py-0.2 rounded bg-purple-500/10 text-purple-600 border border-purple-500/20">
@@ -431,7 +431,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                      <span>🏛️</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
                       <span>宏观折现率与标的 WACC</span>
                     </span>
                     <span className="text-[10px] px-1.5 py-0.2 rounded bg-rose-500/10 text-rose-600 border border-rose-500/20">
@@ -460,7 +460,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                      <span>⚡</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
                       <span>官方资讯与微观事件雷达</span>
                     </span>
                     <span className="text-[10px] px-1.5 py-0.2 rounded bg-cyan-500/10 text-cyan-600 border border-cyan-500/20">

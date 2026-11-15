@@ -1,12 +1,36 @@
-.container { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+.container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
 .site-header { background: #fff; border-bottom: 1px solid var(--line); }
-.main-nav { display: flex; gap: 26px; min-height: 49px; overflow-x: auto; }
-.main-nav button { background: transparent; border: 0; border-bottom: 2px solid transparent; color: var(--ink-muted); padding: 0 2px; white-space: nowrap; }
-.main-nav button[aria-current] { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+.main-nav { display: flex; gap: 32px; min-height: 48px; overflow-x: auto; align-items: center; }
+.main-nav button {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--ink-muted);
+  padding: 12px 2px;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.main-nav button:hover {
+  color: var(--text-primary);
+}
+.main-nav button[aria-current] {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 700;
+}
 .subnav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; margin-bottom: 16px; }
 .subnav button { padding: 7px 11px; border: 1px solid transparent; border-radius: 6px; color: var(--ink-muted); }
 .subnav button[aria-pressed="true"] { background: #e9f1ec; color: var(--accent); border-color: #d5e4da; font-weight: 650; }
-.terminal-top { padding: 14px 24px; background: #fff; border-bottom: 1px solid var(--line); }
+.terminal-top { padding: 12px 0; background: #fff; border-bottom: 1px solid var(--line); }
 .terminal-top h1 { font-size: 1.12rem; }
 .terminal-top .terminal-status { background: #f8faf8; }
 main { padding-bottom: 48px; }

@@ -11,7 +11,7 @@ interface MicroImpactBoxProps {
 export const MicroImpactBox: React.FC<MicroImpactBoxProps> = ({
   impact,
   category,
-  title = '💡 核心研判与影响',
+  title = '核心研判与业务影响',
   style,
 }) => {
   if (!impact) return null;

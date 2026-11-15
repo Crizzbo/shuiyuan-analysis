@@ -41,7 +41,7 @@ export function SettingsTab() {
   const lifecycle = settings?.lifecycle_policy
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 md:p-6 max-w-[1600px] mx-auto space-y-6">
       {/* 顶部标题与功能说明 */}
       <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-2">
         <div className="flex items-center justify-between">
@@ -75,7 +75,7 @@ export function SettingsTab() {
           <div className="bg-[var(--bg-card)] rounded-lg p-3.5 text-xs space-y-2.5 border border-[var(--border-color)]/60">
             <div className="flex items-center justify-between">
               <span className="text-[var(--text-muted)]">数据准入机制:</span>
-              <span className="text-[#3987e5] font-semibold">单向流动 (官方原始财报 ➔ 量化核验 ➔ 决策看板)</span>
+              <span className="text-[#3987e5] font-semibold">单向流动 (官方原始财报 → 量化核验 → 决策看板)</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-[var(--text-muted)]">模型计算机制:</span>

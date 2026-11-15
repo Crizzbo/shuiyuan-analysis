@@ -10,10 +10,10 @@ interface HeaderProps {
 export function Header({ health, sseConnected, onPipelineStarted }: HeaderProps) {
   return (
     <header className="terminal-top">
-      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+      <div className="container flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         {/* 左侧：系统标题与环境状态 */}
         <div className="flex items-center gap-4">
-          <div className="w-9 h-9 rounded-lg bg-[#176249] flex items-center justify-center font-bold text-white">
+          <div className="w-9 h-9 rounded-lg bg-[#176249] flex items-center justify-center font-bold text-white shrink-0">
             水
           </div>
           <div>
@@ -43,15 +43,19 @@ export function Header({ health, sseConnected, onPipelineStarted }: HeaderProps)
               </span>
               <span>·</span>
               <span className="px-2.5 py-0.5 rounded bg-[#3987e5]/15 text-[#3987e5] border border-[#3987e5]/30 font-mono font-bold flex items-center gap-1">
-                <span>🕒 更新时间:</span>
+                <span>更新时间:</span>
                 <span>{health?.latest_data_ts ? formatDeviceTime(health.latest_data_ts) : '暂无'}</span>
               </span>
             </div>
           </div>
         </div>
 
-        <button type="button" className="text-xs text-[var(--accent)]" onClick={onPipelineStarted}>
-          采集中心
+        <button
+          type="button"
+          className="text-xs px-3 py-1.5 rounded-lg border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:text-[#176249] hover:border-[#176249]/40 font-medium transition-all"
+          onClick={onPipelineStarted}
+        >
+          采集中枢通道
         </button>
       </div>
     </header>

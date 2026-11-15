@@ -20,7 +20,6 @@ import {
   InfoCircleIcon,
   SearchIcon,
   CalendarIcon,
-  NewspaperIcon,
   CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
@@ -274,7 +273,7 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
   const recentRuns: TaskSchedulerRun[] = allRuns.slice(0, 10)
 
   return (
-    <div className="p-4 md:p-8 max-w-5xl mx-auto space-y-6">
+    <div className="p-4 md:p-6 max-w-[1600px] mx-auto space-y-6">
       {/* 1. 顶层极简状态条 (一句话看懂当前状态) */}
       <div className="flex flex-wrap items-center justify-between gap-3 bg-[var(--surface-color)] border border-[var(--border-color)] px-5 py-3.5 rounded-2xl shadow-sm text-xs">
         <div className="flex items-center gap-3">
@@ -594,37 +593,34 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
               <button
                 type="button"
                 onClick={() => setAdvancedTab('scheduler')}
-                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                   advancedTab === 'scheduler'
                     ? 'bg-[#3987e5]/10 text-[#3987e5]'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                 }`}
               >
-                <CalendarIcon className="w-3.5 h-3.5" />
                 <span>调度任务清单 ({tasks.length})</span>
               </button>
               <button
                 type="button"
                 onClick={() => setAdvancedTab('runs')}
-                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                   advancedTab === 'runs'
                     ? 'bg-[#3987e5]/10 text-[#3987e5]'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                 }`}
               >
-                <NewspaperIcon className="w-3.5 h-3.5" />
                 <span>执行流水记录 ({recentRuns.length})</span>
               </button>
               <button
                 type="button"
                 onClick={() => setAdvancedTab('archives')}
-                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                   advancedTab === 'archives'
                     ? 'bg-[#3987e5]/10 text-[#3987e5]'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                 }`}
               >
-                <DatabaseIcon className="w-3.5 h-3.5" />
                 <span>全盘日线归档与平账对账</span>
               </button>
             </div>

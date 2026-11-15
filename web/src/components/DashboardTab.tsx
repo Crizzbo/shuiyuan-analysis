@@ -496,7 +496,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
   const sentiment = stats.capital_and_sentiment
 
   return (
-    <div className="p-6 space-y-6 max-w-7xl mx-auto">
+    <div className="p-4 md:p-6 space-y-6 max-w-[1600px] mx-auto">
       {/* ========================================================================= */}
       {/* 顶层交易时段与统计基准状态条 (买方专业交易时段感知，消除底账字眼) */}
       {/* ========================================================================= */}
@@ -507,13 +507,13 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           <span className="text-[var(--text-muted)]">|</span>
           <div className="flex flex-wrap items-center gap-3 text-[var(--text-secondary)] font-mono">
             <span className="flex items-center gap-1.5">
-              <span className="text-[var(--text-muted)]">🇺🇸 美股:</span>
+              <span className="text-[var(--text-muted)]">美股:</span>
               <span className="px-1.5 py-0.2 rounded bg-gray-500/10 text-[var(--text-secondary)] border border-gray-500/20 font-sans text-[11px]">
                 已收盘 (前收盘基准)
               </span>
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="text-[var(--text-muted)]">🇯🇵 日股:</span>
+              <span className="text-[var(--text-muted)]">日股:</span>
               <span className="px-1.5 py-0.2 rounded bg-gray-500/10 text-[var(--text-secondary)] border border-gray-500/20 font-sans text-[11px]">
                 已收盘 (前收盘基准)
               </span>
@@ -1041,7 +1041,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
               <div className="flex items-center gap-2.5">
-                <span className="text-xl">🪜</span>
+                <BarChartIcon className="w-5 h-5 text-[#3987e5]" />
                 <div>
                   <h2 className="text-base font-bold text-[var(--text-primary)]">
                     GICS 全行业板块收益与成交动量天梯榜
@@ -1593,7 +1593,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   className="text-[10px] px-2 py-0.5 rounded bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/30 cursor-pointer transition-all flex items-center gap-1"
                   title="即时核验与抽取官方最新公报"
                 >
-                  <span className={isExtractingNews ? 'animate-spin' : ''}>⚡</span>
+                  <ZapIcon className={`w-3 h-3 text-[#3987e5] ${isExtractingNews ? 'animate-spin' : ''}`} />
                   <span>{isExtractingNews ? '抽取中...' : '即时抽取'}</span>
                 </button>
                 <button
