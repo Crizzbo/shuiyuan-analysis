@@ -145,6 +145,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
   const [error, setError] = useState<string | null>(null)
   const [isExtractingNews, setIsExtractingNews] = useState(false)
   const [showDispatcher, setShowDispatcher] = useState(false)
+  const [activeTooltipTicker, setActiveTooltipTicker] = useState<string | null>(null)
 
   const handleExtractNews = async () => {
     if (isExtractingNews) return
@@ -259,6 +260,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       ticker: 'SPY',
       nameZh: '标普500 ETF',
       desc: '美股大盘蓝筹基准',
+      detail: '追踪标准普尔500指数，覆盖美股500只代表性大盘蓝筹龙头，是全球配置美股核心权益资产与宏观风险偏好的第一风向标。',
       market: 'US',
       currency: 'USD',
       symbol: '$',
@@ -268,6 +270,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       ticker: 'QQQ',
       nameZh: '纳斯达克100 ETF',
       desc: '科技龙头与核心成长',
+      detail: '追踪纳斯达克100指数，重仓全球顶尖科技、AI算法与数字经济成长旗舰企业，对无风险利率变动及科技资本开支高度敏感。',
       market: 'US',
       currency: 'USD',
       symbol: '$',
@@ -277,6 +280,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       ticker: 'DIA',
       nameZh: '道琼斯工业 ETF',
       desc: '工业与价值蓝筹权重',
+      detail: '追踪道琼斯工业平均指数（30家蓝筹工业与消费巨头），采用价格加权法，反映美国传统工业制造与成熟蓝筹周期的基本盘动能。',
       market: 'US',
       currency: 'USD',
       symbol: '$',
@@ -286,6 +290,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       ticker: 'IWM',
       nameZh: '罗素2000 ETF',
       desc: '中小盘流动性敏感标的',
+      detail: '追踪罗素2000小盘指数，涵盖美国本土2000家微中型企业，对美国国内银行信贷松紧、企业再通胀及债务展期成本最为敏锐。',
       market: 'US',
       currency: 'USD',
       symbol: '$',
@@ -295,6 +300,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       ticker: '1306',
       nameZh: '东证 TOPIX ETF',
       desc: '日本全市场核心基准',
+      detail: '野村东证股价指数NEXT FUNDS ETF，全息覆盖东京证交所Prime主板所有企业，代表日本全市场基本盘与央行货币政策正常化影响。',
       market: 'JP',
       currency: 'JPY',
       symbol: '¥',
@@ -304,6 +310,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       ticker: '^N225',
       nameZh: '日经225指数',
       desc: '日本出口与半导体指标',
+      detail: '日经平均株价指数，精选225家高流动性跨国制造与半导体出口巨头，深受日元汇率涨跌波动与海外供应链需求影响。',
       market: 'JP',
       currency: 'JPY',
       symbol: '¥',
@@ -313,6 +320,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       ticker: 'SMH',
       nameZh: '半导体行业 ETF',
       desc: '全球芯片与算力风向标',
+      detail: 'VanEck半导体行业ETF，重仓英伟达、台积电、博通、阿斯麦等芯片巨头，是全球算力基础设施、先进封装与周期胜负手代表。',
       market: 'US',
       currency: 'USD',
       symbol: '$',
@@ -322,6 +330,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       ticker: 'USDJPY',
       nameZh: '美元兑日元 (USD/JPY)',
       desc: '日美利差与汇率承压',
+      detail: '全球最具系统重要性的套息货币对，反映美联储与日本央行政策利差，也是东证出口企业汇兑损益与全球流动性平仓的核心传导链。',
       market: 'FX',
       currency: 'JPY',
       symbol: '¥',
@@ -508,34 +517,115 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
             {/* 双市场核心基准卡片阵列 */}
             <div className="space-y-3 pt-1">
               <div className="flex items-center justify-between text-xs font-semibold text-[var(--text-secondary)]">
-                <span>双市场核心基准指数 (Benchmark Indices)</span>
+                <div className="flex items-center gap-1.5">
+                  <span>双市场核心基准指数 (Benchmark Indices)</span>
+                  <span className="text-[11px] text-[var(--text-muted)] font-normal hidden sm:inline">
+                    · 点击右上角感叹号 ℹ 查看详细图表说明
+                  </span>
+                </div>
                 <span className="text-[11px] text-[var(--text-muted)] font-normal">每日逐笔收盘核验为准</span>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {benchmarkIndices.map((idx) => {
+                {benchmarkIndices.map((idx, index) => {
                   const q = idx.quote as MarketQuoteItem
                   const badge = getStatusBadge(q?.data_status)
                   const chg = BENCHMARK_CHANGES[idx.ticker] || { change: '+0.00', change_pct: '+0.00%', is_up: true }
+                  
+                  // 根据列位置动态调整展开浮层对齐方向，防止屏幕边缘被遮挡
+                  const alignClass = (index % 4 === 0)
+                    ? 'left-0 sm:left-0'
+                    : (index % 4 === 3)
+                    ? 'right-0 sm:right-0'
+                    : 'right-0 sm:left-1/2 sm:-translate-x-1/2'
+
                   return (
                     <div
                       key={idx.ticker}
-                      className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#3987e5]/50 rounded-xl p-3 flex flex-col justify-between transition-all shadow-sm group"
+                      className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#3987e5]/50 rounded-xl p-3 flex flex-col justify-between transition-all shadow-sm group relative"
                     >
                       <div>
+                        {/* 顶栏：代码 + 状态标签 + 聚焦感叹号按钮 */}
                         <div className="flex items-center justify-between gap-1">
                           <span className="font-mono font-bold text-xs text-[var(--text-primary)] group-hover:text-[#3987e5] transition-colors">
                             {idx.ticker}
                           </span>
-                          <span className={`text-[9px] px-1.5 py-0.2 rounded border font-medium ${badge.cls}`}>
-                            {badge.text}
-                          </span>
+                          
+                          <div className="flex items-center gap-1.5">
+                            <span className={`text-[9px] px-1.5 py-0.2 rounded border font-medium ${badge.cls}`}>
+                              {badge.text}
+                            </span>
+
+                            {/* 感叹号交互按钮：支持点击切换、聚焦与悬停详细展开 */}
+                            <div
+                              className="relative"
+                              onMouseEnter={() => setActiveTooltipTicker(idx.ticker)}
+                              onMouseLeave={() => setActiveTooltipTicker(null)}
+                            >
+                              <button
+                                type="button"
+                                tabIndex={0}
+                                title={`${idx.nameZh} 详细说明`}
+                                aria-label={`${idx.nameZh} 详细说明`}
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  setActiveTooltipTicker(activeTooltipTicker === idx.ticker ? null : idx.ticker)
+                                }}
+                                onFocus={() => setActiveTooltipTicker(idx.ticker)}
+                                onBlur={() => setActiveTooltipTicker(null)}
+                                className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                                  activeTooltipTicker === idx.ticker
+                                    ? 'bg-[#3987e5] text-white border-[#3987e5]'
+                                    : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
+                                }`}
+                              >
+                                !
+                              </button>
+
+                              {/* 聚焦/悬停/点击展开详细信息浮层 */}
+                              {activeTooltipTicker === idx.ticker && (
+                                <div
+                                  className={`absolute top-full mt-2 w-64 p-3 rounded-xl bg-[var(--surface-color)] border border-[var(--border-color)] shadow-2xl z-50 pointer-events-auto opacity-100 transition-all duration-200 ${alignClass}`}
+                                  onMouseEnter={() => setActiveTooltipTicker(idx.ticker)}
+                                  onMouseLeave={() => setActiveTooltipTicker(null)}
+                                >
+                                  <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
+                                    <div className="flex items-center gap-1.5 min-w-0">
+                                      <span className="font-mono font-bold text-xs text-[var(--text-primary)]">
+                                        {idx.ticker}
+                                      </span>
+                                      <span className="text-[11px] text-[var(--text-secondary)] font-medium truncate">
+                                        {idx.nameZh}
+                                      </span>
+                                    </div>
+                                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/25 font-medium shrink-0">
+                                      {idx.desc}
+                                    </span>
+                                  </div>
+                                  <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                                    {idx.detail}
+                                  </p>
+                                  <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
+                                    <span>市场: {idx.market}</span>
+                                    <span>货币: {idx.currency}</span>
+                                    <span>时效: {badge.text}</span>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          </div>
                         </div>
-                        <div className="text-[11px] text-[var(--text-muted)] truncate mt-0.5">
+
+                        {/* 指数中文名称 */}
+                        <div className="text-[11px] text-[var(--text-muted)] truncate mt-1">
                           {idx.nameZh}
                         </div>
+
+                        {/* 最新报价 */}
                         <div className="text-lg font-black font-mono text-[var(--text-primary)] mt-1.5 tracking-tight truncate">
                           {q?.formatted_price || (q?.price != null ? `${idx.symbol}${q.price}` : '—')}
                         </div>
+
+                        {/* 涨跌幅 */}
                         <div className="flex items-center gap-1 mt-1 text-[11px] font-mono font-bold">
                           <span className={`px-1.5 py-0.2 rounded ${
                             chg.is_up ? 'text-emerald-500 bg-emerald-500/10' : 'text-rose-500 bg-rose-500/10'
@@ -543,9 +633,6 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                             {chg.is_up ? '▲' : '▼'} {chg.change_pct}
                           </span>
                         </div>
-                      </div>
-                      <div className="mt-2 text-[10px] text-[var(--text-muted)] font-medium truncate pt-1.5 border-t border-[var(--border-color)]/50">
-                        {idx.desc}
                       </div>
                     </div>
                   )
