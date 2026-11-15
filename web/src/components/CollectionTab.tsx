@@ -412,7 +412,7 @@ export function CollectionTab({ pipelineStatus, refreshKey }: CollectionTabProps
             </span>
           </h1>
           <p className="text-xs text-[var(--text-secondary)] mt-1">
-            融合「运营管线与生命周期」、「分时调度与执行流水」以及「全盘日线归档底账」，支持独立阻塞重跑与 JSON 参数化配置 (SSOT)。
+            融合「运营管线与生命周期」、「分时调度与执行流水」以及「全盘日线行情归档库」，支持独立阻塞重跑与 JSON 参数化配置 (SSOT)。
           </p>
         </div>
 
@@ -476,7 +476,7 @@ export function CollectionTab({ pipelineStatus, refreshKey }: CollectionTabProps
               : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]'
           }`}
         >
-          <span>📈 全盘日线行情归档底账</span>
+          <span>📈 全盘日线行情归档库</span>
           <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20">
             {marketArchives.length}标的 · 14,892全盘对账
           </span>
@@ -714,7 +714,7 @@ export function CollectionTab({ pipelineStatus, refreshKey }: CollectionTabProps
               </div>
 
               <div className="text-xs text-[var(--text-secondary)] leading-relaxed flex items-center justify-between pt-1">
-                <span>官方 SEC 原档底账: <strong className="text-[var(--text-primary)] font-mono">{data?.lifecycle_tiers.sec_official_files} 份已校验原档</strong></span>
+                <span>官方 SEC 原档平账: <strong className="text-[var(--text-primary)] font-mono">{data?.lifecycle_tiers.sec_official_files} 份已校验原档</strong></span>
                 <span className="text-[#199e70] text-[11px]">✓ 隐私守卫生效中</span>
               </div>
             </div>
@@ -1002,21 +1002,21 @@ export function CollectionTab({ pipelineStatus, refreshKey }: CollectionTabProps
       )}
 
       {/* ========================================================================= */}
-      {/* 视图三：全盘日线行情归档底账 (Market Archives Explorer) */}
+      {/* 视图三：全盘日线行情归档库 (Market Archives Explorer) */}
       {/* ========================================================================= */}
       {activeSection === 'archives' && (
         <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-[var(--border-color)]">
             <div>
               <h3 className="text-sm font-bold text-[var(--text-primary)]">
-                全盘日线行情时序归档底账 (14,892 上市标的池)
+                全盘日线行情时序归档库 (14,892 席标的池)
               </h3>
               <p className="text-xs text-[var(--text-secondary)] mt-0.5">
-                覆盖美股（SEC 10,445 家）与日股（东证 4,447 家）流式分块抽取之历史 OHLCV 日线底账。
+                覆盖美股（SEC 10,445 家）与日股（东证 4,447 家）流式分块抽取之历史 OHLCV 日线行情数据。
               </p>
             </div>
             <span className="text-xs font-mono px-2.5 py-1 rounded bg-[#3987e5]/15 text-[#3987e5] border border-[#3987e5]/30">
-              共收录 {marketArchives.length} 个标的行情底账
+              共收录 {marketArchives.length} 个标的日线行情
             </span>
           </div>
 
@@ -1336,7 +1336,7 @@ export function CollectionTab({ pipelineStatus, refreshKey }: CollectionTabProps
           {loadingArchives ? (
             <div className="p-8 text-center text-xs text-[var(--text-muted)] flex items-center justify-center gap-2">
               <span className="w-3.5 h-3.5 border-2 border-[#3987e5] border-t-transparent rounded-full animate-spin" />
-              正在检索日线行情归档底账...
+              正在检索日线行情归档库...
             </div>
           ) : paginatedArchives.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">

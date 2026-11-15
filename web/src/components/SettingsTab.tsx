@@ -75,7 +75,7 @@ export function SettingsTab() {
           <div className="bg-[var(--bg-card)] rounded-lg p-3.5 text-xs space-y-2.5 border border-[var(--border-color)]/60">
             <div className="flex items-center justify-between">
               <span className="text-[var(--text-muted)]">数据准入机制:</span>
-              <span className="text-[#3987e5] font-semibold">单向流动 (原始底账 ➔ 量化核验 ➔ 决策看板)</span>
+              <span className="text-[#3987e5] font-semibold">单向流动 (官方原始财报 ➔ 量化核验 ➔ 决策看板)</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-[var(--text-muted)]">模型计算机制:</span>
@@ -95,7 +95,7 @@ export function SettingsTab() {
           <div className="bg-[#102a1e]/15 border border-[#199e70]/30 rounded-lg p-3 text-xs text-[var(--text-secondary)] leading-relaxed">
             <span className="font-semibold text-[#199e70]">准则说明: </span>
             <span className="text-[11px] text-[var(--text-muted)]">
-              系统坚持买方机构实证原则，底层底账只追加不篡改；杜绝无依据的黑盒机械打分，全方位以多情景估值廊道为决策基准。
+              系统坚持买方机构实证原则，底层证据账本只追加不篡改；杜绝无依据的黑盒机械打分，全方位以多阶段 DCF 内在价值走廊为决策基准。
             </span>
           </div>
         </div>
@@ -197,7 +197,7 @@ export function SettingsTab() {
               <span className="font-mono font-semibold text-[#199e70]">{lifecycle?.hot_quote_max_age_days || 30} 天 (高频动态计算)</span>
             </div>
             <div className="flex justify-between items-center bg-[var(--bg-card)] p-2.5 rounded-lg border border-[var(--border-color)]">
-              <span className="text-[var(--text-secondary)]">历史财务底账:</span>
+              <span className="text-[var(--text-secondary)]">历史财务数据:</span>
               <span className="font-mono font-semibold text-[#c98500]">{lifecycle?.warm_quote_max_age_days || 1095} 天 (3年财报全息归档)</span>
             </div>
             <div className="flex justify-between items-center bg-[var(--bg-card)] p-2.5 rounded-lg border border-[var(--border-color)]">
@@ -228,9 +228,9 @@ export function SettingsTab() {
           {[
             { name: '行情时效与完备度核验', desc: '按报价时间和市场时段检查本地归档', status: '按报价核验' },
             { name: '全市场趋势形态初筛', desc: '正式初筛依赖可验证的历史日线价量', status: '等待 OHLCV' },
-            { name: '突发事件雷达', desc: '检索本地事件档案和传闻隔离记录', status: '本地档案' },
-            { name: '企业基本面与情景估值', desc: '查看个股底账或在计算器中输入假设', status: '按证据计算' },
-            { name: '后台采集调度', desc: '在采集中心查看任务计划、进度和归档回执', status: '见任务页' },
+            { name: '权威事件雷达', desc: '检索本地事件档案和传闻隔离记录', status: '本地档案' },
+            { name: '企业基本面与情景估值', desc: '查看个股档案或在计算器中输入假设', status: '按证据计算' },
+            { name: '任务调度控制台', desc: '在采集中心查看任务计划、进度和归档回执', status: '见任务页' },
             { name: '预测账本', desc: '校验预测记录的哈希链条', status: ledger?.integrity_valid ? '验签通过' : '待核验' },
           ].map((svc) => (
             <div key={svc.name} className="bg-[var(--bg-card)] border border-[var(--border-color)]/60 rounded-lg p-3.5 space-y-2">

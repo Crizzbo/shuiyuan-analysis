@@ -422,7 +422,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
               {/* 右侧：总览与已收录统计 */}
               <div className="text-xs text-[var(--text-muted)] font-mono flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#199e70] animate-pulse" />
-                <span>收录 {availableDates.length} 个历史日期 · 共 {data?.total_events ?? 0} 条底账</span>
+                <span>收录 {availableDates.length} 个历史日期 · 共 {data?.total_events ?? 0} 篇权威事件</span>
               </div>
             </div>
 
@@ -524,7 +524,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
             <div className={`space-y-3 ${activeEvent ? 'lg:col-span-7' : 'lg:col-span-12'}`}>
               {loading ? (
                 <div className="text-center py-12 text-xs text-[var(--text-muted)] bg-[var(--surface-color)] rounded-xl border border-[var(--border-color)]">
-                  正在调取数据库最新情报底账...
+                  正在调取数据库最新权威事件...
                 </div>
               ) : pagedEvents.length > 0 ? (
                 <>
@@ -725,7 +725,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
       )}
 
       {/* ========================================================================= */}
-      {/* 视图二：官方监管与交易所资讯流 (分时采集底账) */}
+      {/* 视图二：官方监管与交易所资讯流 (官方资讯流水) */}
       {/* ========================================================================= */}
       {activeView === 'news' && (
         <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">

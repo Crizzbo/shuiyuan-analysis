@@ -29,7 +29,7 @@ const MODULE_ZH_MAP: Record<string, string> = {
   market_quotes: '行情归档',
   pipeline_orchestrator: '信息流水线',
   screening_engine: '选股初筛',
-  audit_ledger: '底账审计',
+  audit_ledger: '预测账本审计',
   filing_audit: '三表核对',
   quant_valuation: '量化估值',
   system_core: '系统核心',
@@ -255,7 +255,7 @@ export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
         {loading && logs.length === 0 ? (
           <div className="text-gray-500 py-12 text-center flex items-center justify-center gap-2">
             <span className="w-3.5 h-3.5 border-2 border-[#3987e5] border-t-transparent rounded-full animate-spin" />
-            正在调取各专属模块日志底账...
+            正在调取各专属模块日志审计流...
           </div>
         ) : pagedLogs.length === 0 ? (
           <div className="text-gray-500 py-12 text-center">

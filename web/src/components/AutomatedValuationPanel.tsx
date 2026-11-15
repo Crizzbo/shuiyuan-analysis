@@ -22,6 +22,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
   const [customGrowthRates, setCustomGrowthRates] = useState<string>('18, 14, 10')
   const [customBeta, setCustomBeta] = useState<number>(1.45)
   const [tuning, setTuning] = useState(false)
+  const [activeScenarioTooltip, setActiveScenarioTooltip] = useState<'floor' | 'base' | 'opt' | null>(null)
 
   // 1. 加载可用企业池
   useEffect(() => {
@@ -105,12 +106,12 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
       <section className="panel">
         <div className="section-head">
           <div>
-            <h2>自动带入金融估值与多阶段 DCF 走廊</h2>
+            <h2>自动带入金融估值与多阶段 DCF 内在价值走廊</h2>
             <p className="muted">
-              无需手动敲入基期数据 · 自动提取 SEC 官方平账原档、行情与 FRED 美债收益率 · 多阶段 DCF 走廊 · WACC 资本成本 · 杜邦比率
+              无需手动敲入基期数据 · 自动提取 SEC 官方平账原档、行情与 FRED 美债收益率 · 多阶段 DCF 内在价值走廊 · WACC 资本成本 · 杜邦比率
             </p>
           </div>
-          <span className="badge success">全自动底账代入</span>
+          <span className="badge success">全自动官方财报代入</span>
         </div>
 
         {/* 标的快速切换按钮池 */}
@@ -156,7 +157,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
             onChange={e => setSearchTicker(e.target.value)}
             className="w-64 rounded-md border border-[var(--border-color)] px-3 py-1.5 text-sm"
           />
-          <button type="submit" className="primary">自动调取底账计算</button>
+          <button type="submit" className="primary">自动调取官方财报计算</button>
         </form>
       </section>
 
@@ -164,17 +165,17 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
 
       {loading && !valuationData && (
         <div className="panel p-8 text-center text-muted">
-          正在从官方 SEC 10-K 底账与实时行情中提取财务事实并自动测算估值...
+          正在从官方 SEC 10-K 原档与实时行情中提取财务事实并自动测算估值...
         </div>
       )}
 
       {valuationData && (
         <>
-          {/* 1. 自动提取的官方底账事实卡片 */}
+          {/* 1. 自动提取的官方财报事实卡片 */}
           <section className="panel">
             <div className="section-head">
               <div>
-                <h2>官方财报三表与实时行情底账 (已自动平账代入)</h2>
+                <h2>官方财报三表与实时行情 (已自动平账代入)</h2>
                 <p className="muted">
                   官方披露原档：{facts?.source_filing} · 报告期截止：{facts?.period_end} · 市场基准时点：{valuationData.quote_timestamp}
                 </p>
@@ -223,11 +224,11 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
             </div>
           </section>
 
-          {/* 2. 多阶段 DCF 估值走廊三态卡片 */}
+          {/* 2. 多阶段 DCF 内在价值走廊三态卡片 */}
           <section className="panel">
             <div className="section-head">
               <div>
-                <h2>多阶段 DCF 估值走廊与安全边际 (Valuation Corridor)</h2>
+                <h2>多阶段 DCF 内在价值走廊与安全边际 (Valuation Corridor)</h2>
                 <p className="muted">
                   基于企业内生真实自由现金流、WACC 资本成本折现率及多情景增长推演
                 </p>
@@ -252,19 +253,68 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
 
             {/* 三态情景卡片 */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* 悲观底线估值 */}
-              <div className="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] flex flex-col justify-between">
+              {/* 保守底价 */}
+              <div className="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] flex flex-col justify-between relative group">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-muted">【悲观底线估值】</span>
-                    <span className="badge warning">严苛情景</span>
+                    <span className="text-xs font-semibold text-rose-500">保守底价</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="badge warning">严苛防御</span>
+                      
+                      {/* 感叹号浮层 */}
+                      <div
+                        className="relative"
+                        onMouseEnter={() => setActiveScenarioTooltip('floor')}
+                        onMouseLeave={() => setActiveScenarioTooltip(null)}
+                      >
+                        <button
+                          type="button"
+                          tabIndex={0}
+                          title="保守底价情景推演说明"
+                          aria-label="保守底价情景推演说明"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setActiveScenarioTooltip(activeScenarioTooltip === 'floor' ? null : 'floor')
+                          }}
+                          onFocus={() => setActiveScenarioTooltip('floor')}
+                          onBlur={() => setActiveScenarioTooltip(null)}
+                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#d03b3b] ${
+                            activeScenarioTooltip === 'floor'
+                              ? 'bg-[#d03b3b] text-white border-[#d03b3b]'
+                              : 'bg-[var(--surface-color)] hover:bg-[#d03b3b]/20 text-[var(--text-muted)] hover:text-[#d03b3b] border border-[var(--border-color)]'
+                          }`}
+                        >
+                          !
+                        </button>
+
+                        {activeScenarioTooltip === 'floor' && (
+                          <div
+                            className="absolute top-full mt-2 left-0 w-72 p-3.5 rounded-xl bg-[var(--surface-color)] border border-[var(--border-color)] shadow-2xl z-50 pointer-events-auto opacity-100 transition-all duration-200 text-left"
+                            onMouseEnter={() => setActiveScenarioTooltip('floor')}
+                            onMouseLeave={() => setActiveScenarioTooltip(null)}
+                          >
+                            <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
+                              <span className="font-bold text-xs text-rose-500">
+                                保守底价情景推演
+                              </span>
+                              <span className="badge warning">严苛防御</span>
+                            </div>
+                            <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                              {corridor?.conservative_floor.description}
+                            </p>
+                            <div className="mt-2.5 pt-1.5 border-t border-[var(--border-color)]/40 text-[10px] text-[var(--text-muted)] font-mono space-y-0.5">
+                              <div>折现率: {corridor?.conservative_floor.discount_rate_pct}% | 永续: {corridor?.conservative_floor.terminal_growth_pct}%</div>
+                              <div>前3年预测增长: {corridor?.conservative_floor.growth_rates_pct.join('%, ')}%</div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
+
                   <div className="text-2xl font-black mt-2 text-[var(--text-primary)]">
                     {sym}{corridor?.conservative_floor.value_per_share.toFixed(2)}
                   </div>
-                  <p className="text-xs text-muted mt-1">
-                    {corridor?.conservative_floor.description}
-                  </p>
                 </div>
                 <div className="mt-4 pt-3 border-t border-[var(--border-color)] text-xs text-muted space-y-1">
                   <div>折现率：{corridor?.conservative_floor.discount_rate_pct}%</div>
@@ -273,19 +323,68 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                 </div>
               </div>
 
-              {/* 中性公允价值 (核心高亮) */}
-              <div className="p-4 rounded-xl border-2 border-[#3987e5] bg-[var(--surface-color)] shadow-sm flex flex-col justify-between">
+              {/* 中性公允价 (核心高亮) */}
+              <div className="p-4 rounded-xl border-2 border-[#3987e5] bg-[var(--surface-color)] shadow-sm flex flex-col justify-between relative group">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#3987e5]">【中性公允价值 · 估值中枢】</span>
-                    <span className="badge success">基准公允</span>
+                    <span className="text-xs font-bold text-[#3987e5]">中性公允价</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="badge success">基准公允</span>
+
+                      {/* 感叹号浮层 */}
+                      <div
+                        className="relative"
+                        onMouseEnter={() => setActiveScenarioTooltip('base')}
+                        onMouseLeave={() => setActiveScenarioTooltip(null)}
+                      >
+                        <button
+                          type="button"
+                          tabIndex={0}
+                          title="中性公允价情景推演说明"
+                          aria-label="中性公允价情景推演说明"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setActiveScenarioTooltip(activeScenarioTooltip === 'base' ? null : 'base')
+                          }}
+                          onFocus={() => setActiveScenarioTooltip('base')}
+                          onBlur={() => setActiveScenarioTooltip(null)}
+                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                            activeScenarioTooltip === 'base'
+                              ? 'bg-[#3987e5] text-white border-[#3987e5]'
+                              : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)]'
+                          }`}
+                        >
+                          !
+                        </button>
+
+                        {activeScenarioTooltip === 'base' && (
+                          <div
+                            className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-72 p-3.5 rounded-xl bg-[var(--surface-color)] border border-[var(--border-color)] shadow-2xl z-50 pointer-events-auto opacity-100 transition-all duration-200 text-left"
+                            onMouseEnter={() => setActiveScenarioTooltip('base')}
+                            onMouseLeave={() => setActiveScenarioTooltip(null)}
+                          >
+                            <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
+                              <span className="font-bold text-xs text-[#3987e5]">
+                                中性公允价推演 (估值中枢)
+                              </span>
+                              <span className="badge success">基准公允</span>
+                            </div>
+                            <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                              {corridor?.base_fair_value.description}
+                            </p>
+                            <div className="mt-2.5 pt-1.5 border-t border-[var(--border-color)]/40 text-[10px] text-[var(--text-muted)] font-mono space-y-0.5">
+                              <div>WACC 折现率: {corridor?.base_fair_value.discount_rate_pct}% | 永续: {corridor?.base_fair_value.terminal_growth_pct}%</div>
+                              <div>前3年预测增长: {corridor?.base_fair_value.growth_rates_pct.join('%, ')}%</div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
+
                   <div className="text-3xl font-black mt-2 text-[#3987e5]">
                     {sym}{corridor?.base_fair_value.value_per_share.toFixed(2)}
                   </div>
-                  <p className="text-xs text-[var(--text-secondary)] mt-1">
-                    {corridor?.base_fair_value.description}
-                  </p>
                 </div>
                 <div className="mt-4 pt-3 border-t border-[var(--border-color)] text-xs text-[var(--text-secondary)] space-y-1">
                   <div>WACC 折现率：{corridor?.base_fair_value.discount_rate_pct}%</div>
@@ -304,19 +403,68 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                 </div>
               </div>
 
-              {/* 乐观成长靶心 */}
-              <div className="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] flex flex-col justify-between">
+              {/* 乐观靶心价 */}
+              <div className="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] flex flex-col justify-between relative group">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-muted">【乐观成长靶心】</span>
-                    <span className="badge info">景气爆发</span>
+                    <span className="text-xs font-semibold text-emerald-600">乐观靶心价</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="badge info">景气爆发</span>
+
+                      {/* 感叹号浮层 */}
+                      <div
+                        className="relative"
+                        onMouseEnter={() => setActiveScenarioTooltip('opt')}
+                        onMouseLeave={() => setActiveScenarioTooltip(null)}
+                      >
+                        <button
+                          type="button"
+                          tabIndex={0}
+                          title="乐观靶心价情景推演说明"
+                          aria-label="乐观靶心价情景推演说明"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setActiveScenarioTooltip(activeScenarioTooltip === 'opt' ? null : 'opt')
+                          }}
+                          onFocus={() => setActiveScenarioTooltip('opt')}
+                          onBlur={() => setActiveScenarioTooltip(null)}
+                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#199e70] ${
+                            activeScenarioTooltip === 'opt'
+                              ? 'bg-[#199e70] text-white border-[#199e70]'
+                              : 'bg-[var(--surface-color)] hover:bg-[#199e70]/20 text-[var(--text-muted)] hover:text-[#199e70] border border-[var(--border-color)]'
+                          }`}
+                        >
+                          !
+                        </button>
+
+                        {activeScenarioTooltip === 'opt' && (
+                          <div
+                            className="absolute top-full mt-2 right-0 w-72 p-3.5 rounded-xl bg-[var(--surface-color)] border border-[var(--border-color)] shadow-2xl z-50 pointer-events-auto opacity-100 transition-all duration-200 text-left"
+                            onMouseEnter={() => setActiveScenarioTooltip('opt')}
+                            onMouseLeave={() => setActiveScenarioTooltip(null)}
+                          >
+                            <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
+                              <span className="font-bold text-xs text-emerald-600">
+                                乐观靶心价推演
+                              </span>
+                              <span className="badge info">景气爆发</span>
+                            </div>
+                            <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                              {corridor?.optimistic_target.description}
+                            </p>
+                            <div className="mt-2.5 pt-1.5 border-t border-[var(--border-color)]/40 text-[10px] text-[var(--text-muted)] font-mono space-y-0.5">
+                              <div>折现率: {corridor?.optimistic_target.discount_rate_pct}% | 永续: {corridor?.optimistic_target.terminal_growth_pct}%</div>
+                              <div>前3年预测增长: {corridor?.optimistic_target.growth_rates_pct.join('%, ')}%</div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
+
                   <div className="text-2xl font-black mt-2 text-emerald-600">
                     {sym}{corridor?.optimistic_target.value_per_share.toFixed(2)}
                   </div>
-                  <p className="text-xs text-muted mt-1">
-                    {corridor?.optimistic_target.description}
-                  </p>
                 </div>
                 <div className="mt-4 pt-3 border-t border-[var(--border-color)] text-xs text-muted space-y-1">
                   <div>折现率：{corridor?.optimistic_target.discount_rate_pct}%</div>
@@ -386,7 +534,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
               <div>
                 <h2>情景敏感性微调与压力测试</h2>
                 <p className="muted">
-                  支持在官方底账自动代入的基础上，微调折现率与逐年预期增长率进行敏感性推演
+                  支持在官方财报自动代入的基础上，微调折现率与逐年预期增长率进行敏感性推演
                 </p>
               </div>
               <button
@@ -454,7 +602,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
 
                 <div className="flex items-center gap-3">
                   <button type="submit" disabled={tuning} className="primary">
-                    {tuning ? '重新测算中…' : '应用微调并重新测算估值走廊'}
+                    {tuning ? '重新测算中…' : '应用微调并重新测算内在价值走廊'}
                   </button>
                   <button type="button" onClick={handleResetToBaseline} className="text-button text-xs">
                     恢复官方原始基准数据
@@ -464,7 +612,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
             )}
           </section>
 
-          {/* 5. 校验摘要与算法底账溯源 */}
+          {/* 5. 校验摘要与算法溯源 */}
           <div className="text-xs text-muted px-2 py-1 flex items-center justify-between">
             <span>
               计算算法版本：{valuationData.calculation_provenance.method_version} · 纯净金融引擎：{valuationData.calculation_provenance.implementation_path}

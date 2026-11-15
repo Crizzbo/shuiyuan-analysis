@@ -62,12 +62,12 @@ export const CHINESE_LABELS: Record<string, string> = {
   scheduled: '定时触发',
   manual: '手动触发',
 
-  // 2. 数据与行情新鲜度
-  FRESH: '盘中最新时段',
-  PREVIOUS_CLOSE: '前一交易日收盘价基准',
-  STALE_BLOCKED: '行情超期阻断',
-  NOT_CONFIGURED: '待配置行情源',
-  NO_QUOTE: '缺少行情',
+  // 2. 数据与行情新鲜度 (统一 SSOT)
+  FRESH: '盘中实时',
+  PREVIOUS_CLOSE: '前收盘基准',
+  STALE_BLOCKED: '前收盘基准',
+  NOT_CONFIGURED: '待配置源',
+  NO_QUOTE: '待补行情',
   NO_FILING: '缺少财报',
   READY: '数据已就绪',
   ARCHIVED_BASELINE: '基线归档',
@@ -90,10 +90,10 @@ export const CHINESE_LABELS: Record<string, string> = {
   ARCHIVED: '已归档',
 
   // 4. 财务与审计平账
-  BALANCED: '平账通过',
+  BALANCED: '官方财报平账通过',
   UNBALANCED: '不平账警告',
   AUDITED: '官方财报已审计',
-  UNAUDITED: '未审计底账',
+  UNAUDITED: '未审计财报',
   VALID: '验签通过',
   INVALID: '验签失败',
   PENDING_SYNC: '待同步',

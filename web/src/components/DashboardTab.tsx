@@ -125,11 +125,11 @@ const DEFAULT_MARKET_STATS: MarketStatisticsData = {
 function getStatusBadge(status?: string) {
   switch (status) {
     case 'FRESH':
-      return { text: '盘中最新', cls: 'bg-[#199e70]/15 text-[#199e70] border-[#199e70]/30' }
+      return { text: '盘中实时', cls: 'bg-[#199e70]/15 text-[#199e70] border-[#199e70]/30' }
     case 'PREVIOUS_CLOSE':
       return { text: '前收盘基准', cls: 'bg-[#3987e5]/10 text-[#3987e5] border-[#3987e5]/25' }
     case 'STALE_BLOCKED':
-      return { text: '前收盘价 (闭市)', cls: 'bg-amber-500/15 text-amber-500 border-amber-500/30' }
+      return { text: '前收盘基准', cls: 'bg-[#3987e5]/10 text-[#3987e5] border-[#3987e5]/25' }
     case 'NOT_CONFIGURED':
       return { text: '待配置源', cls: 'bg-gray-700/20 text-gray-400 border-gray-700/40' }
     case 'NO_QUOTE':
@@ -146,6 +146,9 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
   const [isExtractingNews, setIsExtractingNews] = useState(false)
   const [showDispatcher, setShowDispatcher] = useState(false)
   const [activeTooltipTicker, setActiveTooltipTicker] = useState<string | null>(null)
+  const [activeMacroTooltipId, setActiveMacroTooltipId] = useState<string | null>(null)
+  const [activeMaTooltipId, setActiveMaTooltipId] = useState<string | null>(null)
+  const [activeSentimentTooltipId, setActiveSentimentTooltipId] = useState<string | null>(null)
 
   const handleExtractNews = async () => {
     if (isExtractingNews) return
@@ -347,6 +350,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       role: '波动率警戒 (≥25)',
       status: '波动警戒',
       tone: 'warning',
+      detail: 'CBOE 标普500期权隐含波动率指数，衡量期权市场对未来30天美股年化波动的预期。VIX ≥ 25 触发系统性恐慌警戒，买方机构通常收紧仓位敞口并提高现金防御比例。',
     },
     {
       id: '^TNX',
@@ -355,6 +359,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       role: '无风险利率定价锚',
       status: '高息中枢',
       tone: 'accent',
+      detail: '全球金融资产之锚与无风险折现率基准。10年期美债收益率高位震荡直接提升权益类资产的贴现率要求，对高估值科技成长股与长久期资产倍数形成估值压制。',
     },
     {
       id: 'DXY',
@@ -363,6 +368,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       role: '全球美元流动性松紧',
       status: '强势高位',
       tone: 'info',
+      detail: '衡量美元对一篮子主要贸易伙伴货币（欧元、日元、英镑等）的相对强弱。美元走强意味着全球美元流动性回流收紧，对跨国企业海外营收折算与新兴市场资产构成压力。',
     },
     {
       id: 'T10Y2Y',
@@ -371,6 +377,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       role: '收益率曲线正常化',
       status: '倒挂解除',
       tone: 'good',
+      detail: '美国10年期与2年期国债收益率利差。倒挂解除并陡峭化上行标志着货币政策转入降息预期或长端通胀溢价重建，是宏观经济周期的核心转折信号。',
     },
     {
       id: '^N225VI',
@@ -379,6 +386,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       role: '东京市场风险溢价',
       status: '高位震荡',
       tone: 'warning',
+      detail: '衡量东京证券交易所日经225指数期权隐含波动率。受日元汇率剧烈波动及海外对冲基金套息平仓动向影响，反映日本核心权益资产的恐慌情绪。',
     },
     {
       id: 'EFFR',
@@ -387,6 +395,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       role: '美联储基准隔夜利率',
       status: '政策底座',
       tone: 'info',
+      detail: '美国商业银行之间无担保隔夜拆借的实际加权中位数利率，是美联储货币政策框架中的终极政策操作目标与全市场资金成本底座。',
     },
   ]
 
@@ -433,7 +442,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
             onClick={() => setShowDispatcher(!showDispatcher)}
             className="text-[11px] text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
           >
-            {showDispatcher ? '收起任务面板 ↑' : '后台调度状态 ↓'}
+            {showDispatcher ? '收起任务面板 ↑' : '任务调度状态 ↓'}
           </button>
           <button
             type="button"
@@ -642,35 +651,116 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
 
             {/* 宏观流动性与恐慌舵手指标 */}
             <div className="space-y-2.5 pt-2 border-t border-[var(--border-color)]/50">
-              <div className="text-xs font-semibold text-[var(--text-secondary)]">
-                宏观流动性、无风险利率与恐慌情绪指标 (Macro Liquidity & Volatility)
+              <div className="flex items-center justify-between text-xs font-semibold text-[var(--text-secondary)]">
+                <div className="flex items-center gap-1.5">
+                  <span>宏观流动性、无风险利率与恐慌情绪指标 (Macro Liquidity & Volatility)</span>
+                  <span className="text-[11px] text-[var(--text-muted)] font-normal hidden sm:inline">
+                    · 点击右上角 ! 展开宏观影响解析
+                  </span>
+                </div>
+                <span className="text-[11px] text-[var(--text-muted)] font-mono font-normal">系统重要性锚点</span>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
-                {macroGauges.map((g) => (
-                  <div
-                    key={g.id}
-                    className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 flex flex-col justify-between hover:border-[#3987e5]/40 transition-all"
-                  >
-                    <div>
-                      <div className="text-[10px] text-[var(--text-muted)] truncate font-medium">
-                        {g.nameZh}
+                {macroGauges.map((g, index) => {
+                  const alignClass = (index % 6 === 0)
+                    ? 'left-0'
+                    : (index % 6 === 5)
+                    ? 'right-0'
+                    : 'right-0 sm:left-1/2 sm:-translate-x-1/2'
+
+                  return (
+                    <div
+                      key={g.id}
+                      className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 flex flex-col justify-between hover:border-[#3987e5]/40 transition-all relative group shadow-sm"
+                    >
+                      <div>
+                        {/* 顶栏：指标名称 + 感叹号展开浮层 */}
+                        <div className="flex items-center justify-between gap-1">
+                          <div className="text-[10px] text-[var(--text-muted)] truncate font-medium">
+                            {g.nameZh}
+                          </div>
+                          
+                          <div
+                            className="relative shrink-0"
+                            onMouseEnter={() => setActiveMacroTooltipId(g.id)}
+                            onMouseLeave={() => setActiveMacroTooltipId(null)}
+                          >
+                            <button
+                              type="button"
+                              tabIndex={0}
+                              title={`${g.nameZh} 详细说明`}
+                              aria-label={`${g.nameZh} 详细说明`}
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                setActiveMacroTooltipId(activeMacroTooltipId === g.id ? null : g.id)
+                              }}
+                              onFocus={() => setActiveMacroTooltipId(g.id)}
+                              onBlur={() => setActiveMacroTooltipId(null)}
+                              className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                                activeMacroTooltipId === g.id
+                                  ? 'bg-[#3987e5] text-white border-[#3987e5]'
+                                  : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
+                              }`}
+                            >
+                              !
+                            </button>
+
+                            {/* 浮层 */}
+                            {activeMacroTooltipId === g.id && (
+                              <div
+                                className={`absolute top-full mt-2 w-64 p-3 rounded-xl bg-[var(--surface-color)] border border-[var(--border-color)] shadow-2xl z-50 pointer-events-auto opacity-100 transition-all duration-200 ${alignClass}`}
+                                onMouseEnter={() => setActiveMacroTooltipId(g.id)}
+                                onMouseLeave={() => setActiveMacroTooltipId(null)}
+                              >
+                                <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
+                                  <div className="flex items-center gap-1.5 min-w-0">
+                                    <span className="font-mono font-bold text-xs text-[var(--text-primary)]">
+                                      {g.id}
+                                    </span>
+                                    <span className="text-[11px] text-[var(--text-secondary)] font-medium truncate">
+                                      {g.nameZh}
+                                    </span>
+                                  </div>
+                                  <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/25 font-medium shrink-0">
+                                    {g.role}
+                                  </span>
+                                </div>
+                                <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                                  {g.detail}
+                                </p>
+                                <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
+                                  <span>当前读数: <strong className="text-[var(--text-primary)]">{g.value}</strong></span>
+                                  <span>状态: <span className={
+                                    g.tone === 'warning' ? 'text-amber-500 font-semibold' :
+                                    g.tone === 'good' ? 'text-[#199e70] font-semibold' :
+                                    'text-[#3987e5] font-semibold'
+                                  }>{g.status}</span></span>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* 当前指标大字数值 */}
+                        <div className="text-base font-black font-mono text-[var(--text-primary)] mt-1 tracking-tight">
+                          {g.value}
+                        </div>
                       </div>
-                      <div className="text-base font-black font-mono text-[var(--text-primary)] mt-0.5 tracking-tight">
-                        {g.value}
+
+                      {/* 底栏：代码 + 状态标签 */}
+                      <div className="mt-1.5 flex items-center justify-between gap-1 pt-1 border-t border-[var(--border-color)]/40">
+                        <span className="text-[9px] text-[var(--text-muted)] font-mono truncate">{g.id}</span>
+                        <span className={`text-[9px] px-1 py-0.2 rounded font-medium ${
+                          g.tone === 'warning' ? 'text-amber-500 bg-amber-500/10' :
+                          g.tone === 'good' ? 'text-[#199e70] bg-[#199e70]/10' :
+                          'text-[#3987e5] bg-[#3987e5]/10'
+                        }`}>
+                          {g.status}
+                        </span>
                       </div>
                     </div>
-                    <div className="mt-1.5 flex items-center justify-between gap-1 pt-1 border-t border-[var(--border-color)]/40">
-                      <span className="text-[9px] text-[var(--text-muted)] truncate">{g.role}</span>
-                      <span className={`text-[9px] px-1 py-0.2 rounded font-medium ${
-                        g.tone === 'warning' ? 'text-amber-500 bg-amber-500/10' :
-                        g.tone === 'good' ? 'text-[#199e70] bg-[#199e70]/10' :
-                        'text-[#3987e5] bg-[#3987e5]/10'
-                      }`}>
-                        {g.status}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
           </div>
@@ -924,34 +1014,117 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
             {/* 四大均线渗透条 */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
-                { title: '20 日均线渗透率', pct: ma.above_20d_pct, desc: '短期爆发冲刺力', tone: 'strong' },
-                { title: '50 日均线渗透率', pct: ma.above_50d_pct, desc: '中期波段生命线', tone: 'good' },
-                { title: '150 日均线渗透率', pct: ma.above_150d_pct, desc: '趋势形态确立线', tone: 'good' },
-                { title: '200 日均线渗透率', pct: ma.above_200d_pct, desc: '长期牛熊分水岭', tone: 'good' },
-              ].map((item) => (
-                <div
-                  key={item.title}
-                  className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3 space-y-2"
-                >
-                  <div className="text-[11px] text-[var(--text-muted)] font-medium">
-                    {item.title}
+                {
+                  id: 'ma20',
+                  title: '20 日均线渗透率',
+                  pct: ma.above_20d_pct,
+                  role: '短期爆发冲刺力',
+                  detail: '全市场站上 20 日均线的个股比例。衡量超短期市场爆发动量与日内冲刺力，渗透率超过 70% 表明短线极度亢奋，需注意技术性超买回踩。',
+                },
+                {
+                  id: 'ma50',
+                  title: '50 日均线渗透率',
+                  pct: ma.above_50d_pct,
+                  role: '中期波段生命线',
+                  detail: '全市场站上 50 日移动平均线的个股比例。50日线是公募与对冲基金主力的核心加仓成本防线，站上率 > 50% 是判定中级波段牛市顺风环境的基础契约。',
+                },
+                {
+                  id: 'ma150',
+                  title: '150 日均线渗透率',
+                  pct: ma.above_150d_pct,
+                  role: '趋势形态确立线',
+                  detail: '全市场站上 150 日中长期移动平均线的个股比例。米纳尔维尼 SEPA 趋势模板核心过滤条件，表明标的经历充分筑底后正式进入第二阶段主升浪结构。',
+                },
+                {
+                  id: 'ma200',
+                  title: '200 日均线渗透率',
+                  pct: ma.above_200d_pct,
+                  role: '长期牛熊分水岭',
+                  detail: '全市场站上 200 日长期移动平均线的个股比例。全球机构投资者公认的宏观牛熊分水岭，> 50% 意味着全市场广度处于牛市健康扩张期，个股突破成功率显著提高。',
+                },
+              ].map((item, index) => {
+                const alignClass = (index === 0)
+                  ? 'left-0'
+                  : (index === 3)
+                  ? 'right-0'
+                  : 'right-0 sm:left-1/2 sm:-translate-x-1/2'
+
+                return (
+                  <div
+                    key={item.id}
+                    className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3 space-y-2 relative group shadow-sm hover:border-[#3987e5]/40 transition-all"
+                  >
+                    <div className="flex items-center justify-between gap-1">
+                      <div className="text-[11px] text-[var(--text-muted)] font-medium truncate">
+                        {item.title}
+                      </div>
+
+                      {/* 感叹号详细说明浮层 */}
+                      <div
+                        className="relative shrink-0"
+                        onMouseEnter={() => setActiveMaTooltipId(item.id)}
+                        onMouseLeave={() => setActiveMaTooltipId(null)}
+                      >
+                        <button
+                          type="button"
+                          tabIndex={0}
+                          title={`${item.title} 详细说明`}
+                          aria-label={`${item.title} 详细说明`}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setActiveMaTooltipId(activeMaTooltipId === item.id ? null : item.id)
+                          }}
+                          onFocus={() => setActiveMaTooltipId(item.id)}
+                          onBlur={() => setActiveMaTooltipId(null)}
+                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                            activeMaTooltipId === item.id
+                              ? 'bg-[#3987e5] text-white border-[#3987e5]'
+                              : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
+                          }`}
+                        >
+                          !
+                        </button>
+
+                        {activeMaTooltipId === item.id && (
+                          <div
+                            className={`absolute top-full mt-2 w-64 p-3 rounded-xl bg-[var(--surface-color)] border border-[var(--border-color)] shadow-2xl z-50 pointer-events-auto opacity-100 transition-all duration-200 ${alignClass}`}
+                            onMouseEnter={() => setActiveMaTooltipId(item.id)}
+                            onMouseLeave={() => setActiveMaTooltipId(null)}
+                          >
+                            <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
+                              <span className="font-bold text-xs text-[var(--text-primary)]">
+                                {item.title}
+                              </span>
+                              <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/25 font-medium shrink-0">
+                                {item.role}
+                              </span>
+                            </div>
+                            <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                              {item.detail}
+                            </p>
+                            <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
+                              <span>当前渗透率: <strong className="text-[var(--text-primary)]">{item.pct}%</strong></span>
+                              <span>基准: <span className={item.pct >= 50 ? 'text-[#199e70] font-semibold' : 'text-amber-500 font-semibold'}>{item.pct >= 50 ? '多头优势' : '空头承压'}</span></span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="text-xl font-black font-mono text-[var(--text-primary)]">
+                      {item.pct}%
+                    </div>
+                    <div className="w-full bg-gray-700/20 h-2 rounded-full overflow-hidden">
+                      <div
+                        className={`h-full rounded-full transition-all duration-500 ${
+                          item.pct >= 50 ? 'bg-[#199e70]' : 'bg-amber-500'
+                        }`}
+                        style={{ width: `${item.pct}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="text-xl font-black font-mono text-[var(--text-primary)]">
-                    {item.pct}%
-                  </div>
-                  <div className="w-full bg-gray-700/20 h-2 rounded-full overflow-hidden">
-                    <div
-                      className={`h-full rounded-full transition-all duration-500 ${
-                        item.pct >= 50 ? 'bg-[#199e70]' : 'bg-amber-500'
-                      }`}
-                      style={{ width: `${item.pct}%` }}
-                    />
-                  </div>
-                  <div className="text-[10px] text-[var(--text-secondary)] font-mono pt-0.5">
-                    {item.desc}
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
 
             {/* 52周新高净扩展指标 */}
@@ -1002,7 +1175,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
             {/* 漏斗 5 阶层 */}
             <div className="space-y-2">
               {[
-                { stage: '全盘上市主体扫描', count: funnel.total_screened, pct: '100%', bg: 'bg-[#3987e5]/20 text-[#3987e5]', barW: '100%' },
+                { stage: '全盘标的池扫描', count: funnel.total_screened, pct: '100%', bg: 'bg-[#3987e5]/20 text-[#3987e5]', barW: '100%' },
                 { stage: '站上 200 日牛熊线', count: funnel.stage_1_base_building, pct: '25.7%', bg: 'bg-[#3987e5]/30 text-[#3987e5]', barW: '75%' },
                 { stage: '第二阶段主升浪结构', count: funnel.stage_2_trend_aligned, pct: '7.5%', bg: 'bg-[#199e70]/30 text-[#199e70]', barW: '50%' },
                 { stage: '高相对强度 (RS ≥ 80)', count: funnel.stage_3_near_high, pct: '3.2%', bg: 'bg-[#199e70]/50 text-[#199e70]', barW: '32%' },
@@ -1090,55 +1263,120 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
             </div>
 
             <div className="grid grid-cols-2 gap-2.5">
-              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 text-center">
-                <div className="text-[10px] text-[var(--text-muted)]">Fear & Greed 恐慌贪婪</div>
-                <div className="text-lg font-black font-mono text-emerald-500 mt-0.5">
-                  {sentiment.fear_greed_score}
-                </div>
-                <div className="text-[10px] text-[var(--text-secondary)] mt-0.5 font-medium">
-                  {sentiment.fear_greed_gauge}
-                </div>
-              </div>
+              {[
+                {
+                  id: 'fg',
+                  title: 'Fear & Greed 恐慌贪婪',
+                  value: sentiment.fear_greed_score,
+                  sub: sentiment.fear_greed_gauge,
+                  valColor: 'text-emerald-500',
+                  detail: 'CNN 综合恐慌与贪婪指数（0-100）。综合市场动量、股票价格强度、避险需求与垃圾债利差。读数在 60-75 为健康贪婪蓄势，> 80 触发极度狂热警惕，< 25 为极端恐慌买点。',
+                },
+                {
+                  id: 'pcr',
+                  title: '期权看跌/看涨比 (PCR)',
+                  value: sentiment.put_call_ratio,
+                  sub: sentiment.put_call_signal,
+                  valColor: 'text-[#3987e5]',
+                  detail: '全市场看跌期权 (Put) 与看涨期权 (Call) 总成交量之比。PCR < 0.70 表明市场看多投机亢奋，0.70 - 0.90 为健康防御中性区间，> 1.0 表明对冲买盘沉重。',
+                },
+                {
+                  id: 'inflow',
+                  title: '主力机构资金净流入',
+                  value: sentiment.institutional_net_inflow_str,
+                  sub: '净买入防御权重',
+                  valColor: 'text-emerald-500',
+                  detail: '基于交易所大单宗数 (Block Trades) 资金流向监测的大机构主力买方净流入。反映聪明钱 (Smart Money) 在核心权重指数及龙头防御板块的战略建仓意愿。',
+                },
+                {
+                  id: 'volume',
+                  title: '市场成交量能倍率',
+                  value: `${sentiment.volume_expansion_ratio}x`,
+                  sub: sentiment.volume_verdict,
+                  valColor: 'text-[var(--text-primary)]',
+                  detail: '全市场当日总成交额相对 50 日均量 (50-Day Moving Average Volume) 的倍率。倍率在 1.1x - 1.3x 之间伴随指数上涨，代表机构资金真实介入的健康放量主升浪。',
+                },
+              ].map((item, index) => {
+                const alignClass = (index % 2 === 0) ? 'left-0' : 'right-0'
 
-              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 text-center">
-                <div className="text-[10px] text-[var(--text-muted)]">期权看跌/看涨比 (PCR)</div>
-                <div className="text-lg font-black font-mono text-[#3987e5] mt-0.5">
-                  {sentiment.put_call_ratio}
-                </div>
-                <div className="text-[10px] text-[var(--text-secondary)] mt-0.5 font-medium">
-                  {sentiment.put_call_signal}
-                </div>
-              </div>
+                return (
+                  <div
+                    key={item.id}
+                    className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 text-center relative group shadow-sm hover:border-[#3987e5]/40 transition-all"
+                  >
+                    <div className="flex items-center justify-between gap-1 mb-1">
+                      <div className="text-[10px] text-[var(--text-muted)] truncate font-medium text-left">
+                        {item.title}
+                      </div>
 
-              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 text-center">
-                <div className="text-[10px] text-[var(--text-muted)]">主力机构资金净流入</div>
-                <div className="text-base font-black font-mono text-emerald-500 mt-0.5">
-                  {sentiment.institutional_net_inflow_str}
-                </div>
-                <div className="text-[10px] text-[var(--text-secondary)] mt-0.5 font-medium">
-                  净买入防御权重
-                </div>
-              </div>
+                      {/* 感叹号浮层 */}
+                      <div
+                        className="relative shrink-0"
+                        onMouseEnter={() => setActiveSentimentTooltipId(item.id)}
+                        onMouseLeave={() => setActiveSentimentTooltipId(null)}
+                      >
+                        <button
+                          type="button"
+                          tabIndex={0}
+                          title={`${item.title} 详细说明`}
+                          aria-label={`${item.title} 详细说明`}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setActiveSentimentTooltipId(activeSentimentTooltipId === item.id ? null : item.id)
+                          }}
+                          onFocus={() => setActiveSentimentTooltipId(item.id)}
+                          onBlur={() => setActiveSentimentTooltipId(null)}
+                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                            activeSentimentTooltipId === item.id
+                              ? 'bg-[#3987e5] text-white border-[#3987e5]'
+                              : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
+                          }`}
+                        >
+                          !
+                        </button>
 
-              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 text-center">
-                <div className="text-[10px] text-[var(--text-muted)]">市场成交量能倍率</div>
-                <div className="text-base font-black font-mono text-[var(--text-primary)] mt-0.5">
-                  {sentiment.volume_expansion_ratio}x
-                </div>
-                <div className="text-[10px] text-[var(--text-secondary)] mt-0.5 font-medium">
-                  {sentiment.volume_verdict}
-                </div>
-              </div>
+                        {activeSentimentTooltipId === item.id && (
+                          <div
+                            className={`absolute top-full mt-2 w-60 p-3 rounded-xl bg-[var(--surface-color)] border border-[var(--border-color)] shadow-2xl z-50 pointer-events-auto opacity-100 transition-all duration-200 text-left ${alignClass}`}
+                            onMouseEnter={() => setActiveSentimentTooltipId(item.id)}
+                            onMouseLeave={() => setActiveSentimentTooltipId(null)}
+                          >
+                            <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
+                              <span className="font-bold text-xs text-[var(--text-primary)]">
+                                {item.title}
+                              </span>
+                            </div>
+                            <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                              {item.detail}
+                            </p>
+                            <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
+                              <span>读数: <strong className="text-[var(--text-primary)]">{item.value}</strong></span>
+                              <span>定性: <span className="text-[#3987e5] font-semibold">{item.sub}</span></span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className={`text-lg font-black font-mono ${item.valColor} mt-0.5`}>
+                      {item.value}
+                    </div>
+                    <div className="text-[10px] text-[var(--text-secondary)] mt-0.5 font-medium truncate">
+                      {item.sub}
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </div>
 
-          {/* 3. 突发核心事件情报雷达 (紧凑卡片流) */}
+          {/* 3. 权威事件情报雷达 (紧凑卡片流) */}
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3">
             <div className="flex items-center justify-between pb-2.5 border-b border-[var(--border-color)]/60">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#d03b3b]" />
                 <h3 className="text-xs font-bold text-[var(--text-primary)]">
-                  突发核心事件雷达 ({data?.events_summary?.total_events || 0}篇)
+                  权威事件雷达 ({data?.events_summary?.total_events || 0}篇)
                 </h3>
               </div>
               <div className="flex items-center gap-1.5">
@@ -1188,7 +1426,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                 ))
               ) : (
                 <div className="text-center py-6 text-xs text-[var(--text-muted)]">
-                  暂无突发事件记录
+                  暂无权威事件记录
                 </div>
               )}
             </div>

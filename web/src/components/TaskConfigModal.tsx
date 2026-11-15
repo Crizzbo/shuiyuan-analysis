@@ -303,7 +303,7 @@ export function TaskConfigModal({
                   /* 完整 JSON 文本编辑器 */
                   <div className="flex-1 flex flex-col space-y-2">
                     <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">
-                      <span>可直接在此编辑当前任务的 JSON 配置，点击保存即写入 SSOT 底账：</span>
+                      <span>可直接在此编辑当前任务的 JSON 配置，点击保存即写入 SSOT 任务配置中心：</span>
                       {jsonError && <span className="text-[#d03b3b] font-medium">{jsonError}</span>}
                     </div>
                     <textarea
