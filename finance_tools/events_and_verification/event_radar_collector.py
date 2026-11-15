@@ -368,6 +368,24 @@ class RadarDatabaseManager:
                 results.append(item)
             return results
 
+    def get_events_map_by_title(self) -> Dict[str, Dict[str, Any]]:
+        """按标题索引已落盘事件的元数据映射表，供调度器与新闻流快速注记。"""
+        radar_map: Dict[str, Dict[str, Any]] = {}
+        if not self.db_path.exists():
+            return radar_map
+        try:
+            with sqlite3.connect(f"file:{self.db_path.as_posix()}?mode=ro", uri=True) as conn:
+                conn.row_factory = sqlite3.Row
+                cursor = conn.cursor()
+                cursor.execute(
+                    "SELECT title, category, severity_level, verification_status, involved_entities, micro_physical_impact FROM radar_events"
+                )
+                for row in cursor.fetchall():
+                    radar_map[row["title"]] = dict(row)
+        except Exception:
+            pass
+        return radar_map
+
     def query_cycles(self, limit: int = 20) -> List[Dict[str, Any]]:
         with sqlite3.connect(self.db_path) as conn:
             conn.row_factory = sqlite3.Row

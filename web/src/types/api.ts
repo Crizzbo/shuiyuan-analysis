@@ -467,19 +467,24 @@ export interface CompanyAnalysisData {
       affected_business_segments: string[]
       estimated_duration?: string
     }[]
-    sotp_impact?: {
-      status?: string
-      total_events_evaluated?: number
-      affected_segments_count?: number
-      estimated_enterprise_value_delta_pct?: number
-      segment_impacts?: Array<{
-        segment_name: string
-        revenue_impact_pct: number
-        margin_impact_bps: number
-        qualitative_summary: string
-      }>
-    } | null
+    sotp_impact?: SotpImpactData | null
   }
+}
+
+export interface SotpImpactData {
+  status?: string
+  total_events_evaluated?: number
+  affected_segments_count?: number
+  estimated_enterprise_value_delta_pct?: number
+  penetration_level?: string
+  impact_summary?: string
+  affected_segments?: Array<string | any>
+  segment_impacts?: Array<{
+    segment_name: string
+    revenue_impact_pct: number
+    margin_impact_bps: number
+    qualitative_summary: string
+  }>
 }
 
 export interface PipelineSubFlow {

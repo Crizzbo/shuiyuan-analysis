@@ -3,7 +3,8 @@ import type { DashboardSummaryData, MarketQuoteItem, IndicatorItem, EventItem } 
 import { api } from '../services/api'
 import { showToast } from './Toast'
 import { TaskDispatcherPanel } from './TaskDispatcherPanel'
-import { formatDeviceTime, toChinese, toList } from '../utils/format'
+import { formatDeviceTime, toChinese } from '../utils/format'
+import { EventCard } from './common'
 
 interface DashboardTabProps {
   onNavigateTab: (tabId: string) => void
@@ -11,8 +12,6 @@ interface DashboardTabProps {
   onSelectTicker?: (ticker: string) => void
   refreshKey?: number
 }
-
-
 
 function getStatusBadge(status?: string) {
   switch (status) {
@@ -28,32 +27,6 @@ function getStatusBadge(status?: string) {
       return { text: '待补行情', cls: 'bg-gray-700/20 text-gray-500 border-gray-700/40' }
     default:
       return { text: '状态待核验', cls: 'bg-[#3987e5]/20 text-[#3987e5] border-[#3987e5]/40' }
-  }
-}
-
-function getSeverityBadge(sev: string) {
-  switch (sev) {
-    case 'P0':
-      return { text: '极高影响', cls: 'bg-[#d03b3b]/20 text-[#d03b3b] border-[#d03b3b]/40' }
-    case 'P1':
-      return { text: '重要关注', cls: 'bg-[#c98500]/20 text-[#c98500] border-[#c98500]/40' }
-    case 'P2':
-      return { text: '行业动态', cls: 'bg-[#3987e5]/20 text-[#3987e5] border-[#3987e5]/40' }
-    default:
-      return { text: '常规资讯', cls: 'bg-gray-600/20 text-gray-400 border-gray-600/30' }
-  }
-}
-
-function getVerificationBadge(status: string) {
-  switch (status) {
-    case 'Confirmed_Fact':
-      return { text: '官方权威核实', cls: 'bg-[#199e70]/20 text-[#199e70] border-[#199e70]/40' }
-    case 'Corroborated_Report':
-      return { text: '主流媒体采信', cls: 'bg-[#3987e5]/20 text-[#3987e5] border-[#3987e5]/40' }
-    case 'Unverified_Rumor':
-      return { text: '待核实传闻隔离', cls: 'bg-[#d03b3b]/20 text-[#d03b3b] border-[#d03b3b]/40' }
-    default:
-      return { text: '已归档', cls: 'bg-gray-600/20 text-gray-400 border-gray-600/30' }
   }
 }
 
@@ -369,82 +342,27 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
 
         <div className="space-y-3">
           {data?.events_summary?.top_events && data.events_summary.top_events.length > 0 ? (
-            data.events_summary.top_events.map((ev: EventItem) => {
-              const sBadge = getSeverityBadge(ev.severity)
-              const vBadge = getVerificationBadge(ev.verification_status)
-
-              return (
-                <div
-                  key={ev.event_id}
-                  onClick={() => {
-                    onSelectEvent(ev.event_id)
-                    onNavigateTab('intelligence')
-                  }}
-                  className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#3987e5] rounded-xl p-4 cursor-pointer transition-all flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-sm"
-                >
-                  <div className="flex items-start gap-3">
-                    <span className={`px-2 py-0.5 rounded text-xs font-bold shrink-0 border ${sBadge.cls}`}>
-                      {sBadge.text}
-                    </span>
-                    <div className="space-y-1 min-w-0">
-                      <div className="text-xs font-semibold text-[var(--text-primary)] hover:text-[#3987e5] flex items-center gap-2">
-                        <span>{ev.title}</span>
-                      </div>
-                      {ev.micro_physical_impact && (
-                        <div className="text-[11px] text-[#3987e5] bg-[#3987e5]/5 border border-[#3987e5]/20 rounded px-2.5 py-1 mt-1 leading-relaxed">
-                          <span className="font-bold mr-1">微观商业冲击:</span>
-                          {ev.micro_physical_impact}
-                        </div>
-                      )}
-                      <div className="text-[11px] text-[var(--text-muted)] mt-1 flex flex-wrap items-center gap-2">
-                        <span>信源: {ev.source_name}</span>
-                        <span>·</span>
-                        <span className="font-mono">{formatDeviceTime(ev.published_at)}</span>
-                        {toList(ev.involved_entities).length > 0 && (
-                          <>
-                            <span>·</span>
-                            <span className="text-[var(--text-secondary)]">关联标的:</span>
-                            {toList(ev.involved_entities).slice(0, 4).map((ent: string, i: number) => (
-                              <button
-                                key={i}
-                                type="button"
-                                onClick={(e) => {
-                                  e.stopPropagation()
-                                  const m = ent.match(/\b([A-Z0-9.]+)\b/)
-                                  const ticker = m ? m[1] : ent
-                                  if (onSelectTicker) {
-                                    onSelectTicker(ticker)
-                                  } else {
-                                    onSelectEvent(ev.event_id)
-                                    onNavigateTab('intelligence')
-                                  }
-                                }}
-                                className="px-1.5 py-0.2 rounded text-[10px] bg-[var(--surface-color)] text-[#3987e5] border border-[#3987e5]/30 hover:bg-[#3987e5] hover:text-white transition-all font-mono font-medium cursor-pointer"
-                                title={`快速查看 ${ent} 的全息深度档案与估值走廊`}
-                              >
-                                {ent}
-                              </button>
-                            ))}
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="shrink-0 flex items-center gap-2">
-                    {ev.is_quarantined_rumor ? (
-                      <span className="text-[11px] px-2 py-0.5 rounded bg-[#d03b3b]/20 text-[#d03b3b] border border-[#d03b3b]/40 font-medium">
-                        ⚠ 待核实传闻隔离
-                      </span>
-                    ) : (
-                      <span className={`text-[11px] px-2 py-0.5 rounded border font-medium ${vBadge.cls}`}>
-                        {vBadge.text}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              )
-            })
+            data.events_summary.top_events.map((ev: EventItem) => (
+              <EventCard
+                key={ev.event_id}
+                id={ev.event_id}
+                title={ev.title}
+                severity={ev.severity}
+                verification_status={ev.verification_status}
+                is_quarantined_rumor={ev.is_quarantined_rumor}
+                published_at={ev.published_at}
+                source_name={ev.source_name}
+                category={ev.category}
+                micro_physical_impact={ev.micro_physical_impact}
+                involved_entities={ev.involved_entities}
+                affected_business_segments={ev.affected_business_segments}
+                onClick={() => {
+                  onSelectEvent(ev.event_id)
+                  onNavigateTab('intelligence')
+                }}
+                onSelectTicker={onSelectTicker}
+              />
+            ))
           ) : (
             <div className="text-center py-6 text-xs text-[var(--text-muted)]">
               暂无突发事件记录

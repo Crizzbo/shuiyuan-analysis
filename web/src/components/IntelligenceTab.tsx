@@ -3,7 +3,8 @@ import type { EventsData, EventItem } from '../types/api'
 import { api } from '../services/api'
 import { showToast } from './Toast'
 import { Pagination } from './Pagination'
-import { formatDeviceTime, toList, getSeverityBadge, getVerificationBadge } from '../utils/format'
+import { toList, getSeverityBadge, getVerificationBadge } from '../utils/format'
+import { SeverityBadge, VerificationBadge, EntityPills, MicroImpactBox, EventCard } from './common'
 
 interface IntelligenceTabProps {
   selectedEventId?: string | null
@@ -566,14 +567,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                         {toList(ev.involved_entities).length > 0 && (
                           <div className="flex flex-wrap items-center gap-1.5 mt-3 pt-2.5 border-t border-[var(--border-color)]/50">
                             <span className="text-[11px] text-[var(--text-muted)] mr-1">关联主体:</span>
-                            {toList(ev.involved_entities).map((ent, idx) => (
-                              <span
-                                key={idx}
-                                className="text-[11px] px-2 py-0.5 rounded bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-secondary)] font-mono font-medium"
-                              >
-                                {ent}
-                              </span>
-                            ))}
+                            <EntityPills entities={ev.involved_entities} onSelectTicker={onSelectTicker} />
                           </div>
                         )}
                       </div>
@@ -602,12 +596,8 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
               <div className="lg:col-span-5 bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 sticky top-24 max-h-[85vh] overflow-y-auto space-y-5 shadow-sm">
                 <div className="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
                   <div className="flex items-center gap-2">
-                    <span className={`font-bold text-xs px-2 py-0.5 rounded border ${getSeverityBadge(activeEvent.severity).cls}`}>
-                      {getSeverityBadge(activeEvent.severity).text}
-                    </span>
-                    <span className={`text-xs px-2 py-0.5 rounded border ${getVerificationBadge(activeEvent.verification_status).cls}`}>
-                      {getVerificationBadge(activeEvent.verification_status).text}
-                    </span>
+                    <SeverityBadge level={activeEvent.severity} />
+                    <VerificationBadge status={activeEvent.verification_status} />
                   </div>
                   <button
                     type="button"
@@ -662,26 +652,17 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                     )}
 
                     <div className="space-y-1.5">
-                      <div className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#199e70]" />
-                        业务冲击与微观传导分析
-                      </div>
-                      <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-3.5 text-xs text-[var(--text-secondary)] leading-relaxed whitespace-pre-wrap">
-                        {activeEvent.micro_physical_impact || '暂无结构化微观业务传导分析'}
-                      </div>
+                      <MicroImpactBox
+                        impact={activeEvent.micro_physical_impact || '暂无结构化微观业务传导分析'}
+                        category={activeEvent.category}
+                        title="⚡ 业务冲击与微观传导分析"
+                      />
                     </div>
 
                     <div className="space-y-1.5">
                       <div className="text-xs font-bold text-[var(--text-primary)]">关联标的与受影响业务</div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {toList(activeEvent.involved_entities).map((e, idx) => (
-                          <span
-                            key={idx}
-                            className="text-xs px-2.5 py-1 rounded bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/20 font-mono font-medium"
-                          >
-                            {e}
-                          </span>
-                        ))}
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <EntityPills entities={activeEvent.involved_entities} onSelectTicker={onSelectTicker} />
                         {toList(activeEvent.affected_business_segments).map((seg, idx) => (
                           <span
                             key={idx}
@@ -782,79 +763,25 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
           ) : pagedNews.length > 0 ? (
             <div className="space-y-2.5">
               {pagedNews.map((item, idx) => (
-                <div
+                <EventCard
                   key={`${item.source}-${idx}`}
-                  className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#3987e5]/40 rounded-xl p-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition-all shadow-sm"
-                >
-                  <div className="space-y-1.5 min-w-0 flex-1">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <h4 className="text-xs font-bold text-[var(--text-primary)] hover:text-[#3987e5] leading-relaxed">
-                        {item.title}
-                      </h4>
-                      {item.category && item.category !== 'General' && (
-                        <span className="text-[10px] px-2 py-0.2 rounded font-medium bg-[var(--surface-color)] text-[var(--text-secondary)] border border-[var(--border-color)]">
-                          {item.category}
-                        </span>
-                      )}
-                      {item.is_distilled && (
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const matched = (data?.events || []).find((e) => e.title === item.title)
-                            if (matched) {
-                              void loadEventDetail(matched.event_id)
-                              setActiveView('radar')
-                            }
-                          }}
-                          className="text-[10px] px-2 py-0.2 rounded font-semibold bg-[#199e70]/15 hover:bg-[#199e70]/25 text-[#199e70] border border-[#199e70]/30 cursor-pointer transition-all flex items-center gap-1"
-                          title="点击查看对应的权威雷达研判档案与微观业务传导"
-                        >
-                          <span>🎯 已提炼入库</span>
-                          <span>(查看研判 →)</span>
-                        </button>
-                      )}
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-3 text-[10px] text-[var(--text-muted)] font-mono">
-                      <span>🕒 发布时间: {item.published_at ? formatDeviceTime(item.published_at) : '发布时间未标注'}</span>
-                    </div>
-
-                    {item.micro_physical_impact && (
-                      <div className="mt-1.5 p-2.5 rounded-lg bg-[var(--surface-color)] border border-[var(--border-color)] text-[11px] text-[var(--text-secondary)] leading-relaxed">
-                        <span className="font-semibold text-[#199e70] mr-1.5">⚡ 微观业务冲击:</span>
-                        {item.micro_physical_impact}
-                      </div>
-                    )}
-
-                    {item.involved_entities && item.involved_entities.length > 0 && (
-                      <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                        <span className="text-[10px] text-[var(--text-muted)]">关联标的:</span>
-                        {item.involved_entities.map((ent, eIdx) => (
-                          <button
-                            key={eIdx}
-                            type="button"
-                            onClick={() => onSelectTicker?.(ent)}
-                            className="text-[10px] px-2 py-0.5 rounded font-mono font-bold bg-[#3987e5]/10 hover:bg-[#3987e5]/20 text-[#3987e5] border border-[#3987e5]/30 cursor-pointer transition-colors"
-                            title={`点击跳转查看 ${ent} 全息商业解构与估值`}
-                          >
-                            {ent} →
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="flex flex-col items-end gap-1.5 shrink-0">
-                    <span className="text-[10px] px-2.5 py-1 rounded bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/25 font-semibold">
-                      {item.source}
-                    </span>
-                    {item.severity && (
-                      <span className={`text-[10px] px-2 py-0.5 rounded font-semibold border ${getSeverityBadge(item.severity).cls}`}>
-                        {getSeverityBadge(item.severity).text}
-                      </span>
-                    )}
-                  </div>
-                </div>
+                  title={item.title}
+                  severity={item.severity}
+                  published_at={item.published_at || undefined}
+                  source_name={item.source}
+                  category={item.category}
+                  micro_physical_impact={item.micro_physical_impact}
+                  involved_entities={item.involved_entities}
+                  is_distilled={item.is_distilled}
+                  onSelectTicker={onSelectTicker}
+                  onViewRadarDetail={() => {
+                    const matched = (data?.events || []).find((e) => e.title === item.title)
+                    if (matched) {
+                      void loadEventDetail(matched.event_id)
+                      setActiveView('radar')
+                    }
+                  }}
+                />
               ))}
             </div>
           ) : (

@@ -224,8 +224,8 @@ class EventRadarEngine:
         config_path: Optional[Path] = None,
     ) -> Tuple[Dict[str, List[str]], List[str]]:
         """从配置字典或外部 JSON 文件加载规则 (单一事实来源)."""
-        # 1. 如果显式配置传入了 filtering_rules，直接使用
-        if "filtering_rules" in config:
+        # 1. 如果显式配置传入了 filtering_rules 且非空，直接使用
+        if config.get("filtering_rules"):
             f_rules = config["filtering_rules"]
             return f_rules.get("keyword_dictionaries", {}), f_rules.get("noise_blacklist", [])
 

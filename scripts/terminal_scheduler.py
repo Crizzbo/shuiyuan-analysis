@@ -17,6 +17,7 @@ import uuid
 from zoneinfo import ZoneInfo
 
 from data_ingestion.core import Archive, project_path
+from finance_tools.events_and_verification.event_radar_collector import EventRadarCollector, RadarDatabaseManager
 from financial_core.engines.exchange_calendar_engine import ExchangeCalendarEngine
 from financial_core.engines.market_reconciliation_engine import MarketReconciliationEngine
 from scripts.ingest_data import read, run_plan
@@ -259,16 +260,8 @@ class TerminalScheduler:
     def news(self):
         """展示已归档标题与时间，结合事件雷达提炼结果提供商业影响与实体标注。"""
         items = []
-        radar_map = {}
-        try:
-            radar_db = project_path("data/ledger/event_radar.sqlite3")
-            if radar_db.exists():
-                with closing(sqlite3.connect(f"file:{radar_db.as_posix()}?mode=ro", uri=True)) as conn:
-                    conn.row_factory = sqlite3.Row
-                    for row in conn.execute("SELECT title, category, severity_level, verification_status, involved_entities, micro_physical_impact FROM radar_events"):
-                        radar_map[row["title"]] = dict(row)
-        except Exception:
-            radar_map = {}
+        radar_db = project_path("data/ledger/event_radar.sqlite3")
+        radar_map = RadarDatabaseManager(str(radar_db)).get_events_map_by_title()
 
         for item, records in self._archived_records("OFFICIAL_NEWS"):
             source = next(iter(item.get("artifacts", [])), {}).get("origin_url", "")

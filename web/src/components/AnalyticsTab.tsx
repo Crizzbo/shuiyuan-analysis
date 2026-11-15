@@ -8,7 +8,8 @@ import type {
 } from '../types/api'
 import { api } from '../services/api'
 import { Pagination } from './Pagination'
-import { formatDeviceTime, toChinese, getSeverityBadge, getVerificationBadge } from '../utils/format'
+import { formatDeviceTime, toChinese } from '../utils/format'
+import { EventCard } from './common'
 
 interface AnalyticsTabProps {
   refreshKey?: number
@@ -1408,59 +1409,20 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                       <span>近期高关联突发事件与微观业务传导</span>
                     </div>
                     <div className="space-y-2">
-                      {analysis.events_analysis.recent_events.map((evt) => {
-                        const sevBadge = getSeverityBadge(evt.severity)
-                        const verBadge = getVerificationBadge(evt.verification_status)
-                        return (
-                          <div
-                            key={evt.event_id}
-                            className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#199e70]/40 rounded-xl p-3.5 space-y-2 transition-all"
-                          >
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                              <div className="flex items-center gap-2">
-                                <span className={`text-[10px] px-2 py-0.5 rounded font-semibold border ${sevBadge.cls}`}>
-                                  {sevBadge.text}
-                                </span>
-                                <h4 className="text-xs font-bold text-[var(--text-primary)] leading-tight">
-                                  {evt.title}
-                                </h4>
-                              </div>
-                              <div className="flex items-center gap-2 shrink-0">
-                                <span className={`text-[10px] px-2 py-0.5 rounded font-semibold border ${verBadge.cls}`}>
-                                  {verBadge.text}
-                                </span>
-                                {evt.published_at && (
-                                  <span className="text-[10px] text-[var(--text-muted)] font-mono">
-                                    {formatDeviceTime(evt.published_at)}
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-
-                            {evt.micro_physical_impact && (
-                              <div className="p-2.5 rounded bg-[var(--surface-color)] border border-[var(--border-color)] text-[11px] text-[var(--text-secondary)] leading-relaxed">
-                                <span className="font-semibold text-[#199e70] mr-1.5">⚡ 微观传导冲击:</span>
-                                {evt.micro_physical_impact}
-                              </div>
-                            )}
-
-                            {((evt.involved_entities && evt.involved_entities.length > 0) || (evt.affected_business_segments && evt.affected_business_segments.length > 0)) && (
-                              <div className="flex flex-wrap items-center gap-1.5 pt-1 text-[10px]">
-                                {evt.involved_entities?.map((ent, i) => (
-                                  <span key={`ent-${i}`} className="px-1.5 py-0.2 rounded bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/20 font-mono font-medium">
-                                    {ent}
-                                  </span>
-                                ))}
-                                {evt.affected_business_segments?.map((seg, i) => (
-                                  <span key={`seg-${i}`} className="px-1.5 py-0.2 rounded bg-[#199e70]/10 text-[#199e70] border border-[#199e70]/20 font-medium">
-                                    {seg}
-                                  </span>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        )
-                      })}
+                      {analysis.events_analysis.recent_events.map((evt) => (
+                        <EventCard
+                          key={evt.event_id}
+                          id={evt.event_id}
+                          title={evt.title}
+                          severity={evt.severity}
+                          verification_status={evt.verification_status}
+                          published_at={evt.published_at}
+                          micro_physical_impact={evt.micro_physical_impact}
+                          involved_entities={evt.involved_entities}
+                          affected_business_segments={evt.affected_business_segments}
+                          compact
+                        />
+                      ))}
                     </div>
                   </div>
                 ) : (
