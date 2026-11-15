@@ -265,6 +265,70 @@ export const LayersIcon: React.FC<IconProps> = ({ className = 'w-4 h-4' }) => (
   </svg>
 )
 
+/** 展开下拉矢量箭头 */
+export const ChevronDownIcon: React.FC<IconProps> = ({ className = 'w-3 h-3' }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+  >
+    <polyline points="6 9 12 15 18 9" />
+  </svg>
+)
+
+/** 收起上拉矢量箭头 */
+export const ChevronUpIcon: React.FC<IconProps> = ({ className = 'w-3 h-3' }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+  >
+    <polyline points="18 15 12 9 6 15" />
+  </svg>
+)
+
+/** 刷新 / 重新核算图标 */
+export const RefreshIcon: React.FC<IconProps> = ({ className = 'w-3.5 h-3.5' }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+  </svg>
+)
+
+/** 验证通过对勾图标 */
+export const CheckIcon: React.FC<IconProps> = ({ className = 'w-3 h-3' }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+  >
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+)
+
 /** 关闭 / 清除图标 */
 export const XIcon: React.FC<IconProps> = ({ className = 'w-3 h-3' }) => (
   <svg

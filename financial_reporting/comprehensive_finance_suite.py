@@ -651,6 +651,7 @@ def run_all_24_financial_models(ticker: str = "NVDA") -> Dict[str, Any]:
             interp = get_model_interpretation(m["model_id"], m.get("details", {}), ticker=ticker)
             m["executive_takeaway"] = interp.get("executive_takeaway", "")
             m["parameter_interpretations"] = interp.get("parameter_interpretations", [])
+            m["core_param_reflection"] = interp.get("core_param_reflection", "")
 
     suite_summary = {
         "as_of": as_of,

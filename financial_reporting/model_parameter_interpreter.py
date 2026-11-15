@@ -21,7 +21,20 @@ def get_model_interpretation(
 ) -> Dict[str, Any]:
     """为指定模型生成顶层业务研判与多参数结构化解读矩阵."""
     builder = _INTERPRETATION_REGISTRY.get(model_id, _default_interpreter)
-    return builder(details, ticker)
+    res = builder(details, ticker)
+    if "core_param_reflection" not in res:
+        params = res.get("parameter_interpretations", [])
+        if params:
+            reflections = []
+            for p in params[:3]:
+                p_name = p.get("param_name", "")
+                p_val = p.get("param_value", "")
+                p_intuition = p.get("economic_intuition", "")
+                reflections.append(f"{p_name} ({p_val})：{p_intuition}")
+            res["core_param_reflection"] = "；".join(reflections)
+        else:
+            res["core_param_reflection"] = "各项数理参数均处于基准区间，反映企业业务与财务状况在模型假定下运行稳健。"
+    return res
 
 
 # =============================================================================

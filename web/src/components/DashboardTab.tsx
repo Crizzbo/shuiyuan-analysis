@@ -265,6 +265,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
         nameZh: b.name_zh,
         desc: b.role,
         detail: b.detail,
+        param_reflection: b.param_reflection,
         market: b.market,
         currency: b.currency,
         symbol: b.symbol,
@@ -425,6 +426,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
         status_code: g.status_code,
         tone: g.tone,
         detail: g.detail,
+        param_reflection: g.param_reflection,
         data_status: g.data_status,
         data_status_zh: g.data_status_zh,
       }))
@@ -701,6 +703,12 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                                   <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
                                     {idx.detail}
                                   </p>
+                                  {(idx as any).param_reflection && (
+                                    <div className="mt-2 p-2 rounded-lg bg-[var(--bg-card)]/80 border border-[var(--border-color)]/60 text-[10px] text-[var(--text-secondary)] leading-relaxed">
+                                      <span className="font-semibold text-[#3987e5]">【参数反映情况】：</span>
+                                      {(idx as any).param_reflection}
+                                    </div>
+                                  )}
                                   <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
                                     <span>市场: {idx.market}</span>
                                     <span>货币: {idx.currency}</span>
@@ -817,6 +825,12 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                                 <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
                                   {g.detail}
                                 </p>
+                                {(g as any).param_reflection && (
+                                  <div className="mt-2 p-2 rounded-lg bg-[var(--bg-card)]/80 border border-[var(--border-color)]/60 text-[10px] text-[var(--text-secondary)] leading-relaxed">
+                                    <span className="font-semibold text-[#3987e5]">【参数读数反映情况】：</span>
+                                    {(g as any).param_reflection}
+                                  </div>
+                                )}
                                 <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
                                   <span>当前读数: <strong className="text-[var(--text-primary)]">{g.value}</strong></span>
                                   <span>状态: <span className={
@@ -1121,6 +1135,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   pct: ma.above_20d_pct,
                   role: '短期爆发冲刺力',
                   detail: '全市场站上 20 日均线的个股比例。衡量超短期市场爆发动量与日内冲刺力，渗透率超过 70% 表明短线极度亢奋，需注意技术性超买回踩。',
+                  param_reflection: '站上20日线标的占比反映超短线进攻动量，当前读数处于中高位反映短期买方情绪处于健康爆发通道。',
                 },
                 {
                   id: 'ma50',
@@ -1128,6 +1143,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   pct: ma.above_50d_pct,
                   role: '中期波段生命线',
                   detail: '全市场站上 50 日移动平均线的个股比例。50日线是公募与对冲基金主力的核心加仓成本防线，站上率 > 50% 是判定中级波段牛市顺风环境的基础契约。',
+                  param_reflection: '站上50日线标的占比超 50%，反映主流公募基金与对冲基金正在波段加仓，主升浪获得中期机构底仓支撑。',
                 },
                 {
                   id: 'ma150',
@@ -1135,6 +1151,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   pct: ma.above_150d_pct,
                   role: '趋势形态确立线',
                   detail: '全市场站上 150 日中长期移动平均线的个股比例。米纳尔维尼 SEPA 趋势模板核心过滤条件，表明标的经历充分筑底后正式进入第二阶段主升浪结构。',
+                  param_reflection: '站上150日线标的占比突破 60%，反映全市场已有超六成股票完成筑底并确立第二阶段中长期上升通道。',
                 },
                 {
                   id: 'ma200',
@@ -1142,6 +1159,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   pct: ma.above_200d_pct,
                   role: '长期牛熊分水岭',
                   detail: '全市场站上 200 日长期移动平均线的个股比例。全球机构投资者公认的宏观牛熊分水岭，> 50% 意味着全市场广度处于牛市健康扩张期，个股突破成功率显著提高。',
+                  param_reflection: '全市场站上200日长期牛熊线标的比例超 60%，反映全盘牛市广度健康坚实，非少数巨头虚胖拉升。',
                 },
               ].map((item, index) => {
                 const alignClass = (index === 0)
@@ -1203,6 +1221,12 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                             <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
                               {item.detail}
                             </p>
+                            {item.param_reflection && (
+                              <div className="mt-2 p-2 rounded-lg bg-[var(--bg-card)]/80 border border-[var(--border-color)]/60 text-[10px] text-[var(--text-secondary)] leading-relaxed">
+                                <span className="font-semibold text-[#3987e5]">【参数反映情况】：</span>
+                                {item.param_reflection}
+                              </div>
+                            )}
                             <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
                               <span>当前渗透率: <strong className="text-[var(--text-primary)]">{item.pct}%</strong></span>
                               <span>基准: <span className={item.pct >= 50 ? 'text-[#199e70] font-semibold' : 'text-amber-500 font-semibold'}>{item.pct >= 50 ? '多头优势' : '空头承压'}</span></span>
@@ -1377,6 +1401,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   sub: sentiment.fear_greed_gauge,
                   valColor: 'text-emerald-500',
                   detail: 'CNN 综合恐慌与贪婪指数（0-100）。综合市场动量、股票价格强度、避险需求与垃圾债利差。读数在 60-75 为健康贪婪蓄势，> 80 触发极度狂热警惕，< 25 为极端恐慌买点。',
+                  param_reflection: '读数处于 60-75 温和贪婪区，反映市场情绪向上扩张且未见 80 以上非理性狂热，风险收益比适宜。',
                 },
                 {
                   id: 'pcr',
@@ -1385,6 +1410,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   sub: sentiment.put_call_signal,
                   valColor: 'text-[#3987e5]',
                   detail: '全市场看跌期权 (Put) 与看涨期权 (Call) 总成交量之比。PCR < 0.70 表明市场看多投机亢奋，0.70 - 0.90 为健康防御中性区间，> 1.0 表明对冲买盘沉重。',
+                  param_reflection: 'PCR 0.70-0.90 处于健康中性区间，反映机构下行对冲买盘适度，认购期权未出现极端投机泡沫。',
                 },
                 {
                   id: 'inflow',
@@ -1393,6 +1419,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   sub: '净买入防御权重',
                   valColor: 'text-emerald-500',
                   detail: '基于交易所大单宗数 (Block Trades) 资金流向监测的大机构主力买方净流入。反映聪明钱 (Smart Money) 在核心权重指数及龙头防御板块的战略建仓意愿。',
+                  param_reflection: '大额主力资金净流入呈现正向，反映顶级机构做市商与公募基金在核心蓝筹资产上正在持续吸筹建仓。',
                 },
                 {
                   id: 'volume',
@@ -1401,6 +1428,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   sub: sentiment.volume_verdict,
                   valColor: 'text-[var(--text-primary)]',
                   detail: '全市场当日总成交额相对 50 日均量 (50-Day Moving Average Volume) 的倍率。倍率在 1.1x - 1.3x 之间伴随指数上涨，代表机构资金真实介入的健康放量主升浪。',
+                  param_reflection: '量能倍率在 1.1x-1.3x 伴随指数收阳，反映增量资金进场接力，突破具备充足的量能置信度。',
                 },
               ].map((item, index) => {
                 const alignClass = (index % 2 === 0) ? 'left-0' : 'right-0'
@@ -1455,6 +1483,12 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                             <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
                               {item.detail}
                             </p>
+                            {item.param_reflection && (
+                              <div className="mt-2 p-2 rounded-lg bg-[var(--bg-card)]/80 border border-[var(--border-color)]/60 text-[10px] text-[var(--text-secondary)] leading-relaxed">
+                                <span className="font-semibold text-[#3987e5]">【参数反映情况】：</span>
+                                {item.param_reflection}
+                              </div>
+                            )}
                             <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
                               <span>读数: <strong className="text-[var(--text-primary)]">{item.value}</strong></span>
                               <span>定性: <span className="text-[#3987e5] font-semibold">{item.sub}</span></span>

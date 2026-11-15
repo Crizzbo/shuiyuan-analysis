@@ -230,6 +230,7 @@ export interface BenchmarkIndexItem {
   data_status_zh: string
   role: string
   detail: string
+  param_reflection?: string
   currency: string
   symbol: string
   market: string
@@ -245,6 +246,7 @@ export interface MacroGaugeItem {
   status_code: string
   tone: 'warning' | 'good' | 'accent' | 'critical'
   detail: string
+  param_reflection?: string
   data_status: string
   data_status_zh: string
 }
@@ -864,6 +866,7 @@ export interface FinanceModelItem {
   output_summary: string
   details: Record<string, any>
   executive_takeaway?: string
+  core_param_reflection?: string
   parameter_interpretations?: ModelParameterInterpretation[]
 }
 

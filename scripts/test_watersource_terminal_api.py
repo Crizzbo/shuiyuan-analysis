@@ -764,6 +764,8 @@ class TestWatersourceTerminalAPI(unittest.TestCase):
             self.assertIn("role", b)
             self.assertIn("detail", b)
             self.assertGreater(len(b["detail"]), 10)
+            self.assertIn("param_reflection", b)
+            self.assertGreater(len(b["param_reflection"]), 10)
 
         # 4. 验证 6 大宏观舵手指标完整状态字段
         self.assertIn("macro_gauges", data)
@@ -780,6 +782,8 @@ class TestWatersourceTerminalAPI(unittest.TestCase):
             self.assertIn("tone", g)
             self.assertIn("detail", g)
             self.assertGreater(len(g["detail"]), 10)
+            self.assertIn("param_reflection", g)
+            self.assertGreater(len(g["param_reflection"]), 10)
 
         # 5. 验证事件列表结构化中文状态字段
         code_ev, res_ev = self._http_json("/api/events?limit=10")
@@ -792,6 +796,17 @@ class TestWatersourceTerminalAPI(unittest.TestCase):
             self.assertIn("verification_status_zh", ev)
             self.assertIn("verification_status_tone", ev)
             self.assertIn("credibility_tier_zh", ev)
+
+        # 6. 验证 24 大专业量化金融模型核心参数反映情况
+        code_fm, res_fm = self._http_json("/api/finance/models?ticker=AVGO")
+        self.assertEqual(code_fm, 200)
+        models = res_fm["data"]["models"]
+        self.assertEqual(len(models), 24)
+        for m in models:
+            self.assertIn("theory_origin", m)
+            self.assertIn("output_summary", m)
+            self.assertIn("core_param_reflection", m)
+            self.assertGreater(len(m["core_param_reflection"]), 5)
 
 
 if __name__ == "__main__":

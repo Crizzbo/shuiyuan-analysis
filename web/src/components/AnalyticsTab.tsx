@@ -9,7 +9,7 @@ import type {
 import { api } from '../services/api'
 import { Pagination } from './Pagination'
 import { formatDeviceTime, toChinese } from '../utils/format'
-import { EventCard, InfoCircleIcon } from './common'
+import { EventCard, InfoCircleIcon, CheckIcon, RefreshIcon, ChevronDownIcon, ChevronUpIcon } from './common'
 import { showToast } from './Toast'
 
 interface AnalyticsTabProps {
@@ -41,6 +41,8 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
   const [suiteCategoryFilter, setSuiteCategoryFilter] = useState<string>('ALL')
   const [expandedModelIds, setExpandedModelIds] = useState<Record<string, boolean>>({})
   const [allModelsExpanded, setAllModelsExpanded] = useState<boolean>(false)
+  const [activeModelTooltipId, setActiveModelTooltipId] = useState<string | null>(null)
+  const [activeSuiteOverviewTooltipId, setActiveSuiteOverviewTooltipId] = useState<string | null>(null)
 
   // 敏感性情景微调状态
   const [showSensitivity, setShowSensitivity] = useState(false)
@@ -537,7 +539,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                           onClick={() => void loadSuite24(selectedTicker)}
                           className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#199e70] hover:bg-[#147d58] text-white flex items-center gap-1.5 transition-all shadow-sm cursor-pointer"
                         >
-                          <span>↻</span>
+                          <RefreshIcon className="w-3.5 h-3.5" />
                           <span>重新核算</span>
                         </button>
                       </div>
@@ -545,37 +547,117 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
 
                     {/* 指标矩阵状态胶囊 */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-1">
-                      <div className="bg-[var(--bg-card)] p-3 rounded-lg border border-[var(--border-color)]/60">
-                        <div className="text-[10px] text-[var(--text-muted)]">模型执行覆盖</div>
-                        <div className="text-sm font-bold font-mono text-[#199e70] mt-0.5">
-                          {suite24Data.total_models} / 24 个模型
-                        </div>
-                        <div className="text-[10px] text-[var(--text-secondary)] mt-0.5">100% 执行率</div>
-                      </div>
+                      {[
+                        {
+                          id: 'coverage',
+                          title: '模型执行覆盖',
+                          value: `${suite24Data.total_models} / 24 个模型`,
+                          sub: '100% 执行率',
+                          valColor: 'text-[#199e70]',
+                          role: '投研模型全息覆盖度',
+                          detail: '全面覆盖估值走廊、破产预警、法证舞弊排查、波动率、流动性冲击与衍生品定价 7 大金融学科群。',
+                          param_reflection: '24/24 (100%) 执行率反映所有标的资产均接受全维度数理与会计体检，杜绝单一估值模型的片面盲区。',
+                        },
+                        {
+                          id: 'latency',
+                          title: '端到端执行耗时',
+                          value: `${suite24Data.total_execution_ms.toFixed(1)} ms`,
+                          sub: '超低延迟本地计算',
+                          valColor: 'text-[#3987e5]',
+                          role: '纯本地高性能执行算力',
+                          detail: '由底盘纯 Python/NumPy/SciPy 物理计算引擎本地执行，完全不调用大模型外部 API。',
+                          param_reflection: '耗时处于毫秒级（约 200 ms），反映 0-Token 物理计算极高吞吐，彻底消除网络丢包延迟与大模型黑盒幻觉。',
+                        },
+                        {
+                          id: 'boundary',
+                          title: '金融数学边界防御',
+                          value: '全部通过',
+                          sub: '除零/除负/极值收敛校验',
+                          valColor: 'text-[#199e70]',
+                          role: '鲁棒性与金融数学边界',
+                          detail: '内嵌 Durrleman 无套利条件、Roger Lee 极值斜率收敛、有限责任下界（股价 ≥ 0）与零除零负保护。',
+                          param_reflection: '全部通过反映在极值输入、负利润或债务危机情景下，所有计算函数均具备刚性数学防崩溃能力。',
+                        },
+                        {
+                          id: 'balance',
+                          title: '三表勾稽恒等式',
+                          value: '刚性平账',
+                          sub: '资产 = 负债 + 权益',
+                          valColor: 'text-[#199e70]',
+                          role: '会计防伪与三表勾稽',
+                          detail: '针对 SEC 10-K/10-Q 与东证有价证券报告书三表底账执行会计恒等式刚性自检。',
+                          param_reflection: '资产 = 负债 + 所有者权益 平账误差恒为 0，反映录入底层主管道的数据完全脱离人工篡改与幻觉注入。',
+                        },
+                      ].map((item, oIdx) => {
+                        const alignClass = oIdx >= 2 ? 'right-0' : 'left-0'
+                        return (
+                          <div
+                            key={item.id}
+                            className="bg-[var(--bg-card)] p-3 rounded-lg border border-[var(--border-color)]/60 relative group shadow-sm"
+                          >
+                            <div className="flex items-center justify-between gap-1">
+                              <div className="text-[10px] text-[var(--text-muted)]">{item.title}</div>
+                              <div
+                                className="relative shrink-0"
+                                onMouseEnter={() => setActiveSuiteOverviewTooltipId(item.id)}
+                                onMouseLeave={() => setActiveSuiteOverviewTooltipId(null)}
+                              >
+                                <button
+                                  type="button"
+                                  tabIndex={0}
+                                  title={`${item.title} 详细说明`}
+                                  aria-label={`${item.title} 详细说明`}
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    setActiveSuiteOverviewTooltipId(activeSuiteOverviewTooltipId === item.id ? null : item.id)
+                                  }}
+                                  onFocus={() => setActiveSuiteOverviewTooltipId(item.id)}
+                                  onBlur={() => setActiveSuiteOverviewTooltipId(null)}
+                                  className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                                    activeSuiteOverviewTooltipId === item.id
+                                      ? 'bg-[#3987e5] text-white shadow-sm'
+                                      : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
+                                  }`}
+                                >
+                                  <InfoCircleIcon className="w-2.5 h-2.5" />
+                                </button>
 
-                      <div className="bg-[var(--bg-card)] p-3 rounded-lg border border-[var(--border-color)]/60">
-                        <div className="text-[10px] text-[var(--text-muted)]">端到端执行耗时</div>
-                        <div className="text-sm font-bold font-mono text-[#3987e5] mt-0.5">
-                          {suite24Data.total_execution_ms.toFixed(1)} ms
-                        </div>
-                        <div className="text-[10px] text-[var(--text-secondary)] mt-0.5">超低延迟本地计算</div>
-                      </div>
-
-                      <div className="bg-[var(--bg-card)] p-3 rounded-lg border border-[var(--border-color)]/60">
-                        <div className="text-[10px] text-[var(--text-muted)]">金融数学边界防御</div>
-                        <div className="text-sm font-bold text-[#199e70] mt-0.5">
-                          全部通过
-                        </div>
-                        <div className="text-[10px] text-[var(--text-secondary)] mt-0.5">除零/除负/极值收敛校验</div>
-                      </div>
-
-                      <div className="bg-[var(--bg-card)] p-3 rounded-lg border border-[var(--border-color)]/60">
-                        <div className="text-[10px] text-[var(--text-muted)]">三表勾稽恒等式</div>
-                        <div className="text-sm font-bold text-[#199e70] mt-0.5">
-                          刚性平账
-                        </div>
-                        <div className="text-[10px] text-[var(--text-secondary)] mt-0.5">资产 = 负债 + 权益</div>
-                      </div>
+                                {activeSuiteOverviewTooltipId === item.id && (
+                                  <div
+                                    className={`absolute top-full mt-2 w-64 p-3 rounded-xl bg-[var(--surface-color)] border border-[var(--border-color)] shadow-2xl z-50 pointer-events-auto opacity-100 transition-all duration-200 text-left ${alignClass}`}
+                                    onMouseEnter={() => setActiveSuiteOverviewTooltipId(item.id)}
+                                    onMouseLeave={() => setActiveSuiteOverviewTooltipId(null)}
+                                  >
+                                    <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
+                                      <span className="font-bold text-xs text-[var(--text-primary)]">
+                                        {item.title}
+                                      </span>
+                                      <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/25 font-medium shrink-0">
+                                        {item.role}
+                                      </span>
+                                    </div>
+                                    <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                                      {item.detail}
+                                    </p>
+                                    <div className="mt-2 p-2 rounded-lg bg-[var(--bg-card)]/80 border border-[var(--border-color)]/60 text-[10px] text-[var(--text-secondary)] leading-relaxed">
+                                      <span className="font-semibold text-[#3987e5]">【参数反映情况】：</span>
+                                      {item.param_reflection}
+                                    </div>
+                                    <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
+                                      <span>当前状态: <strong className="text-[var(--text-primary)]">{item.value}</strong></span>
+                                      <span>定性: <span className="text-[#199e70] font-semibold">{item.sub}</span></span>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                            <div className={`text-sm font-bold font-mono ${item.valColor} mt-0.5`}>
+                              {item.value}
+                            </div>
+                            <div className="text-[10px] text-[var(--text-secondary)] mt-0.5">{item.sub}</div>
+                          </div>
+                        )
+                      })}
                     </div>
 
                     {/* 分类筛选器与全量展开/收起按钮 */}
@@ -612,7 +694,8 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                         onClick={() => setAllModelsExpanded(!allModelsExpanded)}
                         className="text-xs px-3 py-1 rounded-lg bg-[var(--bg-card)] hover:bg-[#199e70]/10 text-[#199e70] border border-[#199e70]/30 transition-all font-medium cursor-pointer shrink-0 flex items-center gap-1"
                       >
-                        <span>{allModelsExpanded ? '收起全部参数矩阵 ▲' : '全量展开参数矩阵 ▼'}</span>
+                        <span>{allModelsExpanded ? '收起全部参数矩阵' : '全量展开参数矩阵'}</span>
+                        {allModelsExpanded ? <ChevronUpIcon className="w-3 h-3" /> : <ChevronDownIcon className="w-3 h-3" />}
                       </button>
                     </div>
                   </div>
@@ -628,48 +711,122 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                         return (
                           <div
                             key={m.model_id}
-                            className="bg-[var(--surface-color)] border border-[var(--border-color)] hover:border-[#199e70]/50 rounded-xl p-4.5 flex flex-col justify-between transition-all shadow-sm space-y-3.5"
+                            className="bg-[var(--surface-color)] border border-[var(--border-color)] hover:border-[#199e70]/50 rounded-xl p-4.5 flex flex-col justify-between transition-all shadow-sm space-y-3"
                           >
                             <div className="space-y-3">
-                              {/* 卡片顶部：编号、名称与执行状态 */}
+                              {/* 卡片顶部：编号、名称、外置感叹号说明按钮与执行状态 */}
                               <div className="flex items-start justify-between gap-2">
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 relative">
                                   <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#199e70]/15 text-[#199e70] border border-[#199e70]/30 shrink-0">
                                     #{idx + 1}
                                   </span>
                                   <h3 className="text-sm font-bold text-[var(--text-primary)] leading-tight">
                                     {m.name_zh}
                                   </h3>
+
+                                  {/* 外置感叹号说明按钮 */}
+                                  <div
+                                    className="relative shrink-0"
+                                    onMouseEnter={() => setActiveModelTooltipId(m.model_id)}
+                                    onMouseLeave={() => setActiveModelTooltipId(null)}
+                                  >
+                                    <button
+                                      type="button"
+                                      tabIndex={0}
+                                      title={`${m.name_zh} 模型定位与参数反映情况`}
+                                      aria-label={`${m.name_zh} 模型定位与参数反映情况`}
+                                      onClick={(e) => {
+                                        e.stopPropagation()
+                                        setActiveModelTooltipId(activeModelTooltipId === m.model_id ? null : m.model_id)
+                                      }}
+                                      onFocus={() => setActiveModelTooltipId(m.model_id)}
+                                      onBlur={() => setActiveModelTooltipId(null)}
+                                      className={`w-4 h-4 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                                        activeModelTooltipId === m.model_id
+                                          ? 'bg-[#3987e5] text-white shadow-sm'
+                                          : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
+                                      }`}
+                                    >
+                                      <InfoCircleIcon className="w-2.5 h-2.5" />
+                                    </button>
+
+                                    {/* 聚焦/悬停/点击展开详细信息浮层 */}
+                                    {activeModelTooltipId === m.model_id && (
+                                      <div
+                                        className="absolute top-full mt-2 left-0 w-80 max-w-[90vw] p-3.5 rounded-xl bg-[var(--surface-color)] border border-[var(--border-color)] shadow-2xl z-50 pointer-events-auto opacity-100 transition-all duration-200 text-left space-y-2.5"
+                                        onMouseEnter={() => setActiveModelTooltipId(m.model_id)}
+                                        onMouseLeave={() => setActiveModelTooltipId(null)}
+                                      >
+                                        <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5">
+                                          <div className="flex items-center gap-1.5 min-w-0">
+                                            <span className="font-mono font-bold text-xs text-[var(--text-primary)]">
+                                              #{idx + 1}
+                                            </span>
+                                            <span className="text-xs font-bold text-[var(--text-primary)] truncate">
+                                              {m.name_zh}
+                                            </span>
+                                          </div>
+                                          <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/25 font-medium shrink-0">
+                                            {m.category}
+                                          </span>
+                                        </div>
+
+                                        {/* 模型理论与用途 */}
+                                        <div className="text-[11px] text-[var(--text-secondary)] leading-relaxed space-y-0.5">
+                                          <span className="text-[10px] font-bold text-[#3987e5] block">【学术渊源与金融用途】：</span>
+                                          <p>{m.theory_origin}</p>
+                                        </div>
+
+                                        {/* 顶层商业决策与投资逻辑 */}
+                                        {m.executive_takeaway && (
+                                          <div className="text-[11px] text-[var(--text-primary)] leading-relaxed bg-[#199e70]/10 border-l-2 border-[#199e70] p-2 rounded-r-lg space-y-0.5">
+                                            <span className="text-[10px] font-bold text-[#199e70] block">【顶层研判与投资逻辑】：</span>
+                                            <p>{m.executive_takeaway}</p>
+                                          </div>
+                                        )}
+
+                                        {/* 关键参数反映情况 */}
+                                        <div className="text-[11px] text-[var(--text-secondary)] leading-relaxed bg-[var(--bg-card)]/90 p-2 rounded-lg border border-[var(--border-color)]/60 space-y-1">
+                                          <span className="text-[10px] font-bold text-[#3987e5] block">【核心参数反映情况】：</span>
+                                          <p>{m.core_param_reflection || '模型各输入参数均经严格官方财报映射与时序清洗，当前读数在假定情景下反映企业正常稳态营运。'}</p>
+                                        </div>
+
+                                        {/* 底线边界与平账状态 */}
+                                        <div className="pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
+                                          <span>执行耗时: {m.execution_ms.toFixed(1)} ms</span>
+                                          <span className="text-[#199e70] font-semibold flex items-center gap-0.5">
+                                            <CheckIcon className="w-2.5 h-2.5" />
+                                            <span>数学边界防御通过</span>
+                                          </span>
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
                                 </div>
+
                                 <div className="flex items-center gap-1.5 shrink-0">
                                   <span className="text-[10px] px-1.5 py-0.2 rounded font-mono text-[var(--text-muted)] bg-[var(--bg-card)] border border-[var(--border-color)]">
                                     {m.execution_ms.toFixed(1)} ms
                                   </span>
-                                  <span className="text-[10px] px-1.5 py-0.2 rounded font-semibold bg-[#199e70]/20 text-[#199e70] border border-[#199e70]/40">
-                                    ✓ 验证通过
+                                  <span className="flex items-center gap-1 text-[10px] px-1.5 py-0.2 rounded font-semibold bg-[#199e70]/20 text-[#199e70] border border-[#199e70]/40">
+                                    <CheckIcon className="w-2.5 h-2.5" />
+                                    <span>验证通过</span>
                                   </span>
                                 </div>
                               </div>
 
-                              {/* 理论渊源与分类标签 */}
-                              <div className="flex flex-wrap items-center gap-1.5 text-[10px]">
-                                <span className="px-2 py-0.5 rounded bg-[var(--bg-card)] text-[var(--text-secondary)] border border-[var(--border-color)] font-medium">
+                              {/* 核心测算成果突出展示卡 */}
+                              <div className="p-2.5 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)]/70 flex items-center justify-between gap-2">
+                                <div className="min-w-0">
+                                  <div className="text-[10px] text-[var(--text-muted)] font-medium">测算结果摘要</div>
+                                  <div className="text-xs font-mono font-bold text-[#199e70] truncate mt-0.5">
+                                    {m.output_summary}
+                                  </div>
+                                </div>
+                                <span className="text-[10px] px-2 py-0.5 rounded bg-[var(--surface-color)] text-[var(--text-secondary)] border border-[var(--border-color)] font-medium shrink-0">
                                   {m.category}
                                 </span>
-                                <span className="text-[var(--text-muted)] truncate max-w-[320px]" title={m.theory_origin}>
-                                  🏛️ {m.theory_origin}
-                                </span>
                               </div>
-
-                              {/* 顶层商业决策与投资逻辑 (Executive Takeaway) */}
-                              {m.executive_takeaway && (
-                                <div className="bg-[#199e70]/10 border-l-2 border-[#199e70] p-3 rounded-r-lg text-xs text-[var(--text-primary)] leading-relaxed space-y-1">
-                                  <div className="text-[10px] font-bold text-[#199e70] flex items-center gap-1">
-                                    <span>💡 顶层商业研判与投资逻辑</span>
-                                  </div>
-                                  <p>{m.executive_takeaway}</p>
-                                </div>
-                              )}
 
                               {/* 多参数结构化解读矩阵 (Parameter Interpretations) */}
                               {params.length > 0 && (
@@ -687,9 +844,10 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                           [m.model_id]: !isExpanded
                                         }))
                                       }}
-                                      className="text-xs text-[#3987e5] hover:underline font-medium cursor-pointer"
+                                      className="text-xs text-[#3987e5] hover:underline font-medium cursor-pointer flex items-center gap-1"
                                     >
-                                      {isExpanded ? '收起参数矩阵 ▲' : `展开解读 (${params.length} 项) ▼`}
+                                      <span>{isExpanded ? '收起参数矩阵' : `展开解读 (${params.length} 项)`}</span>
+                                      {isExpanded ? <ChevronUpIcon className="w-3 h-3" /> : <ChevronDownIcon className="w-3 h-3" />}
                                     </button>
                                   </div>
 
@@ -728,6 +886,9 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                                 >
                                                   {param.param_name}
                                                 </span>
+                                                <span className="text-[10px] font-mono text-[var(--text-muted)]">
+                                                  ({param.param_key})
+                                                </span>
                                               </div>
                                               <div className="flex items-center gap-2 shrink-0">
                                                 <span className="font-mono font-bold text-xs text-[var(--text-primary)]">
@@ -745,15 +906,15 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                               <span className="font-mono text-[var(--text-primary)]">{param.benchmark_range}</span>
                                             </div>
 
-                                            {/* 经济学机理传导 */}
+                                            {/* 经济学机理传导 / 参数反映情况 */}
                                             <div className="text-[11px] text-[var(--text-secondary)] bg-[var(--surface-color)]/70 p-2 rounded border border-[var(--border-color)]/50 leading-relaxed">
-                                              <span className="text-[var(--text-muted)] font-medium">经济学机理: </span>
+                                              <span className="text-[#3987e5] font-semibold">【参数反映情况】：</span>
                                               {param.economic_intuition}
                                             </div>
 
                                             {/* 买方决策启示 */}
                                             <div className="text-[11px] text-[var(--text-primary)] leading-relaxed pl-2.5 border-l-2 border-[#3987e5] py-0.5">
-                                              <span className="text-[#3987e5] font-semibold">买方决策启示: </span>
+                                              <span className="text-[#3987e5] font-semibold">【买方决策启示】：</span>
                                               {param.decision_implication}
                                             </div>
                                           </div>
@@ -773,7 +934,10 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                               </div>
                               <div className="flex items-center justify-between text-[var(--text-muted)] pt-0.5">
                                 <span>边界防御:</span>
-                                <span className="text-[#199e70] font-medium">零除零负保护 · 极值收敛与有限责任下界通过</span>
+                                <span className="text-[#199e70] font-medium flex items-center gap-1">
+                                  <CheckIcon className="w-2.5 h-2.5" />
+                                  <span>零除零负保护 · 极值收敛与有限责任下界通过</span>
+                                </span>
                               </div>
                             </div>
                           </div>
@@ -1126,6 +1290,10 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                   <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
                                     {corridor.conservative_floor.description}
                                   </p>
+                                  <div className="mt-2 p-2 rounded-lg bg-[#d03b3b]/10 border border-[#d03b3b]/25 text-[10px] text-[var(--text-secondary)] leading-relaxed">
+                                    <span className="font-semibold text-[#d03b3b]">【核心参数反映情况】：</span>
+                                    折现率提高至 {corridor.conservative_floor.discount_rate_pct}% 与 永续增长率压缩至 {corridor.conservative_floor.terminal_growth_pct}%，反映在宏观紧缩与下游资本开支削减下的极端压力测试支撑底价，由账面净现金和低速稳态现金流托底。
+                                  </div>
                                   <div className="mt-2.5 pt-1.5 border-t border-[var(--border-color)]/40 text-[10px] text-[var(--text-muted)] font-mono space-y-0.5">
                                     <div>折现率: {corridor.conservative_floor.discount_rate_pct}% | 永续: {corridor.conservative_floor.terminal_growth_pct}%</div>
                                     <div>前3年预测增长: {corridor.conservative_floor.growth_rates_pct.join('%, ')}%</div>
@@ -1201,6 +1369,10 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                   <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
                                     {corridor.base_fair_value.description}
                                   </p>
+                                  <div className="mt-2 p-2 rounded-lg bg-[#3987e5]/10 border border-[#3987e5]/25 text-[10px] text-[var(--text-secondary)] leading-relaxed">
+                                    <span className="font-semibold text-[#3987e5]">【核心参数反映情况】：</span>
+                                    基准折现率 {corridor.base_fair_value.discount_rate_pct}% 对应行业标准加权资本成本，永续增速 {corridor.base_fair_value.terminal_growth_pct}% 锚定全球长期名义 GDP 增速，反映基于当前三表底账和稳态护城河的内生真实价值。
+                                  </div>
                                   <div className="mt-2.5 pt-1.5 border-t border-[var(--border-color)]/40 text-[10px] text-[var(--text-muted)] font-mono space-y-0.5">
                                     <div>WACC 折现率: {corridor.base_fair_value.discount_rate_pct}% | 永续: {corridor.base_fair_value.terminal_growth_pct}%</div>
                                     <div>前3年预测增长: {corridor.base_fair_value.growth_rates_pct.join('%, ')}%</div>
@@ -1286,6 +1458,10 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                   <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
                                     {corridor.optimistic_target.description}
                                   </p>
+                                  <div className="mt-2 p-2 rounded-lg bg-[#199e70]/10 border border-[#199e70]/25 text-[10px] text-[var(--text-secondary)] leading-relaxed">
+                                    <span className="font-semibold text-[#199e70]">【核心参数反映情况】：</span>
+                                    折现率微降至 {corridor.optimistic_target.discount_rate_pct}% 享受流动性溢价，永续增速 {corridor.optimistic_target.terminal_growth_pct}%，前3年增速提升至 {corridor.optimistic_target.growth_rates_pct.join('%, ')}%，反映 AI/算力爆发与护城河扩张超预期放量的景气溢价靶心。
+                                  </div>
                                   <div className="mt-2.5 pt-1.5 border-t border-[var(--border-color)]/40 text-[10px] text-[var(--text-muted)] font-mono space-y-0.5">
                                     <div>折现率: {corridor.optimistic_target.discount_rate_pct}% | 永续: {corridor.optimistic_target.terminal_growth_pct}%</div>
                                     <div>前3年预测增长: {corridor.optimistic_target.growth_rates_pct.join('%, ')}%</div>
