@@ -189,16 +189,81 @@ export interface EquityValuationCard {
   } | null
 }
 
+export interface TradingSessionItem {
+  market: string
+  name_zh: string
+  session_status: string
+  session_status_zh: string
+  is_open: boolean
+  trading_day: string
+  timezone: string
+  status_tone: string
+}
+
+export interface TradingSessionsData {
+  benchmark_date: string
+  benchmark_note: string
+  us: TradingSessionItem
+  jp: TradingSessionItem
+}
+
+export interface MarketRegimeData {
+  regime_title: string
+  regime_status: string
+  regime_status_zh: string
+  regime_tone: string
+  strategy_guidance: string
+  adr_us: string
+  adr_jp: string
+  net_highs_52w: string
+}
+
+export interface BenchmarkIndexItem {
+  ticker: string
+  name_zh: string
+  price: number
+  formatted_price: string
+  change: string
+  change_pct: string
+  is_up: boolean
+  data_status: string
+  data_status_zh: string
+  role: string
+  detail: string
+  currency: string
+  symbol: string
+  market: string
+}
+
+export interface MacroGaugeItem {
+  id: string
+  name_zh: string
+  value: string
+  display_value: string
+  role: string
+  status: string
+  status_code: string
+  tone: 'warning' | 'good' | 'accent' | 'critical'
+  detail: string
+  data_status: string
+  data_status_zh: string
+}
+
 export interface DashboardSummaryData {
   as_of?: string
   freshness_banner: string
   readiness?: DataReadinessInfo
   task_scheduler?: TaskSchedulerInfo | null
+  trading_sessions?: TradingSessionsData
+  market_regime?: MarketRegimeData
+  benchmark_indices?: BenchmarkIndexItem[]
+  macro_gauges?: MacroGaugeItem[]
   kpis: KpiItem[]
   markets: {
     all_quotes?: MarketQuoteItem[]
     daily_archives?: MarketArchiveItem[]
     reconciliation?: MarketReconciliationMap | null
+    benchmark_indices?: BenchmarkIndexItem[]
     us_indices: MarketQuoteItem[]
     jp_indices: MarketQuoteItem[]
     jp_core_equities: MarketQuoteItem[]
@@ -323,6 +388,8 @@ export interface EventItem {
   title: string
   category: string
   severity: 'P0' | 'P1' | 'P2' | 'P3' | string
+  severity_zh?: string
+  severity_tone?: string
   published_at: string
   published_date?: string
   published_time?: string
@@ -330,8 +397,11 @@ export interface EventItem {
   collected_at: string
   source_name: string
   credibility_tier: string
+  credibility_tier_zh?: string
   credibility_score: number
   verification_status: string
+  verification_status_zh?: string
+  verification_status_tone?: string
   verification_note?: string
   micro_physical_impact?: string
   involved_entities?: string[] | string

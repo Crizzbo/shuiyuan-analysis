@@ -2,6 +2,7 @@ import React from 'react';
 import { SeverityBadge, VerificationBadge } from './StatusBadge';
 import { EntityPills } from './EntityPills';
 import { MicroImpactBox } from './MicroImpactBox';
+import { TargetIcon, ShieldCheckIcon } from './Icons';
 import { formatDeviceTime, toList, formatEventCategory, formatSourceName } from '../../utils/format';
 
 export interface EventCardProps {
@@ -76,8 +77,8 @@ export const EventCard: React.FC<EventCardProps> = ({
               className="text-[10px] px-2 py-0.2 rounded font-semibold bg-[#199e70]/15 hover:bg-[#199e70]/25 text-[#199e70] border border-[#199e70]/30 cursor-pointer transition-all flex items-center gap-1 shrink-0"
               title="查看权威事件雷达研判档案"
             >
-              <span>🎯 已提炼</span>
-              <span>(查看研判 →)</span>
+              <TargetIcon className="w-3 h-3 text-[#199e70]" />
+              <span>已提炼 (查看研判 →)</span>
             </button>
           )}
         </div>
@@ -85,7 +86,8 @@ export const EventCard: React.FC<EventCardProps> = ({
         <div className="flex items-center gap-2 shrink-0">
           {is_quarantined_rumor ? (
             <span className="text-[11px] px-2 py-0.5 rounded bg-[#d03b3b]/20 text-[#d03b3b] border border-[#d03b3b]/40 font-semibold flex items-center gap-1">
-              ⚠ 传闻隔离
+              <ShieldCheckIcon className="w-3 h-3 text-[#d03b3b]" />
+              <span>传闻隔离</span>
             </span>
           ) : (
             <VerificationBadge status={verification_status} size={compact ? 'sm' : 'md'} />

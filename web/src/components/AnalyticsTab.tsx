@@ -9,7 +9,7 @@ import type {
 import { api } from '../services/api'
 import { Pagination } from './Pagination'
 import { formatDeviceTime, toChinese } from '../utils/format'
-import { EventCard } from './common'
+import { EventCard, InfoCircleIcon } from './common'
 import { showToast } from './Toast'
 
 interface AnalyticsTabProps {
@@ -1080,7 +1080,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                           <span className="text-xs font-bold text-[#d03b3b]">保守底价</span>
                           <div className="flex items-center gap-1.5">
                             <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#d03b3b]/20 text-[#d03b3b] font-semibold font-mono">
-                              严苛防御
+                              {(corridor.conservative_floor as any).scenario_tag || '严苛防御'}
                             </span>
 
                             {/* 感叹号详细说明浮层 */}
@@ -1100,13 +1100,13 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                 }}
                                 onFocus={() => setActiveScenarioTooltip('floor')}
                                 onBlur={() => setActiveScenarioTooltip(null)}
-                                className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#d03b3b] ${
+                                className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#d03b3b] ${
                                   activeScenarioTooltip === 'floor'
                                     ? 'bg-[#d03b3b] text-white border-[#d03b3b]'
                                     : 'bg-[var(--surface-color)] hover:bg-[#d03b3b]/20 text-[var(--text-muted)] hover:text-[#d03b3b] border border-[var(--border-color)] hover:border-[#d03b3b]/50'
                                 }`}
                               >
-                                !
+                                <InfoCircleIcon className="w-2.5 h-2.5" />
                               </button>
 
                               {activeScenarioTooltip === 'floor' && (
@@ -1120,7 +1120,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                       保守底价情景推演
                                     </span>
                                     <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#d03b3b]/15 text-[#d03b3b] border border-[#d03b3b]/30 font-medium">
-                                      严苛防御
+                                      {(corridor.conservative_floor as any).scenario_tag || '严苛防御'}
                                     </span>
                                   </div>
                                   <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
@@ -1155,7 +1155,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                           <span className="text-xs font-bold text-[#3987e5]">中性公允价</span>
                           <div className="flex items-center gap-1.5">
                             <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#3987e5]/20 text-[#3987e5] font-semibold font-mono">
-                              公允基准
+                              {(corridor.base_fair_value as any).scenario_tag || '公允基准'}
                             </span>
 
                             {/* 感叹号详细说明浮层 */}
@@ -1175,13 +1175,13 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                 }}
                                 onFocus={() => setActiveScenarioTooltip('base')}
                                 onBlur={() => setActiveScenarioTooltip(null)}
-                                className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                                className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
                                   activeScenarioTooltip === 'base'
                                     ? 'bg-[#3987e5] text-white border-[#3987e5]'
                                     : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
                                 }`}
                               >
-                                !
+                                <InfoCircleIcon className="w-2.5 h-2.5" />
                               </button>
 
                               {activeScenarioTooltip === 'base' && (
@@ -1195,7 +1195,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                       中性公允价推演 (估值中枢)
                                     </span>
                                     <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#3987e5]/15 text-[#3987e5] border border-[#3987e5]/30 font-medium">
-                                      公允基准
+                                      {(corridor.base_fair_value as any).scenario_tag || '公允基准'}
                                     </span>
                                   </div>
                                   <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
@@ -1240,7 +1240,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                           <span className="text-xs font-bold text-[#199e70]">乐观靶心价</span>
                           <div className="flex items-center gap-1.5">
                             <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#199e70]/20 text-[#199e70] font-semibold font-mono">
-                              景气爆发
+                              {(corridor.optimistic_target as any).scenario_tag || '景气爆发'}
                             </span>
 
                             {/* 感叹号详细说明浮层 */}
@@ -1260,13 +1260,13 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                 }}
                                 onFocus={() => setActiveScenarioTooltip('opt')}
                                 onBlur={() => setActiveScenarioTooltip(null)}
-                                className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#199e70] ${
+                                className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#199e70] ${
                                   activeScenarioTooltip === 'opt'
                                     ? 'bg-[#199e70] text-white border-[#199e70]'
                                     : 'bg-[var(--surface-color)] hover:bg-[#199e70]/20 text-[var(--text-muted)] hover:text-[#199e70] border border-[var(--border-color)] hover:border-[#199e70]/50'
                                 }`}
                               >
-                                !
+                                <InfoCircleIcon className="w-2.5 h-2.5" />
                               </button>
 
                               {activeScenarioTooltip === 'opt' && (
@@ -1280,7 +1280,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                       乐观靶心价推演
                                     </span>
                                     <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#199e70]/15 text-[#199e70] border border-[#199e70]/30 font-medium">
-                                      景气爆发
+                                      {(corridor.optimistic_target as any).scenario_tag || '景气爆发'}
                                     </span>
                                   </div>
                                   <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">

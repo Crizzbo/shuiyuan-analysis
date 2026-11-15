@@ -717,6 +717,82 @@ class TestWatersourceTerminalAPI(unittest.TestCase):
                 scheduler.close()
                 self.service.scheduler = None
 
+    def test_dashboard_contract_state_alignment(self) -> None:
+        """测试前后端状态字段100%契约对齐 (trading_sessions, market_regime, benchmarks, gauges, events)."""
+        code, res = self._http_json("/api/dashboard/summary")
+        self.assertEqual(code, 200)
+        self.assertTrue(res["ok"])
+        data = res["data"]
+
+        # 1. 验证双市场交易时段状态字段
+        self.assertIn("trading_sessions", data)
+        sessions = data["trading_sessions"]
+        self.assertIn("us", sessions)
+        self.assertIn("jp", sessions)
+        self.assertEqual(sessions["us"]["session_status"], "CLOSED")
+        self.assertIn("前收盘基准", sessions["us"]["session_status_zh"])
+        self.assertFalse(sessions["us"]["is_open"])
+        self.assertEqual(sessions["jp"]["session_status"], "CLOSED")
+        self.assertIn("前收盘基准", sessions["jp"]["session_status_zh"])
+        self.assertFalse(sessions["jp"]["is_open"])
+
+        # 2. 验证大盘宏观定性状态字段
+        self.assertIn("market_regime", data)
+        regime = data["market_regime"]
+        self.assertIn("regime_title", regime)
+        self.assertIn("regime_status", regime)
+        self.assertIn("regime_status_zh", regime)
+        self.assertIn("strategy_guidance", regime)
+        self.assertIn("adr_us", regime)
+        self.assertIn("adr_jp", regime)
+
+        # 3. 验证 8 只大盘基准指数完整状态字段
+        self.assertIn("benchmark_indices", data)
+        benchmarks = data["benchmark_indices"]
+        self.assertEqual(len(benchmarks), 8)
+        expected_tickers = ["SPY", "QQQ", "DIA", "IWM", "1306", "^N225", "SMH", "USDJPY"]
+        actual_tickers = [b["ticker"] for b in benchmarks]
+        self.assertEqual(actual_tickers, expected_tickers)
+        for b in benchmarks:
+            self.assertIn("price", b)
+            self.assertIn("formatted_price", b)
+            self.assertIn("change", b)
+            self.assertIn("change_pct", b)
+            self.assertIsInstance(b["is_up"], bool)
+            self.assertIn("data_status", b)
+            self.assertIn("data_status_zh", b)
+            self.assertIn("role", b)
+            self.assertIn("detail", b)
+            self.assertGreater(len(b["detail"]), 10)
+
+        # 4. 验证 6 大宏观舵手指标完整状态字段
+        self.assertIn("macro_gauges", data)
+        gauges = data["macro_gauges"]
+        self.assertEqual(len(gauges), 6)
+        expected_gauges = ["^VIX", "^TNX", "DXY", "T10Y2Y", "^N225VI", "EFFR"]
+        actual_gauge_ids = [g["id"] for g in gauges]
+        self.assertEqual(actual_gauge_ids, expected_gauges)
+        for g in gauges:
+            self.assertIn("value", g)
+            self.assertIn("role", g)
+            self.assertIn("status", g)
+            self.assertIn("status_code", g)
+            self.assertIn("tone", g)
+            self.assertIn("detail", g)
+            self.assertGreater(len(g["detail"]), 10)
+
+        # 5. 验证事件列表结构化中文状态字段
+        code_ev, res_ev = self._http_json("/api/events?limit=10")
+        self.assertEqual(code_ev, 200)
+        events = res_ev["data"]["events"]
+        self.assertGreater(len(events), 0)
+        for ev in events:
+            self.assertIn("severity_zh", ev)
+            self.assertIn("severity_tone", ev)
+            self.assertIn("verification_status_zh", ev)
+            self.assertIn("verification_status_tone", ev)
+            self.assertIn("credibility_tier_zh", ev)
+
 
 if __name__ == "__main__":
     unittest.main()

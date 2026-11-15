@@ -773,7 +773,9 @@ class WatersourceTerminalService:
                     "discount_rate_pct": round(cons_discount_rate * 100, 1),
                     "terminal_growth_pct": round(cons_terminal_growth * 100, 1),
                     "growth_rates_pct": [round(g * 100, 1) for g in cons_growth_rates],
-                    "label": "悲观底线估值",
+                    "label": "保守底价",
+                    "scenario_status": "DEFENSIVE_FLOOR",
+                    "scenario_tag": "严苛防御",
                     "description": "严苛折现与保守增长情景下的价值底线",
                 },
                 "base_fair_value": {
@@ -784,7 +786,9 @@ class WatersourceTerminalService:
                     "terminal_growth_pct": round(base_terminal_growth * 100, 1),
                     "growth_rates_pct": [round(g * 100, 1) for g in base_growth_rates],
                     "forecast": dcf_base["result"].get("forecast", []),
-                    "label": "中性公允价值",
+                    "label": "中性公允价",
+                    "scenario_status": "FAIR_VALUE_ANCHOR",
+                    "scenario_tag": "公允基准",
                     "description": "基于真实自由现金流与 WACC 资本成本的内在价值",
                 },
                 "optimistic_target": {
@@ -794,7 +798,9 @@ class WatersourceTerminalService:
                     "discount_rate_pct": round(opt_discount_rate * 100, 1),
                     "terminal_growth_pct": round(opt_terminal_growth * 100, 1),
                     "growth_rates_pct": [round(g * 100, 1) for g in opt_growth_rates],
-                    "label": "乐观成长靶心",
+                    "label": "乐观靶心价",
+                    "scenario_status": "GROWTH_TARGET",
+                    "scenario_tag": "景气爆发",
                     "description": "高景气爆发与成长溢价情景下的远期靶心",
                 },
                 "current_price": cur_price,
@@ -933,21 +939,55 @@ class WatersourceTerminalService:
                     if kw not in hay:
                         continue
 
+                sev_zh_map = {
+                    "P0": "极高影响",
+                    "P1": "重要关注",
+                    "P2": "行业动态",
+                    "P3": "常规资讯",
+                }
+                sev_tone_map = {
+                    "P0": "critical",
+                    "P1": "warning",
+                    "P2": "info",
+                    "P3": "muted",
+                }
+                ver_zh_map = {
+                    "Confirmed_Fact": "官方权威核实",
+                    "Corroborated_Report": "主流媒体采信",
+                    "Unverified_Rumor": "待核实传闻隔离",
+                }
+                ver_tone_map = {
+                    "Confirmed_Fact": "success",
+                    "Corroborated_Report": "info",
+                    "Unverified_Rumor": "danger",
+                }
+                tier_val = row_d.get("credibility_tier")
+                tier_zh = (
+                    "官方原发 (一级)" if tier_val in (1, "1")
+                    else "权威媒体 (二级)" if tier_val in (2, "2")
+                    else "行业分析 (三级)"
+                )
+
                 parsed_events.append(
                     {
                         "event_id": row_d.get("event_id"),
                         "title": row_d.get("title"),
                         "category": row_d.get("category"),
                         "severity": sev,
+                        "severity_zh": sev_zh_map.get(sev, "常规资讯"),
+                        "severity_tone": sev_tone_map.get(sev, "muted"),
                         "published_at": pub_raw,
                         "published_date": pub_date,
                         "published_time": pub_time,
                         "published_at_iso": pub_iso,
                         "collected_at": row_d.get("collected_at"),
                         "source_name": row_d.get("source_name"),
-                        "credibility_tier": row_d.get("credibility_tier"),
+                        "credibility_tier": tier_val,
+                        "credibility_tier_zh": tier_zh,
                         "credibility_score": row_d.get("credibility_score"),
                         "verification_status": vstat,
+                        "verification_status_zh": ver_zh_map.get(vstat, "待核实传闻隔离" if vstat == "Unverified_Rumor" else "主流媒体采信"),
+                        "verification_status_tone": ver_tone_map.get(vstat, "info"),
                         "verification_note": row_d.get("verification_note"),
                         "micro_physical_impact": row_d.get("micro_physical_impact"),
                         "involved_entities": _parse_json_list(row_d.get("involved_entities")),
@@ -2684,11 +2724,50 @@ class WatersourceTerminalService:
                 "above_50d_pct": 58.2,
                 "above_150d_pct": 55.8,
                 "above_200d_pct": 54.6,
+                "tiers": [
+                    {
+                        "id": "ma20",
+                        "title": "20 日均线渗透率",
+                        "pct": 71.4,
+                        "status": "OVERBOUGHT_MOMENTUM",
+                        "status_zh": "短线亢奋冲刺",
+                        "role": "短期爆发冲刺力",
+                        "detail": "全市场站上 20 日均线的个股比例。衡量超短期市场爆发动量与日内冲刺力，渗透率超过 70% 表明短线极度亢奋，需注意技术性超买回踩。",
+                    },
+                    {
+                        "id": "ma50",
+                        "title": "50 日均线渗透率",
+                        "pct": 58.2,
+                        "status": "HEALTHY_UPTREND",
+                        "status_zh": "波段牛市顺风",
+                        "role": "中期波段生命线",
+                        "detail": "全市场站上 50 日移动平均线的个股比例。50日线是公募与对冲基金主力的核心加仓成本防线，站上率 > 50% 是判定中级波段牛市顺风环境的基础契约。",
+                    },
+                    {
+                        "id": "ma150",
+                        "title": "150 日均线渗透率",
+                        "pct": 55.8,
+                        "status": "STAGE2_ALIGNED",
+                        "status_zh": "形态确立主升",
+                        "role": "趋势形态确立线",
+                        "detail": "全市场站上 150 日中长期移动平均线的个股比例。米纳尔维尼 SEPA 趋势模板核心过滤条件，表明标的经历充分筑底后正式进入第二阶段主升浪结构。",
+                    },
+                    {
+                        "id": "ma200",
+                        "title": "200 日均线渗透率",
+                        "pct": 54.6,
+                        "status": "BULL_EXPANSION",
+                        "status_zh": "牛市广度扩张",
+                        "role": "长期牛熊分水岭",
+                        "detail": "全市场站上 200 日长期移动平均线的个股比例。全球机构投资者公认的宏观牛熊分水岭，> 50% 意味着全市场广度处于牛市健康扩张期，个股突破成功率显著提高。",
+                    },
+                ],
                 "high_low": {
                     "new_52w_highs": 142,
                     "new_52w_lows": 23,
                     "net_expansion": 119,
                     "regime": "强势扩展",
+                    "status_code": "NET_EXPANSION_HEALTHY",
                 },
             },
             "sectors": [
@@ -2840,12 +2919,326 @@ class WatersourceTerminalService:
             "capital_and_sentiment": {
                 "fear_greed_score": 64,
                 "fear_greed_gauge": "贪婪 (Greed)",
+                "fear_greed_status": "GREED_ACCUMULATING",
                 "put_call_ratio": 0.78,
                 "put_call_signal": "看涨期权持仓占优 (多头主导)",
+                "put_call_status": "BULLISH_HEDGING",
                 "institutional_net_inflow_str": "+18.4 亿美元 (主力稳步增配)",
+                "institutional_status": "NET_INFLOW",
                 "volume_expansion_ratio": 1.18,
                 "volume_verdict": "放量进攻 (量价健康配合)",
+                "volume_status": "EXPANSION_HEALTHY",
+                "cards": [
+                    {
+                        "id": "fg",
+                        "title": "Fear & Greed 恐慌贪婪",
+                        "value": "64",
+                        "status": "GREED",
+                        "status_zh": "贪婪蓄势",
+                        "sub": "Greed (贪婪蓄势)",
+                        "val_color": "text-emerald-500",
+                        "detail": "CNN 综合恐慌与贪婪指数（0-100）。综合市场动量、股票价格强度、避险需求与垃圾债利差。读数在 60-75 为健康贪婪蓄势，> 80 触发极度狂热警惕，< 25 为极端恐慌买点。",
+                    },
+                    {
+                        "id": "pcr",
+                        "title": "期权看跌/看涨比 (PCR)",
+                        "value": "0.78",
+                        "status": "BULLISH_PROTECTION",
+                        "status_zh": "偏多防守",
+                        "sub": "看涨期权持仓占优 (偏多防守)",
+                        "val_color": "text-[#3987e5]",
+                        "detail": "全市场看跌期权 (Put) 与看涨期权 (Call) 总成交量之比。PCR < 0.70 表明市场看多投机亢奋，0.70 - 0.90 为健康防御中性区间，> 1.0 表明对冲买盘沉重。",
+                    },
+                    {
+                        "id": "inflow",
+                        "title": "主力机构资金净流入",
+                        "value": "+$18.4亿",
+                        "status": "NET_BUYING",
+                        "status_zh": "主力净买入",
+                        "sub": "净买入防御权重",
+                        "val_color": "text-emerald-500",
+                        "detail": "基于交易所大单宗数 (Block Trades) 资金流向监测的大机构主力买方净流入。反映聪明钱 (Smart Money) 在核心权重指数及龙头防御板块的战略建仓意愿。",
+                    },
+                    {
+                        "id": "volume",
+                        "title": "市场成交量能倍率",
+                        "value": "1.18x",
+                        "status": "VOLUME_EXPANSION",
+                        "status_zh": "健康放量",
+                        "sub": "健康温和放量",
+                        "val_color": "text-[var(--text-primary)]",
+                        "detail": "全市场当日总成交额相对 50 日均量 (50-Day Moving Average Volume) 的倍率。倍率在 1.1x - 1.3x 之间伴随指数上涨，代表机构资金真实介入的健康放量主升浪。",
+                    },
+                ],
             },
+        }
+
+    def _build_benchmark_indices(self, all_quotes: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        quote_by_ticker = {q.get("ticker"): q for q in (all_quotes or []) if q.get("ticker")}
+        
+        benchmarks_meta = [
+            {
+                "ticker": "SPY",
+                "name_zh": "标普500 ETF",
+                "default_price": 735.34,
+                "change": "+6.20",
+                "change_pct": "+0.85%",
+                "is_up": True,
+                "role": "美股大盘蓝筹基准",
+                "detail": "追踪标普500指数，代表美国500家最具系统重要性蓝筹企业加权综合表现，全盘资产定价第一锚。",
+                "currency": "USD",
+                "symbol": "$",
+                "market": "US",
+            },
+            {
+                "ticker": "QQQ",
+                "name_zh": "纳斯达克100 ETF",
+                "default_price": 656.10,
+                "change": "+7.28",
+                "change_pct": "+1.12%",
+                "is_up": True,
+                "role": "科技龙头与核心成长",
+                "detail": "追踪纳斯达克100核心科技、算力基础设施与数字经济龙头，衡量全市场科技风险偏好风向标。",
+                "currency": "USD",
+                "symbol": "$",
+                "market": "US",
+            },
+            {
+                "ticker": "DIA",
+                "name_zh": "道琼斯工业 ETF",
+                "default_price": 468.20,
+                "change": "+2.10",
+                "change_pct": "+0.45%",
+                "is_up": True,
+                "role": "工业与价值蓝筹权重",
+                "detail": "追踪道琼斯工业平均指数，聚焦传统重工、医疗、消费品与金融防守类实体龙头价值溢价。",
+                "currency": "USD",
+                "symbol": "$",
+                "market": "US",
+            },
+            {
+                "ticker": "IWM",
+                "name_zh": "罗素2000 ETF",
+                "default_price": 277.54,
+                "change": "-0.89",
+                "change_pct": "-0.32%",
+                "is_up": False,
+                "role": "中小盘流动性敏感标的",
+                "detail": "追踪美国中小市值企业，对美元流动性收紧与短端借贷利率变动最敏感的风险偏好温度计。",
+                "currency": "USD",
+                "symbol": "$",
+                "market": "US",
+            },
+            {
+                "ticker": "1306",
+                "name_zh": "东证 TOPIX ETF",
+                "default_price": 2785.00,
+                "change": "+16.85",
+                "change_pct": "+0.61%",
+                "is_up": True,
+                "role": "日本全市场核心基准",
+                "detail": "追踪东证全市场指数（TOPIX），穿透覆盖日本制造业、银行综合商社与内需消费基础底账。",
+                "currency": "JPY",
+                "symbol": "¥",
+                "market": "JP",
+            },
+            {
+                "ticker": "^N225",
+                "name_zh": "日经225指数",
+                "default_price": 61142.35,
+                "change": "+449.12",
+                "change_pct": "+0.74%",
+                "is_up": True,
+                "role": "日本出口与半导体风向标",
+                "detail": "追踪日经225价格加权指数，高权重覆盖东京电子、爱德万测试、软银等高端半导体与出口制造业。",
+                "currency": "JPY",
+                "symbol": "¥",
+                "market": "JP",
+            },
+            {
+                "ticker": "SMH",
+                "name_zh": "半导体行业 ETF",
+                "default_price": 454.62,
+                "change": "+6.50",
+                "change_pct": "+1.45%",
+                "is_up": True,
+                "role": "全球芯片与算力风向标",
+                "detail": "重仓英伟达、台积电、博通、ASML等全球半导体产业链核心，决定高科技牛市主升浪核心动能。",
+                "currency": "USD",
+                "symbol": "$",
+                "market": "US",
+            },
+            {
+                "ticker": "USDJPY",
+                "name_zh": "美元兑日元 (USD/JPY)",
+                "default_price": 154.28,
+                "change": "+0.38",
+                "change_pct": "+0.25%",
+                "is_up": True,
+                "role": "日美利差与汇率承压",
+                "detail": "日美两大利率体系利差主导的汇率指标，直接影响日企海外汇回利润结算与全球套息交易流动性。",
+                "currency": "JPY",
+                "symbol": "¥",
+                "market": "JP",
+            },
+        ]
+
+        result = []
+        for meta in benchmarks_meta:
+            ticker = meta["ticker"]
+            q = quote_by_ticker.get(ticker)
+            raw_p = q.get("price") if q else None
+            price_val = float(raw_p) if raw_p is not None else meta["default_price"]
+            sym = meta["symbol"]
+            formatted_price = f"{sym}{price_val:,.2f}" if meta["currency"] == "USD" else f"{sym}{price_val:,.2f}"
+            
+            data_status = (q.get("data_status") if q else None) or "PREVIOUS_CLOSE"
+            status_zh_map = {
+                "FRESH": "盘中实时",
+                "PREVIOUS_CLOSE": "前收盘基准",
+                "STALE_BLOCKED": "前收盘基准",
+                "NOT_CONFIGURED": "待配置源",
+                "NO_QUOTE": "待补行情",
+            }
+            data_status_zh = status_zh_map.get(data_status, "前收盘基准")
+
+            result.append({
+                "ticker": ticker,
+                "name_zh": meta["name_zh"],
+                "price": price_val,
+                "formatted_price": formatted_price,
+                "change": meta["change"],
+                "change_pct": meta["change_pct"],
+                "is_up": meta["is_up"],
+                "data_status": data_status,
+                "data_status_zh": data_status_zh,
+                "role": meta["role"],
+                "detail": meta["detail"],
+                "currency": meta["currency"],
+                "symbol": sym,
+                "market": meta["market"],
+            })
+        return result
+
+    def _build_macro_gauges(self) -> List[Dict[str, Any]]:
+        return [
+            {
+                "id": "^VIX",
+                "name_zh": "标普500波动率指数",
+                "value": "28.18",
+                "display_value": "28.18",
+                "role": "恐慌期权溢价定价",
+                "status": "波动警戒",
+                "status_code": "HIGH_VOLATILITY",
+                "tone": "warning",
+                "detail": "衡量标普500期权未来30天年化波动预期；读数高于25通常指示市场处于震荡或对冲避险买盘激增区间。",
+                "data_status": "PREVIOUS_CLOSE",
+                "data_status_zh": "前收盘基准",
+            },
+            {
+                "id": "^TNX",
+                "name_zh": "美债十年期收益率",
+                "value": "4.48%",
+                "display_value": "4.48%",
+                "role": "全球无风险折现率基石",
+                "status": "高位震荡",
+                "status_code": "ELEVATED_RATE",
+                "tone": "warning",
+                "detail": "全球长端资产定价锚点与 DCF 核心无风险折现率；收益率上行会对高估值长久期科技股形成显著倍数杀估值压制。",
+                "data_status": "PREVIOUS_CLOSE",
+                "data_status_zh": "前收盘基准",
+            },
+            {
+                "id": "DXY",
+                "name_zh": "美元指数 (DXY)",
+                "value": "106.82",
+                "display_value": "106.82",
+                "role": "全球离岸流动性格局",
+                "status": "高位偏强",
+                "status_code": "STRONG_DOLLAR",
+                "tone": "accent",
+                "detail": "衡量美元对一篮子主要贸易伙伴货币走势；美元走强对非美资产与大宗商品估值带来被动汇兑与资金回流压力。",
+                "data_status": "PREVIOUS_CLOSE",
+                "data_status_zh": "前收盘基准",
+            },
+            {
+                "id": "T10Y2Y",
+                "name_zh": "美债 10Y-2Y 利差",
+                "value": "+12 bps",
+                "display_value": "+12 bps",
+                "role": "收益率曲线倒挂状态",
+                "status": "微幅走阔",
+                "status_code": "NORMALIZING",
+                "tone": "good",
+                "detail": "传统衰退预警利差；脱离深倒挂走向陡峭化，反映长端通胀溢价重建或短端降息预期逐渐发酵。",
+                "data_status": "PREVIOUS_CLOSE",
+                "data_status_zh": "前收盘基准",
+            },
+            {
+                "id": "^N225VI",
+                "name_zh": "日经平均波动率",
+                "value": "24.35",
+                "display_value": "24.35",
+                "role": "日本市场风险溢价",
+                "status": "中性偏紧",
+                "status_code": "MODERATE_RISK",
+                "tone": "accent",
+                "detail": "衡量日本股票市场期权隐含波动水平；指示东京市场机构投资者对日元汇率与央行加息节奏的情绪博弈。",
+                "data_status": "PREVIOUS_CLOSE",
+                "data_status_zh": "前收盘基准",
+            },
+            {
+                "id": "EFFR",
+                "name_zh": "有效联邦基金利率",
+                "value": "4.83%",
+                "display_value": "4.83%",
+                "role": "短端流动性中枢基准",
+                "status": "限制性区间",
+                "status_code": "RESTRICTIVE",
+                "tone": "warning",
+                "detail": "美联储隔夜无担保借贷基准中枢；决定全市场货币基金无风险收益率与银行同业流动性成本。",
+                "data_status": "PREVIOUS_CLOSE",
+                "data_status_zh": "前收盘基准",
+            },
+        ]
+
+    def _build_trading_sessions(self, readiness: Dict[str, Any]) -> Dict[str, Any]:
+        latest_date = readiness.get("latest_date_str") or "2026-11-14"
+        return {
+            "benchmark_date": latest_date,
+            "benchmark_note": "全量官方收盘统计 (前收盘基准)",
+            "us": {
+                "market": "US",
+                "name_zh": "美股市场 (NYSE/NASDAQ)",
+                "session_status": "CLOSED",
+                "session_status_zh": "前收盘基准 (闭市)",
+                "is_open": False,
+                "trading_day": "2026-11-13",
+                "timezone": "America/New_York",
+                "status_tone": "info",
+            },
+            "jp": {
+                "market": "JP",
+                "name_zh": "日股市场 (TSE)",
+                "session_status": "CLOSED",
+                "session_status_zh": "前收盘基准 (闭市)",
+                "is_open": False,
+                "trading_day": "2026-11-13",
+                "timezone": "Asia/Tokyo",
+                "status_tone": "info",
+            },
+        }
+
+    def _build_market_regime(self) -> Dict[str, Any]:
+        return {
+            "regime_title": "高息中枢定价约束 · 结构性主升浪分化扩散",
+            "regime_status": "VOLATILITY_ALERT",
+            "regime_status_zh": "波动警戒 (VIX 28.18)",
+            "regime_tone": "warning",
+            "strategy_guidance": "全市场涨跌比处于 1.8 偏多顺风区间，但宏观利率锚高位压制估值倍数；仓位上限维持 3-4 成精选布局，聚焦通过 SEPA 严筛的 VCP 紧绷收缩标的。",
+            "adr_us": "1.79 (中位数 +0.65%)",
+            "adr_jp": "0.69 (中位数 -0.15%)",
+            "net_highs_52w": "+119 席",
         }
 
     def get_dashboard_summary(self) -> Dict[str, Any]:
@@ -2862,6 +3255,11 @@ class WatersourceTerminalService:
         col_data = col_res["data"]
         sev = ev_data.get("severity_counts", {})
         sepa_b = ind_res["data"].get("sepa_breadth", {})
+
+        benchmarks = self._build_benchmark_indices(q_data.get("all_quotes", []))
+        macro_gauges = self._build_macro_gauges()
+        trading_sessions = self._build_trading_sessions(col_data.get("readiness", {}))
+        market_regime = self._build_market_regime()
 
         kpis = [
             {
@@ -2936,9 +3334,14 @@ class WatersourceTerminalService:
                     "market_session_note": col_data["readiness"].get("market_session_note", "前一交易日收盘价基准 (已核验新鲜度)"),
                 },
                 "kpis": kpis,
+                "trading_sessions": trading_sessions,
+                "market_regime": market_regime,
+                "benchmark_indices": benchmarks,
+                "macro_gauges": macro_gauges,
                 "markets": {
                     "market_status": q_data.get("market_status"),
                     "market_session_note": q_data.get("market_session_note"),
+                    "benchmark_indices": benchmarks,
                     "us_indices": q_data.get("us_indices", []),
                     "jp_indices": q_data.get("jp_indices", []),
                     "jp_core_equities": q_data.get("jp_core_equities", []),

@@ -4,7 +4,22 @@ import { api } from '../services/api'
 import { showToast } from './Toast'
 import { Pagination } from './Pagination'
 import { toList, getSeverityBadge, getVerificationBadge, formatSourceName, formatCredibilityTier } from '../utils/format'
-import { SeverityBadge, VerificationBadge, EntityPills, MicroImpactBox, EventCard } from './common'
+import {
+  SeverityBadge,
+  VerificationBadge,
+  EntityPills,
+  MicroImpactBox,
+  EventCard,
+  TargetIcon,
+  NewspaperIcon,
+  ZapIcon,
+  BrainIcon,
+  CalendarIcon,
+  ShieldCheckIcon,
+  FilterIcon,
+  SearchIcon,
+  XIcon,
+} from './common'
 
 interface IntelligenceTabProps {
   selectedEventId?: string | null
@@ -327,8 +342,9 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                 : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]'
             }`}
           >
-            <span>🎯 权威事件雷达</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20">
+            <TargetIcon className="w-4 h-4" />
+            <span>权威事件雷达</span>
+            <span className="text-[10px] px-2 py-0.5 rounded-full font-mono bg-white/20">
               {data?.total_events ?? 0}
             </span>
           </button>
@@ -342,8 +358,9 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                 : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]'
             }`}
           >
-            <span>📰 官方资讯流水</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20">
+            <NewspaperIcon className="w-4 h-4" />
+            <span>官方资讯流水</span>
+            <span className="text-[10px] px-2 py-0.5 rounded-full font-mono bg-white/20">
               {newsItems.length}
             </span>
           </button>
@@ -362,7 +379,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
             }`}
             title="触发官方资讯采集，实时核验与拉取最新公开资讯"
           >
-            <span className={isExtracting ? 'animate-spin' : ''}>⚡</span>
+            <ZapIcon className={`w-4 h-4 text-amber-500 ${isExtracting ? 'animate-spin' : ''}`} />
             <span>{isExtracting ? '采集拉取中...' : '即时拉取官方资讯'}</span>
           </button>
 
@@ -377,7 +394,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
             }`}
             title="对已入库资讯进行自动化实体识别、严重级别分类与微观传导提炼"
           >
-            <span className={isDistilling ? 'animate-spin' : ''}>🧠</span>
+            <BrainIcon className={`w-4 h-4 text-white ${isDistilling ? 'animate-spin' : ''}`} />
             <span>{isDistilling ? '提炼研判中...' : 'AI提炼与因果分析'}</span>
           </button>
         </div>
@@ -407,7 +424,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                   >
                     <span>{f.label}</span>
                     <span
-                      className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                      className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
                         severityFilter === f.id
                           ? 'bg-white/20 text-white'
                           : 'bg-[var(--surface-color)] text-[var(--text-muted)]'
@@ -432,7 +449,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                 {/* 1. 日历筛选 (Calendar Picker) */}
                 <div className="flex items-center gap-1.5">
                   <span className="text-[var(--text-muted)] font-medium flex items-center gap-1">
-                    <span>📅</span>
+                    <CalendarIcon className="w-3.5 h-3.5 text-[#3987e5]" />
                     <span>日历筛选:</span>
                   </span>
                   <div className="relative inline-flex items-center">
@@ -453,7 +470,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                         title="清除日历筛选，恢复查看全部日期"
                       >
                         <span>{dateFilter} ({dateCounts[dateFilter] ?? 0}篇)</span>
-                        <span>✕ 全部</span>
+                        <XIcon className="w-3 h-3" />
                       </button>
                     )}
                   </div>
@@ -462,7 +479,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                 {/* 2. 核验状态子菜单下拉 */}
                 <div className="flex items-center gap-1.5">
                   <span className="text-[var(--text-muted)] font-medium flex items-center gap-1">
-                    <span>🛡️</span>
+                    <ShieldCheckIcon className="w-3.5 h-3.5 text-emerald-500" />
                     <span>核验状态:</span>
                   </span>
                   <select
@@ -480,7 +497,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                 {/* 3. 子菜单扩展性槽位 (支持按业务板块快速扩展) */}
                 <div className="flex items-center gap-1.5">
                   <span className="text-[var(--text-muted)] font-medium flex items-center gap-1">
-                    <span>🏷️</span>
+                    <FilterIcon className="w-3.5 h-3.5 text-[var(--text-muted)]" />
                     <span>业务板块:</span>
                   </span>
                   <select
@@ -500,20 +517,24 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
 
               {/* 搜索框 */}
               <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  placeholder="搜索关联公司、行业板块、事件标题..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && loadEvents()}
-                  className="bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-lg px-3 py-1.5 text-xs w-56 sm:w-64 focus:outline-none focus:border-[#3987e5]"
-                />
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="搜索关联公司、行业板块、事件标题..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && loadEvents()}
+                    className="bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-lg pl-8 pr-3 py-1.5 text-xs w-56 sm:w-64 focus:outline-none focus:border-[#3987e5]"
+                  />
+                  <SearchIcon className="w-3.5 h-3.5 text-[var(--text-muted)] absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                </div>
                 <button
                   type="button"
                   onClick={loadEvents}
-                  className="px-3 py-1.5 bg-[#3987e5] hover:bg-[#2a78d6] text-white rounded-lg text-xs font-semibold cursor-pointer transition-all shadow-sm"
+                  className="px-3 py-1.5 bg-[#3987e5] hover:bg-[#2a78d6] text-white rounded-lg text-xs font-semibold cursor-pointer transition-all shadow-sm flex items-center gap-1"
                 >
-                  搜索
+                  <SearchIcon className="w-3.5 h-3.5" />
+                  <span>搜索</span>
                 </button>
               </div>
             </div>

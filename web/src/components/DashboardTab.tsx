@@ -3,7 +3,17 @@ import type { DashboardSummaryData, MarketQuoteItem, EventItem, MarketStatistics
 import { api } from '../services/api'
 import { showToast } from './Toast'
 import { TaskDispatcherPanel } from './TaskDispatcherPanel'
-import { EventCard } from './common'
+import {
+  EventCard,
+  InfoCircleIcon,
+  TrendUpIcon,
+  TrendDownIcon,
+  CompassIcon,
+  LightBulbIcon,
+  BarChartIcon,
+  FilterIcon,
+  ZapIcon,
+} from './common'
 
 interface DashboardTabProps {
   onNavigateTab: (tabId: string) => void
@@ -30,16 +40,6 @@ const TICKER_ZH_FALLBACK: Record<string, string> = {
   EFFR: '有效联邦基金利率',
 }
 
-const BENCHMARK_CHANGES: Record<string, { change: string; change_pct: string; is_up: boolean }> = {
-  SPY: { change: '+$6.20', change_pct: '+0.85%', is_up: true },
-  QQQ: { change: '+$5.94', change_pct: '+1.12%', is_up: true },
-  DIA: { change: '+$1.95', change_pct: '+0.45%', is_up: true },
-  IWM: { change: '-$0.89', change_pct: '-0.32%', is_up: false },
-  '1306': { change: '+¥2.5', change_pct: '+0.61%', is_up: true },
-  '^N225': { change: '+¥284.10', change_pct: '+0.74%', is_up: true },
-  SMH: { change: '+$4.64', change_pct: '+1.45%', is_up: true },
-  USDJPY: { change: '+0.38', change_pct: '+0.25%', is_up: true },
-}
 
 const DEFAULT_MARKET_STATS: MarketStatisticsData = {
   advance_decline: {
@@ -257,8 +257,32 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
     return null
   }
 
-  // 大盘基准指数精选阵列
-  const benchmarkIndices = [
+  // 大盘基准指数精选阵列（100% 后台契约字段对齐，优先消费后端数据）
+  const backendBenchmarks = data?.benchmark_indices || data?.markets?.benchmark_indices
+  const benchmarkIndices = (backendBenchmarks && backendBenchmarks.length > 0)
+    ? backendBenchmarks.map(b => ({
+        ticker: b.ticker,
+        nameZh: b.name_zh,
+        desc: b.role,
+        detail: b.detail,
+        market: b.market,
+        currency: b.currency,
+        symbol: b.symbol,
+        formatted_price: b.formatted_price,
+        change: b.change,
+        change_pct: b.change_pct,
+        is_up: b.is_up,
+        data_status: b.data_status,
+        data_status_zh: b.data_status_zh,
+        quote: {
+          ticker: b.ticker,
+          price: b.price,
+          formatted_price: b.formatted_price,
+          data_status: b.data_status,
+          timestamp_formatted: b.data_status_zh,
+        } as MarketQuoteItem,
+      }))
+    : [
     {
       ticker: 'SPY',
       nameZh: '标普500 ETF',
@@ -267,6 +291,12 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       market: 'US',
       currency: 'USD',
       symbol: '$',
+      change: '+6.20',
+      change_pct: '+0.85%',
+      is_up: true,
+      data_status: 'PREVIOUS_CLOSE',
+      data_status_zh: '前收盘基准',
+      formatted_price: '$735.34',
       quote: getQuote('SPY') || { formatted_price: '$735.34', data_status: 'PREVIOUS_CLOSE', timestamp_formatted: '前收盘基准' },
     },
     {
@@ -277,7 +307,13 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       market: 'US',
       currency: 'USD',
       symbol: '$',
-      quote: getQuote('QQQ') || { formatted_price: '$536.00', data_status: 'PREVIOUS_CLOSE', timestamp_formatted: '前收盘基准' },
+      change: '+7.28',
+      change_pct: '+1.12%',
+      is_up: true,
+      data_status: 'PREVIOUS_CLOSE',
+      data_status_zh: '前收盘基准',
+      formatted_price: '$656.10',
+      quote: getQuote('QQQ') || { formatted_price: '$656.10', data_status: 'PREVIOUS_CLOSE', timestamp_formatted: '前收盘基准' },
     },
     {
       ticker: 'DIA',
@@ -287,7 +323,13 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       market: 'US',
       currency: 'USD',
       symbol: '$',
-      quote: getQuote('DIA') || { formatted_price: '$434.50', data_status: 'PREVIOUS_CLOSE', timestamp_formatted: '前收盘基准' },
+      change: '+2.10',
+      change_pct: '+0.45%',
+      is_up: true,
+      data_status: 'PREVIOUS_CLOSE',
+      data_status_zh: '前收盘基准',
+      formatted_price: '$468.20',
+      quote: getQuote('DIA') || { formatted_price: '$468.20', data_status: 'PREVIOUS_CLOSE', timestamp_formatted: '前收盘基准' },
     },
     {
       ticker: 'IWM',
@@ -297,6 +339,12 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       market: 'US',
       currency: 'USD',
       symbol: '$',
+      change: '-0.89',
+      change_pct: '-0.32%',
+      is_up: false,
+      data_status: 'PREVIOUS_CLOSE',
+      data_status_zh: '前收盘基准',
+      formatted_price: '$277.54',
       quote: getQuote('IWM') || { formatted_price: '$277.54', data_status: 'PREVIOUS_CLOSE', timestamp_formatted: '前收盘基准' },
     },
     {
@@ -307,17 +355,29 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       market: 'JP',
       currency: 'JPY',
       symbol: '¥',
-      quote: getQuote('1306') || { formatted_price: '¥415.5', data_status: 'PREVIOUS_CLOSE', timestamp_formatted: '前收盘基准' },
+      change: '+16.85',
+      change_pct: '+0.61%',
+      is_up: true,
+      data_status: 'PREVIOUS_CLOSE',
+      data_status_zh: '前收盘基准',
+      formatted_price: '¥2,785.00',
+      quote: getQuote('1306') || { formatted_price: '¥2,785.00', data_status: 'PREVIOUS_CLOSE', timestamp_formatted: '前收盘基准' },
     },
     {
       ticker: '^N225',
       nameZh: '日经225指数',
-      desc: '日本出口与半导体指标',
+      desc: '日本出口与半导体风向标',
       detail: '日经平均株价指数，精选225家高流动性跨国制造与半导体出口巨头，深受日元汇率涨跌波动与海外供应链需求影响。',
       market: 'JP',
       currency: 'JPY',
       symbol: '¥',
-      quote: getQuote('^N225') || { formatted_price: '¥38,642.91', data_status: 'PREVIOUS_CLOSE', timestamp_formatted: '前收盘基准' },
+      change: '+449.12',
+      change_pct: '+0.74%',
+      is_up: true,
+      data_status: 'PREVIOUS_CLOSE',
+      data_status_zh: '前收盘基准',
+      formatted_price: '¥61,142.35',
+      quote: getQuote('^N225') || { formatted_price: '¥61,142.35', data_status: 'PREVIOUS_CLOSE', timestamp_formatted: '前收盘基准' },
     },
     {
       ticker: 'SMH',
@@ -327,7 +387,13 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       market: 'US',
       currency: 'USD',
       symbol: '$',
-      quote: getQuote('SMH') || { formatted_price: '$324.50', data_status: 'PREVIOUS_CLOSE', timestamp_formatted: '前收盘基准' },
+      change: '+6.50',
+      change_pct: '+1.45%',
+      is_up: true,
+      data_status: 'PREVIOUS_CLOSE',
+      data_status_zh: '前收盘基准',
+      formatted_price: '$454.62',
+      quote: getQuote('SMH') || { formatted_price: '$454.62', data_status: 'PREVIOUS_CLOSE', timestamp_formatted: '前收盘基准' },
     },
     {
       ticker: 'USDJPY',
@@ -337,19 +403,39 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       market: 'FX',
       currency: 'JPY',
       symbol: '¥',
-      quote: getQuote('USDJPY') || { formatted_price: '154.20', data_status: 'PREVIOUS_CLOSE', timestamp_formatted: '前收盘基准' },
+      change: '+0.38',
+      change_pct: '+0.25%',
+      is_up: true,
+      data_status: 'PREVIOUS_CLOSE',
+      data_status_zh: '前收盘基准',
+      formatted_price: '154.28',
+      quote: getQuote('USDJPY') || { formatted_price: '154.28', data_status: 'PREVIOUS_CLOSE', timestamp_formatted: '前收盘基准' },
     },
   ]
 
-  // 宏观核心风险与流动性舵手指标
-  const macroGauges = [
+  // 宏观核心风险与流动性舵手指标（100% 后台契约字段对齐，优先消费后端数据）
+  const backendMacro = data?.macro_gauges
+  const macroGauges = (backendMacro && backendMacro.length > 0)
+    ? backendMacro.map(g => ({
+        id: g.id,
+        nameZh: g.name_zh,
+        value: g.display_value || g.value,
+        role: g.role,
+        status: g.status,
+        status_code: g.status_code,
+        tone: g.tone,
+        detail: g.detail,
+        data_status: g.data_status,
+        data_status_zh: g.data_status_zh,
+      }))
+    : [
     {
       id: '^VIX',
       nameZh: '标普恐慌指数 (VIX)',
       value: data?.indicators?.find(i => i.id === '^VIX')?.display_value || '28.18',
       role: '波动率警戒 (≥25)',
       status: '波动警戒',
-      tone: 'warning',
+      tone: 'warning' as const,
       detail: 'CBOE 标普500期权隐含波动率指数，衡量期权市场对未来30天美股年化波动的预期。VIX ≥ 25 触发系统性恐慌警戒，买方机构通常收紧仓位敞口并提高现金防御比例。',
     },
     {
@@ -358,7 +444,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       value: data?.indicators?.find(i => i.id === '^TNX')?.display_value || '4.42%',
       role: '无风险利率定价锚',
       status: '高息中枢',
-      tone: 'accent',
+      tone: 'accent' as const,
       detail: '全球金融资产之锚与无风险折现率基准。10年期美债收益率高位震荡直接提升权益类资产的贴现率要求，对高估值科技成长股与长久期资产倍数形成估值压制。',
     },
     {
@@ -367,7 +453,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       value: data?.indicators?.find(i => i.id === 'DXY')?.display_value || '105.80',
       role: '全球美元流动性松紧',
       status: '强势高位',
-      tone: 'info',
+      tone: 'info' as const,
       detail: '衡量美元对一篮子主要贸易伙伴货币（欧元、日元、英镑等）的相对强弱。美元走强意味着全球美元流动性回流收紧，对跨国企业海外营收折算与新兴市场资产构成压力。',
     },
     {
@@ -376,7 +462,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       value: data?.indicators?.find(i => i.id === 'T10Y2Y')?.display_value || '+0.27%',
       role: '收益率曲线正常化',
       status: '倒挂解除',
-      tone: 'good',
+      tone: 'good' as const,
       detail: '美国10年期与2年期国债收益率利差。倒挂解除并陡峭化上行标志着货币政策转入降息预期或长端通胀溢价重建，是宏观经济周期的核心转折信号。',
     },
     {
@@ -385,7 +471,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       value: data?.indicators?.find(i => i.id === '^N225VI')?.display_value || '29.80',
       role: '东京市场风险溢价',
       status: '高位震荡',
-      tone: 'warning',
+      tone: 'warning' as const,
       detail: '衡量东京证券交易所日经225指数期权隐含波动率。受日元汇率剧烈波动及海外对冲基金套息平仓动向影响，反映日本核心权益资产的恐慌情绪。',
     },
     {
@@ -394,7 +480,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       value: data?.indicators?.find(i => i.id === 'EFFR')?.display_value || '3.88%',
       role: '美联储基准隔夜利率',
       status: '政策底座',
-      tone: 'info',
+      tone: 'info' as const,
       detail: '美国商业银行之间无担保隔夜拆借的实际加权中位数利率，是美联储货币政策框架中的终极政策操作目标与全市场资金成本底座。',
     },
   ]
@@ -476,7 +562,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
               <div className="flex items-center gap-2.5">
-                <span className="text-xl">🧭</span>
+                <CompassIcon className="w-5 h-5 text-[#3987e5]" />
                 <div>
                   <h2 className="text-base font-bold text-[var(--text-primary)]">
                     全球宏观罗盘与双市场体温研判
@@ -488,7 +574,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-xs px-2.5 py-1 rounded-full bg-[var(--bg-card)] text-[var(--text-secondary)] border border-[var(--border-color)] font-mono">
-                  基准: {readiness?.latest_date_str || '2026-11-13'} (前收盘基准)
+                  基准: {data?.trading_sessions?.benchmark_date || readiness?.latest_date_str || '2026-11-14'} ({data?.trading_sessions?.benchmark_note || '前收盘基准'})
                 </span>
               </div>
             </div>
@@ -498,10 +584,10 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-bold text-[var(--text-primary)]">
-                    大盘定性：高息中枢定价约束 · 结构性主升浪分化扩散
+                    大盘定性：{data?.market_regime?.regime_title || '高息中枢定价约束 · 结构性主升浪分化扩散'}
                   </span>
                   <span className="text-[10px] px-2 py-0.5 rounded font-semibold bg-amber-500/15 text-amber-500 border border-amber-500/30">
-                    波动警戒 (VIX 28.18)
+                    {data?.market_regime?.regime_status_zh || '波动警戒 (VIX 28.18)'}
                   </span>
                 </div>
                 <button
@@ -513,13 +599,14 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   <span>&rarr;</span>
                 </button>
               </div>
-              <p className="text-xs text-[#199e70] font-medium">
-                💡 策略指引：全市场涨跌比处于 1.8 偏多顺风区间，但宏观利率锚高位压制估值倍数；仓位上限维持 3-4 成精选布局，聚焦通过 SEPA 严筛的 VCP 紧绷收缩标的。
-              </p>
+              <div className="flex items-start gap-1.5 text-xs text-[#199e70] font-medium">
+                <LightBulbIcon className="w-4 h-4 shrink-0 text-amber-500 mt-0.5" />
+                <span>策略指引：{data?.market_regime?.strategy_guidance || '全市场涨跌比处于 1.8 偏多顺风区间，但宏观利率锚高位压制估值倍数；仓位上限维持 3-4 成精选布局，聚焦通过 SEPA 严筛的 VCP 紧绷收缩标的。'}</span>
+              </div>
               <div className="text-[11px] text-[var(--text-muted)] font-mono pt-1 border-t border-[var(--border-color)]/40 flex flex-wrap gap-x-4 gap-y-1">
-                <span>美股涨跌比 (ADR): {usAD.ad_ratio} (中位数 {usAD.median_return_pct})</span>
-                <span>日股涨跌比 (ADR): {jpAD.ad_ratio} (中位数 {jpAD.median_return_pct})</span>
-                <span>52周净新高: +{ma.high_low.net_expansion} 席</span>
+                <span>美股涨跌比 (ADR): {data?.market_regime?.adr_us || `${usAD.ad_ratio} (中位数 ${usAD.median_return_pct})`}</span>
+                <span>日股涨跌比 (ADR): {data?.market_regime?.adr_jp || `${jpAD.ad_ratio} (中位数 ${jpAD.median_return_pct})`}</span>
+                <span>52周净新高: {data?.market_regime?.net_highs_52w || `+${ma.high_low.net_expansion} 席`}</span>
               </div>
             </div>
 
@@ -529,7 +616,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                 <div className="flex items-center gap-1.5">
                   <span>双市场核心基准指数 (Benchmark Indices)</span>
                   <span className="text-[11px] text-[var(--text-muted)] font-normal hidden sm:inline">
-                    · 点击右上角感叹号 ℹ 查看详细图表说明
+                    · 点击右上角感叹号图标聚焦查看详细图表说明
                   </span>
                 </div>
                 <span className="text-[11px] text-[var(--text-muted)] font-normal">每日逐笔收盘核验为准</span>
@@ -537,8 +624,9 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {benchmarkIndices.map((idx, index) => {
                   const q = idx.quote as MarketQuoteItem
-                  const badge = getStatusBadge(q?.data_status)
-                  const chg = BENCHMARK_CHANGES[idx.ticker] || { change: '+0.00', change_pct: '+0.00%', is_up: true }
+                  const badge = getStatusBadge(idx.data_status || q?.data_status)
+                  const isUp = idx.is_up ?? true
+                  const chgPct = idx.change_pct || '+0.00%'
                   
                   // 根据列位置动态调整展开浮层对齐方向，防止屏幕边缘被遮挡
                   const alignClass = (index % 4 === 0)
@@ -561,10 +649,10 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                           
                           <div className="flex items-center gap-1.5">
                             <span className={`text-[9px] px-1.5 py-0.2 rounded border font-medium ${badge.cls}`}>
-                              {badge.text}
+                              {idx.data_status_zh || badge.text}
                             </span>
 
-                            {/* 感叹号交互按钮：支持点击切换、聚焦与悬停详细展开 */}
+                            {/* 感叹号交互按钮：使用规范 SVG 矢量图标 */}
                             <div
                               className="relative"
                               onMouseEnter={() => setActiveTooltipTicker(idx.ticker)}
@@ -581,13 +669,13 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                                 }}
                                 onFocus={() => setActiveTooltipTicker(idx.ticker)}
                                 onBlur={() => setActiveTooltipTicker(null)}
-                                className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                                className={`w-4 h-4 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
                                   activeTooltipTicker === idx.ticker
-                                    ? 'bg-[#3987e5] text-white border-[#3987e5]'
+                                    ? 'bg-[#3987e5] text-white shadow-sm'
                                     : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
                                 }`}
                               >
-                                !
+                                <InfoCircleIcon className="w-3 h-3" />
                               </button>
 
                               {/* 聚焦/悬停/点击展开详细信息浮层 */}
@@ -616,7 +704,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                                   <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
                                     <span>市场: {idx.market}</span>
                                     <span>货币: {idx.currency}</span>
-                                    <span>时效: {badge.text}</span>
+                                    <span>时效: {idx.data_status_zh || badge.text}</span>
                                   </div>
                                 </div>
                               )}
@@ -631,15 +719,16 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
 
                         {/* 最新报价 */}
                         <div className="text-lg font-black font-mono text-[var(--text-primary)] mt-1.5 tracking-tight truncate">
-                          {q?.formatted_price || (q?.price != null ? `${idx.symbol}${q.price}` : '—')}
+                          {idx.formatted_price || q?.formatted_price || (q?.price != null ? `${idx.symbol}${q.price}` : '—')}
                         </div>
 
-                        {/* 涨跌幅 */}
+                        {/* 涨跌幅：微型矢量箭头徽章 */}
                         <div className="flex items-center gap-1 mt-1 text-[11px] font-mono font-bold">
-                          <span className={`px-1.5 py-0.2 rounded ${
-                            chg.is_up ? 'text-emerald-500 bg-emerald-500/10' : 'text-rose-500 bg-rose-500/10'
+                          <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded ${
+                            isUp ? 'text-emerald-500 bg-emerald-500/10' : 'text-rose-500 bg-rose-500/10'
                           }`}>
-                            {chg.is_up ? '▲' : '▼'} {chg.change_pct}
+                            {isUp ? <TrendUpIcon className="w-2.5 h-2.5 stroke-[3]" /> : <TrendDownIcon className="w-2.5 h-2.5 stroke-[3]" />}
+                            <span>{chgPct}</span>
                           </span>
                         </div>
                       </div>
@@ -655,7 +744,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                 <div className="flex items-center gap-1.5">
                   <span>宏观流动性、无风险利率与恐慌情绪指标 (Macro Liquidity & Volatility)</span>
                   <span className="text-[11px] text-[var(--text-muted)] font-normal hidden sm:inline">
-                    · 点击右上角 ! 展开宏观影响解析
+                    · 点击右上角感叹号图标展开宏观影响解析
                   </span>
                 </div>
                 <span className="text-[11px] text-[var(--text-muted)] font-mono font-normal">系统重要性锚点</span>
@@ -696,13 +785,13 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                               }}
                               onFocus={() => setActiveMacroTooltipId(g.id)}
                               onBlur={() => setActiveMacroTooltipId(null)}
-                              className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                              className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
                                 activeMacroTooltipId === g.id
-                                  ? 'bg-[#3987e5] text-white border-[#3987e5]'
+                                  ? 'bg-[#3987e5] text-white shadow-sm'
                                   : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
                               }`}
                             >
-                              !
+                              <InfoCircleIcon className="w-2.5 h-2.5" />
                             </button>
 
                             {/* 浮层 */}
@@ -769,7 +858,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
               <div className="flex items-center gap-2.5">
-                <span className="text-xl">📊</span>
+                <BarChartIcon className="w-5 h-5 text-[#3987e5]" />
                 <div>
                   <h2 className="text-base font-bold text-[var(--text-primary)]">
                     全市场每日股票涨跌分布统计
@@ -793,7 +882,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3.5 space-y-2.5 shadow-sm">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                    <span>🇺🇸</span>
+                    <span className="px-1.5 py-0.2 rounded bg-[#3987e5]/10 text-[#3987e5] font-mono text-[10px] font-bold">US</span>
                     <span>美股全市场涨跌统计 (10,000+ 标的)</span>
                   </span>
                   <span className="font-mono font-bold text-emerald-500">
@@ -819,9 +908,15 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   />
                 </div>
                 <div className="flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)] pt-0.5">
-                  <span className="text-[#199e70] font-semibold">▲ 上涨 {usAD.advancers.toLocaleString()} ({usAD.advancers_pct}%)</span>
+                  <span className="text-[#199e70] font-semibold inline-flex items-center gap-1">
+                    <TrendUpIcon className="w-2.5 h-2.5 stroke-[3]" />
+                    <span>上涨 {usAD.advancers.toLocaleString()} ({usAD.advancers_pct}%)</span>
+                  </span>
                   <span className="text-gray-400">━ 平盘 {usAD.unchanged.toLocaleString()}</span>
-                  <span className="text-[#d03b3b] font-semibold">▼ 下跌 {usAD.decliners.toLocaleString()} ({usAD.decliners_pct}%)</span>
+                  <span className="text-[#d03b3b] font-semibold inline-flex items-center gap-1">
+                    <TrendDownIcon className="w-2.5 h-2.5 stroke-[3]" />
+                    <span>下跌 {usAD.decliners.toLocaleString()} ({usAD.decliners_pct}%)</span>
+                  </span>
                 </div>
                 <div className="text-[10px] text-[var(--text-secondary)] bg-[var(--surface-color)] px-2.5 py-1 rounded border border-[var(--border-color)]/50 flex justify-between">
                   <span>定性：{usAD.regime}</span>
@@ -833,7 +928,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3.5 space-y-2.5 shadow-sm">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                    <span>🇯🇵</span>
+                    <span className="px-1.5 py-0.2 rounded bg-rose-500/10 text-rose-500 font-mono text-[10px] font-bold">JP</span>
                     <span>东证全市场涨跌统计 (4,400+ 标的)</span>
                   </span>
                   <span className="font-mono font-bold text-emerald-500">
@@ -859,9 +954,15 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   />
                 </div>
                 <div className="flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)] pt-0.5">
-                  <span className="text-[#199e70] font-semibold">▲ 上涨 {jpAD.advancers.toLocaleString()} ({jpAD.advancers_pct}%)</span>
+                  <span className="text-[#199e70] font-semibold inline-flex items-center gap-1">
+                    <TrendUpIcon className="w-2.5 h-2.5 stroke-[3]" />
+                    <span>上涨 {jpAD.advancers.toLocaleString()} ({jpAD.advancers_pct}%)</span>
+                  </span>
                   <span className="text-gray-400">━ 平盘 {jpAD.unchanged.toLocaleString()}</span>
-                  <span className="text-[#d03b3b] font-semibold">▼ 下跌 {jpAD.decliners.toLocaleString()} ({jpAD.decliners_pct}%)</span>
+                  <span className="text-[#d03b3b] font-semibold inline-flex items-center gap-1">
+                    <TrendDownIcon className="w-2.5 h-2.5 stroke-[3]" />
+                    <span>下跌 {jpAD.decliners.toLocaleString()} ({jpAD.decliners_pct}%)</span>
+                  </span>
                 </div>
                 <div className="text-[10px] text-[var(--text-secondary)] bg-[var(--surface-color)] px-2.5 py-1 rounded border border-[var(--border-color)]/50 flex justify-between">
                   <span>定性：{jpAD.regime}</span>
@@ -996,7 +1097,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
               <div className="flex items-center gap-2.5">
-                <span className="text-xl">📈</span>
+                <BarChartIcon className="w-5 h-5 text-emerald-500" />
                 <div>
                   <h2 className="text-base font-bold text-[var(--text-primary)]">
                     全市场多周期均线渗透与 52 周新高净扩展
@@ -1076,13 +1177,13 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                           }}
                           onFocus={() => setActiveMaTooltipId(item.id)}
                           onBlur={() => setActiveMaTooltipId(null)}
-                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
                             activeMaTooltipId === item.id
                               ? 'bg-[#3987e5] text-white border-[#3987e5]'
                               : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
                           }`}
                         >
-                          !
+                          <InfoCircleIcon className="w-2.5 h-2.5" />
                         </button>
 
                         {activeMaTooltipId === item.id && (
@@ -1130,7 +1231,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
             {/* 52周新高净扩展指标 */}
             <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <span className="text-xl">🚀</span>
+                <TrendUpIcon className="w-5 h-5 text-[#3987e5]" />
                 <div>
                   <div className="text-xs font-bold text-[var(--text-primary)]">
                     52 周新高 vs 52 周新低净扩展 (Net New Highs)
@@ -1164,7 +1265,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3.5">
             <div className="flex items-center justify-between pb-2.5 border-b border-[var(--border-color)]/60">
               <div className="flex items-center gap-2">
-                <span className="text-base">🌪️</span>
+                <FilterIcon className="w-4 h-4 text-[#3987e5]" />
                 <h3 className="text-xs font-bold text-[var(--text-primary)]">
                   SEPA 主升浪选股统计漏斗
                 </h3>
@@ -1183,9 +1284,14 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               ].map((f, i) => (
                 <div key={f.stage} className="space-y-1">
                   <div className="flex items-center justify-between text-[11px]">
-                    <span className="text-[var(--text-secondary)] font-medium">
-                      {i + 1}. {f.stage}
-                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold bg-[#3987e5]/15 text-[#3987e5]">
+                        {i + 1}
+                      </span>
+                      <span className="text-[var(--text-secondary)] font-medium">
+                        {f.stage}
+                      </span>
+                    </div>
                     <span className="font-mono font-bold text-[var(--text-primary)]">
                       {f.count.toLocaleString()} 家 <span className="text-[var(--text-muted)] text-[10px]">({f.pct})</span>
                     </span>
@@ -1254,7 +1360,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3">
             <div className="flex items-center justify-between pb-2 border-b border-[var(--border-color)]/60">
               <div className="flex items-center gap-2">
-                <span className="text-base">⚡</span>
+                <ZapIcon className="w-4 h-4 text-amber-500" />
                 <h3 className="text-xs font-bold text-[var(--text-primary)]">
                   宏观资金能级与期权情绪
                 </h3>
@@ -1326,13 +1432,13 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                           }}
                           onFocus={() => setActiveSentimentTooltipId(item.id)}
                           onBlur={() => setActiveSentimentTooltipId(null)}
-                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
                             activeSentimentTooltipId === item.id
                               ? 'bg-[#3987e5] text-white border-[#3987e5]'
                               : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
                           }`}
                         >
-                          !
+                          <InfoCircleIcon className="w-2.5 h-2.5" />
                         </button>
 
                         {activeSentimentTooltipId === item.id && (
