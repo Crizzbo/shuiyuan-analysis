@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import type { SettingsData } from '../types/api'
 import { api } from '../services/api'
+import { BrandLogo } from './common/BrandLogo'
 
 export function SettingsTab() {
   const [settings, setSettings] = useState<SettingsData | null>(null)
@@ -55,6 +56,55 @@ export function SettingsTab() {
         <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
           监控数据准入合规准则、决策轨迹防伪溯源及数据存储生命周期。
         </p>
+      </div>
+
+      {/* 水·凤凰 品牌视觉与设计体系规范 */}
+      <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[var(--border-color)]">
+          <div className="flex items-center gap-3.5">
+            <BrandLogo size="lg" className="rounded-xl shadow-xs" />
+            <div>
+              <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
+                <span>「水 · 凤凰」视觉设计与品牌体系</span>
+                <span className="text-[10px] px-2 py-0.5 rounded bg-[#176249]/10 text-[#176249] border border-[#176249]/20 font-medium">
+                  Impeccable 设计系统
+                </span>
+              </h3>
+              <p className="text-xs text-[var(--text-muted)] mt-0.5">
+                水蕴深潭（理智防守、资本厚度）与 凤鸣朝阳（价值重估、破局飞升）的设计哲学
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs">
+          <div className="bg-[var(--bg-card)] p-3.5 rounded-lg border border-[var(--border-color)] space-y-1.5">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-[#176249]" />
+              <span className="font-bold text-[var(--text-primary)]">深潭墨翠 (#176249)</span>
+            </div>
+            <p className="text-[var(--text-muted)] text-[11px] leading-relaxed">
+              象征理智基底、充足资本储备与深厚护城河，承载核心架构、品牌主色与基准线。
+            </p>
+          </div>
+          <div className="bg-[var(--bg-card)] p-3.5 rounded-lg border border-[var(--border-color)] space-y-1.5">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-gradient-to-r from-amber-500 to-rose-500" />
+              <span className="font-bold text-[var(--text-primary)]">凤翎赤金 (Amber & Rose)</span>
+            </div>
+            <p className="text-[var(--text-muted)] text-[11px] leading-relaxed">
+              徽标右捺化为振翅高翔的赤金飞羽，象征 VCP 临界突破、Alpha 跃迁与浴火新生。
+            </p>
+          </div>
+          <div className="bg-[var(--bg-card)] p-3.5 rounded-lg border border-[var(--border-color)] space-y-1.5">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-slate-100 border border-slate-300" />
+              <span className="font-bold text-[var(--text-primary)]">凝霜玉阶 (Clean White/Slate)</span>
+            </div>
+            <p className="text-[var(--text-muted)] text-[11px] leading-relaxed">
+              现代机构级高清晰度排版底色，无杂色干扰，数据图表一目了然。
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* 架构合规与账本验签 (三层结构化：状态、信息、说明) */}

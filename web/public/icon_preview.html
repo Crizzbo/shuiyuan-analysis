@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>水·凤凰 品牌图标设计预览</title>
+  <style>
+    body {
+      background: #0b1914;
+      color: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+    .grid {
+      display: flex;
+      gap: 32px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .card {
+      background: #112820;
+      border: 1px solid #1c4b3a;
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    .title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+    .sub {
+      font-size: 12px;
+      color: #64748b;
+    }
+    .preview-light {
+      background: #f8fafc;
+      border-color: #e2e8f0;
+      color: #1e293b;
+    }
+    .preview-light .title { color: #475569; }
+    .preview-light .sub { color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <div style="text-align: center;">
+    <h1 style="margin: 0; font-size: 24px; color: #5eead4;">「水 · 凤凰」品牌专属矢量徽标 (Design Explorations)</h1>
+    <p style="margin: 8px 0 0 0; color: #94a3b8; font-size: 14px;">深潭清涟（理智守成、资本厚度）与 凤鸣朝阳（跃迁突破、浴火新生）的视觉和鸣</p>
+  </div>
+
+  <div class="grid">
+    <!-- 设计 1: 水凤双生徽章 (Dynamic Dual-Flow Crest) -->
+    <div class="card">
+      <div class="title">方案 A：水凤双生徽章 (Taiji Harmonious Flow)</div>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <!-- 64px -->
+        <svg viewBox="0 0 64 64" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bgGradA" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#123d2f"/>
+              <stop offset="100%" stop-color="#0a231b"/>
+            </linearGradient>
+            <linearGradient id="waterGradA" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#0d9488"/>
+              <stop offset="60%" stop-color="#10b981"/>
+              <stop offset="100%" stop-color="#6ee7b7"/>
+            </linearGradient>
+            <linearGradient id="phoenixGradA" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#e11d48"/>
+              <stop offset="40%" stop-color="#f43f5e"/>
+              <stop offset="75%" stop-color="#f59e0b"/>
+              <stop offset="100%" stop-color="#fef08a"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="16" fill="url(#bgGradA)" stroke="#1d664e" stroke-width="1.5"/>
+          <!-- 水纹：从底部升腾包裹的深水流线 -->
+          <path d="M14 36 C14 47 23 52 33 52 C44 52 50 45 49 39 C48 33 41 31 35 33 C27 36 22 31 22 25 C22 18 29 13 36 12 C25 13 14 23 14 36 Z" fill="url(#waterGradA)"/>
+          <!-- 凤翎：向上腾飞的金色羽冠与飞翼 -->
+          <path d="M31 12 C36 18 43 20 47 25 C51 30 50 36 45 39 C41 41 37 39 38 35 C39 30 44 26 42 21 C40 17 35 14 31 12 Z" fill="url(#phoenixGradA)"/>
+          <!-- 凤眼真火 -->
+          <circle cx="33" cy="12" r="2.5" fill="#fef08a"/>
+          <!-- 水凤交融微光点缀 -->
+          <circle cx="45" cy="27" r="1.5" fill="#fff" opacity="0.9"/>
+        </svg>
+
+        <!-- 36px (Header 实际使用尺寸) -->
+        <svg viewBox="0 0 64 64" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <use href="#bgGradA"/>
+          <rect width="64" height="64" rx="16" fill="url(#bgGradA)" stroke="#1d664e" stroke-width="1.5"/>
+          <path d="M14 36 C14 47 23 52 33 52 C44 52 50 45 49 39 C48 33 41 31 35 33 C27 36 22 31 22 25 C22 18 29 13 36 12 C25 13 14 23 14 36 Z" fill="url(#waterGradA)"/>
+          <path d="M31 12 C36 18 43 20 47 25 C51 30 50 36 45 39 C41 41 37 39 38 35 C39 30 44 26 42 21 C40 17 35 14 31 12 Z" fill="url(#phoenixGradA)"/>
+          <circle cx="33" cy="12" r="2.5" fill="#fef08a"/>
+        </svg>
+
+        <!-- 20px (Favicon 模拟尺寸) -->
+        <svg viewBox="0 0 64 64" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="16" fill="url(#bgGradA)"/>
+          <path d="M14 36 C14 47 23 52 33 52 C44 52 50 45 49 39 C48 33 41 31 35 33 C27 36 22 31 22 25 C22 18 29 13 36 12 C25 13 14 23 14 36 Z" fill="url(#waterGradA)"/>
+          <path d="M31 12 C36 18 43 20 47 25 C51 30 50 36 45 39 C41 41 37 39 38 35 C39 30 44 26 42 21 C40 17 35 14 31 12 Z" fill="url(#phoenixGradA)"/>
+          <circle cx="33" cy="12" r="3" fill="#fef08a"/>
+        </svg>
+      </div>
+      <div class="sub">水波包容下盘，凤羽腾跃而上，阴阳互抱</div>
+    </div>
+
+    <!-- 设计 2: 极简几何水凤徽章 (Modern Geometric Monogram) -->
+    <div class="card">
+      <div class="title">方案 B：现代极简印章 (Minimal Geometric Crest)</div>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <!-- 64px -->
+        <svg viewBox="0 0 64 64" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="phoenixWingB" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#f43f5e"/>
+              <stop offset="50%" stop-color="#f59e0b"/>
+              <stop offset="100%" stop-color="#fbbf24"/>
+            </linearGradient>
+            <linearGradient id="waterArcB" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#2dd4bf"/>
+              <stop offset="100%" stop-color="#0f766e"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="16" fill="#0f3427" stroke="#1d664e" stroke-width="1.5"/>
+          <!-- 水滴外弧 -->
+          <path d="M32 10 C18 24 16 38 24 48 C30 54 40 54 48 46 C52 42 54 35 52 28 C46 36 38 38 32 34 C26 30 28 20 32 10 Z" fill="url(#waterArcB)"/>
+          <!-- 凤翼三叠火翎 -->
+          <path d="M34 14 C38 20 46 22 50 18 C48 24 44 28 38 28 C34 28 32 22 34 14 Z" fill="url(#phoenixWingB)"/>
+          <path d="M38 27 C43 31 51 32 54 28 C52 34 47 38 42 38 C38 38 36 33 38 27 Z" fill="url(#phoenixWingB)" opacity="0.85"/>
+          <!-- 极光顶点 -->
+          <circle cx="33" cy="11" r="2.5" fill="#fef08a"/>
+        </svg>
+
+        <!-- 36px -->
+        <svg viewBox="0 0 64 64" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="16" fill="#0f3427" stroke="#1d664e" stroke-width="1.5"/>
+          <path d="M32 10 C18 24 16 38 24 48 C30 54 40 54 48 46 C52 42 54 35 52 28 C46 36 38 38 32 34 C26 30 28 20 32 10 Z" fill="url(#waterArcB)"/>
+          <path d="M34 14 C38 20 46 22 50 18 C48 24 44 28 38 28 C34 28 32 22 34 14 Z" fill="url(#phoenixWingB)"/>
+          <path d="M38 27 C43 31 51 32 54 28 C52 34 47 38 42 38 C38 38 36 33 38 27 Z" fill="url(#phoenixWingB)" opacity="0.85"/>
+          <circle cx="33" cy="11" r="2.5" fill="#fef08a"/>
+        </svg>
+
+        <!-- 20px -->
+        <svg viewBox="0 0 64 64" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="16" fill="#0f3427"/>
+          <path d="M32 10 C18 24 16 38 24 48 C30 54 40 54 48 46 C52 42 54 35 52 28 C46 36 38 38 32 34 C26 30 28 20 32 10 Z" fill="url(#waterArcB)"/>
+          <path d="M34 14 C38 20 46 22 50 18 C48 24 44 28 38 28 C34 28 32 22 34 14 Z" fill="url(#phoenixWingB)"/>
+          <circle cx="33" cy="11" r="3" fill="#fef08a"/>
+        </svg>
+      </div>
+      <div class="sub">几何利落，三叠火羽高悬于深水环流之上</div>
+    </div>
+
+    <!-- 设计 3: 金石印契「水·凤」字图合一 (Calligraphic Medallion) -->
+    <div class="card">
+      <div class="title">方案 C：水源金石印鉴 (Calligraphic Water & Phoenix Sigil)</div>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <!-- 64px -->
+        <svg viewBox="0 0 64 64" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="sealBg" cx="30%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#19634b"/>
+              <stop offset="60%" stop-color="#114735"/>
+              <stop offset="100%" stop-color="#09261c"/>
+            </radialGradient>
+            <linearGradient id="emberGradC" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#f43f5e"/>
+              <stop offset="60%" stop-color="#f59e0b"/>
+              <stop offset="100%" stop-color="#fef08a"/>
+            </linearGradient>
+          </defs>
+          <!-- 墨翠玉璧底座 -->
+          <rect width="64" height="64" rx="16" fill="url(#sealBg)" stroke="#237d5f" stroke-width="1.5"/>
+          <circle cx="32" cy="32" r="26" stroke="#237d5f" stroke-width="1" stroke-dasharray="2 3" opacity="0.6"/>
+          
+          <!-- 水字主脊骨：如清泉垂瀑，圆润苍劲 -->
+          <path d="M32 15 V49" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+          <!-- 水字左折撇点：流转青翠波纹 -->
+          <path d="M21 27 C24 29 27 34 26 39 M16 41 C20 41 24 38 27 35" stroke="#5eead4" stroke-width="3" stroke-linecap="round"/>
+          <!-- 水字右挑捺：化为高扬升腾的赤金凤翎飞羽 -->
+          <path d="M34 26 C41 24 49 20 52 14 C51 22 47 31 38 38 C43 39 49 42 51 46" stroke="url(#emberGradC)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          
+          <!-- 凤火余烬星芒 -->
+          <circle cx="52" cy="14" r="2.5" fill="#fef08a"/>
+        </svg>
+
+        <!-- 36px -->
+        <svg viewBox="0 0 64 64" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="16" fill="url(#sealBg)" stroke="#237d5f" stroke-width="1.5"/>
+          <path d="M32 15 V49" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M21 27 C24 29 27 34 26 39" stroke="#5eead4" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M34 26 C41 24 49 20 52 14 C51 22 47 31 38 38 C43 39 49 42 51 46" stroke="url(#emberGradC)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="52" cy="14" r="3" fill="#fef08a"/>
+        </svg>
+
+        <!-- 20px -->
+        <svg viewBox="0 0 64 64" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="16" fill="url(#sealBg)"/>
+          <path d="M32 15 V49" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+          <path d="M20 30 C24 32 26 36 26 40" stroke="#5eead4" stroke-width="4" stroke-linecap="round"/>
+          <path d="M34 26 C42 24 48 19 51 15 C49 23 45 31 37 38" stroke="url(#emberGradC)" stroke-width="4.5" stroke-linecap="round"/>
+          <circle cx="51" cy="15" r="3.5" fill="#fef08a"/>
+        </svg>
+      </div>
+      <div class="sub">以「水」字为苍劲底骨，右捺化为凤翔火翎，神形兼备</div>
+    </div>
+  </div>
+
+  <!-- 在浅色背景（对应当前白底顶栏）中的融合测试 -->
+  <div class="card preview-light" style="width: 80%; max-width: 820px;">
+    <div class="title">在浅色顶栏背景（当前页面实境）下的效果比对</div>
+    <div style="display: flex; gap: 40px; align-items: center; justify-content: center; width: 100%; padding: 12px 0;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <svg viewBox="0 0 64 64" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <use href="#bgGradA"/>
+          <rect width="64" height="64" rx="14" fill="#0f3427" stroke="#1d664e" stroke-width="1.2"/>
+          <path d="M14 36 C14 47 23 52 33 52 C44 52 50 45 49 39 C48 33 41 31 35 33 C27 36 22 31 22 25 C22 18 29 13 36 12 C25 13 14 23 14 36 Z" fill="url(#waterGradA)"/>
+          <path d="M31 12 C36 18 43 20 47 25 C51 30 50 36 45 39 C41 41 37 39 38 35 C39 30 44 26 42 21 C40 17 35 14 31 12 Z" fill="url(#phoenixGradA)"/>
+          <circle cx="33" cy="12" r="2.5" fill="#fef08a"/>
+        </svg>
+        <div>
+          <div style="font-weight: 700; font-size: 15px; color: #0f172a;">水源分析终端 <span style="font-size: 11px; padding: 2px 6px; border-radius: 99px; background: rgba(23,98,73,0.1); color: #176249;">方案 A</span></div>
+          <div style="font-size: 11px; color: #64748b;">水凤双生徽章 · 和谐圆融</div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <svg viewBox="0 0 64 64" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="14" fill="url(#sealBg)" stroke="#237d5f" stroke-width="1.2"/>
+          <circle cx="32" cy="32" r="26" stroke="#237d5f" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.6"/>
+          <path d="M32 15 V49" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M21 27 C24 29 27 34 26 39" stroke="#5eead4" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M34 26 C41 24 49 20 52 14 C51 22 47 31 38 38 C43 39 49 42 51 46" stroke="url(#emberGradC)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="52" cy="14" r="3" fill="#fef08a"/>
+        </svg>
+        <div>
+          <div style="font-weight: 700; font-size: 15px; color: #0f172a;">水源分析终端 <span style="font-size: 11px; padding: 2px 6px; border-radius: 99px; background: rgba(23,98,73,0.1); color: #176249;">方案 C（神形兼备）</span></div>
+          <div style="font-size: 11px; color: #64748b;">金石书法骨架 + 凤翔火翎右挑</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

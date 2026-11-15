@@ -261,6 +261,13 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 return
 
+            # 允许安全访问 REACT_DIST_DIR 根目录下的静态页面（如 icon_preview.html）
+            if path.count("/") == 1 and not path.startswith("/api/"):
+                potential_file = (REACT_DIST_DIR / path.lstrip("/")).resolve()
+                if potential_file.is_file() and str(potential_file).startswith(str(REACT_DIST_DIR.resolve())):
+                    self._send_file(potential_file)
+                    return
+
             if path == "/api/stream":
                 self._handle_sse_stream()
                 return

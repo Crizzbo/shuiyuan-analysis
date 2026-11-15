@@ -1,5 +1,6 @@
 import type { HealthData } from '../types/api'
 import { formatDeviceTime } from '../utils/format'
+import { BrandLogo } from './common/BrandLogo'
 
 interface HeaderProps {
   health: HealthData | null
@@ -12,11 +13,8 @@ export function Header({ health, sseConnected, onPipelineStarted }: HeaderProps)
     <header className="terminal-top">
       <div className="container flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         {/* 左侧：系统标题与环境状态 */}
-        <div className="flex items-center gap-4">
-          <div className="w-9 h-9 rounded-lg bg-[#176249] flex items-center justify-center font-bold text-white shrink-0 shadow-xs relative overflow-hidden">
-            <span className="text-sm font-semibold tracking-wide">水</span>
-            <span className="absolute bottom-0 right-0 w-2 h-2 bg-gradient-to-tl from-amber-400 to-rose-500 rounded-tl-sm opacity-90" title="水凤和鸣" />
-          </div>
+        <div className="flex items-center gap-3.5">
+          <BrandLogo size="md" className="rounded-lg shadow-xs" />
           <div>
             <div className="flex items-center gap-2.5">
               <h1 className="text-xl font-bold tracking-tight text-[var(--text-primary)]">
