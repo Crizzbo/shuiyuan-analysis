@@ -527,13 +527,27 @@ class WatersourceTerminalService:
         )
 
     def get_finance_models(self, ticker: str = "NVDA") -> Dict[str, Any]:
-        """获取系统内全量 24 个专业量化与金融估值模型计算结果."""
+        """获取系统内全量 25 个专业量化与金融估值模型计算结果 (支持针对标的真实动态核算)."""
         clean_ticker = (ticker or "NVDA").strip().upper()
+        ticker_file = self.data_dir / "indicators" / f"finance_calc_{clean_ticker}.json"
+        if ticker_file.is_file():
+            try:
+                cached = _safe_read_json(ticker_file, {})
+                if cached.get("total_models") in (24, 25) and cached.get("ticker") == clean_ticker:
+                    return self._envelope(
+                        cached,
+                        as_of=cached.get("as_of", _utc_now_iso()),
+                        source=f"data/indicators/finance_calc_{clean_ticker}.json",
+                        status="CALCULATED_VERIFIED",
+                    )
+            except Exception:
+                pass
+
         indicators_file = self.data_dir / "indicators" / "finance_calc_latest.json"
         if indicators_file.is_file():
             try:
                 cached = _safe_read_json(indicators_file, {})
-                if cached.get("total_models") == 24 and cached.get("ticker") == clean_ticker:
+                if cached.get("total_models") in (24, 25) and cached.get("ticker") == clean_ticker:
                     return self._envelope(
                         cached,
                         as_of=cached.get("as_of", _utc_now_iso()),
@@ -543,9 +557,9 @@ class WatersourceTerminalService:
             except Exception:
                 pass
 
-        # 若未缓存或需要重新计算，调用 24 模型套件
-        from financial_reporting.comprehensive_finance_suite import run_all_24_financial_models
-        suite_data = run_all_24_financial_models(ticker=clean_ticker)
+        # 若未缓存或需要重新计算，调用 25 模型套件
+        from financial_reporting.comprehensive_finance_suite import run_all_25_financial_models
+        suite_data = run_all_25_financial_models(ticker=clean_ticker)
         return self._envelope(
             suite_data,
             as_of=suite_data.get("as_of", _utc_now_iso()),

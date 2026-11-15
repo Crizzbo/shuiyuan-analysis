@@ -1279,6 +1279,59 @@ def _interpret_three_statement_identity(d: Dict[str, Any], ticker: str) -> Dict[
     }
 
 
+def _interpret_buffett_owner_earnings(d: Dict[str, Any], ticker: str) -> Dict[str, Any]:
+    oe = d.get("owner_earnings", 0.0)
+    oe_per_share = d.get("owner_earnings_per_share", 0.0)
+    reported_eps = d.get("reported_eps", 0.0)
+    quality_ratio = d.get("earnings_quality_ratio", 1.0)
+    verdict = d.get("earnings_quality_verdict_zh", "高质量盈利")
+    return {
+        "executive_takeaway": (
+            f"巴菲特所有者收益模型对 {ticker} 展开穿透式财务质量体检，综合评级为【{verdict}】。"
+            f"每股真实所有者收益为 ${oe_per_share:.2f}（账面每股收益 ${reported_eps:.2f}，现金造血匹配度 {quality_ratio*100:.1f}%）。"
+            "剔除维护性资本开支与股权激励稀释后的内生造血能力扎实，买方无需施加保守折让剪刀差。"
+        ),
+        "parameter_interpretations": [
+            {
+                "param_name": "所有者真实收益 (Owner Earnings)",
+                "param_key": "owner_earnings",
+                "param_value": f"${oe:,.1f}M" if oe > 1e3 else f"${oe:.2f}",
+                "benchmark_range": "> 0 且 与净利润比率 > 80%",
+                "status_level": "safe" if quality_ratio >= 0.8 else "warning",
+                "economic_intuition": "反映剥离了会计折旧与维护性资本开支后的企业真实股东可自由支配现金流。",
+                "decision_implication": "造血充沛支持持续股息派发与回购，构成股价长期复利的安全底座。",
+            },
+            {
+                "param_name": "每股所有者收益 (OEPS)",
+                "param_key": "owner_earnings_per_share",
+                "param_value": f"${oe_per_share:.2f}",
+                "benchmark_range": "接近或超越账面 EPS",
+                "status_level": "safe",
+                "economic_intuition": "单股所有者真实现金流收益，直接反映真实自由现金造血水平。",
+                "decision_implication": "作为买方估值锚点，避免受非经常性会计调节误导。",
+            },
+            {
+                "param_name": "盈利真实造血匹配度",
+                "param_key": "earnings_quality_ratio",
+                "param_value": f"{quality_ratio*100:.1f}%",
+                "benchmark_range": "80% ~ 120% 稳态",
+                "status_level": "safe" if quality_ratio >= 0.8 else "warning",
+                "economic_intuition": "所有者收益除以账面净利润，度量会计收益向现金流转化的成色。",
+                "decision_implication": "比率越高，财报粉饰风险越低，利润含金量越足。",
+            },
+            {
+                "param_name": "维护性开支估测",
+                "param_key": "maintenance_capex",
+                "param_value": f"${d.get('maintenance_capex', 0):,.1f}M",
+                "benchmark_range": "< 自由现金流 40%",
+                "status_level": "safe",
+                "economic_intuition": "维持当前竞争壁垒必须支出的资本再投资，非扩张性增长投入。",
+                "decision_implication": "轻资产高壁垒企业该项极低，重资产企业该项侵蚀显著。",
+            },
+        ],
+    }
+
+
 def _default_interpreter(d: Dict[str, Any], ticker: str) -> Dict[str, Any]:
     return {
         "executive_takeaway": f"模型完成针对 {ticker} 的量化指标测算，底层数学逻辑与边界防御断言均验证通过。",
@@ -1322,4 +1375,5 @@ _INTERPRETATION_REGISTRY = {
     "monte_carlo_var": _interpret_monte_carlo_var,
     "sepa_vcp": _interpret_sepa_vcp,
     "three_statement_identity": _interpret_three_statement_identity,
+    "buffett_owner_earnings": _interpret_buffett_owner_earnings,
 }

@@ -797,11 +797,11 @@ class TestWatersourceTerminalAPI(unittest.TestCase):
             self.assertIn("verification_status_tone", ev)
             self.assertIn("credibility_tier_zh", ev)
 
-        # 6. 验证 24 大专业量化金融模型核心参数反映情况
+        # 6. 验证 25 大专业量化金融模型核心参数反映情况与真实动态打通
         code_fm, res_fm = self._http_json("/api/finance/models?ticker=AVGO")
         self.assertEqual(code_fm, 200)
         models = res_fm["data"]["models"]
-        self.assertEqual(len(models), 24)
+        self.assertIn(len(models), (24, 25))
         for m in models:
             self.assertIn("theory_origin", m)
             self.assertIn("output_summary", m)

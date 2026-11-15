@@ -1264,13 +1264,70 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
             {/* 52周新高净扩展指标 */}
             <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <TrendUpIcon className="w-5 h-5 text-[#3987e5]" />
+                <TrendUpIcon className="w-5 h-5 text-rose-500" />
                 <div>
-                  <div className="text-xs font-bold text-[var(--text-primary)]">
-                    52 周新高 vs 52 周新低净扩展 (Net New Highs)
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-xs font-bold text-[var(--text-primary)]">
+                      52 周新高 vs 52 周新低净扩展 (Net New Highs)
+                    </span>
+                    
+                    {/* 感叹号交互说明：外置感叹号聚焦展开 */}
+                    <div
+                      className="relative"
+                      onMouseEnter={() => setActiveTooltipTicker('NET_EXPANSION')}
+                      onMouseLeave={() => setActiveTooltipTicker(null)}
+                    >
+                      <button
+                        type="button"
+                        tabIndex={0}
+                        title="52周新高净扩展指标详细说明"
+                        aria-label="52周新高净扩展指标详细说明"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setActiveTooltipTicker(activeTooltipTicker === 'NET_EXPANSION' ? null : 'NET_EXPANSION')
+                        }}
+                        onFocus={() => setActiveTooltipTicker('NET_EXPANSION')}
+                        onBlur={() => setActiveTooltipTicker(null)}
+                        className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                          activeTooltipTicker === 'NET_EXPANSION'
+                            ? 'bg-[#3987e5] text-white shadow-sm'
+                            : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
+                        }`}
+                      >
+                        <InfoCircleIcon className="w-2.5 h-2.5" />
+                      </button>
+
+                      {activeTooltipTicker === 'NET_EXPANSION' && (
+                        <div
+                          className="absolute top-full mt-2 left-0 w-72 p-3 rounded-xl bg-[var(--surface-color)] border border-[var(--border-color)] shadow-2xl z-50 pointer-events-auto opacity-100 transition-all duration-200 text-left"
+                          onMouseEnter={() => setActiveTooltipTicker('NET_EXPANSION')}
+                          onMouseLeave={() => setActiveTooltipTicker(null)}
+                        >
+                          <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
+                            <span className="font-bold text-xs text-[var(--text-primary)]">
+                              52 周新高净扩展
+                            </span>
+                            <span className="text-[9px] px-1.5 py-0.2 rounded bg-rose-500/10 text-rose-500 border border-rose-500/25 font-medium shrink-0">
+                              多头广度指标
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                            新高持续压制新低，表明牛市趋势内部流动性宽裕，假跌风险低。
+                          </p>
+                          <div className="mt-2 p-2 rounded-lg bg-[var(--bg-card)]/80 border border-[var(--border-color)]/60 text-[10px] text-[var(--text-secondary)] leading-relaxed">
+                            <span className="font-semibold text-[#3987e5]">【参数反映情况】：</span>
+                            当前净扩展为 +{ma.high_low.net_expansion} 席（52周新高 {ma.high_low.new_52w_highs} 席 vs 52周新低 {ma.high_low.new_52w_lows} 席），新高持续处于净主导地位，反映市场整体赚钱效应充沛，属于典型多头进攻浪潮。
+                          </div>
+                          <div className="mt-2 pt-1.5 border-t border-[var(--border-color)]/40 flex items-center justify-between text-[10px] text-[var(--text-muted)] font-mono">
+                            <span>统计范围: 双市场全量</span>
+                            <span>净差: +{ma.high_low.net_expansion}</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <div className="text-[11px] text-[var(--text-muted)] mt-0.5">
-                    新高持续压制新低，表明牛市趋势内部流动性宽裕，假跌风险低
+                  <div className="text-[10px] text-[var(--text-muted)] mt-0.5">
+                    双市场广度指标 · 新高 vs 新低净差监测
                   </div>
                 </div>
               </div>
@@ -1285,7 +1342,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                 </div>
                 <div className="text-center pl-3 border-l border-[var(--border-color)]">
                   <div className="text-[9px] text-[var(--text-muted)]">净扩展指数</div>
-                  <div className="text-base font-black text-[#3987e5]">+{ma.high_low.net_expansion} 席</div>
+                  <div className="text-base font-black text-rose-500">+{ma.high_low.net_expansion} 席</div>
                 </div>
               </div>
             </div>
