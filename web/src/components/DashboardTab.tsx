@@ -733,9 +733,9 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                         {/* 涨跌幅：微型矢量箭头徽章 */}
                         <div className="flex items-center gap-1 mt-1 text-[11px] font-mono font-bold">
                           <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded ${
-                            isUp ? 'text-emerald-500 bg-emerald-500/10' : 'text-rose-500 bg-rose-500/10'
+                            isUp ? 'text-rose-500 bg-rose-500/10' : 'text-[#3987e5] bg-[#3987e5]/10'
                           }`}>
-                            {isUp ? <TrendUpIcon className="w-2.5 h-2.5 stroke-[3]" /> : <TrendDownIcon className="w-2.5 h-2.5 stroke-[3]" />}
+                            {isUp ? <TrendUpIcon className="w-2.5 h-2.5 stroke-[3] text-rose-500" /> : <TrendDownIcon className="w-2.5 h-2.5 stroke-[3] text-[#3987e5]" />}
                             <span>{chgPct}</span>
                           </span>
                         </div>
@@ -884,9 +884,18 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               </div>
               <div className="flex items-center gap-2 text-xs font-mono text-[var(--text-muted)]">
                 <span>全市场中位数涨幅:</span>
-                <span className="text-emerald-500 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                  美股 {usAD.median_return_pct} / 日股 {jpAD.median_return_pct}
-                </span>
+                <div className="flex items-center gap-1.5 font-bold">
+                  <span className={`px-2 py-0.5 rounded border ${
+                    !usAD.median_return_pct.startsWith('-') ? 'text-rose-500 bg-rose-500/10 border-rose-500/30' : 'text-[#3987e5] bg-[#3987e5]/10 border-[#3987e5]/30'
+                  }`}>
+                    美股 {usAD.median_return_pct}
+                  </span>
+                  <span className={`px-2 py-0.5 rounded border ${
+                    !jpAD.median_return_pct.startsWith('-') ? 'text-rose-500 bg-rose-500/10 border-rose-500/30' : 'text-[#3987e5] bg-[#3987e5]/10 border-[#3987e5]/30'
+                  }`}>
+                    日股 {jpAD.median_return_pct}
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -899,15 +908,15 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                     <span className="px-1.5 py-0.2 rounded bg-[#3987e5]/10 text-[#3987e5] font-mono text-[10px] font-bold">US</span>
                     <span>美股全市场涨跌统计 (10,000+ 标的)</span>
                   </span>
-                  <span className="font-mono font-bold text-emerald-500">
+                  <span className={`font-mono font-bold ${usAD.ad_ratio >= 1.0 ? 'text-rose-500' : 'text-[#3987e5]'}`}>
                     涨跌比: {usAD.ad_ratio}
                   </span>
                 </div>
-                {/* 比例条 */}
+                {/* 比例条 (红涨蓝跌) */}
                 <div className="h-3 w-full bg-gray-700/30 rounded-full overflow-hidden flex">
                   <div
                     style={{ width: `${usAD.advancers_pct}%` }}
-                    className="bg-[#199e70] h-full transition-all"
+                    className="bg-[#d03b3b] h-full transition-all"
                     title={`上涨: ${usAD.advancers} 家 (${usAD.advancers_pct}%)`}
                   />
                   <div
@@ -917,18 +926,18 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   />
                   <div
                     style={{ width: `${usAD.decliners_pct}%` }}
-                    className="bg-[#d03b3b] h-full transition-all"
+                    className="bg-[#3987e5] h-full transition-all"
                     title={`下跌: ${usAD.decliners} 家 (${usAD.decliners_pct}%)`}
                   />
                 </div>
                 <div className="flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)] pt-0.5">
-                  <span className="text-[#199e70] font-semibold inline-flex items-center gap-1">
-                    <TrendUpIcon className="w-2.5 h-2.5 stroke-[3]" />
+                  <span className="text-rose-500 font-semibold inline-flex items-center gap-1">
+                    <TrendUpIcon className="w-2.5 h-2.5 stroke-[3] text-rose-500" />
                     <span>上涨 {usAD.advancers.toLocaleString()} ({usAD.advancers_pct}%)</span>
                   </span>
                   <span className="text-gray-400">━ 平盘 {usAD.unchanged.toLocaleString()}</span>
-                  <span className="text-[#d03b3b] font-semibold inline-flex items-center gap-1">
-                    <TrendDownIcon className="w-2.5 h-2.5 stroke-[3]" />
+                  <span className="text-[#3987e5] font-semibold inline-flex items-center gap-1">
+                    <TrendDownIcon className="w-2.5 h-2.5 stroke-[3] text-[#3987e5]" />
                     <span>下跌 {usAD.decliners.toLocaleString()} ({usAD.decliners_pct}%)</span>
                   </span>
                 </div>
@@ -945,15 +954,15 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                     <span className="px-1.5 py-0.2 rounded bg-rose-500/10 text-rose-500 font-mono text-[10px] font-bold">JP</span>
                     <span>东证全市场涨跌统计 (4,400+ 标的)</span>
                   </span>
-                  <span className="font-mono font-bold text-emerald-500">
+                  <span className={`font-mono font-bold ${jpAD.ad_ratio >= 1.0 ? 'text-rose-500' : 'text-[#3987e5]'}`}>
                     涨跌比: {jpAD.ad_ratio}
                   </span>
                 </div>
-                {/* 比例条 */}
+                {/* 比例条 (红涨蓝跌) */}
                 <div className="h-3 w-full bg-gray-700/30 rounded-full overflow-hidden flex">
                   <div
                     style={{ width: `${jpAD.advancers_pct}%` }}
-                    className="bg-[#199e70] h-full transition-all"
+                    className="bg-[#d03b3b] h-full transition-all"
                     title={`上涨: ${jpAD.advancers} 家 (${jpAD.advancers_pct}%)`}
                   />
                   <div
@@ -963,18 +972,18 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   />
                   <div
                     style={{ width: `${jpAD.decliners_pct}%` }}
-                    className="bg-[#d03b3b] h-full transition-all"
+                    className="bg-[#3987e5] h-full transition-all"
                     title={`下跌: ${jpAD.decliners} 家 (${jpAD.decliners_pct}%)`}
                   />
                 </div>
                 <div className="flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)] pt-0.5">
-                  <span className="text-[#199e70] font-semibold inline-flex items-center gap-1">
-                    <TrendUpIcon className="w-2.5 h-2.5 stroke-[3]" />
+                  <span className="text-rose-500 font-semibold inline-flex items-center gap-1">
+                    <TrendUpIcon className="w-2.5 h-2.5 stroke-[3] text-rose-500" />
                     <span>上涨 {jpAD.advancers.toLocaleString()} ({jpAD.advancers_pct}%)</span>
                   </span>
                   <span className="text-gray-400">━ 平盘 {jpAD.unchanged.toLocaleString()}</span>
-                  <span className="text-[#d03b3b] font-semibold inline-flex items-center gap-1">
-                    <TrendDownIcon className="w-2.5 h-2.5 stroke-[3]" />
+                  <span className="text-[#3987e5] font-semibold inline-flex items-center gap-1">
+                    <TrendDownIcon className="w-2.5 h-2.5 stroke-[3] text-[#3987e5]" />
                     <span>下跌 {jpAD.decliners.toLocaleString()} ({jpAD.decliners_pct}%)</span>
                   </span>
                 </div>
@@ -996,8 +1005,8 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               <div className="grid grid-cols-7 gap-2 pt-1">
                 {histogram.map((bucket) => {
                   const isUp = bucket.tone === 'up'
-                  const barColor = isUp ? 'bg-[#199e70]' : 'bg-[#d03b3b]'
-                  const textColor = isUp ? 'text-emerald-500' : 'text-rose-500'
+                  const barColor = isUp ? 'bg-[#d03b3b]' : 'bg-[#3987e5]'
+                  const textColor = isUp ? 'text-rose-500' : 'text-[#3987e5]'
                   return (
                     <div
                       key={bucket.range}
@@ -1077,7 +1086,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                     <span className="text-[10px] text-[var(--text-muted)] font-mono shrink-0">上涨率:</span>
                     <div className="w-24 bg-gray-700/20 h-2 rounded-full overflow-hidden">
                       <div
-                        className="bg-[#199e70] h-full rounded-full"
+                        className="bg-[#d03b3b] h-full rounded-full"
                         style={{ width: `${sec.advancers_pct}%` }}
                       />
                     </div>
@@ -1086,7 +1095,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                     </span>
                   </div>
 
-                  {/* 右：成交量倍率与涨跌幅 */}
+                  {/* 右：成交量倍率与涨跌幅 (红涨蓝跌) */}
                   <div className="flex items-center gap-4 text-right">
                     <div className="text-right">
                       <div className="text-[9px] text-[var(--text-muted)]">量能倍率</div>
@@ -1096,7 +1105,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                     </div>
                     <div className="min-w-[80px] text-right">
                       <span className={`inline-block px-2.5 py-1 rounded-lg text-xs font-black font-mono ${
-                        sec.is_up ? 'bg-emerald-500/15 text-emerald-500 border border-emerald-500/30' : 'bg-rose-500/15 text-rose-500 border border-rose-500/30'
+                        sec.is_up ? 'bg-rose-500/15 text-rose-500 border border-rose-500/30' : 'bg-[#3987e5]/15 text-[#3987e5] border border-[#3987e5]/30'
                       }`}>
                         {sec.return_formatted}
                       </span>
@@ -1268,11 +1277,11 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               <div className="flex items-center gap-4 font-mono">
                 <div className="text-center">
                   <div className="text-[9px] text-[var(--text-muted)]">52周新高</div>
-                  <div className="text-sm font-black text-emerald-500">+{ma.high_low.new_52w_highs} 席</div>
+                  <div className="text-sm font-black text-rose-500">+{ma.high_low.new_52w_highs} 席</div>
                 </div>
                 <div className="text-center">
                   <div className="text-[9px] text-[var(--text-muted)]">52周新低</div>
-                  <div className="text-sm font-black text-rose-500">-{ma.high_low.new_52w_lows} 席</div>
+                  <div className="text-sm font-black text-[#3987e5]">-{ma.high_low.new_52w_lows} 席</div>
                 </div>
                 <div className="text-center pl-3 border-l border-[var(--border-color)]">
                   <div className="text-[9px] text-[var(--text-muted)]">净扩展指数</div>
@@ -1367,7 +1376,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                       <div className="font-bold text-xs text-[var(--text-primary)]">
                         {c.price}
                       </div>
-                      <div className="text-[10px] font-bold text-emerald-500">
+                      <div className={`text-[10px] font-bold ${c.chg_pct?.startsWith('-') ? 'text-[#3987e5]' : 'text-rose-500'}`}>
                         {c.chg_pct}
                       </div>
                       <div className="text-[9px] text-[var(--text-muted)] mt-0.5">
@@ -1417,7 +1426,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   title: '主力机构资金净流入',
                   value: sentiment.institutional_net_inflow_str,
                   sub: '净买入防御权重',
-                  valColor: 'text-emerald-500',
+                  valColor: 'text-rose-500',
                   detail: '基于交易所大单宗数 (Block Trades) 资金流向监测的大机构主力买方净流入。反映聪明钱 (Smart Money) 在核心权重指数及龙头防御板块的战略建仓意愿。',
                   param_reflection: '大额主力资金净流入呈现正向，反映顶级机构做市商与公募基金在核心蓝筹资产上正在持续吸筹建仓。',
                 },

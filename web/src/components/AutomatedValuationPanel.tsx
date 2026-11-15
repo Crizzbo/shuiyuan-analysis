@@ -257,7 +257,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
               <div className="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] flex flex-col justify-between relative group">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-rose-500">保守底价</span>
+                    <span className="text-xs font-semibold text-[#3987e5]">保守底价</span>
                     <div className="flex items-center gap-1.5">
                       <span className="badge warning">严苛防御</span>
                       
@@ -278,10 +278,10 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                           }}
                           onFocus={() => setActiveScenarioTooltip('floor')}
                           onBlur={() => setActiveScenarioTooltip(null)}
-                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#d03b3b] ${
+                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
                             activeScenarioTooltip === 'floor'
-                              ? 'bg-[#d03b3b] text-white border-[#d03b3b]'
-                              : 'bg-[var(--surface-color)] hover:bg-[#d03b3b]/20 text-[var(--text-muted)] hover:text-[#d03b3b] border border-[var(--border-color)]'
+                              ? 'bg-[#3987e5] text-white border-[#3987e5]'
+                              : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)]'
                           }`}
                         >
                           !
@@ -294,7 +294,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                             onMouseLeave={() => setActiveScenarioTooltip(null)}
                           >
                             <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
-                              <span className="font-bold text-xs text-rose-500">
+                              <span className="font-bold text-xs text-[#3987e5]">
                                 保守底价情景推演
                               </span>
                               <span className="badge warning">严苛防御</span>
@@ -407,7 +407,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
               <div className="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] flex flex-col justify-between relative group">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-emerald-600">乐观靶心价</span>
+                    <span className="text-xs font-semibold text-rose-500">乐观靶心价</span>
                     <div className="flex items-center gap-1.5">
                       <span className="badge info">景气爆发</span>
 
@@ -428,10 +428,10 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                           }}
                           onFocus={() => setActiveScenarioTooltip('opt')}
                           onBlur={() => setActiveScenarioTooltip(null)}
-                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#199e70] ${
+                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#d03b3b] ${
                             activeScenarioTooltip === 'opt'
-                              ? 'bg-[#199e70] text-white border-[#199e70]'
-                              : 'bg-[var(--surface-color)] hover:bg-[#199e70]/20 text-[var(--text-muted)] hover:text-[#199e70] border border-[var(--border-color)]'
+                              ? 'bg-[#d03b3b] text-white border-[#d03b3b]'
+                              : 'bg-[var(--surface-color)] hover:bg-[#d03b3b]/20 text-[var(--text-muted)] hover:text-[#d03b3b] border border-[var(--border-color)]'
                           }`}
                         >
                           !
@@ -444,7 +444,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                             onMouseLeave={() => setActiveScenarioTooltip(null)}
                           >
                             <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
-                              <span className="font-bold text-xs text-emerald-600">
+                              <span className="font-bold text-xs text-rose-500">
                                 乐观靶心价推演
                               </span>
                               <span className="badge info">景气爆发</span>
@@ -462,7 +462,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                     </div>
                   </div>
 
-                  <div className="text-2xl font-black mt-2 text-emerald-600">
+                  <div className="text-2xl font-black mt-2 text-rose-500">
                     {sym}{corridor?.optimistic_target.value_per_share.toFixed(2)}
                   </div>
                 </div>
@@ -510,7 +510,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
               <div className="rows mt-3">
                 <div className="row">
                   <div><strong>净资产收益率 (ROE)</strong><p>普通股股东真实内生资本回报率</p></div>
-                  <span className="text-base font-bold text-emerald-600">{ratios?.roe_pct != null ? `${ratios.roe_pct}%` : '—'}</span>
+                  <span className="text-base font-bold text-rose-500">{ratios?.roe_pct != null ? `${ratios.roe_pct}%` : '—'}</span>
                 </div>
                 <div className="row">
                   <div><strong>总资产收益率 (ROA)</strong><p>企业全量资产运营效率</p></div>

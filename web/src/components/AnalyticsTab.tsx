@@ -1188,34 +1188,34 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                       return (
                         <div className="pt-7 pb-5 px-3">
                           <div className="relative w-full h-3 rounded-full bg-slate-700/30 overflow-visible">
-                            {/* 悲观到中性区间 */}
+                            {/* 悲观到中性区间 (蓝到靛) */}
                             <div
-                              className="absolute top-0 h-3 rounded-l-full bg-gradient-to-r from-rose-500/30 to-blue-500/30"
+                              className="absolute top-0 h-3 rounded-l-full bg-gradient-to-r from-[#3987e5]/30 to-indigo-500/30"
                               style={{ left: `${floorPos}%`, width: `${Math.max(0, basePos - floorPos)}%` }}
                             />
-                            {/* 中性到乐观区间 */}
+                            {/* 中性到乐观区间 (靛到红) */}
                             <div
-                              className="absolute top-0 h-3 rounded-r-full bg-gradient-to-r from-blue-500/30 to-emerald-500/30"
+                              className="absolute top-0 h-3 rounded-r-full bg-gradient-to-r from-indigo-500/30 to-rose-500/30"
                               style={{ left: `${basePos}%`, width: `${Math.max(0, optPos - basePos)}%` }}
                             />
 
-                            {/* 悲观标记 */}
-                            <div className="absolute top-0 -mt-1 w-0.5 h-5 bg-rose-500/80 -translate-x-1/2" style={{ left: `${floorPos}%` }}>
-                              <div className="absolute top-5 -translate-x-1/2 text-[10px] font-mono text-rose-400 whitespace-nowrap">
+                            {/* 悲观标记 (蓝色底线) */}
+                            <div className="absolute top-0 -mt-1 w-0.5 h-5 bg-[#3987e5]/80 -translate-x-1/2" style={{ left: `${floorPos}%` }}>
+                              <div className="absolute top-5 -translate-x-1/2 text-[10px] font-mono text-[#3987e5] whitespace-nowrap">
                                 <div>底线 {sym}{pFloor.toFixed(1)}</div>
                               </div>
                             </div>
 
                             {/* 中性公允标记 */}
-                            <div className="absolute top-0 -mt-1.5 w-1 h-6 bg-[#3987e5] -translate-x-1/2" style={{ left: `${basePos}%` }}>
-                              <div className="absolute top-6 -translate-x-1/2 text-[10px] font-mono font-bold text-[#3987e5] whitespace-nowrap">
+                            <div className="absolute top-0 -mt-1.5 w-1 h-6 bg-indigo-400 -translate-x-1/2" style={{ left: `${basePos}%` }}>
+                              <div className="absolute top-6 -translate-x-1/2 text-[10px] font-mono font-bold text-indigo-400 whitespace-nowrap">
                                 <div>公允 {sym}{pBase.toFixed(1)}</div>
                               </div>
                             </div>
 
-                            {/* 乐观靶心标记 */}
-                            <div className="absolute top-0 -mt-1 w-0.5 h-5 bg-emerald-500/80 -translate-x-1/2" style={{ left: `${optPos}%` }}>
-                              <div className="absolute top-5 -translate-x-1/2 text-[10px] font-mono text-emerald-400 whitespace-nowrap">
+                            {/* 乐观靶心标记 (红色靶心) */}
+                            <div className="absolute top-0 -mt-1 w-0.5 h-5 bg-rose-500/80 -translate-x-1/2" style={{ left: `${optPos}%` }}>
+                              <div className="absolute top-5 -translate-x-1/2 text-[10px] font-mono text-rose-500 whitespace-nowrap">
                                 <div>靶心 {sym}{pOpt.toFixed(1)}</div>
                               </div>
                             </div>
@@ -1238,12 +1238,12 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                   {/* 三态情景估值卡片 (外置感叹号聚焦交互，去臃肿与统一术语) */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {/* 保守底价 */}
-                    <div className="p-4 rounded-xl border border-[#d03b3b]/30 bg-[#331114]/15 flex flex-col justify-between relative group shadow-sm">
+                    <div className="p-4 rounded-xl border border-[#3987e5]/30 bg-[#0f2744]/15 flex flex-col justify-between relative group shadow-sm">
                       <div>
                         <div className="flex items-center justify-between">
-                          <span className="text-xs font-bold text-[#d03b3b]">保守底价</span>
+                          <span className="text-xs font-bold text-[#3987e5]">保守底价</span>
                           <div className="flex items-center gap-1.5">
-                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#d03b3b]/20 text-[#d03b3b] font-semibold font-mono">
+                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#3987e5]/20 text-[#3987e5] font-semibold font-mono">
                               {(corridor.conservative_floor as any).scenario_tag || '严苛防御'}
                             </span>
 
@@ -1264,10 +1264,10 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                 }}
                                 onFocus={() => setActiveScenarioTooltip('floor')}
                                 onBlur={() => setActiveScenarioTooltip(null)}
-                                className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#d03b3b] ${
+                                className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
                                   activeScenarioTooltip === 'floor'
-                                    ? 'bg-[#d03b3b] text-white border-[#d03b3b]'
-                                    : 'bg-[var(--surface-color)] hover:bg-[#d03b3b]/20 text-[var(--text-muted)] hover:text-[#d03b3b] border border-[var(--border-color)] hover:border-[#d03b3b]/50'
+                                    ? 'bg-[#3987e5] text-white border-[#3987e5]'
+                                    : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)] hover:border-[#3987e5]/50'
                                 }`}
                               >
                                 <InfoCircleIcon className="w-2.5 h-2.5" />
@@ -1280,18 +1280,18 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                   onMouseLeave={() => setActiveScenarioTooltip(null)}
                                 >
                                   <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
-                                    <span className="font-bold text-xs text-[#d03b3b]">
+                                    <span className="font-bold text-xs text-[#3987e5]">
                                       保守底价情景推演
                                     </span>
-                                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#d03b3b]/15 text-[#d03b3b] border border-[#d03b3b]/30 font-medium">
+                                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#3987e5]/15 text-[#3987e5] border border-[#3987e5]/30 font-medium">
                                       {(corridor.conservative_floor as any).scenario_tag || '严苛防御'}
                                     </span>
                                   </div>
                                   <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
                                     {corridor.conservative_floor.description}
                                   </p>
-                                  <div className="mt-2 p-2 rounded-lg bg-[#d03b3b]/10 border border-[#d03b3b]/25 text-[10px] text-[var(--text-secondary)] leading-relaxed">
-                                    <span className="font-semibold text-[#d03b3b]">【核心参数反映情况】：</span>
+                                  <div className="mt-2 p-2 rounded-lg bg-[#3987e5]/10 border border-[#3987e5]/25 text-[10px] text-[var(--text-secondary)] leading-relaxed">
+                                    <span className="font-semibold text-[#3987e5]">【核心参数反映情况】：</span>
                                     折现率提高至 {corridor.conservative_floor.discount_rate_pct}% 与 永续增长率压缩至 {corridor.conservative_floor.terminal_growth_pct}%，反映在宏观紧缩与下游资本开支削减下的极端压力测试支撑底价，由账面净现金和低速稳态现金流托底。
                                   </div>
                                   <div className="mt-2.5 pt-1.5 border-t border-[var(--border-color)]/40 text-[10px] text-[var(--text-muted)] font-mono space-y-0.5">
@@ -1304,12 +1304,12 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                           </div>
                         </div>
 
-                        <div className="text-2xl font-black font-mono text-[#d03b3b] mt-2.5">
+                        <div className="text-2xl font-black font-mono text-[#3987e5] mt-2.5">
                           {sym}{corridor.conservative_floor.value_per_share.toFixed(2)}
                         </div>
                       </div>
 
-                      <div className="mt-3 pt-2.5 border-t border-[#d03b3b]/20 text-[11px] text-[var(--text-muted)] space-y-0.5">
+                      <div className="mt-3 pt-2.5 border-t border-[#3987e5]/20 text-[11px] text-[var(--text-muted)] space-y-0.5">
                         <div>折现率：{corridor.conservative_floor.discount_rate_pct}%</div>
                         <div>永续增长率：{corridor.conservative_floor.terminal_growth_pct}%</div>
                         <div>预测增长：{corridor.conservative_floor.growth_rates_pct.join('%, ')}%</div>
@@ -1406,12 +1406,12 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                     </div>
 
                     {/* 乐观靶心价 */}
-                    <div className="p-4 rounded-xl border border-[#199e70]/30 bg-[#102a1e]/15 flex flex-col justify-between relative group shadow-sm">
+                    <div className="p-4 rounded-xl border border-[#d03b3b]/30 bg-[#331114]/15 flex flex-col justify-between relative group shadow-sm">
                       <div>
                         <div className="flex items-center justify-between">
-                          <span className="text-xs font-bold text-[#199e70]">乐观靶心价</span>
+                          <span className="text-xs font-bold text-[#d03b3b]">乐观靶心价</span>
                           <div className="flex items-center gap-1.5">
-                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#199e70]/20 text-[#199e70] font-semibold font-mono">
+                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#d03b3b]/20 text-[#d03b3b] font-semibold font-mono">
                               {(corridor.optimistic_target as any).scenario_tag || '景气爆发'}
                             </span>
 
@@ -1432,10 +1432,10 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                 }}
                                 onFocus={() => setActiveScenarioTooltip('opt')}
                                 onBlur={() => setActiveScenarioTooltip(null)}
-                                className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#199e70] ${
+                                className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#d03b3b] ${
                                   activeScenarioTooltip === 'opt'
-                                    ? 'bg-[#199e70] text-white border-[#199e70]'
-                                    : 'bg-[var(--surface-color)] hover:bg-[#199e70]/20 text-[var(--text-muted)] hover:text-[#199e70] border border-[var(--border-color)] hover:border-[#199e70]/50'
+                                    ? 'bg-[#d03b3b] text-white border-[#d03b3b]'
+                                    : 'bg-[var(--surface-color)] hover:bg-[#d03b3b]/20 text-[var(--text-muted)] hover:text-[#d03b3b] border border-[var(--border-color)] hover:border-[#d03b3b]/50'
                                 }`}
                               >
                                 <InfoCircleIcon className="w-2.5 h-2.5" />
@@ -1448,18 +1448,18 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                                   onMouseLeave={() => setActiveScenarioTooltip(null)}
                                 >
                                   <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
-                                    <span className="font-bold text-xs text-[#199e70]">
+                                    <span className="font-bold text-xs text-[#d03b3b]">
                                       乐观靶心价推演
                                     </span>
-                                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#199e70]/15 text-[#199e70] border border-[#199e70]/30 font-medium">
+                                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#d03b3b]/15 text-[#d03b3b] border border-[#d03b3b]/30 font-medium">
                                       {(corridor.optimistic_target as any).scenario_tag || '景气爆发'}
                                     </span>
                                   </div>
                                   <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
                                     {corridor.optimistic_target.description}
                                   </p>
-                                  <div className="mt-2 p-2 rounded-lg bg-[#199e70]/10 border border-[#199e70]/25 text-[10px] text-[var(--text-secondary)] leading-relaxed">
-                                    <span className="font-semibold text-[#199e70]">【核心参数反映情况】：</span>
+                                  <div className="mt-2 p-2 rounded-lg bg-[#d03b3b]/10 border border-[#d03b3b]/25 text-[10px] text-[var(--text-secondary)] leading-relaxed">
+                                    <span className="font-semibold text-[#d03b3b]">【核心参数反映情况】：</span>
                                     折现率微降至 {corridor.optimistic_target.discount_rate_pct}% 享受流动性溢价，永续增速 {corridor.optimistic_target.terminal_growth_pct}%，前3年增速提升至 {corridor.optimistic_target.growth_rates_pct.join('%, ')}%，反映 AI/算力爆发与护城河扩张超预期放量的景气溢价靶心。
                                   </div>
                                   <div className="mt-2.5 pt-1.5 border-t border-[var(--border-color)]/40 text-[10px] text-[var(--text-muted)] font-mono space-y-0.5">
@@ -1472,12 +1472,12 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                           </div>
                         </div>
 
-                        <div className="text-2xl font-black font-mono text-[#199e70] mt-2.5">
+                        <div className="text-2xl font-black font-mono text-[#d03b3b] mt-2.5">
                           {sym}{corridor.optimistic_target.value_per_share.toFixed(2)}
                         </div>
                       </div>
 
-                      <div className="mt-3 pt-2.5 border-t border-[#199e70]/20 text-[11px] text-[var(--text-muted)] space-y-0.5">
+                      <div className="mt-3 pt-2.5 border-t border-[#d03b3b]/20 text-[11px] text-[var(--text-muted)] space-y-0.5">
                         <div>折现率：{corridor.optimistic_target.discount_rate_pct}%</div>
                         <div>永续增长率：{corridor.optimistic_target.terminal_growth_pct}%</div>
                         <div>预测增长：{corridor.optimistic_target.growth_rates_pct.join('%, ')}%</div>
@@ -1619,14 +1619,14 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                         <span className="text-xs font-bold text-[var(--text-primary)]">
                           杜邦分析与盈利质量透视
                         </span>
-                        <span className="text-[10px] px-1.5 py-0.5 rounded font-mono bg-[#199e70]/10 text-[#199e70]">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded font-mono bg-[#d03b3b]/10 text-[#d03b3b]">
                           官方三表披露
                         </span>
                       </div>
                       <div className="space-y-2 text-xs">
                         <div className="flex items-center justify-between">
                           <span className="text-[var(--text-secondary)]">净资产收益率 (ROE)</span>
-                          <span className="font-mono font-bold text-[#199e70]">
+                          <span className="font-mono font-bold text-[#d03b3b]">
                             {ratios?.roe_pct != null ? `${ratios.roe_pct}%` : '—'}
                           </span>
                         </div>
@@ -1673,7 +1673,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                         </div>
                         <div className="p-2.5 rounded bg-[var(--bg-card)] border border-[var(--border-color)]">
                           <div className="text-[10px] text-[var(--text-muted)]">净现金状态</div>
-                          <div className="font-medium text-xs mt-1 text-[#199e70]">
+                          <div className="font-medium text-xs mt-1 text-[#d03b3b]">
                             {facts.net_cash_status}
                           </div>
                         </div>
@@ -1741,7 +1741,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                 {/* 上下游供应链结构 */}
                 <div className="xl:col-span-4 bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
                   <div className="flex items-center gap-2 pb-3 border-b border-[var(--border-color)]">
-                    <span className="w-2 h-2 rounded-full bg-[#199e70]" />
+                    <span className="w-2 h-2 rounded-full bg-[#d03b3b]" />
                     <h3 className="text-sm font-bold text-[var(--text-primary)]">
                       产业链上下游集中度
                     </h3>
@@ -1798,7 +1798,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                         <span
                           className={`text-[10px] px-2 py-0.5 rounded font-semibold ${
                             probes?.financial_audit?.balance_sheet_balanced
-                              ? 'bg-[#199e70]/20 text-[#199e70] border border-[#199e70]/40'
+                              ? 'bg-[#d03b3b]/20 text-[#d03b3b] border border-[#d03b3b]/40'
                               : 'bg-[#d03b3b]/20 text-[#d03b3b] border border-[#d03b3b]/40'
                           }`}
                         >
@@ -1828,7 +1828,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                         <span
                           className={`text-[10px] px-2 py-0.5 rounded font-semibold ${
                             probes?.credit_kmv_probe?.distance_to_default_DD !== undefined
-                              ? 'bg-[#199e70]/20 text-[#199e70] border border-[#199e70]/40'
+                              ? 'bg-[#d03b3b]/20 text-[#d03b3b] border border-[#d03b3b]/40'
                               : 'bg-gray-600/20 text-gray-400 border border-gray-600/40'
                           }`}
                         >
@@ -1882,7 +1882,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
               <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 border-b border-[var(--border-color)]">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#199e70]" />
+                    <span className="w-2 h-2 rounded-full bg-[#d03b3b]" />
                     <h3 className="text-sm font-bold text-[var(--text-primary)]">
                       关联突发舆情与业务分部因果冲击 (News & Event Radar Impact)
                     </h3>
@@ -1894,7 +1894,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                     {analysis?.events_analysis?.sotp_impact?.estimated_enterprise_value_delta_pct !== undefined && (
                       <span className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded border ${
                         analysis.events_analysis.sotp_impact.estimated_enterprise_value_delta_pct >= 0
-                          ? 'bg-[#199e70]/15 text-[#199e70] border-[#199e70]/30'
+                          ? 'bg-[#d03b3b]/15 text-[#d03b3b] border-[#d03b3b]/30'
                           : 'bg-[#d03b3b]/15 text-[#d03b3b] border-[#d03b3b]/30'
                       }`}>
                         企业价值预估变动: {analysis.events_analysis.sotp_impact.estimated_enterprise_value_delta_pct > 0 ? '+' : ''}
@@ -1917,10 +1917,10 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                           <div className="flex items-center justify-between">
                             <span className="font-bold text-xs text-[var(--text-primary)]">{seg.segment_name}</span>
                             <div className="flex items-center gap-2 text-[10px] font-mono">
-                              <span className={seg.revenue_impact_pct >= 0 ? 'text-[#199e70]' : 'text-[#d03b3b]'}>
+                              <span className={seg.revenue_impact_pct >= 0 ? 'text-rose-500' : 'text-[#3987e5]'}>
                                 营收冲击: {seg.revenue_impact_pct >= 0 ? '+' : ''}{seg.revenue_impact_pct.toFixed(1)}%
                               </span>
-                              <span className={seg.margin_impact_bps >= 0 ? 'text-[#199e70]' : 'text-[#d03b3b]'}>
+                              <span className={seg.margin_impact_bps >= 0 ? 'text-rose-500' : 'text-[#3987e5]'}>
                                 利润率: {seg.margin_impact_bps >= 0 ? '+' : ''}{seg.margin_impact_bps} bps
                               </span>
                             </div>
@@ -1938,7 +1938,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                 {analysis?.events_analysis?.recent_events && analysis.events_analysis.recent_events.length > 0 ? (
                   <div className="space-y-2.5">
                     <div className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#199e70]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#d03b3b]" />
                       <span>近期高关联突发事件与微观业务传导</span>
                     </div>
                     <div className="space-y-2">
