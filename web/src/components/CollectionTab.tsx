@@ -11,7 +11,22 @@ import { api } from '../services/api'
 import { showToast } from './Toast'
 import { TaskConfigModal } from './TaskConfigModal'
 import { formatDeviceTime, toChinese } from '../utils/format'
-import { TargetIcon, ZapIcon, LayersIcon, BarChartIcon, RefreshIcon } from './common'
+import {
+  TargetIcon,
+  ZapIcon,
+  LayersIcon,
+  RefreshIcon,
+  ShieldCheckIcon,
+  InfoCircleIcon,
+  SearchIcon,
+  CalendarIcon,
+  NewspaperIcon,
+  CheckIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  SettingsIcon,
+  DatabaseIcon,
+} from './common'
 
 interface CollectionTabProps {
   pipelineStatus?: PipelineStatusData | null
@@ -22,6 +37,9 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
   // 极简主视图模式：默认干净极简，高级选项可一键折叠展开
   const [showAdvanced, setShowAdvanced] = useState(false)
   const [advancedTab, setAdvancedTab] = useState<'scheduler' | 'runs' | 'archives'>('scheduler')
+
+  // 信息提示 Popover 状态 (统一感叹号说明组件)
+  const [activePopover, setActivePopover] = useState<string | null>(null)
 
   // 调度器与任务状态
   const [schedulerInfo, setSchedulerInfo] = useState<TaskSchedulerInfo | null>(null)
@@ -247,7 +265,7 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
     { ticker: 'AMD', name: '超威半导体' },
     { ticker: 'AVGO', name: '博通' },
     { ticker: '8035', name: '东京电子' },
-    { ticker: '6857', name: '爱德万' },
+    { ticker: '6857', name: '爱德万测试' },
     { ticker: 'TSM', name: '台积电' },
   ]
 
@@ -260,12 +278,51 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
       {/* 1. 顶层极简状态条 (一句话看懂当前状态) */}
       <div className="flex flex-wrap items-center justify-between gap-3 bg-[var(--surface-color)] border border-[var(--border-color)] px-5 py-3.5 rounded-2xl shadow-sm text-xs">
         <div className="flex items-center gap-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#199e70] animate-pulse" />
-          <span className="font-bold text-[var(--text-primary)]">数据同步服务正常运行</span>
+          <div className="flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#199e70] animate-pulse" />
+            <ShieldCheckIcon className="w-4 h-4 text-[#199e70]" />
+          </div>
+          <span className="font-bold text-[var(--text-primary)]">官方数据源与同步引擎 · 在线</span>
           <span className="text-[var(--text-muted)]">|</span>
-          <span className="text-[var(--text-secondary)] font-mono">
-            基准日期：2026-11-14 (前收盘基准 · 闭市逐笔核验为准)
-          </span>
+          <div className="flex items-center gap-1.5 text-[var(--text-secondary)] font-mono">
+            <span>数据基准：2026-11-14（前收盘价基准 · 闭市平账核验）</span>
+            {/* 时效核验规则说明感叹号 */}
+            <div className="relative inline-flex items-center">
+              <button
+                type="button"
+                onClick={() => setActivePopover(activePopover === 'freshness' ? null : 'freshness')}
+                onFocus={() => setActivePopover('freshness')}
+                onBlur={() => setActivePopover(null)}
+                className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none ${
+                  activePopover === 'freshness'
+                    ? 'bg-[#3987e5] text-white shadow-sm'
+                    : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)]'
+                }`}
+                title="查看行情时效与闭市对账机制"
+              >
+                <InfoCircleIcon className="w-2.5 h-2.5" />
+              </button>
+              {activePopover === 'freshness' && (
+                <div
+                  className="absolute top-full left-0 mt-2 w-72 p-3 rounded-xl bg-[var(--surface-color)] border border-[var(--border-color)] shadow-2xl z-50 pointer-events-auto text-left"
+                  onMouseEnter={() => setActivePopover('freshness')}
+                  onMouseLeave={() => setActivePopover(null)}
+                >
+                  <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
+                    <span className="font-bold text-xs text-[var(--text-primary)]">行情时效与对账核验机制</span>
+                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#199e70]/10 text-[#199e70] font-semibold">时效门禁</span>
+                  </div>
+                  <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                    严格前置查验并标明行情时段状态，确保估值与决策基于最新真实交易依据。
+                  </p>
+                  <div className="mt-2 p-2 rounded-lg bg-[var(--bg-card)]/80 border border-[var(--border-color)]/60 text-[10px] text-[var(--text-secondary)] leading-relaxed">
+                    <span className="font-semibold text-[#3987e5]">【参数反映情况】：</span>
+                    非交易时段强制标记为 PREVIOUS_CLOSE 前收盘价基准，逐笔核验交易所收盘撮合价，严禁使用旧日脏数据冒充盘中现价。
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -274,42 +331,81 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
             className="text-[var(--text-secondary)] hover:text-[#3987e5] cursor-pointer flex items-center gap-1.5 transition-all px-3 py-1.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] text-xs font-semibold hover:border-[#3987e5]/40"
           >
             <RefreshIcon className="w-3.5 h-3.5" />
-            <span>刷新状态</span>
+            <span>刷新服务状态</span>
           </button>
         </div>
       </div>
 
       {/* 2. 双核极简卡片：左边查单只股票，右边全市场同步 */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* 卡片 A：更新单只股票 */}
+        {/* 卡片 A：个股全息商业与估值更新 */}
         <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-5 hover:border-[#3987e5]/40 transition-all">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-bold text-[var(--text-primary)] flex items-center gap-2">
+              <div className="flex items-center gap-2">
                 <TargetIcon className="w-5 h-5 text-[#3987e5]" />
-                <span>更新单只股票数据</span>
-              </h2>
+                <h2 className="text-base font-bold text-[var(--text-primary)]">个股全息商业与估值更新</h2>
+                {/* 统一感叹号说明组件 */}
+                <div className="relative inline-flex items-center">
+                  <button
+                    type="button"
+                    onClick={() => setActivePopover(activePopover === 'single_stock' ? null : 'single_stock')}
+                    onFocus={() => setActivePopover('single_stock')}
+                    onBlur={() => setActivePopover(null)}
+                    className={`w-4 h-4 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none ${
+                      activePopover === 'single_stock'
+                        ? 'bg-[#3987e5] text-white shadow-sm'
+                        : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)]'
+                    }`}
+                    title="查看个股全息拉取与参数说明"
+                  >
+                    <InfoCircleIcon className="w-2.5 h-2.5" />
+                  </button>
+                  {activePopover === 'single_stock' && (
+                    <div
+                      className="absolute top-full left-0 mt-2 w-72 p-3 rounded-xl bg-[var(--surface-color)] border border-[var(--border-color)] shadow-2xl z-50 pointer-events-auto text-left"
+                      onMouseEnter={() => setActivePopover('single_stock')}
+                      onMouseLeave={() => setActivePopover(null)}
+                    >
+                      <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
+                        <span className="font-bold text-xs text-[var(--text-primary)]">个股全息商业与估值底账</span>
+                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#3987e5]/10 text-[#3987e5] font-semibold">SEC/JPX 官方</span>
+                      </div>
+                      <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                        一键完成单只股票从官方原始源到本地多维估值底账的穿透同步。
+                      </p>
+                      <div className="mt-2 p-2 rounded-lg bg-[var(--bg-card)]/80 border border-[var(--border-color)]/60 text-[10px] text-[var(--text-secondary)] leading-relaxed">
+                        <span className="font-semibold text-[#3987e5]">【参数反映情况】：</span>
+                        同步拉取最新交易时段报价、官方原始三表平账自检（资产 = 负债 + 股东权益 刚性平账）、计算过去 250 日 OHLCV 价量时序均线，并自动刷新现金流折现 (DCF) 多情景估值走廊。
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
               <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-[#3987e5]/10 text-[#3987e5] font-semibold font-mono">
-                精准单票
+                单票深度拉取
               </span>
             </div>
             <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-              输入股票代码，一键从 SEC EDGAR 与东证官方拉取最新现价、三表底稿平账、250日K线与DCF估值参数。
+              输入标的代码，一键从官方 SEC EDGAR 与东证决算短信拉取最新行情、三表平账底稿、250日K线与 DCF 估值走廊。
             </p>
 
             {/* 输入与更新按钮 */}
             <div className="space-y-3 pt-2">
               <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  value={singleStockTicker}
-                  onChange={e => setSingleStockTicker(e.target.value.toUpperCase())}
-                  onKeyDown={e => {
-                    if (e.key === 'Enter') void handleCollectSingleStock(singleStockTicker)
-                  }}
-                  placeholder="输入代码 (如 NVDA, AAPL, 8035)..."
-                  className="flex-1 text-sm font-mono font-bold rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] px-3.5 py-2.5 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[#3987e5]"
-                />
+                <div className="relative flex-1">
+                  <SearchIcon className="w-4 h-4 text-[var(--text-muted)] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <input
+                    type="text"
+                    value={singleStockTicker}
+                    onChange={e => setSingleStockTicker(e.target.value.toUpperCase())}
+                    onKeyDown={e => {
+                      if (e.key === 'Enter') void handleCollectSingleStock(singleStockTicker)
+                    }}
+                    placeholder="输入股票代码 (如 NVDA, AAPL, 8035)..."
+                    className="w-full text-sm font-mono font-bold rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] pl-10 pr-3.5 py-2.5 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[#3987e5]"
+                  />
+                </div>
                 <button
                   type="button"
                   disabled={runningSingleStockCollect}
@@ -322,14 +418,17 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
                       <span>正在更新…</span>
                     </>
                   ) : (
-                    <span>立即更新</span>
+                    <>
+                      <ZapIcon className="w-3.5 h-3.5" />
+                      <span>立即拉取并核算</span>
+                    </>
                   )}
                 </button>
               </div>
 
               {/* 常用快捷标的药丸 */}
               <div className="flex items-center gap-1.5 flex-wrap pt-1">
-                <span className="text-[11px] text-[var(--text-muted)] mr-1">快捷选择:</span>
+                <span className="text-[11px] text-[var(--text-muted)] mr-1">常用标的快捷检索:</span>
                 {quickPillTickers.map(item => (
                   <button
                     key={item.ticker}
@@ -352,25 +451,64 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
           </div>
 
           <div className="pt-3 border-t border-[var(--border-color)] text-[11px] text-[var(--text-muted)] flex items-center justify-between">
-            <span>已核验数据项：最新行情 · 官方三表 · 250日K线 · 估值走廊</span>
-            <span className="text-[#199e70] font-semibold">即查即用</span>
+            <div className="flex items-center gap-1">
+              <CheckIcon className="w-3.5 h-3.5 text-[#199e70]" />
+              <span>已核验维度：当日现价 · 官方三表平账 · 250日K线时序 · DCF估值走廊</span>
+            </div>
+            <span className="text-[#199e70] font-semibold">即时生效</span>
           </div>
         </div>
 
-        {/* 卡片 B：全市场自动同步 */}
+        {/* 卡片 B：全市场自动化批处理同步 */}
         <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-5 hover:border-[#199e70]/40 transition-all">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-bold text-[var(--text-primary)] flex items-center gap-2">
-                <ZapIcon className="w-5 h-5 text-[#199e70]" />
-                <span>全市场自动同步</span>
-              </h2>
+              <div className="flex items-center gap-2">
+                <DatabaseIcon className="w-5 h-5 text-[#199e70]" />
+                <h2 className="text-base font-bold text-[var(--text-primary)]">全市场自动化批处理同步</h2>
+                {/* 统一感叹号说明组件 */}
+                <div className="relative inline-flex items-center">
+                  <button
+                    type="button"
+                    onClick={() => setActivePopover(activePopover === 'market_sync' ? null : 'market_sync')}
+                    onFocus={() => setActivePopover('market_sync')}
+                    onBlur={() => setActivePopover(null)}
+                    className={`w-4 h-4 rounded-full flex items-center justify-center transition-all cursor-pointer focus:outline-none ${
+                      activePopover === 'market_sync'
+                        ? 'bg-[#199e70] text-white shadow-sm'
+                        : 'bg-[var(--surface-color)] hover:bg-[#199e70]/20 text-[var(--text-muted)] hover:text-[#199e70] border border-[var(--border-color)]'
+                    }`}
+                    title="查看全市场批处理与守护说明"
+                  >
+                    <InfoCircleIcon className="w-2.5 h-2.5" />
+                  </button>
+                  {activePopover === 'market_sync' && (
+                    <div
+                      className="absolute top-full left-0 mt-2 w-72 p-3 rounded-xl bg-[var(--surface-color)] border border-[var(--border-color)] shadow-2xl z-50 pointer-events-auto text-left"
+                      onMouseEnter={() => setActivePopover('market_sync')}
+                      onMouseLeave={() => setActivePopover(null)}
+                    >
+                      <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
+                        <span className="font-bold text-xs text-[var(--text-primary)]">全市场批处理与守护机制</span>
+                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#199e70]/10 text-[#199e70] font-semibold">自动化守护</span>
+                      </div>
+                      <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                        统一调度美股与日股共计 14,892 只全量上市主体的日线行情归档与形态初筛。
+                      </p>
+                      <div className="mt-2 p-2 rounded-lg bg-[var(--bg-card)]/80 border border-[var(--border-color)]/60 text-[10px] text-[var(--text-secondary)] leading-relaxed">
+                        <span className="font-semibold text-[#199e70]">【参数反映情况】：</span>
+                        纯本地 0-Token 执行 200/150/50 日均线多头排列与 VCP 波动收缩形态过滤，严格核验资产负债表平账，沉淀第二阶段主升浪候选池。
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
               <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-[#199e70]/10 text-[#199e70] font-semibold font-mono">
-                全量 14,892 标的
+                全量 14,892 只标的
               </span>
             </div>
             <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-              覆盖美股 10,443 家与日股 4,449 家上市企业，后台自动调度日线归档、平账自检与 SEPA 动量形态初筛。
+              覆盖美股 10,443 家与日股 4,449 家全量上市企业，后台自动调度日线归档、三表会计恒等式平账检验与 SEPA 主升浪初筛。
             </p>
 
             {/* 定时守护状态与手动触发 */}
@@ -378,11 +516,11 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
               <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)]">
                 <div className="space-y-0.5">
                   <div className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                    <span className={`w-2 h-2 rounded-full ${schedulerInfo?.automatic_enabled ? 'bg-[#199e70]' : 'bg-[var(--text-muted)]'}`} />
+                    <CalendarIcon className="w-3.5 h-3.5 text-[#199e70]" />
                     <span>定时守护调度：{schedulerInfo?.automatic_enabled ? '已开启' : '已暂停'}</span>
                   </div>
                   <div className="text-[11px] text-[var(--text-muted)]">
-                    每周二至周六 08:00 JST / 07:00 EST 盘后自动执行
+                    每周二至周六 08:00 JST / 07:00 EST 闭市后自动执行
                   </div>
                 </div>
                 <button
@@ -391,7 +529,7 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
                   onClick={handleToggleAutomatic}
                   className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[var(--border-color)] hover:border-[#199e70] text-[var(--text-secondary)] hover:text-[#199e70] cursor-pointer transition-all"
                 >
-                  {schedulerInfo?.automatic_enabled ? '暂停守护' : '开启守护'}
+                  {schedulerInfo?.automatic_enabled ? '暂停自动守护' : '开启自动守护'}
                 </button>
               </div>
 
@@ -409,7 +547,7 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
                 ) : (
                   <>
                     <LayersIcon className="w-4 h-4 text-[#199e70]" />
-                    <span>一键全市场对账与形态同步</span>
+                    <span>立即执行全市场对账与形态同步</span>
                   </>
                 )}
               </button>
@@ -417,8 +555,11 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
           </div>
 
           <div className="pt-3 border-t border-[var(--border-color)] text-[11px] text-[var(--text-muted)] flex items-center justify-between font-mono">
-            <span>美股 10,443 · 日股 4,449</span>
-            <span className="text-[#199e70] font-semibold font-sans">平账对账率 100%</span>
+            <span>全盘底账：美股 10,443 · 日股 4,449</span>
+            <div className="flex items-center gap-1 text-[#199e70] font-sans">
+              <ShieldCheckIcon className="w-3.5 h-3.5" />
+              <span className="font-semibold">资产负债表平账率 100%</span>
+            </div>
           </div>
         </div>
       </div>
@@ -431,8 +572,17 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
             onClick={() => setShowAdvanced(!showAdvanced)}
             className="flex items-center gap-2 text-xs font-semibold text-[var(--text-secondary)] hover:text-[#3987e5] cursor-pointer px-4 py-2 rounded-xl border border-[var(--border-color)] bg-[var(--surface-color)] hover:border-[#3987e5]/40 shadow-sm transition-all"
           >
-            <BarChartIcon className="w-3.5 h-3.5" />
-            <span>{showAdvanced ? '▲ 收起高级运维与任务流水' : '▼ 高级运维选项与任务历史记录'}</span>
+            {showAdvanced ? (
+              <>
+                <ChevronUpIcon className="w-3.5 h-3.5 text-[#3987e5]" />
+                <span>收起高级运维面板</span>
+              </>
+            ) : (
+              <>
+                <ChevronDownIcon className="w-3.5 h-3.5 text-[var(--text-secondary)]" />
+                <span>高级运维配置与任务执行历史 (按需展开)</span>
+              </>
+            )}
           </button>
         </div>
 
@@ -444,35 +594,38 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
               <button
                 type="button"
                 onClick={() => setAdvancedTab('scheduler')}
-                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
                   advancedTab === 'scheduler'
                     ? 'bg-[#3987e5]/10 text-[#3987e5]'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                 }`}
               >
-                调度任务清单 ({tasks.length})
+                <CalendarIcon className="w-3.5 h-3.5" />
+                <span>调度任务清单 ({tasks.length})</span>
               </button>
               <button
                 type="button"
                 onClick={() => setAdvancedTab('runs')}
-                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
                   advancedTab === 'runs'
                     ? 'bg-[#3987e5]/10 text-[#3987e5]'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                 }`}
               >
-                执行流水记录 ({recentRuns.length})
+                <NewspaperIcon className="w-3.5 h-3.5" />
+                <span>执行流水记录 ({recentRuns.length})</span>
               </button>
               <button
                 type="button"
                 onClick={() => setAdvancedTab('archives')}
-                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
                   advancedTab === 'archives'
                     ? 'bg-[#3987e5]/10 text-[#3987e5]'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                 }`}
               >
-                日线归档与对账概览
+                <DatabaseIcon className="w-3.5 h-3.5" />
+                <span>全盘日线归档与平账对账</span>
               </button>
             </div>
 
@@ -480,7 +633,7 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
             {advancedTab === 'scheduler' && (
               <div className="space-y-3">
                 <div className="flex items-center justify-between text-xs text-[var(--text-secondary)]">
-                  <span>共配置 {tasks.length} 项自动化与对账任务，支持单独配置 JSON 参数与手动触发</span>
+                  <span>内置 {tasks.length} 项批处理调度作业，严格采用单一真实数据源 (SSOT) JSON 参数驱动，支持手动分步调优。</span>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {tasks.map(task => (
@@ -498,14 +651,14 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
                                 : 'bg-[var(--text-muted)]/10 text-[var(--text-muted)]'
                             }`}
                           >
-                            {task.enabled ? '定时已开' : '定时已关'}
+                            {task.enabled ? '定时已开启' : '定时已暂停'}
                           </span>
                         </div>
                         <p className="text-[11px] text-[var(--text-secondary)] line-clamp-2">
                           {task.description || '官方财报拉取、三表平账核验与估值模型运算。'}
                         </p>
                         <div className="text-[10px] font-mono text-[var(--text-muted)] pt-0.5">
-                          定时表达式: {task.schedule || '手动触发'}
+                          调度周期: {task.schedule || '手动触发'}
                         </div>
                       </div>
 
@@ -516,9 +669,10 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
                             setSelectedConfigTaskId(task.id)
                             setConfigModalOpen(true)
                           }}
-                          className="px-2.5 py-1 rounded-lg border border-[var(--border-color)] text-[11px] text-[var(--text-secondary)] hover:text-[#3987e5] cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg border border-[var(--border-color)] text-[11px] text-[var(--text-secondary)] hover:text-[#3987e5] cursor-pointer flex items-center gap-1"
                         >
-                          配置参数
+                          <SettingsIcon className="w-3 h-3" />
+                          <span>参数配置</span>
                         </button>
                         <button
                           type="button"
@@ -532,9 +686,10 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
                           type="button"
                           disabled={runningTaskId === task.id}
                           onClick={() => handleRunTask(task)}
-                          className="px-3 py-1 rounded-lg bg-[#3987e5] text-white text-[11px] font-bold cursor-pointer disabled:opacity-50"
+                          className="px-3 py-1 rounded-lg bg-[#3987e5] text-white text-[11px] font-bold cursor-pointer disabled:opacity-50 flex items-center gap-1"
                         >
-                          {runningTaskId === task.id ? '运行中…' : '立即运行'}
+                          <ZapIcon className="w-3 h-3" />
+                          <span>{runningTaskId === task.id ? '运行中…' : '立即运行'}</span>
                         </button>
                       </div>
                     </div>
@@ -550,10 +705,10 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
                   <table className="w-full text-left text-xs">
                     <thead className="bg-[var(--bg-card)] text-[var(--text-muted)] font-semibold border-b border-[var(--border-color)]">
                       <tr>
-                        <th className="p-3">任务代码</th>
+                        <th className="p-3">任务名称 / 标识</th>
                         <th className="p-3">触发方式</th>
                         <th className="p-3">执行状态</th>
-                        <th className="p-3">完成时间</th>
+                        <th className="p-3">耗时与完成时间</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[var(--border-color)] font-mono text-[11px]">
@@ -580,15 +735,15 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
                   {/* 美股对账 */}
                   <div className="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] space-y-2 text-xs">
                     <div className="flex items-center justify-between font-bold">
-                      <span className="text-[var(--text-primary)]">美股市场日线对账 (US Market)</span>
+                      <span className="text-[var(--text-primary)]">美股市场日线对账 (US Market · SEC EDGAR)</span>
                       <span className="text-[10px] px-2 py-0.5 rounded bg-[#199e70]/10 text-[#199e70] font-mono">
                         {reconciliation?.us?.is_balanced ? '已刚性平账' : '持续核对中'}
                       </span>
                     </div>
                     <div className="grid grid-cols-2 gap-2 text-[11px] text-[var(--text-secondary)] font-mono pt-1">
-                      <div>总标的数: {reconciliation?.us?.universe_count || 10443}</div>
-                      <div>已平账数: {reconciliation?.us?.matched_count || 10443}</div>
-                      <div>核验率: {reconciliation?.us?.coverage_rate_pct || 100}%</div>
+                      <div>标的底账: {reconciliation?.us?.universe_count || 10443} 只</div>
+                      <div>成功平账: {reconciliation?.us?.matched_count || 10443} 只</div>
+                      <div>核对覆盖率: {reconciliation?.us?.coverage_rate_pct || 100}%</div>
                       <div>平账差额: {reconciliation?.us?.balance_diff || 0}</div>
                     </div>
                   </div>
@@ -596,23 +751,24 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
                   {/* 日股对账 */}
                   <div className="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] space-y-2 text-xs">
                     <div className="flex items-center justify-between font-bold">
-                      <span className="text-[var(--text-primary)]">日股市场日线对账 (JP Market)</span>
+                      <span className="text-[var(--text-primary)]">日股市场日线对账 (JP Market · JPX 东证)</span>
                       <span className="text-[10px] px-2 py-0.5 rounded bg-[#199e70]/10 text-[#199e70] font-mono">
                         {reconciliation?.jp?.is_balanced ? '已刚性平账' : '持续核对中'}
                       </span>
                     </div>
                     <div className="grid grid-cols-2 gap-2 text-[11px] text-[var(--text-secondary)] font-mono pt-1">
-                      <div>总标的数: {reconciliation?.jp?.universe_count || 4449}</div>
-                      <div>已平账数: {reconciliation?.jp?.matched_count || 4449}</div>
-                      <div>核验率: {reconciliation?.jp?.coverage_rate_pct || 100}%</div>
+                      <div>标的底账: {reconciliation?.jp?.universe_count || 4449} 只</div>
+                      <div>成功平账: {reconciliation?.jp?.matched_count || 4449} 只</div>
+                      <div>核对覆盖率: {reconciliation?.jp?.coverage_rate_pct || 100}%</div>
                       <div>平账差额: {reconciliation?.jp?.balance_diff || 0}</div>
                     </div>
                   </div>
                 </div>
 
                 {/* 归档样本条目 */}
-                <div className="text-xs text-[var(--text-secondary)]">
-                  近期归档样本数：{marketArchives.length} 标的，完整覆盖全市场行情底账。
+                <div className="text-xs text-[var(--text-secondary)] flex items-center justify-between">
+                  <span>近期全盘日线归档活跃样本：{marketArchives.length} 只标的</span>
+                  <span className="font-mono text-[var(--text-muted)]">双市场全量索引：14,892 标的就绪</span>
                 </div>
               </div>
             )}
