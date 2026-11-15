@@ -141,12 +141,12 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
       <div className={`flex flex-wrap items-center justify-between gap-3 ${expanded ? 'pb-3 border-b border-[var(--border-color)]' : ''}`}>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#199e70] animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-[#176249] animate-pulse" />
             <span className="font-bold text-xs text-[var(--text-primary)]">
               投研数据调度中枢
             </span>
           </div>
-          <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/25 font-medium">
+          <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#176249]/10 text-[#176249] border border-[#176249]/25 font-medium">
             分时调度已开启 · 10大任务通道正常
           </span>
         </div>
@@ -158,13 +158,13 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
             value={customTicker}
             onChange={e => setCustomTicker(e.target.value.toUpperCase())}
             placeholder="代码 (如 NVDA, 8035)..."
-            className="w-28 text-xs font-mono font-bold rounded-md border border-[var(--border-color)] bg-[var(--bg-card)] px-2 py-1 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[#3987e5]"
+            className="w-28 text-xs font-mono font-bold rounded-md border border-[var(--border-color)] bg-[var(--bg-card)] px-2 py-1 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[#176249] hover:border-slate-300"
           />
           <button
             type="button"
             disabled={singleStockBusy}
             onClick={() => void handleCollectSingleStock(customTicker)}
-            className="px-2.5 py-1 rounded-md bg-[#3987e5] hover:bg-[#2c72c8] text-white text-xs font-semibold cursor-pointer disabled:opacity-50 transition-all flex items-center gap-1 shadow-sm"
+            className="px-2.5 py-1 rounded-md bg-[#176249] hover:bg-[#124e3a] text-white text-xs font-semibold cursor-pointer disabled:opacity-50 transition-all flex items-center gap-1 shadow-sm"
           >
             {singleStockBusy ? (
               <>
@@ -195,7 +195,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
             onClick={() => void submitMaster('automatic')}
             className={`px-2.5 py-1 rounded-md border text-xs font-semibold cursor-pointer disabled:opacity-50 transition-all ${
               automatic
-                ? 'bg-[#199e70]/15 text-[#199e70] border-[#199e70]/40 hover:bg-[#199e70]/20'
+                ? 'bg-[#176249]/15 text-[#176249] border-[#176249]/40 hover:bg-[#176249]/20'
                 : 'bg-[var(--bg-card)] text-[var(--text-muted)] border-[var(--border-color)] hover:text-[var(--text-primary)]'
             }`}
           >
@@ -205,7 +205,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
           <button
             type="button"
             onClick={() => setExpanded(!expanded)}
-            className="text-xs text-[#3987e5] hover:underline font-medium px-1.5 py-1 cursor-pointer"
+            className="text-xs text-[#176249] hover:underline font-medium px-1.5 py-1 cursor-pointer"
           >
             {expanded ? '收起详情 ▲' : '展开基石调度 ▼'}
           </button>

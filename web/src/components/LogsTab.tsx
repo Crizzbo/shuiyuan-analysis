@@ -36,15 +36,15 @@ const MODULE_ZH_MAP: Record<string, string> = {
 }
 
 const MODULE_COLOR_MAP: Record<string, string> = {
-  event_radar: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-  evidence_verification: 'bg-purple-500/15 text-purple-400 border-purple-500/30',
-  terminal_scheduler: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
-  terminal_service: 'bg-cyan-500/15 text-cyan-400 border-cyan-500/30',
-  alert_dispatcher: 'bg-rose-500/15 text-rose-400 border-rose-500/30',
-  market_quotes: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
-  pipeline_orchestrator: 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30',
-  screening_engine: 'bg-teal-500/15 text-teal-400 border-teal-500/30',
-  audit_ledger: 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30',
+  event_radar: 'bg-[#176249]/20 text-emerald-400 border-[#176249]/40',
+  evidence_verification: 'bg-slate-700/40 text-slate-300 border-slate-600',
+  terminal_scheduler: 'bg-[#176249]/20 text-emerald-300 border-[#176249]/40',
+  terminal_service: 'bg-slate-700/40 text-slate-300 border-slate-600',
+  alert_dispatcher: 'bg-rose-950/60 text-rose-400 border-rose-800/60',
+  market_quotes: 'bg-amber-950/60 text-amber-400 border-amber-800/60',
+  pipeline_orchestrator: 'bg-slate-700/40 text-slate-300 border-slate-600',
+  screening_engine: 'bg-[#176249]/20 text-emerald-400 border-[#176249]/40',
+  audit_ledger: 'bg-amber-950/60 text-amber-300 border-amber-800/60',
 }
 
 export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
@@ -131,7 +131,7 @@ export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
         <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm">
           <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-[var(--border-color)]">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#199e70]" />
+              <span className="w-2 h-2 rounded-full bg-[#176249]" />
               <h3 className="text-xs font-bold text-[var(--text-primary)]">
                 物理专属日志文件落盘体系 (data/logs/ · 10MB 自动轮转)
               </h3>
@@ -144,7 +144,7 @@ export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
             {logFiles.map((f) => (
               <div
                 key={f.filename}
-                className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#3987e5]/40 rounded-lg p-2.5 flex flex-col justify-between transition-all"
+                className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-slate-300 rounded-lg p-2.5 flex flex-col justify-between transition-all"
                 title={`物理文件路径: ${f.path}`}
               >
                 <div className="text-[11px] font-bold font-mono text-[var(--text-primary)] truncate">
@@ -152,7 +152,7 @@ export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
                 </div>
                 <div className="flex items-center justify-between mt-1.5 text-[10px]">
                   <span className="text-[var(--text-muted)] font-mono">{f.size_formatted}</span>
-                  <span className={`px-1.5 py-0.2 rounded font-medium ${f.exists ? 'bg-[#199e70]/15 text-[#199e70]' : 'bg-gray-700/20 text-gray-500'}`}>
+                  <span className={`px-1.5 py-0.2 rounded font-medium ${f.exists ? 'bg-[#176249]/10 text-[#176249]' : 'bg-slate-100 text-slate-500'}`}>
                     {f.exists ? '落盘正常' : '待初始化'}
                   </span>
                 </div>
@@ -180,8 +180,8 @@ export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
                 onClick={() => setLevelFilter(lvl.id)}
                 className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   levelFilter === lvl.id
-                    ? 'bg-[#3987e5] text-white shadow-sm'
-                    : 'bg-[var(--bg-card)] text-[var(--text-secondary)] hover:bg-[var(--border-color)]'
+                    ? 'bg-[#176249] text-white shadow-sm'
+                    : 'bg-[var(--bg-card)] text-[var(--text-secondary)] hover:bg-slate-100 border border-transparent hover:border-slate-200'
                 }`}
               >
                 {lvl.label}
@@ -197,12 +197,12 @@ export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && setAppliedQuery(searchQuery.trim())}
-              className="bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-lg px-3 py-1.5 text-xs w-64 focus:outline-none focus:border-[#3987e5]"
+              className="bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-lg px-3 py-1.5 text-xs w-64 focus:outline-none focus:border-[#176249] hover:border-slate-300"
             />
             <button
               type="button"
               onClick={() => setAppliedQuery(searchQuery.trim())}
-              className="px-3 py-1.5 bg-[#3987e5] text-white rounded-lg text-xs hover:bg-[#2a78d6] cursor-pointer"
+              className="px-3 py-1.5 bg-[#176249] hover:bg-[#124e3a] text-white rounded-lg text-xs cursor-pointer shadow-sm transition-all"
             >
               筛选
             </button>
@@ -214,7 +214,7 @@ export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
                 setLevelFilter('ALL')
                 setModuleFilter('ALL')
               }}
-              className="px-2.5 py-1.5 bg-[var(--bg-card)] text-[var(--text-secondary)] rounded-lg text-xs hover:bg-[var(--border-color)] border border-[var(--border-color)] cursor-pointer"
+              className="px-2.5 py-1.5 bg-[var(--bg-card)] text-[var(--text-secondary)] rounded-lg text-xs hover:bg-slate-100 border border-[var(--border-color)] cursor-pointer transition-all"
             >
               重置
             </button>
@@ -231,8 +231,8 @@ export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
               onClick={() => setModuleFilter(mod.id)}
               className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                 moduleFilter === mod.id
-                  ? 'bg-[#199e70] text-white shadow-sm'
-                  : 'bg-[var(--bg-card)] text-[var(--text-secondary)] border border-[var(--border-color)] hover:border-[#199e70]'
+                  ? 'bg-[#176249] text-white shadow-sm'
+                  : 'bg-[var(--bg-card)] text-[var(--text-secondary)] border border-[var(--border-color)] hover:border-[#176249]'
               }`}
             >
               <span>{mod.label}</span>
@@ -245,15 +245,15 @@ export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
       <div className="bg-[#090d16] border border-[#27354b] rounded-xl p-4 font-mono text-xs shadow-inner min-h-[500px] max-h-[70vh] overflow-y-auto">
         <div className="flex items-center justify-between pb-3 border-b border-gray-800 text-[11px] text-gray-500 mb-2">
           <span>系统运行日志（共收录 {combinedLogs.length} 条记录）</span>
-          <span className="flex items-center gap-1.5 text-[#199e70]">
-            <span className="w-2 h-2 rounded-full bg-[#199e70] animate-pulse" />
+          <span className="flex items-center gap-1.5 text-emerald-400">
+            <span className="w-2 h-2 rounded-full bg-[#176249] animate-pulse" />
             SSE 实时推流已就绪
           </span>
         </div>
 
         {loading && logs.length === 0 ? (
           <div className="text-gray-500 py-12 text-center flex items-center justify-center gap-2">
-            <span className="w-3.5 h-3.5 border-2 border-[#3987e5] border-t-transparent rounded-full animate-spin" />
+            <span className="w-3.5 h-3.5 border-2 border-[#176249] border-t-transparent rounded-full animate-spin" />
             正在调取各专属模块日志审计流...
           </div>
         ) : pagedLogs.length === 0 ? (
@@ -275,10 +275,10 @@ export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
                   <span
                     className={`px-1.5 py-0.2 rounded text-[10px] font-bold shrink-0 ${
                       log.level === 'ERROR'
-                        ? 'bg-[#d03b3b]/30 text-[#d03b3b] border border-[#d03b3b]/50'
+                        ? 'bg-rose-950/60 text-rose-400 border border-rose-800/60'
                         : log.level === 'WARN'
-                        ? 'bg-[#c98500]/30 text-[#c98500] border border-[#c98500]/50'
-                        : 'bg-[#3987e5]/20 text-[#3987e5]'
+                        ? 'bg-amber-950/60 text-amber-400 border border-amber-800/60'
+                        : 'bg-emerald-950/60 text-emerald-400 border border-emerald-800/60'
                     }`}
                   >
                     {{ INFO: '信息', WARN: '预警', ERROR: '异常' }[log.level] ?? log.level}

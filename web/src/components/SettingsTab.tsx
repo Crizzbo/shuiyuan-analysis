@@ -28,7 +28,7 @@ export function SettingsTab() {
     return (
       <div className="p-8 flex items-center justify-center min-h-[400px]">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-3 border-[#3987e5] border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-3 border-[#176249] border-t-transparent rounded-full animate-spin" />
           <div className="text-xs text-[var(--text-muted)]">加载系统配置与账本验签状态...</div>
         </div>
       </div>
@@ -48,7 +48,7 @@ export function SettingsTab() {
           <h2 className="text-base font-bold text-[var(--text-primary)]">
             投研合规与系统设置
           </h2>
-          <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#199e70]/15 text-[#199e70] border border-[#199e70]/30 font-medium">
+          <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-medium">
             全链路健康
           </span>
         </div>
@@ -66,7 +66,7 @@ export function SettingsTab() {
             <h3 className="text-sm font-bold text-[var(--text-primary)]">
               投研风控与数据合规准则
             </h3>
-            <span className="text-xs px-2 py-0.5 rounded bg-[#199e70]/20 text-[#199e70] border border-[#199e70]/30 font-semibold">
+            <span className="text-xs px-2 py-0.5 rounded bg-[#176249]/10 text-[#176249] border border-[#176249]/25 font-semibold">
               合规运行中
             </span>
           </div>
@@ -110,8 +110,8 @@ export function SettingsTab() {
             <span
               className={`text-xs px-2 py-0.5 rounded font-semibold ${
                 ledger?.integrity_valid
-                  ? 'bg-[#199e70]/20 text-[#199e70] border border-[#199e70]/30'
-                  : 'bg-[#d03b3b]/20 text-[#d03b3b] border border-[#d03b3b]/30'
+                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                  : 'bg-rose-50 text-rose-700 border border-rose-200'
               }`}
             >
               {ledger?.integrity_valid ? '防伪审计有效' : '验签异常'}
@@ -128,7 +128,7 @@ export function SettingsTab() {
             </div>
             <div className="bg-[var(--bg-card)] rounded-lg p-3 border border-[var(--border-color)]">
               <div className="text-xs text-[var(--text-muted)]">覆盖资产标的</div>
-              <div className="text-2xl font-bold font-mono text-[#3987e5] mt-1">
+              <div className="text-2xl font-bold font-mono text-[#176249] mt-1">
                 {ledger?.unique_tickers} 家
               </div>
             </div>
@@ -163,19 +163,19 @@ export function SettingsTab() {
           <div className="space-y-2 text-xs">
             <div className="flex justify-between items-center bg-[var(--bg-card)] p-2.5 rounded-lg border border-[var(--border-color)]">
               <span className="text-[var(--text-secondary)]">行情数据同步接口:</span>
-              <span className={`font-mono font-semibold ${env?.gdrive_detected ? 'text-[#199e70]' : 'text-gray-400'}`}>
+              <span className={`font-mono font-semibold ${env?.gdrive_detected ? 'text-[#176249]' : 'text-gray-400'}`}>
                 {env?.gdrive_detected ? '已连接 (行情专有表)' : '未连接'}
               </span>
             </div>
             <div className="flex justify-between items-center bg-[var(--bg-card)] p-2.5 rounded-lg border border-[var(--border-color)]">
               <span className="text-[var(--text-secondary)]">官方监管披露核验:</span>
-              <span className={`font-mono font-semibold ${env?.edge_detected ? 'text-[#199e70]' : 'text-gray-400'}`}>
+              <span className={`font-mono font-semibold ${env?.edge_detected ? 'text-[#176249]' : 'text-gray-400'}`}>
                 {env?.edge_detected ? '已就绪 (SEC / 东证 / 美联储)' : '未就绪'}
               </span>
             </div>
             <div className="flex justify-between items-center bg-[var(--bg-card)] p-2.5 rounded-lg border border-[var(--border-color)]">
               <span className="text-[var(--text-secondary)]">本地投研计算引擎:</span>
-              <span className="font-mono text-[11px] text-[#199e70] font-semibold">
+              <span className="font-mono text-[11px] text-[#176249] font-semibold">
                 {env?.python_executable ? '已就绪 (本地隔离运行)' : '默认环境就绪'}
               </span>
             </div>
@@ -194,15 +194,15 @@ export function SettingsTab() {
           <div className="space-y-2 text-xs">
             <div className="flex justify-between items-center bg-[var(--bg-card)] p-2.5 rounded-lg border border-[var(--border-color)]">
               <span className="text-[var(--text-secondary)]">动态盘中数据:</span>
-              <span className="font-mono font-semibold text-[#199e70]">{lifecycle?.hot_quote_max_age_days || 30} 天 (高频动态计算)</span>
+              <span className="font-mono font-semibold text-[#176249]">{lifecycle?.hot_quote_max_age_days || 30} 天 (高频动态计算)</span>
             </div>
             <div className="flex justify-between items-center bg-[var(--bg-card)] p-2.5 rounded-lg border border-[var(--border-color)]">
               <span className="text-[var(--text-secondary)]">历史财务数据:</span>
-              <span className="font-mono font-semibold text-[#c98500]">{lifecycle?.warm_quote_max_age_days || 1095} 天 (3年财报全息归档)</span>
+              <span className="font-mono font-semibold text-amber-700">{lifecycle?.warm_quote_max_age_days || 1095} 天 (3年财报全息归档)</span>
             </div>
             <div className="flex justify-between items-center bg-[var(--bg-card)] p-2.5 rounded-lg border border-[var(--border-color)]">
               <span className="text-[var(--text-secondary)]">长周期历史归档:</span>
-              <span className="font-mono font-semibold text-[#3987e5]">自动化离线压缩归档</span>
+              <span className="font-mono font-semibold text-slate-700">自动化离线压缩归档</span>
             </div>
           </div>
         </div>
@@ -219,7 +219,7 @@ export function SettingsTab() {
               已接入的模块和当前数据条件。
             </p>
           </div>
-          <span className="text-xs px-2.5 py-1 rounded bg-[#199e70]/15 text-[#199e70] border border-[#199e70]/30 font-medium">
+          <span className="text-xs px-2.5 py-1 rounded bg-[#176249]/10 text-[#176249] border border-[#176249]/25 font-medium">
             {settings ? '配置已读取' : '配置读取失败'}
           </span>
         </div>
@@ -236,7 +236,7 @@ export function SettingsTab() {
             <div key={svc.name} className="bg-[var(--bg-card)] border border-[var(--border-color)]/60 rounded-lg p-3.5 space-y-2">
               <div className="flex items-center justify-between gap-2">
                 <span className="text-xs font-bold text-[var(--text-primary)]">{svc.name}</span>
-                <span className="text-[11px] px-2 py-0.5 rounded bg-[#199e70]/15 text-[#199e70] border border-[#199e70]/30 shrink-0 font-medium">
+                <span className="text-[11px] px-2 py-0.5 rounded bg-[#176249]/10 text-[#176249] border border-[#176249]/25 shrink-0 font-medium">
                   {svc.status}
                 </span>
               </div>

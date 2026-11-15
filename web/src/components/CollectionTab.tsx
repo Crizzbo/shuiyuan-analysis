@@ -536,16 +536,16 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
                 type="button"
                 disabled={runningBatchSync}
                 onClick={handleRunFullSync}
-                className="w-full py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] hover:border-[#199e70]/50 hover:bg-[#199e70]/5 text-xs font-bold text-[var(--text-primary)] cursor-pointer disabled:opacity-50 transition-all flex items-center justify-center gap-2 shadow-sm"
+                className="w-full py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] hover:border-[#176249]/50 hover:bg-[#176249]/5 text-xs font-bold text-[var(--text-primary)] cursor-pointer disabled:opacity-50 transition-all flex items-center justify-center gap-2 shadow-sm"
               >
                 {runningBatchSync ? (
                   <>
-                    <div className="w-3.5 h-3.5 border-2 border-[#199e70] border-t-transparent rounded-full animate-spin" />
+                    <div className="w-3.5 h-3.5 border-2 border-[#176249] border-t-transparent rounded-full animate-spin" />
                     <span>正在执行全盘同步与对账…</span>
                   </>
                 ) : (
                   <>
-                    <LayersIcon className="w-4 h-4 text-[#199e70]" />
+                    <LayersIcon className="w-4 h-4 text-[#176249]" />
                     <span>立即执行全市场对账与形态同步</span>
                   </>
                 )}
@@ -772,7 +772,7 @@ export function CollectionTab({ refreshKey }: CollectionTabProps) {
         )}
       </div>
 
-      {/* 任务参数化配置弹窗 (SSOT JSON Modal) */}
+      {/* 任务参数化配置弹窗 (任务配置管理) */}
       <TaskConfigModal
         isOpen={configModalOpen}
         onClose={() => {

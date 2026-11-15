@@ -85,7 +85,7 @@ export function TaskConfigModal({
     }
   }
 
-  // 保存配置到后端 SSOT
+  // 保存配置到后端持久化
   const handleSave = async () => {
     if (jsonError) {
       showToast({
@@ -113,7 +113,7 @@ export function TaskConfigModal({
       if (res.ok) {
         showToast({
           type: 'success',
-          title: '任务配置已落盘 (SSOT)',
+          title: '任务配置已保存',
           message: `[${currentTaskConfig.name_zh || activeTaskId}] 参数已成功保存至 config/terminal_tasks.json`,
         })
         onConfigSaved?.()
@@ -187,7 +187,7 @@ export function TaskConfigModal({
                   onClick={() => handleSelectTask(k)}
                   className={`w-full text-left p-2.5 rounded-xl transition-all cursor-pointer flex flex-col gap-1 border ${
                     isSelected
-                      ? 'bg-[#3987e5]/15 border-[#3987e5] text-[var(--text-primary)] shadow-sm'
+                      ? 'bg-[#176249]/10 border-[#176249] text-[var(--text-primary)] shadow-sm'
                       : 'border-transparent hover:bg-[var(--surface-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                   }`}
                 >
@@ -196,8 +196,8 @@ export function TaskConfigModal({
                     <span
                       className={`text-[9px] px-1.5 py-0.2 rounded font-mono ${
                         isCollection
-                          ? 'bg-[#3987e5]/20 text-[#3987e5]'
-                          : 'bg-[#199e70]/20 text-[#199e70]'
+                          ? 'bg-slate-100 text-slate-700'
+                          : 'bg-[#176249]/10 text-[#176249]'
                       }`}
                     >
                       {isCollection ? '采集轨' : '核对轨'}
@@ -215,7 +215,7 @@ export function TaskConfigModal({
           <div className="flex-1 flex flex-col overflow-y-auto p-5 space-y-4">
             {loading ? (
               <div className="flex-1 flex items-center justify-center p-12">
-                <div className="w-6 h-6 border-2 border-[#3987e5] border-t-transparent rounded-full animate-spin" />
+                <div className="w-6 h-6 border-2 border-[#176249] border-t-transparent rounded-full animate-spin" />
               </div>
             ) : (
               <>
@@ -239,7 +239,7 @@ export function TaskConfigModal({
                     <button
                       type="button"
                       onClick={() => setIsRawJsonMode(!isRawJsonMode)}
-                      className="px-2.5 py-1 text-xs rounded-lg border border-[var(--border-color)] bg-[var(--surface-color)] hover:border-[#3987e5] text-[var(--text-secondary)] cursor-pointer"
+                      className="px-2.5 py-1 text-xs rounded-lg border border-[var(--border-color)] bg-[var(--surface-color)] hover:border-[#176249] text-[var(--text-secondary)] hover:text-[#176249] cursor-pointer transition-all"
                     >
                       {isRawJsonMode ? '切换结构化视图' : '查看/编辑完整 JSON'}
                     </button>

@@ -17,7 +17,7 @@ interface AnalyticsTabProps {
   initialTicker?: string | null
 }
 
-// 使用 format.ts 统一导出的 getSeverityBadge, getVerificationBadge 单一事实来源 (SSOT)
+// 使用 format.ts 统一导出的 getSeverityBadge, getVerificationBadge 规范映射
 
 export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
   // 左侧标的资产池状态
@@ -559,7 +559,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
               </p>
             </div>
           ) : analysisError ? (
-            <div className="p-8 text-center text-[#d03b3b] bg-[#331114]/20 border border-[#d03b3b]/30 rounded-xl space-y-3">
+            <div className="p-8 text-center text-rose-700 bg-rose-50 border border-rose-200 rounded-xl space-y-3">
               <div className="text-sm font-bold">获取标的深度研报失败</div>
               <p className="text-xs opacity-90">{analysisError}</p>
               <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
@@ -1268,7 +1268,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                       <button
                         type="button"
                         onClick={() => setShowSensitivity(!showSensitivity)}
-                        className="px-2.5 py-1 text-xs font-medium rounded border border-[var(--border-color)] bg-[var(--bg-card)] text-[#3987e5] hover:border-[#3987e5] cursor-pointer"
+                        className="px-2.5 py-1 text-xs font-medium rounded border border-[var(--border-color)] bg-[var(--bg-card)] text-[#176249] hover:border-[#176249] cursor-pointer"
                       >
                         {showSensitivity ? '收起微调面板 ▲' : '展开敏感性微调 ▼'}
                       </button>
@@ -1332,7 +1332,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                           <button
                             type="submit"
                             disabled={tuning}
-                            className="px-3.5 py-1.5 rounded-md bg-[#3987e5] text-white text-xs font-semibold cursor-pointer hover:bg-[#3987e5]/90 disabled:opacity-50"
+                            className="px-3.5 py-1.5 rounded-md bg-[#176249] hover:bg-[#124e3a] text-white text-xs font-semibold cursor-pointer disabled:opacity-50 transition-all shadow-sm"
                           >
                             {tuning ? '重新测算中…' : '应用微调并重新测算估值走廊'}
                           </button>
@@ -1356,7 +1356,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                         <span className="text-xs font-bold text-[var(--text-primary)]">
                           加权平均资本成本 (WACC)
                         </span>
-                        <span className="text-[10px] px-1.5 py-0.5 rounded font-mono bg-[#3987e5]/10 text-[#3987e5]">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded font-mono bg-slate-100 text-slate-700">
                           CAPM 模型
                         </span>
                       </div>
@@ -1388,14 +1388,14 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                         <span className="text-xs font-bold text-[var(--text-primary)]">
                           杜邦分析与盈利质量透视
                         </span>
-                        <span className="text-[10px] px-1.5 py-0.5 rounded font-mono bg-[#d03b3b]/10 text-[#d03b3b]">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded font-mono bg-slate-100 text-slate-700">
                           官方三表披露
                         </span>
                       </div>
                       <div className="space-y-2 text-xs">
                         <div className="flex items-center justify-between">
                           <span className="text-[var(--text-secondary)]">净资产收益率 (ROE)</span>
-                          <span className="font-mono font-bold text-[#d03b3b]">
+                          <span className="font-mono font-bold text-[#176249]">
                             {ratios?.roe_pct != null ? `${ratios.roe_pct}%` : '—'}
                           </span>
                         </div>
@@ -1460,7 +1460,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                 <div className="space-y-4">
                   {loadingSuite24 ? (
                     <div className="p-12 text-center text-xs text-[var(--text-muted)] bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl space-y-3">
-                      <div className="w-8 h-8 border-3 border-[#199e70] border-t-transparent rounded-full animate-spin mx-auto" />
+                      <div className="w-8 h-8 border-3 border-[#176249] border-t-transparent rounded-full animate-spin mx-auto" />
                       <div className="text-sm font-semibold text-[var(--text-primary)]">
                         正在穿透核验 25 项核心金融量化指标…
                       </div>
@@ -2009,7 +2009,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                 {/* 商业模式与护城河 */}
                 <div className="xl:col-span-8 bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
                   <div className="flex items-center gap-2 pb-3 border-b border-[var(--border-color)]">
-                    <span className="w-2 h-2 rounded-full bg-[#3987e5]" />
+                    <span className="w-2 h-2 rounded-full bg-[#176249]" />
                     <h3 className="text-sm font-bold text-[var(--text-primary)]">
                       商业模式与护城河壁垒剖析
                     </h3>
@@ -2060,7 +2060,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                 {/* 上下游供应链结构 */}
                 <div className="xl:col-span-4 bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
                   <div className="flex items-center gap-2 pb-3 border-b border-[var(--border-color)]">
-                    <span className="w-2 h-2 rounded-full bg-[#d03b3b]" />
+                    <span className="w-2 h-2 rounded-full bg-rose-500" />
                     <h3 className="text-sm font-bold text-[var(--text-primary)]">
                       产业链上下游集中度
                     </h3>
