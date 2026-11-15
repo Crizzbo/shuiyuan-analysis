@@ -19,7 +19,7 @@ const tabs = [
   { id: 'collection', label: '采集中心' },
   { id: 'analytics', label: '计算分析' },
   { id: 'logs', label: '系统日志' },
-  { id: 'settings', label: '系统设置' },
+  { id: 'settings', label: '合规审计' },
 ] as const
 type Tab = (typeof tabs)[number]['id']
 

@@ -173,10 +173,10 @@ export const api = {
     body: JSON.stringify({ enabled }),
   }),
 
-  runTerminalTask: (taskId: string) =>
-    request<{ run_id: string; status: string; task: string }>('/api/terminal/tasks/run', {
+  runTerminalTask: (taskId: string, ticker?: string) =>
+    request<{ run_id: string; status: string; task: string; ticker?: string }>('/api/terminal/tasks/run', {
       method: 'POST',
-      body: JSON.stringify({ task: taskId }),
+      body: JSON.stringify({ task: taskId, ticker }),
     }),
 
   scheduleTerminalTask: (taskId: string, enabled: boolean) =>

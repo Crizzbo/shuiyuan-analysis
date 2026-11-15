@@ -20,6 +20,21 @@ const MODULE_PRESETS: Array<{ id: string; label: string; icon: string }> = [
   { id: 'pipeline_orchestrator', label: '信息流水线', icon: '🔄' },
 ]
 
+const MODULE_ZH_MAP: Record<string, string> = {
+  event_radar: '事件雷达',
+  evidence_verification: '公报核验',
+  terminal_scheduler: '任务调度',
+  terminal_service: '终端服务',
+  alert_dispatcher: '告警分发',
+  market_quotes: '行情归档',
+  pipeline_orchestrator: '信息流水线',
+  screening_engine: '选股初筛',
+  audit_ledger: '底账审计',
+  filing_audit: '三表核对',
+  quant_valuation: '量化估值',
+  system_core: '系统核心',
+}
+
 const MODULE_COLOR_MAP: Record<string, string> = {
   event_radar: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
   evidence_verification: 'bg-purple-500/15 text-purple-400 border-purple-500/30',
@@ -105,7 +120,7 @@ export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
     const seen = new Set(MODULE_PRESETS.map(m => m.id))
     const extra = availableModules
       .filter(m => !seen.has(m))
-      .map(m => ({ id: m, label: m, icon: '📦' }))
+      .map(m => ({ id: m, label: MODULE_ZH_MAP[m] || m, icon: '📦' }))
     return [...MODULE_PRESETS, ...extra]
   }, [availableModules])
 
@@ -274,9 +289,9 @@ export function LogsTab({ realtimeLogs = [], refreshKey }: LogsTabProps) {
                     type="button"
                     onClick={() => setModuleFilter(log.module)}
                     className={`px-1.5 py-0.2 rounded text-[10px] font-semibold border shrink-0 cursor-pointer hover:opacity-80 transition-opacity ${modCls}`}
-                    title={`点击仅查看 ${log.module} 模块专属日志`}
+                    title={`点击仅查看 ${MODULE_ZH_MAP[log.module] || log.module} 模块专属日志`}
                   >
-                    {log.task ? toChinese(log.task) : log.module}
+                    {log.task ? toChinese(log.task) : (MODULE_ZH_MAP[log.module] || log.module)}
                   </button>
                   <span className="min-w-0 text-gray-200 break-words flex-1">
                     {log.status && <span className="text-gray-400 font-semibold">{toChinese(log.status)} · </span>}

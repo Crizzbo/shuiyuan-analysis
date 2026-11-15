@@ -98,6 +98,10 @@ export interface TaskSchedulerTask {
   enabled: boolean
   automatic: boolean
   track: 'local' | 'collection'
+  dimension?: string
+  dimension_name?: string
+  description?: string
+  serves_stock_analysis?: string
 }
 
 export interface TaskSchedulerRun {
@@ -158,6 +162,33 @@ export interface MarketReconciliationMap {
   jp?: MarketReconciliationItem | null
 }
 
+export interface EquityValuationCard {
+  ticker: string
+  company_name: string
+  market: 'US' | 'JP'
+  currency: string
+  current_price: number | null
+  formatted_price: string
+  data_status: string
+  timestamp_formatted: string
+  has_valuation: boolean
+  corridor?: {
+    conservative_floor?: number
+    base_fair_value?: number
+    optimistic_target?: number
+    margin_of_safety_pct?: number
+    verdict_grade?: string
+    verdict_zh?: string
+    valuation_verdict?: string
+  } | null
+  fundamentals?: {
+    free_cash_flow_formatted?: string
+    net_cash_status?: string
+    wacc_pct?: string
+    gross_margin?: string
+  } | null
+}
+
 export interface DashboardSummaryData {
   as_of?: string
   freshness_banner: string
@@ -175,6 +206,7 @@ export interface DashboardSummaryData {
     market_status?: string
   }
   indicators: IndicatorItem[]
+  core_equities_valuation?: EquityValuationCard[]
   sepa_breadth: SepaBreadthData
   events_summary: {
     total_events: number

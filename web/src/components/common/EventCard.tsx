@@ -2,7 +2,7 @@ import React from 'react';
 import { SeverityBadge, VerificationBadge } from './StatusBadge';
 import { EntityPills } from './EntityPills';
 import { MicroImpactBox } from './MicroImpactBox';
-import { formatDeviceTime, toList } from '../../utils/format';
+import { formatDeviceTime, toList, formatEventCategory, formatSourceName } from '../../utils/format';
 
 export interface EventCardProps {
   id?: string;
@@ -58,11 +58,14 @@ export const EventCard: React.FC<EventCardProps> = ({
           <h4 className="text-xs font-bold text-[var(--text-primary)] hover:text-[#3987e5] leading-snug truncate">
             {title}
           </h4>
-          {category && category !== 'General' && (
-            <span className="text-[10px] px-1.5 py-0.2 rounded font-medium bg-[var(--surface-color)] text-[var(--text-secondary)] border border-[var(--border-color)] shrink-0">
-              {category}
-            </span>
-          )}
+          {(() => {
+            const catLabel = formatEventCategory(category);
+            return catLabel ? (
+              <span className="text-[10px] px-1.5 py-0.2 rounded font-medium bg-[var(--surface-color)] text-[var(--text-secondary)] border border-[var(--border-color)] shrink-0">
+                {catLabel}
+              </span>
+            ) : null;
+          })()}
           {is_distilled && onViewRadarDetail && (
             <button
               type="button"
@@ -105,13 +108,13 @@ export const EventCard: React.FC<EventCardProps> = ({
         <div className="flex flex-wrap items-center gap-2 text-[10px]">
           {source_name && (
             <span className="text-[var(--text-muted)]">
-              信源: <span className="text-[var(--text-secondary)]">{source_name}</span>
+              信源: <span className="text-[var(--text-secondary)]">{formatSourceName(source_name)}</span>
             </span>
           )}
           <EntityPills entities={involved_entities} onSelectTicker={onSelectTicker} />
           {segments.length > 0 && (
             <div className="inline-flex flex-wrap items-center gap-1">
-              {segments.map((seg, i) => (
+              {segments.slice(0, 3).map((seg, i) => (
                 <span
                   key={`seg-${i}`}
                   className="px-1.5 py-0.2 rounded bg-[#199e70]/10 text-[#199e70] border border-[#199e70]/20 font-medium"

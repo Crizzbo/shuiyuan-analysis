@@ -10,13 +10,13 @@
  * 输出范式：2026-11-14 09:42:07（UTC+09:00）
  */
 export function formatDeviceTime(value?: string | number | null): string {
-  if (!value) return '时间未提供'
+  if (!value) return ''
   const strVal = String(value).trim()
-  if (!strVal) return '时间未提供'
+  if (!strVal || strVal === '时间未提供' || strVal === '未知' || strVal === '待补数') return ''
 
   // 若仅包含纯日期 (如 2026-11-14)
   if (/^\d{4}-\d{2}-\d{2}$/.test(strVal)) {
-    return `${strVal}（仅发布日期）`
+    return strVal
   }
 
   const date = new Date(strVal)
@@ -71,6 +71,7 @@ export const CHINESE_LABELS: Record<string, string> = {
   NO_FILING: '缺少财报',
   READY: '数据已就绪',
   ARCHIVED_BASELINE: '基线归档',
+  EMPTY: '待初筛',
   collected: '已归档',
   no_data: '暂无数据',
   network_error: '网络失败',
@@ -204,3 +205,105 @@ export function getVerificationBadge(status?: string): { text: string; cls: stri
       return { text: '已归档', cls: 'bg-gray-600/20 text-gray-400 border-gray-600/30' }
   }
 }
+
+/**
+ * 事件分类英文枚举向优雅买方直觉中文映射 (SSOT)
+ */
+export function formatEventCategory(cat?: string): string {
+  if (!cat) return ''
+  const c = String(cat).trim()
+  const map: Record<string, string> = {
+    State_Policy_Regulatory: '政策法规',
+    CentralBank_Liquidity_FX_Shock: '央行利率',
+    Geopolitical_Conflict: '地缘局势',
+    Physical_Plant_Disruption: '突发停工',
+    Supply_Chain_Shortage: '供应链',
+    Corporate_Earnings_Event: '公司财报',
+    Technology_Breakthrough: '前沿技术',
+    Executive_Leadership_Change: '高管变动',
+    Other_Macro_Event: '宏观综合',
+    Macro_Monetary: '宏观流动性',
+    Regulatory_Compliance: '监管合规',
+    Corporate_Action: '公司动态',
+    general_market: '综合市场',
+    earnings: '企业财报',
+    macro: '宏观经济',
+    technology: '前沿技术',
+    General: '',
+  }
+  if (map[c] !== undefined) return map[c]
+  return c.replace(/_/g, ' ')
+}
+
+/**
+ * 信源权威可信度分级转换为专业中文标签 (SSOT)
+ */
+export function formatCredibilityTier(tier?: string): { text: string; cls: string } {
+  const t = String(tier || '').trim()
+  switch (t) {
+    case 'Tier1_Official_Regulatory':
+      return { text: '官方原发 (一级)', cls: 'bg-[#199e70]/15 text-[#199e70] border-[#199e70]/30' }
+    case 'Tier2_Issuer_Direct':
+      return { text: '企业直发 (二级)', cls: 'bg-[#3987e5]/15 text-[#3987e5] border-[#3987e5]/30' }
+    case 'Tier3_Mainstream_Wire':
+      return { text: '主流财经 (三级)', cls: 'bg-[#c98500]/15 text-[#c98500] border-[#c98500]/30' }
+    case 'Tier4_Public_Flash_Social':
+      return { text: '公开快讯 (四级)', cls: 'bg-gray-600/20 text-gray-400 border-gray-600/30' }
+    default:
+      return { text: t ? '已归档' : '', cls: 'bg-gray-600/20 text-gray-400 border-gray-600/30' }
+  }
+}
+
+/**
+ * 将原始长 URL 或技术源名转换为友好机构信源名称 (SSOT)
+ */
+export function formatSourceName(source?: string): string {
+  if (!source) return ''
+  const s = String(source).trim()
+  if (s.startsWith('http://') || s.startsWith('https://')) {
+    try {
+      const url = new URL(s)
+      const host = url.hostname.toLowerCase()
+      if (host.includes('federalreserve.gov')) return '美联储发布'
+      if (host.includes('sec.gov')) return 'SEC 官方披露'
+      if (host.includes('nvidia.com')) return '英伟达官方'
+      if (host.includes('bloomberg.com')) return '彭博社'
+      if (host.includes('reuters.com')) return '路透社'
+      if (host.includes('cnbc.com')) return 'CNBC'
+      if (host.includes('wsj.com')) return '华尔街日报'
+      if (host.includes('ft.com')) return '金融时报'
+      if (host.includes('jpx.co.jp')) return '东证官方'
+      if (host.includes('yahoo.com')) return '雅虎财经'
+      return host.replace(/^www\./, '')
+    } catch {
+      return s
+    }
+  }
+  return s
+}
+
+/**
+ * 过滤内部占位实体并去重限制数量 (SSOT)
+ */
+export function cleanEntityList(entities?: string | string[], max: number = 3): string[] {
+  const list = toList(entities)
+  const ignored = new Set([
+    '未知实体', '未知主体', '未知', 'unknown', '通用产业', '通用主体', '通用', '无', 'none', 'null', 'n/a',
+    '未指定', '未分类', '未匹配'
+  ])
+  const result: string[] = []
+  const seen = new Set<string>()
+
+  for (const ent of list) {
+    let clean = String(ent).trim()
+    clean = clean.replace(/^[🏢🏛️📊\s]+/, '').trim()
+    if (!clean || ignored.has(clean.toLowerCase())) continue
+    if (!seen.has(clean)) {
+      seen.add(clean)
+      result.push(clean)
+    }
+    if (result.length >= max) break
+  }
+  return result
+}
+

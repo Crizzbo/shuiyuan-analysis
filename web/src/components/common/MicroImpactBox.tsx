@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatEventCategory } from '../../utils/format';
 
 interface MicroImpactBoxProps {
   impact?: string;
@@ -10,10 +11,11 @@ interface MicroImpactBoxProps {
 export const MicroImpactBox: React.FC<MicroImpactBoxProps> = ({
   impact,
   category,
-  title = '⚡ 微观物理与供应链冲击传导 (Event Radar Impact)',
+  title = '💡 核心研判与影响',
   style,
 }) => {
   if (!impact) return null;
+  const catLabel = formatEventCategory(category);
 
   return (
     <div
@@ -38,7 +40,7 @@ export const MicroImpactBox: React.FC<MicroImpactBoxProps> = ({
         }}
       >
         <span>{title}</span>
-        {category && (
+        {catLabel && (
           <span
             style={{
               fontSize: '0.72rem',
@@ -47,7 +49,7 @@ export const MicroImpactBox: React.FC<MicroImpactBoxProps> = ({
               borderRadius: 4,
             }}
           >
-            {category}
+            {catLabel}
           </span>
         )}
       </div>

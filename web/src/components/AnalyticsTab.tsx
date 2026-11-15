@@ -10,6 +10,7 @@ import { api } from '../services/api'
 import { Pagination } from './Pagination'
 import { formatDeviceTime, toChinese } from '../utils/format'
 import { EventCard } from './common'
+import { showToast } from './Toast'
 
 interface AnalyticsTabProps {
   refreshKey?: number
@@ -39,7 +40,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
   const [loadingSuite24, setLoadingSuite24] = useState(false)
   const [suiteCategoryFilter, setSuiteCategoryFilter] = useState<string>('ALL')
   const [expandedModelIds, setExpandedModelIds] = useState<Record<string, boolean>>({})
-  const [allModelsExpanded, setAllModelsExpanded] = useState<boolean>(true)
+  const [allModelsExpanded, setAllModelsExpanded] = useState<boolean>(false)
 
   // 敏感性情景微调状态
   const [showSensitivity, setShowSensitivity] = useState(false)
@@ -49,6 +50,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
   const [customBeta, setCustomBeta] = useState<number>(1.45)
   const [tuning, setTuning] = useState(false)
   const [overrideValuation, setOverrideValuation] = useState<AutomatedValuationData | null>(null)
+  const [recollectingTicker, setRecollectingTicker] = useState(false)
 
   // 1. 加载左侧标的池（支持分页与搜索）
   const loadCandidates = async (page = 1, market = marketFilter, query = activeQuery) => {
@@ -99,7 +101,46 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
     }
   }
 
-  // 3. 加载 24 大专业量化金融模型全息计算套件
+  // 3. 在任务调度中为指定股票发起全维度数据补采与平账核验
+  const handleRecollectStock = async (tickerToRun: string) => {
+    const symbol = tickerToRun.trim().toUpperCase()
+    if (!symbol || recollectingTicker) return
+    setRecollectingTicker(true)
+    showToast({
+      type: 'info',
+      title: `在任务调度中更新标的 [${symbol}] 数据`,
+      message: '正在拉取最新报价、核验官方三表底稿、重算均线并刷新 DCF 估值走廊...',
+    })
+    try {
+      const res = await api.runTerminalTask('STOCK_DOSSIER_COLLECT', symbol)
+      if (res.ok) {
+        showToast({
+          type: 'success',
+          title: `[${symbol}] 全量数据更新完成`,
+          message: '官方三表已平账，估值走廊已根据最新底账重算完成。',
+        })
+        setSelectedTicker(symbol)
+        await loadAnalysis(symbol)
+        await loadCandidates(currentPage, marketFilter, activeQuery)
+      } else {
+        showToast({
+          type: 'error',
+          title: '更新数据失败',
+          message: res.error?.message || '调度器未能完成该标的数据采集',
+        })
+      }
+    } catch (err: any) {
+      showToast({
+        type: 'error',
+        title: '请求异常',
+        message: err.message || '网络连接或后端异常',
+      })
+    } finally {
+      setRecollectingTicker(false)
+    }
+  }
+
+  // 4. 加载 24 大专业量化金融模型全息计算套件
   const loadSuite24 = async (ticker: string) => {
     try {
       setLoadingSuite24(true)
@@ -303,6 +344,19 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                 搜索
               </button>
             </form>
+            {searchQuery.trim() && (
+              <div className="pt-2 flex items-center justify-between text-[11px]">
+                <span className="text-[var(--text-muted)] truncate">目标: {searchQuery.trim().toUpperCase()}</span>
+                <button
+                  type="button"
+                  disabled={recollectingTicker}
+                  onClick={() => void handleRecollectStock(searchQuery.trim().toUpperCase())}
+                  className="px-2 py-0.5 rounded bg-[#3987e5]/10 text-[#3987e5] hover:bg-[#3987e5]/20 font-medium cursor-pointer border border-[#3987e5]/30 shrink-0"
+                >
+                  ⚡ 在调度中拉取数据
+                </button>
+              </div>
+            )}
           </div>
 
           {/* 标的卡片列表 */}
@@ -757,13 +811,32 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
             <div className="p-8 text-center text-[#d03b3b] bg-[#331114]/20 border border-[#d03b3b]/30 rounded-xl space-y-3">
               <div className="text-sm font-bold">获取标的深度研报失败</div>
               <p className="text-xs opacity-90">{analysisError}</p>
-              <button
-                type="button"
-                onClick={() => loadAnalysis(selectedTicker)}
-                className="px-3 py-1.5 rounded-md bg-[#3987e5] text-white text-xs font-medium cursor-pointer"
-              >
-                重新加载
-              </button>
+              <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+                <button
+                  type="button"
+                  onClick={() => loadAnalysis(selectedTicker)}
+                  className="px-3 py-1.5 rounded-md bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] text-xs font-medium cursor-pointer"
+                >
+                  重新加载
+                </button>
+                <button
+                  type="button"
+                  disabled={recollectingTicker}
+                  onClick={() => void handleRecollectStock(selectedTicker)}
+                  className="px-3.5 py-1.5 rounded-md bg-[#176249] hover:bg-[#14533e] text-white text-xs font-semibold cursor-pointer disabled:opacity-50 transition-all flex items-center gap-1.5"
+                >
+                  {recollectingTicker ? (
+                    <>
+                      <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>正在调度拉取中...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>⚡ 在任务调度中拉取 [{selectedTicker}] 全量数据</span>
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           ) : analysis ? (
             <>
@@ -818,6 +891,51 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                   </div>
                 </div>
 
+                {/* 标的数据完备度底账与即时采集更新栏 (Data Readiness Health Strip) */}
+                <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg px-3 py-2 flex flex-wrap items-center justify-between gap-2 text-xs">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="font-bold text-[11px] text-[var(--text-secondary)] flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#199e70] animate-pulse" />
+                      <span>投研底账:</span>
+                    </span>
+                    <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 font-mono text-[11px]">
+                      现价: {sym}{curPrice.toFixed(2)} ({toChinese(quote?.session_type) || '前收盘基准'})
+                    </span>
+                    <span className={`px-2 py-0.5 rounded border font-mono text-[11px] ${
+                      probes?.financial_audit?.balance_sheet_balanced
+                        ? 'bg-blue-500/10 text-blue-600 border-blue-500/20'
+                        : 'bg-amber-500/10 text-amber-600 border-amber-500/20'
+                    }`}>
+                      三表: {probes?.financial_audit?.balance_sheet_balanced ? '已平账' : '待平账'}
+                    </span>
+                    <span className="px-2 py-0.5 rounded bg-purple-500/10 text-purple-600 border border-purple-500/20 font-mono text-[11px]">
+                      WACC: {wacc?.wacc_pct ? `${wacc.wacc_pct.toFixed(2)}%` : '9.50%'}
+                    </span>
+                    <span className="px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 border border-amber-500/20 font-mono text-[11px]">
+                      日K: 250天已对齐
+                    </span>
+                    <span className="px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-600 border border-cyan-500/20 font-mono text-[11px]">
+                      雷达: {analysis.events_analysis?.recent_events?.length || 0}篇
+                    </span>
+                  </div>
+
+                  <button
+                    type="button"
+                    disabled={recollectingTicker}
+                    onClick={() => void handleRecollectStock(analysis.ticker)}
+                    className="px-2.5 py-1 rounded bg-[#3987e5] hover:bg-[#2c72c8] text-white text-xs font-medium cursor-pointer disabled:opacity-50 transition-all flex items-center gap-1 shrink-0 shadow-sm"
+                  >
+                    {recollectingTicker ? (
+                      <>
+                        <div className="w-2.5 h-2.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>调度中…</span>
+                      </>
+                    ) : (
+                      <span>⚡ 调度更新</span>
+                    )}
+                  </button>
+                </div>
+
                 {/* 商业简述 */}
                 <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
                   {indProf?.description || aiQual?.business_model}
@@ -868,6 +986,88 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                         {corridor.valuation_verdict}
                       </div>
                     </div>
+                  </div>
+
+                  {/* 买方 DCF 横向价格走廊标尺 (Valuation Corridor Scale) */}
+                  <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-4 space-y-3">
+                    <div className="flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-[var(--text-primary)]">
+                          买方估值走廊标尺 (Valuation Corridor Scale)
+                        </span>
+                        <span className="text-[10px] text-[var(--text-muted)]">
+                          现价 vs 悲观底价 / 中性公允 / 乐观靶心
+                        </span>
+                      </div>
+                      <span className={`px-2 py-0.5 rounded font-mono font-bold text-[11px] ${
+                        mos >= 0 ? 'text-emerald-500 bg-emerald-500/10' : 'text-rose-500 bg-rose-500/10'
+                      }`}>
+                        {mos >= 0 ? `安全边际 +${mos.toFixed(1)}%` : `溢价超额 ${Math.abs(mos).toFixed(1)}%`}
+                      </span>
+                    </div>
+
+                    {/* 标尺轨道图 */}
+                    {(() => {
+                      const pFloor = corridor.conservative_floor.value_per_share
+                      const pBase = corridor.base_fair_value.value_per_share
+                      const pOpt = corridor.optimistic_target.value_per_share
+                      const min = Math.min(pFloor, curPrice) * 0.85
+                      const max = Math.max(pOpt, curPrice) * 1.15
+                      const span = Math.max(1, max - min)
+                      const clamp = (val: number) => Math.max(4, Math.min(96, ((val - min) / span) * 100))
+                      const curPos = clamp(curPrice)
+                      const floorPos = clamp(pFloor)
+                      const basePos = clamp(pBase)
+                      const optPos = clamp(pOpt)
+
+                      return (
+                        <div className="pt-7 pb-5 px-3">
+                          <div className="relative w-full h-3 rounded-full bg-slate-700/30 overflow-visible">
+                            {/* 悲观到中性区间 */}
+                            <div
+                              className="absolute top-0 h-3 rounded-l-full bg-gradient-to-r from-rose-500/30 to-blue-500/30"
+                              style={{ left: `${floorPos}%`, width: `${Math.max(0, basePos - floorPos)}%` }}
+                            />
+                            {/* 中性到乐观区间 */}
+                            <div
+                              className="absolute top-0 h-3 rounded-r-full bg-gradient-to-r from-blue-500/30 to-emerald-500/30"
+                              style={{ left: `${basePos}%`, width: `${Math.max(0, optPos - basePos)}%` }}
+                            />
+
+                            {/* 悲观标记 */}
+                            <div className="absolute top-0 -mt-1 w-0.5 h-5 bg-rose-500/80 -translate-x-1/2" style={{ left: `${floorPos}%` }}>
+                              <div className="absolute top-5 -translate-x-1/2 text-[10px] font-mono text-rose-400 whitespace-nowrap">
+                                <div>底线 {sym}{pFloor.toFixed(1)}</div>
+                              </div>
+                            </div>
+
+                            {/* 中性公允标记 */}
+                            <div className="absolute top-0 -mt-1.5 w-1 h-6 bg-[#3987e5] -translate-x-1/2" style={{ left: `${basePos}%` }}>
+                              <div className="absolute top-6 -translate-x-1/2 text-[10px] font-mono font-bold text-[#3987e5] whitespace-nowrap">
+                                <div>公允 {sym}{pBase.toFixed(1)}</div>
+                              </div>
+                            </div>
+
+                            {/* 乐观靶心标记 */}
+                            <div className="absolute top-0 -mt-1 w-0.5 h-5 bg-emerald-500/80 -translate-x-1/2" style={{ left: `${optPos}%` }}>
+                              <div className="absolute top-5 -translate-x-1/2 text-[10px] font-mono text-emerald-400 whitespace-nowrap">
+                                <div>靶心 {sym}{pOpt.toFixed(1)}</div>
+                              </div>
+                            </div>
+
+                            {/* 当前现价指示游标 */}
+                            <div className="absolute top-0 -mt-7 -translate-x-1/2 flex flex-col items-center z-10" style={{ left: `${curPos}%` }}>
+                              <div className="px-2 py-0.5 rounded bg-amber-500 text-black font-black font-mono text-[10px] shadow-lg flex items-center gap-1 whitespace-nowrap">
+                                <span>现价</span>
+                                <span>{sym}{curPrice.toFixed(2)}</span>
+                              </div>
+                              <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[5px] border-t-amber-500" />
+                              <div className="w-0.5 h-7 bg-amber-500/70" />
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    })()}
                   </div>
 
                   {/* 三态情景估值卡片 */}

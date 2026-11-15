@@ -1,14 +1,15 @@
 import React from 'react';
-import { toList } from '../../utils/format';
+import { cleanEntityList } from '../../utils/format';
 
 interface EntityPillsProps {
   entities?: string | string[];
+  max?: number;
   onSelectTicker?: (ticker: string) => void;
   style?: React.CSSProperties;
 }
 
-export const EntityPills: React.FC<EntityPillsProps> = ({ entities, onSelectTicker, style }) => {
-  const list = toList(entities);
+export const EntityPills: React.FC<EntityPillsProps> = ({ entities, max = 3, onSelectTicker, style }) => {
+  const list = cleanEntityList(entities, max);
   if (!list || list.length === 0) return null;
 
   return (

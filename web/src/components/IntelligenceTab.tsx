@@ -3,7 +3,7 @@ import type { EventsData, EventItem } from '../types/api'
 import { api } from '../services/api'
 import { showToast } from './Toast'
 import { Pagination } from './Pagination'
-import { toList, getSeverityBadge, getVerificationBadge } from '../utils/format'
+import { toList, getSeverityBadge, getVerificationBadge, formatSourceName, formatCredibilityTier } from '../utils/format'
 import { SeverityBadge, VerificationBadge, EntityPills, MicroImpactBox, EventCard } from './common'
 
 interface IntelligenceTabProps {
@@ -302,7 +302,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                 : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]'
             }`}
           >
-            <span>🎯 权威事件雷达与深度商业影响研判</span>
+            <span>🎯 权威事件雷达</span>
             <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20">
               {data?.total_events ?? 0}
             </span>
@@ -317,7 +317,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                 : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]'
             }`}
           >
-            <span>📰 官方监管与交易所资讯流 (分时采集底账)</span>
+            <span>📰 官方资讯流水</span>
             <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20">
               {newsItems.length}
             </span>
@@ -369,14 +369,10 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
               <div className="flex flex-wrap items-center gap-2.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#199e70]" />
                 <h2 className="text-xs font-bold text-[var(--text-primary)]">
-                  按日期归档时间线 (Date Archive & Timeline)
+                  事件时间线
                 </h2>
-                <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-[#199e70]/15 text-[#199e70] border border-[#199e70]/30 font-medium flex items-center gap-1">
-                  <span>↓</span>
-                  <span>严格按时间降序（最新在前）</span>
-                </span>
                 <span className="text-xs text-[var(--text-muted)] font-mono">
-                  已收录 {availableDates.length} 个历史日期 · 共 {data?.total_events ?? 0} 篇情报底账
+                  已收录 {availableDates.length} 个历史日期 · 共 {data?.total_events ?? 0} 条
                 </span>
               </div>
 
@@ -550,12 +546,19 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                                     </span>
                                   )}
                                 </div>
-                                <span className="px-2 py-0.5 rounded bg-[var(--bg-card)] border border-[var(--border-color)] text-[11px]">
-                                  信源: {ev.source_name}
-                                </span>
-                                <span className="px-2 py-0.5 rounded bg-[var(--bg-card)] border border-[var(--border-color)] text-[11px]">
-                                  可信度: {ev.credibility_tier}
-                                </span>
+                                {ev.source_name && (
+                                  <span className="px-2 py-0.5 rounded bg-[var(--bg-card)] border border-[var(--border-color)] text-[11px]">
+                                    信源: {formatSourceName(ev.source_name)}
+                                  </span>
+                                )}
+                                {(() => {
+                                  const cred = formatCredibilityTier(ev.credibility_tier);
+                                  return cred.text ? (
+                                    <span className={`px-2 py-0.5 rounded border text-[11px] font-medium ${cred.cls}`}>
+                                      {cred.text}
+                                    </span>
+                                  ) : null;
+                                })()}
                               </div>
                             </div>
                           </div>
@@ -639,9 +642,11 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                             🕒 确切时间: {activeEvent.published_time}
                           </span>
                         )}
-                        <span className="px-2 py-0.5 rounded bg-[var(--bg-card)] border border-[var(--border-color)]">
-                          信源: {activeEvent.source_name}
-                        </span>
+                        {activeEvent.source_name && (
+                          <span className="px-2 py-0.5 rounded bg-[var(--bg-card)] border border-[var(--border-color)]">
+                            信源: {formatSourceName(activeEvent.source_name)}
+                          </span>
+                        )}
                         {activeEvent.estimated_duration && (
                           <span className="px-2 py-0.5 rounded bg-[var(--bg-card)] border border-[var(--border-color)]">
                             预期影响周期: {activeEvent.estimated_duration}
@@ -716,7 +721,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
               </p>
             </div>
             <span className="text-xs font-mono px-2.5 py-1 rounded bg-[#3987e5]/15 text-[#3987e5] border border-[#3987e5]/30">
-              共收录 {newsItems.length} 条官方资讯底账
+              共收录 {newsItems.length} 条资讯
             </span>
           </div>
 
@@ -746,7 +751,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                   }`}
                 >
-                  {s}
+                  {formatSourceName(s)}
                 </button>
               ))}
             </div>

@@ -40,6 +40,8 @@ export function CollectionTab({ pipelineStatus, refreshKey }: CollectionTabProps
   const [togglingScheduleTaskId, setTogglingScheduleTaskId] = useState<string | null>(null)
   const [runHistoryPage, setRunHistoryPage] = useState(1)
   const runHistoryPageSize = 10
+  const [singleStockTicker, setSingleStockTicker] = useState('NVDA')
+  const [runningSingleStockCollect, setRunningSingleStockCollect] = useState(false)
 
   // 3. 全盘日线归档状态与全市场对账 (Market Archives & Reconciliation)
   const [marketArchives, setMarketArchives] = useState<MarketArchiveItem[]>([])
@@ -155,7 +157,7 @@ export function CollectionTab({ pipelineStatus, refreshKey }: CollectionTabProps
       message: '提交美股、日股和官方资讯采集任务',
     })
     try {
-      const results = await Promise.all(['US_DAILY', 'JP_DAILY', 'OFFICIAL_NEWS'].map(api.runTerminalTask))
+      const results = await Promise.all(['US_DAILY', 'JP_DAILY', 'OFFICIAL_NEWS'].map(id => api.runTerminalTask(id)))
       const accepted = results.filter(res => res.ok).length
       if (accepted > 0) {
         showToast({
@@ -264,7 +266,44 @@ export function CollectionTab({ pipelineStatus, refreshKey }: CollectionTabProps
     }
   }
 
-  // 6. 切换调度器定时配置
+  // 6. 针对指定个股触发全维度数据拉取与平账
+  const handleCollectSingleStock = async (symbolToRun: string) => {
+    const symbol = symbolToRun.trim().toUpperCase()
+    if (!symbol || runningSingleStockCollect) return
+    setRunningSingleStockCollect(true)
+    showToast({
+      type: 'info',
+      title: `在任务调度中启动标的 [${symbol}] 数据拉取`,
+      message: '正在拉取最新行情、核验官方三表底稿、重算250日均线并刷新DCF估值走廊...',
+    })
+    try {
+      const res = await api.runTerminalTask('STOCK_DOSSIER_COLLECT', symbol)
+      if (res.ok) {
+        showToast({
+          type: 'success',
+          title: `标的 [${symbol}] 数据拉取与核算已完成`,
+          message: `已同步最新报价、平账自检与 DCF 估值 (Run ID: ${res.data.run_id?.slice(0, 8)})`,
+        })
+        await loadScheduler()
+      } else {
+        showToast({
+          type: 'error',
+          title: '单票数据拉取失败',
+          message: res.error?.message || '无法获取该标的数据',
+        })
+      }
+    } catch (err: any) {
+      showToast({
+        type: 'error',
+        title: '请求异常',
+        message: err.message || '网络连接或调度服务异常',
+      })
+    } finally {
+      setRunningSingleStockCollect(false)
+    }
+  }
+
+  // 7. 切换调度器定时配置
   const handleToggleSchedule = async (taskId: string, currentEnabled: boolean) => {
     if (togglingScheduleTaskId === taskId) return
     setTogglingScheduleTaskId(taskId)
@@ -739,6 +778,79 @@ export function CollectionTab({ pipelineStatus, refreshKey }: CollectionTabProps
       {activeSection === 'scheduler' && (
         <div className="space-y-6">
           {!schedulerInfo && <p className="text-sm text-[var(--text-muted)]">等待任务目录加载</p>}
+
+          {/* ========================================================================= */}
+          {/* 重点一：🎯 指定个股全维度数据拉取与平账 (精准单票采集入口) */}
+          {/* ========================================================================= */}
+          <div className="rounded-xl border border-[#3987e5]/30 bg-[#3987e5]/5 p-5 shadow-sm space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#3987e5]/20">
+              <div>
+                <h3 className="text-sm font-bold text-[#3987e5] flex items-center gap-2">
+                  <span>🎯</span>
+                  <span>个股深度分析数据采集中枢 (Single-Stock Ingestion Hub)</span>
+                </h3>
+                <p className="text-xs text-[var(--text-secondary)] mt-1">
+                  个股分析所需的 6 大核心数据基石（行情现价、官方三表平账、250日K线、SEPA形态初筛、WACC资本成本与事件雷达），均在此统一调度执行。
+                </p>
+              </div>
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#199e70]/15 text-[#199e70] border border-[#199e70]/30 font-medium shrink-0">
+                支持美股 (SEC) 与日股 (东证) 全量 14,892 标的
+              </span>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <input
+                type="text"
+                value={singleStockTicker}
+                onChange={e => setSingleStockTicker(e.target.value.toUpperCase())}
+                placeholder="输入代码 (如 NVDA, AAPL, MSFT, 8035, 6857)..."
+                className="w-56 text-xs font-mono font-bold rounded-lg border border-[var(--border-color)] bg-[var(--surface-color)] px-3 py-2 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[#3987e5]"
+              />
+
+              <button
+                type="button"
+                disabled={runningSingleStockCollect}
+                onClick={() => void handleCollectSingleStock(singleStockTicker)}
+                className="px-4 py-2 rounded-lg bg-[#3987e5] hover:bg-[#2c72c8] text-white text-xs font-semibold cursor-pointer disabled:opacity-50 transition-all flex items-center gap-1.5 shadow-sm"
+              >
+                {runningSingleStockCollect ? (
+                  <>
+                    <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <span>正在拉取与核算 {singleStockTicker}...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>⚡ 启动单票全量收集与平账核对</span>
+                  </>
+                )}
+              </button>
+
+              <div className="flex flex-wrap items-center gap-1.5 text-xs text-[var(--text-muted)] pl-2">
+                <span>快捷标的：</span>
+                {[
+                  { ticker: 'NVDA', name: '英伟达' },
+                  { ticker: 'AAPL', name: '苹果' },
+                  { ticker: 'MSFT', name: '微软' },
+                  { ticker: '8035', name: '东京电子' },
+                  { ticker: '6857', name: '爱德万' },
+                  { ticker: 'TSM', name: '台积电' },
+                ].map(item => (
+                  <button
+                    key={item.ticker}
+                    type="button"
+                    onClick={() => {
+                      setSingleStockTicker(item.ticker)
+                      void handleCollectSingleStock(item.ticker)
+                    }}
+                    className="px-2.5 py-1 rounded bg-[var(--surface-color)] hover:bg-[#3987e5]/10 border border-[var(--border-color)] hover:border-[#3987e5]/40 text-[var(--text-secondary)] hover:text-[#3987e5] cursor-pointer text-xs transition-all"
+                  >
+                    {item.ticker} ({item.name})
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {(['local', 'collection'] as const).map(track => (
             <section key={track} className="rounded-lg border border-[var(--border-color)] bg-[var(--surface-color)] px-4">
               <h2 className="border-b border-[var(--border-color)] py-3 text-sm font-bold">
@@ -746,20 +858,53 @@ export function CollectionTab({ pipelineStatus, refreshKey }: CollectionTabProps
               </h2>
               {configuredTasks.filter(task => task.track === track).map(task => {
                 const lastRun = getLastRun(task.id)
-                return <div key={task.id} className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-color)] py-2.5 last:border-0">
-                  <div className="min-w-0 flex-1">
-                    <div className="text-sm font-medium">{task.name}</div>
-                    <div className="text-xs text-[var(--text-muted)]">{task.schedule}{lastRun ? ` · ${toChinese(lastRun.status)} · ${formatDeviceTime(lastRun.finished_at || lastRun.created_at)}` : ''}</div>
-                    {lastRun?.result?.message && <p className="text-xs text-[var(--text-secondary)]">{lastRun.result.message}</p>}
+                return (
+                  <div key={task.id} className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-color)] py-3 last:border-0">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-bold text-[var(--text-primary)]">{task.name}</span>
+                        {task.dimension_name && (
+                          <span className="text-[10px] px-2 py-0.5 rounded font-medium bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/25">
+                            {task.dimension_name}
+                          </span>
+                        )}
+                        <span className="text-[10px] text-[var(--text-muted)] font-mono">{task.id}</span>
+                      </div>
+                      {task.serves_stock_analysis && (
+                        <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+                          {task.serves_stock_analysis}
+                        </p>
+                      )}
+                      <div className="text-xs text-[var(--text-muted)] mt-0.5">
+                        {task.schedule}{lastRun ? ` · ${toChinese(lastRun.status)} · ${formatDeviceTime(lastRun.finished_at || lastRun.created_at)}` : ''}
+                      </div>
+                      {lastRun?.result?.message && <p className="text-xs text-[var(--text-secondary)] mt-0.5 font-mono">{lastRun.result.message}</p>}
+                    </div>
+                    <div className="flex items-center gap-2 text-xs">
+                      {task.automatic && (
+                        <button
+                          type="button"
+                          role="switch"
+                          aria-checked={task.enabled}
+                          aria-label={`${task.name}定时开关`}
+                          disabled={togglingScheduleTaskId === task.id}
+                          onClick={() => void handleToggleSchedule(task.id, task.enabled)}
+                          className="rounded border border-[var(--border-color)] px-2.5 py-1 hover:bg-[var(--bg-card)] cursor-pointer"
+                        >
+                          {task.enabled ? '定时已开' : '定时已关'}
+                        </button>
+                      )}
+                      <button
+                        type="button"
+                        disabled={isTaskRunning(task.id)}
+                        onClick={() => void handleRunScheduledTask(task)}
+                        className="rounded bg-[#176249] hover:bg-[#14533e] px-3 py-1 text-white font-medium disabled:opacity-50 cursor-pointer shadow-sm"
+                      >
+                        {isTaskRunning(task.id) ? '执行中…' : '立即运行'}
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 text-xs">
-                    {task.automatic && <button type="button" role="switch" aria-checked={task.enabled} aria-label={`${task.name}定时开关`}
-                      disabled={togglingScheduleTaskId === task.id} onClick={() => void handleToggleSchedule(task.id, task.enabled)}
-                      className="rounded border border-[var(--border-color)] px-2 py-1">{task.enabled ? '定时已开' : '定时已关'}</button>}
-                    <button type="button" disabled={isTaskRunning(task.id)} onClick={() => void handleRunScheduledTask(task)}
-                      className="rounded bg-[#176249] px-2 py-1 text-white disabled:opacity-50">{isTaskRunning(task.id) ? '执行中' : '运行'}</button>
-                  </div>
-                </div>
+                )
               })}
             </section>
           ))}
@@ -791,8 +936,17 @@ export function CollectionTab({ pipelineStatus, refreshKey }: CollectionTabProps
                     paginatedRuns.map((r) => (
                       <tr key={r.run_id} className="hover:bg-[var(--bg-card)]/50">
                         <td className="p-3 font-bold text-[var(--text-primary)]">
-                          {configuredTasks.find((m) => m.id === r.task)?.name || r.task}
-                          <div className="mt-1 select-all text-[var(--text-muted)]" title={r.run_id}>{r.run_id}</div>
+                          <div className="flex items-center gap-2">
+                            <span>{configuredTasks.find((m) => m.id === r.task)?.name || r.task}</span>
+                            <span className="font-mono text-[10px] text-[var(--text-muted)] bg-[var(--surface-color)] px-1.5 py-0.2 rounded border border-[var(--border-color)]" title={`完整编号: ${r.run_id}`}>
+                              #{r.run_id.slice(0, 8)}
+                            </span>
+                            {r.slot && (
+                              <span className="font-mono text-[10px] text-[#3987e5] bg-[#3987e5]/10 px-1.5 py-0.2 rounded border border-[#3987e5]/25">
+                                {r.slot}
+                              </span>
+                            )}
+                          </div>
                         </td>
                         <td className="p-3 text-[var(--text-secondary)]">
                           {r.trigger === 'scheduled' ? '⏰ 定时分时槽' : '⚡ 手动即时'}
