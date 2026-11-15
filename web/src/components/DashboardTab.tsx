@@ -566,19 +566,18 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#176249] to-[#0e3a2f] flex items-center justify-center text-white shadow-xs shrink-0 relative overflow-hidden">
                   <CompassIcon className="w-5 h-5 text-emerald-200" />
-                  <span className="absolute bottom-0 right-0 w-2 h-2 bg-gradient-to-tl from-amber-400 to-rose-500 rounded-tl-sm opacity-90" title="水凤和鸣" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
                     <h2 className="text-base font-bold text-[var(--text-primary)]">
-                      水凤宏观罗盘与大盘体温研判
+                      全球双市场宏观罗盘与大盘体温研判
                     </h2>
                     <span className="text-[10px] px-2 py-0.5 rounded-full font-medium bg-[#176249]/10 text-[#176249] border border-[#176249]/20 font-mono">
-                      水凤·宏观罗盘
+                      美日跨市宏观
                     </span>
                   </div>
                   <p className="text-xs text-[var(--text-muted)] mt-0.5">
-                    水蕴深潭（流动性与价值底座）· 凤鸣朝阳（主升浪与突破动能）· 全球双市场宏观定价锚
+                    美股与日股核心宏观流动性、波动率指数 (VIX) 与大盘情绪跨市场定价锚
                   </p>
                 </div>
               </div>
@@ -1361,16 +1360,16 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
 
         {/* ==================== 右侧 35% (lg:col-span-4): SEPA漏斗、资金情绪与突发事件雷达 ==================== */}
         <div className="lg:col-span-4 space-y-5">
-          {/* 1. 凤鸣朝阳 · SEPA 主升浪选股统计漏斗 */}
+          {/* 1. SEPA 主升浪趋势形态统计漏斗 */}
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3.5">
             <div className="flex items-center justify-between pb-2.5 border-b border-[var(--border-color)]/60">
               <div className="flex items-center gap-2">
                 <FilterIcon className="w-4 h-4 text-[#176249]" />
                 <h3 className="text-xs font-bold text-[var(--text-primary)]">
-                  凤鸣朝阳 · SEPA 主升浪选股漏斗
+                  SEPA 主升浪选股统计漏斗
                 </h3>
               </div>
-              <span className="text-[10px] text-[var(--text-muted)] font-mono">趋势模板与收缩模型</span>
+              <span className="text-[10px] text-[var(--text-muted)] font-mono">趋势模板与形态收缩</span>
             </div>
 
             {/* 漏斗 5 阶层 */}
@@ -1380,7 +1379,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                 { stage: '站上 200 日牛熊线', count: funnel.stage_1_base_building, pct: '25.7%', barW: '75%' },
                 { stage: '第二阶段主升浪结构', count: funnel.stage_2_trend_aligned, pct: '7.5%', barW: '50%' },
                 { stage: '高相对强度 (RS ≥ 80)', count: funnel.stage_3_near_high, pct: '3.2%', barW: '32%' },
-                { stage: '凤鸣突破 · VCP 临界收缩', count: funnel.stage_4_vcp_candidates, pct: '0.12%', barW: '18%' },
+                { stage: 'VCP 临界突破候选', count: funnel.stage_4_vcp_candidates, pct: '0.12%', barW: '18%' },
               ].map((f, i) => (
                 <div key={f.stage} className="space-y-1">
                   <div className="flex items-center justify-between text-[11px]">

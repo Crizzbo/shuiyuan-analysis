@@ -63,7 +63,21 @@
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; background-color: var(--water-bg); color: var(--text-primary); }
+body {
+  margin: 0;
+  color: var(--text-primary);
+  background-color: #f2f5f3;
+  background-image: 
+    /* 顶部环境微光：沉水墨绿高质感弥散渐变 */
+    radial-gradient(circle at 50% -20px, rgba(23, 98, 73, 0.07) 0%, rgba(23, 98, 73, 0.02) 40%, transparent 70%),
+    /* 东方如意水云纹平铺底纹（无缝宣纸暗纹水印） */
+    url('/cloud_pattern.svg');
+  background-repeat: no-repeat, repeat;
+  background-position: top center, 0 0;
+  background-size: 100% 700px, 240px 160px;
+  background-attachment: scroll, fixed;
+  min-height: 100vh;
+}
 button, input, select { font: inherit; }
 button { cursor: pointer; }
 button:disabled { opacity: .55; cursor: wait; }

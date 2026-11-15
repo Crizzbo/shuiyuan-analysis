@@ -20,8 +20,8 @@ export function Header({ health, sseConnected, onPipelineStarted }: HeaderProps)
               <h1 className="text-xl font-bold tracking-tight text-[var(--text-primary)]">
                 水源分析终端
               </h1>
-              <span className="text-[10px] px-2 py-0.5 rounded-full font-medium bg-[#176249]/10 text-[#176249] border border-[#176249]/20">
-                水凤·投研
+              <span className="text-[10px] px-2 py-0.5 rounded-full font-medium bg-[#176249]/10 text-[#176249] border border-[#176249]/20 font-mono">
+                量化投研
               </span>
               <span
                 className={`text-xs px-2.5 py-0.5 rounded-full flex items-center gap-1 font-medium ${
