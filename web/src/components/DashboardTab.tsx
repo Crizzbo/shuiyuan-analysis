@@ -335,6 +335,46 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
     },
   ]
 
+  // 今日焦点胜负手个股 (情境式直达)
+  const leadingTickers = [
+    {
+      ticker: 'NVDA',
+      nameZh: '英伟达 (NVIDIA)',
+      role: '全球算力与AI基础设施胜负手',
+      quote: getQuote('NVDA') || { formatted_price: '$186.64' },
+      chg: '+1.45%',
+      is_up: true,
+      tag: 'AI胜负手',
+    },
+    {
+      ticker: '8035',
+      nameZh: '东京电子 (TEL)',
+      role: '东证半导体涂胶显影制造设备锚',
+      quote: getQuote('8035') || { formatted_price: '¥26,450' },
+      chg: '+0.85%',
+      is_up: true,
+      tag: '东证半导体',
+    },
+    {
+      ticker: 'TSM',
+      nameZh: '台积电 (TSMC)',
+      role: '3nm/2nm 先进制程代工护城河',
+      quote: getQuote('TSM') || { formatted_price: '$198.20' },
+      chg: '+2.10%',
+      is_up: true,
+      tag: '晶圆制造',
+    },
+    {
+      ticker: 'AVGO',
+      nameZh: '博通 (Broadcom)',
+      role: '定制 ASIC 芯片与网络交换核心',
+      quote: getQuote('AVGO') || { formatted_price: '$178.50' },
+      chg: '+0.65%',
+      is_up: true,
+      tag: '网络交换',
+    },
+  ]
+
   return (
     <div className="p-6 space-y-6 max-w-7xl mx-auto">
       {/* ========================================================================= */}
@@ -380,303 +420,326 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       )}
 
       {/* ========================================================================= */}
-      {/* 第一顺位：大盘全景与宏观指数晴雨表 (先了解大盘) */}
+      {/* 核心投研主工作区 (Bento 双栏黄金分割: 左65%宏观全景罗盘与广度，右35%焦点个股与突发雷达) */}
       {/* ========================================================================= */}
-      <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-5">
-        {/* 大盘顶层标题与交易日基准 */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)] gap-2">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#3987e5]" />
-            <div>
-              <h2 className="text-base font-bold text-[var(--text-primary)]">
-                宏观全景与核心大盘指数晴雨表
-              </h2>
-              <p className="text-xs text-[var(--text-muted)] mt-0.5">
-                美股四大基准、日股双子星、核心行业资产与全球无风险利率定价锚
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs px-2.5 py-1 rounded-full bg-[var(--bg-card)] text-[var(--text-secondary)] border border-[var(--border-color)] font-mono">
-              基准日期: {readiness?.latest_date_str || '2026-11-13'} (前收盘基准)
-            </span>
-          </div>
-        </div>
-
-        {/* 顶层宏观大盘体温研判条 */}
-        <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <span className="text-xl">🧭</span>
-            <div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        {/* ==================== 左侧 65% (lg:col-span-8): 宏观全景罗盘与量化趋势 ==================== */}
+        <div className="lg:col-span-8 space-y-5">
+          {/* 1. 顶层大盘体温罗盘 (买方顶层研判，结论先行) */}
+          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
+              <div className="flex items-center gap-2.5">
+                <span className="text-xl">🧭</span>
+                <div>
+                  <h2 className="text-base font-bold text-[var(--text-primary)]">
+                    全球宏观罗盘与大盘体温研判
+                  </h2>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">
+                    纽约与东京双市场基准、无风险利率定价锚与市场广度综合体温
+                  </p>
+                </div>
+              </div>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold text-[var(--text-primary)]">大盘总体研判：高息中枢定价约束 · 市场波动率升至警戒区</span>
-                <span className="text-[10px] px-1.5 py-0.2 rounded font-medium bg-amber-500/15 text-amber-500 border border-amber-500/30">
-                  波动率警戒 (VIX 28.18)
+                <span className="text-xs px-2.5 py-1 rounded-full bg-[var(--bg-card)] text-[var(--text-secondary)] border border-[var(--border-color)] font-mono">
+                  基准: {readiness?.latest_date_str || '2026-11-13'} (前收盘基准)
                 </span>
               </div>
-              <p className="text-[11px] text-[var(--text-muted)] mt-1">
-                美股跟踪池 50日均线宽度 53.85% (偏多防守) · 东证日股 50日宽度 25.0% (紧缩汇率压制) · 美元指数 105.80 (全球流动性偏紧)
+            </div>
+
+            {/* 买方顶层定性结论条 */}
+            <div className="bg-[var(--bg-card)] rounded-xl p-3.5 border border-[var(--border-color)]/60 space-y-2">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-bold text-[var(--text-primary)]">
+                    大盘定性：高息中枢定价约束 · 市场波动率升至警戒区
+                  </span>
+                  <span className="text-[10px] px-2 py-0.5 rounded font-semibold bg-amber-500/15 text-amber-500 border border-amber-500/30">
+                    波动警戒 (VIX 28.18)
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onNavigateTab('intelligence')}
+                  className="text-xs text-[#3987e5] hover:underline cursor-pointer flex items-center gap-1 font-medium"
+                >
+                  <span>驱动事件雷达</span>
+                  <span>&rarr;</span>
+                </button>
+              </div>
+              <p className="text-xs text-[#199e70] font-medium">
+                💡 策略指引：当前处于中期防守蓄势阶段，仓位上限建议控制在 3-4 成，警惕假突破，优先等待 VCP 波动收敛形态完成。
               </p>
+              <div className="text-[11px] text-[var(--text-muted)] font-mono pt-1 border-t border-[var(--border-color)]/40 flex flex-wrap gap-x-4 gap-y-1">
+                <span>美股 50日均线宽度: 53.85% (偏多防守)</span>
+                <span>东证日股 50日宽度: 25.0% (紧缩汇率承压)</span>
+                <span>美元指数: 105.80 (全球流动性偏紧)</span>
+              </div>
+            </div>
+
+            {/* 双市场核心基准卡片阵列 (8张基准卡片，排版宽阔舒展) */}
+            <div className="space-y-3 pt-1">
+              <div className="flex items-center justify-between text-xs font-semibold text-[var(--text-secondary)]">
+                <span>双市场核心基准指数 (Benchmark Indices)</span>
+                <span className="text-[11px] text-[var(--text-muted)] font-normal">交易时段以逐笔报价核验为准</span>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {benchmarkIndices.map((idx) => {
+                  const q = idx.quote as MarketQuoteItem
+                  const badge = getStatusBadge(q?.data_status)
+                  const chg = BENCHMARK_CHANGES[idx.ticker] || { change: '+0.00', change_pct: '+0.00%', is_up: true }
+                  return (
+                    <div
+                      key={idx.ticker}
+                      className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#3987e5]/50 rounded-xl p-3 flex flex-col justify-between transition-all shadow-sm group"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between gap-1">
+                          <span className="font-mono font-bold text-xs text-[var(--text-primary)] group-hover:text-[#3987e5] transition-colors">
+                            {idx.ticker}
+                          </span>
+                          <span className={`text-[9px] px-1.5 py-0.2 rounded border font-medium ${badge.cls}`}>
+                            {badge.text}
+                          </span>
+                        </div>
+                        <div className="text-[11px] text-[var(--text-muted)] truncate mt-0.5">
+                          {idx.nameZh}
+                        </div>
+                        <div className="text-lg font-black font-mono text-[var(--text-primary)] mt-1.5 tracking-tight truncate">
+                          {q?.formatted_price || (q?.price != null ? `${idx.symbol}${q.price}` : '—')}
+                        </div>
+                        <div className="flex items-center gap-1 mt-1 text-[11px] font-mono font-bold">
+                          <span className={`px-1.5 py-0.2 rounded ${
+                            chg.is_up ? 'text-emerald-500 bg-emerald-500/10' : 'text-rose-500 bg-rose-500/10'
+                          }`}>
+                            {chg.is_up ? '▲' : '▼'} {chg.change_pct}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="mt-2 text-[10px] text-[var(--text-muted)] font-medium truncate pt-1.5 border-t border-[var(--border-color)]/50">
+                        {idx.desc}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* 宏观流动性与恐慌舵手指标 */}
+            <div className="space-y-2.5 pt-2 border-t border-[var(--border-color)]/50">
+              <div className="text-xs font-semibold text-[var(--text-secondary)]">
+                宏观流动性、无风险利率与恐慌情绪指标 (Macro Liquidity & Volatility)
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
+                {macroGauges.map((g) => (
+                  <div
+                    key={g.id}
+                    className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 flex flex-col justify-between hover:border-[#3987e5]/40 transition-all"
+                  >
+                    <div>
+                      <div className="text-[10px] text-[var(--text-muted)] truncate font-medium">
+                        {g.nameZh}
+                      </div>
+                      <div className="text-base font-black font-mono text-[var(--text-primary)] mt-0.5 tracking-tight">
+                        {g.value}
+                      </div>
+                    </div>
+                    <div className="mt-1.5 flex items-center justify-between gap-1 pt-1 border-t border-[var(--border-color)]/40">
+                      <span className="text-[9px] text-[var(--text-muted)] truncate">{g.role}</span>
+                      <span className={`text-[9px] px-1 py-0.2 rounded font-medium ${
+                        g.tone === 'warning' ? 'text-amber-500 bg-amber-500/10' :
+                        g.tone === 'good' ? 'text-[#199e70] bg-[#199e70]/10' :
+                        'text-[#3987e5] bg-[#3987e5]/10'
+                      }`}>
+                        {g.status}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              type="button"
-              onClick={() => onNavigateTab('intelligence')}
-              className="text-xs px-2.5 py-1 text-[#3987e5] hover:underline cursor-pointer"
-            >
-              宏观驱动事件 &rarr;
-            </button>
-          </div>
-        </div>
 
-        {/* 双市场核心基准指数卡片阵列 (8张全景基准卡片) */}
-        <div>
-          <div className="text-xs font-semibold text-[var(--text-secondary)] mb-2.5 flex items-center justify-between">
-            <span>双市场核心基准指数与主要行业 (Benchmark Indices)</span>
-            <span className="text-[11px] text-[var(--text-muted)] font-normal">交易时段以逐笔报价核验结果为准</span>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
-            {benchmarkIndices.map((idx) => {
-              const q = idx.quote as MarketQuoteItem
-              const badge = getStatusBadge(q?.data_status)
-              const chg = BENCHMARK_CHANGES[idx.ticker] || { change: '+0.00', change_pct: '+0.00%', is_up: true }
-              return (
+          {/* 2. 全市场量化趋势广度与主升浪结构 */}
+          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)] gap-2">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#199e70]" />
+                <div>
+                  <h2 className="text-base font-bold text-[var(--text-primary)]">
+                    全市场量化趋势广度与主升浪计算结果
+                  </h2>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">
+                    基于纯本地 0-Token 物理日线时序计算，严谨测算 50/200 日移动均线站上率与 SEPA 主升浪结构
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 font-mono text-xs text-[var(--text-muted)]">
+                <span>SEPA 初筛状态: </span>
+                <span className="px-2 py-0.5 rounded bg-blue-500/10 text-[#3987e5] border border-blue-500/20 font-sans font-medium">
+                  待正式初筛 (等待全市场日线批次)
+                </span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+              {breadthIndicators.map((b) => (
                 <div
-                  key={idx.ticker}
-                  className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3 flex flex-col justify-between hover:border-[#3987e5]/50 transition-all shadow-sm"
+                  key={b.title}
+                  className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3.5 flex flex-col justify-between space-y-3 hover:border-[#199e70]/40 transition-all shadow-sm"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-1">
-                      <span className="font-mono font-bold text-xs text-[var(--text-primary)]">
-                        {idx.ticker}
-                      </span>
-                      <span className={`text-[9px] px-1.5 py-0.2 rounded border font-medium ${badge.cls}`}>
-                        {badge.text}
-                      </span>
-                    </div>
-                    <div className="text-[11px] text-[var(--text-muted)] truncate mt-0.5">
-                      {idx.nameZh}
-                    </div>
-                    <div className="text-base font-black font-mono text-[var(--text-primary)] mt-1.5 tracking-tight truncate">
-                      {q?.formatted_price || (q?.price != null ? `${idx.symbol}${q.price}` : '—')}
-                    </div>
-                    <div className="flex items-center gap-1 mt-1 text-[10px] font-mono font-bold">
-                      <span className={`px-1.5 py-0.2 rounded ${
-                        chg.is_up ? 'text-emerald-500 bg-emerald-500/10' : 'text-rose-500 bg-rose-500/10'
+                      <span className="text-xs font-semibold text-[var(--text-secondary)]">{b.title}</span>
+                      <span className={`text-[10px] px-1.5 py-0.2 rounded font-medium ${
+                        b.tone === 'good' ? 'bg-[#199e70]/15 text-[#199e70] border border-[#199e70]/30' : 'bg-amber-500/15 text-amber-500 border border-amber-500/30'
                       }`}>
-                        {chg.is_up ? '▲' : '▼'} {chg.change_pct}
+                        {b.regime}
                       </span>
                     </div>
+                    <div className="text-2xl font-black font-mono text-[var(--text-primary)] mt-1.5 tracking-tight">
+                      {b.ratio}
+                    </div>
                   </div>
-                  <div className="mt-2 text-[10px] text-[var(--text-muted)] font-medium truncate pt-1.5 border-t border-[var(--border-color)]/50">
-                    {idx.desc}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
 
-        {/* 宏观核心风险与流动性舵手 (6张流动性指标卡片) */}
-        <div>
-          <div className="text-xs font-semibold text-[var(--text-secondary)] mb-2.5">
-            宏观流动性、无风险利率与恐慌情绪指标
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {macroGauges.map((g) => (
-              <div
-                key={g.id}
-                className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3 flex flex-col justify-between hover:border-[#3987e5]/50 transition-all shadow-sm"
-              >
-                <div>
-                  <div className="text-[11px] text-[var(--text-muted)] truncate font-medium">
-                    {g.nameZh}
-                  </div>
-                  <div className="text-lg font-black font-mono text-[var(--text-primary)] mt-1 tracking-tight">
-                    {g.value}
+                  <div className="space-y-1">
+                    <div className="w-full bg-[var(--surface-color)] h-2 rounded-full overflow-hidden border border-[var(--border-color)]">
+                      <div
+                        className={`h-full rounded-full transition-all duration-500 ${
+                          b.pct >= 50 ? 'bg-[#199e70]' : 'bg-amber-500'
+                        }`}
+                        style={{ width: `${b.pct}%` }}
+                      />
+                    </div>
+                    <div className="text-[10px] text-[var(--text-muted)] flex justify-between font-mono">
+                      <span>{b.detail}</span>
+                      <span>{b.pct.toFixed(1)}%</span>
+                    </div>
                   </div>
                 </div>
-                <div className="mt-2 flex items-center justify-between gap-1 pt-1.5 border-t border-[var(--border-color)]/50">
-                  <span className="text-[10px] text-[var(--text-muted)] truncate">{g.role}</span>
-                  <span className={`text-[9px] px-1 py-0.2 rounded font-medium ${
-                    g.tone === 'warning' ? 'text-amber-500 bg-amber-500/10' :
-                    g.tone === 'good' ? 'text-[#199e70] bg-[#199e70]/10' :
-                    'text-[#3987e5] bg-[#3987e5]/10'
-                  }`}>
-                    {g.status}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ========================================================================= */}
-      {/* 第二顺位：全市场量化趋势广度与 SEPA 计算结果矩阵 (宏观量化计算结果呈现) */}
-      {/* ========================================================================= */}
-      <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)] gap-2">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#199e70]" />
-            <div>
-              <h2 className="text-base font-bold text-[var(--text-primary)]">
-                全市场量化趋势广度与主升浪计算结果
-              </h2>
-              <p className="text-xs text-[var(--text-muted)] mt-0.5">
-                基于纯本地 0-Token 物理日线时序计算，严谨测算 50/200 日移动均线站上率与 SEPA 主升浪结构
-              </p>
+              ))}
             </div>
           </div>
-          <div className="flex items-center gap-2 font-mono text-xs text-[var(--text-muted)]">
-            <span>SEPA 初筛引擎状态: </span>
-            <span className="px-2 py-0.5 rounded bg-blue-500/10 text-[#3987e5] border border-blue-500/20 font-sans font-medium">
-              待正式初筛 (等待全市场日线批次)
-            </span>
-          </div>
         </div>
 
-        {/* 4 组全市场趋势广度进度条卡片 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {breadthIndicators.map((b) => (
-            <div
-              key={b.title}
-              className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-4 flex flex-col justify-between space-y-3 hover:border-[#199e70]/40 transition-all shadow-sm"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-1">
-                  <span className="text-xs font-semibold text-[var(--text-secondary)]">{b.title}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded font-medium ${
-                    b.tone === 'good' ? 'bg-[#199e70]/15 text-[#199e70] border border-[#199e70]/30' : 'bg-amber-500/15 text-amber-500 border border-amber-500/30'
-                  }`}>
-                    {b.regime}
-                  </span>
-                </div>
-                <div className="text-2xl font-black font-mono text-[var(--text-primary)] mt-2 tracking-tight">
-                  {b.ratio}
-                </div>
+        {/* ==================== 右侧 35% (lg:col-span-4): 焦点胜负手个股直达 + 突发事件雷达 ==================== */}
+        <div className="lg:col-span-4 space-y-5">
+          {/* 1. 宏观驱动与焦点胜负手标的 (情境式直达) */}
+          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3">
+            <div className="flex items-center justify-between pb-2.5 border-b border-[var(--border-color)]/60">
+              <div className="flex items-center gap-2">
+                <span className="text-base">🎯</span>
+                <h3 className="text-xs font-bold text-[var(--text-primary)]">
+                  宏观驱动与焦点胜负手标的
+                </h3>
               </div>
+              <span className="text-[10px] text-[var(--text-muted)]">点击直达 DCF 深度估值</span>
+            </div>
 
-              {/* 视觉化广度百分比条 */}
-              <div className="space-y-1">
-                <div className="w-full bg-[var(--surface-color)] h-2 rounded-full overflow-hidden border border-[var(--border-color)]">
-                  <div
-                    className={`h-full rounded-full transition-all duration-500 ${
-                      b.pct >= 50 ? 'bg-[#199e70]' : 'bg-amber-500'
-                    }`}
-                    style={{ width: `${b.pct}%` }}
+            <div className="space-y-2.5">
+              {leadingTickers.map((item) => (
+                <div
+                  key={item.ticker}
+                  onClick={() => {
+                    onSelectTicker?.(item.ticker)
+                    onNavigateTab('analytics')
+                  }}
+                  className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#3987e5] rounded-xl p-3 cursor-pointer transition-all flex items-center justify-between gap-3 group shadow-sm hover:shadow"
+                >
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-mono font-bold text-xs text-[var(--text-primary)] group-hover:text-[#3987e5] transition-colors">
+                        {item.ticker}
+                      </span>
+                      <span className="text-[10px] px-1.5 py-0.2 rounded font-medium bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/20">
+                        {item.tag}
+                      </span>
+                      <span className="text-[11px] text-[var(--text-secondary)] font-medium truncate">
+                        {item.nameZh}
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-[var(--text-muted)] truncate mt-1">
+                      {item.role}
+                    </p>
+                  </div>
+
+                  <div className="text-right shrink-0">
+                    <div className="font-mono font-black text-xs text-[var(--text-primary)]">
+                      {item.quote?.formatted_price || '—'}
+                    </div>
+                    <div className="text-[10px] font-mono font-bold text-emerald-500 mt-0.5">
+                      {item.chg}
+                    </div>
+                    <div className="text-[10px] text-[#3987e5] group-hover:underline mt-0.5 flex items-center justify-end gap-0.5">
+                      <span>分析</span>
+                      <span>&rarr;</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 2. 突发核心事件情报雷达 (紧凑卡片流) */}
+          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3">
+            <div className="flex items-center justify-between pb-2.5 border-b border-[var(--border-color)]/60">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#d03b3b]" />
+                <h3 className="text-xs font-bold text-[var(--text-primary)]">
+                  突发核心事件雷达 ({data?.events_summary?.total_events || 0}篇)
+                </h3>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={handleExtractNews}
+                  disabled={isExtractingNews}
+                  className="text-[10px] px-2 py-0.5 rounded bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/30 cursor-pointer transition-all flex items-center gap-1"
+                  title="即时核验与抽取官方最新公报"
+                >
+                  <span className={isExtractingNews ? 'animate-spin' : ''}>⚡</span>
+                  <span>{isExtractingNews ? '抽取中...' : '即时抽取'}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onNavigateTab('intelligence')}
+                  className="text-[10px] text-[var(--text-secondary)] hover:text-[#3987e5] hover:underline cursor-pointer"
+                >
+                  全部 &rarr;
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-2.5">
+              {data?.events_summary?.top_events && data.events_summary.top_events.length > 0 ? (
+                data.events_summary.top_events.slice(0, 4).map((ev: EventItem) => (
+                  <EventCard
+                    key={ev.event_id}
+                    id={ev.event_id}
+                    title={ev.title}
+                    severity={ev.severity}
+                    verification_status={ev.verification_status}
+                    is_quarantined_rumor={ev.is_quarantined_rumor}
+                    published_at={ev.published_at}
+                    source_name={ev.source_name}
+                    category={ev.category}
+                    micro_physical_impact={ev.micro_physical_impact}
+                    involved_entities={ev.involved_entities}
+                    affected_business_segments={ev.affected_business_segments}
+                    compact={true}
+                    onClick={() => {
+                      onSelectEvent(ev.event_id)
+                      onNavigateTab('intelligence')
+                    }}
+                    onSelectTicker={onSelectTicker}
                   />
+                ))
+              ) : (
+                <div className="text-center py-6 text-xs text-[var(--text-muted)]">
+                  暂无突发事件记录
                 </div>
-                <div className="text-[10px] text-[var(--text-muted)] flex justify-between font-mono">
-                  <span>{b.detail}</span>
-                  <span>{b.pct.toFixed(1)}%</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ========================================================================= */}
-      {/* 个股深度研究导航入口 (明确引导：总览看大盘，个股进“计算分析”) */}
-      {/* ========================================================================= */}
-      <div className="bg-[var(--surface-color)] border border-[var(--border-color)] hover:border-[#3987e5]/50 rounded-xl p-5 shadow-sm transition-all flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-[#3987e5]/10 border border-[#3987e5]/25 flex items-center justify-center text-2xl shrink-0">
-            📊
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-sm font-bold text-[var(--text-primary)]">
-                个股全息深度诊断、三阶段 DCF 估值走廊与 24 大专业量化模型
-              </h3>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#199e70]/15 text-[#199e70] border border-[#199e70]/30 font-medium">
-                覆盖 14,892 家全盘资产池
-              </span>
-            </div>
-            <p className="text-xs text-[var(--text-muted)] mt-1">
-              总览页专注全球宏观、大盘指数与市场广度；如需查验单只股票的官方 SEC 10-K / 决算短信审计底稿、安全边际买点、微观资金流或敏感性微调，请直接前往“计算分析”工作台。
-            </p>
-          </div>
-        </div>
-        <button
-          type="button"
-          onClick={() => onNavigateTab('analytics')}
-          className="px-4 py-2 rounded-lg bg-[#3987e5] hover:bg-[#2c72c7] text-white text-xs font-semibold shrink-0 cursor-pointer transition-all flex items-center justify-center gap-1.5 shadow-sm"
-        >
-          <span>进入个股计算分析</span>
-          <span>&rarr;</span>
-        </button>
-      </div>
-
-      {/* ========================================================================= */}
-      {/* 第三顺位：突发核心事件情报雷达 (催化剂与动态新闻) */}
-      {/* ========================================================================= */}
-      <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
-        <div className="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#d03b3b]" />
-            <div>
-              <h2 className="text-base font-bold text-[var(--text-primary)]">
-                突发核心事件情报雷达
-              </h2>
-              <p className="text-xs text-[var(--text-muted)] mt-0.5">
-                官方监管与交易所权威资讯流，AI 微观供应链与大盘流动性冲击推演
-              </p>
+              )}
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={handleExtractNews}
-              disabled={isExtractingNews}
-              className={`text-xs px-2.5 py-1 rounded-md font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
-                isExtractingNews
-                  ? 'bg-amber-500/10 text-amber-500 border border-amber-500/30'
-                  : 'bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/30 hover:border-[#3987e5]'
-              }`}
-              title="触发官方资讯采集，实时核验与抽取最新情报"
-            >
-              <span className={isExtractingNews ? 'animate-spin' : ''}>⚡</span>
-              <span>{isExtractingNews ? '正在抽取情报...' : '即时抽取最新新闻'}</span>
-            </button>
-            <button
-              onClick={() => onNavigateTab('intelligence')}
-              className="text-xs text-[var(--text-secondary)] hover:text-[#3987e5] hover:underline cursor-pointer"
-            >
-              查看全部情报 ({data?.events_summary?.total_events || 0}条) →
-            </button>
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          {data?.events_summary?.top_events && data.events_summary.top_events.length > 0 ? (
-            data.events_summary.top_events.map((ev: EventItem) => (
-              <EventCard
-                key={ev.event_id}
-                id={ev.event_id}
-                title={ev.title}
-                severity={ev.severity}
-                verification_status={ev.verification_status}
-                is_quarantined_rumor={ev.is_quarantined_rumor}
-                published_at={ev.published_at}
-                source_name={ev.source_name}
-                category={ev.category}
-                micro_physical_impact={ev.micro_physical_impact}
-                involved_entities={ev.involved_entities}
-                affected_business_segments={ev.affected_business_segments}
-                onClick={() => {
-                  onSelectEvent(ev.event_id)
-                  onNavigateTab('intelligence')
-                }}
-                onSelectTicker={onSelectTicker}
-              />
-            ))
-          ) : (
-            <div className="text-center py-6 text-xs text-[var(--text-muted)]">
-              暂无突发事件记录
-            </div>
-          )}
         </div>
       </div>
     </div>
