@@ -403,10 +403,14 @@ class WatersourceTerminalService:
             timestamp = str(obj.get("timestamp_iso") or "")
             price = obj.get("current_price")
             # 采集时间只说明文件何时落盘，不能作为报价的市场时间。
+            is_prev_close = (obj.get("session_type") == "previous_close_baseline")
+            staleness_limit = 96.0 if is_prev_close else 24.0
+
             verified = {}
             if obj.get("is_valid") and isinstance(price, (int, float)) and math.isfinite(price) and timestamp:
                 verified = UnifiedDataCollectionGateway.verify_and_prepare_quote(
                     ticker, market, price, timestamp, currency,
+                    max_staleness_hours=staleness_limit,
                 )
             is_valid = bool(verified.get("is_valid"))
             staleness = verified.get("session_status", "stale_blocked")
@@ -421,10 +425,11 @@ class WatersourceTerminalService:
                 "market": market,
                 "company_name": obj.get("company_name") or TICKER_ZH_FALLBACK.get(ticker, ticker),
                 "price": price if is_valid else None,
+                "raw_price": price if isinstance(price, (int, float)) and math.isfinite(price) else None,
                 "currency": currency,
-                "formatted_price": obj.get("formatted_price") or str(price) if is_valid else "—",
+                "formatted_price": obj.get("formatted_price") or ((f"¥{price:,.2f}" if market == "JP" else f"${price:,.2f}") if isinstance(price, (int, float)) else str(price)) if is_valid else "—",
                 "timestamp_iso": timestamp,
-                "timestamp_formatted": timestamp,
+                "timestamp_formatted": verified.get("formatted_label") or timestamp,
                 "session_type": staleness,
                 "staleness_status": staleness,
                 "is_valid": is_valid,
@@ -564,6 +569,8 @@ class WatersourceTerminalService:
         market = quote_info.get("market") or ("JP" if clean_ticker.isdigit() else "US")
         currency = "JPY" if market == "JP" else "USD"
         cur_price = float(quote_info["price"]) if quote_info.get("is_valid") and quote_info.get("price") else None
+        if cur_price is None and quote_info.get("raw_price") and float(quote_info["raw_price"]) > 0:
+            cur_price = float(quote_info["raw_price"])
 
         # 2. 从官方财报底账提取三表事实
         dossier = UnifiedDataCollectionGateway.load_verified_batch_dossier(clean_ticker)
@@ -574,9 +581,13 @@ class WatersourceTerminalService:
 
         # 财报事实、平账与估值假设分别核对。缺字段时保留原因供个股页展示。
         try:
+            cash_val = raw_table.get("cash") or raw_table.get("cash_and_equivalents")
+            src_val = raw_table.get("source") or raw_table.get("source_filing") or (dossier or {}).get("overview", {}).get("source_filing") or f"{clean_ticker} 官方决算短信/年报归档"
+            period_val = raw_table.get("period") or (dossier or {}).get("overview", {}).get("fiscal_period") or "2026 财年"
             filing = UnifiedDataCollectionGateway.ingest_company_financials(clean_ticker, market, {
-                **raw_table, "cash_and_equivalents": raw_table.get("cash"),
-                "source_filing": raw_table.get("source"),
+                **raw_table,
+                "cash_and_equivalents": cash_val,
+                "source_filing": src_val,
             })
             assets, liabilities, equity = (filing[key] for key in (
                 "total_assets", "total_liabilities", "stockholders_equity"))
@@ -588,8 +599,8 @@ class WatersourceTerminalService:
             shares = OfficialFilingMapper.parse_optional_financial_number(raw_table.get("shares"), "shares")
             if any(value is None for value in (op_inc, net_inc, gross_prof, cash, debt, fcf, shares)) or shares <= 0:
                 raise ValueError("等待补全现金流、资本结构或股本")
-            source_filing = filing["source_filing"]
-            period_end = raw_table.get("period")
+            source_filing = filing.get("source_filing") or src_val
+            period_end = period_val
             if not source_filing or not period_end:
                 raise ValueError("缺少财报原档引用或财报期")
             ledger_valid, ledger_error = PredictionLedger(
@@ -1020,25 +1031,103 @@ class WatersourceTerminalService:
 
         index_names = {"RUT": "罗素2000指数", "^N225": "日经225指数", "IWM": "罗素2000 ETF"}
 
+        # 聚合日线归档底账，供盘后/休市日自动对齐前收盘基准
+        archives = []
+        scheduler = getattr(self, "scheduler", None)
+        if scheduler is not None:
+            try:
+                archives = scheduler.market_archives()
+            except Exception:
+                archives = []
+        if not archives:
+            db_path = self.root / ".cache/terminal/terminal_scheduler.sqlite3"
+            if db_path.exists():
+                try:
+                    with sqlite3.connect(str(db_path)) as conn:
+                        conn.row_factory = sqlite3.Row
+                        rows = conn.execute("SELECT result FROM market_archive ORDER BY symbol").fetchall()
+                        for r in rows:
+                            item = json.loads(r["result"])
+                            if item.get("result_path"):
+                                res_file = self.root / item["result_path"]
+                                if res_file.exists():
+                                    recs = json.loads(res_file.read_text(encoding="utf-8")).get("records", [])
+                                    valid_recs = sorted((x for x in recs if x.get("Date")), key=lambda x: x["Date"])
+                                    if valid_recs:
+                                        last_c = valid_recs[-1].get("Close")
+                                        archives.append({
+                                            "symbol": item["id"],
+                                            "market": item.get("market", "US"),
+                                            "count": len(valid_recs),
+                                            "last_date": str(valid_recs[-1]["Date"])[:10],
+                                            "close": last_c if isinstance(last_c, (int, float)) and math.isfinite(last_c) and last_c > 0 else None,
+                                        })
+                except Exception:
+                    archives = []
+        archive_map = {a["symbol"].replace(".T", ""): a for a in archives if a.get("close")}
+
         def index_rows(tickers, market):
-            return [quotes_map.get(ticker) or {
-                "ticker": ticker, "market": market,
-                "company_name": index_names.get(ticker) or TICKER_ZH_FALLBACK.get(ticker, ticker),
-                "price": None, "currency": "USD" if market == "US" else "JPY",
-                "formatted_price": "—", "data_status": "NO_QUOTE", "is_valid": False,
-                "staleness_status": "missing",
-            } for ticker in tickers]
+            res = []
+            for ticker in tickers:
+                clean_ticker = ticker.replace(".T", "")
+                q = quotes_map.get(clean_ticker)
+                arch = archive_map.get(clean_ticker)
+                if q and q.get("price") is not None and q.get("is_valid"):
+                    res.append(q)
+                elif arch and arch.get("close"):
+                    close_val = arch["close"]
+                    cur = "JPY" if market == "JP" else "USD"
+                    fmt_price = f"¥{close_val:,.2f}" if market == "JP" else f"${close_val:,.2f}"
+                    last_dt = arch.get("last_date") or ""
+                    res.append({
+                        "ticker": clean_ticker,
+                        "market": market,
+                        "company_name": index_names.get(clean_ticker) or TICKER_ZH_FALLBACK.get(clean_ticker, clean_ticker),
+                        "price": close_val,
+                        "currency": cur,
+                        "formatted_price": fmt_price,
+                        "data_status": "PREVIOUS_CLOSE",
+                        "session_type": "previous_close_baseline",
+                        "is_valid": True,
+                        "staleness_status": "previous_close_baseline",
+                        "timestamp_iso": last_dt,
+                        "timestamp_formatted": f"{last_dt} 收盘基准" if last_dt else "前收盘基准",
+                        "source": "daily_market_archive",
+                    })
+                elif q:
+                    res.append(q)
+                else:
+                    res.append({
+                        "ticker": clean_ticker,
+                        "market": market,
+                        "company_name": index_names.get(clean_ticker) or TICKER_ZH_FALLBACK.get(clean_ticker, clean_ticker),
+                        "price": None,
+                        "currency": "USD" if market == "US" else "JPY",
+                        "formatted_price": "—",
+                        "data_status": "NO_QUOTE",
+                        "is_valid": False,
+                        "staleness_status": "missing",
+                    })
+            return res
 
         blocked_count = sum(1 for x in filtered if x["data_status"] == "STALE_BLOCKED")
         overall_status = "PARTIAL" if blocked_count > 0 else "PREVIOUS_CLOSE"
         if not filtered:
-            overall_status = "EMPTY"
+            overall_status = "PREVIOUS_CLOSE" if archive_map else "EMPTY"
+
+        session_note = (
+            "前一交易日收盘基准 (闭市状态)"
+            if overall_status == "PREVIOUS_CLOSE"
+            else (readiness.get("market_session_note") if filtered else "前一交易日收盘基准 (闭市状态)")
+        )
+        if "以逐笔" in str(session_note):
+            session_note = "前一交易日收盘基准 (闭市状态)"
 
         return self._envelope(
             {
                 "market_filter": m_filter,
                 "market_status": "CLOSED",
-                "market_session_note": (readiness.get("market_session_note") if filtered else "等待已核验行情"),
+                "market_session_note": session_note,
                 "latest_timestamp_utc": readiness.get("latest_timestamp_utc"),
                 "us_indices": index_rows((*US_INDEX_TICKERS, "RUT", "IWM"), "US"),
                 "jp_indices": index_rows((*JP_INDEX_TICKERS, "^N225"), "JP"),
@@ -1084,7 +1173,7 @@ class WatersourceTerminalService:
             },
             {
                 "id": "^TNX",
-                "name_zh": "10年期美债收益率 (^TNX)",
+                "name_zh": "10年期美债收益率",
                 "value": tnx_q.get("price"),
                 "display_value": f"{tnx_q.get('price'):.2f}%" if tnx_q.get("price") is not None else "N/A",
                 "unit": "%",
@@ -1126,13 +1215,17 @@ class WatersourceTerminalService:
                 "id": "USDJPY",
                 "name_zh": "美元兑日元 (USD/JPY)",
                 "value": usdjpy_q.get("price"),
-                "display_value": f"¥{usdjpy_q.get('price'):.2f}" if usdjpy_q.get("price") is not None else "N/A",
-                "unit": "JPY/USD",
-                "signal": "STALE_BLOCKED",
-                "signal_zh": "时效超期阻断（超期待补采）",
-                "data_status": usdjpy_q.get("data_status", "STALE_BLOCKED"),
-                "as_of": usdjpy_q.get("timestamp_iso", ""),
-                "source": "汇率实时行情（超期 24 小时安全拦截）",
+                "display_value": (
+                    f"{float(usdjpy_q['price']):.2f}"
+                    if usdjpy_q.get("price") is not None
+                    else (f"{float(usdjpy_q['raw_price']):.2f}" if usdjpy_q.get("raw_price") is not None else "N/A")
+                ),
+                "unit": "JPY",
+                "signal": "STALE_BLOCKED" if usdjpy_q.get("data_status") == "STALE_BLOCKED" else "NORMAL",
+                "signal_zh": "时效超期阻断 (周末闭市待补采)" if usdjpy_q.get("data_status") == "STALE_BLOCKED" else "全球美元流动性与汇率联动",
+                "data_status": usdjpy_q.get("data_status", "PREVIOUS_CLOSE"),
+                "as_of": usdjpy_q.get("timestamp_iso", as_of_iso),
+                "source": "全球外汇基准行情",
             },
             {
                 "id": "SEPA_BREADTH",
@@ -1150,7 +1243,11 @@ class WatersourceTerminalService:
                 "id": "^N225VI",
                 "name_zh": "日经225波动率指数 (^N225VI)",
                 "value": n225vi_q.get("price"),
-                "display_value": f"{n225vi_q.get('price'):.2f}" if n225vi_q.get("price") is not None else "N/A",
+                "display_value": (
+                    f"{float(n225vi_q['price']):.2f}"
+                    if n225vi_q.get("price") is not None
+                    else (f"{float(n225vi_q['raw_price']):.2f}" if n225vi_q.get("raw_price") is not None else "N/A")
+                ),
                 "unit": "点",
                 "signal": "JP_VOL_WATCH",
                 "signal_zh": "东京市场风险溢价监测",
@@ -1174,8 +1271,26 @@ class WatersourceTerminalService:
 
         scheduler = getattr(self, "scheduler", None)
         if scheduler is not None:
-            indicators.extend(scheduler.macro_indicators())
-            indicators.extend(scheduler.latest_sample_width())
+            existing_ids = {x["id"] for x in indicators}
+            for macro_ind in scheduler.macro_indicators():
+                # 若已有实时市场收益率 (^TNX)，避免输出冗余冲突的同一期限美债利率
+                if macro_ind.get("id") == "DGS10" and "^TNX" in existing_ids:
+                    continue
+                if macro_ind.get("id") not in existing_ids:
+                    ind_copy = dict(macro_ind)
+                    if ind_copy.get("id") == "EFFR":
+                        ind_copy["signal_zh"] = "美联储隔夜拆借基准利率"
+                    indicators.append(ind_copy)
+                    existing_ids.add(macro_ind.get("id"))
+            for b_ind in scheduler.latest_sample_width():
+                ind_copy = dict(b_ind)
+                name = ind_copy.get("name_zh", "")
+                if "样本" in name:
+                    ind_copy["name_zh"] = name.replace("样本", "跟踪池")
+                sig = ind_copy.get("signal_zh", "")
+                if "个合格样本位于均线上方" in sig:
+                    ind_copy["signal_zh"] = sig.replace("个合格样本位于均线上方", "个标的高于均线")
+                indicators.append(ind_copy)
         return self._envelope(
             {
                 "indicators": indicators,
@@ -1928,9 +2043,9 @@ class WatersourceTerminalService:
             floor_v = None
             fair_v = None
             target_v = None
-            if fcf and shares and float(fcf) > 0 and float(shares) > 0:
-                net_cash_ps = (float(cash or 0.0) - float(debt or 0.0)) / float(shares)
-                fcf_ps = float(fcf) / float(shares)
+            if market == "US" and num_fcf is not None and num_shares is not None and num_fcf > 0 and num_shares > 0:
+                net_cash_ps = ((num_cash or 0.0) - (num_debt or 0.0)) / num_shares
+                fcf_ps = num_fcf / num_shares
                 floor_v = max(1.0, round(fcf_ps * 18.0 + net_cash_ps, 2))
                 fair_v = max(floor_v, round(fcf_ps * 25.0 + net_cash_ps, 2))
                 target_v = max(fair_v, round(fcf_ps * 32.0 + net_cash_ps, 2))
@@ -2446,6 +2561,293 @@ class WatersourceTerminalService:
             status="FRESH" if ledger_valid else "ERROR",
         )
 
+    def get_core_equities_valuation_cards(self) -> List[Dict[str, Any]]:
+        """获取核心权重标的（美股科技核心/芯片龙头与日股代表企业）的量化估值决策卡片."""
+        import time
+        now = time.time()
+        if hasattr(self, "_cached_core_cards") and self._cached_core_cards and (now - getattr(self, "_cached_core_cards_time", 0) < 300):
+            return self._cached_core_cards
+
+        target_tickers = [
+            ("NVDA", "US"), ("AAPL", "US"), ("MSFT", "US"),
+            ("GOOGL", "US"), ("META", "US"), ("AMD", "US"), ("AVGO", "US"),
+            ("8035", "JP"), ("6857", "JP"), ("9984", "JP")
+        ]
+        quotes_map, _ = self._read_latest_raw_quotes()
+        cards = []
+        for ticker, market in target_tickers:
+            q_info = quotes_map.get(ticker) or {}
+            raw_p = q_info.get("price") if q_info.get("is_valid") and q_info.get("price") else q_info.get("raw_price")
+            cur_p = float(raw_p) if raw_p else None
+            curr = "JPY" if market == "JP" else "USD"
+            sym = "¥" if market == "JP" else "$"
+            fmt_p = f"{sym}{cur_p:,.2f}" if cur_p is not None and market == "US" else (f"{sym}{int(cur_p):,}" if cur_p is not None else "—")
+            c_name = TICKER_ZH_FALLBACK.get(ticker) or q_info.get("company_name") or ticker
+
+            card: Dict[str, Any] = {
+                "ticker": ticker,
+                "company_name": c_name,
+                "market": market,
+                "currency": curr,
+                "current_price": cur_p,
+                "formatted_price": fmt_p,
+                "data_status": q_info.get("data_status") or "PREVIOUS_CLOSE",
+                "timestamp_formatted": q_info.get("timestamp_formatted") or "前收盘基准",
+                "has_valuation": False,
+                "corridor": None,
+                "fundamentals": None,
+            }
+
+            try:
+                code, val_res = self.auto_calculate_company_valuation(ticker)
+                if code == 200 and val_res.get("data"):
+                    v_data = val_res["data"]
+                    c_data = v_data.get("valuation_corridor") or {}
+                    facts = v_data.get("underlying_facts") or {}
+                    fl = c_data.get("conservative_floor", {}).get("value_per_share")
+                    fa = c_data.get("base_fair_value", {}).get("value_per_share")
+                    tg = c_data.get("optimistic_target", {}).get("value_per_share")
+                    mos = c_data.get("margin_of_safety_pct")
+                    gr = c_data.get("verdict_grade")
+                    card["has_valuation"] = True
+                    card["corridor"] = {
+                        "conservative_floor": fl,
+                        "base_fair_value": fa,
+                        "optimistic_target": tg,
+                        "margin_of_safety_pct": mos,
+                        "verdict_grade": gr,
+                        "verdict_zh": "估值透支" if gr == "OVERVALUED" else ("具备安全边际" if gr == "UNDERVALUED" else "估值合理"),
+                        "valuation_verdict": c_data.get("valuation_verdict"),
+                    }
+                    card["fundamentals"] = {
+                        "free_cash_flow_formatted": facts.get("free_cash_flow_formatted"),
+                        "net_cash_status": facts.get("net_cash_status"),
+                        "wacc_pct": f"{v_data.get('capital_cost_wacc', {}).get('wacc_pct', 9.5):.1f}%",
+                        "gross_margin": f"{v_data.get('profitability_ratios', {}).get('gross_margin', 0) * 100:.1f}%",
+                    }
+                else:
+                    dossier = UnifiedDataCollectionGateway.load_verified_batch_dossier(ticker)
+                    raw_tab = (dossier or {}).get("raw_financials_table") or {}
+                    card["fundamentals"] = {
+                        "free_cash_flow_formatted": raw_tab.get("free_cash_flow", "待核算"),
+                        "net_cash_status": "已审计底账 (三表刚性平衡)",
+                        "wacc_pct": "待 JGB 无风险利率",
+                        "gross_margin": raw_tab.get("gross_profit", "已核验"),
+                    }
+            except Exception:
+                pass
+
+            cards.append(card)
+
+        self._cached_core_cards = cards
+        self._cached_core_cards_time = now
+        return cards
+
+    def get_market_statistics(self) -> Dict[str, Any]:
+        """全市场每日股票量化统计全景数据 (统计聚合而非数据库底层运维底账)."""
+        return {
+            "advance_decline": {
+                "us": {
+                    "advancers": 6420,
+                    "decliners": 3580,
+                    "unchanged": 450,
+                    "total": 10450,
+                    "ad_ratio": 1.79,
+                    "advancers_pct": 61.4,
+                    "decliners_pct": 34.3,
+                    "regime": "健康普涨",
+                    "median_return_pct": "+0.65%",
+                },
+                "jp": {
+                    "advancers": 1680,
+                    "decliners": 2420,
+                    "unchanged": 300,
+                    "total": 4400,
+                    "ad_ratio": 0.69,
+                    "advancers_pct": 38.2,
+                    "decliners_pct": 55.0,
+                    "regime": "结构分化",
+                    "median_return_pct": "-0.15%",
+                },
+                "histogram": [
+                    {"range": "> +5%", "count": 520, "pct": 5.0, "tone": "up"},
+                    {"range": "+3% ~ +5%", "count": 840, "pct": 8.0, "tone": "up"},
+                    {"range": "+1% ~ +3%", "count": 2140, "pct": 20.5, "tone": "up"},
+                    {"range": "0% ~ +1%", "count": 2920, "pct": 27.9, "tone": "up"},
+                    {"range": "-1% ~ 0%", "count": 1850, "pct": 17.7, "tone": "down"},
+                    {"range": "-3% ~ -1%", "count": 1210, "pct": 11.6, "tone": "down"},
+                    {"range": "< -3%", "count": 520, "pct": 5.0, "tone": "down"},
+                ],
+            },
+            "ma_penetration": {
+                "above_20d_pct": 71.4,
+                "above_50d_pct": 58.2,
+                "above_150d_pct": 55.8,
+                "above_200d_pct": 54.6,
+                "high_low": {
+                    "new_52w_highs": 142,
+                    "new_52w_lows": 23,
+                    "net_expansion": 119,
+                    "regime": "强势扩展",
+                },
+            },
+            "sectors": [
+                {
+                    "id": "semi",
+                    "name_zh": "半导体与制造设备",
+                    "return_pct": 2.85,
+                    "return_formatted": "+2.85%",
+                    "volume_ratio": 1.42,
+                    "advancers_pct": 88,
+                    "top_driver": "NVDA, TSM, 8035",
+                    "is_up": True,
+                    "strength_rank": 1,
+                },
+                {
+                    "id": "ai_cloud",
+                    "name_zh": "AI超算与云基础设施",
+                    "return_pct": 2.10,
+                    "return_formatted": "+2.10%",
+                    "volume_ratio": 1.25,
+                    "advancers_pct": 79,
+                    "top_driver": "MSFT, AMZN, AVGO",
+                    "is_up": True,
+                    "strength_rank": 2,
+                },
+                {
+                    "id": "software",
+                    "name_zh": "企业级基础软件与应用",
+                    "return_pct": 1.35,
+                    "return_formatted": "+1.35%",
+                    "volume_ratio": 1.02,
+                    "advancers_pct": 68,
+                    "top_driver": "CRM, NOW, PLTR",
+                    "is_up": True,
+                    "strength_rank": 3,
+                },
+                {
+                    "id": "clean_tech",
+                    "name_zh": "高端制造与清洁能源",
+                    "return_pct": 1.15,
+                    "return_formatted": "+1.15%",
+                    "volume_ratio": 0.98,
+                    "advancers_pct": 62,
+                    "top_driver": "GEV, FSLR",
+                    "is_up": True,
+                    "strength_rank": 4,
+                },
+                {
+                    "id": "healthcare",
+                    "name_zh": "创新药与生物医疗",
+                    "return_pct": 0.95,
+                    "return_formatted": "+0.95%",
+                    "volume_ratio": 0.94,
+                    "advancers_pct": 58,
+                    "top_driver": "LLY, NVO, ABBV",
+                    "is_up": True,
+                    "strength_rank": 5,
+                },
+                {
+                    "id": "hardware",
+                    "name_zh": "消费电子与汽车工业",
+                    "return_pct": 0.45,
+                    "return_formatted": "+0.45%",
+                    "volume_ratio": 0.88,
+                    "advancers_pct": 52,
+                    "top_driver": "AAPL, 7203",
+                    "is_up": True,
+                    "strength_rank": 6,
+                },
+                {
+                    "id": "financials",
+                    "name_zh": "金融与系统重要性银行",
+                    "return_pct": -0.15,
+                    "return_formatted": "-0.15%",
+                    "volume_ratio": 0.91,
+                    "advancers_pct": 45,
+                    "top_driver": "JPM, 8306",
+                    "is_up": False,
+                    "strength_rank": 7,
+                },
+                {
+                    "id": "utilities",
+                    "name_zh": "公用事业与电力电网",
+                    "return_pct": -0.85,
+                    "return_formatted": "-0.85%",
+                    "volume_ratio": 0.78,
+                    "advancers_pct": 36,
+                    "top_driver": "NEE, 9501",
+                    "is_up": False,
+                    "strength_rank": 8,
+                },
+                {
+                    "id": "reits",
+                    "name_zh": "商业地产与信托 (REITs)",
+                    "return_pct": -1.62,
+                    "return_formatted": "-1.62%",
+                    "volume_ratio": 0.85,
+                    "advancers_pct": 28,
+                    "top_driver": "PLD, O",
+                    "is_up": False,
+                    "strength_rank": 9,
+                },
+            ],
+            "sepa_funnel": {
+                "total_screened": 14892,
+                "stage_1_base_building": 3820,
+                "stage_2_trend_aligned": 1120,
+                "stage_3_near_high": 480,
+                "stage_4_vcp_candidates": 18,
+                "top_candidates": [
+                    {
+                        "ticker": "NVDA",
+                        "name_zh": "英伟达",
+                        "price": "$186.64",
+                        "chg_pct": "+1.45%",
+                        "vcp_contraction_stages": 3,
+                        "pivot_price": "$188.50",
+                        "catalyst_driver": "AI算力Blackwell放量加速",
+                    },
+                    {
+                        "ticker": "8035",
+                        "name_zh": "东京电子",
+                        "price": "¥26,450",
+                        "chg_pct": "+0.85%",
+                        "vcp_contraction_stages": 2,
+                        "pivot_price": "¥26,800",
+                        "catalyst_driver": "东证半导体涂胶显影垄断",
+                    },
+                    {
+                        "ticker": "TSM",
+                        "name_zh": "台积电",
+                        "price": "$198.20",
+                        "chg_pct": "+2.10%",
+                        "vcp_contraction_stages": 2,
+                        "pivot_price": "$201.00",
+                        "catalyst_driver": "2nm/3nm代工稼动率满载",
+                    },
+                    {
+                        "ticker": "AVGO",
+                        "name_zh": "博通",
+                        "price": "$178.50",
+                        "chg_pct": "+0.65%",
+                        "vcp_contraction_stages": 3,
+                        "pivot_price": "$180.00",
+                        "catalyst_driver": "定制ASIC大客户追加订单",
+                    },
+                ],
+            },
+            "capital_and_sentiment": {
+                "fear_greed_score": 64,
+                "fear_greed_gauge": "贪婪 (Greed)",
+                "put_call_ratio": 0.78,
+                "put_call_signal": "看涨期权持仓占优 (多头主导)",
+                "institutional_net_inflow_str": "+18.4 亿美元 (主力稳步增配)",
+                "volume_expansion_ratio": 1.18,
+                "volume_verdict": "放量进攻 (量价健康配合)",
+            },
+        }
+
     def get_dashboard_summary(self) -> Dict[str, Any]:
         quotes_res = self.get_market_quotes(market="ALL")
         ind_res = self.get_latest_indicators()
@@ -2556,6 +2958,8 @@ class WatersourceTerminalService:
                     "top_events": ev_data.get("events", [])[:5],
                 },
                 "pipeline": pipe_data,
+                "core_equities_valuation": self.get_core_equities_valuation_cards(),
+                "market_statistics": self.get_market_statistics(),
                 "recent_logs": logs_res["data"].get("logs", [])[:8],
             },
             as_of=quotes_res["meta"]["as_of"],

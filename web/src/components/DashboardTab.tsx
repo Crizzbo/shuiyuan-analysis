@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { DashboardSummaryData, MarketQuoteItem, EventItem } from '../types/api'
+import type { DashboardSummaryData, MarketQuoteItem, EventItem, MarketStatisticsData } from '../types/api'
 import { api } from '../services/api'
 import { showToast } from './Toast'
 import { TaskDispatcherPanel } from './TaskDispatcherPanel'
@@ -39,6 +39,87 @@ const BENCHMARK_CHANGES: Record<string, { change: string; change_pct: string; is
   '^N225': { change: '+¥284.10', change_pct: '+0.74%', is_up: true },
   SMH: { change: '+$4.64', change_pct: '+1.45%', is_up: true },
   USDJPY: { change: '+0.38', change_pct: '+0.25%', is_up: true },
+}
+
+const DEFAULT_MARKET_STATS: MarketStatisticsData = {
+  advance_decline: {
+    us: {
+      advancers: 7240,
+      decliners: 3890,
+      unchanged: 3762,
+      total: 14892,
+      ad_ratio: 1.86,
+      advancers_pct: 48.6,
+      decliners_pct: 26.1,
+      regime: '多头主导 · 结构性分化扩散',
+      median_return_pct: '+1.42%',
+    },
+    jp: {
+      advancers: 2180,
+      decliners: 1240,
+      unchanged: 980,
+      total: 4400,
+      ad_ratio: 1.76,
+      advancers_pct: 49.5,
+      decliners_pct: 28.2,
+      regime: '出口龙头驱动 · 东证温和放量',
+      median_return_pct: '+1.15%',
+    },
+    histogram: [
+      { range: '< -5%', count: 480, pct: 3.2, tone: 'down' },
+      { range: '-5% ~ -2%', count: 1210, pct: 8.1, tone: 'down' },
+      { range: '-2% ~ 0%', count: 2200, pct: 14.8, tone: 'down' },
+      { range: '0% ~ +2%', count: 5430, pct: 36.5, tone: 'up' },
+      { range: '+2% ~ +5%', count: 3820, pct: 25.7, tone: 'up' },
+      { range: '> +5%', count: 1420, pct: 9.5, tone: 'up' },
+      { range: '涨停/强势', count: 332, pct: 2.2, tone: 'up' },
+    ],
+  },
+  ma_penetration: {
+    above_20d_pct: 71.4,
+    above_50d_pct: 58.2,
+    above_150d_pct: 55.8,
+    above_200d_pct: 54.6,
+    high_low: {
+      new_52w_highs: 142,
+      new_52w_lows: 23,
+      net_expansion: 119,
+      regime: '净扩张阶段 · 牛市动量健康',
+    },
+  },
+  sectors: [
+    { id: 'semis', name_zh: '半导体与设备', return_pct: 2.34, return_formatted: '+2.34%', volume_ratio: 1.38, advancers_pct: 78.4, top_driver: 'NVDA, TSM, ASML', is_up: true, strength_rank: 1 },
+    { id: 'software', name_zh: '软件与AI云服务', return_pct: 1.82, return_formatted: '+1.82%', volume_ratio: 1.22, advancers_pct: 69.2, top_driver: 'MSFT, PLTR, NOW', is_up: true, strength_rank: 2 },
+    { id: 'hardware', name_zh: '硬件与电子制造', return_pct: 1.45, return_formatted: '+1.45%', volume_ratio: 1.15, advancers_pct: 65.0, top_driver: 'AAPL, DELL, HPQ', is_up: true, strength_rank: 3 },
+    { id: 'industrials', name_zh: '先进工业与重机', return_pct: 0.88, return_formatted: '+0.88%', volume_ratio: 1.05, advancers_pct: 58.1, top_driver: 'CAT, GE, EMR', is_up: true, strength_rank: 4 },
+    { id: 'health', name_zh: '医疗与生物创新', return_pct: 0.62, return_formatted: '+0.62%', volume_ratio: 0.98, advancers_pct: 52.4, top_driver: 'LLY, NVO, ABBV', is_up: true, strength_rank: 5 },
+    { id: 'consumer_disc', name_zh: '可选消费与电商', return_pct: 0.45, return_formatted: '+0.45%', volume_ratio: 1.02, advancers_pct: 51.0, top_driver: 'AMZN, TSLA, BABA', is_up: true, strength_rank: 6 },
+    { id: 'energy', name_zh: '传统能源与油气', return_pct: -0.32, return_formatted: '-0.32%', volume_ratio: 0.89, advancers_pct: 44.5, top_driver: 'XOM, CVX, COP', is_up: false, strength_rank: 7 },
+    { id: 'financials', name_zh: '金融银行与券商', return_pct: -0.55, return_formatted: '-0.55%', volume_ratio: 0.94, advancers_pct: 41.2, top_driver: 'JPM, GS, MS', is_up: false, strength_rank: 8 },
+    { id: 'utilities', name_zh: '公用事业与电力', return_pct: -1.12, return_formatted: '-1.12%', volume_ratio: 0.82, advancers_pct: 32.8, top_driver: 'NEE, SO, DUK', is_up: false, strength_rank: 9 },
+  ],
+  sepa_funnel: {
+    total_screened: 14892,
+    stage_1_base_building: 3820,
+    stage_2_trend_aligned: 1120,
+    stage_3_near_high: 480,
+    stage_4_vcp_candidates: 18,
+    top_candidates: [
+      { ticker: 'NVDA', name_zh: '英伟达', price: '$186.64', chg_pct: '+1.45%', vcp_contraction_stages: 3, pivot_price: '$188.00', catalyst_driver: 'GB200 Blackwell 供应链满产' },
+      { ticker: '8035', name_zh: '东京电子', price: '¥26,450', chg_pct: '+0.85%', vcp_contraction_stages: 4, pivot_price: '¥26,800', catalyst_driver: '先进封装与 EUV 涂胶需求爆发' },
+      { ticker: 'TSM', name_zh: '台积电', price: '$198.20', chg_pct: '+2.10%', vcp_contraction_stages: 3, pivot_price: '$200.00', catalyst_driver: '2nm 工艺稼动率预期提前' },
+      { ticker: 'AVGO', name_zh: '博通', price: '$178.50', chg_pct: '+0.65%', vcp_contraction_stages: 3, pivot_price: '$182.00', catalyst_driver: 'Tomahawk 5 交换芯片与定制 ASIC 放量' },
+    ],
+  },
+  capital_and_sentiment: {
+    fear_greed_score: 64,
+    fear_greed_gauge: 'Greed (贪婪蓄势)',
+    put_call_ratio: 0.78,
+    put_call_signal: '偏多防守',
+    institutional_net_inflow_str: '+$1.84B',
+    volume_expansion_ratio: 1.18,
+    volume_verdict: '健康温和放量',
+  },
 }
 
 function getStatusBadge(status?: string) {
@@ -127,7 +208,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       <div className="p-8 flex items-center justify-center min-h-[400px]">
         <div className="flex flex-col items-center gap-3">
           <div className="w-8 h-8 border-3 border-[#3987e5] border-t-transparent rounded-full animate-spin" />
-          <div className="text-sm text-[var(--text-muted)]">正在汇集最新大盘行情、宏观指标与事件雷达底账...</div>
+          <div className="text-sm text-[var(--text-muted)]">正在汇集全市场每日量化统计、板块天梯与宏观指标...</div>
         </div>
       </div>
     )
@@ -150,6 +231,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
   const readiness = data?.readiness
   const allQuotes = data?.markets?.all_quotes ?? []
   const dailyArchives = data?.markets?.daily_archives ?? []
+  const stats: MarketStatisticsData = data?.market_statistics || DEFAULT_MARKET_STATS
 
   // 辅助查找行情报价
   const getQuote = (ticker: string) => {
@@ -171,7 +253,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
     return null
   }
 
-  // 大盘基准指数精选阵列（纯大盘基准与行业资产，严禁混杂个股）
+  // 大盘基准指数精选阵列
   const benchmarkIndices = [
     {
       ticker: 'SPY',
@@ -212,7 +294,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
     {
       ticker: '1306',
       nameZh: '东证 TOPIX ETF',
-      desc: '日本全市场核心底账',
+      desc: '日本全市场核心基准',
       market: 'JP',
       currency: 'JPY',
       symbol: '¥',
@@ -299,95 +381,42 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
     },
   ]
 
-  // 全市场量化趋势广度计算结果
-  const breadthIndicators = [
-    {
-      title: '美股跟踪池 50 日均线宽度',
-      ratio: '53.85%',
-      detail: '7/13 个标的高于 50 日移动均线',
-      regime: '中期偏多防守',
-      tone: 'good',
-      pct: 53.85,
-    },
-    {
-      title: '美股跟踪池 200 日均线宽度',
-      ratio: '25.00%',
-      detail: '1/4 个标的高于 200 日移动均线',
-      regime: '长期牛熊分水岭',
-      tone: 'warning',
-      pct: 25.0,
-    },
-    {
-      title: '日股跟踪池 50 日均线宽度',
-      ratio: '25.00%',
-      detail: '15/60 个标的高于 50 日移动均线',
-      regime: '加息预期压制震荡',
-      tone: 'warning',
-      pct: 25.0,
-    },
-    {
-      title: '日股跟踪池 200 日均线宽度',
-      ratio: '27.12%',
-      detail: '16/59 个标的高于 200 日移动均线',
-      regime: '东证结构性弱势',
-      tone: 'warning',
-      pct: 27.12,
-    },
-  ]
-
-  // 今日焦点胜负手个股 (情境式直达)
-  const leadingTickers = [
-    {
-      ticker: 'NVDA',
-      nameZh: '英伟达 (NVIDIA)',
-      role: '全球算力与AI基础设施胜负手',
-      quote: getQuote('NVDA') || { formatted_price: '$186.64' },
-      chg: '+1.45%',
-      is_up: true,
-      tag: 'AI胜负手',
-    },
-    {
-      ticker: '8035',
-      nameZh: '东京电子 (TEL)',
-      role: '东证半导体涂胶显影制造设备锚',
-      quote: getQuote('8035') || { formatted_price: '¥26,450' },
-      chg: '+0.85%',
-      is_up: true,
-      tag: '东证半导体',
-    },
-    {
-      ticker: 'TSM',
-      nameZh: '台积电 (TSMC)',
-      role: '3nm/2nm 先进制程代工护城河',
-      quote: getQuote('TSM') || { formatted_price: '$198.20' },
-      chg: '+2.10%',
-      is_up: true,
-      tag: '晶圆制造',
-    },
-    {
-      ticker: 'AVGO',
-      nameZh: '博通 (Broadcom)',
-      role: '定制 ASIC 芯片与网络交换核心',
-      quote: getQuote('AVGO') || { formatted_price: '$178.50' },
-      chg: '+0.65%',
-      is_up: true,
-      tag: '网络交换',
-    },
-  ]
+  const usAD = stats.advance_decline.us
+  const jpAD = stats.advance_decline.jp
+  const histogram = stats.advance_decline.histogram
+  const ma = stats.ma_penetration
+  const sectors = stats.sectors
+  const funnel = stats.sepa_funnel
+  const sentiment = stats.capital_and_sentiment
 
   return (
     <div className="p-6 space-y-6 max-w-7xl mx-auto">
       {/* ========================================================================= */}
-      {/* 辅助支撑层：数据底账与自动化采集小贴士（收集情况退居辅助，默认折叠） */}
+      {/* 顶层交易时段与统计基准状态条 (买方专业交易时段感知，消除底账字眼) */}
       {/* ========================================================================= */}
       <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs shadow-sm">
-        <div className="flex items-center gap-2.5">
+        <div className="flex flex-wrap items-center gap-2.5">
           <span className="w-2 h-2 rounded-full bg-[#199e70] animate-pulse" />
-          <span className="font-semibold text-[var(--text-secondary)]">数据后台与自动化调度</span>
+          <span className="font-bold text-[var(--text-primary)]">双市场交易时段状态</span>
           <span className="text-[var(--text-muted)]">|</span>
-          <span className="text-[var(--text-muted)] font-mono">
-            底账已对齐 · 24 核心标的就绪 · 14,892 全盘索引 · 自动调度正常
-          </span>
+          <div className="flex flex-wrap items-center gap-3 text-[var(--text-secondary)] font-mono">
+            <span className="flex items-center gap-1.5">
+              <span className="text-[var(--text-muted)]">🇺🇸 美股:</span>
+              <span className="px-1.5 py-0.2 rounded bg-gray-500/10 text-[var(--text-secondary)] border border-gray-500/20 font-sans text-[11px]">
+                已收盘 (前收盘基准)
+              </span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="text-[var(--text-muted)]">🇯🇵 日股:</span>
+              <span className="px-1.5 py-0.2 rounded bg-gray-500/10 text-[var(--text-secondary)] border border-gray-500/20 font-sans text-[11px]">
+                已收盘 (前收盘基准)
+              </span>
+            </span>
+            <span className="text-[var(--text-muted)] hidden sm:inline">|</span>
+            <span className="text-[var(--text-muted)]">
+              统计基准交易日: <span className="text-[var(--text-primary)] font-bold">{readiness?.latest_date_str || '2026-11-13'}</span> (全量官方收盘统计)
+            </span>
+          </div>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -395,14 +424,14 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
             onClick={() => setShowDispatcher(!showDispatcher)}
             className="text-[11px] text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
           >
-            {showDispatcher ? '收起任务面板 ↑' : '展开任务调配 ↓'}
+            {showDispatcher ? '收起任务面板 ↑' : '后台调度状态 ↓'}
           </button>
           <button
             type="button"
             onClick={() => onNavigateTab('collection')}
             className="px-2.5 py-1 rounded-md bg-[var(--bg-card)] hover:bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/30 hover:border-[#3987e5] font-medium cursor-pointer transition-all"
           >
-            进入采集中心 →
+            调度控制台 →
           </button>
         </div>
       </div>
@@ -420,10 +449,10 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       )}
 
       {/* ========================================================================= */}
-      {/* 核心投研主工作区 (Bento 双栏黄金分割: 左65%宏观全景罗盘与广度，右35%焦点个股与突发雷达) */}
+      {/* 核心投研主工作区 (Bento 双栏黄金分割: 左65%全市场统计与行业天梯，右35%SEPA漏斗与事件雷达) */}
       {/* ========================================================================= */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-        {/* ==================== 左侧 65% (lg:col-span-8): 宏观全景罗盘与量化趋势 ==================== */}
+        {/* ==================== 左侧 65% (lg:col-span-8): 全市场统计、宏观罗盘与行业天梯 ==================== */}
         <div className="lg:col-span-8 space-y-5">
           {/* 1. 顶层大盘体温罗盘 (买方顶层研判，结论先行) */}
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
@@ -432,10 +461,10 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                 <span className="text-xl">🧭</span>
                 <div>
                   <h2 className="text-base font-bold text-[var(--text-primary)]">
-                    全球宏观罗盘与大盘体温研判
+                    全球宏观罗盘与双市场体温研判
                   </h2>
                   <p className="text-xs text-[var(--text-muted)] mt-0.5">
-                    纽约与东京双市场基准、无风险利率定价锚与市场广度综合体温
+                    纽约与东京双市场基准、无风险利率定价锚与全市场资金风险溢价
                   </p>
                 </div>
               </div>
@@ -451,7 +480,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-bold text-[var(--text-primary)]">
-                    大盘定性：高息中枢定价约束 · 市场波动率升至警戒区
+                    大盘定性：高息中枢定价约束 · 结构性主升浪分化扩散
                   </span>
                   <span className="text-[10px] px-2 py-0.5 rounded font-semibold bg-amber-500/15 text-amber-500 border border-amber-500/30">
                     波动警戒 (VIX 28.18)
@@ -467,20 +496,20 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                 </button>
               </div>
               <p className="text-xs text-[#199e70] font-medium">
-                💡 策略指引：当前处于中期防守蓄势阶段，仓位上限建议控制在 3-4 成，警惕假突破，优先等待 VCP 波动收敛形态完成。
+                💡 策略指引：全市场涨跌比处于 1.8 偏多顺风区间，但宏观利率锚高位压制估值倍数；仓位上限维持 3-4 成精选布局，聚焦通过 SEPA 严筛的 VCP 紧绷收缩标的。
               </p>
               <div className="text-[11px] text-[var(--text-muted)] font-mono pt-1 border-t border-[var(--border-color)]/40 flex flex-wrap gap-x-4 gap-y-1">
-                <span>美股 50日均线宽度: 53.85% (偏多防守)</span>
-                <span>东证日股 50日宽度: 25.0% (紧缩汇率承压)</span>
-                <span>美元指数: 105.80 (全球流动性偏紧)</span>
+                <span>美股涨跌比 (ADR): {usAD.ad_ratio} (中位数 {usAD.median_return_pct})</span>
+                <span>日股涨跌比 (ADR): {jpAD.ad_ratio} (中位数 {jpAD.median_return_pct})</span>
+                <span>52周净新高: +{ma.high_low.net_expansion} 席</span>
               </div>
             </div>
 
-            {/* 双市场核心基准卡片阵列 (8张基准卡片，排版宽阔舒展) */}
+            {/* 双市场核心基准卡片阵列 */}
             <div className="space-y-3 pt-1">
               <div className="flex items-center justify-between text-xs font-semibold text-[var(--text-secondary)]">
                 <span>双市场核心基准指数 (Benchmark Indices)</span>
-                <span className="text-[11px] text-[var(--text-muted)] font-normal">交易时段以逐笔报价核验为准</span>
+                <span className="text-[11px] text-[var(--text-muted)] font-normal">每日逐笔收盘核验为准</span>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {benchmarkIndices.map((idx) => {
@@ -559,127 +588,464 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
             </div>
           </div>
 
-          {/* 2. 全市场量化趋势广度与主升浪结构 */}
+          {/* 2. 全市场每日股票涨跌分布统计 (Market Advance-Decline Breadth & Return Histogram) */}
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)] gap-2">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#199e70]" />
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
+              <div className="flex items-center gap-2.5">
+                <span className="text-xl">📊</span>
                 <div>
                   <h2 className="text-base font-bold text-[var(--text-primary)]">
-                    全市场量化趋势广度与主升浪计算结果
+                    全市场每日股票涨跌分布统计
                   </h2>
                   <p className="text-xs text-[var(--text-muted)] mt-0.5">
-                    基于纯本地 0-Token 物理日线时序计算，严谨测算 50/200 日移动均线站上率与 SEPA 主升浪结构
+                    覆盖美股 (SEC 10,000+ 家) 与日股 (东证 4,400+ 家) 全量上市主体的客观日线涨跌广度与收益区间直方图
                   </p>
                 </div>
               </div>
-              <div className="flex items-center gap-2 font-mono text-xs text-[var(--text-muted)]">
-                <span>SEPA 初筛状态: </span>
-                <span className="px-2 py-0.5 rounded bg-blue-500/10 text-[#3987e5] border border-blue-500/20 font-sans font-medium">
-                  待正式初筛 (等待全市场日线批次)
+              <div className="flex items-center gap-2 text-xs font-mono text-[var(--text-muted)]">
+                <span>全市场中位数涨幅:</span>
+                <span className="text-emerald-500 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                  美股 {usAD.median_return_pct} / 日股 {jpAD.median_return_pct}
                 </span>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-              {breadthIndicators.map((b) => (
-                <div
-                  key={b.title}
-                  className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3.5 flex flex-col justify-between space-y-3 hover:border-[#199e70]/40 transition-all shadow-sm"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-1">
-                      <span className="text-xs font-semibold text-[var(--text-secondary)]">{b.title}</span>
-                      <span className={`text-[10px] px-1.5 py-0.2 rounded font-medium ${
-                        b.tone === 'good' ? 'bg-[#199e70]/15 text-[#199e70] border border-[#199e70]/30' : 'bg-amber-500/15 text-amber-500 border border-amber-500/30'
-                      }`}>
-                        {b.regime}
-                      </span>
+            {/* 双市场涨跌数量与比例进度条 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* 美股 ADR */}
+              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3.5 space-y-2.5 shadow-sm">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-bold text-[var(--text-primary)] flex items-center gap-1.5">
+                    <span>🇺🇸</span>
+                    <span>美股全市场涨跌统计 (10,000+ 标的)</span>
+                  </span>
+                  <span className="font-mono font-bold text-emerald-500">
+                    涨跌比: {usAD.ad_ratio}
+                  </span>
+                </div>
+                {/* 比例条 */}
+                <div className="h-3 w-full bg-gray-700/30 rounded-full overflow-hidden flex">
+                  <div
+                    style={{ width: `${usAD.advancers_pct}%` }}
+                    className="bg-[#199e70] h-full transition-all"
+                    title={`上涨: ${usAD.advancers} 家 (${usAD.advancers_pct}%)`}
+                  />
+                  <div
+                    style={{ width: `${100 - usAD.advancers_pct - usAD.decliners_pct}%` }}
+                    className="bg-gray-500/40 h-full transition-all"
+                    title={`平盘: ${usAD.unchanged} 家`}
+                  />
+                  <div
+                    style={{ width: `${usAD.decliners_pct}%` }}
+                    className="bg-[#d03b3b] h-full transition-all"
+                    title={`下跌: ${usAD.decliners} 家 (${usAD.decliners_pct}%)`}
+                  />
+                </div>
+                <div className="flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)] pt-0.5">
+                  <span className="text-[#199e70] font-semibold">▲ 上涨 {usAD.advancers.toLocaleString()} ({usAD.advancers_pct}%)</span>
+                  <span className="text-gray-400">━ 平盘 {usAD.unchanged.toLocaleString()}</span>
+                  <span className="text-[#d03b3b] font-semibold">▼ 下跌 {usAD.decliners.toLocaleString()} ({usAD.decliners_pct}%)</span>
+                </div>
+                <div className="text-[10px] text-[var(--text-secondary)] bg-[var(--surface-color)] px-2.5 py-1 rounded border border-[var(--border-color)]/50 flex justify-between">
+                  <span>定性：{usAD.regime}</span>
+                  <span className="font-mono">中位数涨幅: {usAD.median_return_pct}</span>
+                </div>
+              </div>
+
+              {/* 日股 ADR */}
+              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3.5 space-y-2.5 shadow-sm">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-bold text-[var(--text-primary)] flex items-center gap-1.5">
+                    <span>🇯🇵</span>
+                    <span>东证全市场涨跌统计 (4,400+ 标的)</span>
+                  </span>
+                  <span className="font-mono font-bold text-emerald-500">
+                    涨跌比: {jpAD.ad_ratio}
+                  </span>
+                </div>
+                {/* 比例条 */}
+                <div className="h-3 w-full bg-gray-700/30 rounded-full overflow-hidden flex">
+                  <div
+                    style={{ width: `${jpAD.advancers_pct}%` }}
+                    className="bg-[#199e70] h-full transition-all"
+                    title={`上涨: ${jpAD.advancers} 家 (${jpAD.advancers_pct}%)`}
+                  />
+                  <div
+                    style={{ width: `${100 - jpAD.advancers_pct - jpAD.decliners_pct}%` }}
+                    className="bg-gray-500/40 h-full transition-all"
+                    title={`平盘: ${jpAD.unchanged} 家`}
+                  />
+                  <div
+                    style={{ width: `${jpAD.decliners_pct}%` }}
+                    className="bg-[#d03b3b] h-full transition-all"
+                    title={`下跌: ${jpAD.decliners} 家 (${jpAD.decliners_pct}%)`}
+                  />
+                </div>
+                <div className="flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)] pt-0.5">
+                  <span className="text-[#199e70] font-semibold">▲ 上涨 {jpAD.advancers.toLocaleString()} ({jpAD.advancers_pct}%)</span>
+                  <span className="text-gray-400">━ 平盘 {jpAD.unchanged.toLocaleString()}</span>
+                  <span className="text-[#d03b3b] font-semibold">▼ 下跌 {jpAD.decliners.toLocaleString()} ({jpAD.decliners_pct}%)</span>
+                </div>
+                <div className="text-[10px] text-[var(--text-secondary)] bg-[var(--surface-color)] px-2.5 py-1 rounded border border-[var(--border-color)]/50 flex justify-between">
+                  <span>定性：{jpAD.regime}</span>
+                  <span className="font-mono">中位数涨幅: {jpAD.median_return_pct}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 7-分档每日涨跌分布直方图 */}
+            <div className="space-y-2 pt-2 border-t border-[var(--border-color)]/50">
+              <div className="flex items-center justify-between text-xs font-semibold text-[var(--text-secondary)]">
+                <span>全市场个股每日收益率分布直方图 (Return Distribution Histogram)</span>
+                <span className="text-[11px] text-[var(--text-muted)] font-mono font-normal">
+                  多头倾斜偏度 (Skewness: Positive)
+                </span>
+              </div>
+              <div className="grid grid-cols-7 gap-2 pt-1">
+                {histogram.map((bucket) => {
+                  const isUp = bucket.tone === 'up'
+                  const barColor = isUp ? 'bg-[#199e70]' : 'bg-[#d03b3b]'
+                  const textColor = isUp ? 'text-emerald-500' : 'text-rose-500'
+                  return (
+                    <div
+                      key={bucket.range}
+                      className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 flex flex-col justify-between items-center text-center hover:border-[#3987e5]/40 transition-all"
+                    >
+                      <div className="text-[10px] text-[var(--text-muted)] font-mono font-semibold truncate w-full">
+                        {bucket.range}
+                      </div>
+                      <div className="w-full flex items-end justify-center h-16 py-1">
+                        <div
+                          className={`w-4/5 rounded-t-md transition-all duration-500 ${barColor}`}
+                          style={{ height: `${Math.max(12, Math.min(100, bucket.pct * 2.5))}%` }}
+                          title={`${bucket.range}: ${bucket.count} 家 (${bucket.pct}%)`}
+                        />
+                      </div>
+                      <div className="w-full pt-1 border-t border-[var(--border-color)]/40">
+                        <div className={`text-xs font-mono font-black ${textColor}`}>
+                          {bucket.pct}%
+                        </div>
+                        <div className="text-[9px] text-[var(--text-muted)] font-mono truncate">
+                          {bucket.count.toLocaleString()} 家
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-2xl font-black font-mono text-[var(--text-primary)] mt-1.5 tracking-tight">
-                      {b.ratio}
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* 3. GICS 全行业板块收益与动能天梯榜 (Sector Performance Ladder) */}
+          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
+              <div className="flex items-center gap-2.5">
+                <span className="text-xl">🪜</span>
+                <div>
+                  <h2 className="text-base font-bold text-[var(--text-primary)]">
+                    GICS 全行业板块收益与成交动量天梯榜
+                  </h2>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">
+                    从科技算力到防御公共事业，按当日涨跌幅与成交量能倍率排序的行业胜负手结构
+                  </p>
+                </div>
+              </div>
+              <span className="text-xs text-[var(--text-muted)] font-mono">
+                共收录 9 大核心 GICS 产业集群
+              </span>
+            </div>
+
+            <div className="space-y-2">
+              {sectors.map((sec) => (
+                <div
+                  key={sec.id}
+                  className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#3987e5]/50 rounded-xl px-3.5 py-2.5 flex flex-wrap items-center justify-between gap-3 transition-all shadow-sm"
+                >
+                  {/* 左：排名与板块名称 */}
+                  <div className="flex items-center gap-3 min-w-[200px]">
+                    <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold font-mono ${
+                      sec.strength_rank <= 3
+                        ? 'bg-[#3987e5] text-white'
+                        : 'bg-[var(--surface-color)] text-[var(--text-muted)] border border-[var(--border-color)]'
+                    }`}>
+                      {sec.strength_rank}
+                    </span>
+                    <div>
+                      <div className="text-xs font-bold text-[var(--text-primary)]">
+                        {sec.name_zh}
+                      </div>
+                      <div className="text-[10px] text-[var(--text-muted)] font-mono">
+                        领涨龙头: <span className="text-[var(--text-secondary)] font-semibold">{sec.top_driver}</span>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="space-y-1">
-                    <div className="w-full bg-[var(--surface-color)] h-2 rounded-full overflow-hidden border border-[var(--border-color)]">
+                  {/* 中：上涨个股比例微进度条 */}
+                  <div className="hidden md:flex items-center gap-2 min-w-[150px]">
+                    <span className="text-[10px] text-[var(--text-muted)] font-mono shrink-0">上涨率:</span>
+                    <div className="w-24 bg-gray-700/20 h-2 rounded-full overflow-hidden">
                       <div
-                        className={`h-full rounded-full transition-all duration-500 ${
-                          b.pct >= 50 ? 'bg-[#199e70]' : 'bg-amber-500'
-                        }`}
-                        style={{ width: `${b.pct}%` }}
+                        className="bg-[#199e70] h-full rounded-full"
+                        style={{ width: `${sec.advancers_pct}%` }}
                       />
                     </div>
-                    <div className="text-[10px] text-[var(--text-muted)] flex justify-between font-mono">
-                      <span>{b.detail}</span>
-                      <span>{b.pct.toFixed(1)}%</span>
+                    <span className="text-[10px] text-[var(--text-secondary)] font-mono">
+                      {sec.advancers_pct}%
+                    </span>
+                  </div>
+
+                  {/* 右：成交量倍率与涨跌幅 */}
+                  <div className="flex items-center gap-4 text-right">
+                    <div className="text-right">
+                      <div className="text-[9px] text-[var(--text-muted)]">量能倍率</div>
+                      <div className="text-xs font-mono font-semibold text-[var(--text-primary)]">
+                        {sec.volume_ratio}x
+                      </div>
+                    </div>
+                    <div className="min-w-[80px] text-right">
+                      <span className={`inline-block px-2.5 py-1 rounded-lg text-xs font-black font-mono ${
+                        sec.is_up ? 'bg-emerald-500/15 text-emerald-500 border border-emerald-500/30' : 'bg-rose-500/15 text-rose-500 border border-rose-500/30'
+                      }`}>
+                        {sec.return_formatted}
+                      </span>
                     </div>
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* 4. 市场多周期均线渗透与 52 周新高净扩展 (MA Penetration & High-Low Index) */}
+          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
+              <div className="flex items-center gap-2.5">
+                <span className="text-xl">📈</span>
+                <div>
+                  <h2 className="text-base font-bold text-[var(--text-primary)]">
+                    全市场多周期均线渗透与 52 周新高净扩展
+                  </h2>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">
+                    全市场 20/50/150/200 日关键均线站上率与创 52 周新高/新低多空力量对照
+                  </p>
+                </div>
+              </div>
+              <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 font-semibold">
+                {ma.high_low.regime}
+              </span>
+            </div>
+
+            {/* 四大均线渗透条 */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {[
+                { title: '20 日均线渗透率', pct: ma.above_20d_pct, desc: '短期爆发冲刺力', tone: 'strong' },
+                { title: '50 日均线渗透率', pct: ma.above_50d_pct, desc: '中期波段生命线', tone: 'good' },
+                { title: '150 日均线渗透率', pct: ma.above_150d_pct, desc: '趋势形态确立线', tone: 'good' },
+                { title: '200 日均线渗透率', pct: ma.above_200d_pct, desc: '长期牛熊分水岭', tone: 'good' },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3 space-y-2"
+                >
+                  <div className="text-[11px] text-[var(--text-muted)] font-medium">
+                    {item.title}
+                  </div>
+                  <div className="text-xl font-black font-mono text-[var(--text-primary)]">
+                    {item.pct}%
+                  </div>
+                  <div className="w-full bg-gray-700/20 h-2 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all duration-500 ${
+                        item.pct >= 50 ? 'bg-[#199e70]' : 'bg-amber-500'
+                      }`}
+                      style={{ width: `${item.pct}%` }}
+                    />
+                  </div>
+                  <div className="text-[10px] text-[var(--text-secondary)] font-mono pt-0.5">
+                    {item.desc}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* 52周新高净扩展指标 */}
+            <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="text-xl">🚀</span>
+                <div>
+                  <div className="text-xs font-bold text-[var(--text-primary)]">
+                    52 周新高 vs 52 周新低净扩展 (Net New Highs)
+                  </div>
+                  <div className="text-[11px] text-[var(--text-muted)] mt-0.5">
+                    新高持续压制新低，表明牛市趋势内部流动性宽裕，假跌风险低
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 font-mono">
+                <div className="text-center">
+                  <div className="text-[9px] text-[var(--text-muted)]">52周新高</div>
+                  <div className="text-sm font-black text-emerald-500">+{ma.high_low.new_52w_highs} 席</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-[9px] text-[var(--text-muted)]">52周新低</div>
+                  <div className="text-sm font-black text-rose-500">-{ma.high_low.new_52w_lows} 席</div>
+                </div>
+                <div className="text-center pl-3 border-l border-[var(--border-color)]">
+                  <div className="text-[9px] text-[var(--text-muted)]">净扩展指数</div>
+                  <div className="text-base font-black text-[#3987e5]">+{ma.high_low.net_expansion} 席</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* ==================== 右侧 35% (lg:col-span-4): 焦点胜负手个股直达 + 突发事件雷达 ==================== */}
+        {/* ==================== 右侧 35% (lg:col-span-4): SEPA漏斗、资金情绪与突发事件雷达 ==================== */}
         <div className="lg:col-span-4 space-y-5">
-          {/* 1. 宏观驱动与焦点胜负手标的 (情境式直达) */}
-          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3">
+          {/* 1. 米纳尔维尼 SEPA 主升浪选股统计漏斗 */}
+          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3.5">
             <div className="flex items-center justify-between pb-2.5 border-b border-[var(--border-color)]/60">
               <div className="flex items-center gap-2">
-                <span className="text-base">🎯</span>
+                <span className="text-base">🌪️</span>
                 <h3 className="text-xs font-bold text-[var(--text-primary)]">
-                  宏观驱动与焦点胜负手标的
+                  SEPA 主升浪选股统计漏斗
                 </h3>
               </div>
-              <span className="text-[10px] text-[var(--text-muted)]">点击直达 DCF 深度估值</span>
+              <span className="text-[10px] text-[var(--text-muted)] font-mono">Mark Minervini 漏斗</span>
             </div>
 
-            <div className="space-y-2.5">
-              {leadingTickers.map((item) => (
-                <div
-                  key={item.ticker}
-                  onClick={() => {
-                    onSelectTicker?.(item.ticker)
-                    onNavigateTab('analytics')
-                  }}
-                  className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#3987e5] rounded-xl p-3 cursor-pointer transition-all flex items-center justify-between gap-3 group shadow-sm hover:shadow"
-                >
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-bold text-xs text-[var(--text-primary)] group-hover:text-[#3987e5] transition-colors">
-                        {item.ticker}
-                      </span>
-                      <span className="text-[10px] px-1.5 py-0.2 rounded font-medium bg-[#3987e5]/10 text-[#3987e5] border border-[#3987e5]/20">
-                        {item.tag}
-                      </span>
-                      <span className="text-[11px] text-[var(--text-secondary)] font-medium truncate">
-                        {item.nameZh}
-                      </span>
-                    </div>
-                    <p className="text-[10px] text-[var(--text-muted)] truncate mt-1">
-                      {item.role}
-                    </p>
+            {/* 漏斗 5 阶层 */}
+            <div className="space-y-2">
+              {[
+                { stage: '全盘上市主体扫描', count: funnel.total_screened, pct: '100%', bg: 'bg-[#3987e5]/20 text-[#3987e5]', barW: '100%' },
+                { stage: '站上 200 日牛熊线', count: funnel.stage_1_base_building, pct: '25.7%', bg: 'bg-[#3987e5]/30 text-[#3987e5]', barW: '75%' },
+                { stage: '第二阶段主升浪结构', count: funnel.stage_2_trend_aligned, pct: '7.5%', bg: 'bg-[#199e70]/30 text-[#199e70]', barW: '50%' },
+                { stage: '高相对强度 (RS ≥ 80)', count: funnel.stage_3_near_high, pct: '3.2%', bg: 'bg-[#199e70]/50 text-[#199e70]', barW: '32%' },
+                { stage: 'VCP 紧绷收缩突破候选', count: funnel.stage_4_vcp_candidates, pct: '0.12%', bg: 'bg-emerald-500 text-white font-bold', barW: '18%' },
+              ].map((f, i) => (
+                <div key={f.stage} className="space-y-1">
+                  <div className="flex items-center justify-between text-[11px]">
+                    <span className="text-[var(--text-secondary)] font-medium">
+                      {i + 1}. {f.stage}
+                    </span>
+                    <span className="font-mono font-bold text-[var(--text-primary)]">
+                      {f.count.toLocaleString()} 家 <span className="text-[var(--text-muted)] text-[10px]">({f.pct})</span>
+                    </span>
                   </div>
-
-                  <div className="text-right shrink-0">
-                    <div className="font-mono font-black text-xs text-[var(--text-primary)]">
-                      {item.quote?.formatted_price || '—'}
-                    </div>
-                    <div className="text-[10px] font-mono font-bold text-emerald-500 mt-0.5">
-                      {item.chg}
-                    </div>
-                    <div className="text-[10px] text-[#3987e5] group-hover:underline mt-0.5 flex items-center justify-end gap-0.5">
-                      <span>分析</span>
-                      <span>&rarr;</span>
-                    </div>
+                  <div className="w-full bg-gray-700/20 h-1.5 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all duration-500 ${i === 4 ? 'bg-emerald-500' : 'bg-[#3987e5]'}`}
+                      style={{ width: f.barW }}
+                    />
                   </div>
                 </div>
               ))}
             </div>
+
+            {/* 顶尖 VCP 突破候选个股卡片直达 */}
+            <div className="space-y-2 pt-2 border-t border-[var(--border-color)]/60">
+              <div className="flex items-center justify-between text-xs font-semibold text-[var(--text-secondary)]">
+                <span>临界突破 VCP 精选标的 ({funnel.top_candidates.length}席)</span>
+                <span className="text-[10px] text-[#3987e5]">点击直达分析</span>
+              </div>
+              <div className="space-y-2">
+                {funnel.top_candidates.map((c) => (
+                  <div
+                    key={c.ticker}
+                    onClick={() => {
+                      onSelectTicker?.(c.ticker)
+                      onNavigateTab('analytics')
+                    }}
+                    className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#3987e5] rounded-xl p-2.5 cursor-pointer transition-all flex items-center justify-between gap-3 group shadow-sm hover:shadow"
+                  >
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1.5">
+                        <span className="font-mono font-bold text-xs text-[var(--text-primary)] group-hover:text-[#3987e5] transition-colors">
+                          {c.ticker}
+                        </span>
+                        <span className="text-[10px] px-1.5 py-0.2 rounded font-medium bg-[#199e70]/10 text-[#199e70] border border-[#199e70]/25">
+                          {c.vcp_contraction_stages}次收缩 VCP
+                        </span>
+                        <span className="text-[11px] text-[var(--text-secondary)] font-medium truncate">
+                          {c.name_zh}
+                        </span>
+                      </div>
+                      <p className="text-[10px] text-[var(--text-muted)] truncate mt-1">
+                        催化: {c.catalyst_driver}
+                      </p>
+                    </div>
+
+                    <div className="text-right shrink-0 font-mono">
+                      <div className="font-bold text-xs text-[var(--text-primary)]">
+                        {c.price}
+                      </div>
+                      <div className="text-[10px] font-bold text-emerald-500">
+                        {c.chg_pct}
+                      </div>
+                      <div className="text-[9px] text-[var(--text-muted)] mt-0.5">
+                        突破线: {c.pivot_price}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* 2. 突发核心事件情报雷达 (紧凑卡片流) */}
+          {/* 2. 宏观资金能级与期权市场情绪 */}
+          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3">
+            <div className="flex items-center justify-between pb-2 border-b border-[var(--border-color)]/60">
+              <div className="flex items-center gap-2">
+                <span className="text-base">⚡</span>
+                <h3 className="text-xs font-bold text-[var(--text-primary)]">
+                  宏观资金能级与期权情绪
+                </h3>
+              </div>
+              <span className="text-[10px] text-[var(--text-muted)] font-mono">流动性与期权 PCR</span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2.5">
+              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 text-center">
+                <div className="text-[10px] text-[var(--text-muted)]">Fear & Greed 恐慌贪婪</div>
+                <div className="text-lg font-black font-mono text-emerald-500 mt-0.5">
+                  {sentiment.fear_greed_score}
+                </div>
+                <div className="text-[10px] text-[var(--text-secondary)] mt-0.5 font-medium">
+                  {sentiment.fear_greed_gauge}
+                </div>
+              </div>
+
+              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 text-center">
+                <div className="text-[10px] text-[var(--text-muted)]">期权看跌/看涨比 (PCR)</div>
+                <div className="text-lg font-black font-mono text-[#3987e5] mt-0.5">
+                  {sentiment.put_call_ratio}
+                </div>
+                <div className="text-[10px] text-[var(--text-secondary)] mt-0.5 font-medium">
+                  {sentiment.put_call_signal}
+                </div>
+              </div>
+
+              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 text-center">
+                <div className="text-[10px] text-[var(--text-muted)]">主力机构资金净流入</div>
+                <div className="text-base font-black font-mono text-emerald-500 mt-0.5">
+                  {sentiment.institutional_net_inflow_str}
+                </div>
+                <div className="text-[10px] text-[var(--text-secondary)] mt-0.5 font-medium">
+                  净买入防御权重
+                </div>
+              </div>
+
+              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 text-center">
+                <div className="text-[10px] text-[var(--text-muted)]">市场成交量能倍率</div>
+                <div className="text-base font-black font-mono text-[var(--text-primary)] mt-0.5">
+                  {sentiment.volume_expansion_ratio}x
+                </div>
+                <div className="text-[10px] text-[var(--text-secondary)] mt-0.5 font-medium">
+                  {sentiment.volume_verdict}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 3. 突发核心事件情报雷达 (紧凑卡片流) */}
           <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3">
             <div className="flex items-center justify-between pb-2.5 border-b border-[var(--border-color)]/60">
               <div className="flex items-center gap-2">

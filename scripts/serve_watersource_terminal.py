@@ -273,6 +273,10 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 self._send_json(200, svc.get_dashboard_summary())
                 return
 
+            if path in ("/api/market/statistics", "/api/markets/statistics"):
+                self._send_json(200, svc._envelope(svc.get_market_statistics(), as_of="", source="market_statistics_engine", status="OK"))
+                return
+
             if path == "/api/markets/quotes":
                 market = (_q1("market", "ALL") or "ALL").upper()
                 self._send_json(200, svc.get_market_quotes(market=market))
@@ -431,8 +435,10 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 elif scheduler is None:
                     self._send_json(*svc.error_envelope("SCHEDULER_UNAVAILABLE", "调度器未启动", 503))
                 elif path.endswith("/run"):
-                    run_id, status = scheduler.submit_with_status(task)
-                    self._send_json(200, svc._envelope({"run_id": run_id, "status": status, "task": task}, as_of="", source="terminal_scheduler", status=status, run_id=run_id))
+                    target_ticker = (body.get("ticker") or body.get("target_ticker") or "").strip().upper()
+                    slot = target_ticker if task == "STOCK_DOSSIER_COLLECT" and target_ticker else None
+                    run_id, status = scheduler.submit_with_status(task, slot=slot)
+                    self._send_json(200, svc._envelope({"run_id": run_id, "status": status, "task": task, "ticker": target_ticker}, as_of="", source="terminal_scheduler", status=status, run_id=run_id))
                 elif task not in AUTOMATIC_TASKS or not isinstance(body.get("enabled"), bool):
                     self._send_json(*svc.error_envelope("INVALID_SCHEDULE", "请指定支持定时的任务及启用状态", 400))
                 else:

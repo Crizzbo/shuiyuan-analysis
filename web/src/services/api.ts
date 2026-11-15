@@ -19,6 +19,7 @@ import type {
   MarketArchiveItem,
   MarketReconciliationMap,
   TaskSchedulerInfo,
+  MarketStatisticsData,
 } from '../types/api'
 
 const BASE_URL = '' // 相对路径，由 Vite proxy 或 Python 网关同源处理
@@ -59,6 +60,7 @@ export const api = {
 
   // 2. 总览工作台
   getDashboardSummary: () => request<DashboardSummaryData>('/api/dashboard/summary'),
+  getMarketStatistics: () => request<MarketStatisticsData>('/api/market/statistics'),
 
   // 3. 行情矩阵
   getMarketQuotes: (market: 'ALL' | 'US' | 'JP' = 'ALL') =>

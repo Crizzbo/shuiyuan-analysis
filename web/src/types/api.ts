@@ -216,6 +216,88 @@ export interface DashboardSummaryData {
   }
   pipeline: PipelineStatusData
   recent_logs: LogItem[]
+  market_statistics?: MarketStatisticsData
+}
+
+export interface MarketStatisticsData {
+  advance_decline: {
+    us: {
+      advancers: number
+      decliners: number
+      unchanged: number
+      total: number
+      ad_ratio: number
+      advancers_pct: number
+      decliners_pct: number
+      regime: string
+      median_return_pct: string
+    }
+    jp: {
+      advancers: number
+      decliners: number
+      unchanged: number
+      total: number
+      ad_ratio: number
+      advancers_pct: number
+      decliners_pct: number
+      regime: string
+      median_return_pct: string
+    }
+    histogram: Array<{
+      range: string
+      count: number
+      pct: number
+      tone: 'up' | 'down' | 'neutral'
+    }>
+  }
+  ma_penetration: {
+    above_20d_pct: number
+    above_50d_pct: number
+    above_150d_pct: number
+    above_200d_pct: number
+    high_low: {
+      new_52w_highs: number
+      new_52w_lows: number
+      net_expansion: number
+      regime: string
+    }
+  }
+  sectors: Array<{
+    id: string
+    name_zh: string
+    return_pct: number
+    return_formatted: string
+    volume_ratio: number
+    advancers_pct: number
+    top_driver: string
+    is_up: boolean
+    strength_rank: number
+  }>
+  sepa_funnel: {
+    total_screened: number
+    stage_1_base_building: number
+    stage_2_trend_aligned: number
+    stage_3_near_high: number
+    stage_4_vcp_candidates: number
+    top_candidates: Array<{
+      ticker: string
+      name_zh: string
+      price: string
+      chg_pct: string
+      vcp_contraction_stages: number
+      pivot_price: string
+      catalyst_driver: string
+    }>
+  }
+  capital_and_sentiment: {
+    fear_greed_score: number
+    fear_greed_gauge: string
+    put_call_ratio: number
+    put_call_signal: string
+    institutional_net_inflow_str: string
+    volume_expansion_ratio: number
+    volume_verdict: string
+  }
 }
 
 // 3. 行情矩阵
