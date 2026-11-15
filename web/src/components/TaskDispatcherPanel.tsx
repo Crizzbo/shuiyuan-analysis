@@ -223,16 +223,16 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
       {expanded && (
         <div className="space-y-4 pt-1">
           {/* ========================================================================= */}
-          {/* 重点一：指定个股全维度数据拉取与平账 (精准单票采集入口) */}
+          {/* 重点一：指定标的数据拉取与报表核验 (精准单票采集入口) */}
           {/* ========================================================================= */}
-          <div className="rounded-lg border border-[#3987e5]/30 bg-[#3987e5]/5 p-3.5 space-y-2.5">
+          <div className="rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] p-4 space-y-3">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-[#3987e5]">
-                  指定个股全维度数据拉取 (Single-Stock Pipeline)
+                <span className="text-sm font-bold text-[var(--text-primary)]">
+                  指定标的数据拉取与报表核验
                 </span>
-                <span className="text-[10px] text-[var(--text-muted)]">
-                  一站式补齐：最新报价 · 官方三表平账 · 250日K线均线 · DCF估值
+                <span className="text-xs text-[var(--text-muted)]">
+                  一键同步：基准报价 · 官方财报平衡 · 250日均线 · 现金流折现 (DCF)
                 </span>
               </div>
               <div className="text-[11px] text-[var(--text-muted)]">
@@ -246,29 +246,29 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                 value={customTicker}
                 onChange={e => setCustomTicker(e.target.value.toUpperCase())}
                 placeholder="输入代码 (如 NVDA, AAPL, MSFT, 8035, 6857)..."
-                className="w-48 text-xs font-mono font-bold rounded-lg border border-[var(--border-color)] bg-[var(--surface-color)] px-3 py-1.5 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[#3987e5]"
+                className="w-48 text-xs font-mono font-bold rounded-lg border border-[var(--border-color)] bg-[var(--surface-color)] px-3 py-1.5 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[#176249]"
               />
 
               <button
                 type="button"
                 disabled={singleStockBusy}
                 onClick={() => void handleCollectSingleStock(customTicker)}
-                className="px-3.5 py-1.5 rounded-lg bg-[#3987e5] hover:bg-[#2c72c8] text-white text-xs font-semibold cursor-pointer disabled:opacity-50 transition-all flex items-center gap-1.5 shadow-sm"
+                className="px-3.5 py-1.5 rounded-lg bg-[#176249] hover:bg-[#14533e] text-white text-xs font-semibold cursor-pointer disabled:opacity-50 transition-all flex items-center gap-1.5 shadow-sm"
               >
                 {singleStockBusy ? (
                   <>
                     <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    <span>正在拉取与核算 {customTicker}...</span>
+                    <span>正在拉取与核验 {customTicker}...</span>
                   </>
                 ) : (
                   <>
-                    <span>启动单票全量收集与平账核对</span>
+                    <span>立即拉取与核验</span>
                   </>
                 )}
               </button>
 
               <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-[var(--text-muted)] pl-2">
-                <span>快捷快捷标的：</span>
+                <span>快捷标的：</span>
                 {QUICK_TICKERS.map(item => (
                   <button
                     key={item.ticker}
@@ -277,7 +277,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                       setCustomTicker(item.ticker)
                       void handleCollectSingleStock(item.ticker)
                     }}
-                    className="px-2 py-0.5 rounded bg-[var(--surface-color)] hover:bg-[#3987e5]/10 border border-[var(--border-color)] hover:border-[#3987e5]/40 text-[var(--text-secondary)] hover:text-[#3987e5] cursor-pointer transition-all"
+                    className="px-2 py-0.5 rounded bg-[var(--surface-color)] hover:bg-slate-100 border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] cursor-pointer transition-all"
                   >
                     {item.ticker}
                   </button>
@@ -287,12 +287,12 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
           </div>
 
           {/* ========================================================================= */}
-          {/* 重点二：🧱 个股分析 6 大数据基石任务流 (6 Data Pillars) */}
+          {/* 重点二：核心数据通道与维护任务 (可分别独立触发更新) */}
           {/* ========================================================================= */}
           <div>
             <div className="flex items-center justify-between pb-2">
               <span className="text-xs font-bold text-[var(--text-secondary)]">
-                个股分析必备 6 大核心数据基石（可分别独立触发更新）
+                核心数据通道与维护任务（可分别独立触发更新）
               </span>
               <span className="text-[11px] text-[var(--text-muted)]">
                 {active.length > 0 ? `当前 ${active.length} 项任务执行中` : '所有数据通道就绪'}
@@ -305,10 +305,10 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
                       <span>最新行情与时效核验</span>
                     </span>
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200">
                       现价维度
                     </span>
                   </div>
@@ -329,20 +329,20 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                 </div>
               </div>
 
-              {/* 2. 官方三表底稿与平账 */}
+              {/* 2. 官方三表底稿与报表勾稽 */}
               <div className="p-3 rounded-lg border border-[var(--border-color)] bg-[var(--bg-card)] flex flex-col justify-between gap-2">
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                      <span>官方三表底稿与平账</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                      <span>官方三表底稿与报表勾稽</span>
                     </span>
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-blue-500/10 text-blue-600 border border-blue-500/20">
+                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200">
                       财报维度
                     </span>
                   </div>
                   <p className="text-[11px] text-[var(--text-muted)] mt-1 line-clamp-2">
-                    SEC 10-K / 东证决算短信底稿平账自检 (资产=负债+权益)，核算 FCF 与净负债。
+                    SEC 10-K / 东证决算短信底稿核验 (资产=负债+权益)，核算 FCF 与净负债。
                   </p>
                 </div>
                 <div className="flex items-center justify-between pt-1 border-t border-[var(--border-color)]/60 text-[10px]">
@@ -350,10 +350,10 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                   <button
                     type="button"
                     disabled={isTaskRunning('FINANCE_CALC')}
-                    onClick={() => void submitSingleTask('FINANCE_CALC', '官方三表底稿与平账')}
+                    onClick={() => void submitSingleTask('FINANCE_CALC', '官方三表底稿与报表勾稽')}
                     className="px-2.5 py-1 rounded bg-[#176249] hover:bg-[#14533e] text-white font-medium cursor-pointer disabled:opacity-50"
                   >
-                    {isTaskRunning('FINANCE_CALC') ? '核算中…' : '立即平账'}
+                    {isTaskRunning('FINANCE_CALC') ? '核算中…' : '立即核算'}
                   </button>
                 </div>
               </div>
@@ -363,15 +363,15 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
                       <span>250日历史日K量价</span>
                     </span>
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-600 border border-amber-500/20">
+                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200">
                       量价维度
                     </span>
                   </div>
                   <p className="text-[11px] text-[var(--text-muted)] mt-1 line-clamp-2">
-                    归档 250 天历史日线 OHLCV，计算 50/150/200 日均线与成交量萎缩度。
+                    归档 250 天历史日线 OHLCV，计算 50/150/200 日均线与成交量变化。
                   </p>
                 </div>
                 <div className="flex items-center justify-between pt-1 border-t border-[var(--border-color)]/60 text-[10px]">
@@ -402,15 +402,15 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
-                      <span>SEPA 主升浪与形态初筛</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                      <span>SEPA 趋势与形态初筛</span>
                     </span>
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-purple-500/10 text-purple-600 border border-purple-500/20">
+                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200">
                       形态维度
                     </span>
                   </div>
                   <p className="text-[11px] text-[var(--text-muted)] mt-1 line-clamp-2">
-                    0-Token 纯本地物理计算，识别符合 Minervini 趋势模板且 VCP 波动收缩的标的。
+                    基于价量时序执行 Minervini 趋势模板与 VCP 波动收缩形态过滤，筛选上升趋势标的。
                   </p>
                 </div>
                 <div className="flex items-center justify-between pt-1 border-t border-[var(--border-color)]/60 text-[10px]">
@@ -431,10 +431,10 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
                       <span>宏观折现率与标的 WACC</span>
                     </span>
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-rose-500/10 text-rose-600 border border-rose-500/20">
+                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200">
                       资本成本
                     </span>
                   </div>
@@ -460,10 +460,10 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
                       <span>官方资讯与微观事件雷达</span>
                     </span>
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-cyan-500/10 text-cyan-600 border border-cyan-500/20">
+                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200">
                       催化剂维度
                     </span>
                   </div>

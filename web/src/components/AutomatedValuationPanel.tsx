@@ -107,12 +107,12 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
       <section className="panel">
         <div className="section-head">
           <div>
-            <h2>自动带入金融估值与多阶段 DCF 内在价值走廊</h2>
+            <h2>多阶段 DCF 估值模型与内在价值区间</h2>
             <p className="muted">
-              无需手动敲入基期数据 · 自动提取 SEC 官方平账原档、行情与 FRED 美债收益率 · 多阶段 DCF 内在价值走廊 · WACC 资本成本 · 杜邦比率
+              基于官方财报数据、基准行情与美债收益率 · 多阶段 DCF 内在价值评估 · WACC 资本成本 · 杜邦比率
             </p>
           </div>
-          <span className="badge success">全自动官方财报代入</span>
+          <span className="badge">官方财报数据</span>
         </div>
 
         {/* 标的快速切换按钮池 */}
@@ -123,8 +123,8 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
               type="button"
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 border ${
                 selectedTicker === c.ticker
-                  ? 'bg-[#3987e5] text-white border-[#3987e5] shadow-sm'
-                  : 'bg-[var(--bg-card)] text-[var(--text-secondary)] border-[var(--border-color)] hover:border-[#3987e5]'
+                  ? 'bg-[#176249] text-white border-[#176249] shadow-sm'
+                  : 'bg-[var(--bg-card)] text-[var(--text-secondary)] border-[var(--border-color)] hover:border-slate-300'
               }`}
               onClick={() => {
                 setSelectedTicker(c.ticker)
@@ -158,7 +158,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
             onChange={e => setSearchTicker(e.target.value)}
             className="w-64 rounded-md border border-[var(--border-color)] px-3 py-1.5 text-sm"
           />
-          <button type="submit" className="primary">自动调取官方财报计算</button>
+          <button type="submit" className="primary">执行估值计算</button>
         </form>
       </section>
 
@@ -176,13 +176,13 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
           <section className="panel">
             <div className="section-head">
               <div>
-                <h2>官方财报三表与实时行情 (已自动平账代入)</h2>
+                <h2>官方财报数据与基准行情</h2>
                 <p className="muted">
                   官方披露原档：{facts?.source_filing} · 报告期截止：{facts?.period_end} · 市场基准时点：{valuationData.quote_timestamp}
                 </p>
               </div>
-              <span className="badge success">
-                {facts?.balance_sheet_status || '资产负债表严格平账'}
+              <span className="badge">
+                财务报表勾稽平衡
               </span>
             </div>
 
@@ -208,7 +208,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                 <div className="text-base font-bold mt-1 text-[var(--text-primary)]">
                   {facts?.cash_formatted} / {facts?.debt_formatted}
                 </div>
-                <div className="text-xs text-emerald-600 mt-0.5 font-medium">
+                <div className="text-xs text-[#176249] mt-0.5 font-medium">
                   {facts?.net_cash_status}
                 </div>
               </div>
@@ -229,22 +229,26 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
           <section className="panel">
             <div className="section-head">
               <div>
-                <h2>多阶段 DCF 内在价值走廊与安全边际 (Valuation Corridor)</h2>
+                <h2>多阶段 DCF 内在价值走廊与估值区间</h2>
                 <p className="muted">
                   基于企业内生真实自由现金流、WACC 资本成本折现率及多情景增长推演
                 </p>
               </div>
-              <span className={`badge ${mos >= 0 ? 'success' : 'warning'}`}>
-                安全边际 {mos >= 0 ? `+${mos.toFixed(1)}%` : `${mos.toFixed(1)}%`}
+              <span className={`px-2.5 py-1 rounded-full font-bold text-xs font-mono border ${
+                mos >= 0
+                  ? 'text-blue-600 bg-blue-50 border-blue-200'
+                  : 'text-rose-600 bg-rose-50 border-rose-200'
+              }`}>
+                {mos >= 0 ? `安全边际 +${mos.toFixed(1)}%` : `估值溢价 ${Math.abs(mos).toFixed(1)}%`}
               </span>
             </div>
 
             {/* 顶层通俗商业研判横幅 */}
             <div className="p-4 rounded-xl my-4 border bg-[var(--bg-subtle)] flex items-start gap-3">
-              <TargetIcon className="w-5 h-5 text-[#3987e5] mt-0.5 shrink-0" />
+              <TargetIcon className="w-5 h-5 text-slate-700 mt-0.5 shrink-0" />
               <div>
                 <div className="font-bold text-sm text-[var(--text-primary)]">
-                  投资直觉与估值结论
+                  估值研判与投资逻辑
                 </div>
                 <div className="text-xs mt-1 text-[var(--text-secondary)] leading-relaxed">
                   {corridor?.valuation_verdict}
@@ -258,7 +262,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
               <div className="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] flex flex-col justify-between relative group">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-[#3987e5]">保守底价</span>
+                    <span className="text-xs font-semibold text-slate-800">保守底价</span>
                     <div className="flex items-center gap-1.5">
                       <span className="badge warning">严苛防御</span>
                       
@@ -279,10 +283,10 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                           }}
                           onFocus={() => setActiveScenarioTooltip('floor')}
                           onBlur={() => setActiveScenarioTooltip(null)}
-                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-slate-400 ${
                             activeScenarioTooltip === 'floor'
-                              ? 'bg-[#3987e5] text-white border-[#3987e5]'
-                              : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)]'
+                              ? 'bg-slate-800 text-white border-slate-800'
+                              : 'bg-[var(--surface-color)] hover:bg-slate-100 text-[var(--text-muted)] hover:text-slate-800 border border-[var(--border-color)]'
                           }`}
                         >
                           !
@@ -295,7 +299,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                             onMouseLeave={() => setActiveScenarioTooltip(null)}
                           >
                             <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
-                              <span className="font-bold text-xs text-[#3987e5]">
+                              <span className="font-bold text-xs text-slate-800">
                                 保守底价情景推演
                               </span>
                               <span className="badge warning">严苛防御</span>
@@ -325,10 +329,10 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
               </div>
 
               {/* 中性公允价 (核心高亮) */}
-              <div className="p-4 rounded-xl border-2 border-[#3987e5] bg-[var(--surface-color)] shadow-sm flex flex-col justify-between relative group">
+              <div className="p-4 rounded-xl border-2 border-[#176249] bg-[var(--surface-color)] shadow-sm flex flex-col justify-between relative group">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#3987e5]">中性公允价</span>
+                    <span className="text-xs font-bold text-[#176249]">中性公允价</span>
                     <div className="flex items-center gap-1.5">
                       <span className="badge success">基准公允</span>
 
@@ -349,10 +353,10 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                           }}
                           onFocus={() => setActiveScenarioTooltip('base')}
                           onBlur={() => setActiveScenarioTooltip(null)}
-                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#3987e5] ${
+                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#176249] ${
                             activeScenarioTooltip === 'base'
-                              ? 'bg-[#3987e5] text-white border-[#3987e5]'
-                              : 'bg-[var(--surface-color)] hover:bg-[#3987e5]/20 text-[var(--text-muted)] hover:text-[#3987e5] border border-[var(--border-color)]'
+                              ? 'bg-[#176249] text-white border-[#176249]'
+                              : 'bg-[var(--surface-color)] hover:bg-[#176249]/20 text-[var(--text-muted)] hover:text-[#176249] border border-[var(--border-color)]'
                           }`}
                         >
                           !
@@ -365,7 +369,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                             onMouseLeave={() => setActiveScenarioTooltip(null)}
                           >
                             <div className="flex items-center justify-between border-b border-[var(--border-color)]/60 pb-1.5 mb-1.5">
-                              <span className="font-bold text-xs text-[#3987e5]">
+                              <span className="font-bold text-xs text-[#176249]">
                                 中性公允价推演 (估值中枢)
                               </span>
                               <span className="badge success">基准公允</span>
@@ -383,7 +387,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                     </div>
                   </div>
 
-                  <div className="text-3xl font-black mt-2 text-[#3987e5]">
+                  <div className="text-3xl font-black mt-2 text-[var(--text-primary)]">
                     {sym}{corridor?.base_fair_value.value_per_share.toFixed(2)}
                   </div>
                 </div>
@@ -393,7 +397,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                   <div>前3年预测增长：{corridor?.base_fair_value.growth_rates_pct.join('%, ')}%</div>
                   {corridor?.base_fair_value.forecast && (
                     <details className="mt-2 text-xs">
-                      <summary className="cursor-pointer text-[#3987e5] font-medium">查看 3 年期折现预测明细</summary>
+                      <summary className="cursor-pointer text-slate-700 hover:text-slate-900 font-medium">查看 3 年期折现预测明细</summary>
                       <ul className="mt-1 pl-2 space-y-0.5 text-muted">
                         {corridor.base_fair_value.forecast.map(row => (
                           <li key={row.year}>第 {row.year} 年 FCF: {sym}{(row.cash_flow / 1e9).toFixed(2)}B (现值: {sym}{(row.present_value / 1e9).toFixed(2)}B)</li>
@@ -429,10 +433,10 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
                           }}
                           onFocus={() => setActiveScenarioTooltip('opt')}
                           onBlur={() => setActiveScenarioTooltip(null)}
-                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#d03b3b] ${
+                          className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-rose-500 ${
                             activeScenarioTooltip === 'opt'
-                              ? 'bg-[#d03b3b] text-white border-[#d03b3b]'
-                              : 'bg-[var(--surface-color)] hover:bg-[#d03b3b]/20 text-[var(--text-muted)] hover:text-[#d03b3b] border border-[var(--border-color)]'
+                              ? 'bg-rose-500 text-white border-rose-500'
+                              : 'bg-[var(--surface-color)] hover:bg-rose-50 text-[var(--text-muted)] hover:text-rose-500 border border-[var(--border-color)]'
                           }`}
                         >
                           !
@@ -506,7 +510,7 @@ export function AutomatedValuationPanel({ onSelectTicker }: AutomatedValuationPa
             <section className="panel">
               <div className="section-head">
                 <h2>杜邦分析与盈利质量透视</h2>
-                <span className="badge success">官方披露平账</span>
+                <span className="badge">报表勾稽平衡</span>
               </div>
               <div className="rows mt-3">
                 <div className="row">

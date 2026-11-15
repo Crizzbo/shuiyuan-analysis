@@ -148,16 +148,16 @@ export function TaskConfigModal({
         {/* 顶部标题栏 */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--border-color)] bg-[var(--bg-card)]">
           <div className="flex items-center gap-3">
-            <SettingsIcon className="w-5 h-5 text-[#3987e5]" />
+            <SettingsIcon className="w-5 h-5 text-slate-700" />
             <div>
               <h2 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
-                <span>全盘运营任务参数化中枢 (SSOT JSON Config)</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#3987e5]/15 text-[#3987e5] border border-[#3987e5]/30 font-mono font-medium">
+                <span>数据运营任务参数配置</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 font-mono font-medium">
                   config/terminal_tasks.json
                 </span>
               </h2>
               <p className="text-xs text-[var(--text-secondary)] mt-0.5">
-                单一事实来源驱动：动态配置 8 项双轨任务的批处理规模、Cron 表达式、过滤规则与执行阈值。
+                配置各数据任务的调度排程、批处理规模、过滤规则与执行阈值。
               </p>
             </div>
           </div>
@@ -304,8 +304,8 @@ export function TaskConfigModal({
                   /* 完整 JSON 文本编辑器 */
                   <div className="flex-1 flex flex-col space-y-2">
                     <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">
-                      <span>可直接在此编辑当前任务的 JSON 配置，点击保存即写入 SSOT 任务配置中心：</span>
-                      {jsonError && <span className="text-[#d03b3b] font-medium">{jsonError}</span>}
+                      <span>可直接在此编辑当前任务的 JSON 配置，点击保存即写入任务配置：</span>
+                      {jsonError && <span className="text-rose-600 font-medium">{jsonError}</span>}
                     </div>
                     <textarea
                       value={jsonText}
@@ -313,8 +313,8 @@ export function TaskConfigModal({
                       rows={14}
                       className={`w-full font-mono text-xs p-3.5 rounded-xl bg-[var(--bg-card)] border focus:outline-none transition-colors leading-relaxed ${
                         jsonError
-                          ? 'border-[#d03b3b] text-[#d03b3b]'
-                          : 'border-[var(--border-color)] text-[var(--text-primary)] focus:border-[#3987e5]'
+                          ? 'border-rose-500 text-rose-600'
+                          : 'border-[var(--border-color)] text-[var(--text-primary)] focus:border-[#176249]'
                       }`}
                     />
                   </div>
@@ -327,7 +327,7 @@ export function TaskConfigModal({
         {/* 底部操作栏 */}
         <div className="px-6 py-3.5 border-t border-[var(--border-color)] bg-[var(--bg-card)] flex items-center justify-between">
           <div className="text-xs text-[var(--text-muted)]">
-            数据存储源: <code className="font-mono text-[var(--text-secondary)]">config/terminal_tasks.json</code>
+            配置文件: <code className="font-mono text-[var(--text-secondary)]">config/terminal_tasks.json</code>
           </div>
 
           <div className="flex items-center gap-2.5">
@@ -342,12 +342,12 @@ export function TaskConfigModal({
               type="button"
               disabled={saving || !!jsonError || loading}
               onClick={handleSave}
-              className="px-5 py-1.5 rounded-lg bg-[#3987e5] hover:bg-[#2a78d6] active:scale-95 text-white text-xs font-semibold shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-1.5"
+              className="px-5 py-1.5 rounded-lg bg-[#176249] hover:bg-[#14533e] active:scale-95 text-white text-xs font-semibold shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-1.5"
             >
               {saving ? (
                 <>
                   <span className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>正在落盘...</span>
+                  <span>正在保存...</span>
                 </>
               ) : (
                 <span>保存任务配置</span>

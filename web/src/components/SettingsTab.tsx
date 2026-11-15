@@ -75,15 +75,15 @@ export function SettingsTab() {
           <div className="bg-[var(--bg-card)] rounded-lg p-3.5 text-xs space-y-2.5 border border-[var(--border-color)]/60">
             <div className="flex items-center justify-between">
               <span className="text-[var(--text-muted)]">数据准入机制:</span>
-              <span className="text-[#3987e5] font-semibold">单向流动 (官方原始财报 → 量化核验 → 决策看板)</span>
+              <span className="text-[var(--text-primary)] font-semibold">单向流动 (官方原始财报 → 量化核验 → 决策看板)</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-[var(--text-muted)]">模型计算机制:</span>
-              <span className="text-[#199e70] font-semibold">0-Token 纯本地数学计算引擎</span>
+              <span className="text-[#176249] font-semibold">本地量化计算引擎</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-[var(--text-muted)]">投研决策输出:</span>
-              <span className="text-[var(--text-primary)] font-semibold">买方情景区间与质化研判 (禁用机械打分)</span>
+              <span className="text-[var(--text-primary)] font-semibold">多阶段现金流折现与估值区间</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-[var(--text-muted)]">行情时效控制:</span>
@@ -92,10 +92,10 @@ export function SettingsTab() {
           </div>
 
           {/* 说明层 */}
-          <div className="bg-[#102a1e]/15 border border-[#199e70]/30 rounded-lg p-3 text-xs text-[var(--text-secondary)] leading-relaxed">
-            <span className="font-semibold text-[#199e70]">准则说明: </span>
+          <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-[var(--text-secondary)] leading-relaxed">
+            <span className="font-semibold text-slate-800">准则说明: </span>
             <span className="text-[11px] text-[var(--text-muted)]">
-              系统坚持买方机构实证原则，底层证据账本只追加不篡改；杜绝无依据的黑盒机械打分，全方位以多阶段 DCF 内在价值走廊为决策基准。
+              系统遵循严谨的金融量化分析准则，依托官方原始财报与多阶段现金流折现 (DCF) 模型进行估值推演。
             </span>
           </div>
         </div>
