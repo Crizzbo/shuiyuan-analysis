@@ -37,6 +37,7 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
   const [severityFilter, setSeverityFilter] = useState('ALL')
   const [statusFilter, setStatusFilter] = useState('ALL')
   const [dateFilter, setDateFilter] = useState('ALL')
+  const [segmentFilter, setSegmentFilter] = useState('ALL')
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 10
@@ -191,13 +192,37 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
     }
   }, [selectedEventId])
 
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [segmentFilter])
+
   const allEvents = data?.events || []
-  const totalItems = allEvents.length
+  const availableSegments = useMemo(() => {
+    const set = new Set<string>()
+    allEvents.forEach((ev) => {
+      toList(ev.affected_business_segments).forEach((s) => {
+        const clean = String(s).trim()
+        if (clean && clean !== 'General' && clean !== '通用' && clean !== '通用产业') {
+          set.add(clean)
+        }
+      })
+    })
+    return Array.from(set).sort()
+  }, [allEvents])
+
+  const filteredEvents = useMemo(() => {
+    if (segmentFilter === 'ALL') return allEvents
+    return allEvents.filter((ev) =>
+      toList(ev.affected_business_segments).includes(segmentFilter)
+    )
+  }, [allEvents, segmentFilter])
+
+  const totalItems = filteredEvents.length
   const totalPages = Math.max(1, Math.ceil(totalItems / pageSize))
   const pagedEvents = useMemo(() => {
     const start = (currentPage - 1) * pageSize
-    return allEvents.slice(start, start + pageSize)
-  }, [allEvents, currentPage, pageSize])
+    return filteredEvents.slice(start, start + pageSize)
+  }, [filteredEvents, currentPage, pageSize])
 
   const sevCounts = data?.severity_counts || {}
   const verCounts = data?.verification_counts || {}
@@ -363,141 +388,134 @@ export function IntelligenceTab({ selectedEventId, onClearSelectedEvent, refresh
       {/* ========================================================================= */}
       {activeView === 'radar' && (
         <div className="space-y-6">
-          {/* 按日期归档与历史时间线控制台 */}
-          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 space-y-3 shadow-sm">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex flex-wrap items-center gap-2.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#199e70]" />
-                <h2 className="text-xs font-bold text-[var(--text-primary)]">
-                  事件时间线
-                </h2>
-                <span className="text-xs text-[var(--text-muted)] font-mono">
-                  已收录 {availableDates.length} 个历史日期 · 共 {data?.total_events ?? 0} 条
-                </span>
-              </div>
-
-              {/* 日期精确选择下拉框 */}
-              <div className="flex items-center gap-2 text-xs">
-                <span className="text-[var(--text-muted)]">精确归档日期:</span>
-                <select
-                  value={dateFilter}
-                  onChange={(e) => setDateFilter(e.target.value)}
-                  className="bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-lg px-3 py-1.5 text-xs font-mono focus:outline-none focus:border-[#3987e5] cursor-pointer font-bold"
-                >
-                  <option value="ALL">全部历史日期 ({data?.total_events ?? 0} 篇)</option>
-                  {availableDates.map((d) => (
-                    <option key={d} value={d}>
-                      {d} 归档 ({dateCounts[d] ?? 0} 篇)
-                    </option>
-                  ))}
-                </select>
-                {dateFilter !== 'ALL' && (
-                  <button
-                    type="button"
-                    onClick={() => setDateFilter('ALL')}
-                    className="text-xs text-[#3987e5] hover:underline cursor-pointer"
-                  >
-                    重置全量 ✕
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {/* 快捷日期切档药丸列表 */}
-            <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-[var(--border-color)]/50 text-xs">
-              <span className="text-[11px] text-[var(--text-muted)] mr-1">快捷切档:</span>
-              <button
-                type="button"
-                onClick={() => setDateFilter('ALL')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer ${
-                  dateFilter === 'ALL'
-                    ? 'bg-[#3987e5] text-white shadow-sm'
-                    : 'bg-[var(--bg-card)] text-[var(--text-secondary)] border border-[var(--border-color)] hover:border-[#3987e5]'
-                }`}
-              >
-                全部 ({data?.total_events ?? 0})
-              </button>
-              {availableDates.slice(0, 10).map((d) => (
-                <button
-                  type="button"
-                  key={d}
-                  onClick={() => setDateFilter(d)}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
-                    dateFilter === d
-                      ? 'bg-[#199e70] text-white shadow-sm'
-                      : 'bg-[var(--bg-card)] text-[var(--text-secondary)] border border-[var(--border-color)] hover:border-[#199e70]'
-                  }`}
-                >
-                  <span>{d}</span>
-                  <span
-                    className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                      dateFilter === d
-                        ? 'bg-white/20 text-white'
-                        : 'bg-[var(--surface-color)] text-[var(--text-muted)]'
-                    }`}
-                  >
-                    {dateCounts[d] ?? 0}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* 筛选与搜索 */}
-          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 shadow-sm">
-            <div className="flex flex-wrap items-center gap-3">
-              {/* 级别筛选 */}
-              <div className="flex items-center gap-1.5 text-xs">
-                <span className="text-[var(--text-muted)]">影响级别:</span>
+          {/* 综合情报控制台 (上下合并为统一子菜单架构，集成日历精准筛选与可扩展板块维度) */}
+          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 space-y-3.5 shadow-sm">
+            {/* 子菜单一级：影响级别分类导航项 */}
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[var(--border-color)]/60">
+              <div className="flex flex-wrap items-center gap-1.5 text-xs">
+                <span className="text-[var(--text-muted)] font-semibold text-xs mr-1 shrink-0">情报分类:</span>
                 {severityFilters.map((f) => (
                   <button
                     type="button"
                     key={f.id}
                     onClick={() => setSeverityFilter(f.id)}
-                    className={`px-2.5 py-1 rounded-lg font-medium transition-all cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                       severityFilter === f.id
                         ? 'bg-[#3987e5] text-white shadow-sm'
-                        : 'bg-[var(--bg-card)] text-[var(--text-secondary)] hover:bg-[var(--border-color)]'
+                        : 'bg-[var(--bg-card)] text-[var(--text-secondary)] hover:bg-[var(--border-color)] hover:text-[var(--text-primary)]'
                     }`}
                   >
-                    {f.label}
+                    <span>{f.label}</span>
+                    <span
+                      className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                        severityFilter === f.id
+                          ? 'bg-white/20 text-white'
+                          : 'bg-[var(--surface-color)] text-[var(--text-muted)]'
+                      }`}
+                    >
+                      {f.id === 'ALL' ? (data?.total_events ?? 0) : (sevCounts[f.id] ?? 0)}
+                    </span>
                   </button>
                 ))}
               </div>
 
-              {/* 核验状态筛选 */}
-              <div className="flex items-center gap-1.5 text-xs">
-                <span className="text-[var(--text-muted)]">核验状态:</span>
-                <select
-                  value={statusFilter}
-                  onChange={(e) => setStatusFilter(e.target.value)}
-                  className="bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-[#3987e5] cursor-pointer"
-                >
-                  <option value="ALL">全部状态</option>
-                  <option value="Confirmed_Fact">官方权威核实</option>
-                  <option value="Corroborated_Report">主流媒体采信</option>
-                  <option value="Unverified_Rumor">待核实传闻隔离</option>
-                </select>
+              {/* 右侧：总览与已收录统计 */}
+              <div className="text-xs text-[var(--text-muted)] font-mono flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#199e70] animate-pulse" />
+                <span>收录 {availableDates.length} 个历史日期 · 共 {data?.total_events ?? 0} 条底账</span>
               </div>
             </div>
 
-            {/* 关键字搜索 */}
-            <div className="flex items-center gap-2">
-              <input
-                type="text"
-                placeholder="搜索关联公司、行业板块、事件标题..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && loadEvents()}
-                className="bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-lg px-3 py-1.5 text-xs w-60 focus:outline-none focus:border-[#3987e5]"
-              />
-              <button
-                type="button"
-                onClick={loadEvents}
-                className="px-3 py-1.5 bg-[#3987e5] text-white rounded-lg text-xs hover:bg-[#2a78d6] cursor-pointer"
-              >
-                搜索
-              </button>
+            {/* 子菜单二级：日历精准筛选 + 核验状态 + 可扩展维度 (业务板块) + 搜索框 */}
+            <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
+              <div className="flex flex-wrap items-center gap-3">
+                {/* 1. 日历筛选 (Calendar Picker) */}
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[var(--text-muted)] font-medium flex items-center gap-1">
+                    <span>📅</span>
+                    <span>日历筛选:</span>
+                  </span>
+                  <div className="relative inline-flex items-center">
+                    <input
+                      type="date"
+                      value={dateFilter === 'ALL' ? '' : dateFilter}
+                      min={availableDates[availableDates.length - 1]}
+                      max={availableDates[0]}
+                      onChange={(e) => setDateFilter(e.target.value || 'ALL')}
+                      className="bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] hover:border-[#3987e5] rounded-lg px-2.5 py-1 text-xs font-mono focus:outline-none focus:border-[#3987e5] cursor-pointer"
+                      title="点击日历选择历史日期进行归档精准筛选"
+                    />
+                    {dateFilter !== 'ALL' && (
+                      <button
+                        type="button"
+                        onClick={() => setDateFilter('ALL')}
+                        className="ml-1.5 px-2 py-0.5 rounded bg-gray-700/20 hover:bg-gray-700/40 text-[var(--text-muted)] hover:text-white text-[11px] cursor-pointer transition-all flex items-center gap-1"
+                        title="清除日历筛选，恢复查看全部日期"
+                      >
+                        <span>{dateFilter} ({dateCounts[dateFilter] ?? 0}篇)</span>
+                        <span>✕ 全部</span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* 2. 核验状态子菜单下拉 */}
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[var(--text-muted)] font-medium flex items-center gap-1">
+                    <span>🛡️</span>
+                    <span>核验状态:</span>
+                  </span>
+                  <select
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                    className="bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] hover:border-[#3987e5] rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-[#3987e5] cursor-pointer"
+                  >
+                    <option value="ALL">全部核验状态</option>
+                    <option value="Confirmed_Fact">官方权威核实</option>
+                    <option value="Corroborated_Report">主流媒体采信</option>
+                    <option value="Unverified_Rumor">待核实传闻隔离</option>
+                  </select>
+                </div>
+
+                {/* 3. 子菜单扩展性槽位 (支持按业务板块快速扩展) */}
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[var(--text-muted)] font-medium flex items-center gap-1">
+                    <span>🏷️</span>
+                    <span>业务板块:</span>
+                  </span>
+                  <select
+                    value={segmentFilter}
+                    onChange={(e) => setSegmentFilter(e.target.value)}
+                    className="bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] hover:border-[#3987e5] rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-[#3987e5] cursor-pointer"
+                  >
+                    <option value="ALL">全部业务分部</option>
+                    {availableSegments.map((s) => (
+                      <option key={s} value={s}>
+                        {s}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* 搜索框 */}
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  placeholder="搜索关联公司、行业板块、事件标题..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && loadEvents()}
+                  className="bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-lg px-3 py-1.5 text-xs w-56 sm:w-64 focus:outline-none focus:border-[#3987e5]"
+                />
+                <button
+                  type="button"
+                  onClick={loadEvents}
+                  className="px-3 py-1.5 bg-[#3987e5] hover:bg-[#2a78d6] text-white rounded-lg text-xs font-semibold cursor-pointer transition-all shadow-sm"
+                >
+                  搜索
+                </button>
+              </div>
             </div>
           </div>
 
