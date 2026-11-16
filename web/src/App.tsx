@@ -6,27 +6,29 @@ import type { HealthData, PipelineStatusData, LogItem } from './types/api'
 import { useSSE } from './hooks/useSSE'
 import { Header } from './components/Header'
 import { DashboardTab } from './components/DashboardTab'
+import { IntelligenceTab } from './components/IntelligenceTab'
+import { CollectionTab } from './components/CollectionTab'
 import { AnalyticsTab } from './components/AnalyticsTab'
-import { SystemOpsTab } from './components/SystemOpsTab'
-import { CompanyDrawer } from './components/common/CompanyDrawer'
+import { LogsTab } from './components/LogsTab'
+import { SettingsTab } from './components/SettingsTab'
 import { ToastContainer } from './components/Toast'
 
 const tabs = [
-  { id: 'overview', label: '投资决策总览' },
-  { id: 'analytics', label: '标的计算中心' },
-  { id: 'system', label: '系统底账运维' },
+  { id: 'dashboard', label: '总览' },
+  { id: 'intelligence', label: '事件情报' },
+  { id: 'collection', label: '采集中心' },
+  { id: 'analytics', label: '计算分析' },
+  { id: 'logs', label: '系统日志' },
+  { id: 'settings', label: '合规审计' },
 ] as const
 type Tab = (typeof tabs)[number]['id']
 
 export default function App() {
-  const [tab, setTab] = useState<Tab>('overview')
-  const [systemSubTab, setSystemSubTab] = useState<'collection' | 'intelligence' | 'settings' | 'logs'>('collection')
+  const [tab, setTab] = useState<Tab>('dashboard')
   const [health, setHealth] = useState<HealthData | null>(null)
   const [pipelineStatus, setPipelineStatus] = useState<PipelineStatusData | null>(null)
-  const [selectedTicker, setSelectedTicker] = useState<string | null>(null)
-  const [drawerTicker, setDrawerTicker] = useState<string | null>(null)
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null)
+  const [selectedTicker, setSelectedTicker] = useState<string | null>(null)
   const [realtimeLogs, setRealtimeLogs] = useState<LogItem[]>([])
   const [refreshKey, setRefreshKey] = useState(0)
 
@@ -59,8 +61,7 @@ export default function App() {
         health={health}
         sseConnected={connected}
         onPipelineStarted={() => {
-          setSystemSubTab('collection')
-          setTab('system')
+          setTab('collection')
         }}
       />
       <div className="site-header">
@@ -78,63 +79,51 @@ export default function App() {
         </nav>
       </div>
       <main>
-        {tab === 'overview' && (
+        {tab === 'dashboard' && (
           <DashboardTab
             refreshKey={refreshKey}
-            onNavigateTab={(target) => {
-              if (target === 'analytics') {
-                setTab('analytics')
-              } else if (target === 'collection' || target === 'intelligence' || target === 'settings' || target === 'logs') {
-                setSystemSubTab(target)
-                setTab('system')
-              }
+            onNavigateTab={(id) => {
+              if (tabs.some((item) => item.id === id)) setTab(id as Tab)
             }}
-            onSelectEvent={(eventId) => {
-              setSelectedEventId(eventId)
-              setSystemSubTab('intelligence')
-              setTab('system')
+            onSelectEvent={(id) => {
+              setSelectedEventId(id)
+              setTab('intelligence')
             }}
             onSelectTicker={(ticker) => {
               setSelectedTicker(ticker)
-              setDrawerTicker(ticker)
-              setIsDrawerOpen(true)
+              setTab('analytics')
             }}
           />
+        )}
+
+        {tab === 'intelligence' && (
+          <IntelligenceTab
+            selectedEventId={selectedEventId}
+            onClearSelectedEvent={() => setSelectedEventId(null)}
+            refreshKey={refreshKey}
+            onSelectTicker={(ticker) => {
+              setSelectedTicker(ticker)
+              setTab('analytics')
+            }}
+          />
+        )}
+
+        {tab === 'collection' && (
+          <CollectionTab pipelineStatus={pipelineStatus} refreshKey={refreshKey} />
         )}
 
         {tab === 'analytics' && (
           <AnalyticsTab refreshKey={refreshKey} initialTicker={selectedTicker} />
         )}
 
-        {tab === 'system' && (
-          <SystemOpsTab
-            pipelineStatus={pipelineStatus}
-            realtimeLogs={realtimeLogs}
-            refreshKey={refreshKey}
-            defaultSubTab={systemSubTab}
-            selectedEventId={selectedEventId}
-            onClearSelectedEvent={() => setSelectedEventId(null)}
-            onSelectTicker={(ticker) => {
-              setSelectedTicker(ticker)
-              setDrawerTicker(ticker)
-              setIsDrawerOpen(true)
-            }}
-          />
+        {tab === 'logs' && (
+          <LogsTab realtimeLogs={realtimeLogs} refreshKey={refreshKey} />
+        )}
+
+        {tab === 'settings' && (
+          <SettingsTab />
         )}
       </main>
-
-      {/* 右侧标的全息底账与 25 模型速览抽屉 */}
-      <CompanyDrawer
-        isOpen={isDrawerOpen}
-        ticker={drawerTicker}
-        onClose={() => setIsDrawerOpen(false)}
-        onOpenFullAnalytics={(t) => {
-          setSelectedTicker(t)
-          setIsDrawerOpen(false)
-          setTab('analytics')
-        }}
-      />
-
       <ToastContainer />
     </>
   )
