@@ -17,6 +17,7 @@ import logging
 import mimetypes
 from pathlib import Path
 import queue
+import re
 import sys
 import threading
 import time
@@ -289,6 +290,14 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 self._send_json(200, svc.get_market_quotes(market=market))
                 return
 
+            if path in ("/api/terminal/quotes/batch-collect", "/api/quotes/batch-collect"):
+                raw_tickers = _q1("tickers") or ""
+                tickers = [t.strip().upper() for t in re.split(r"[,;\s]+", raw_tickers) if t.strip()]
+                force_refresh = (_q1("force_refresh", "false") or "false").lower() in ("true", "1")
+                code, res = svc.batch_collect_stock_quotes(tickers, force_refresh=force_refresh)
+                self._send_json(code, res)
+                return
+
             if path == "/api/indicators/latest":
                 self._send_json(200, svc.get_latest_indicators())
                 return
@@ -451,6 +460,13 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 else:
                     scheduler.set_enabled(task, body["enabled"])
                     self._send_json(200, svc._envelope({"enabled": body["enabled"]}, as_of="", source="terminal_scheduler", status="OK"))
+                return
+
+            if path in ("/api/terminal/quotes/batch-collect", "/api/quotes/batch-collect"):
+                tickers = body.get("tickers") or []
+                force_refresh = bool(body.get("force_refresh", False))
+                code, res = svc.batch_collect_stock_quotes(tickers, force_refresh=force_refresh)
+                self._send_json(code, res)
                 return
 
             if path == "/api/pipeline/start":

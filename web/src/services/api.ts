@@ -20,6 +20,7 @@ import type {
   MarketReconciliationMap,
   TaskSchedulerInfo,
   MarketStatisticsData,
+  BatchQuotesResponseData,
 } from '../types/api'
 
 const BASE_URL = '' // 相对路径，由 Vite proxy 或 Python 网关同源处理
@@ -62,9 +63,15 @@ export const api = {
   getDashboardSummary: () => request<DashboardSummaryData>('/api/dashboard/summary'),
   getMarketStatistics: () => request<MarketStatisticsData>('/api/market/statistics'),
 
-  // 3. 行情矩阵
+  // 3. 行情矩阵与批量采集
   getMarketQuotes: (market: 'ALL' | 'US' | 'JP' = 'ALL') =>
     request<MarketQuotesData>(`/api/markets/quotes?market=${market}`),
+
+  batchCollectQuotes: (tickers: string[] | string, forceRefresh = false) =>
+    request<BatchQuotesResponseData>('/api/terminal/quotes/batch-collect', {
+      method: 'POST',
+      body: JSON.stringify({ tickers, force_refresh: forceRefresh }),
+    }),
 
   // 4. 宏观与量化指标
   getLatestIndicators: () => request<IndicatorsData>('/api/indicators/latest'),

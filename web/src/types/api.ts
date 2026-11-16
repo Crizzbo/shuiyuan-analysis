@@ -56,6 +56,27 @@ export interface MarketQuoteItem {
   source_file?: string
 }
 
+export interface BatchQuoteCollectedItem extends MarketQuoteItem {
+  change?: number | null
+  change_percent?: number | null
+  previous_close?: number | null
+  volume?: string | number | null
+  is_fresh_today?: boolean
+  sha256_hash?: string
+  status?: string
+  message?: string
+}
+
+export interface BatchQuotesResponseData {
+  total_requested: number
+  total_collected: number
+  success_count: number
+  failed_count: number
+  collected_at: string
+  market_session_note: string
+  items: BatchQuoteCollectedItem[]
+}
+
 export interface IndicatorItem {
   id: string
   name_zh: string
@@ -370,10 +391,12 @@ export interface MarketStatisticsData {
 // 3. 行情矩阵
 export interface MarketQuotesData {
   freshness_banner?: string
+  market_session_note?: string
   us_indices: MarketQuoteItem[]
   jp_indices: MarketQuoteItem[]
   jp_core_equities?: MarketQuoteItem[]
   all_ready_quotes?: MarketQuoteItem[]
+  all_quotes?: MarketQuoteItem[]
   total_ready?: number
   stale_blocked_count?: number
 }
