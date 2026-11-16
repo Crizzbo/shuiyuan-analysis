@@ -2,84 +2,282 @@
 
 :root {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  color: #111d18;
-  background: #f4f7f5;
+  color: #0b253a;
+  background: #ecf4fa;
   color-scheme: light;
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
 
   /* ========================================================================= */
-  /* 水 (Water) 主题基调与界面系统 */
+  /* 「冰与火」主题系统规范 (Ice & Fire Design Tokens)                           */
   /* ========================================================================= */
-  --water-deep: #0e3a2f;           /* 沉水墨绿，顶层深色底 */
-  --water-primary: #176249;        /* 沧澜碧翠，品牌主要操作与聚焦态 */
-  --water-primary-hover: #124e3a;  /* 墨翠悬浮态 */
-  --water-surface: #ffffff;        /* 容器纯白表面 */
-  --water-surface-subtle: #f8faf9; /* 轻微次层背景 */
-  --water-bg: #f4f7f5;             /* 全局水汽雾白底色 */
-  --water-line: #d5e2da;           /* 柔和水纹分割线 */
-  --water-line-focus: #176249;     /* 激活边框 */
+  /* 1. 玄冰晶体系统 (Glacial Ice Block) */
+  --ice-950: #031e33;
+  --ice-900: #082f49;
+  --ice-800: #075985;
+  --ice-700: #0369a1;
+  --ice-600: #0284c7;
+  --ice-500: #0ea5e9;
+  --ice-400: #38bdf8;
+  --ice-200: #bae6fd;
+  --ice-100: #e0f2fe;
+  --ice-50:  #f0f8ff;
 
-  /* 兼容既有变量 */
-  --ink-title: #0f1a15;
-  --ink-body: #23352c;
-  --ink-secondary: #475b51;
-  --ink-muted: #5e7368;
-  --line: #d5e2da;
-  --accent: #176249;
-  --bg-color: #f4f7f5;
-  --surface-color: #ffffff;
-  --bg-card: #f8faf9;
-  --border-color: #d5e2da;
-  --text-primary: #111d18;
-  --text-secondary: #374a40;
-  --text-muted: #5e7368;
+  --ice-surface: rgba(240, 248, 255, 0.88);
+  --ice-surface-card: rgba(246, 251, 255, 0.92);
+  --ice-border: rgba(186, 230, 253, 0.70);
+  --ice-border-highlight: rgba(255, 255, 255, 0.95);
+  --ice-crystal-shadow:
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 2px rgba(186, 230, 253, 0.3),
+    0 4px 20px -2px rgba(14, 116, 144, 0.08),
+    0 1px 3px rgba(30, 58, 138, 0.04);
 
-  /* ========================================================================= */
-  /* 市场行情与动态语义 (股票统一红涨蓝跌 · 水凤和鸣) */
-  /* ========================================================================= */
-  /* 凤羽红：上涨 / 估值溢价 / 多头走强 */
-  --phoenix-rise: #dc2626;
-  --phoenix-rise-hover: #b91c1c;
-  --phoenix-rise-bg: #fef2f2;
-  --phoenix-rise-border: #fecaca;
+  /* 2. 沉睡暗火 (Dormant Fire Sleeping in Ice) */
+  --flame-dormant-amber: rgba(249, 115, 22, 0.08);
+  --flame-dormant-red: rgba(239, 68, 68, 0.05);
+
+  /* 3. 大涨流火 (Awakened Flowing Flame Surge · 红涨) */
+  --flame-rise: #dc2626;
+  --flame-rise-bright: #ef4444;
+  --flame-ember-gold: #f59e0b;
+  --flame-magma: #ea580c;
+  --flame-glow: rgba(239, 68, 68, 0.35);
+  --flame-border: rgba(249, 115, 22, 0.55);
+
+  /* 4. 寒霜玄冰 (Freezing Crystal Fall · 蓝跌) */
+  --frost-fall: #2563eb;
+  --frost-fall-deep: #1d4ed8;
+  --frost-fall-border: rgba(96, 165, 250, 0.55);
+  --frost-fall-bg: rgba(239, 246, 255, 0.90);
+
+  /* 5. 兼容性变量对齐 */
+  --text-primary: #0b253a;
+  --text-secondary: #1e4766;
+  --text-muted: #527999;
+  --bg-color: #ecf4fa;
+  --surface-color: var(--ice-surface);
+  --bg-card: var(--ice-surface-card);
+  --border-color: var(--ice-border);
+  --line: var(--ice-border);
+  --accent: #0284c7;
   --accent-red: #dc2626;
-
-  /* 寒潭蓝：下跌 / 估值折价 / 安全边际 */
-  --water-depth: #2563eb;
-  --water-depth-hover: #1d4ed8;
-  --water-depth-bg: #eff6ff;
-  --water-depth-border: #bfdbfe;
   --accent-blue: #2563eb;
-
-  /* 凤翎金：关键触发 / 核心研判点睛 */
-  --phoenix-gold: #b45309;
-  --phoenix-gold-bg: #fffbeb;
-  --phoenix-gold-border: #fde68a;
-  --accent-amber: #b45309;
-
-  /* 水墨绿：品牌主基调 */
-  --accent-green: #176249;
+  --accent-amber: #ea580c;
 }
 
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
   color: var(--text-primary);
-  background-color: #f2f5f3;
-  background-image: 
-    /* 顶部环境微光：沉水墨绿高质感弥散渐变 */
-    radial-gradient(circle at 50% -20px, rgba(23, 98, 73, 0.07) 0%, rgba(23, 98, 73, 0.02) 40%, transparent 70%),
-    /* 东方如意水云纹平铺底纹（无缝宣纸暗纹水印） */
+  background-color: #ecf4fa;
+  background-image:
+    /* 顶部极光冰晶冷光弥散 */
+    radial-gradient(circle at 15% -40px, rgba(56, 189, 248, 0.16) 0%, rgba(56, 189, 248, 0.03) 50%, transparent 75%),
+    /* 顶部地底流火暗热微光弥散 */
+    radial-gradient(circle at 85% -40px, rgba(249, 115, 22, 0.10) 0%, rgba(239, 68, 68, 0.03) 45%, transparent 75%),
+    /* 东方如意水云纹冰火水印 */
     url('/cloud_pattern.svg');
-  background-repeat: no-repeat, repeat;
-  background-position: top center, 0 0;
-  background-size: 100% 700px, 240px 160px;
-  background-attachment: scroll, fixed;
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-position: top left, top right, 0 0;
+  background-size: 55% 650px, 55% 650px, 240px 160px;
+  background-attachment: scroll, scroll, fixed;
   min-height: 100vh;
 }
+
 button, input, select { font: inherit; }
 button { cursor: pointer; }
 button:disabled { opacity: .55; cursor: wait; }
-button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--water-primary); outline-offset: 2px; }
+button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--ice-600);
+  outline-offset: 2px;
+}
 h1, h2, p { margin: 0; }
+
+/* ========================================================================= */
+/* 冰与火核心类库 (Ice Block & Flowing Flame)                                   */
+/* ========================================================================= */
+
+/* 1. 质感冰块容器 (Ice Panel) - 质感冰块外壳 + 内部沉睡流动火焰 */
+.ice-panel {
+  background: linear-gradient(135deg, rgba(240, 248, 255, 0.92) 0%, rgba(248, 252, 255, 0.82) 50%, rgba(235, 246, 255, 0.92) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(186, 230, 253, 0.75);
+  border-radius: 16px;
+  box-shadow:
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 2px rgba(186, 230, 253, 0.25),
+    0 4px 24px -2px rgba(12, 74, 110, 0.08),
+    0 1px 3px rgba(30, 58, 138, 0.04);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ice-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 75% 85%, rgba(249, 115, 22, 0.07) 0%, rgba(239, 68, 68, 0.04) 40%, transparent 70%);
+  opacity: 0.85;
+  animation: dormant-ember-breathe 10s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+/* 2. 质感冰块小卡片 (Ice Block) - 内部蕴含沉睡暗火 */
+.ice-block {
+  background: linear-gradient(135deg, rgba(240, 248, 255, 0.88) 0%, rgba(248, 252, 255, 0.80) 50%, rgba(235, 246, 255, 0.88) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(186, 230, 253, 0.65);
+  border-radius: 12px;
+  box-shadow:
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 2px rgba(186, 230, 253, 0.25),
+    0 2px 12px -2px rgba(14, 116, 144, 0.06);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ice-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 65% 75%, rgba(249, 115, 22, 0.08) 0%, rgba(239, 68, 68, 0.04) 35%, transparent 70%);
+  opacity: 0.8;
+  animation: dormant-ember-breathe 8s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+.ice-block:hover {
+  border-color: rgba(56, 189, 248, 0.7);
+  box-shadow:
+    inset 0 1.5px 2px rgba(255, 255, 255, 1),
+    0 8px 24px -4px rgba(14, 116, 144, 0.12),
+    0 0 16px -2px rgba(249, 115, 22, 0.15);
+}
+
+.ice-block:hover::before {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* 3. 大涨时变成流动的火焰 (Flame Surge) - 破冰而出的炽烈流动火光 */
+.flame-surge {
+  background: linear-gradient(-45deg, rgba(255, 241, 242, 0.94) 0%, rgba(255, 237, 213, 0.90) 35%, rgba(254, 226, 226, 0.93) 70%, rgba(255, 247, 237, 0.95) 100%) !important;
+  background-size: 250% 250% !important;
+  animation: liquid-flame-flow 6s ease infinite alternate !important;
+  border: 1px solid rgba(249, 115, 22, 0.55) !important;
+  box-shadow:
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
+    0 0 20px -2px rgba(249, 115, 22, 0.32),
+    0 4px 16px rgba(239, 68, 68, 0.18) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.flame-surge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.18) 0%, rgba(249, 115, 22, 0.14) 45%, transparent 80%) !important;
+  animation: awakened-flame-pulse 3s ease-in-out infinite alternate !important;
+  opacity: 1 !important;
+  z-index: 0;
+}
+
+.flame-surge:hover {
+  border-color: rgba(239, 68, 68, 0.75) !important;
+  box-shadow:
+    inset 0 1.5px 2px rgba(255, 255, 255, 1),
+    0 0 28px -2px rgba(239, 68, 68, 0.45),
+    0 6px 20px rgba(249, 115, 22, 0.25) !important;
+}
+
+/* 4. 寒霜晶体下跌态 (Frost Crystal) - 蓝跌深冷晶体 */
+.frost-crystal {
+  background: linear-gradient(135deg, rgba(240, 248, 255, 0.92) 0%, rgba(235, 245, 255, 0.88) 100%);
+  border: 1px solid rgba(96, 165, 250, 0.45);
+}
+
+.frost-crystal::before {
+  background: radial-gradient(circle at 60% 70%, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+}
+
+/* 5. 动态火焰徽章与流动文本 */
+.flame-badge {
+  background: linear-gradient(135deg, #fff1f2 0%, #ffedd5 100%);
+  color: #dc2626;
+  border: 1px solid rgba(249, 115, 22, 0.4);
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.flame-badge::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  animation: flame-shimmer 2.5s infinite;
+}
+
+.frost-badge {
+  background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
+  color: #2563eb;
+  border: 1px solid rgba(96, 165, 250, 0.4);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.15);
+}
+
+.flame-text {
+  color: #dc2626;
+  text-shadow: 0 0 10px rgba(239, 68, 68, 0.35);
+  font-weight: 800;
+}
+
+.frost-text {
+  color: #2563eb;
+  text-shadow: 0 0 10px rgba(37, 99, 235, 0.25);
+  font-weight: 800;
+}
+
+/* ========================================================================= */
+/* 动画关键帧 (Keyframes)                                                     */
+/* ========================================================================= */
+
+@keyframes dormant-ember-breathe {
+  0% {
+    transform: scale(0.92) translate(-2%, 2%);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.08) translate(2%, -1%);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(0.96) translate(-1%, -2%);
+    opacity: 0.55;
+  }
+}
+
+@keyframes liquid-flame-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes awakened-flame-pulse {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  100% { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes flame-shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}

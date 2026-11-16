@@ -5,80 +5,119 @@
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
+
+/* 顶部玄冰玻璃导航栏 */
 .site-header {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(23, 98, 73, 0.1);
-  box-shadow: 0 2px 8px -2px rgba(17, 29, 24, 0.03);
+  background: rgba(240, 248, 255, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(186, 230, 253, 0.65);
+  box-shadow: 0 2px 12px -2px rgba(12, 74, 110, 0.05);
   position: sticky;
   top: 0;
   z-index: 40;
 }
+
 .main-nav { display: flex; gap: 32px; min-height: 48px; overflow-x: auto; align-items: center; }
 .main-nav button {
   background: transparent;
   border: 0;
   border-bottom: 2px solid transparent;
-  color: var(--ink-muted);
+  color: var(--ice-text-muted);
   padding: 13px 4px;
   white-space: nowrap;
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   letter-spacing: 0.01em;
 }
 .main-nav button:hover {
-  color: var(--text-primary);
+  color: var(--ice-600);
 }
 .main-nav button[aria-current] {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--ice-600);
+  color: var(--ice-700);
   font-weight: 700;
+  text-shadow: 0 0 12px rgba(2, 132, 199, 0.25);
 }
+
 .subnav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; margin-bottom: 16px; }
-.subnav button { padding: 7px 11px; border: 1px solid transparent; border-radius: 6px; color: var(--ink-muted); }
-.subnav button[aria-pressed="true"] { background: #e9f1ec; color: var(--accent); border-color: #d5e4da; font-weight: 650; }
+.subnav button {
+  padding: 7px 12px;
+  border: 1px solid rgba(186, 230, 253, 0.6);
+  border-radius: 8px;
+  color: var(--ice-text-secondary);
+  background: rgba(240, 248, 255, 0.7);
+  transition: all 0.15s ease;
+}
+.subnav button[aria-pressed="true"] {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  color: var(--ice-900);
+  border-color: rgba(56, 189, 248, 0.8);
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(14, 116, 144, 0.12);
+}
+
 .terminal-top {
   padding: 12px 0;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(23, 98, 73, 0.12);
-  box-shadow: 0 1px 2px rgba(17, 29, 24, 0.02), 0 4px 16px -2px rgba(23, 98, 73, 0.03);
+  background: rgba(240, 248, 255, 0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(186, 230, 253, 0.7);
+  box-shadow: 0 1px 2px rgba(11, 37, 58, 0.02), 0 4px 16px -2px rgba(14, 116, 144, 0.05);
 }
 .terminal-top h1 { font-size: 1.12rem; }
-.terminal-top .terminal-status { background: #f8faf8; }
+.terminal-top .terminal-status { background: #f0f8ff; }
 main { padding-bottom: 48px; }
 .page-heading { padding: 38px 0 24px; }
 h1 { font-size: clamp(1.8rem, 3vw, 2.35rem); letter-spacing: -.045em; }
 h2 { font-size: 1rem; font-weight: 700; }
+
+/* 质感冰块大面板 (自带晶体边缘高光与沉睡暗火流动) */
 .panel {
   padding: 24px;
   margin-bottom: 20px;
-  background: #ffffff;
-  border: 1px solid rgba(23, 98, 73, 0.1);
-  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(240, 248, 255, 0.92) 0%, rgba(248, 252, 255, 0.84) 50%, rgba(235, 246, 255, 0.92) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(186, 230, 253, 0.70);
+  border-radius: 16px;
   min-width: 0;
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 1px 3px rgba(17, 29, 24, 0.03),
-    0 8px 24px -4px rgba(23, 98, 73, 0.05);
-  transition: all 0.2s ease;
+  box-shadow:
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 2px rgba(186, 230, 253, 0.25),
+    0 4px 24px -2px rgba(12, 74, 110, 0.08),
+    0 1px 3px rgba(30, 58, 138, 0.04);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 75% 85%, rgba(249, 115, 22, 0.07) 0%, rgba(239, 68, 68, 0.04) 40%, transparent 70%);
+  opacity: 0.85;
+  animation: dormant-ember-breathe 10s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
 .panel:hover {
-  border-color: rgba(23, 98, 73, 0.18);
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 1),
-    0 2px 6px rgba(17, 29, 24, 0.04),
-    0 12px 32px -4px rgba(23, 98, 73, 0.07);
+  border-color: rgba(56, 189, 248, 0.75);
+  box-shadow:
+    inset 0 1.5px 2px rgba(255, 255, 255, 1),
+    0 8px 32px -4px rgba(12, 74, 110, 0.12),
+    0 0 16px -2px rgba(249, 115, 22, 0.15);
 }
+
 .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .metric { display: grid; justify-items: start; gap: 10px; }
-.metric h2 { font-size: .875rem; color: var(--ink-muted); }
+.metric h2 { font-size: .875rem; color: var(--ice-text-muted); }
 .metric strong { font-size: 1.65rem; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
-.metric p, .muted, .row p { color: var(--ink-muted); font-size: .875rem; line-height: 1.55; }
+.metric p, .muted, .row p { color: var(--ice-text-muted); font-size: .875rem; line-height: 1.55; }
 .muted { margin: 8px 0; }
 .section-head, .row { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .rows { margin-top: 12px; }
@@ -86,63 +125,74 @@ h2 { font-size: 1rem; font-weight: 700; }
 .row p { margin-top: 3px; overflow-wrap: anywhere; }
 .row strong { font-size: .94rem; }
 .actions { display: flex; gap: 8px; flex: none; }
-.actions button, .primary { border: 1px solid var(--line); padding: 8px 12px; border-radius: 7px; background: #fff; color: #20372d; white-space: nowrap; }
+.actions button, .primary { border: 1px solid var(--line); padding: 8px 12px; border-radius: 7px; background: #fff; color: #1e3a5f; white-space: nowrap; }
+
+/* 烈焰主操作按钮 (Flowing Flame Primary Button) */
 .primary {
   margin-top: 16px;
   color: white;
-  background: linear-gradient(180deg, #1b6d51 0%, #176249 100%);
-  border: 1px solid #124e3a;
+  background: linear-gradient(135deg, #ea580c 0%, #dc2626 50%, #b91c1c 100%);
+  background-size: 200% 200%;
+  border: 1px solid rgba(254, 202, 202, 0.4);
   border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(17, 29, 24, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  transition: all 0.15s ease;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-weight: 700;
 }
 .primary:hover {
-  background: linear-gradient(180deg, #1d7b5c 0%, #155741 100%);
-  box-shadow: 0 2px 6px rgba(17, 29, 24, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  background: linear-gradient(135deg, #f97316 0%, #ef4444 50%, #dc2626 100%);
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
 }
-.text-button { border: 0; padding: 0; color: var(--accent); background: transparent; text-align: left; }
+
+.text-button { border: 0; padding: 0; color: var(--ice-600); background: transparent; text-align: left; }
 .text-button:hover, summary:hover { text-decoration: underline; }
-.badge { flex: none; padding: 4px 9px; border-radius: 6px; background: #edf2ee; color: #30493d; font-size: .8rem; }
-.badge.success { background: #e6f7ef; color: #157953; border: 1px solid #c2ebd7; }
-.badge.warning { background: #fdf3e7; color: #9c5c16; border: 1px solid #f6d8b8; }
-.badge.info { background: #edf5fe; color: #1e62b3; border: 1px solid #cbe0fc; }
-.badge.running, .badge.queued { background: #eaf0f9; color: #254871; }
-.badge.failed, .badge.blocked, .badge.partial_success { background: #fbefe1; color: #824823; }
-.error { margin: 12px 0; color: #9d3224; }
+
+.badge { flex: none; padding: 4px 9px; border-radius: 6px; background: #e0f2fe; color: #0369a1; font-size: .8rem; }
+.badge.success { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; }
+.badge.warning { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+.badge.info { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.badge.running, .badge.queued { background: #e0f2fe; color: #075985; }
+.badge.failed, .badge.blocked, .badge.partial_success { background: #fef2f2; color: #b91c1c; }
+.error { margin: 12px 0; color: #b91c1c; }
+
 .calculator { display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px; }
-.field { display: grid; gap: 7px; margin-top: 14px; color: #31473c; font-size: .875rem; }
+.field { display: grid; gap: 7px; margin-top: 14px; color: var(--ice-text-secondary); font-size: .875rem; }
 .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; }
-.field input, .field select { min-width: 0; width: 100%; padding: 9px 10px; border-radius: 6px; border: 1px solid #c9d7ce; color: #15231e; background: #fff; }
+.field input, .field select {
+  min-width: 0;
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(186, 230, 253, 0.7);
+  color: var(--ice-text-primary);
+  background: rgba(255, 255, 255, 0.95);
+}
 .results dl > div { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); }
 dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
-details { color: var(--ink-muted); font-size: .875rem; padding: 4px 0 8px; }
+details { color: var(--ice-text-muted); font-size: .875rem; padding: 4px 0 8px; }
 summary { cursor: pointer; }
 pre { max-width: 100%; overflow: auto; font-size: .8rem; }
 li, code { overflow-wrap: anywhere; }
-/* ========================================================================= */
-/* 高质感卡片与微质感光影层级 (Tactile Depth & Micro-Highlights) */
-/* ========================================================================= */
-.panel,
-[class*="rounded-xl"][class*="border"] {
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 1px 3px rgba(17, 29, 24, 0.03),
-    0 6px 18px -3px rgba(23, 98, 73, 0.04);
+
+/* 冰块与微质感光影层级 */
+[class*="rounded-xl"][class*="border"],
+[class*="rounded-2xl"][class*="border"] {
+  box-shadow:
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 2px rgba(186, 230, 253, 0.25),
+    0 1px 3px rgba(11, 37, 58, 0.03),
+    0 4px 16px -2px rgba(14, 116, 144, 0.05);
 }
 
-/* 输入框微质感 */
+/* 输入框冰晶切面质感 */
 input[type="text"], input[type="search"], select {
-  box-shadow: inset 0 1px 2px rgba(17, 29, 24, 0.04);
+  box-shadow: inset 0 1px 2px rgba(11, 37, 58, 0.04);
   transition: all 0.15s ease;
 }
 input[type="text"]:focus, input[type="search"]:focus, select:focus {
-  border-color: #176249 !important;
-  box-shadow: 0 0 0 3px rgba(23, 98, 73, 0.12), inset 0 1px 2px rgba(17, 29, 24, 0.02) !important;
-}
-
-/* 标签与徽章微立体 */
-.badge {
-  box-shadow: 0 1px 2px rgba(17, 29, 24, 0.04);
+  border-color: var(--ice-500) !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2), inset 0 1px 2px rgba(11, 37, 58, 0.02) !important;
 }
 
 @media (max-width: 720px) {

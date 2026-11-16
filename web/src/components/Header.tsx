@@ -14,13 +14,13 @@ export function Header({ health, sseConnected, onPipelineStarted }: HeaderProps)
       <div className="container flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         {/* 左侧：系统标题与环境状态 */}
         <div className="flex items-center gap-3.5">
-          <BrandLogo size="md" className="rounded-lg shadow-xs" />
+          <BrandLogo size="md" className="rounded-xl shadow-xs" />
           <div>
             <div className="flex items-center gap-2.5">
               <h1 className="text-xl font-bold tracking-tight text-[var(--text-primary)]">
                 水源分析终端
               </h1>
-              <span className="text-[10px] px-2 py-0.5 rounded-full font-medium bg-[#176249]/10 text-[#176249] border border-[#176249]/20 font-mono">
+              <span className="text-[10px] px-2 py-0.5 rounded-full font-semibold bg-sky-50 text-sky-700 border border-sky-200 font-mono">
                 量化投研
               </span>
               <span
@@ -44,7 +44,7 @@ export function Header({ health, sseConnected, onPipelineStarted }: HeaderProps)
                 账本: {health?.ledger_valid ? `完整 (${health.ledger_total_predictions} 条)` : health ? '校验异常' : '待检测'}
               </span>
               <span>·</span>
-              <span className="px-2.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 font-mono font-medium flex items-center gap-1">
+              <span className="px-2.5 py-0.5 rounded bg-sky-50/70 text-sky-800 border border-sky-200/70 font-mono font-medium flex items-center gap-1">
                 <span>更新时间:</span>
                 <span>{health?.latest_data_ts ? formatDeviceTime(health.latest_data_ts) : '暂无'}</span>
               </span>
@@ -54,7 +54,7 @@ export function Header({ health, sseConnected, onPipelineStarted }: HeaderProps)
 
         <button
           type="button"
-          className="text-xs px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-700 hover:text-[#176249] hover:border-[#176249]/40 font-medium transition-all shadow-xs"
+          className="text-xs px-3.5 py-1.5 rounded-lg border border-sky-200 bg-white/90 text-sky-800 hover:text-white hover:bg-sky-600 hover:border-sky-600 font-medium transition-all shadow-xs"
           onClick={onPipelineStarted}
         >
           数据采集

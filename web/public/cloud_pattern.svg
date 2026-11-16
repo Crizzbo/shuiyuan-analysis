@@ -1,5 +1,24 @@
 <svg width="240" height="160" viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
-  <g fill="none" stroke="#176249" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round" opacity="0.05">
+  <defs>
+    <!-- 玄冰冷光渐变线条 -->
+    <linearGradient id="frostCloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" stop-opacity="0.08" />
+      <stop offset="60%" stop-color="#38bdf8" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.03" />
+    </linearGradient>
+    <!-- 云心沉睡流火微弱辉光 -->
+    <radialGradient id="emberCoreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.06" />
+      <stop offset="60%" stop-color="#ef4444" stop-opacity="0.03" />
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- 云心暗藏的温润流火核 -->
+  <circle cx="74" cy="56" r="32" fill="url(#emberCoreGlow)" />
+  <circle cx="186" cy="126" r="24" fill="url(#emberCoreGlow)" />
+
+  <g fill="none" stroke="url(#frostCloudGrad)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
     <!-- 主如意祥云 (居左上区间，中心 x=70, y=50) -->
     <!-- 外层主云轮廓 -->
     <path d="M 32,56 C 32,44 42,34 54,34 C 62,34 69,38 73,44 C 77,38 85,34 94,34 C 108,34 118,44 119,57 C 124,54 131,54 136,58 C 143,62 147,70 145,79 C 143,87 136,93 126,94 C 117,95 109,91 105,84 C 102,89 95,93 88,93 C 78,93 70,86 67,77 C 62,81 56,84 49,84 C 38,84 30,75 30,64 C 30,61 31,58 32,56 Z" />
@@ -17,10 +36,10 @@
     <path d="M 170,118 C 164,118 160,122 160,128 C 160,134 164,138 170,138 C 175,138 179,134 179,128 C 179,124 176,121 172,121 C 169,121 167,123 167,126" />
     <path d="M 204,118 C 210,118 215,122 215,128 C 215,134 210,138 204,138 C 199,138 195,134 195,128 C 195,124 198,121 201,121 C 204,121 206,123 206,126" />
     
-    <!-- 错落的微型水气光斑 / 祥云浮尘 (丰富景深) -->
+    <!-- 错落的微型冰晶火星光斑 -->
     <path d="M 188,36 C 194,30 204,30 210,35 C 216,30 224,32 226,38" />
-    <circle cx="218" cy="46" r="1.5" />
+    <circle cx="218" cy="46" r="1.5" stroke="#f97316" stroke-opacity="0.12" fill="#f97316" fill-opacity="0.08" />
     <path d="M 18,128 C 24,122 34,122 40,127 C 46,122 54,124 56,130" />
-    <circle cx="48" cy="138" r="1.5" />
+    <circle cx="48" cy="138" r="1.5" stroke="#0284c7" stroke-opacity="0.12" fill="#0284c7" fill-opacity="0.08" />
   </g>
 </svg>

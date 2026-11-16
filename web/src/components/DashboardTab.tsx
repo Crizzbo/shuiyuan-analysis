@@ -500,7 +500,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
       {/* ========================================================================= */}
       {/* 顶层交易时段与统计基准状态条 */}
       {/* ========================================================================= */}
-      <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs shadow-sm">
+      <div className="ice-panel rounded-xl px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs shadow-sm">
         <div className="flex flex-wrap items-center gap-2.5">
           <span className="w-2 h-2 rounded-full bg-[#176249] animate-pulse" />
           <span className="font-bold text-[var(--text-primary)]">双市场交易时段状态</span>
@@ -561,11 +561,11 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
         {/* ==================== 左侧 65% (lg:col-span-8): 水凤宏观罗盘、市场广度与行业天梯 ==================== */}
         <div className="lg:col-span-8 space-y-5">
           {/* 1. 水凤宏观罗盘与大盘体温研判 */}
-          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
+          <div className="ice-panel rounded-xl p-5 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#176249] to-[#0e3a2f] flex items-center justify-center text-white shadow-xs shrink-0 relative overflow-hidden">
-                  <CompassIcon className="w-5 h-5 text-emerald-200" />
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#0284c7] via-[#0369a1] to-[#082f49] border border-[#38bdf8]/40 flex items-center justify-center text-white shadow-xs shrink-0 relative overflow-hidden">
+                  <CompassIcon className="w-5 h-5 text-sky-200" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
@@ -636,7 +636,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   const badge = getStatusBadge(idx.data_status || q?.data_status)
                   const isUp = idx.is_up ?? true
                   const chgPct = idx.change_pct || '+0.00%'
-                  
+
                   // 根据列位置动态调整展开浮层对齐方向，防止屏幕边缘被遮挡
                   const alignClass = (index % 4 === 0)
                     ? 'left-0 sm:left-0'
@@ -647,7 +647,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   return (
                     <div
                       key={idx.ticker}
-                      className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-slate-300 rounded-xl p-3 flex flex-col justify-between transition-all shadow-sm group relative"
+                      className={`ice-block ${isUp ? 'flame-surge' : 'frost-crystal'} rounded-xl p-3.5 flex flex-col justify-between transition-all group relative`}
                     >
                       <div>
                         {/* 顶栏：代码 + 状态标签 + 聚焦感叹号按钮 */}
@@ -655,7 +655,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                           <span className="font-mono font-bold text-xs text-[var(--text-primary)] group-hover:text-[#176249] transition-colors">
                             {idx.ticker}
                           </span>
-                          
+
                           <div className="flex items-center gap-1.5">
                             <span className={`text-[9px] px-1.5 py-0.2 rounded border font-medium ${badge.cls}`}>
                               {idx.data_status_zh || badge.text}
@@ -733,16 +733,16 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                         </div>
 
                         {/* 最新报价 */}
-                        <div className="text-lg font-black font-mono text-[var(--text-primary)] mt-1.5 tracking-tight truncate">
+                        <div className="text-lg font-black font-mono mt-1.5 tracking-tight truncate">
                           {idx.formatted_price || q?.formatted_price || (q?.price != null ? `${idx.symbol}${q.price}` : '—')}
                         </div>
 
-                        {/* 涨跌幅：微型矢量箭头徽章 (红涨蓝跌) */}
+                        {/* 涨跌幅：微型矢量箭头徽章 (大涨流火 / 寒霜玄冰) */}
                         <div className="flex items-center gap-1 mt-1 text-[11px] font-mono font-bold">
-                          <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded border ${
+                          <span className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded border ${
                             isUp
-                              ? 'text-rose-600 bg-rose-50 border-rose-200'
-                              : 'text-blue-600 bg-blue-50 border-blue-200'
+                              ? 'flame-badge font-black'
+                              : 'frost-badge font-bold'
                           }`}>
                             {isUp ? <TrendUpIcon className="w-2.5 h-2.5 stroke-[3] text-rose-600" /> : <TrendDownIcon className="w-2.5 h-2.5 stroke-[3] text-blue-600" />}
                             <span>{chgPct}</span>
@@ -777,7 +777,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                   return (
                     <div
                       key={g.id}
-                      className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 flex flex-col justify-between hover:border-slate-300 transition-all relative group shadow-sm"
+                      className="ice-block rounded-xl p-2.5 flex flex-col justify-between hover:border-sky-300 transition-all relative group shadow-2xs"
                     >
                       <div>
                         {/* 顶栏：指标名称 + 感叹号展开浮层 */}
@@ -785,7 +785,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                           <div className="text-[10px] text-[var(--text-muted)] truncate font-medium">
                             {g.nameZh}
                           </div>
-                          
+
                           <div
                             className="relative shrink-0"
                             onMouseEnter={() => setActiveMacroTooltipId(g.id)}
@@ -878,7 +878,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           </div>
 
           {/* 2. 全市场每日股票涨跌分布统计 (Market Advance-Decline Breadth & Return Histogram) */}
-          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
+          <div className="ice-panel rounded-xl p-5 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
               <div className="flex items-center gap-2.5">
                 <BarChartIcon className="w-5 h-5 text-slate-700" />
@@ -1047,7 +1047,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           </div>
 
           {/* 3. GICS 全行业板块收益与动能天梯榜 (Sector Performance Ladder) */}
-          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
+          <div className="ice-panel rounded-xl p-5 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
               <div className="flex items-center gap-2.5">
                 <BarChartIcon className="w-5 h-5 text-slate-700" />
@@ -1069,7 +1069,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
               {sectors.map((sec) => (
                 <div
                   key={sec.id}
-                  className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-slate-300 rounded-xl px-3.5 py-2.5 flex flex-wrap items-center justify-between gap-3 transition-all shadow-sm"
+                  className={`ice-block ${sec.is_up ? 'flame-surge' : 'frost-crystal'} rounded-xl px-3.5 py-2.5 flex flex-wrap items-center justify-between gap-3 transition-all shadow-2xs`}
                 >
                   {/* 左：排名与板块名称 */}
                   <div className="flex items-center gap-3 min-w-[200px]">
@@ -1114,7 +1114,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                     </div>
                     <div className="min-w-[80px] text-right">
                       <span className={`inline-block px-2.5 py-1 rounded-lg text-xs font-black font-mono border ${
-                        sec.is_up ? 'bg-rose-50 text-rose-600 border-rose-200' : 'bg-blue-50 text-blue-600 border-blue-200'
+                        sec.is_up ? 'flame-badge font-black' : 'frost-badge font-bold'
                       }`}>
                         {sec.return_formatted}
                       </span>
@@ -1126,7 +1126,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           </div>
 
           {/* 4. 市场多周期均线渗透与 52 周新高净扩展 (MA Penetration & High-Low Index) */}
-          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
+          <div className="ice-panel rounded-xl p-5 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[var(--border-color)]/60 gap-2">
               <div className="flex items-center gap-2.5">
                 <BarChartIcon className="w-5 h-5 text-emerald-500" />
@@ -1279,7 +1279,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                     <span className="text-xs font-bold text-[var(--text-primary)]">
                       52 周新高 vs 52 周新低净扩展 (Net New Highs)
                     </span>
-                    
+
                     {/* 感叹号交互说明：外置感叹号聚焦展开 */}
                     <div
                       className="relative"
@@ -1361,7 +1361,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
         {/* ==================== 右侧 35% (lg:col-span-4): SEPA漏斗、资金情绪与突发事件雷达 ==================== */}
         <div className="lg:col-span-4 space-y-5">
           {/* 1. SEPA 主升浪趋势形态统计漏斗 */}
-          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3.5">
+          <div className="ice-panel rounded-xl p-4 shadow-sm space-y-3.5">
             <div className="flex items-center justify-between pb-2.5 border-b border-[var(--border-color)]/60">
               <div className="flex items-center gap-2">
                 <FilterIcon className="w-4 h-4 text-[#176249]" />
@@ -1431,7 +1431,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                       onSelectTicker?.(c.ticker)
                       onNavigateTab('analytics')
                     }}
-                    className="bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[#176249]/60 rounded-xl p-2.5 cursor-pointer transition-all flex items-center justify-between gap-3 group shadow-sm hover:shadow"
+                    className="ice-block flame-surge rounded-xl p-3 cursor-pointer transition-all flex items-center justify-between gap-3 group shadow-xs hover:shadow-md"
                   >
                     <div className="min-w-0">
                       <div className="flex items-center gap-1.5">
@@ -1468,7 +1468,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           </div>
 
           {/* 2. 宏观资金能级与期权市场情绪 */}
-          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3">
+          <div className="ice-panel rounded-xl p-4 shadow-sm space-y-3">
             <div className="flex items-center justify-between pb-2 border-b border-[var(--border-color)]/60">
               <div className="flex items-center gap-2">
                 <ZapIcon className="w-4 h-4 text-slate-700" />
@@ -1523,7 +1523,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
                 return (
                   <div
                     key={item.id}
-                    className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-2.5 text-center relative group shadow-sm hover:border-slate-300 transition-all"
+                    className="ice-block rounded-xl p-2.5 text-center relative group shadow-2xs hover:border-sky-300 transition-all"
                   >
                     <div className="flex items-center justify-between gap-1 mb-1">
                       <div className="text-[10px] text-[var(--text-muted)] truncate font-medium text-left">
@@ -1598,7 +1598,7 @@ export function DashboardTab({ onNavigateTab, onSelectEvent, onSelectTicker, ref
           </div>
 
           {/* 3. 权威事件情报雷达 (紧凑卡片流) */}
-          <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-4 shadow-sm space-y-3">
+          <div className="ice-panel rounded-xl p-4 shadow-sm space-y-3">
             <div className="flex items-center justify-between pb-2.5 border-b border-[var(--border-color)]/60">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-rose-500" />
