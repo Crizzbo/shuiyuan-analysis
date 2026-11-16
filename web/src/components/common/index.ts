@@ -4,3 +4,5 @@ export * from './MicroImpactBox';
 export * from './SotpImpactBox';
 export * from './EventCard';
 export * from './Icons';
+export * from './BrandLogo';
+export * from './CompanyDrawer';
