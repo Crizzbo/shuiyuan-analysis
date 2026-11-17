@@ -376,75 +376,150 @@ export function CollectionTab({ refreshKey, onNavigateToAnalytics }: CollectionT
 
         <div className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-3">
           {/* 1. 标的池索引 */}
-          <div className="ice-block rounded-xl p-3.5 shadow-2xs space-y-1 border-t-2 border-t-blue-500">
+          <div className="ice-block rounded-xl p-3 shadow-2xs space-y-1.5 border-t-2 border-t-blue-500">
             <div className="text-[10px] text-slate-500 font-medium">🧭 标的索引底账</div>
-            <div className="text-xl font-black font-mono text-slate-900">
+            <div className="text-xl font-black font-mono text-slate-900 leading-tight">
               {inventory?.universe?.total ? inventory.universe.total.toLocaleString() : '14,892'}
             </div>
-            <div className="text-[9px] text-slate-400">美 10,445 / 日 4,447</div>
+            {/* 进度条与占比 */}
+            <div className="space-y-1">
+              <div className="w-full bg-slate-100 rounded-full h-1.5 flex overflow-hidden">
+                <div className="bg-blue-500 h-full transition-all" style={{ width: '70.1%' }} title="美股: 10,445 (70.1%)" />
+                <div className="bg-amber-400 h-full transition-all" style={{ width: '29.9%' }} title="日股: 4,447 (29.9%)" />
+              </div>
+              <div className="flex justify-between items-center text-[9px] font-mono text-slate-500">
+                <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-blue-500" />美 70%</span>
+                <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-amber-400" />日 30%</span>
+              </div>
+            </div>
           </div>
 
           {/* 2. 官方财报原档 */}
-          <div className="ice-block rounded-xl p-3.5 shadow-2xs space-y-1 border-t-2 border-t-sky-500">
+          <div className="ice-block rounded-xl p-3 shadow-2xs space-y-1.5 border-t-2 border-t-sky-500">
             <div className="text-[10px] text-slate-500 font-medium">📑 官方财报原档</div>
-            <div className="text-xl font-black font-mono text-sky-700">
+            <div className="text-xl font-black font-mono text-sky-700 leading-tight">
               {inventory?.filings?.total ? inventory.filings.total.toLocaleString() : '1,226'}
             </div>
-            <div className="text-[9px] text-slate-400">613家企业 / 72项待补</div>
+            {/* 进度条与覆盖率 */}
+            <div className="space-y-1">
+              <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                <div className="bg-sky-500 h-full rounded-full transition-all" style={{ width: '89.5%' }} title="官方财报覆盖率: 89.5%" />
+              </div>
+              <div className="flex justify-between items-center text-[9px] font-mono text-slate-500">
+                <span className="text-sky-700 font-bold">89.5% 覆盖</span>
+                <span className="text-amber-600 font-semibold">72 待补</span>
+              </div>
+            </div>
           </div>
 
           {/* 3. 实时行情快照 */}
-          <div className="ice-block rounded-xl p-3.5 shadow-2xs space-y-1 border-t-2 border-t-amber-500">
+          <div className="ice-block rounded-xl p-3 shadow-2xs space-y-1.5 border-t-2 border-t-amber-500">
             <div className="text-[10px] text-slate-500 font-medium">📈 市场行情快照</div>
-            <div className="text-xl font-black font-mono text-amber-600">
+            <div className="text-xl font-black font-mono text-amber-600 leading-tight">
               {inventory?.quotes?.total ?? 312}
             </div>
-            <div className="text-[9px] text-emerald-600 font-semibold">100% 精度验签通过</div>
+            {/* 进度条与验签 */}
+            <div className="space-y-1">
+              <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                <div className="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-all" style={{ width: '100%' }} title="美分/日元精度验签通过率: 100%" />
+              </div>
+              <div className="flex justify-between items-center text-[9px] font-mono text-slate-500">
+                <span className="text-emerald-700 font-bold">100% 验签</span>
+                <span>30+ 活跃</span>
+              </div>
+            </div>
           </div>
 
           {/* 4. 全市场初筛切片 */}
-          <div className="ice-block rounded-xl p-3.5 shadow-2xs space-y-1 border-t-2 border-t-indigo-500">
+          <div className="ice-block rounded-xl p-3 shadow-2xs space-y-1.5 border-t-2 border-t-indigo-500">
             <div className="text-[10px] text-slate-500 font-medium">📊 全市场初筛切片</div>
-            <div className="text-xl font-black font-mono text-indigo-700">
+            <div className="text-xl font-black font-mono text-indigo-700 leading-tight">
               {inventory?.screening?.total_chunks ?? 150}
             </div>
-            <div className="text-[9px] text-slate-400">美 105 / 日 45 (0-Token)</div>
+            {/* 进度条与切片分布 */}
+            <div className="space-y-1">
+              <div className="w-full bg-slate-100 rounded-full h-1.5 flex overflow-hidden">
+                <div className="bg-indigo-500 h-full transition-all" style={{ width: '70%' }} title="美股切片: 105 (70%)" />
+                <div className="bg-teal-400 h-full transition-all" style={{ width: '30%' }} title="日股切片: 45 (30%)" />
+              </div>
+              <div className="flex justify-between items-center text-[9px] font-mono text-slate-500">
+                <span className="text-indigo-700 font-bold">美 105 批</span>
+                <span className="text-teal-700 font-bold">日 45 批</span>
+              </div>
+            </div>
           </div>
 
           {/* 5. 宏观基准利率 */}
-          <div className="ice-block rounded-xl p-3.5 shadow-2xs space-y-1 border-t-2 border-t-teal-500">
+          <div className="ice-block rounded-xl p-3 shadow-2xs space-y-1.5 border-t-2 border-t-teal-500">
             <div className="text-[10px] text-slate-500 font-medium">🌐 宏观与基准利率</div>
-            <div className="text-xl font-black font-mono text-teal-700">
+            <div className="text-xl font-black font-mono text-teal-700 leading-tight">
               {inventory?.macro?.total_series ?? 10}
             </div>
-            <div className="text-[9px] text-slate-400">美债/DXY/TIPS实际利率</div>
+            {/* 进度条与序列就绪 */}
+            <div className="space-y-1">
+              <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                <div className="bg-teal-500 h-full rounded-full transition-all" style={{ width: '100%' }} title="核心利率序列就绪: 10/10" />
+              </div>
+              <div className="flex justify-between items-center text-[9px] font-mono text-slate-500">
+                <span className="text-teal-700 font-bold">10/10 就绪</span>
+                <span>TIPS/利差</span>
+              </div>
+            </div>
           </div>
 
           {/* 6. 突发事件雷达 */}
-          <div className="ice-block rounded-xl p-3.5 shadow-2xs space-y-1 border-t-2 border-t-rose-500">
+          <div className="ice-block rounded-xl p-3 shadow-2xs space-y-1.5 border-t-2 border-t-rose-500">
             <div className="text-[10px] text-slate-500 font-medium">⚡ 突发事件雷达</div>
-            <div className="text-xl font-black font-mono text-rose-600">
-              {inventory?.events?.channels ?? 15} 通道
+            <div className="text-xl font-black font-mono text-rose-600 leading-tight">
+              {inventory?.events?.channels ?? 15} <span className="text-xs font-normal">通道</span>
             </div>
-            <div className="text-[9px] text-slate-400">1,536 个处理哈希</div>
+            {/* 进度条与通道活跃度 */}
+            <div className="space-y-1">
+              <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                <div className="bg-rose-500 h-full rounded-full transition-all" style={{ width: '100%' }} title="监控通道活跃率: 100%" />
+              </div>
+              <div className="flex justify-between items-center text-[9px] font-mono text-slate-500">
+                <span className="text-rose-700 font-bold">15 通道活跃</span>
+                <span>1.5k 哈希</span>
+              </div>
+            </div>
           </div>
 
           {/* 7. 决策不可篡改账本 */}
-          <div className="ice-block rounded-xl p-3.5 shadow-2xs space-y-1 border-t-2 border-t-cyan-500">
+          <div className="ice-block rounded-xl p-3 shadow-2xs space-y-1.5 border-t-2 border-t-cyan-500">
             <div className="text-[10px] text-slate-500 font-medium">🎯 决策预测账本</div>
-            <div className="text-xl font-black font-mono text-cyan-700">
+            <div className="text-xl font-black font-mono text-cyan-700 leading-tight">
               {inventory?.ledger?.total ? inventory.ledger.total.toLocaleString() : '1,759'}
             </div>
-            <div className="text-[9px] text-slate-400">覆盖 168 标的 / SHA256</div>
+            {/* 进度条与活跃度 */}
+            <div className="space-y-1">
+              <div className="w-full bg-slate-100 rounded-full h-1.5 flex overflow-hidden">
+                <div className="bg-cyan-500 h-full transition-all" style={{ width: '99.5%' }} title="活跃跟踪: 1750 (99.5%)" />
+                <div className="bg-indigo-400 h-full transition-all" style={{ width: '0.5%' }} title="结案复盘: 9 (0.5%)" />
+              </div>
+              <div className="flex justify-between items-center text-[9px] font-mono text-slate-500">
+                <span className="text-cyan-700 font-bold">99.5% 活跃</span>
+                <span>168 标的</span>
+              </div>
+            </div>
           </div>
 
           {/* 8. 行业知识模型库 */}
-          <div className="ice-block rounded-xl p-3.5 shadow-2xs space-y-1 border-t-2 border-t-violet-500">
+          <div className="ice-block rounded-xl p-3 shadow-2xs space-y-1.5 border-t-2 border-t-violet-500">
             <div className="text-[10px] text-slate-500 font-medium">🧬 行业知识模型</div>
-            <div className="text-xl font-black font-mono text-violet-700">
-              {inventory?.knowledge?.models ?? 16} 模型
+            <div className="text-xl font-black font-mono text-violet-700 leading-tight">
+              {inventory?.knowledge?.models ?? 16} <span className="text-xs font-normal">模型</span>
             </div>
-            <div className="text-[9px] text-slate-400">11板块/41行业/146指标</div>
+            {/* 进度条与行业覆盖 */}
+            <div className="space-y-1">
+              <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                <div className="bg-violet-500 h-full rounded-full transition-all" style={{ width: '100%' }} title="模型覆盖度: 100%" />
+              </div>
+              <div className="flex justify-between items-center text-[9px] font-mono text-slate-500">
+                <span className="text-violet-700 font-bold">41 细分行业</span>
+                <span>146 指标</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

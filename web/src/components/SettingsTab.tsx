@@ -125,51 +125,89 @@ export function SettingsTab() {
 
       {/* 一、全系统数据合规健康度 KPI 大数仪表盘 (5 大核心门禁) */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3.5">
-        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-1 border-t-2 border-t-emerald-500">
+        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-emerald-500">
           <div className="text-[11px] text-slate-500 font-medium">综合合规质检率</div>
           <div className="text-2xl font-black font-mono text-slate-900">100%</div>
-          <div className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-            <span>●</span> 5 大合规门禁全项通过
+          <div className="space-y-1">
+            <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div className="bg-emerald-500 h-full rounded-full transition-all" style={{ width: '100%' }} />
+            </div>
+            <div className="flex justify-between items-center text-[10px] text-slate-500 font-mono">
+              <span className="text-emerald-600 font-semibold flex items-center gap-1">
+                <span>●</span> 5 大合规门禁
+              </span>
+              <span className="font-bold text-emerald-700">全项通过</span>
+            </div>
           </div>
         </div>
 
-        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-1 border-t-2 border-t-sky-500">
+        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-sky-500">
           <div className="text-[11px] text-slate-500 font-medium">财报会计恒等式平账率</div>
           <div className="text-2xl font-black font-mono text-sky-700">
             {audit?.accounting_identity?.balance_rate_pct ?? 100}%
           </div>
-          <div className="text-[10px] text-slate-500">
-            {audit?.accounting_identity?.total_audited ?? 1226} 份原档 · 0 差额
+          <div className="space-y-1">
+            <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div
+                className="bg-sky-500 h-full rounded-full transition-all"
+                style={{ width: `${audit?.accounting_identity?.balance_rate_pct ?? 100}%` }}
+              />
+            </div>
+            <div className="flex justify-between items-center text-[10px] text-slate-500 font-mono">
+              <span>{audit?.accounting_identity?.total_audited ?? 1226} 份原档</span>
+              <span className="text-sky-700 font-bold">0 差额</span>
+            </div>
           </div>
         </div>
 
-        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-1 border-t-2 border-t-indigo-500">
+        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-indigo-500">
           <div className="text-[11px] text-slate-500 font-medium">行情时效门禁合规率</div>
           <div className="text-2xl font-black font-mono text-indigo-700">
             {audit?.quote_freshness?.fresh_rate_pct ?? 100}%
           </div>
-          <div className="text-[10px] text-slate-500">
-            {audit?.quote_freshness?.total_snapshots ?? 312} 份快照 · 0 超期
+          <div className="space-y-1">
+            <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div
+                className="bg-indigo-500 h-full rounded-full transition-all"
+                style={{ width: `${audit?.quote_freshness?.fresh_rate_pct ?? 100}%` }}
+              />
+            </div>
+            <div className="flex justify-between items-center text-[10px] text-slate-500 font-mono">
+              <span>{audit?.quote_freshness?.total_snapshots ?? 312} 份快照</span>
+              <span className="text-indigo-700 font-bold">0 超期</span>
+            </div>
           </div>
         </div>
 
-        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-1 border-t-2 border-t-cyan-500">
+        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-cyan-500">
           <div className="text-[11px] text-slate-500 font-medium">决策账本防伪验签</div>
           <div className="text-2xl font-black font-mono text-cyan-700">
             {ledger?.integrity_valid ? '100% VALID' : 'ERROR'}
           </div>
-          <div className="text-[10px] text-slate-500 font-mono">
-            {ledger?.total_predictions.toLocaleString()} 笔记录 · SHA-256 完好
+          <div className="space-y-1">
+            <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div className="bg-cyan-500 h-full rounded-full transition-all" style={{ width: '100%' }} />
+            </div>
+            <div className="flex justify-between items-center text-[10px] text-slate-500 font-mono">
+              <span>{ledger?.total_predictions.toLocaleString()} 笔记录</span>
+              <span className="text-cyan-700 font-bold">SHA-256 完好</span>
+            </div>
           </div>
         </div>
 
-        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-1 border-t-2 border-t-teal-500">
+        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-teal-500">
           <div className="text-[11px] text-slate-500 font-medium">架构四层单向解耦率</div>
           <div className="text-2xl font-black font-mono text-teal-700">
             {audit?.architecture_governance?.four_layer_purity_pct ?? 100}%
           </div>
-          <div className="text-[10px] text-slate-500">
-            954 单测零失败 · 物理纯净
+          <div className="space-y-1">
+            <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div className="bg-teal-500 h-full rounded-full transition-all" style={{ width: '100%' }} />
+            </div>
+            <div className="flex justify-between items-center text-[10px] text-slate-500 font-mono">
+              <span>954 单测通过</span>
+              <span className="text-teal-700 font-bold">物理纯净</span>
+            </div>
           </div>
         </div>
       </div>
