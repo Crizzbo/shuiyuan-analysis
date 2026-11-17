@@ -224,4 +224,12 @@ export const api = {
       method: 'POST',
       body: JSON.stringify(config),
     }),
+
+  // 14. 合规审计与全盘密码学验签
+  getAuditOverview: () => request<SettingsData>('/api/audit/overview'),
+  verifyLedgerIntegrity: () =>
+    request<SettingsData>('/api/terminal/ledger/verify', {
+      method: 'POST',
+      body: JSON.stringify({ action: 'verify' }),
+    }),
 }

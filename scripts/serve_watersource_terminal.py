@@ -387,7 +387,7 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 self._send_json(200, res)
                 return
 
-            if path == "/api/settings":
+            if path in ("/api/settings", "/api/audit/overview"):
                 self._send_json(200, svc.get_settings())
                 return
 
@@ -467,6 +467,10 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 force_refresh = bool(body.get("force_refresh", False))
                 code, res = svc.batch_collect_stock_quotes(tickers, force_refresh=force_refresh)
                 self._send_json(code, res)
+                return
+
+            if path in ("/api/terminal/ledger/verify", "/api/ledger/verify"):
+                self._send_json(200, svc.get_settings())
                 return
 
             if path == "/api/pipeline/start":

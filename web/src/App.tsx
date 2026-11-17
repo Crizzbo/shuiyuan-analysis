@@ -109,7 +109,12 @@ export default function App() {
         )}
 
         {tab === 'collection' && (
-          <CollectionTab pipelineStatus={pipelineStatus} refreshKey={refreshKey} />
+          <CollectionTab pipelineStatus={pipelineStatus} refreshKey={refreshKey} onAudit={() => setTab('settings')}
+            onNavigateToAnalytics={(ticker) => {
+              setSelectedTicker(ticker)
+              setTab('analytics')
+            }}
+          />
         )}
 
         {tab === 'analytics' && (

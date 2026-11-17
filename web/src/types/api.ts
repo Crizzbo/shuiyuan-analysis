@@ -470,6 +470,8 @@ export interface CollectionPipelineItem {
 
 export interface CollectionOverviewData {
   pipelines: CollectionPipelineItem[]
+  source_catalog?: Array<{ id: string; dataset?: string; trust?: string; mode: 'disabled' | 'scheduled' | 'available' }>
+  event_sources?: Array<{ name: string; role: 'scheduled' | 'candidate' | 'radar'; priority?: string }>
   lifecycle_tiers: {
     hot_files: number
     warm_files: number
@@ -491,7 +493,8 @@ export interface CollectionOverviewData {
     }>
   }
   radar_cycles?: any[]
-  readiness?: any
+  readiness?: DataReadinessInfo
+  data_type_inventory?: DataTypeInventoryMap
 }
 
 export interface TaskRerunResult {
@@ -937,4 +940,54 @@ export interface SettingsData {
     path: string
     purpose: string
   }>
+  compliance_audit?: ComplianceAuditSummary
+  data_type_inventory?: DataTypeInventoryMap
+}
+
+export interface DataTypeInventoryMap {
+  universe: { total: number; us_count: number; jp_count: number; label: string; unit: string }
+  filings: { total: number; covered_companies: number; pending_replenishment: number; label: string; unit: string }
+  quotes: { total: number; active_pool: number; precision_pass_rate_pct: number; label: string; unit: string }
+  screening: { total_chunks: number; us_chunks: number; jp_chunks: number; results: number; label: string; unit: string }
+  macro: { total_series: number; label: string; unit: string }
+  events: { channels: number; processed_hashes: number; p0_p1_triggers: number; label: string; unit: string }
+  ledger: { total: number; active: number; resolved: number; unique_tickers: number; label: string; unit: string }
+  knowledge: { sectors: number; industries: number; models: number; metrics: number; label: string; unit: string }
+}
+
+export interface ComplianceAuditSummary {
+  accounting_identity: {
+    total_audited: number
+    balanced_count: number
+    warning_count: number
+    balance_rate_pct: number
+    status: string
+  }
+  quote_freshness: {
+    total_snapshots: number
+    regular_trading_count: number
+    previous_close_count: number
+    stale_blocked_count: number
+    fresh_rate_pct: number
+    max_staleness_hours: number
+  }
+  prediction_ledger: {
+    total_predictions: number
+    unique_tickers: number
+    integrity_valid: boolean
+    hash_chain_status: string
+  }
+  event_radar: {
+    total_events: number
+    confirmed_facts: number
+    quarantined_rumors: number
+    official_certificates: number
+    quarantine_rate_pct: number
+  }
+  architecture_governance: {
+    four_layer_purity_pct: number
+    unit_tests_pass: number
+    unit_tests_total: number
+    knowledge_links: number
+  }
 }
