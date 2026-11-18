@@ -1128,6 +1128,8 @@ class WatersourceTerminalService:
                 arch = archive_map.get(clean_ticker)
                 if q and q.get("price") is not None and q.get("is_valid"):
                     res.append(q)
+                elif q and q.get("data_status") == "STALE_BLOCKED":
+                    res.append(q)
                 elif arch and arch.get("close"):
                     close_val = arch["close"]
                     cur = "JPY" if market == "JP" else "USD"

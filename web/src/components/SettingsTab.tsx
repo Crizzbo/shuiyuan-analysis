@@ -83,6 +83,13 @@ export function SettingsTab() {
   const arch = settings?.architecture_policy
   const lifecycle = settings?.lifecycle_policy
 
+  const scrollToAuditSection = (id: string) => {
+    const el = document.getElementById(id)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }
+
   return (
     <div className="p-4 md:p-6 max-w-[1600px] mx-auto space-y-6">
       {/* 顶部标题与全局验签交互栏 */}
@@ -125,7 +132,11 @@ export function SettingsTab() {
 
       {/* 一、全系统数据合规健康度 KPI 大数仪表盘 (5 大核心门禁) */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3.5">
-        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-emerald-500">
+        <div
+          onClick={() => scrollToAuditSection('audit-accounting')}
+          title="点击定位至官方财报平账面板"
+          className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-emerald-500 cursor-pointer hover:border-emerald-400 hover:shadow-xs transition-all"
+        >
           <div className="text-[11px] text-slate-500 font-medium">综合合规质检率</div>
           <div className="text-2xl font-black font-mono text-slate-900">100%</div>
           <div className="space-y-1">
@@ -141,7 +152,11 @@ export function SettingsTab() {
           </div>
         </div>
 
-        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-sky-500">
+        <div
+          onClick={() => scrollToAuditSection('audit-accounting')}
+          title="点击定位至财报会计恒等式自检面板"
+          className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-sky-500 cursor-pointer hover:border-sky-400 hover:shadow-xs transition-all"
+        >
           <div className="text-[11px] text-slate-500 font-medium">财报会计恒等式平账率</div>
           <div className="text-2xl font-black font-mono text-sky-700">
             {audit?.accounting_identity?.balance_rate_pct ?? 100}%
@@ -160,7 +175,11 @@ export function SettingsTab() {
           </div>
         </div>
 
-        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-indigo-500">
+        <div
+          onClick={() => scrollToAuditSection('audit-quotes')}
+          title="点击定位至行情时效与时段门禁面板"
+          className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-indigo-500 cursor-pointer hover:border-indigo-400 hover:shadow-xs transition-all"
+        >
           <div className="text-[11px] text-slate-500 font-medium">行情时效门禁合规率</div>
           <div className="text-2xl font-black font-mono text-indigo-700">
             {audit?.quote_freshness?.fresh_rate_pct ?? 100}%
@@ -179,7 +198,11 @@ export function SettingsTab() {
           </div>
         </div>
 
-        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-cyan-500">
+        <div
+          onClick={() => scrollToAuditSection('audit-ledger')}
+          title="点击定位至决策账本 SHA-256 验签面板"
+          className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-cyan-500 cursor-pointer hover:border-cyan-400 hover:shadow-xs transition-all"
+        >
           <div className="text-[11px] text-slate-500 font-medium">决策账本防伪验签</div>
           <div className="text-2xl font-black font-mono text-cyan-700">
             {ledger?.integrity_valid ? '100% VALID' : 'ERROR'}
@@ -195,7 +218,11 @@ export function SettingsTab() {
           </div>
         </div>
 
-        <div className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-teal-500">
+        <div
+          onClick={() => scrollToAuditSection('audit-architecture')}
+          title="点击定位至工程架构解耦与生命周期面板"
+          className="ice-block rounded-xl p-4 shadow-2xs space-y-2 border-t-2 border-t-teal-500 cursor-pointer hover:border-teal-400 hover:shadow-xs transition-all"
+        >
           <div className="text-[11px] text-slate-500 font-medium">架构四层单向解耦率</div>
           <div className="text-2xl font-black font-mono text-teal-700">
             {audit?.architecture_governance?.four_layer_purity_pct ?? 100}%
@@ -215,7 +242,7 @@ export function SettingsTab() {
       {/* 二、按数据类型的五维合规审计看板 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* 1. 📑 官方财报三表：会计恒等式刚性平账自检统计 */}
-        <div className="ice-panel rounded-2xl p-5 shadow-xs space-y-4">
+        <div id="audit-accounting" className="ice-panel rounded-2xl p-5 shadow-xs space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-sky-100/80">
             <div className="space-y-0.5">
               <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
@@ -271,7 +298,7 @@ export function SettingsTab() {
         </div>
 
         {/* 2. ⏱️ 市场行情数据：交易时段与时效门禁分布统计 */}
-        <div className="ice-panel rounded-2xl p-5 shadow-xs space-y-4">
+        <div id="audit-quotes" className="ice-panel rounded-2xl p-5 shadow-xs space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-sky-100/80">
             <div className="space-y-0.5">
               <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
@@ -337,7 +364,7 @@ export function SettingsTab() {
         </div>
 
         {/* 3. 🔐 决策预测账本：SHA-256 密码学防伪验签台 */}
-        <div className="ice-panel rounded-2xl p-5 shadow-xs space-y-4">
+        <div id="audit-ledger" className="ice-panel rounded-2xl p-5 shadow-xs space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-sky-100/80">
             <div className="space-y-0.5">
               <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
@@ -401,7 +428,7 @@ export function SettingsTab() {
         </div>
 
         {/* 4. 🛡️ 突发舆情数据：信源真实性与传闻隔离熔断统计 */}
-        <div className="ice-panel rounded-2xl p-5 shadow-xs space-y-4">
+        <div id="audit-rumor" className="ice-panel rounded-2xl p-5 shadow-xs space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-sky-100/80">
             <div className="space-y-0.5">
               <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
@@ -458,7 +485,7 @@ export function SettingsTab() {
       </div>
 
       {/* 三、工程架构解耦规范与数据生命周期策略 */}
-      <div className="ice-panel rounded-2xl p-5 shadow-xs space-y-4">
+      <div id="audit-architecture" className="ice-panel rounded-2xl p-5 shadow-xs space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-sky-100/80">
           <div className="space-y-0.5">
             <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">

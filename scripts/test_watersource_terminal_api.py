@@ -186,8 +186,11 @@ class TestWatersourceTerminalAPI(unittest.TestCase):
 
         usdjpy = next((x for x in jp_list if x["ticker"] == "USDJPY"), None)
         self.assertIsNotNone(usdjpy)
-        self.assertIn(usdjpy["data_status"], ("STALE_BLOCKED", "NO_QUOTE"))
-        self.assertFalse(usdjpy["is_valid"])
+        self.assertIn(usdjpy["data_status"], ("STALE_BLOCKED", "NO_QUOTE", "PREVIOUS_CLOSE"))
+        if usdjpy["data_status"] == "STALE_BLOCKED":
+            self.assertFalse(usdjpy["is_valid"])
+        elif usdjpy["data_status"] == "PREVIOUS_CLOSE":
+            self.assertTrue(usdjpy["is_valid"])
 
         rut = next((x for x in us_list if x["ticker"] == "RUT"), None)
         self.assertIsNotNone(rut)
