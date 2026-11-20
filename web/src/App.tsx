@@ -12,6 +12,7 @@ import { AnalyticsTab } from './components/AnalyticsTab'
 import { LogsTab } from './components/LogsTab'
 import { SettingsTab } from './components/SettingsTab'
 import { ToastContainer } from './components/Toast'
+import { CommandPalette } from './components/common/CommandPalette'
 
 const tabs = [
   { id: 'dashboard', label: '总览' },
@@ -31,6 +32,7 @@ export default function App() {
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null)
   const [realtimeLogs, setRealtimeLogs] = useState<LogItem[]>([])
   const [refreshKey, setRefreshKey] = useState(0)
+  const [isPaletteOpen, setIsPaletteOpen] = useState(false)
 
   const refreshHealth = useCallback(async () => {
     const [status, healthResponse] = await Promise.all([
@@ -44,6 +46,44 @@ export default function App() {
   useEffect(() => {
     void refreshHealth()
   }, [refreshHealth])
+
+  // 全局键盘快捷键监听 (Cmd+K / Ctrl+K 以及 1~6 快捷切屏)
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      // 1. Cmd+K / Ctrl+K 切换命令面板
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault()
+        setIsPaletteOpen((prev) => !prev)
+        return
+      }
+
+      // 如果当前聚焦在输入框内，不拦截单键数字快捷键
+      const activeTagName = (document.activeElement?.tagName || '').toLowerCase()
+      if (activeTagName === 'input' || activeTagName === 'textarea' || activeTagName === 'select') {
+        return
+      }
+
+      // 2. 纯数字键 1~6 快速切换标签页 (当命令面板未打开时)
+      if (!isPaletteOpen && ['1', '2', '3', '4', '5', '6'].includes(e.key)) {
+        const targetTabMap: Record<string, Tab> = {
+          '1': 'dashboard',
+          '2': 'intelligence',
+          '3': 'collection',
+          '4': 'analytics',
+          '5': 'logs',
+          '6': 'settings',
+        }
+        const targetTab = targetTabMap[e.key]
+        if (targetTab) {
+          e.preventDefault()
+          setTab(targetTab)
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleGlobalKeyDown)
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown)
+  }, [isPaletteOpen])
 
   const { connected } = useSSE({
     onPipelineStatus: setPipelineStatus,
@@ -63,17 +103,22 @@ export default function App() {
         onPipelineStarted={() => {
           setTab('collection')
         }}
+        onOpenCommandPalette={() => setIsPaletteOpen(true)}
       />
       <div className="site-header">
         <nav className="container main-nav" aria-label="主导航">
-          {tabs.map((item) => (
+          {tabs.map((item, index) => (
             <button
               key={item.id}
               type="button"
               aria-current={tab === item.id ? 'page' : undefined}
               onClick={() => setTab(item.id)}
+              title={`按 ${index + 1} 快速切换`}
             >
-              {item.label}
+              <span>{item.label}</span>
+              <span className="ml-1.5 text-[10px] font-mono opacity-50 font-normal">
+                {index + 1}
+              </span>
             </button>
           ))}
         </nav>
@@ -129,6 +174,34 @@ export default function App() {
           <SettingsTab />
         )}
       </main>
+
+      {/* 全局 Cmd+K 命令面板与万家资产池秒级检索中枢 */}
+      <CommandPalette
+        isOpen={isPaletteOpen}
+        onClose={() => setIsPaletteOpen(false)}
+        onNavigateTab={(targetTab) => {
+          if (tabs.some((t) => t.id === targetTab)) {
+            setTab(targetTab as Tab)
+          }
+        }}
+        onSelectTicker={(ticker) => {
+          setSelectedTicker(ticker)
+          setTab('analytics')
+        }}
+        onSelectEvent={(eventId) => {
+          setSelectedEventId(eventId)
+          setTab('intelligence')
+        }}
+        onTriggerPipeline={() => {
+          setTab('collection')
+          void api.startPipeline('local_audit_sync', 'ALL')
+        }}
+        onRefreshData={() => {
+          setRefreshKey((k) => k + 1)
+          void refreshHealth()
+        }}
+      />
+
       <ToastContainer />
     </>
   )

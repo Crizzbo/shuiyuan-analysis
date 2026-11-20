@@ -1,14 +1,16 @@
 import type { HealthData } from '../types/api'
 import { formatDeviceTime } from '../utils/format'
 import { BrandLogo } from './common/BrandLogo'
+import { SearchIcon } from './common/Icons'
 
 interface HeaderProps {
   health: HealthData | null
   sseConnected: boolean
   onPipelineStarted: () => void
+  onOpenCommandPalette?: () => void
 }
 
-export function Header({ health, sseConnected, onPipelineStarted }: HeaderProps) {
+export function Header({ health, sseConnected, onPipelineStarted, onOpenCommandPalette }: HeaderProps) {
   return (
     <header className="terminal-top">
       <div className="container flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
@@ -52,13 +54,29 @@ export function Header({ health, sseConnected, onPipelineStarted }: HeaderProps)
           </div>
         </div>
 
-        <button
-          type="button"
-          className="text-xs px-3.5 py-1.5 rounded-lg border border-sky-200 bg-white/90 text-sky-800 hover:text-white hover:bg-sky-600 hover:border-sky-600 font-medium transition-all shadow-xs"
-          onClick={onPipelineStarted}
-        >
-          数据采集
-        </button>
+        {/* 右侧：全局搜索与快捷触发器 */}
+        <div className="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-end">
+          <button
+            type="button"
+            onClick={onOpenCommandPalette}
+            className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg border border-sky-200/90 bg-white/80 hover:bg-white text-xs text-[var(--text-secondary)] hover:text-sky-900 hover:border-sky-400 transition-all shadow-2xs group cursor-pointer"
+            title="全局搜索标的、重大事件或切换功能 (Ctrl+K / ⌘K)"
+          >
+            <SearchIcon className="w-3.5 h-3.5 text-sky-600 group-hover:scale-110 transition-transform" />
+            <span className="text-xs font-medium">全局搜索 / 命令...</span>
+            <kbd className="hidden sm:inline-flex items-center text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-100/80 text-sky-700 border border-sky-200/90 shadow-2xs">
+              ⌘K
+            </kbd>
+          </button>
+
+          <button
+            type="button"
+            className="text-xs px-3.5 py-1.5 rounded-lg border border-sky-200 bg-white/90 text-sky-800 hover:text-white hover:bg-sky-600 hover:border-sky-600 font-medium transition-all shadow-xs cursor-pointer shrink-0"
+            onClick={onPipelineStarted}
+          >
+            数据采集
+          </button>
+        </div>
       </div>
     </header>
   )
