@@ -51,13 +51,9 @@ from scripts.run_four_models_dynamic_comparison import (
     execute_single_model_backtest,
     calculate_model_metrics,
 )
+from scripts.env_discovery import get_data_max_root
 
-DATA_MAX_DIR = ROOT / "data_max"
-if not (DATA_MAX_DIR / "normalized" / "us").exists() or not any((DATA_MAX_DIR / "normalized" / "us").glob("*_bars.json")):
-    candidate_alt = Path("C:/Users/zhibo/Desktop/金融测试/data_max")
-    if candidate_alt.exists() and (candidate_alt / "normalized" / "us").exists():
-        DATA_MAX_DIR = candidate_alt
-
+DATA_MAX_DIR = get_data_max_root()
 NORMALIZED_US_DIR = DATA_MAX_DIR / "normalized" / "us"
 NORMALIZED_JP_DIR = DATA_MAX_DIR / "normalized" / "jp"
 REPORTS_DIR = ROOT / "reports" / "data_max_backtest"

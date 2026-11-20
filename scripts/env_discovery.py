@@ -105,3 +105,47 @@ def run_cmd(args: List[str], timeout: int = 120) -> subprocess.CompletedProcess:
         timeout=timeout,
     )
 
+
+def get_cat_reference_root() -> Optional[Path]:
+    """动态探测外部授权参考资料目录（消除硬编码开发机绝对路径）。"""
+    # 1. 显式环境变量覆盖
+    env_dir = os.getenv("CAT_REFERENCE_DIR")
+    if env_dir and Path(env_dir).is_dir():
+        return Path(env_dir).resolve()
+
+    # 2. 当前用户与常用桌面探测
+    desktop_candidates = [
+        Path.home() / "Desktop" / "猫哥的股票交易指南",
+        Path("C:/Users/shared_user/Desktop/猫哥的股票交易指南"),
+    ]
+    for candidate in desktop_candidates:
+        if candidate.is_dir():
+            return candidate.resolve()
+
+    return None
+
+
+def get_data_max_root() -> Path:
+    """动态探测 data_max 历史回测数据根目录（消除硬编码路径）。"""
+    root = Path(__file__).resolve().parents[1]
+    # 1. 环境变量
+    env_dir = os.getenv("DATA_MAX_DIR")
+    if env_dir and Path(env_dir).is_dir():
+        return Path(env_dir).resolve()
+
+    # 2. 项目内默认目录
+    local_data_max = root / "data_max"
+    if (local_data_max / "normalized" / "us").exists() and any((local_data_max / "normalized" / "us").glob("*_bars.json")):
+        return local_data_max.resolve()
+
+    # 3. 常见备用回测数据目录
+    candidates = [
+        Path.home() / "Desktop" / "金融测试" / "data_max",
+        Path("C:/Users/zhibo/Desktop/金融测试/data_max"),
+    ]
+    for c in candidates:
+        if c.is_dir() and (c / "normalized" / "us").exists():
+            return c.resolve()
+
+    return local_data_max.resolve()
+

@@ -91,6 +91,17 @@
      - 哪些标的数据仍处于前收盘价或待补数状态；
   3. 严禁在未前置查验最新日期拉取底账的情况下给出结论。
 
-
-
+2026-11-19 融合 pstack 严谨工程体系与反 AI 虚胖规范 (Pstack Rigor & Anti-Slop Directive):
+用户明确要求：融合开源工程套件 pstack 的严谨工程原则优化当前工程，且 pstack 插件和工具严禁上传至 Git 仓库。
+- 极简减法准则 (Subtract Before You Add & Laziness Protocol):
+  1. 重构与功能迭代必须以删减死代码、清除多余抽象为第一步；严禁为了局部简单调用封装复杂的胶水层。
+  2. 坚决消除 AI 废话 (Unslop) 与代码过度工程 (Deslop)，保持函数短小精悍、接口语义显式。
+- 边界纪律与强类型守卫 (Boundary Discipline & Type System Discipline):
+  1. 数据清洗与格式校验仅在系统外部边界（网络拉取、CLI 解析、文件反序列化）执行一次；
+  2. 核心金融计算层（`financial_core`）内部严格信任经过清洗的数据契约与结构模型，杜绝散落在各处的防御性分支，让非法状态无法被表达。
+- 真实可证与核爆级验收 (Prove It Works & Thermo-Nuclear Quality Bar):
+  1. 任何改动完成均需经过真实测试套件检验（全量单测通过率 100%），拒绝“看起来能跑”的假设；
+  2. 核心门禁脚本 (`verify_architecture_integrity.py`) 强制自动断言 Git 边界隔离与 pstack 零追踪防御。
+- 插件外挂隔离铁律 (External Plugin Git Quarantine):
+  pstack 插件部署在用户全局环境 (`~/.gemini/config/plugins/pstack`)，项目 `.gitignore` 强制永久排除 `*pstack*`，严禁任何 pstack 源码或配置提交至本项目 Git 仓库。
 

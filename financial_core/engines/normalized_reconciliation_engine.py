@@ -222,9 +222,21 @@ class NormalizedReconciliationStateManager:
             except Exception:
                 pass
 
-        # 2. 检查是否有历史 SEC 收集底账未迁移，若有且开启迁移则自动对齐合并
+        # 2. 检查是否有历史已核验底账未迁移，若开启迁移则优先快速对齐主进度文件
         if self.sync_legacy and not self.records:
-            if LEGACY_SEC_STATE_PATH.exists():
+            if DEFAULT_STATE_PATH.exists() and self.state_path != DEFAULT_STATE_PATH:
+                try:
+                    default_data = json.loads(DEFAULT_STATE_PATH.read_text(encoding="utf-8"))
+                    for key_str, v in default_data.get("records", {}).items():
+                        if ":" in key_str:
+                            mkt, tick = key_str.split(":", 1)
+                        else:
+                            mkt, tick = "US", key_str
+                        self.records[(mkt.upper(), tick.upper())] = ReconciliationRecord(**v)
+                except Exception:
+                    pass
+
+            if not self.records and LEGACY_SEC_STATE_PATH.exists():
                 try:
                     univ_mgr = TieredUniverseManager.get_instance()
                     legacy_data = json.loads(LEGACY_SEC_STATE_PATH.read_text(encoding="utf-8"))
@@ -270,12 +282,12 @@ class NormalizedReconciliationStateManager:
                 except Exception:
                     pass
 
-            # 自动基于本地已有官方 CIK 底账全科目补齐财务三表，消灭全0字段
-            try:
-                self.enrich_from_local_filings()
-                self.reconcile_from_local_filings()
-            except Exception:
-                pass
+                # 自动基于本地已有官方 CIK 底账全科目补齐财务三表，消灭全0字段
+                try:
+                    self.enrich_from_local_filings()
+                    self.reconcile_from_local_filings()
+                except Exception:
+                    pass
 
         self._refresh_summary()
 

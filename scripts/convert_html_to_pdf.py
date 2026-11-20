@@ -6,7 +6,13 @@ import subprocess
 import sys
 import time
 
-EDGE_EXE = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from scripts.env_discovery import get_edge_executable
+
+EDGE_EXE = get_edge_executable() or "msedge.exe"
 
 
 def convert_html_to_pdf(html_path: Path, pdf_path: Path) -> bool:
@@ -17,8 +23,11 @@ def convert_html_to_pdf(html_path: Path, pdf_path: Path) -> bool:
 
     cmd = [
         EDGE_EXE,
-        "--headless",
+        "--headless=new",
         "--disable-gpu",
+        "--no-sandbox",
+        "--disable-dev-shm-usage",
+        "--run-all-compositor-stages-before-draw",
         "--no-pdf-header-footer",
         f"--print-to-pdf={pdf_abs}",
         html_abs,

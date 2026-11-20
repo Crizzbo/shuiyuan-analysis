@@ -20,6 +20,12 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+if sys.stdout and hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 from finance_tools.market_quote_verifier import MarketQuoteVerifier
 from financial_core.engines.quote_freshness_gateway import QuoteFreshnessGateway
 
@@ -56,6 +62,14 @@ RAW_TARGET_SECURITIES = [
     {"ticker": "8035", "name_zh": "东京电子 (EUV 涂布显影机 100% 绝对垄断)", "category": "AI_Semiconductor_Equipment", "market": "JP", "currency": "JPY", "price": 8263.00},
     {"ticker": "6857", "name_zh": "爱德万测试 (高带宽内存 HBM3e/HBM4 测试机全球垄断)", "category": "AI_Semiconductor_Equipment", "market": "JP", "currency": "JPY", "price": 9850.00},
     {"ticker": "9984", "name_zh": "软银集团 (掌控 ARM 90% 股权/AI 生态主权投资)", "category": "AI_Semiconductor_IP_Investment", "market": "JP", "currency": "JPY", "price": 11200.00},
+    # --- 7. 买方精选成长与防御基石标的 ---
+    {"ticker": "LLY", "name_zh": "礼来制药 (GLP-1 减重与阿尔茨海默病专利护城河)", "category": "Healthcare_Biotech", "market": "US", "currency": "USD", "price": 818.28},
+    {"ticker": "RXRX", "name_zh": "Recursion AI制药 (NVIDIA BioNeMo 平台与TechBio先锋)", "category": "AI_Biotech_Platform", "market": "US", "currency": "USD", "price": 4.36},
+    {"ticker": "INTU", "name_zh": "财捷集团 (Intuit 企业智能财税工作流)", "category": "AI_Enterprise_Software", "market": "US", "currency": "USD", "price": 650.00},
+    {"ticker": "7203", "name_zh": "丰田汽车 (全球精益生产与HEV混动现金流造血基石)", "category": "Automotive_Global_Leader", "market": "JP", "currency": "JPY", "price": 2910.50},
+    {"ticker": "6501", "name_zh": "日立制作所 (变压器电网与AI数据中心电力设备巨擘)", "category": "Power_Grid_Infrastructure", "market": "JP", "currency": "JPY", "price": 4020.00},
+    {"ticker": "7974", "name_zh": "任天堂 (超级IP资产帝国与Switch次世代周期)", "category": "Entertainment_Consumer_IP", "market": "JP", "currency": "JPY", "price": 8360.00},
+    {"ticker": "GLD", "name_zh": "SPDR 黄金信托 (全球规模最大实物黄金储备ETF)", "category": "Macro_Commodity_Gold", "market": "US", "currency": "USD", "price": 238.50},
 ]
 
 

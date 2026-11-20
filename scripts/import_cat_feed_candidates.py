@@ -7,11 +7,19 @@ import sys
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = Path("C:/Users/shared_user/Desktop/猫哥的股票交易指南/canyon_system/intel/intel_config.py")
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from scripts.env_discovery import get_cat_reference_root
 
 
 def main():
-    raw = SOURCE.read_bytes()
+    cat_root = get_cat_reference_root()
+    if not cat_root:
+        raise FileNotFoundError("未探测到猫哥参考资料目录，请通过 CAT_REFERENCE_DIR 环境变量指定")
+    source = cat_root / "canyon_system" / "intel" / "intel_config.py"
+    if not source.is_file():
+        raise FileNotFoundError(f"未找到配置文件: {source}")
+    raw = source.read_bytes()
     tree = ast.parse(raw.decode("utf-8-sig"))
     feeds = None
     for node in tree.body:

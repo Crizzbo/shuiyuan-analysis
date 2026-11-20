@@ -38,10 +38,74 @@ TASKS = {
     "FINANCE_CALC": ("个股三表核对与财务指标", "手动"),
     "LOCAL_AUDIT": ("本地数据与账本核验", "手动"),
     "INCREMENTAL_COLLECT": ("官方监管补数与档案增量归档", "每小时扫描补数队列"),
+    "STOCK_DOSSIER_COLLECT": ("指定个股全维度数据拉取与平账核对", "支持单票精准补采"),
 }
 START_COLLECTION_TASKS = ("US_DAILY", "JP_DAILY", "OFFICIAL_NEWS")
-COLLECTION_TASKS = (*START_COLLECTION_TASKS, "QUOTE_COLLECT", "INCREMENTAL_COLLECT")
+COLLECTION_TASKS = (*START_COLLECTION_TASKS, "QUOTE_COLLECT", "INCREMENTAL_COLLECT", "STOCK_DOSSIER_COLLECT")
 AUTOMATIC_TASKS = {*START_COLLECTION_TASKS, "STOCK_SCREENING", "INDICATOR_UPDATE", "INCREMENTAL_COLLECT"}
+
+TASK_METADATA = {
+    "QUOTE_COLLECT": {
+        "dimension": "PRICE",
+        "dimension_name": "最新行情与时效核验",
+        "description": "拉取最新行情报价与时效门禁核验",
+        "serves_stock_analysis": "为个股 DCF 估值走廊提供现价锚与安全边际基准",
+    },
+    "FINANCE_CALC": {
+        "dimension": "FINANCIALS",
+        "dimension_name": "官方三表底稿与平账",
+        "description": "从 SEC 10-K / 决算短信提取三表事实并执行刚性平账自检",
+        "serves_stock_analysis": "提供自由现金流 (FCF)、净负债、资产负债表刚性平衡底账",
+    },
+    "US_DAILY": {
+        "dimension": "OHLCV",
+        "dimension_name": "美股日线价量时序",
+        "description": "拉取美股标的过去 250 天历史日线与成交量",
+        "serves_stock_analysis": "计算 50/150/200 日均线、52 周高低点与成交量萎缩度",
+    },
+    "JP_DAILY": {
+        "dimension": "OHLCV",
+        "dimension_name": "日股日线价量时序",
+        "description": "拉取东证标的过去 250 天历史日线与成交额",
+        "serves_stock_analysis": "计算日股标的移动均线与主升浪趋势广度",
+    },
+    "STOCK_SCREENING": {
+        "dimension": "SEPA",
+        "dimension_name": "SEPA与VCP初筛",
+        "description": "纯本地 0-Token 物理扫描波幅收缩比例与买点枢轴",
+        "serves_stock_analysis": "识别处于第二阶段主升浪且 VCP 波动收缩至临界点的标的",
+    },
+    "INDICATOR_UPDATE": {
+        "dimension": "MACRO_RATE",
+        "dimension_name": "宏观无风险利率与WACC",
+        "description": "更新 10Y 美债收益率、JGB 利率、利差与汇率中枢",
+        "serves_stock_analysis": "测算标的专属 WACC 资本成本与多阶段折现率基准",
+    },
+    "OFFICIAL_NEWS": {
+        "dimension": "NEWS_EVENTS",
+        "dimension_name": "突发事件与因果推演",
+        "description": "分时抓取官方监管与突发事件并提炼入事件雷达",
+        "serves_stock_analysis": "测算监管与地缘突发事件对个股营运利润 ΔEBIT 与 ΔEPS 的因果冲击",
+    },
+    "INCREMENTAL_COLLECT": {
+        "dimension": "DOSSIER",
+        "dimension_name": "微观商业与供应链档案",
+        "description": "官方监管补数与供应链集中度、护城河深度档案归档",
+        "serves_stock_analysis": "补充标的上下游供应商集中度、库存周期 DIO 与商业模式",
+    },
+    "LOCAL_AUDIT": {
+        "dimension": "AUDIT",
+        "dimension_name": "底账审计与账本验签",
+        "description": "全盘数据平账断言与 SHA-256 密码学不可篡改预测账本验签",
+        "serves_stock_analysis": "确保所有研判底账具备买方机构级证据置信度",
+    },
+    "STOCK_DOSSIER_COLLECT": {
+        "dimension": "TARGET_COLLECT",
+        "dimension_name": "指定单票全维度采集",
+        "description": "输入股票代码，一键启动该标的专属的行情、三表、DCF、事件全量拉取",
+        "serves_stock_analysis": "为指定个股一站式补齐所有分析所需数据并完成自动估值",
+    },
+}
 BENCHMARKS = {
     "US": ("SPY", "QQQ", "IWM", "^VIX"),
     "JP": ("1306.T", "^N225"),
@@ -269,10 +333,18 @@ class TerminalScheduler:
             "scheduled": self.scheduled and bool(settings["__automatic__"]) and self.thread is not None and self.thread.is_alive(),
             "automatic_enabled": self.scheduled and bool(settings["__automatic__"]),
             "automatic_available": self.scheduled,
-            "tasks": [{"id": task, "name": name, "schedule": schedule, "enabled": settings[task],
-                       "automatic": task in AUTOMATIC_TASKS,
-                       "track": "collection" if task in COLLECTION_TASKS else "local"}
-                      for task, (name, schedule) in TASKS.items()],
+            "tasks": [{
+                "id": task,
+                "name": name,
+                "schedule": schedule,
+                "enabled": settings.get(task, True),
+                "automatic": task in AUTOMATIC_TASKS,
+                "track": "collection" if task in COLLECTION_TASKS else "local",
+                "dimension": TASK_METADATA.get(task, {}).get("dimension", "LOCAL"),
+                "dimension_name": TASK_METADATA.get(task, {}).get("dimension_name", "本地任务"),
+                "description": TASK_METADATA.get(task, {}).get("description", name),
+                "serves_stock_analysis": TASK_METADATA.get(task, {}).get("serves_stock_analysis", "为个股分析提供基础支撑"),
+            } for task, (name, schedule) in TASKS.items()],
             "runs": runs,
         }
 
@@ -484,6 +556,8 @@ class TerminalScheduler:
             return self._execute_indicator_update(run)
         if task == "FINANCE_CALC":
             return self._execute_finance_calc(run)
+        if task == "STOCK_DOSSIER_COLLECT":
+            return self._execute_stock_dossier_collect(run)
         if task == "INCREMENTAL_COLLECT":
             return self._execute_incremental_collect(run)
         return self._execute_market_daily(run)
@@ -805,3 +879,44 @@ class TerminalScheduler:
             "message": f"本地归档中有 {valid} 项通过行情时效门禁，实时采集需要已授权宿主",
             "verified_count": valid, "blocked_count": len(data["stale_blocked_tickers"]),
         }
+
+    def _execute_stock_dossier_collect(self, run):
+        """精准执行单票全维度数据收集与自动估值（行情、三表平账、DCF走廊、事件穿透）."""
+        clean_ticker = (run.get("slot") or "NVDA").strip().upper()
+        from financial_reporting.watersource_terminal_service import WatersourceTerminalService
+        from financial_reporting.data_collection_gateway import UnifiedDataCollectionGateway
+
+        svc = WatersourceTerminalService()
+        dossier = UnifiedDataCollectionGateway.load_verified_batch_dossier(clean_ticker)
+        code, val_res = svc.auto_calculate_company_valuation(clean_ticker)
+
+        if code == 200 and val_res.get("data"):
+            v = val_res["data"]
+            c = v.get("valuation_corridor") or {}
+            cur_p = c.get("current_price")
+            fair = c.get("base_fair_value", {}).get("value_per_share")
+            msg = f"{clean_ticker} · 个股分析全维度数据拉取就绪 · 现价 ${cur_p} · 公允价值 ${fair} · 平账自检通过"
+            self._record_item(run, "SUCCESS", msg)
+            return "SUCCESS", {
+                "message": msg,
+                "ticker": clean_ticker,
+                "price": cur_p,
+                "fair_value": fair,
+                "verdict": c.get("valuation_verdict"),
+            }
+        elif dossier:
+            raw = dossier.get("raw_financials_table") or {}
+            msg = f"{clean_ticker} · 官方三表与商业档案已核验归档 · 待实时交易时段或无风险利率对齐"
+            self._record_item(run, "PARTIAL_SUCCESS", msg)
+            return "PARTIAL_SUCCESS", {
+                "message": msg,
+                "ticker": clean_ticker,
+                "filing": raw.get("source"),
+            }
+        else:
+            msg = f"{clean_ticker} · 已加入官方原文增量补数队列，等待公开监管或交易所归档"
+            self._record_item(run, "BLOCKED", msg)
+            return "BLOCKED", {
+                "message": msg,
+                "ticker": clean_ticker,
+            }

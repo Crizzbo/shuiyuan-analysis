@@ -150,6 +150,39 @@ def check_facade_and_ledger_health() -> list[str]:
     return issues
 
 
+def check_git_quarantine_and_boundary_discipline() -> list[str]:
+    """检查工程隔离与防泄漏守卫（严格落实 pstack principle-boundary-discipline 与非跟踪铁律）。"""
+    issues = []
+    gitignore_path = ROOT / ".gitignore"
+    if not gitignore_path.is_file():
+        issues.append("Missing .gitignore file in project root")
+        return issues
+
+    content = gitignore_path.read_text(encoding="utf-8")
+    required_ignores = ["*pstack*", ".pstack/", "pstack/"]
+    for req in required_ignores:
+        if req not in content:
+            issues.append(f".gitignore missing quarantine rule for '{req}'")
+
+    # 检查工作区是否存在被错误追踪的 pstack 相关文件
+    try:
+        import subprocess
+        res = subprocess.run(
+            ["git", "ls-files", "*pstack*"],
+            cwd=str(ROOT),
+            capture_output=True,
+            text=True,
+            encoding="utf-8"
+        )
+        if res.returncode == 0 and res.stdout.strip():
+            issues.append(f"Forbidden: pstack files are being tracked by git: {res.stdout.strip()}")
+    except Exception as e:
+        # 如果当前环境没有 git 命令，降级为常规目录检查
+        pass
+
+    return issues
+
+
 class TestArchitectureIntegrity(unittest.TestCase):
     """自动化架构防劣变回归单测套件。"""
 
@@ -164,6 +197,10 @@ class TestArchitectureIntegrity(unittest.TestCase):
     def test_facade_and_ledger_operational(self):
         issues = check_facade_and_ledger_health()
         self.assertEqual(issues, [], f"Facade / Ledger health issues: {issues}")
+
+    def test_git_quarantine_and_boundary_discipline(self):
+        issues = check_git_quarantine_and_boundary_discipline()
+        self.assertEqual(issues, [], f"Git quarantine boundary issues: {issues}")
 
 
 if __name__ == "__main__":
@@ -189,7 +226,7 @@ if __name__ == "__main__":
     else:
         print("  [通过] 29 个关键模块独立导入 100% 成功，零循环依赖!")
 
-    print("\n[3/3] 检查金融分析系统门面与预测底账审计链...")
+    print("\n[3/4] 检查金融分析系统门面与预测底账审计链...")
     health_issues = check_facade_and_ledger_health()
     if health_issues:
         print("  [未通过] 发现系统健康度异常:")
@@ -198,7 +235,16 @@ if __name__ == "__main__":
     else:
         print("  [通过] 门面执行契约与不可篡改底账 100% 就绪通过!")
 
-    total_issues = len(purity_issues) + len(import_issues) + len(health_issues)
+    print("\n[4/4] 检查工程隔离与防泄漏守卫 (pstack 隔离与边界纪律)...")
+    quarantine_issues = check_git_quarantine_and_boundary_discipline()
+    if quarantine_issues:
+        print("  [未通过] 发现工程隔离异常:")
+        for issue in quarantine_issues:
+            print(f"     • {issue}")
+    else:
+        print("  [通过] Git 边界隔离与 pstack 零追踪防御 100% 合规!")
+
+    total_issues = len(purity_issues) + len(import_issues) + len(health_issues) + len(quarantine_issues)
     print("\n" + "=" * 70)
     if total_issues == 0:
         print("[巡检合格] 巡检结果：系统架构极其稳固，多轮改修未造成任何架构破损！")

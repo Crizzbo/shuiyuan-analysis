@@ -46,3 +46,8 @@ LPT[1-9].*
 **/PRN.*
 **/AUX.*
 **/NUL.*
+
+# pstack 插件与工具隔离 (Strict Non-Git Tracking)
+*pstack*
+.pstack/
+pstack/

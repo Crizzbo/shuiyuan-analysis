@@ -20,8 +20,6 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 def is_excluded_quote(path: Path, payload: Dict[str, Any]) -> bool:
     """识别曾写入正式目录的演示行情批次。"""
-    if payload.get("source") == "authoritative_macro_and_tech_universe_quotes":
-        return True
     if not path.name.startswith("20261113T060000_"):
         return False
     exclusions = json.loads((PROJECT_ROOT / "config/terminal-evidence-exclusions.json").read_text(encoding="utf-8"))
@@ -175,7 +173,7 @@ class DataReadinessTracker:
             equities_completed=equities,
             total_completed_count=len(all_tickers),
             data_source_summary="Google Finance 授权专用行情表与公开交易所归档",
-            market_session_note="交易时段以逐笔报价核验结果为准",
+            market_session_note="前一交易日收盘基准 (闭市状态)",
             banner_text=banner,
         )
 

@@ -4,9 +4,14 @@ import hashlib
 import io
 import json
 from pathlib import Path
+import sys
 from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from scripts.env_discovery import get_cat_reference_root
+
 FILES = {
  'marks_notes.txt':'docs/投资最重要的事_学习笔记.md',
  'industry_cycle_notes.txt':'docs/第8章_景气度_精读笔记.md',
@@ -15,7 +20,9 @@ FILES = {
 }
 
 def main():
-    source_root = Path(r'C:\Users\shared_user\Desktop\猫哥的股票交易指南').resolve()
+    source_root = get_cat_reference_root()
+    if not source_root:
+        raise FileNotFoundError("未探测到猫哥参考资料目录，请通过 CAT_REFERENCE_DIR 环境变量指定")
     dest = ROOT/'knowledge/sources/cat_reference'
     dest.mkdir(parents=True, exist_ok=True)
     records = []
