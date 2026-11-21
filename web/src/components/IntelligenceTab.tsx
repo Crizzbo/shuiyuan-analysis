@@ -51,8 +51,8 @@ export function IntelligenceTab({
     setIsExtracting(true)
     showToast({
       type: 'info',
-      title: '官方资讯分时采集',
-      message: '正在向后端发起新闻与突发情报即时抽取...',
+      title: '官方公告与资讯同步',
+      message: '正在同步权威监管披露与官方新闻最新资讯...',
     })
 
     try {
@@ -60,14 +60,14 @@ export function IntelligenceTab({
       if (res.ok) {
         showToast({
           type: 'success',
-          title: '官方资讯采集已完成',
-          message: '最新官方公告与新闻已归档入库。',
+          title: '官方资讯同步已完成',
+          message: '最新官方监管披露与权威资讯已完成核验与存证。',
         })
         await Promise.all([loadEvents(), loadNews()])
       } else {
         showToast({
           type: 'error',
-          title: '提交采集失败',
+          title: '提交同步失败',
           message: res.error?.message || '未能完成事件雷达脉冲采集',
         })
       }
@@ -82,14 +82,14 @@ export function IntelligenceTab({
     }
   }
 
-  // 触发资讯 AI 因果提炼
+  // 触发资讯深度解析与影响评估
   const handleDistillNews = async () => {
     if (isDistilling) return
     setIsDistilling(true)
     showToast({
       type: 'info',
-      title: '新闻AI提炼与因果分析',
-      message: '正在对已入库资讯进行实体提取、级别判定与微观业务传导分析...',
+      title: '资讯深度解析与影响评估',
+      message: '正在对权威资讯进行标的识别、影响级别评估与业务传导深度分析...',
     })
 
     try {
@@ -102,8 +102,8 @@ export function IntelligenceTab({
             : 0
         showToast({
           type: 'success',
-          title: '因果分析提炼完成',
-          message: `新提炼 ${newCount} 篇情报，共收录 ${stats.total_events || 0} 篇权威事件。`,
+          title: '资讯影响分析完成',
+          message: `新增解析 ${newCount} 篇重要资讯，共收录 ${stats.total_events || 0} 篇官方核实事件。`,
         })
         await Promise.all([loadEvents(), loadNews()])
       } else {
@@ -200,7 +200,7 @@ export function IntelligenceTab({
       {/* 头部统计卡片 */}
       <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
         <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-3 text-center shadow-sm">
-          <div className="text-xs text-[var(--text-muted)]">事件库总收录</div>
+          <div className="text-xs text-[var(--text-muted)]">全市场收录事件</div>
           <div className="text-xl font-bold font-mono text-[var(--text-primary)] mt-1">
             {data?.total_events ?? '—'}
           </div>
@@ -282,10 +282,10 @@ export function IntelligenceTab({
                 ? 'bg-amber-50 text-amber-700 border border-amber-200'
                 : 'bg-[var(--bg-card)] hover:bg-slate-100 text-[var(--text-primary)] border border-[var(--border-color)]'
             }`}
-            title="触发官方资讯采集，实时核验与拉取最新公开资讯"
+            title="同步官方披露公告，实时核验与拉取最新公开资讯"
           >
             <ZapIcon className={`w-4 h-4 text-amber-600 ${isExtracting ? 'animate-spin' : ''}`} />
-            <span>{isExtracting ? '采集拉取中...' : '即时拉取官方资讯'}</span>
+            <span>{isExtracting ? '同步资讯中...' : '即时同步官方资讯'}</span>
           </button>
 
           <button
@@ -297,10 +297,10 @@ export function IntelligenceTab({
                 ? 'bg-[#176249]/10 text-[#176249] border border-[#176249]/30'
                 : 'bg-[#176249] hover:bg-[#124e3a] text-white'
             }`}
-            title="对已入库资讯进行自动化实体识别、严重级别分类与微观传导提炼"
+            title="对已收录资讯进行标的归属识别、影响级别评估与微观业务传导分析"
           >
             <BrainIcon className={`w-4 h-4 text-white ${isDistilling ? 'animate-spin' : ''}`} />
-            <span>{isDistilling ? '提炼研判中...' : '智能提炼与因果分析'}</span>
+            <span>{isDistilling ? '深度分析中...' : '深度解析与影响评估'}</span>
           </button>
         </div>
       </div>

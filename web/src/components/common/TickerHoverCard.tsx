@@ -23,7 +23,7 @@ const TICKER_SNAPSHOTS: Record<
 }
 
 /**
- * 0-Token 纯轻量即时决策悬停卡片 (Contextual Ticker Hover Card)
+ * 纯本地轻量即时决策悬停卡片 (Contextual Ticker Hover Card)
  * 鼠标悬停 200ms 即时浮出决策底稿，无需切屏即可快速获悉现价、平账状态与主升阶段
  */
 export const TickerHoverCard: React.FC<TickerHoverCardProps> = ({
@@ -101,7 +101,7 @@ export const TickerHoverCard: React.FC<TickerHoverCardProps> = ({
                   : 'bg-rose-50 text-rose-700 border border-rose-200'
               }`}
             >
-              {snap.balanced ? '报表平衡' : '待平账'}
+              {snap.balanced ? '勾稽平衡' : '待复核'}
             </span>
           </div>
 
@@ -138,7 +138,7 @@ export const TickerHoverCard: React.FC<TickerHoverCardProps> = ({
                 }}
                 className="px-2 py-0.5 rounded bg-sky-600 hover:bg-sky-700 text-white font-medium cursor-pointer transition-colors shadow-2xs"
               >
-                穿透个股 ↵
+                查看深度投研 ↵
               </button>
             )}
           </div>

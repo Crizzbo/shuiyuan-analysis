@@ -53,14 +53,14 @@ export function TradingSessionBar({
             onClick={onToggleDispatcher}
             className="text-[11px] text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
           >
-            {showDispatcher ? '收起任务面板 ↑' : '任务调度状态 ↓'}
+            {showDispatcher ? '收起任务面板 ↑' : '后台数据任务 ↓'}
           </button>
           <button
             type="button"
             onClick={() => onNavigateTab('collection')}
             className="px-2.5 py-1 rounded-md bg-[var(--bg-card)] hover:bg-slate-100 text-slate-700 border border-slate-200 hover:text-[#176249] hover:border-[#176249]/40 font-medium cursor-pointer transition-all"
           >
-            调度控制台 →
+            数据中心 →
           </button>
         </div>
       </div>

@@ -25,11 +25,11 @@ export function QuantitativeProbesCard({ probes }: QuantitativeProbesCardProps) 
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* 1. 资产负债表刚性平账自检 */}
+        {/* 1. 资产负债表会计恒等式核验 */}
         <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-4 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-muted)]">官方财报平账自检</span>
+              <span className="text-xs text-[var(--text-muted)]">官方财报会计恒等式核验</span>
               <span
                 className={`text-[10px] px-2 py-0.5 rounded font-semibold ${
                   probes?.financial_audit?.balance_sheet_balanced
@@ -37,7 +37,7 @@ export function QuantitativeProbesCard({ probes }: QuantitativeProbesCardProps) 
                     : 'bg-rose-50 text-rose-700 border border-rose-200'
                 }`}
               >
-                {probes?.financial_audit?.balance_sheet_balanced ? '勾稽平衡' : '不平账警告'}
+                {probes?.financial_audit?.balance_sheet_balanced ? '勾稽平衡通过' : '勾稽待复核'}
               </span>
             </div>
             <div className="text-lg font-bold font-mono text-[var(--text-primary)] mt-2">
@@ -45,7 +45,7 @@ export function QuantitativeProbesCard({ probes }: QuantitativeProbesCardProps) 
             </div>
           </div>
           <div className="text-[11px] text-[var(--text-muted)] mt-2 pt-2 border-t border-[var(--border-color)]/40 truncate">
-            原档：{probes?.financial_audit?.source_filing || '等待官方原档'}
+            披露来源：{probes?.financial_audit?.source_filing || '等待官方原档'}
           </div>
           {probes?.financial_audit?.scheduled_calculation && (
             <div className="text-xs text-[var(--text-muted)] mt-2" title={probes.financial_audit.scheduled_calculation.source_path}>

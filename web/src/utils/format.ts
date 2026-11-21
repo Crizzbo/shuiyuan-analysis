@@ -12,7 +12,7 @@
 export function formatDeviceTime(value?: string | number | null): string {
   if (!value) return ''
   const strVal = String(value).trim()
-  if (!strVal || strVal === '时间未提供' || strVal === '未知' || strVal === '待补数') return ''
+  if (!strVal || strVal === '时间未提供' || strVal === '未知' || strVal === '待补数' || strVal === '待同步') return ''
 
   // 若仅包含纯日期 (如 2026-11-14)
   if (/^\d{4}-\d{2}-\d{2}$/.test(strVal)) {
@@ -54,7 +54,7 @@ export const CHINESE_LABELS: Record<string, string> = {
   SUCCESS: '已完成',
   PARTIAL_SUCCESS: '部分完成',
   FAILED: '执行失败',
-  BLOCKED: '待补数',
+  BLOCKED: '待核查',
   CANCELLED: '已取消',
   WAITING_DEPENDENCY: '等待前置任务',
   CONFIGURED: '配置已更新',
@@ -109,13 +109,13 @@ export const CHINESE_LABELS: Record<string, string> = {
   FINANCE_CALC: '金融计算与估值区间',
   LOCAL_AUDIT: '本地数据与账本核验',
   QUOTE_COLLECT: '授权行情归档核对',
-  INCREMENTAL_COLLECT: '官方原文补数清单',
+  INCREMENTAL_COLLECT: '权威财报核验清单',
   MASTER: '总启动',
   GF_MARKET_READINESS: '行情时效与交易时段',
   SEPA_UNIVERSE_SCREENER: '全市场趋势形态初筛',
   SEC_10K_BALANCED_AUDIT: '官方财报勾稽核对',
   UNIVERSE_567_BATCH: '全景深度研报管线',
-  AI_BROWSER_REPLENISHMENT: '官方原文补数清单',
+  AI_BROWSER_REPLENISHMENT: '权威财报核查清单',
   EVENT_RADAR_POLLING: '事件雷达脉冲轮询',
 
   // 6. 市场
@@ -157,7 +157,7 @@ export function getStatusBadge(status?: string): { text: string; cls: string } {
     case 'STOPPING':
       return { text: '正在停止', cls: 'bg-amber-50 text-amber-700 border border-amber-200' }
     case 'BLOCKED':
-      return { text: '待补数', cls: 'bg-amber-50 text-amber-800 border border-amber-200' }
+      return { text: '待核查', cls: 'bg-amber-50 text-amber-800 border border-amber-200' }
     case 'CANCELLED':
       return { text: '已取消', cls: 'bg-slate-100 text-slate-500 border border-slate-200' }
     default:

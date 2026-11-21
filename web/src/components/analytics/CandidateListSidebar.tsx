@@ -162,7 +162,7 @@ export function CandidateListSidebar({
                 <div className="flex items-center justify-between text-[10px] pt-0.5">
                   <div className="flex items-center gap-1.5">
                     <span className="px-1.5 py-0.2 rounded font-medium bg-slate-100 text-slate-700 border border-slate-200">
-                      {item.readiness_status || (item.has_quote ? '行情已就绪' : '待补数')}
+                      {item.readiness_status || (item.has_quote ? '行情已就绪' : '待同步')}
                     </span>
                     {item.ticker === 'NVDA' ? (
                       <span className="px-1.5 py-0.2 rounded bg-rose-50 text-rose-600 border border-rose-200 font-mono text-[9px] font-bold">

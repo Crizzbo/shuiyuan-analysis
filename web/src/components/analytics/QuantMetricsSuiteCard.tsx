@@ -50,7 +50,7 @@ export function QuantMetricsSuiteCard({
               正在穿透核验 25 项核心金融量化指标…
             </div>
             <p className="text-xs text-[var(--text-secondary)]">
-              涵盖现金流折现、隐含增速、资本成本WACC、违约距离KMV、Altman破产预警、法证平账自检与巴菲特所有者收益
+              涵盖现金流折现、隐含增速、资本成本WACC、违约距离KMV、Altman破产预警、会计报表勾稽核验与巴菲特所有者收益
             </p>
           </div>
         ) : suite24Data ? (

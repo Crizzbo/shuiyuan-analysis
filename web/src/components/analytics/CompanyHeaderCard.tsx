@@ -90,7 +90,7 @@ export function CompanyHeaderCard({
             {toChinese(quote?.session_type) || '盘中时段'}
           </span>
 
-          {/* 平账自检状态门禁 */}
+          {/* 资产负债表勾稽平衡状态 */}
           <span
             className={`text-xs px-2.5 py-1 rounded-full font-semibold border ${
               probes?.financial_audit?.balance_sheet_balanced
@@ -98,17 +98,17 @@ export function CompanyHeaderCard({
                 : 'bg-rose-50 text-rose-600 border-rose-200'
             }`}
           >
-            {probes?.financial_audit?.balance_sheet_balanced ? '报表平衡通过' : '报表勾稽异常'}
+            {probes?.financial_audit?.balance_sheet_balanced ? '资产负债表平衡通过' : '资产负债表待复核'}
           </span>
         </div>
       </div>
 
-      {/* 标的数据完备度与即时采集更新栏 (Data Readiness Health Strip) */}
+      {/* 标的数据完备度与行情时钟状态栏 */}
       <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg px-3 py-2 flex flex-wrap items-center justify-between gap-2 text-xs">
         <div className="flex flex-wrap items-center gap-2">
           <span className="font-bold text-[11px] text-[var(--text-secondary)] flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-[#176249] animate-pulse" />
-            <span>标的档案:</span>
+            <span>标的概况:</span>
           </span>
           <span className="px-2 py-0.5 rounded bg-[var(--surface-color)] text-[var(--text-primary)] border border-[var(--border-color)] font-mono text-[11px] font-bold">
             现价: {sym}{curPrice.toFixed(2)} ({toChinese(quote?.session_type) || '前收盘基准'})

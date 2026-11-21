@@ -116,8 +116,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'action-collection',
         type: 'action',
-        label: '采集中心 (Data Operations)',
-        subtext: '美日全市场数据采集调度、时效对账与 AI 浏览器补数',
+        label: '数据中心 (Data Operations)',
+        subtext: '美日全市场数据同步、行情校准与官方披露核查',
         shortcut: '3',
         icon: <DatabaseIcon className="w-4 h-4 text-cyan-600" />,
         perform: () => {
@@ -153,7 +153,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         id: 'action-settings',
         type: 'action',
         label: '合规审计 (Compliance & Rules)',
-        subtext: '全盘知识库契约、平账规则、时效门禁与架构四层巡检',
+        subtext: '全市场数据质量审计、财报勾稽核验与系统健康状态',
         shortcut: '6',
         icon: <SettingsIcon className="w-4 h-4 text-slate-600" />,
         perform: () => {
@@ -164,8 +164,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'action-trigger-pipeline',
         type: 'action',
-        label: '立即触发数据采集流水线',
-        subtext: '调度盘前/盘中自动化补数与状态对账任务',
+        label: '立即执行数据同步任务',
+        subtext: '调度盘前/盘中自动化数据核验与行情校准任务',
         shortcut: '↵ Run',
         icon: <DatabaseIcon className="w-4 h-4 text-rose-600" />,
         perform: () => {
@@ -477,7 +477,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                             </span>
                           </div>
                           <div className="text-[11px] text-[var(--text-muted)] truncate mt-0.5">
-                            {item.readiness ? `底账: ${item.readiness}` : '点击穿透至计算分析工作台与 DCF 走廊'}
+                            {item.readiness ? `数据就绪: ${item.readiness}` : '点击查看深度投研与 DCF 估值走廊'}
                           </div>
                         </div>
                       </div>
@@ -526,7 +526,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                             </span>
                           </div>
                           <div className="text-[11px] text-[var(--text-muted)] truncate mt-0.5">
-                            {item.publishedAt ? `发布: ${item.publishedAt}` : '点击穿透查看事件影响与因果雷达'}
+                            {item.publishedAt ? `发布: ${item.publishedAt}` : '点击查看事件影响与深度研判'}
                           </div>
                         </div>
                       </div>

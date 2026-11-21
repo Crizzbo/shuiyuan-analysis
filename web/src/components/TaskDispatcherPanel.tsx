@@ -88,7 +88,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
     }
   }
 
-  // 🎯 指定个股全维度一键数据拉取与平账核对
+  // 🎯 指定个股全维度一键数据拉取与财报勾稽核验
   async function handleCollectSingleStock(tickerToRun: string) {
     const symbol = tickerToRun.trim().toUpperCase()
     if (!symbol) {
@@ -107,7 +107,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
         showToast({
           type: 'success',
           title: `标的 [${symbol}] 数据拉取与核算已完成`,
-          message: `已同步最新报价、平账自检与 DCF 估值 (Run ID: ${res.data.run_id?.slice(0, 8)})`,
+          message: `已同步最新报价、财报勾稽核验与 DCF 估值 (Run ID: ${res.data.run_id?.slice(0, 8)})`,
         })
         await onTaskCompleted()
         if (onSelectTicker) {
@@ -215,7 +215,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
             onClick={onManage}
             className="text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] px-1.5 py-1 cursor-pointer"
           >
-            采集中枢 →
+            数据中心 →
           </button>
         </div>
       </div>
@@ -313,7 +313,7 @@ export function TaskDispatcherPanel({ schedulerInfo, onTaskCompleted, onManage, 
                     </span>
                   </div>
                   <p className="text-[11px] text-[var(--text-muted)] mt-1 line-clamp-2">
-                    获取标的盘中现价与前收盘基准，执行 24h 新鲜度门禁，为 DCF 估值提供基准锚。
+                    获取标的最新现价与收盘基准，执行 24 小时行情时效核验，为 DCF 估值提供基准现价。
                   </p>
                 </div>
                 <div className="flex items-center justify-between pt-1 border-t border-[var(--border-color)]/60 text-[10px]">

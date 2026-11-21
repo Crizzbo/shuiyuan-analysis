@@ -161,8 +161,8 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
 
     showToast({
       type: 'info',
-      title: `启动批量价格摄取 (${tickerList.length} 只标的)`,
-      message: '正在核验交易时段、执行美分级精度验签并不可篡改归档...',
+      title: `启动批量行情报价同步 (${tickerList.length} 只标的)`,
+      message: '正在识别市场交易时段、核验价格精度并执行合规存证归档...',
     })
 
     const timer = setInterval(() => {
@@ -181,7 +181,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
         setBatchResult(res.data)
         showToast({
           type: 'success',
-          title: `批量摄取完成 (成功 ${res.data.success_count}/${res.data.total_requested})`,
+          title: `批量行情同步完成 (成功 ${res.data.success_count}/${res.data.total_requested})`,
           message: `时效状态: ${res.data.market_session_note || '已安全落盘'}`,
         })
         void loadData()
@@ -328,14 +328,14 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
               <span className="p-1.5 rounded-lg bg-sky-100/80 text-sky-700">
                 <DatabaseIcon className="w-5 h-5" />
               </span>
-              数据采集总仓与调度工作台
+              数据中心与自动化调度台
             </h1>
             <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200 font-bold">
-              8 大数据类型全景资产盘点
+              核心投研数据资产全景
             </span>
           </div>
           <p className="text-xs text-slate-500">
-            按数据类型开展全生命周期资产盘点与摄取管控：覆盖行情快照、全市场日线、官方财报底账、宏观利率、突发舆情与决策账本。
+            集中管理全流程量化投研数据资产：覆盖实时与收盘行情、历史K线、官方权威财报、宏观利率、行业突发舆情与历史投研决策存证。
           </p>
         </div>
 
@@ -369,7 +369,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
         onAudit={onAudit}
       />
 
-      {/* 二、按数据类型的摄取与对账控制台 */}
+      {/* 二、按数据类型的同步与校准控制台 */}
       <div className="ice-panel rounded-2xl p-5 shadow-xs space-y-4">
         {/* 控制台二级子标签 (Pills) */}
         <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-sky-100">
@@ -384,7 +384,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
               }`}
             >
               <ZapIcon className="w-3.5 h-3.5" />
-              <span>行情快照并发摄取台</span>
+              <span>批量行情同步工作台</span>
             </button>
 
             <button
@@ -397,7 +397,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
               }`}
             >
               <LayersIcon className="w-3.5 h-3.5" />
-              <span>全盘日线对账简报</span>
+              <span>全市场K线数据校准</span>
               {reconciliation?.us && (
                 <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-sky-100 text-sky-800 font-mono">
                   {reconciliation.us.coverage_rate_pct}%
@@ -415,7 +415,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
               }`}
             >
               <DatabaseIcon className="w-3.5 h-3.5" />
-              <span>官方财报补数队列</span>
+              <span>待补充权威财报清单</span>
               <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-100 text-amber-800 font-mono">
                 {overview?.replenishment_queue?.total_pending ?? 72}
               </span>
@@ -423,13 +423,13 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
           </div>
 
           <div className="text-[11px] text-slate-400 font-mono">
-            {operationTab === 'quotes' && '数据类型: 实时与盘中行情快照'}
-            {operationTab === 'reconciliation' && '数据类型: 全市场 250 日 OHLCV 时序对账'}
-            {operationTab === 'filings_queue' && '数据类型: SEC EDGAR / TDnet 官方原文'}
+            {operationTab === 'quotes' && '数据分类: 实时行情与收盘报价'}
+            {operationTab === 'reconciliation' && '数据分类: 全市场 250 日量化K线时序校准'}
+            {operationTab === 'filings_queue' && '数据分类: SEC EDGAR / TDnet 官方权威财报原档'}
           </div>
         </div>
 
-        {/* 子视图 A：行情快照并发摄取台 */}
+        {/* 子视图 A：批量行情同步工作台 */}
         {operationTab === 'quotes' && (
           <div className="space-y-4">
             {/* 预设资产池快速填充胶囊 */}
@@ -489,12 +489,12 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
                     <ZapIcon className={`w-4 h-4 ${runningBatchCollect ? 'animate-bounce' : ''}`} />
                     <span>
                       {runningBatchCollect
-                        ? '并发拉取与精度验签中…'
-                        : `一键并发采集最新价格 (${parsedTickerCount} 只)`}
+                        ? '正在同步最新价格与核验时钟…'
+                        : `一键同步最新行情报价 (${parsedTickerCount} 只)`}
                     </span>
                   </div>
                   <span className="text-[10px] text-sky-100/90 font-normal">
-                    时段动态感知 · 美分级精度 · SHA-256 归档
+                    市场交易时段自适应 · 官方精度核验 · 合规存证归档
                   </span>
                 </button>
               </div>
@@ -583,7 +583,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
                         <th className="py-2.5 px-3 text-right">最新现价</th>
                         <th className="py-2.5 px-3 text-right">涨跌幅</th>
                         <th className="py-2.5 px-3 text-center">交易时段</th>
-                        <th className="py-2.5 px-3">不可篡改底账签名</th>
+                        <th className="py-2.5 px-3">合规存证防伪签名</th>
                         <th className="py-2.5 px-3 text-center">操作</th>
                       </tr>
                     </thead>
@@ -627,7 +627,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
                                   onClick={() => onNavigateToAnalytics(item.ticker)}
                                   className="text-[11px] text-sky-600 hover:text-sky-800 font-bold hover:underline cursor-pointer"
                                 >
-                                  深度分析 &gt;
+                                  查看深度投研 &gt;
                                 </button>
                               )}
                             </td>
@@ -642,7 +642,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
           </div>
         )}
 
-        {/* 子视图 B：全盘日线对账简报 */}
+        {/* 子视图 B：全市场K线数据校准 */}
         {operationTab === 'reconciliation' && (
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -652,7 +652,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
                   ['标的总数', data?.universe_count ?? (market === 'us' ? 10445 : 4447)],
                   ['有效日线', data?.matched_count ?? (market === 'us' ? 502 : 9)],
                   ['无成交', data?.no_trade_count ?? 0],
-                  ['待补日线', data?.pending_count ?? 0],
+                  ['待同步日线', data?.pending_count ?? 0],
                   ['差额', data?.balance_diff ?? 0],
                 ] as const
 
@@ -661,7 +661,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
                     <div className="flex justify-between items-center pb-2 border-b border-sky-100">
                       <div className="flex items-center gap-2">
                         <span className="font-bold text-sm text-slate-900">
-                          {market === 'us' ? '美股全盘日线时序对账' : '日股全盘日线时序对账'}
+                          {market === 'us' ? '美股全市场K线时序校准' : '日股全市场K线时序校准'}
                         </span>
                         <span className="text-[10px] px-2 py-0.5 rounded bg-sky-50 text-sky-700 font-bold">
                           覆盖率 {data?.coverage_rate_pct ?? (market === 'us' ? '4.8%' : '0.2%')}
@@ -684,7 +684,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
                     </div>
 
                     <p className="text-[11px] text-slate-500 leading-relaxed">
-                      对账结果: {data?.is_balanced !== false ? '平账平衡，零未映射异常' : '存在未映射标的'} · 纯离线 0-Token 计算引擎
+                      校准结果: {data?.is_balanced !== false ? '数据匹配平衡，无未映射标的' : '存在未映射标的'} · 本地量化计算引擎
                     </p>
                   </div>
                 )
@@ -706,26 +706,26 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
           </div>
         )}
 
-        {/* 子视图 C：官方财报补数队列 */}
+        {/* 子视图 C：待补充权威财报清单 */}
         {operationTab === 'filings_queue' && (
           <div className="space-y-4">
             <div className="grid grid-cols-3 gap-3">
               <div className="ice-block rounded-xl p-3 text-center">
-                <div className="text-[10px] text-slate-500">待下载官方原文标的</div>
+                <div className="text-[10px] text-slate-500">待核验官方财报公司</div>
                 <div className="text-xl font-black font-mono text-amber-600 mt-0.5">
                   {overview?.replenishment_queue?.total_pending ?? 72} 家
                 </div>
               </div>
               <div className="ice-block rounded-xl p-3 text-center">
-                <div className="text-[10px] text-slate-500">已入库官方原档</div>
+                <div className="text-[10px] text-slate-500">已存档官方权威年报/季报</div>
                 <div className="text-xl font-black font-mono text-emerald-600 mt-0.5">
                   {overview?.lifecycle_tiers?.sec_official_files ?? 1226} 份
                 </div>
               </div>
               <div className="ice-block rounded-xl p-3 text-center">
-                <div className="text-[10px] text-slate-500">补数安全策略</div>
+                <div className="text-[10px] text-slate-500">数据采集安全策略</div>
                 <div className="text-xs font-bold text-slate-700 mt-1">
-                  AI 浏览器进入官方披露下载 (杜绝伪造)
+                  直连监管披露中心核验下载 (真实原文)
                 </div>
               </div>
             </div>

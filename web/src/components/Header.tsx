@@ -52,7 +52,7 @@ export function Header({
               </span>
               <span>·</span>
               <span>
-                账本: {health?.ledger_valid ? `完整 (${health.ledger_total_predictions} 条)` : health ? '校验异常' : '待检测'}
+                投研存证: {health?.ledger_valid ? `正常 (${health.ledger_total_predictions} 条记录)` : health ? '校验异常' : '待检测'}
               </span>
               <span>·</span>
               <span className="px-2.5 py-0.5 rounded bg-sky-50/70 dark:bg-sky-950/50 text-sky-800 dark:text-sky-300 border border-sky-200/70 dark:border-sky-800/70 font-mono font-medium flex items-center gap-1">
@@ -99,7 +99,7 @@ export function Header({
             className="text-xs px-3.5 py-1.5 rounded-lg border border-sky-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 text-sky-800 dark:text-sky-300 hover:text-white hover:bg-sky-600 hover:border-sky-600 dark:hover:bg-sky-600 dark:hover:border-sky-600 font-medium transition-all shadow-xs cursor-pointer shrink-0"
             onClick={onPipelineStarted}
           >
-            数据采集
+            数据中心
           </button>
         </div>
       </div>

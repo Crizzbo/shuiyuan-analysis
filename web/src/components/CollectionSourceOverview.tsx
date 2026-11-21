@@ -91,7 +91,7 @@ export function CollectionSourceOverview({ overview, reconciliation, checked, ru
         <article className="rounded-lg border border-sky-100 bg-white/75 p-3">
           <h2 className="text-sm font-semibold text-slate-900">官方财报</h2>
           <p className="mt-1 text-sm text-slate-700">SEC 原档 {count(overview?.lifecycle_tiers.sec_official_files)} 份</p>
-          <p className="mt-1 text-xs text-slate-500">原文补数队列 {count(overview?.replenishment_queue.total_pending)} 项</p>
+          <p className="mt-1 text-xs text-slate-500">待核查权威财报 {count(overview?.replenishment_queue.total_pending)} 项</p>
         </article>
         {([{ title: '宏观指标更新', run: macro }, { title: '官方资讯采集', run: events }]).map(({ title, run }) => (
           <article key={title} className="min-w-0 rounded-lg border border-sky-100 bg-white/75 p-3">
@@ -144,7 +144,7 @@ export function CollectionSourceOverview({ overview, reconciliation, checked, ru
           <ul className="mt-1 space-y-1 text-xs text-slate-700">
             <li>Google Finance 专用 Sheets · 宿主授权导入行情快照</li>
             <li>SEC／JPX 标的目录 · 本地证券池与覆盖分母</li>
-            <li>SEC CompanyFacts、JPX／发行人披露 · 本地原档与浏览器核验补数</li>
+            <li>SEC CompanyFacts、JPX／发行人披露 · 官方原档与披露检索核验</li>
             <li>本地市场与宏观归档 · 供计算与历史对账读取</li>
           </ul>
         </div>
