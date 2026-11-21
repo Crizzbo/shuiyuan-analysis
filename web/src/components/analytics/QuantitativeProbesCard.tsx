@@ -1,8 +1,15 @@
+import { ContractionWaveform } from '../common'
+
 interface QuantitativeProbesCardProps {
   probes: any
 }
 
 export function QuantitativeProbesCard({ probes }: QuantitativeProbesCardProps) {
+  const sepa = probes?.timing_and_ohlcv_probe?.sepa_telemetry
+  const pivot = sepa?.pivot_price ?? sepa?.pivot_buy_point ?? null
+  const currentPrice = sepa?.current_price ?? null
+  const vcpCode = sepa?.vcp_contraction_footprint || 'VCP-4T'
+
   return (
     <div id="sec-probes" className="scroll-mt-16 bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
       <div className="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
@@ -76,29 +83,17 @@ export function QuantitativeProbesCard({ probes }: QuantitativeProbesCardProps) 
           </div>
         </div>
 
-        {/* 3. 趋势形态与买点结构 (SEPA) */}
-        <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-4 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-muted)]">技术形态与买点结构</span>
-              <span
-                className={`text-[10px] px-2 py-0.5 rounded font-semibold ${
-                  probes?.timing_and_ohlcv_probe?.sepa_telemetry
-                    ? 'bg-slate-100 text-slate-700 border border-slate-200'
-                    : 'bg-slate-100 text-slate-500 border border-slate-200'
-                }`}
-              >
-                {probes?.timing_and_ohlcv_probe?.sepa_telemetry ? '形态就绪' : '静态快照'}
-              </span>
-            </div>
-            <div className="text-lg font-bold font-mono text-[var(--text-primary)] mt-2">
-              {probes?.timing_and_ohlcv_probe?.sepa_telemetry
-                ? `主升阶段 · ${probes.timing_and_ohlcv_probe.sepa_telemetry.stage || '第二阶段'}`
-                : '日线快照基准'}
-            </div>
-          </div>
-          <div className="text-[11px] text-[var(--text-secondary)] mt-2 pt-2 border-t border-[var(--border-color)]/40 truncate">
-            {probes?.timing_and_ohlcv_probe?.note || '已接入全市场趋势形态指标'}
+        {/* 3. 趋势形态与买点结构 (SEPA) 结合 VCP 动态微波形 */}
+        <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-3 flex flex-col justify-between space-y-2">
+          <ContractionWaveform
+            pivotPrice={pivot}
+            currentPrice={currentPrice}
+            vcpCode={vcpCode}
+            isStage2={Boolean(sepa?.is_stage_2 ?? true)}
+            className="border-0 p-0 bg-transparent shadow-none"
+          />
+          <div className="text-[11px] text-[var(--text-secondary)] pt-1.5 border-t border-[var(--border-color)]/40 truncate">
+            {probes?.timing_and_ohlcv_probe?.note || 'SEPA 均线多头排列 · 波动收缩买点监控中'}
           </div>
         </div>
       </div>

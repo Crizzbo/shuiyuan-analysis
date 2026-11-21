@@ -991,3 +991,21 @@ export interface ComplianceAuditSummary {
     knowledge_links: number
   }
 }
+
+export interface TerminalNewsItem {
+  title: string
+  published_at: string | null
+  source: string
+  category?: string
+  severity?: string
+  involved_entities?: string[]
+  micro_physical_impact?: string
+  is_distilled?: boolean
+}
+
+export interface TerminalTasksConfigData {
+  version?: string
+  tasks: Record<string, any>
+  [key: string]: any
+}
+

@@ -26,6 +26,14 @@ type Tab = (typeof tabs)[number]['id']
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('dashboard')
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('shuiyuan_theme')
+      if (saved === 'dark' || saved === 'light') return saved
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark'
+    }
+    return 'light'
+  })
   const [health, setHealth] = useState<HealthData | null>(null)
   const [pipelineStatus, setPipelineStatus] = useState<PipelineStatusData | null>(null)
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null)
@@ -33,6 +41,18 @@ export default function App() {
   const [realtimeLogs, setRealtimeLogs] = useState<LogItem[]>([])
   const [refreshKey, setRefreshKey] = useState(0)
   const [isPaletteOpen, setIsPaletteOpen] = useState(false)
+
+  // 极夜暗黑交易模式与 DOM/本地缓存双向挂载
+  useEffect(() => {
+    const isDark = theme === 'dark'
+    document.documentElement.classList.toggle('dark', isDark)
+    document.body.classList.toggle('dark', isDark)
+    localStorage.setItem('shuiyuan_theme', theme)
+  }, [theme])
+
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
+  }, [])
 
   const refreshHealth = useCallback(async () => {
     const [status, healthResponse] = await Promise.all([
@@ -100,6 +120,8 @@ export default function App() {
       <Header
         health={health}
         sseConnected={connected}
+        theme={theme}
+        onToggleTheme={toggleTheme}
         onPipelineStarted={() => {
           setTab('collection')
         }}

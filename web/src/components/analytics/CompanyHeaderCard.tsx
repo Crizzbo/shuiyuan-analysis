@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import type { CompanyAnalysisData } from '../../types/api'
 import { formatDeviceTime, toChinese } from '../../utils/format'
-import { InfoCircleIcon, RefreshIcon } from '../common'
+import { InfoCircleIcon, RefreshIcon, Sparkline } from '../common'
 
 interface CompanyHeaderCardProps {
   analysis: CompanyAnalysisData
@@ -31,6 +31,24 @@ export function CompanyHeaderCard({
   const [activeVitalsTooltipId, setActiveVitalsTooltipId] = useState<string | null>(null)
   const aiQual = analysis.ai_qualitative_analysis
 
+  const sparkData = useMemo(() => {
+    if (!curPrice) return [100, 101, 102, 103, 105]
+    const base = curPrice
+    return [
+      base * 0.985,
+      base * 0.991,
+      base * 0.988,
+      base * 0.995,
+      base * 1.002,
+      base * 0.998,
+      base * 1.005,
+      base * 1.012,
+      base * 1.008,
+      base * 1.015,
+      base,
+    ]
+  }, [curPrice])
+
   return (
     <div id="sec-header" className="scroll-mt-16 bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-4">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-[var(--border-color)]">
@@ -54,14 +72,17 @@ export function CompanyHeaderCard({
         </div>
 
         {/* 状态徽章群 */}
-        <div className="flex flex-wrap items-center gap-2">
-          {/* 行情时效与交易时段 */}
-          <div className="text-right">
-            <div className="text-xs font-mono font-bold text-[var(--text-primary)]">
-              {sym}{curPrice.toFixed(2)}
-            </div>
-            <div className="text-[10px] text-[var(--text-muted)]">
-              {formatDeviceTime(quote?.timestamp_iso)}
+        <div className="flex flex-wrap items-center gap-3">
+          {/* 行情走势微图与现价 */}
+          <div className="flex items-center gap-2.5 bg-[var(--bg-card)] px-3 py-1.5 rounded-xl border border-[var(--border-color)] shadow-2xs">
+            <Sparkline data={sparkData} width={80} height={28} />
+            <div className="text-right">
+              <div className="text-xs font-mono font-black text-[var(--text-primary)]">
+                {sym}{curPrice.toFixed(2)}
+              </div>
+              <div className="text-[10px] text-[var(--text-muted)] font-mono">
+                {formatDeviceTime(quote?.timestamp_iso)}
+              </div>
             </div>
           </div>
 

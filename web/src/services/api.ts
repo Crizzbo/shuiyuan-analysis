@@ -21,6 +21,9 @@ import type {
   TaskSchedulerInfo,
   MarketStatisticsData,
   BatchQuotesResponseData,
+  ComprehensiveFinanceSuiteData,
+  TerminalNewsItem,
+  TerminalTasksConfigData,
 } from '../types/api'
 
 const BASE_URL = '' // 相对路径，由 Vite proxy 或 Python 网关同源处理
@@ -45,12 +48,13 @@ async function request<T>(endpoint: string, options?: RequestInit): Promise<ApiR
       }
     }
     return json
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : '网络连接异常'
     return {
       ok: false,
       data: {} as T,
       meta: { as_of: '', updated_at: '', source: '', status: 'NETWORK_ERROR' },
-      error: { code: 'NETWORK_ERROR', message: err.message || '网络连接异常' },
+      error: { code: 'NETWORK_ERROR', message: errorMsg },
     }
   }
 }
@@ -99,7 +103,7 @@ export const api = {
   distillEvents: () =>
     request<{
       message: string
-      cycle_result?: any
+      cycle_result?: Record<string, unknown>
       total_events: number
     }>('/api/events/distill', {
       method: 'POST',
@@ -198,29 +202,29 @@ export const api = {
     request<{ items: MarketArchiveItem[]; reconciliation?: MarketReconciliationMap }>('/api/terminal/market-archives'),
 
   getTerminalNews: () =>
-    request<{ items: any[] }>('/api/terminal/news'),
+    request<{ items: TerminalNewsItem[] }>('/api/terminal/news'),
 
   // 12. 自动带入数据金融估值与 24 大模型全息计算
   getFinanceCompanies: () =>
     request<{ companies: ValuationCompanyItem[]; total_count: number }>('/api/finance/companies'),
 
   getFinanceModels: (ticker = 'NVDA') =>
-    request<any>(`/api/finance/models?ticker=${encodeURIComponent(ticker)}`),
+    request<ComprehensiveFinanceSuiteData>(`/api/finance/models?ticker=${encodeURIComponent(ticker)}`),
 
   getAutoValuation: (ticker: string) =>
     request<AutomatedValuationData>(`/api/finance/auto-calculate?ticker=${encodeURIComponent(ticker)}`),
 
-  calculateAutoValuation: (ticker: string, adjustments?: Record<string, any>) =>
+  calculateAutoValuation: (ticker: string, adjustments?: Record<string, unknown>) =>
     request<AutomatedValuationData>('/api/finance/auto-calculate', {
       method: 'POST',
       body: JSON.stringify({ ticker, adjustments }),
     }),
 
   // 13. 全盘任务参数化 JSON 配置 (SSOT)
-  getTaskConfig: () => request<any>('/api/tasks/config'),
+  getTaskConfig: () => request<TerminalTasksConfigData>('/api/tasks/config'),
 
-  updateTaskConfig: (config: any) =>
-    request<any>('/api/tasks/config', {
+  updateTaskConfig: (config: TerminalTasksConfigData | Record<string, any>) =>
+    request<TerminalTasksConfigData>('/api/tasks/config', {
       method: 'POST',
       body: JSON.stringify(config),
     }),
