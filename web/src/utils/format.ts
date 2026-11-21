@@ -296,7 +296,7 @@ export function cleanEntityList(entities?: string | string[], max: number = 3): 
 
   for (const ent of list) {
     let clean = String(ent).trim()
-    clean = clean.replace(/^[🏢🏛️📊\s]+/, '').trim()
+    clean = clean.replace(/^(\p{Extended_Pictographic}|\uFE0F|\s)+/u, '').trim()
     if (!clean || ignored.has(clean.toLowerCase())) continue
     if (!seen.has(clean)) {
       seen.add(clean)

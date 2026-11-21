@@ -72,7 +72,8 @@ export const EventRadarView: React.FC<EventRadarViewProps> = ({
   onCloseDetail,
   onSelectTicker,
 }) => {
-  const allEvents = data?.events || []
+  const eventsList = data?.events
+  const allEvents = useMemo(() => eventsList || [], [eventsList])
   const sevCounts = data?.severity_counts || {}
   const availableDates = data?.available_dates || []
   const dateCounts = data?.date_counts || {}

@@ -5,14 +5,16 @@ interface SSEHandlers {
   onPipelineStatus?: (status: PipelineStatusData) => void
   onSnapshot?: (snapshot: DashboardSummaryData) => void
   onLogEntry?: (log: LogItem) => void
-  onCollectionUpdate?: (update: any) => void
+  onCollectionUpdate?: (update: unknown) => void
 }
 
 export function useSSE(handlers: SSEHandlers) {
   const [connected, setConnected] = useState(false)
   const [lastHeartbeat, setLastHeartbeat] = useState<number | null>(null)
   const handlersRef = useRef(handlers)
-  handlersRef.current = handlers
+  useEffect(() => {
+    handlersRef.current = handlers
+  })
 
   useEffect(() => {
     const es = new EventSource('/api/stream')
