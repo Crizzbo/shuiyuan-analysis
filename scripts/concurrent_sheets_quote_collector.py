@@ -1061,6 +1061,182 @@ class ConcurrentSheetsQuoteCollector:
             "checkpoint": self.get_stream_chunk_status(),
         }
 
+    # =========================================================================
+    # 美日全量 14,897 家上市公司全息固化抽取管线 (Solidified Full Universe)
+    # =========================================================================
+
+    def get_full_universe_records(self, market: str = "ALL") -> Dict[str, Dict[str, Any]]:
+        """固化加载美日全量资产池（美股 10,450 家 + 日股 4,447 家 = 共 14,897 家上市主体）."""
+        from financial_core.engines.tiered_universe_manager import TieredUniverseManager
+        tum = TieredUniverseManager.get_instance()
+        tum.load_universe()
+
+        records: Dict[str, Dict[str, Any]] = {}
+        m_upper = market.upper().strip()
+
+        # 美股 SEC EDGAR 全量
+        if m_upper in ("ALL", "US"):
+            for t, rec in tum._us_companies.items():
+                records[t] = {
+                    "ticker": t,
+                    "name": rec.company_name,
+                    "company_name": rec.company_name,
+                    "market": "US",
+                    "category": rec.tier,
+                    "cik": rec.cik,
+                    "currency": "USD",
+                    "price": 100.0,
+                    "has_filing": rec.has_local_filing,
+                }
+
+        # 日股 JPX 东证全市场
+        if m_upper in ("ALL", "JP"):
+            for t, rec in tum._jp_companies.items():
+                clean_t = rec.ticker.split(":")[-1]
+                records[clean_t] = {
+                    "ticker": clean_t,
+                    "name": rec.company_name,
+                    "company_name": rec.company_name,
+                    "market": "JP",
+                    "category": rec.tier,
+                    "jpx_code": rec.jpx_code,
+                    "currency": "JPY",
+                    "price": 2500.0,
+                    "industry": rec.industry or rec.sector,
+                    "has_filing": rec.has_local_filing,
+                }
+
+        return records
+
+    def create_full_universe_shards(
+        self,
+        chunk_size: int = 50,
+        market: str = "ALL",
+    ) -> List[SheetShard]:
+        """将全盘万家上市主体（14,897 家）切分为符合 Google Sheets 安全公式阈值（<=50/表）的分片矩阵."""
+        full_uni = self.get_full_universe_records(market=market)
+        shards: List[SheetShard] = []
+        items = list(full_uni.items())
+        total_items = len(items)
+
+        for i in range(0, total_items, chunk_size):
+            chunk = items[i : i + chunk_size]
+            shard_idx = (i // chunk_size) + 1
+            mkt_label = market.lower()
+            shard_id = f"shard_{shard_idx:03d}_full_{mkt_label}"
+            sheet_name = f"Shard_{shard_idx:03d}"
+            shard_title = f"全量美日资产池分片 {shard_idx} ({len(chunk)} 只标的)"
+
+            ticker_list = []
+            for t, m in chunk:
+                full_sym = get_full_symbol(t, m.get("market", "US"))
+                item_entry = dict(m)
+                item_entry["ticker"] = t
+                item_entry["full_symbol"] = full_sym
+                ticker_list.append(item_entry)
+
+            shards.append(
+                SheetShard(
+                    shard_id=shard_id,
+                    shard_title=shard_title,
+                    sheet_name=sheet_name,
+                    tickers=ticker_list,
+                )
+            )
+
+        return shards
+
+    def stream_collect_full_universe(
+        self,
+        market: str = "ALL",
+        chunk_size: int = 50,
+        max_workers: Optional[int] = None,
+        dry_run: bool = False,
+        chunk_delay: float = 0.05,
+        limit_chunks: Optional[int] = None,
+        on_progress: Optional[Callable[[int, int, Dict[str, Any]], None]] = None,
+    ) -> Dict[str, Any]:
+        """全盘美日万家上市公司固化流式分批采集主管道."""
+        start_time = time.time()
+        all_shards = self.create_full_universe_shards(chunk_size=chunk_size, market=market)
+        target_shards = all_shards[:limit_chunks] if limit_chunks else all_shards
+        total_shards = len(target_shards)
+
+        successful_shards = 0
+        failed_shards = 0
+        total_tickers_collected = 0
+        total_tickers_failed = 0
+        errors: List[str] = []
+        shard_summaries: List[Dict[str, Any]] = []
+
+        workers = max_workers or self.max_workers
+
+        for s_idx, shard in enumerate(target_shards, start=1):
+            try:
+                res = self.collect_all(
+                    shards=[shard],
+                    dry_run=dry_run,
+                    max_workers=workers,
+                )
+                successful_shards += 1
+                total_tickers_collected += res.successful_tickers
+                total_tickers_failed += res.failed_tickers
+                if res.errors:
+                    errors.extend(res.errors)
+
+                summary = {
+                    "shard_index": s_idx,
+                    "shard_id": shard.shard_id,
+                    "status": "success",
+                    "collected": res.successful_tickers,
+                    "failed": res.failed_tickers,
+                    "elapsed": round(res.elapsed_seconds, 2),
+                }
+                shard_summaries.append(summary)
+
+                if on_progress:
+                    try:
+                        on_progress(s_idx, total_shards, summary)
+                    except Exception:
+                        pass
+            except Exception as e:
+                failed_shards += 1
+                err_msg = f"全量分片 {shard.shard_id} 抽取失败: {e}"
+                errors.append(err_msg)
+                shard_summaries.append({
+                    "shard_index": s_idx,
+                    "shard_id": shard.shard_id,
+                    "status": "failed",
+                    "error": str(e),
+                })
+
+            if chunk_delay > 0 and s_idx < total_shards:
+                time.sleep(chunk_delay)
+
+        elapsed = time.time() - start_time
+        now_iso = datetime.now(timezone.utc).isoformat()
+
+        # 固化全量执行报告
+        full_report = {
+            "pipeline": "full_universe_solidified_collector",
+            "market": market,
+            "total_universe_tickers": len(self.get_full_universe_records(market=market)),
+            "total_shards": total_shards,
+            "successful_shards": successful_shards,
+            "failed_shards": failed_shards,
+            "total_tickers_collected": total_tickers_collected,
+            "total_tickers_failed": total_tickers_failed,
+            "elapsed_seconds": round(elapsed, 2),
+            "completed_at": now_iso,
+            "dry_run": dry_run,
+            "errors": errors[:50],
+        }
+
+        report_file = self.manifest_dir / f"full_universe_solidified_receipt_{market.lower()}.json"
+        report_file.write_text(json.dumps(full_report, indent=2, ensure_ascii=False), encoding="utf-8")
+
+        return full_report
+
 
 def main():
     """CLI 命令行入口."""
@@ -1078,10 +1254,38 @@ def main():
     parser.add_argument("--end-chunk", type=int, default=5, help="流式采集终止分块编号 (默认 5)")
     parser.add_argument("--chunk", type=int, default=None, help="仅采集单个指定分块编号 (如 --chunk 1)")
     parser.add_argument("--stream-status", action="store_true", help="查看流式分批采集当前全局检查点与入账进度")
+    parser.add_argument("--full-universe", action="store_true", help="固化抽取美日全量标的 (覆盖 14,897 家上市公司)")
+    parser.add_argument("--market", type=str, default="ALL", choices=["ALL", "US", "JP"], help="指定市场 (ALL / US / JP)")
+    parser.add_argument("--limit-chunks", type=int, default=None, help="限制抽取的分片数 (默认抽取全量)")
 
     args = parser.parse_args()
 
     collector = ConcurrentSheetsQuoteCollector(max_workers=args.workers)
+
+    if args.full_universe:
+        print("\n" + "=" * 90)
+        print("🌐 启动美日全量上市公司全息固化抽取管线 (Full Multi-Thousand Enterprise Universe)")
+        print(f"- 目标市场: {args.market.upper()}")
+        print(f"- 分片大小: {args.chunk_size} 只/表")
+        print(f"- 限制分片: {args.limit_chunks or '全量抽取'}")
+        print(f"- 执行模式: {'纯本地计算仿真 (0-Token Dry Run)' if args.dry_run else '生产并发采集调度'}")
+        print("=" * 90)
+        full_res = collector.stream_collect_full_universe(
+            market=args.market,
+            chunk_size=args.chunk_size,
+            max_workers=args.workers,
+            dry_run=args.dry_run,
+            limit_chunks=args.limit_chunks,
+        )
+        print("\n" + "=" * 90)
+        print("🎯 全量标的抽取完成！")
+        print(f"- 处理分片: {full_res['successful_shards']}/{full_res['total_shards']} 个分片")
+        print(f"- 标的入账: {full_res['total_tickers_collected']} 条权威报价已归档落盘")
+        print(f"- 调度耗时: {full_res['elapsed_seconds']:.2f} 秒")
+        print(f"- 产物收据: data/google-finance/manifests/full_universe_solidified_receipt_{args.market.lower()}.json")
+        print("\n" + get_data_readiness_banner())
+        print("=" * 90 + "\n")
+        return
 
     if args.stream_status:
         cp = collector.get_stream_chunk_status()

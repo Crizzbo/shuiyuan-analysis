@@ -30,6 +30,7 @@ NEW_YORK = ZoneInfo("America/New_York")
 MARKET_SESSIONS = {"US": (NEW_YORK, 800, 930), "JP": (TOKYO, 730, 900)}
 TASKS = {
     "QUOTE_COLLECT": ("授权行情归档核对", "手动"),
+    "FULL_UNIVERSE_COLLECT": ("美日万家标的全盘流式抽取", "全量 14,897 家上市公司分片并发"),
     "US_DAILY": ("美股全市场盘前日线与宏观", "工作日 08:00（纽约）"),
     "JP_DAILY": ("日股全市场盘前日线", "工作日 07:30（东京）"),
     "OFFICIAL_NEWS": ("官方财经资讯", "每小时"),
@@ -41,7 +42,7 @@ TASKS = {
     "STOCK_DOSSIER_COLLECT": ("指定个股全维度数据拉取与平账核对", "支持单票精准补采"),
 }
 START_COLLECTION_TASKS = ("US_DAILY", "JP_DAILY", "OFFICIAL_NEWS")
-COLLECTION_TASKS = (*START_COLLECTION_TASKS, "QUOTE_COLLECT", "INCREMENTAL_COLLECT", "STOCK_DOSSIER_COLLECT")
+COLLECTION_TASKS = (*START_COLLECTION_TASKS, "QUOTE_COLLECT", "FULL_UNIVERSE_COLLECT", "INCREMENTAL_COLLECT", "STOCK_DOSSIER_COLLECT")
 AUTOMATIC_TASKS = {*START_COLLECTION_TASKS, "STOCK_SCREENING", "INDICATOR_UPDATE", "INCREMENTAL_COLLECT"}
 
 TASK_METADATA = {
@@ -50,6 +51,12 @@ TASK_METADATA = {
         "dimension_name": "最新行情与时效核验",
         "description": "拉取最新行情报价与时效门禁核验",
         "serves_stock_analysis": "为个股 DCF 估值走廊提供现价锚与安全边际基准",
+    },
+    "FULL_UNIVERSE_COLLECT": {
+        "dimension": "PRICE_FULL",
+        "dimension_name": "全盘万家企业流式行情",
+        "description": "流式分批并发采集全量 14,897 家美日上市主体最新行情并断点续传",
+        "serves_stock_analysis": "为全市场万家上市公司提供权威行情报价与时效门禁基准",
     },
     "FINANCE_CALC": {
         "dimension": "FINANCIALS",
@@ -540,6 +547,8 @@ class TerminalScheduler:
         task = run["task"]
         if task == "QUOTE_COLLECT":
             return self._execute_quote_collect(run)
+        if task == "FULL_UNIVERSE_COLLECT":
+            return self._execute_full_universe_collect(run)
         if task == "LOCAL_AUDIT":
             status, result = self.audit()
             archives = self.market_archives()
@@ -896,6 +905,25 @@ class TerminalScheduler:
                 "message": f"云端采集降级，本地归档中 {valid} 项通过时效门禁: {e}",
                 "verified_count": valid, "blocked_count": len(data["stale_blocked_tickers"]),
             }
+
+    def _execute_full_universe_collect(self, run):
+        """全盘万家美日上市公司固化流式分批采集调度执行器 (14,897 家全覆盖)."""
+        from scripts.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
+
+        try:
+            collector = ConcurrentSheetsQuoteCollector(data_root=PROJECT_ROOT / "data")
+            mkt = run.get("market") or "ALL"
+            res = collector.stream_collect_full_universe(market=mkt, chunk_size=50, max_workers=4, dry_run=False)
+            msg = f"已通过流式管道完成 {mkt} 市场全盘万家企业抽取，成功入账 {res['total_tickers_collected']} 条权威报价"
+            return "SUCCESS", {
+                "message": msg,
+                "total_shards": res["total_shards"],
+                "successful_shards": res["successful_shards"],
+                "total_tickers": res["total_tickers_collected"],
+                "elapsed_seconds": res["elapsed_seconds"],
+            }
+        except Exception as e:
+            return "BLOCKED", {"message": f"全盘万家抽取异常: {e}"}
 
     def _execute_stock_dossier_collect(self, run):
         """精准执行单票全维度数据收集与自动估值（行情、三表平账、DCF走廊、事件穿透）."""

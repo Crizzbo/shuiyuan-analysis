@@ -77,6 +77,10 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
   const [runningStreamCollect, setRunningStreamCollect] = useState(false)
   const [streamResult, setStreamResult] = useState<any | null>(null)
 
+  // 5.2 固化全量美日万家标的抽取状态
+  const [runningFullUniverse, setRunningFullUniverse] = useState(false)
+  const [selectedFullUniverseMarket, setSelectedFullUniverseMarket] = useState<'ALL' | 'US' | 'JP'>('ALL')
+
   // 6. 参数配置弹窗
   const [configModalOpen, setConfigModalOpen] = useState(false)
   const [selectedConfigTaskId, setSelectedConfigTaskId] = useState<string | null>(null)
@@ -86,6 +90,12 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
 
   // 预设资产池快速填充
   const PRESET_POOLS = [
+    {
+      id: 'full_universe_solidified',
+      label: '🌐 固化美日全量池 (14,897家)',
+      icon: '🏛️',
+      tickers: 'ALL',
+    },
     {
       id: 'full_universe',
       label: '⚡ Tier-0 核心池 (63只 / 全盘14,897家)',
@@ -208,6 +218,43 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
       })
     } finally {
       setRunningStreamCollect(false)
+    }
+  }
+
+  // 固化抽取美日全量标的 (14,897 家上市公司全盘流式覆盖)
+  const handleFullUniverseCollect = async (market: 'ALL' | 'US' | 'JP' = selectedFullUniverseMarket) => {
+    setRunningFullUniverse(true)
+    const mktName = market === 'ALL' ? '美日全量 (14,897 家)' : market === 'US' ? '美股全量 (10,450 家)' : '日股全量 (4,447 家)'
+    showToast({
+      type: 'info',
+      title: `🌐 启动固化全量标的流式抽取: ${mktName}`,
+      message: '正在分批切片（每表 50 只）并流式并发入账，边渲染边存证...',
+    })
+    try {
+      const res = await api.streamCollectFullUniverse(market, 50, undefined, false)
+      if (res.ok && res.data) {
+        showToast({
+          type: 'success',
+          title: '🎯 全量万家标的抽取成功！',
+          message: res.data.message || `已成功入账 ${res.data.data.total_tickers_collected} 条权威报价`,
+        })
+        void loadData()
+      } else {
+        const errMsg = typeof res.error === 'string' ? res.error : (res.error as any)?.message || '全量抽取过程中遇到错误'
+        showToast({
+          type: 'error',
+          title: '全量抽取未完全成功',
+          message: errMsg,
+        })
+      }
+    } catch (e: any) {
+      showToast({
+        type: 'error',
+        title: '全量抽取请求异常',
+        message: e?.message || '网络连接或服务异常',
+      })
+    } finally {
+      setRunningFullUniverse(false)
     }
   }
 
@@ -715,6 +762,45 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
                     </span>
                   </button>
                 </div>
+              </div>
+
+              {/* 🏛️ 固化美日全量标的抽取专属控制区 */}
+              <div className="rounded-xl border border-indigo-200/90 bg-gradient-to-r from-indigo-50/80 via-white to-sky-50/80 p-3 flex flex-wrap items-center justify-between gap-3 shadow-2xs">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-bold text-slate-800">🏛️ 固化全量美日抽取:</span>
+                  <div className="flex items-center gap-1">
+                    {(['ALL', 'US', 'JP'] as const).map(m => (
+                      <button
+                        key={m}
+                        type="button"
+                        onClick={() => setSelectedFullUniverseMarket(m)}
+                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold cursor-pointer transition-all ${
+                          selectedFullUniverseMarket === m
+                            ? 'bg-indigo-600 text-white shadow-2xs'
+                            : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                        }`}
+                      >
+                        {m === 'ALL' && '美日全量 (14,897家)'}
+                        {m === 'US' && '美股全量 (10,450家)'}
+                        {m === 'JP' && '日股全量 (4,447家)'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  disabled={runningFullUniverse}
+                  onClick={() => void handleFullUniverseCollect(selectedFullUniverseMarket)}
+                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-xs shadow-md hover:shadow-lg transition-all cursor-pointer disabled:opacity-50 flex items-center gap-1.5"
+                >
+                  <span>🚀</span>
+                  <span>
+                    {runningFullUniverse
+                      ? `正在流式抽取 ${selectedFullUniverseMarket} 全量标的…`
+                      : `固化一键抽取 ${selectedFullUniverseMarket === 'ALL' ? '美日全量 (14,897 家)' : selectedFullUniverseMarket === 'US' ? '美股全量 (10,450 家)' : '日股全量 (4,447 家)'}`}
+                  </span>
+                </button>
               </div>
 
               {/* 最近一次流式采集结果提示 */}

@@ -453,6 +453,10 @@ class TerminalQuotesMixin:
             if item and item not in cleaned_tickers:
                 cleaned_tickers.append(item)
 
+        # 固化全量美日万家标的快捷指令支持
+        if len(cleaned_tickers) == 1 and cleaned_tickers[0] in ("ALL", "FULL", "FULL_UNIVERSE", "GLOBAL"):
+            return self.stream_collect_full_universe_quotes(market="ALL", dry_run=False)
+
         if not cleaned_tickers:
             # 默认拉取全量最新价格 (覆盖全部分片多资产池)
             from scripts.batch_replenish_universe_quotes import REPLENISHMENT_UNIVERSE
@@ -877,5 +881,46 @@ class TerminalQuotesMixin:
         return 200, {
             "status": "success",
             "data": status,
+        }
+
+    def stream_collect_full_universe_quotes(
+        self,
+        market: str = "ALL",
+        chunk_size: int = 50,
+        limit_chunks: Optional[int] = None,
+        dry_run: bool = False,
+        max_workers: int = 4,
+    ) -> Tuple[int, Dict[str, Any]]:
+        """全盘万家美日标的固化流式抽取 (14,897 家上市公司全覆盖)."""
+        from scripts.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
+
+        collector = ConcurrentSheetsQuoteCollector(data_root=self.root / "data", max_workers=max_workers)
+        result = collector.stream_collect_full_universe(
+            market=market,
+            chunk_size=chunk_size,
+            max_workers=max_workers,
+            dry_run=dry_run,
+            limit_chunks=limit_chunks,
+        )
+
+        sse_mgr = getattr(self, "sse_manager", None)
+        if sse_mgr:
+            try:
+                sse_mgr.broadcast(
+                    "full_universe_collected",
+                    {
+                        "market": market,
+                        "total_tickers": result["total_tickers_collected"],
+                        "total_shards": result["total_shards"],
+                        "elapsed": result["elapsed_seconds"],
+                    },
+                )
+            except Exception:
+                pass
+
+        return 200, {
+            "status": "success",
+            "message": f"成功完成 {market} 市场全盘万家标的流式抽取，共处理 {result['successful_shards']}/{result['total_shards']} 个分片，入账 {result['total_tickers_collected']} 条权威报价",
+            "data": result,
         }
 

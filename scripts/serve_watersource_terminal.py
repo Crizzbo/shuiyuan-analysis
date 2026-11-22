@@ -489,6 +489,22 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 self._send_json(code, res)
                 return
 
+            if path in ("/api/terminal/quotes/full-universe", "/api/quotes/full-universe"):
+                mkt = str(body.get("market") or "ALL").upper()
+                c_size = _safe_int(body.get("chunk_size"), 50, min_val=10, max_val=200)
+                lim = _safe_int(body.get("limit_chunks"), 0, min_val=0, max_val=500) or None
+                dry_run = bool(body.get("dry_run", False))
+                workers = _safe_int(body.get("max_workers"), 4, min_val=1, max_val=16)
+                code, res = svc.stream_collect_full_universe_quotes(
+                    market=mkt,
+                    chunk_size=c_size,
+                    limit_chunks=lim,
+                    dry_run=dry_run,
+                    max_workers=workers,
+                )
+                self._send_json(code, res)
+                return
+
             if path in ("/api/terminal/ledger/verify", "/api/ledger/verify"):
                 self._send_json(200, svc.get_settings())
                 return

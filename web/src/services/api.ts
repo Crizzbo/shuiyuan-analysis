@@ -128,6 +128,35 @@ export const api = {
       }),
     }),
 
+  // 3.2 全盘万家美日上市公司固化流式抽取 (14,897 家上市公司全覆盖)
+  streamCollectFullUniverse: (market: 'ALL' | 'US' | 'JP' = 'ALL', chunkSize = 50, limitChunks?: number, dryRun = false) =>
+    request<{
+      status: string
+      message: string
+      data: {
+        pipeline: string
+        market: string
+        total_universe_tickers: number
+        total_shards: number
+        successful_shards: number
+        failed_shards: number
+        total_tickers_collected: number
+        total_tickers_failed: number
+        elapsed_seconds: number
+        completed_at: string
+        dry_run: boolean
+        errors: string[]
+      }
+    }>('/api/terminal/quotes/full-universe', {
+      method: 'POST',
+      body: JSON.stringify({
+        market,
+        chunk_size: chunkSize,
+        limit_chunks: limitChunks,
+        dry_run: dryRun,
+      }),
+    }),
+
   // 4. 宏观与量化指标
   getLatestIndicators: () => request<IndicatorsData>('/api/indicators/latest'),
 
