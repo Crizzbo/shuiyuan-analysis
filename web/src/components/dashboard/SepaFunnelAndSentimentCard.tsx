@@ -45,49 +45,75 @@ export function SepaFunnelAndSentimentCard({
         </div>
 
         {/* 漏斗 5 阶层 */}
-        <div className="space-y-2">
-          {[
+        {(() => {
+          const tot = funnel.total_screened || 1
+          const stages = [
             { stage: '全盘标的池扫描', count: funnel.total_screened, pct: '100%', barW: '100%' },
-            { stage: '站上 200 日牛熊线', count: funnel.stage_1_base_building, pct: '25.7%', barW: '75%' },
-            { stage: '第二阶段主升浪结构', count: funnel.stage_2_trend_aligned, pct: '7.5%', barW: '50%' },
-            { stage: '高相对强度 (RS ≥ 80)', count: funnel.stage_3_near_high, pct: '3.2%', barW: '32%' },
-            { stage: 'VCP 临界突破候选', count: funnel.stage_4_vcp_candidates, pct: '0.12%', barW: '18%' },
-          ].map((f, i) => (
-            <div key={f.stage} className="space-y-1">
-              <div className="flex items-center justify-between text-[11px]">
-                <div className="flex items-center gap-1.5">
-                  <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold ${
-                    i === 4 ? 'bg-gradient-to-r from-amber-500 to-rose-600 text-white shadow-xs' : 'bg-slate-100 text-slate-700'
-                  }`}>
-                    {i + 1}
-                  </span>
-                  <span className={`font-medium ${i === 4 ? 'text-rose-600 font-bold' : 'text-[var(--text-secondary)]'}`}>
-                    {f.stage}
-                  </span>
+            {
+              stage: '站上 200 日牛熊线',
+              count: funnel.stage_1_base_building,
+              pct: `${((funnel.stage_1_base_building / tot) * 100).toFixed(1)}%`,
+              barW: `${Math.min(100, Math.max(5, (funnel.stage_1_base_building / tot) * 100 * 3))}%`,
+            },
+            {
+              stage: '第二阶段主升浪结构',
+              count: funnel.stage_2_trend_aligned,
+              pct: `${((funnel.stage_2_trend_aligned / tot) * 100).toFixed(1)}%`,
+              barW: `${Math.min(100, Math.max(5, (funnel.stage_2_trend_aligned / tot) * 100 * 5))}%`,
+            },
+            {
+              stage: '高相对强度 (RS ≥ 80)',
+              count: funnel.stage_3_near_high,
+              pct: `${((funnel.stage_3_near_high / tot) * 100).toFixed(1)}%`,
+              barW: `${Math.min(100, Math.max(4, (funnel.stage_3_near_high / tot) * 100 * 8))}%`,
+            },
+            {
+              stage: 'VCP 临界突破候选',
+              count: funnel.stage_4_vcp_candidates,
+              pct: `${((funnel.stage_4_vcp_candidates / tot) * 100).toFixed(2)}%`,
+              barW: `${Math.min(100, Math.max(3, (funnel.stage_4_vcp_candidates / tot) * 100 * 40))}%`,
+            },
+          ]
+          return (
+            <div className="space-y-2">
+              {stages.map((f, i) => (
+                <div key={f.stage} className="space-y-1">
+                  <div className="flex items-center justify-between text-[11px]">
+                    <div className="flex items-center gap-1.5">
+                      <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold ${
+                        i === 4 ? 'bg-gradient-to-r from-amber-500 to-rose-600 text-white shadow-xs' : 'bg-slate-100 text-slate-700'
+                      }`}>
+                        {i + 1}
+                      </span>
+                      <span className={`font-medium ${i === 4 ? 'text-rose-600 font-bold' : 'text-[var(--text-secondary)]'}`}>
+                        {f.stage}
+                      </span>
+                    </div>
+                    <span className="font-mono font-bold text-[var(--text-primary)]">
+                      {f.count.toLocaleString()} 家 <span className="text-[var(--text-muted)] text-[10px]">({f.pct})</span>
+                    </span>
+                  </div>
+                  <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all duration-500 ${
+                        i === 4
+                          ? 'bg-gradient-to-r from-amber-500 to-rose-600'
+                          : i === 0
+                          ? 'bg-slate-300'
+                          : i === 1
+                          ? 'bg-[#176249]/40'
+                          : i === 2
+                          ? 'bg-[#176249]/70'
+                          : 'bg-[#176249]'
+                      }`}
+                      style={{ width: f.barW }}
+                    />
+                  </div>
                 </div>
-                <span className="font-mono font-bold text-[var(--text-primary)]">
-                  {f.count.toLocaleString()} 家 <span className="text-[var(--text-muted)] text-[10px]">({f.pct})</span>
-                </span>
-              </div>
-              <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
-                <div
-                  className={`h-full rounded-full transition-all duration-500 ${
-                    i === 4
-                      ? 'bg-gradient-to-r from-amber-500 to-rose-600'
-                      : i === 0
-                      ? 'bg-slate-300'
-                      : i === 1
-                      ? 'bg-[#176249]/40'
-                      : i === 2
-                      ? 'bg-[#176249]/70'
-                      : 'bg-[#176249]'
-                  }`}
-                  style={{ width: f.barW }}
-                />
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+          )
+        })()}
 
         {/* 顶尖 VCP 突破候选个股卡片直达 */}
         <div className="space-y-2 pt-2 border-t border-[var(--border-color)]/60">

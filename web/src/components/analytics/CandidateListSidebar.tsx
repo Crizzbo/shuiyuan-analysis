@@ -5,12 +5,14 @@ import { Pagination } from '../Pagination'
 interface CandidateListSidebarProps {
   candidatesData: CandidatesData | null
   marketFilter: 'ALL' | 'US' | 'JP'
+  assetCategoryFilter: string
   selectedTicker: string
   searchQuery: string
   currentPage: number
   loadingCandidates: boolean
   recollectingTicker: boolean
   onMarketChange: (m: 'ALL' | 'US' | 'JP') => void
+  onAssetCategoryChange: (cat: string) => void
   onSearchChange: (q: string) => void
   onSearchSubmit: (e: FormEvent) => void
   onClearSearch: () => void
@@ -19,15 +21,25 @@ interface CandidateListSidebarProps {
   onRecollectStock: (ticker: string) => void
 }
 
+const ASSET_CATEGORIES = [
+  { id: 'ALL', label: '全部分类' },
+  { id: 'Growth_Equity', label: '成长动量' },
+  { id: 'Broad_Or_Sector_ETF', label: '核心ETF' },
+  { id: 'Gold_And_Commodity', label: '黄金大宗' },
+  { id: 'Dividend_And_Defensive', label: '红利防御' },
+] as const
+
 export function CandidateListSidebar({
   candidatesData,
   marketFilter,
+  assetCategoryFilter,
   selectedTicker,
   searchQuery,
   currentPage,
   loadingCandidates,
   recollectingTicker,
   onMarketChange,
+  onAssetCategoryChange,
   onSearchChange,
   onSearchSubmit,
   onClearSearch,
@@ -67,6 +79,25 @@ export function CandidateListSidebar({
           ))}
         </div>
 
+        {/* 多资产自适应分类过滤胶囊 */}
+        <div className="grid grid-cols-5 gap-0.5 sm:gap-1 bg-[var(--surface-color)] p-0.5 rounded-lg border border-[var(--border-color)]">
+          {ASSET_CATEGORIES.map(cat => (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => onAssetCategoryChange(cat.id)}
+              className={`py-1 px-0.5 text-[10px] font-semibold rounded transition-all cursor-pointer text-center truncate ${
+                assetCategoryFilter === cat.id
+                  ? 'bg-[#176249] text-white shadow-xs'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+              }`}
+              title={cat.label}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
         {/* 搜索框 */}
         <form onSubmit={onSearchSubmit} className="relative flex items-center">
           <input
@@ -74,13 +105,14 @@ export function CandidateListSidebar({
             value={searchQuery}
             onChange={e => onSearchChange(e.target.value)}
             placeholder="搜索代码或名称 (如 NVDA, 8035)..."
-            className="w-full text-xs rounded-lg border border-[var(--border-color)] bg-[var(--bg-card)] px-3 py-1.5 pr-14 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[#176249]"
+            className="w-full text-xs rounded-lg border border-[var(--border-color)] bg-[var(--bg-card)] px-3 py-1.5 pr-16 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[#176249]"
           />
           {searchQuery && (
             <button
               type="button"
               onClick={onClearSearch}
-              className="absolute right-9 text-[11px] text-[var(--text-muted)] hover:text-[var(--text-primary)] px-1"
+              className="absolute right-12 text-[12px] text-[var(--text-muted)] hover:text-[var(--text-primary)] px-1 cursor-pointer"
+              title="清除搜索"
             >
               ✕
             </button>
@@ -131,8 +163,8 @@ export function CandidateListSidebar({
                 onClick={() => onSelectTicker(item.ticker)}
                 className={`w-full text-left p-3 transition-all cursor-pointer flex flex-col gap-1.5 ${
                   isSelected
-                    ? 'bg-slate-100 border-l-4 border-l-[#176249]'
-                    : 'hover:bg-[var(--bg-card)]'
+                    ? 'bg-[#176249]/15 dark:bg-[#176249]/35 border-l-4 border-l-[#176249] shadow-2xs'
+                    : 'hover:bg-slate-100/70 dark:hover:bg-slate-800/60'
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -161,20 +193,32 @@ export function CandidateListSidebar({
 
                 <div className="flex items-center justify-between text-[10px] pt-0.5">
                   <div className="flex items-center gap-1.5">
-                    <span className="px-1.5 py-0.2 rounded font-medium bg-slate-100 text-slate-700 border border-slate-200">
+                    <span className="px-1.5 py-0.2 rounded font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
                       {item.readiness_status || (item.has_quote ? '行情已就绪' : '待同步')}
                     </span>
-                    {item.ticker === 'NVDA' ? (
-                      <span className="px-1.5 py-0.2 rounded bg-rose-50 text-rose-600 border border-rose-200 font-mono text-[9px] font-bold">
+                    {item.asset_category === 'Gold_And_Commodity' ? (
+                      <span className="px-1.5 py-0.2 rounded bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800 font-mono text-[9px] font-bold">
+                        黄金大宗
+                      </span>
+                    ) : item.asset_category === 'Broad_Or_Sector_ETF' ? (
+                      <span className="px-1.5 py-0.2 rounded bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 font-mono text-[9px] font-bold">
+                        核心ETF
+                      </span>
+                    ) : item.asset_category === 'Dividend_And_Defensive' ? (
+                      <span className="px-1.5 py-0.2 rounded bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 font-mono text-[9px] font-bold">
+                        红利防御
+                      </span>
+                    ) : item.ticker === 'NVDA' ? (
+                      <span className="px-1.5 py-0.2 rounded bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800 font-mono text-[9px] font-bold">
                         估值溢价
                       </span>
                     ) : item.ticker === 'AMD' || item.ticker === 'AVGO' ? (
-                      <span className="px-1.5 py-0.2 rounded bg-blue-50 text-blue-600 border border-blue-200 font-mono text-[9px] font-bold">
+                      <span className="px-1.5 py-0.2 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800 font-mono text-[9px] font-bold">
                         安全边际
                       </span>
                     ) : (
-                      <span className="px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200 font-mono text-[9px]">
-                        公允跟踪
+                      <span className="px-1.5 py-0.2 rounded bg-cyan-50 text-cyan-700 border border-cyan-200 font-mono text-[9px]">
+                        成长动量
                       </span>
                     )}
                   </div>

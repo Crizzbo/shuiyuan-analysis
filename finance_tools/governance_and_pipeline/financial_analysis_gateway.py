@@ -639,7 +639,7 @@ class FinancialAnalysisGateway:
         )
 
     def get_top_screening_candidates(
-        self, top_n: int = 10, market: str = "ALL"
+        self, top_n: int = 10, market: str = "ALL", asset_category: str = "ALL"
     ) -> Dict[str, Any]:
         """单一事实来源：获取全盘初筛准入的顶级优质候选标的 (Stage_2_Pivot_Ready 与 Watchlist)."""
         from finance_tools.screening.screening_candidate_ranker import ScreeningCandidateRanker
@@ -647,8 +647,11 @@ class FinancialAnalysisGateway:
         data = ranker.aggregate_and_rank_candidates()
         pivots = data.get("pivot_ready_candidates", [])
         watchlists = data.get("watchlist_candidates", [])
+        categorized = data.get("categorized_candidates", {})
         m_breakdown = data.get("market_chunks_breakdown", {"US": 0, "JP": 0})
+        cat_breakdown = data.get("asset_category_breakdown", {})
         m_upper = market.upper()
+        cat_filter = (asset_category or "ALL").strip()
 
         if m_upper != "ALL":
             pivots = [c for c in pivots if c.get("market") == m_upper]
@@ -657,15 +660,28 @@ class FinancialAnalysisGateway:
         else:
             market_chunks = data.get("source_result_chunks_count", 0)
 
+        if cat_filter != "ALL":
+            pivots = [c for c in pivots if c.get("asset_category", "").lower() == cat_filter.lower()]
+            watchlists = [c for c in watchlists if c.get("asset_category", "").lower() == cat_filter.lower()]
+
         return {
             "market": m_upper,
+            "asset_category": cat_filter,
             "global_chunks_count": data.get("source_result_chunks_count", 0),
             "market_chunks_count": market_chunks,
             "source_result_chunks_count": market_chunks,  # 向下兼容
             "total_qualified_count": len(pivots) + len(watchlists),
             "tier0_pivot_ready_count": len(pivots),
             "tier1_watchlist_count": len(watchlists),
+            "asset_category_breakdown": cat_breakdown,
             "top_pivot_ready_candidates": pivots[:top_n],
             "top_watchlist_candidates": watchlists[:top_n],
+            "categorized_candidates": categorized,
         }
+
+    def get_top_multi_asset_candidates(
+        self, top_n: int = 10, market: str = "ALL", asset_category: str = "ALL"
+    ) -> Dict[str, Any]:
+        """买方多资产初筛统一查询接口 (支持 Growth, ETF, Gold/Commodity, Dividend 分流)."""
+        return self.get_top_screening_candidates(top_n=top_n, market=market, asset_category=asset_category)
 

@@ -73,8 +73,10 @@ class RawNewsItem:
     raw_hash: str = field(init=False)
 
     def __post_init__(self):
-        # 基于标题与前 200 字符生成唯一指纹，确保幂等排重
-        fingerprint = f"{self.title.strip()}::{self.content[:200].strip()}"
+        # 统一规范化标题字符串，去除多余空白字符
+        self.title = re.sub(r"\s+", " ", self.title).strip()
+        # 基于规范化标题与前 200 字符生成唯一指纹，确保幂等排重
+        fingerprint = f"{self.title}::{self.content[:200].strip()}"
         self.raw_hash = hashlib.sha256(fingerprint.encode("utf-8")).hexdigest()
 
 
@@ -252,6 +254,13 @@ class EventRadarEngine:
             self.config_path = Path(config_path)
         self.dictionaries, self.blacklist = self._load_rules(self.config, self.config_path)
 
+    @staticmethod
+    def _matches_keyword(tag_lower: str, text_lower: str) -> bool:
+        """针对短英文缩写(如 sec, itc, ila, fed, boj, ndaa 等)避免嵌入英文字词内部(如 available/sector/stitch)."""
+        if tag_lower.isascii() and tag_lower.isalnum() and len(tag_lower) <= 4:
+            return bool(re.search(rf"(?<![a-z]){re.escape(tag_lower)}(?![a-z])", text_lower))
+        return tag_lower in text_lower
+
     def pre_filter(self, item: RawNewsItem) -> Tuple[bool, List[str], EventCategory]:
         """第一道防线：零 Token 物理去噪与关键词匹配 (16大全景信息收集维度).
 
@@ -270,11 +279,18 @@ class EventRadarEngine:
 
         for dict_key, cat_enum in self.CATEGORY_MAPPING:
             for tag in self.dictionaries.get(dict_key, []):
-                if tag.lower() in combined_text:
+                tag_lower = tag.lower()
+                if self._matches_keyword(tag_lower, combined_text):
                     matched_tags.append(tag)
                     category_hits[cat_enum] += 1
 
         if not matched_tags:
+            # 官方信源保底准入：如果是官方监管/中央银行/官方发行人公报，默认归入对应政策/宏观/企业动态分类，确保官方披露 100% 入库不遗漏
+            cred_tier, _ = self.evaluate_source_credibility(item.source)
+            if cred_tier == SourceCredibilityTier.TIER_1_OFFICIAL_REGULATORY:
+                return True, ["official_regulatory_bulletin"], EventCategory.STATE_POLICY
+            elif cred_tier == SourceCredibilityTier.TIER_2_OFFICIAL_DISCLOSURE:
+                return True, ["issuer_official_announcement"], EventCategory.OTHER_MACRO
             return False, [], EventCategory.OTHER_MACRO
 
         # 选取命中频率最高的业务分类
@@ -338,7 +354,8 @@ class EventRadarEngine:
         tier2_signatures = [
             "investor relations", "press release", "port authority",
             "ila", "ilwu", "union", "lme official", "statement", "port notice",
-            "ir pr", "_ir", "ir_"
+            "ir pr", "_ir", "ir_", "blogs.nvidia.com", "blogs.microsoft.com",
+            "blog.google", "apple.com/newsroom", "company blog", "official blog"
         ]
         if any(sig in s_norm for sig in tier2_signatures) or s_norm.endswith(" pr") or s_norm.endswith(" ir"):
             return SourceCredibilityTier.TIER_2_OFFICIAL_DISCLOSURE, 0.9

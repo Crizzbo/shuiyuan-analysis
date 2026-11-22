@@ -298,6 +298,11 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 self._send_json(code, res)
                 return
 
+            if path in ("/api/terminal/quotes/stream-chunk-status", "/api/quotes/stream-chunk-status"):
+                code, res = svc.get_stream_chunk_status()
+                self._send_json(code, res)
+                return
+
             if path == "/api/indicators/latest":
                 self._send_json(200, svc.get_latest_indicators())
                 return
@@ -352,11 +357,12 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
 
             if path == "/api/analytics/candidates":
                 market = (_q1("market", "ALL") or "ALL").upper()
+                asset_cat = (_q1("asset_category", "ALL") or "ALL")
                 limit = _safe_int(_q1("limit"), 20, min_val=1, max_val=100)
                 page = _safe_int(_q1("page"), 1, min_val=1, max_val=10000)
                 page_size = _safe_int(_q1("page_size"), limit, min_val=1, max_val=100)
                 q_kw = (_q1("q") or "").strip()
-                self._send_json(200, svc.get_analytics_candidates(market=market, limit=limit, page=page, page_size=page_size, q=q_kw))
+                self._send_json(200, svc.get_analytics_candidates(market=market, asset_category=asset_cat, limit=limit, page=page, page_size=page_size, q=q_kw))
                 return
 
             if path == "/api/analytics/company":
@@ -466,6 +472,20 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 tickers = body.get("tickers") or []
                 force_refresh = bool(body.get("force_refresh", False))
                 code, res = svc.batch_collect_stock_quotes(tickers, force_refresh=force_refresh)
+                self._send_json(code, res)
+                return
+
+            if path in ("/api/terminal/quotes/stream-chunk-collect", "/api/quotes/stream-chunk-collect"):
+                start_c = _safe_int(body.get("start_chunk"), 1, min_val=1, max_val=150)
+                end_c = _safe_int(body.get("end_chunk"), 5, min_val=1, max_val=150)
+                dry_run = bool(body.get("dry_run", False))
+                workers = _safe_int(body.get("max_workers"), 4, min_val=1, max_val=16)
+                code, res = svc.stream_chunk_collect_quotes(
+                    start_chunk=start_c,
+                    end_chunk=end_c,
+                    dry_run=dry_run,
+                    max_workers=workers,
+                )
                 self._send_json(code, res)
                 return
 

@@ -208,28 +208,40 @@ class TerminalQuotesMixin:
             price = obj.get("current_price")
             # 采集时间只说明文件何时落盘，不能作为报价的市场时间。
             is_prev_close = (obj.get("session_type") == "previous_close_baseline")
-            staleness_limit = 96.0 if is_prev_close else 24.0
+            is_weekend = datetime.now(timezone.utc).weekday() in (5, 6)
+            staleness_limit = 96.0 if (is_prev_close or is_weekend) else 24.0
 
             verified = {}
-            if obj.get("is_valid") and isinstance(price, (int, float)) and math.isfinite(price) and timestamp:
+            if isinstance(price, (int, float)) and math.isfinite(price) and timestamp:
                 verified = UnifiedDataCollectionGateway.verify_and_prepare_quote(
                     ticker, market, price, timestamp, currency,
                     max_staleness_hours=staleness_limit,
                 )
             is_valid = bool(verified.get("is_valid"))
             staleness = verified.get("session_status", "stale_blocked")
-            if is_valid and obj.get("session_type") == "previous_close_baseline":
+            if is_valid and (obj.get("session_type") == "previous_close_baseline" or is_weekend):
                 staleness = "previous_close_baseline"
             data_status = (
                 "STALE_BLOCKED" if not is_valid else
                 "PREVIOUS_CLOSE" if staleness == "previous_close_baseline" else "FRESH"
             )
+            from scripts.batch_replenish_universe_quotes import REPLENISHMENT_UNIVERSE
+            meta = REPLENISHMENT_UNIVERSE.get(ticker)
+            prev_close = meta.get("prev_close") if meta else obj.get("previous_close")
+            chg = round(price - prev_close, 2) if (price is not None and prev_close) else None
+            chg_pct = round(((price - prev_close) / prev_close) * 100.0, 2) if (price is not None and prev_close) else None
+            spark_data = [prev_close, price] if (prev_close and price is not None) else ([price] if price is not None else [])
+
             formatted_quotes[ticker] = {
                 "ticker": ticker,
                 "market": market,
                 "company_name": obj.get("company_name") or TICKER_ZH_FALLBACK.get(ticker, ticker),
                 "price": price if is_valid else None,
                 "raw_price": price if isinstance(price, (int, float)) and math.isfinite(price) else None,
+                "previous_close": prev_close,
+                "change": chg,
+                "change_percent": chg_pct,
+                "sparkline_data": spark_data,
                 "currency": currency,
                 "formatted_price": obj.get("formatted_price") or ((f"¥{price:,.2f}" if market == "JP" else f"${price:,.2f}") if isinstance(price, (int, float)) else str(price)) if is_valid else "—",
                 "timestamp_iso": timestamp,
@@ -442,10 +454,24 @@ class TerminalQuotesMixin:
                 cleaned_tickers.append(item)
 
         if not cleaned_tickers:
-            code, err = self.error_envelope("MISSING_TICKERS", "请提供至少一个有效的股票代码", status_code=400)
-            return code, err
+            # 默认拉取全量最新价格 (覆盖全部分片多资产池)
+            from scripts.batch_replenish_universe_quotes import REPLENISHMENT_UNIVERSE
+            cleaned_tickers = list(REPLENISHMENT_UNIVERSE.keys())
 
         verifier = MarketQuoteVerifier(self.root)
+
+        # 调度多表并发采集引擎以获取全量或指定标的最新云端报价
+        try:
+            from scripts.batch_replenish_universe_quotes import REPLENISHMENT_UNIVERSE
+            from scripts.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
+            collector = ConcurrentSheetsQuoteCollector(data_root=self.root / "data")
+            is_full = (len(cleaned_tickers) >= len(REPLENISHMENT_UNIVERSE))
+            filter_targets = None if is_full else cleaned_tickers
+            shards = collector.create_shards(tickers_filter=filter_targets)
+            collector.collect_all(shards=shards, max_workers=4)
+        except Exception:
+            pass
+
         quotes_map, _ = self._read_latest_raw_quotes()
 
         # 权威基准价格表与公司名称索引
@@ -510,14 +536,17 @@ class TerminalQuotesMixin:
             company_name = TICKER_ZH_FALLBACK.get(ticker, ticker)
             volume = "—"
 
-            if base_info:
+            # 优先从归档与实时拉取的行情底账中获取最新报价
+            if existing_q and existing_q.get("price") is not None and existing_q.get("is_valid"):
+                price = existing_q["price"]
+                prev_close = existing_q.get("previous_close") or (base_info.get("prev_close") if base_info else None)
+                company_name = existing_q.get("company_name", company_name)
+                volume = str(existing_q.get("volume", base_info.get("vol", "—") if base_info else "—"))
+            elif base_info:
                 price = base_info["price"]
                 prev_close = base_info.get("prev_close")
                 company_name = base_info.get("name", company_name)
                 volume = base_info.get("vol", "—")
-            elif existing_q and existing_q.get("price") is not None and existing_q.get("is_valid"):
-                price = existing_q["price"]
-                company_name = existing_q.get("company_name", company_name)
             else:
                 price = 100.00 if market == "US" else 1000.00
 
@@ -800,4 +829,53 @@ class TerminalQuotesMixin:
             source="google-finance/raw + macro-reviewed-20261012 + terminal_scheduler",
             status="PARTIAL",
         )
+
+    def stream_chunk_collect_quotes(
+        self,
+        start_chunk: int = 1,
+        end_chunk: int = 5,
+        dry_run: bool = False,
+        max_workers: int = 4,
+    ) -> Tuple[int, Dict[str, Any]]:
+        """全盘流式分批并发采集 (Chunk-and-Stream Option 1)."""
+        from scripts.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
+
+        collector = ConcurrentSheetsQuoteCollector(data_root=self.root / "data", max_workers=max_workers)
+        result = collector.stream_collect_chunks(
+            start_chunk=start_chunk,
+            end_chunk=end_chunk,
+            dry_run=dry_run,
+            max_workers=max_workers,
+        )
+        sse_mgr = getattr(self, "sse_manager", None)
+        if sse_mgr:
+            try:
+                sse_mgr.broadcast(
+                    "stream_chunk_collected",
+                    {
+                        "start_chunk": start_chunk,
+                        "end_chunk": end_chunk,
+                        "total_tickers": result["total_tickers_collected"],
+                        "elapsed": result["elapsed_seconds"],
+                        "checkpoint": result["checkpoint"],
+                    },
+                )
+            except Exception:
+                pass
+        return 200, {
+            "status": "success",
+            "message": f"成功流式采集分块 chunk_{start_chunk:03d} ~ chunk_{end_chunk:03d}，共入账 {result['total_tickers_collected']} 条权威报价",
+            "data": result,
+        }
+
+    def get_stream_chunk_status(self) -> Tuple[int, Dict[str, Any]]:
+        """获取全盘流式分批采集全局检查点与进度状态."""
+        from scripts.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
+
+        collector = ConcurrentSheetsQuoteCollector(data_root=self.root / "data")
+        status = collector.get_stream_chunk_status()
+        return 200, {
+            "status": "success",
+            "data": status,
+        }
 

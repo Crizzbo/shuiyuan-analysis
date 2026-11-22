@@ -50,15 +50,43 @@ export function DcfValuationCorridorCard({
   const ratios = activeValuation?.profitability_ratios
   const mos = corridor?.margin_of_safety_pct ?? 0
 
-  if (!activeValuation && analysis?.automated_valuation_issue) {
-    return (
-      <p className="rounded-lg border border-[var(--border-color)] px-4 py-3 text-sm text-[var(--text-muted)]">
-        {analysis.automated_valuation_issue}
-      </p>
-    )
+  if (!activeValuation || !corridor) {
+    if (analysis?.asset_category === 'Broad_Or_Sector_ETF') {
+      return (
+        <div id="sec-dcf" className="rounded-xl border border-purple-200 bg-purple-50/60 p-5 text-xs text-purple-900 space-y-2 shadow-sm">
+          <div className="flex items-center gap-2 font-bold text-sm text-purple-950">
+            <span>💡</span>
+            <span>【多资产自适应说明】ETF 采用成分股聚合穿透估值模型</span>
+          </div>
+          <p className="leading-relaxed text-purple-800">
+            标的 [{analysis.ticker}] 属于全球核心指数/行业主题 ETF 资产，其公允价值由底层成分股集合净值 (NAV) 与费率跟踪误差决定。单体企业多阶段自由现金流折现 (DCF) 模型已自适应切换至上方的《ETF 穿透深度分析》面板（包含前十大权重成分股穿透分布与宏观降息敏感度分析）。
+          </p>
+        </div>
+      )
+    }
+    if (analysis?.asset_category === 'Gold_And_Commodity') {
+      return (
+        <div id="sec-dcf" className="rounded-xl border border-amber-200 bg-amber-50/60 p-5 text-xs text-amber-900 space-y-2 shadow-sm">
+          <div className="flex items-center gap-2 font-bold text-sm text-amber-950">
+            <span>💡</span>
+            <span>【多资产自适应说明】贵金属采用真实利率与实物储备定价模型</span>
+          </div>
+          <p className="leading-relaxed text-amber-800">
+            标的 [{analysis.ticker}] 属于实物黄金/贵金属大宗商品资产，不适用企业自由现金流贴现。其公允区间由上方的《黄金与特级贵金属宏观穿透分析》承载（涵盖 10 年期 TIPS 真实利率负向弹性、全球金银比与伦敦金库实物交割标准）。
+          </p>
+        </div>
+      )
+    }
+    if (analysis?.automated_valuation_issue) {
+      return (
+        <div id="sec-dcf" className="rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] p-4 text-xs text-[var(--text-muted)] space-y-1 shadow-sm">
+          <div className="font-semibold text-[var(--text-secondary)]">自动估值状态提示</div>
+          <div>{analysis.automated_valuation_issue}</div>
+        </div>
+      )
+    }
+    return null
   }
-
-  if (!activeValuation || !corridor) return null
 
   return (
     <div id="sec-dcf" className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 shadow-sm space-y-5">

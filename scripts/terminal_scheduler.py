@@ -359,16 +359,17 @@ class TerminalScheduler:
             for record in records:
                 t = record.get("title")
                 if t:
-                    distilled = radar_map.get(t) or {}
+                    clean_t = re.sub(r"\s+", " ", t).strip()
+                    distilled = radar_map.get(clean_t) or radar_map.get(clean_t.lower()) or radar_map.get(t) or {}
                     ent = distilled.get("involved_entities")
                     parsed_ent = []
                     if ent:
                         try:
                             parsed_ent = json.loads(ent) if isinstance(ent, str) else ent
                         except Exception:
-                            parsed_ent = [str(ent)]
+                            parsed_ent = [x.strip() for x in str(ent).split(",") if x.strip()]
                     items.append({
-                        "title": t,
+                        "title": clean_t,
                         "published_at": record.get("pubDate") or record.get("published") or record.get("updated"),
                         "source": source,
                         "verification_status": distilled.get("verification_status") or "Pending_Verification",
@@ -665,11 +666,13 @@ class TerminalScheduler:
                 recs = res.get("records") or []
                 origin = next(iter(res.get("artifacts", [])), {}).get("origin_url", "")
                 for r in recs:
-                    if r.get("title"):
+                    t = r.get("title")
+                    if t:
+                        clean_t = re.sub(r"\s+", " ", t).strip()
                         raw_items.append({
-                            "id": r.get("id") or r.get("guid") or r.get("link") or r.get("title", ""),
-                            "title": r.get("title", ""),
-                            "content": r.get("description") or r.get("summary") or r.get("title", ""),
+                            "id": r.get("id") or r.get("guid") or r.get("link") or clean_t,
+                            "title": clean_t,
+                            "content": r.get("description") or r.get("summary") or clean_t,
                             "source": origin or "Official_RSS",
                             "published_at": r.get("pubDate") or r.get("published") or r.get("updated") or "",
                             "url": r.get("link") or origin or "",
@@ -871,14 +874,28 @@ class TerminalScheduler:
         }
 
     def _execute_quote_collect(self, run):
+        from scripts.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
         from financial_reporting.watersource_terminal_service import WatersourceTerminalService
 
-        data = WatersourceTerminalService().get_market_quotes()["data"]
-        valid = sum(bool(quote.get("is_valid")) for quote in data["all_quotes"])
-        return ("PARTIAL_SUCCESS" if valid else "BLOCKED"), {
-            "message": f"本地归档中有 {valid} 项通过行情时效门禁，实时采集需要已授权宿主",
-            "verified_count": valid, "blocked_count": len(data["stale_blocked_tickers"]),
-        }
+        try:
+            collector = ConcurrentSheetsQuoteCollector(data_root=PROJECT_ROOT / "data")
+            shards = collector.create_shards()
+            res = collector.collect_all(shards=shards, max_workers=4)
+            msg = f"已通过 Google Sheets 多表并发引擎全量同步 {res.successful_tickers}/{res.total_tickers} 只标的最新价格"
+            return "SUCCESS", {
+                "message": msg,
+                "total_tickers": res.total_tickers,
+                "successful_tickers": res.successful_tickers,
+                "elapsed_seconds": round(res.elapsed_seconds, 2),
+                "receipt_file": res.receipt_file,
+            }
+        except Exception as e:
+            data = WatersourceTerminalService().get_market_quotes()["data"]
+            valid = sum(bool(quote.get("is_valid")) for quote in data["all_quotes"])
+            return ("PARTIAL_SUCCESS" if valid else "BLOCKED"), {
+                "message": f"云端采集降级，本地归档中 {valid} 项通过时效门禁: {e}",
+                "verified_count": valid, "blocked_count": len(data["stale_blocked_tickers"]),
+            }
 
     def _execute_stock_dossier_collect(self, run):
         """精准执行单票全维度数据收集与自动估值（行情、三表平账、DCF走廊、事件穿透）."""

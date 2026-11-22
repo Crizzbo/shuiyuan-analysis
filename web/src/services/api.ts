@@ -77,6 +77,57 @@ export const api = {
       body: JSON.stringify({ tickers, force_refresh: forceRefresh }),
     }),
 
+  // 3.1 全盘流式分批并发采集 (Chunk-and-Stream Option 1)
+  getStreamChunkStatus: () =>
+    request<{
+      status: string
+      data: {
+        schema_version: string
+        total_chunks_available: number
+        completed_chunks: number[]
+        completed_chunks_count: number
+        total_tickers_archived: number
+        last_run_at: string | null
+        last_processed_chunk: number
+        next_chunk_to_process: number
+        chunk_records: Record<string, any>
+      }
+    }>('/api/terminal/quotes/stream-chunk-status'),
+
+  streamChunkCollect: (startChunk = 1, endChunk = 5, dryRun = false, maxWorkers = 4) =>
+    request<{
+      status: string
+      message: string
+      data: {
+        pipeline: string
+        start_chunk: number
+        end_chunk: number
+        processed_chunks: number[]
+        total_chunks_processed: number
+        total_tickers_collected: number
+        total_tickers_failed: number
+        elapsed_seconds: number
+        chunk_results: Array<{
+          chunk: number
+          status: string
+          tickers_collected?: number
+          elapsed_seconds?: number
+          receipt_file?: string
+          error?: string
+        }>
+        errors: string[]
+        checkpoint: any
+      }
+    }>('/api/terminal/quotes/stream-chunk-collect', {
+      method: 'POST',
+      body: JSON.stringify({
+        start_chunk: startChunk,
+        end_chunk: endChunk,
+        dry_run: dryRun,
+        max_workers: maxWorkers,
+      }),
+    }),
+
   // 4. 宏观与量化指标
   getLatestIndicators: () => request<IndicatorsData>('/api/indicators/latest'),
 
@@ -131,12 +182,13 @@ export const api = {
     ),
 
   // 7. 计算分析（无打分）
-  getAnalyticsCandidates: (market: 'ALL' | 'US' | 'JP' = 'ALL', limit = 20, page = 1, q = '') => {
+  getAnalyticsCandidates: (market: 'ALL' | 'US' | 'JP' = 'ALL', limit = 20, page = 1, q = '', assetCategory = 'ALL') => {
     const params = new URLSearchParams()
     if (market) params.set('market', market)
     if (limit) params.set('limit', String(limit))
     if (page) params.set('page', String(page))
     if (q) params.set('q', q)
+    if (assetCategory && assetCategory !== 'ALL') params.set('asset_category', assetCategory)
     return request<CandidatesData>(`/api/analytics/candidates?${params.toString()}`)
   },
 

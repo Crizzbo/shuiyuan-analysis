@@ -210,6 +210,13 @@ from .sepa_buy_signal_engine import (
     SEPA_SIGNAL_STATE_REGISTRY,
     get_sepa_state_metadata,
 )
+from .multi_asset_screening_engine import (
+    MultiAssetScreeningEngine,
+    AssetCategory,
+    MultiAssetScreeningInput,
+    MultiAssetScreeningDecision,
+    AssetClassClassifier,
+)
 from .causal_inference_engine import (
     QuantitativeCausalInferenceEngine,
     CausalInferenceResult,
@@ -465,6 +472,11 @@ __all__ = [
     "BuySignalTier",
     "SEPA_SIGNAL_STATE_REGISTRY",
     "SepaAdaptiveParams",
+    "MultiAssetScreeningEngine",
+    "AssetCategory",
+    "MultiAssetScreeningInput",
+    "MultiAssetScreeningDecision",
+    "AssetClassClassifier",
     "EventRadarEngine",
     "EventSeverity",
     "EventCategory",

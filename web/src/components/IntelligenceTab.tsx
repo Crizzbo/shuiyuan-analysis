@@ -197,44 +197,121 @@ export function IntelligenceTab({
 
   return (
     <div className="p-4 md:p-6 max-w-[1600px] mx-auto space-y-6">
-      {/* 头部统计卡片 */}
+      {/* 头部统计卡片 (支持一键联动筛选) */}
       <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
-        <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-3 text-center shadow-sm">
+        <button
+          type="button"
+          onClick={() => {
+            setSeverityFilter('ALL')
+            setStatusFilter('ALL')
+            setActiveView('radar')
+          }}
+          className={`border rounded-xl p-3 text-center shadow-sm cursor-pointer transition-all ${
+            severityFilter === 'ALL' && statusFilter === 'ALL' && activeView === 'radar'
+              ? 'bg-[var(--surface-color)] border-[#176249] ring-2 ring-[#176249]'
+              : 'bg-[var(--surface-color)] border-[var(--border-color)] hover:border-slate-400'
+          }`}
+        >
           <div className="text-xs text-[var(--text-muted)]">全市场收录事件</div>
           <div className="text-xl font-bold font-mono text-[var(--text-primary)] mt-1">
             {data?.total_events ?? '—'}
           </div>
-        </div>
-        <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-3 text-center shadow-sm">
-          <div className="text-xs text-rose-600 font-medium">极高影响事件</div>
-          <div className="text-xl font-bold font-mono text-rose-600 mt-1">
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            setSeverityFilter('P0')
+            setStatusFilter('ALL')
+            setActiveView('radar')
+          }}
+          className={`border rounded-xl p-3 text-center shadow-sm cursor-pointer transition-all ${
+            severityFilter === 'P0' && activeView === 'radar'
+              ? 'bg-rose-50/40 dark:bg-rose-950/30 border-rose-500 ring-2 ring-rose-500'
+              : 'bg-[var(--surface-color)] border-[var(--border-color)] hover:border-rose-400'
+          }`}
+        >
+          <div className="text-xs text-rose-600 dark:text-rose-400 font-medium">极高影响事件</div>
+          <div className="text-xl font-bold font-mono text-rose-600 dark:text-rose-400 mt-1">
             {sevCounts.P0 ?? 0}
           </div>
-        </div>
-        <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-3 text-center shadow-sm">
-          <div className="text-xs text-amber-600 font-medium">重要关注事件</div>
-          <div className="text-xl font-bold font-mono text-amber-600 mt-1">
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            setSeverityFilter('P1')
+            setStatusFilter('ALL')
+            setActiveView('radar')
+          }}
+          className={`border rounded-xl p-3 text-center shadow-sm cursor-pointer transition-all ${
+            severityFilter === 'P1' && activeView === 'radar'
+              ? 'bg-amber-50/40 dark:bg-amber-950/30 border-amber-500 ring-2 ring-amber-500'
+              : 'bg-[var(--surface-color)] border-[var(--border-color)] hover:border-amber-400'
+          }`}
+        >
+          <div className="text-xs text-amber-600 dark:text-amber-400 font-medium">重要关注事件</div>
+          <div className="text-xl font-bold font-mono text-amber-600 dark:text-amber-400 mt-1">
             {sevCounts.P1 ?? 0}
           </div>
-        </div>
-        <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-3 text-center shadow-sm">
-          <div className="text-xs text-slate-700 font-medium">行业动态情报</div>
-          <div className="text-xl font-bold font-mono text-slate-700 mt-1">
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            setSeverityFilter('P2')
+            setStatusFilter('ALL')
+            setActiveView('radar')
+          }}
+          className={`border rounded-xl p-3 text-center shadow-sm cursor-pointer transition-all ${
+            severityFilter === 'P2' && activeView === 'radar'
+              ? 'bg-slate-100/70 dark:bg-slate-800 border-slate-500 ring-2 ring-slate-500'
+              : 'bg-[var(--surface-color)] border-[var(--border-color)] hover:border-slate-400'
+          }`}
+        >
+          <div className="text-xs text-slate-700 dark:text-slate-300 font-medium">行业动态情报</div>
+          <div className="text-xl font-bold font-mono text-slate-700 dark:text-slate-200 mt-1">
             {sevCounts.P2 ?? 0}
           </div>
-        </div>
-        <div className="bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-3 text-center shadow-sm">
-          <div className="text-xs text-slate-500">常规资讯</div>
-          <div className="text-xl font-bold font-mono text-slate-500 mt-1">
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            setSeverityFilter('P3')
+            setStatusFilter('ALL')
+            setActiveView('radar')
+          }}
+          className={`border rounded-xl p-3 text-center shadow-sm cursor-pointer transition-all ${
+            severityFilter === 'P3' && activeView === 'radar'
+              ? 'bg-slate-100/70 dark:bg-slate-800 border-slate-400 ring-2 ring-slate-400'
+              : 'bg-[var(--surface-color)] border-[var(--border-color)] hover:border-slate-400'
+          }`}
+        >
+          <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">常规资讯</div>
+          <div className="text-xl font-bold font-mono text-slate-500 dark:text-slate-400 mt-1">
             {sevCounts.P3 ?? 0}
           </div>
-        </div>
-        <div className="bg-rose-50/50 border border-rose-200 rounded-xl p-3 text-center shadow-sm">
-          <div className="text-xs text-rose-700 font-medium">传闻风险隔离</div>
-          <div className="text-xl font-bold font-mono text-rose-700 mt-1">
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            setStatusFilter('Unverified_Rumor')
+            setSeverityFilter('ALL')
+            setActiveView('radar')
+          }}
+          className={`border rounded-xl p-3 text-center shadow-sm cursor-pointer transition-all ${
+            statusFilter === 'Unverified_Rumor' && activeView === 'radar'
+              ? 'bg-rose-100/70 dark:bg-rose-950/50 border-rose-600 ring-2 ring-rose-600'
+              : 'bg-rose-50/50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-900/40 hover:border-rose-400'
+          }`}
+        >
+          <div className="text-xs text-rose-700 dark:text-rose-400 font-medium">传闻风险隔离</div>
+          <div className="text-xl font-bold font-mono text-rose-700 dark:text-rose-400 mt-1">
             {verCounts.Unverified_Rumor ?? 0}
           </div>
-        </div>
+        </button>
       </div>
 
       {/* 原生内嵌双模块切换器 */}

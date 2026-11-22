@@ -123,7 +123,7 @@ export const EventRadarView: React.FC<EventRadarViewProps> = ({
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                   severityFilter === f.id
                     ? 'bg-[#176249] text-white shadow-sm'
-                    : 'bg-[var(--bg-card)] text-[var(--text-secondary)] hover:bg-slate-100 hover:text-[var(--text-primary)] border border-transparent hover:border-slate-200'
+                    : 'bg-[var(--bg-card)] text-[var(--text-secondary)] hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-[var(--text-primary)] border border-transparent hover:border-slate-200 dark:hover:border-slate-700'
                 }`}
               >
                 <span>{f.label}</span>
@@ -170,7 +170,7 @@ export const EventRadarView: React.FC<EventRadarViewProps> = ({
                   <button
                     type="button"
                     onClick={() => setDateFilter('ALL')}
-                    className="ml-1.5 px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 text-[11px] cursor-pointer transition-all flex items-center gap-1"
+                    className="ml-1.5 px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-[11px] cursor-pointer transition-all flex items-center gap-1"
                     title="清除日历筛选，恢复查看全部日期"
                   >
                     <span>{dateFilter} ({dateCounts[dateFilter] ?? 0}篇)</span>
@@ -258,7 +258,14 @@ export const EventRadarView: React.FC<EventRadarViewProps> = ({
                 return (
                   <div
                     key={ev.event_id}
-                    onClick={() => onSelectEvent(ev.event_id)}
+                    onClick={() => {
+                      onSelectEvent(ev.event_id)
+                      if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+                        setTimeout(() => {
+                          document.getElementById('event-detail-drawer')?.scrollIntoView({ behavior: 'smooth' })
+                        }, 150)
+                      }
+                    }}
                     className={`bg-[var(--surface-color)] border rounded-xl p-4 cursor-pointer transition-all ${
                       activeEvent?.event_id === ev.event_id
                         ? 'border-[#176249] ring-1 ring-[#176249]/50'
@@ -306,7 +313,7 @@ export const EventRadarView: React.FC<EventRadarViewProps> = ({
                       {/* 状态徽章 */}
                       <div className="shrink-0">
                         {ev.is_quarantined_rumor ? (
-                          <span className="px-2 py-0.5 rounded text-[11px] bg-rose-50 text-rose-700 border border-rose-200 font-semibold flex items-center gap-1">
+                          <span className="px-2 py-0.5 rounded text-[11px] bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 font-semibold flex items-center gap-1">
                             传闻隔离
                           </span>
                         ) : (

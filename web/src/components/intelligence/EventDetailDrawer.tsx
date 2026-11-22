@@ -28,7 +28,10 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({
   if (!activeEvent) return null
 
   return (
-    <div className="lg:col-span-5 bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 sticky top-24 max-h-[85vh] overflow-y-auto space-y-5 shadow-sm">
+    <div
+      id="event-detail-drawer"
+      className="lg:col-span-5 bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-5 sticky top-24 max-h-[85vh] overflow-y-auto space-y-5 shadow-sm"
+    >
       {/* 头部状态与关闭按钮 */}
       <div className="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
         <div className="flex items-center gap-2">
@@ -75,8 +78,8 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({
           </div>
 
           {activeEvent.is_quarantined_rumor && (
-            <div className="bg-rose-50 border border-rose-200 rounded-lg p-3 text-xs text-rose-800 space-y-1.5">
-              <div className="font-bold text-rose-700 flex items-center gap-1.5">
+            <div className="bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 rounded-lg p-3 text-xs text-rose-800 dark:text-rose-300 space-y-1.5">
+              <div className="font-bold text-rose-700 dark:text-rose-400 flex items-center gap-1.5">
                 <span>未核实传闻已启动安全隔离</span>
               </div>
               <p className="text-[11px] opacity-90 leading-relaxed">
@@ -101,13 +104,37 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({
               {toList(activeEvent.affected_business_segments).map((seg, idx) => (
                 <span
                   key={idx}
-                  className="text-xs px-2.5 py-1 rounded bg-slate-100 text-slate-700 border border-slate-200"
+                  className="text-xs px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
                 >
                   {seg}
                 </span>
               ))}
             </div>
           </div>
+
+          {toList(activeEvent.involved_entities).length > 0 && onSelectTicker && (
+            <div className="bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60 rounded-xl p-3.5 space-y-2">
+              <div className="text-xs font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-1.5">
+                <span>📊 深度研报联动穿透</span>
+              </div>
+              <p className="text-[11px] text-emerald-800/80 dark:text-emerald-400/80 leading-relaxed">
+                点击关联标的，一键切换至企业深度档案、财报三表底稿与多情景 DCF 估值测算：
+              </p>
+              <div className="flex flex-wrap gap-2 pt-1">
+                {toList(activeEvent.involved_entities).map((ticker) => (
+                  <button
+                    key={ticker}
+                    type="button"
+                    onClick={() => onSelectTicker(ticker)}
+                    className="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#176249] hover:bg-[#124e3a] text-white shadow-sm flex items-center gap-1.5 cursor-pointer transition-all"
+                  >
+                    <span>穿透分析 {ticker}</span>
+                    <span className="font-mono">→</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {activeEvent.raw_content && (
             <div className="space-y-1.5">

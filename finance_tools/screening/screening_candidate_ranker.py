@@ -38,6 +38,8 @@ class QualifiedCandidate:
     gain_from_52w_low_pct: float
     pullback_from_52w_high_pct: float
     business_rationale_zh: str
+    asset_category: str = "Growth_Equity"
+    multi_asset_action: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -100,6 +102,9 @@ class ScreeningCandidateRanker:
                 seq = vcp.get("contraction_sequence", [])
                 last_c = seq[-1] if seq else 15.0
 
+                asset_cat = r.get("asset_category") or "Growth_Equity"
+                multi_action = r.get("multi_asset_action")
+
                 candidate = QualifiedCandidate(
                     ticker=r.get("ticker", "UNKNOWN"),
                     market=r.get("market", "US"),
@@ -114,6 +119,8 @@ class ScreeningCandidateRanker:
                     gain_from_52w_low_pct=cycle.get("gain_from_52w_low_pct", 0.0),
                     pullback_from_52w_high_pct=cycle.get("pullback_from_52w_high_pct", 0.0),
                     business_rationale_zh=qual.get("business_rationale_zh", ""),
+                    asset_category=asset_cat,
+                    multi_asset_action=multi_action,
                 )
 
                 if action == "Stage_2_Pivot_Ready":
@@ -129,6 +136,11 @@ class ScreeningCandidateRanker:
             key=lambda c: (c.dryup_ratio, c.last_contraction_pct, c.pullback_from_52w_high_pct)
         )
 
+        growth_pivots = [c.to_dict() for c in pivot_ready_list if c.asset_category == "Growth_Equity"]
+        etf_pivots = [c.to_dict() for c in pivot_ready_list if c.asset_category == "Broad_Or_Sector_ETF"]
+        gold_pivots = [c.to_dict() for c in pivot_ready_list if c.asset_category == "Gold_And_Commodity"]
+        div_pivots = [c.to_dict() for c in pivot_ready_list if c.asset_category == "Dividend_And_Defensive"]
+
         output_data = {
             "title": "全盘初筛准入优质候选池总账 (Qualified Screening Candidates)",
             "updated_at": datetime.now(timezone.utc).isoformat(),
@@ -140,8 +152,20 @@ class ScreeningCandidateRanker:
             "total_qualified_count": len(pivot_ready_list) + len(watchlist_list),
             "tier0_pivot_ready_count": len(pivot_ready_list),
             "tier1_watchlist_count": len(watchlist_list),
+            "asset_category_breakdown": {
+                "Growth_Equity": len(growth_pivots),
+                "Broad_Or_Sector_ETF": len(etf_pivots),
+                "Gold_And_Commodity": len(gold_pivots),
+                "Dividend_And_Defensive": len(div_pivots),
+            },
             "pivot_ready_candidates": [c.to_dict() for c in pivot_ready_list],
             "watchlist_candidates": [c.to_dict() for c in watchlist_list],
+            "categorized_candidates": {
+                "growth_equity": growth_pivots,
+                "broad_or_sector_etf": etf_pivots,
+                "gold_and_commodity": gold_pivots,
+                "dividend_and_defensive": div_pivots,
+            },
         }
 
         self.qualified_file.write_text(

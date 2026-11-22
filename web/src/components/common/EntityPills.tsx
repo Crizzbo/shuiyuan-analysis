@@ -14,7 +14,7 @@ export const EntityPills: React.FC<EntityPillsProps> = ({ entities, max = 3, onS
   if (!list || list.length === 0) return null;
 
   return (
-    <div style={{ display: 'inline-flex', flexWrap: 'wrap', gap: 4, alignItems: 'center', ...style }}>
+    <div style={style} className="inline-flex flex-wrap gap-1.5 items-center">
       {list.map((ent, i) => (
         <TickerHoverCard key={i} ticker={ent} onSelectTicker={onSelectTicker}>
           <span
@@ -24,16 +24,12 @@ export const EntityPills: React.FC<EntityPillsProps> = ({ entities, max = 3, onS
                 onSelectTicker(ent);
               }
             }}
-            style={{
-              fontSize: '0.72rem',
-              padding: '1px 6px',
-              background: 'rgba(76, 175, 80, 0.15)',
-              color: '#81c784',
-              borderRadius: 4,
-              cursor: onSelectTicker ? 'pointer' : 'default',
-              transition: 'all 0.15s ease',
-            }}
-            title={onSelectTicker ? `在个股分析中查看 ${ent}` : undefined}
+            className={`text-[11px] font-semibold px-2 py-0.5 rounded border transition-all ${
+              onSelectTicker
+                ? 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 cursor-pointer shadow-2xs'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+            }`}
+            title={onSelectTicker ? `在个股深度研报中穿透分析 ${ent}` : undefined}
           >
             {ent}
           </span>

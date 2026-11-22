@@ -44,14 +44,14 @@ def _extract_company_real_inputs(ticker: str) -> Dict[str, Any]:
     svc = WatersourceTerminalService()
     quotes_map, _ = svc._read_latest_raw_quotes()
     quote = quotes_map.get(clean_ticker) or {}
-    
+
     price = quote.get("price")
     if price is None and quote.get("raw_price"):
         try:
             price = float(quote["raw_price"])
         except Exception:
             price = None
-            
+
     # 如果暂无实时行情缓存，根据官方已知交易时段价格兜底
     if price is None or price <= 0:
         price_fallbacks = {
@@ -456,10 +456,10 @@ def run_all_25_financial_models(ticker: str = "NVDA") -> Dict[str, Any]:
         "model_id": "portfolio_performance",
         "name_zh": "QuantStats 投资组合量化收益风险比 (Sharpe & Sortino)",
         "category": "资产配置与衍生品群",
-        "status": "CALCULATED_VERIFIED",
+        "status": "ESTIMATED_BASELINE",
         "execution_ms": round((time.perf_counter() - t0) * 1000, 2),
         "theory_origin": "Sharpe (1966) 超额收益与总波动率风险调整后回报",
-        "output_summary": f"夏普比率 (Sharpe): {m12['result'].get('sharpe', 2.45):.2f} · 最大回撤: {m12['result'].get('max_drawdown', -0.015)*100:.2f}%",
+        "output_summary": f"【基准估算】夏普比率 (Sharpe): {m12['result'].get('sharpe', 2.45):.2f} · 最大回撤: {m12['result'].get('max_drawdown', -0.015)*100:.2f}% (待完整历史日K序列)",
         "details": m12["result"],
     })
 
@@ -575,10 +575,10 @@ def run_all_25_financial_models(ticker: str = "NVDA") -> Dict[str, Any]:
         "model_id": "amihud_liquidity",
         "name_zh": "Amihud 微观流动性深度与大单冲击滑点模型",
         "category": "微观流动性与波动率群",
-        "status": "CALCULATED_VERIFIED",
+        "status": "ESTIMATED_BASELINE",
         "execution_ms": round((time.perf_counter() - t0) * 1000, 2),
         "theory_origin": "Amihud (2002) 价格冲击弹性与不流动性溢价",
-        "output_summary": f"流动性分级: {m16.capacity_tier} · 大单冲击滑点: {m16.market_impact_penalty_bps:.2f} bps · 深度极佳",
+        "output_summary": f"【基准估算】流动性分级: {m16.capacity_tier} · 大单冲击滑点: {m16.market_impact_penalty_bps:.2f} bps (待日线逐笔成交流水)",
         "details": {
             "capacity_tier": m16.capacity_tier,
             "amihud_ratio": round(m16.amihud_illiquidity_ratio, 6),
@@ -598,10 +598,10 @@ def run_all_25_financial_models(ticker: str = "NVDA") -> Dict[str, Any]:
         "model_id": "garch_volatility",
         "name_zh": "GARCH(1,1) 条件异方差与前瞻波动率聚类预测",
         "category": "微观流动性与波动率群",
-        "status": "CALCULATED_VERIFIED",
+        "status": "ESTIMATED_BASELINE",
         "execution_ms": round((time.perf_counter() - t0) * 1000, 2),
         "theory_origin": "Bollerslev (1986) 广义自回归条件异方差模型",
-        "output_summary": f"长期无条件年化波动率: {m17_fit.unconditional_vol_annual*100:.2f}% · 次日前瞻波动率: {m17_forecast.forecast_1d_annual*100:.2f}%",
+        "output_summary": f"【基准估算】长期无条件年化波动率: {m17_fit.unconditional_vol_annual*100:.2f}% · 次日前瞻波动率: {m17_forecast.forecast_1d_annual*100:.2f}% (待连续250日收益率时序)",
         "details": {
             "unconditional_vol": round(m17_fit.unconditional_vol_annual, 4),
             "persistence": round(m17_fit.persistence, 4),
@@ -622,10 +622,10 @@ def run_all_25_financial_models(ticker: str = "NVDA") -> Dict[str, Any]:
         "model_id": "kalman_filter",
         "name_zh": "卡尔曼滤波动态状态估计与 OU 均值回归通道",
         "category": "微观流动性与波动率群",
-        "status": "CALCULATED_VERIFIED",
+        "status": "ESTIMATED_BASELINE",
         "execution_ms": round((time.perf_counter() - t0) * 1000, 2),
         "theory_origin": "Kalman (1960) 状态空间滤波与 Ornstein-Uhlenbeck 均值回归",
-        "output_summary": f"卡尔曼平滑价格: ${m18_kf.filtered_price:.2f} · 通道区间: [${m18_kf.kalman_lower_band:.2f}, ${m18_kf.kalman_upper_band:.2f}]",
+        "output_summary": f"【基准估算】卡尔曼平滑价格: ${m18_kf.filtered_price:.2f} · 通道区间: [${m18_kf.kalman_lower_band:.2f}, ${m18_kf.kalman_upper_band:.2f}] (待250日K线序列)",
         "details": {
             "filtered_price": round(m18_kf.filtered_price, 2),
             "upper_band": round(m18_kf.kalman_upper_band, 2),

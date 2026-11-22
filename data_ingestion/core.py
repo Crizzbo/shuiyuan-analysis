@@ -172,9 +172,18 @@ class HTTP:
         current, query = url, params
         for attempt in range(4):
             self.archive.reserve(provider, config.get("interval_seconds", 2), config.get("daily_limit"))
+            req_headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,application/rss+xml,*/*;q=0.8",
+                "Accept-Language": "en-US,en;q=0.9,ja;q=0.8,zh-CN;q=0.7",
+            }
+            if "sec.gov" in current:
+                req_headers["User-Agent"] = os.environ.get("SEC_USER_AGENT") or "ShuiyuanAnalysis/1.0 (research@shuiyuan-analysis.org)"
+            if headers:
+                req_headers.update(headers)
             try:
                 response = self.session.request("POST" if json_body is not None else "GET", current,
-                    params=query, headers=headers or {}, json=json_body, timeout=(10, 40),
+                    params=query, headers=req_headers, json=json_body, timeout=(10, 40),
                     allow_redirects=False)
             except requests.RequestException:
                 if attempt == 3:
@@ -185,7 +194,8 @@ class HTTP:
                 from urllib.parse import urljoin
                 current = public_url(urljoin(response.url, response.headers.get("Location", "")), config["hosts"])
                 # 仅无密钥 GET 允许重定向，防止凭据跨域外泄。
-                if json_body is not None or any(k.lower() in SECRET_FIELDS for k in (params or {})) or headers:
+                has_auth = any(k.lower() in SECRET_FIELDS or k.lower() in ("authorization", "cookie") for k in (headers or {}))
+                if json_body is not None or any(k.lower() in SECRET_FIELDS for k in (params or {})) or has_auth:
                     raise IngestionError("upstream_error", "带身份信息的请求拒绝重定向")
                 query = None
                 continue

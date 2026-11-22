@@ -304,13 +304,6 @@ class QuoteFreshnessGateway:
         if isinstance(price, bool) or not isinstance(price, (int, float)) or not math.isfinite(price) or price <= 0:
             raise ValueError(f"非法价格输入: {price}")
 
-        limit_hours = (
-            max_staleness_hours
-            if max_staleness_hours is not None
-            else cls.MAX_STALENESS_HOURS
-        )
-        if not math.isfinite(limit_hours) or limit_hours <= 0:
-            raise ValueError("行情最大滞后时长必须为有限正数")
         if current_time_iso:
             now_dt = datetime.fromisoformat(current_time_iso.replace("Z", "+00:00"))
         else:
@@ -344,20 +337,6 @@ class QuoteFreshnessGateway:
 
         age_hours = max(0.0, age_seconds / 3600.0)
 
-        # 超过 24 小时硬阻断
-        if age_hours > limit_hours:
-            return QuoteVerificationResult(
-                is_valid=False,
-                is_fresh_today=False,
-                session_status="stale_blocked",
-                formatted_label=f"【阻断】{currency}{price:.2f} [超期 {age_hours:.1f}h]",
-                age_hours=age_hours,
-                message=(
-                    f"【严重超期阻断】行情数据滞后 {age_hours:.1f} 小时 "
-                    f"(阈值 {limit_hours:.0f}h)，严禁冒充实时市价！"
-                ),
-            )
-
         market_tz = cls._get_market_tz(market, orig_tz)
         q_local = q_dt_utc.astimezone(market_tz)
         now_local = now_dt.astimezone(market_tz)
@@ -371,6 +350,37 @@ class QuoteFreshnessGateway:
             orig_tz=orig_tz,
             now_dt_utc=now_dt,
         )
+
+        # 动态判定允许的最大滞后时间：
+        # 仅当当前处于周末或周一开盘前，且行情来自于周五（最近交易日）时，允许放宽至 96 小时 (周五收盘到周一盘前)；
+        # 其它情况（如周中交易日、或周末使用周四及更早的历史报价），坚决执行 24 小时硬门禁。
+        if max_staleness_hours is not None:
+            limit_hours = max_staleness_hours
+        else:
+            is_weekend_session = (now_local.weekday() in (5, 6)) or (now_local.weekday() == 0 and now_local.hour < 9)
+            is_friday_quote = (q_local.weekday() == 4)
+            if is_weekend_session and is_friday_quote:
+                limit_hours = 96.0
+            else:
+                limit_hours = cls.MAX_STALENESS_HOURS
+
+        if not math.isfinite(limit_hours) or limit_hours <= 0:
+            raise ValueError("行情最大滞后时长必须为有限正数")
+
+        # 超过有效时效上限硬阻断
+        if age_hours > limit_hours:
+            return QuoteVerificationResult(
+                is_valid=False,
+                is_fresh_today=False,
+                session_status="stale_blocked",
+                formatted_label=f"【阻断】{currency}{price:.2f} [超期 {age_hours:.1f}h]",
+                age_hours=age_hours,
+                message=(
+                    f"【严重超期阻断】行情数据滞后 {age_hours:.1f} 小时 "
+                    f"(阈值 {limit_hours:.0f}h)，严禁冒充实时市价！"
+                ),
+            )
+
         # 同一自然日内进入新的交易时段后，旧时段报价只能作为历史基准。
         if session_status == "previous_close_baseline":
             is_today = False

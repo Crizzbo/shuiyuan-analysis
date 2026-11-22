@@ -367,7 +367,56 @@ class AIEngineAdapter:
                 pass
 
         # 3. 确定性默认回退 (基于真实已审计数字推演业务)
-        rev = audited_facts.get("revenue") or 1000.0
+        rev = audited_facts.get("revenue") if audited_facts else None
+        if not rev:
+            unarchived_analysis = {
+                "business_model": f"【官方底稿待归档】本地尚未采集该标的（{ticker} / {company_name}）官方已审计年报（SEC 10-K / 金融厅有価証券報告書），已暂停质性商业解构。请通过采集中心或 AI 浏览器补齐官方底稿。",
+                "revenue_mix": "【官方底稿待归档】暂无已审计官方财报三表营业收入与分部拆分数据。",
+                "winner_factor": f"{industry_name} 赛道竞争壁垒需结合公司最新官方年报战略指引进行穿透。",
+                "market_share_and_crn": "待官方披露数据归档后计算。",
+                "tam_and_cagr": "待官方披露数据归档后计算。",
+                "moat_analysis": {
+                    "network_effects": "待官方披露底稿归档后评估",
+                    "switching_costs": "待官方披露底稿归档后评估",
+                    "cost_advantage_and_scale": "待官方披露底稿归档后评估",
+                    "intangible_assets": "待官方披露底稿归档后评估",
+                    "reinvestment_efficiency": "待官方披露底稿归档后评估",
+                },
+                "supply_chain_analysis": {
+                    "upstream_suppliers": {
+                        "core_suppliers": "待官方供应链底稿归档后核验",
+                        "supplier_concentration": "待官方供应链底稿归档后核验",
+                        "supply_chain_risks": "待官方供应链底稿归档后核验",
+                    },
+                    "downstream_customers": {
+                        "customer_structure": "待官方客户底稿归档后核验",
+                        "top5_customer_concentration": "待官方客户底稿归档后核验",
+                        "default_and_churn_risks": "待官方客户底稿归档后核验",
+                    },
+                },
+                "financial_statement_deep_dive": {
+                    "profitability_quality": "待官方三表底稿归档后核验",
+                    "net_cash_status": "待官方三表底稿归档后核验",
+                    "inventory_cycle_position": "待官方三表底稿归档后核验",
+                },
+                "catalysts": [
+                    f"等待 {company_name} 官方年报底稿归档与买方研究立项",
+                    "等待行业周期与官方关键财务数据入库",
+                ],
+                "kill_switch_risks": [
+                    "底稿缺失风险：缺乏官方已审计三表，无法执行财务真实性平账检验",
+                    "估值盲区风险：缺乏官方现金流底稿，DCF模型无法建立可信现金流贴现",
+                ],
+                "rating": "观望",
+                "stance": "底稿待补齐 (数据受限)",
+                "tactical_action": "买方纪律：在官方已审计年报完整归档前，严禁仅凭外围推测盲目建仓。建议等待财报底稿入库后再行决策。",
+                "qualitative_scores": {
+                    "moat_score": 0.0,
+                    "supply_chain_risk_level": "UNKNOWN",
+                },
+            }
+            return AIResearchAgent.sanitize_ai_response(unarchived_analysis)
+
         ebit = audited_facts.get("operating_income")
         if ebit is None:
             ebit = rev * 0.15

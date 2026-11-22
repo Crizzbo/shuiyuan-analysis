@@ -4,13 +4,16 @@
 
 import json
 from pathlib import Path
+import sys
 import tempfile
 import unittest
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 from finance_tools.screening_candidate_ranker import ScreeningCandidateRanker
 from scripts.run_screening_universe_batch import ScreeningUniverseBatchPipeline
-
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
 class TestScreeningUniverseBatchPipeline(unittest.TestCase):

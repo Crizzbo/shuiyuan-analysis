@@ -85,8 +85,8 @@ export const EventCard: React.FC<EventCardProps> = ({
 
         <div className="flex items-center gap-2 shrink-0">
           {is_quarantined_rumor ? (
-            <span className="text-[11px] px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 font-semibold flex items-center gap-1">
-              <ShieldCheckIcon className="w-3 h-3 text-rose-600" />
+            <span className="text-[11px] px-2 py-0.5 rounded bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 font-semibold flex items-center gap-1">
+              <ShieldCheckIcon className="w-3 h-3 text-rose-600 dark:text-rose-400" />
               <span>传闻隔离</span>
             </span>
           ) : (
@@ -119,7 +119,7 @@ export const EventCard: React.FC<EventCardProps> = ({
               {segments.slice(0, 3).map((seg, i) => (
                 <span
                   key={`seg-${i}`}
-                  className="px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200 font-medium"
+                  className="px-1.5 py-0.2 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium"
                 >
                   {seg}
                 </span>

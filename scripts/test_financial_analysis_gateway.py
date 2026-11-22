@@ -205,6 +205,20 @@ class FinancialAnalysisGatewayTests(unittest.TestCase):
         for c in data_jp["top_pivot_ready_candidates"]:
             self.assertEqual(c["market"], "JP")
 
+    def test_multi_asset_screening_gateway(self) -> None:
+        """测试多资产自适应选股统一网关接口."""
+        # 1. 验证多资产门面返回结构
+        multi_data = self.gateway.get_top_multi_asset_candidates(top_n=10, market="ALL", asset_category="ALL")
+        self.assertIn("asset_category", multi_data)
+        self.assertIn("asset_category_breakdown", multi_data)
+        self.assertIn("categorized_candidates", multi_data)
+
+        # 2. 验证指定资产类别查询
+        growth_data = self.gateway.get_top_multi_asset_candidates(top_n=5, market="ALL", asset_category="Growth_Equity")
+        self.assertEqual(growth_data["asset_category"], "Growth_Equity")
+        for c in growth_data["top_pivot_ready_candidates"]:
+            self.assertEqual(c.get("asset_category", "Growth_Equity"), "Growth_Equity")
+
 
 if __name__ == "__main__":
     unittest.main()

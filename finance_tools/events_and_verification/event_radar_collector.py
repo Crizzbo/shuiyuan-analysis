@@ -12,6 +12,7 @@ import json
 import logging
 import os
 from pathlib import Path
+import re
 import socket
 import sqlite3
 import time
@@ -285,7 +286,7 @@ class RadarDatabaseManager:
                 item.published_at,
                 summary.source_name,
                 summary.category,
-                summary.raw_title,
+                re.sub(r"\s+", " ", summary.raw_title or "").strip(),
                 summary.micro_physical_impact,
                 json.dumps(summary.involved_entities, ensure_ascii=False),
                 json.dumps(summary.affected_business_segments, ensure_ascii=False),
@@ -374,6 +375,7 @@ class RadarDatabaseManager:
         if not self.db_path.exists():
             return radar_map
         try:
+            import re
             with sqlite3.connect(f"file:{self.db_path.as_posix()}?mode=ro", uri=True) as conn:
                 conn.row_factory = sqlite3.Row
                 cursor = conn.cursor()
@@ -381,7 +383,12 @@ class RadarDatabaseManager:
                     "SELECT title, category, severity_level, verification_status, involved_entities, micro_physical_impact FROM radar_events"
                 )
                 for row in cursor.fetchall():
-                    radar_map[row["title"]] = dict(row)
+                    raw_t = row["title"] or ""
+                    d = dict(row)
+                    radar_map[raw_t] = d
+                    norm_k = re.sub(r"\s+", " ", raw_t).strip().lower()
+                    if norm_k:
+                        radar_map[norm_k] = d
         except Exception:
             pass
         return radar_map
@@ -924,8 +931,7 @@ class EventRadarCollector:
             # 漏斗第 2 级：物理去噪与实体词典命中初筛 (0 Token)
             matched, tags, likely_cat = self.engine.pre_filter(item)
             if not matched:
-                # 记录为已处理指纹，防止重复扫描无关新闻
-                self.progress_mgr.record_processed_hash(item.raw_hash)
+                # 仅跳过当前轮次，不将其写入已处理哈希，保留未来词典扩展或手动补数时重新提炼的机会
                 continue
 
             cycle_metrics["filtered_in"] += 1

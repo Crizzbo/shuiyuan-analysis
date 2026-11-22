@@ -45,8 +45,8 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
   // 4. 数据操作区子标签切换 (按数据类型：quotes / reconciliation / filings_queue)
   const [operationTab, setOperationTab] = useState<'quotes' | 'reconciliation' | 'filings_queue'>('quotes')
 
-  // 5. 批量价格采集控制台状态
-  const [batchTickersInput, setBatchTickersInput] = useState('AAPL, MSFT, GOOGL, AMZN, NVDA, META, TSLA')
+  // 5. 批量价格采集控制台状态 (默认留空代表 Tier-0 核心高频池 63 只标的，支持输入全盘 14,897 家中任意代码)
+  const [batchTickersInput, setBatchTickersInput] = useState('')
   const [runningBatchCollect, setRunningBatchCollect] = useState(false)
   const [batchProgress, setBatchProgress] = useState<number | null>(null)
   const [batchResult, setBatchResult] = useState<{
@@ -60,6 +60,23 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
   } | null>(null)
   const [quoteFilter, setQuoteFilter] = useState<'ALL' | 'US' | 'JP' | 'UP_ONLY'>('ALL')
 
+  // 5.1 全盘流式分批并发采集 (Chunk-and-Stream Option 1) 状态
+  const [streamStatus, setStreamStatus] = useState<{
+    schema_version?: string
+    total_chunks_available: number
+    completed_chunks: number[]
+    completed_chunks_count: number
+    total_tickers_archived: number
+    last_run_at: string | null
+    last_processed_chunk?: number
+    next_chunk_to_process: number
+    chunk_records: Record<string, any>
+  } | null>(null)
+  const [streamStartChunk, setStreamStartChunk] = useState<number>(1)
+  const [streamEndChunk, setStreamEndChunk] = useState<number>(5)
+  const [runningStreamCollect, setRunningStreamCollect] = useState(false)
+  const [streamResult, setStreamResult] = useState<any | null>(null)
+
   // 6. 参数配置弹窗
   const [configModalOpen, setConfigModalOpen] = useState(false)
   const [selectedConfigTaskId, setSelectedConfigTaskId] = useState<string | null>(null)
@@ -69,6 +86,12 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
 
   // 预设资产池快速填充
   const PRESET_POOLS = [
+    {
+      id: 'full_universe',
+      label: '⚡ Tier-0 核心池 (63只 / 全盘14,897家)',
+      icon: '🚀',
+      tickers: '',
+    },
     {
       id: 'mag7',
       label: '科技七巨头 (Mag 7)',
@@ -105,10 +128,11 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
   const loadData = async () => {
     try {
       setLoadingOverview(true)
-      const [ovRes, schedRes, archRes] = await Promise.all([
+      const [ovRes, schedRes, archRes, streamRes] = await Promise.all([
         api.getCollectionOverview(),
         api.getTerminalTasks(),
         api.getMarketArchives(),
+        api.getStreamChunkStatus(),
       ])
 
       if (ovRes.ok && ovRes.data) {
@@ -123,6 +147,14 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
           setReconciliation(archRes.data.reconciliation)
         }
       }
+      if (streamRes.ok && streamRes.data && streamRes.data.data) {
+        const cp = streamRes.data.data
+        setStreamStatus(cp)
+        if (cp.next_chunk_to_process) {
+          setStreamStartChunk(cp.next_chunk_to_process)
+          setStreamEndChunk(Math.min(100, cp.next_chunk_to_process + 4))
+        }
+      }
     } catch (err) {
       console.error('Failed to load collection hub data:', err)
     } finally {
@@ -134,35 +166,73 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
     void loadData()
   }, [refreshKey])
 
-  // 执行批量价格采集
+  // 执行全盘流式分批并发采集 (Chunk-and-Stream Option 1)
+  const handleStreamCollect = async (start = streamStartChunk, end = streamEndChunk) => {
+    setRunningStreamCollect(true)
+    showToast({
+      type: 'info',
+      title: `🌊 启动 Chunk-and-Stream 流式分批并发采集 (Chunk ${start} ~ ${end})`,
+      message: '正在按分块流式生成公式矩阵并执行并发验真入账...',
+    })
+    try {
+      const res = await api.streamChunkCollect(start, end, false)
+      if (res.ok && res.data) {
+        setStreamResult(res.data.data)
+        if (res.data.data.checkpoint) {
+          const cp = res.data.data.checkpoint
+          setStreamStatus(cp)
+          if (cp.next_chunk_to_process) {
+            setStreamStartChunk(cp.next_chunk_to_process)
+            setStreamEndChunk(Math.min(100, cp.next_chunk_to_process + 4))
+          }
+        }
+        showToast({
+          type: 'success',
+          title: '🎯 流式分批并发采集完成！',
+          message: res.data.message || `已成功落盘 ${res.data.data.total_tickers_collected} 条权威行情`,
+        })
+        void loadData()
+      } else {
+        const errMsg = typeof res.error === 'string' ? res.error : (res.error as any)?.message || '采集过程中遇到错误，请检查日志'
+        showToast({
+          type: 'error',
+          title: '流式分批采集未完成',
+          message: errMsg,
+        })
+      }
+    } catch (e: any) {
+      showToast({
+        type: 'error',
+        title: '流式分批采集请求异常',
+        message: e?.message || '网络连接或服务异常',
+      })
+    } finally {
+      setRunningStreamCollect(false)
+    }
+  }
+
+  // 执行批量价格采集 (支持留空默认全量拉取)
   const handleBatchCollect = async () => {
     const raw = batchTickersInput.trim()
-    if (!raw) {
-      showToast({ type: 'warning', title: '输入为空', message: '请在输入框填入股票代码或点击上方预设池' })
-      return
-    }
-
-    const tickerList = Array.from(
-      new Set(
-        raw
-          .split(/[,;\s\n\r]+/)
-          .map(t => t.trim().toUpperCase())
-          .filter(t => t.length > 0)
-      )
-    )
-
-    if (tickerList.length === 0) {
-      showToast({ type: 'warning', title: '无效代码', message: '未能解析出有效标的代码' })
-      return
-    }
+    const tickerList = raw
+      ? Array.from(
+          new Set(
+            raw
+              .split(/[,;\s\n\r]+/)
+              .map(t => t.trim().toUpperCase())
+              .filter(t => t.length > 0)
+          )
+        )
+      : []
 
     setRunningBatchCollect(true)
     setBatchProgress(15)
 
+    const isFullUniverse = tickerList.length === 0
     showToast({
       type: 'info',
-      title: `启动批量行情报价同步 (${tickerList.length} 只标的)`,
-      message: '正在识别市场交易时段、核验价格精度并执行合规存证归档...',
+      title: isFullUniverse ? '启动 Tier-0 核心资产池行情并发同步 (63 只标的)' : `启动指定行情报价同步 (${tickerList.length} 只标的)`,
+      message: '正在通过 Google Sheets 6 表并发调度引擎拉取最新报价并执行时效验真...',
     })
 
     const timer = setInterval(() => {
@@ -464,16 +534,22 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
                   <label htmlFor="batch-tickers-input" className="text-slate-600 font-semibold">
                     待采集标的列表 (支持逗号、分号、换行或空格分隔):
                   </label>
-                  <span className="text-[11px] font-mono text-sky-700 font-bold">
-                    当前已输入 {parsedTickerCount} 只标的
-                  </span>
+                  {parsedTickerCount === 0 ? (
+                    <span className="text-[11px] font-mono text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                      默认：Tier-0 核心高频池 63 只 (全盘底账 14,897 家)
+                    </span>
+                  ) : (
+                    <span className="text-[11px] font-mono text-sky-700 font-bold bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200">
+                      当前已输入 {parsedTickerCount} 只指定标的
+                    </span>
+                  )}
                 </div>
                 <textarea
                   id="batch-tickers-input"
                   rows={2}
                   value={batchTickersInput}
                   onChange={e => setBatchTickersInput(e.target.value)}
-                  placeholder="例如: AAPL, MSFT, GOOGL, NVDA, 8035, 7203..."
+                  placeholder="留空默认一键并发拉取 Tier-0 核心 63 只高频标的，或输入全盘 14,897 家中任意标的代码 (如: NVDA, AAPL, 7203, IBM, 9983)..."
                   className="w-full rounded-xl border border-sky-200/80 bg-white/95 px-3 py-2 text-xs font-mono text-slate-800 placeholder-slate-400 shadow-2xs focus:border-sky-500 focus:outline-hidden"
                 />
               </div>
@@ -481,7 +557,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
               <div>
                 <button
                   type="button"
-                  disabled={runningBatchCollect || parsedTickerCount === 0}
+                  disabled={runningBatchCollect}
                   onClick={() => void handleBatchCollect()}
                   className="w-full h-15 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-bold text-xs shadow-md hover:shadow-lg transition-all cursor-pointer disabled:opacity-50 flex flex-col items-center justify-center gap-1"
                 >
@@ -489,12 +565,16 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
                     <ZapIcon className={`w-4 h-4 ${runningBatchCollect ? 'animate-bounce' : ''}`} />
                     <span>
                       {runningBatchCollect
-                        ? '正在同步最新价格与核验时钟…'
-                        : `一键同步最新行情报价 (${parsedTickerCount} 只)`}
+                        ? '正在通过多表并发同步最新价格…'
+                        : parsedTickerCount === 0
+                          ? '一键并发同步核心行情 (63 只)'
+                          : `一键同步指定行情报价 (${parsedTickerCount} 只)`}
                     </span>
                   </div>
                   <span className="text-[10px] text-sky-100/90 font-normal">
-                    市场交易时段自适应 · 官方精度核验 · 合规存证归档
+                    {parsedTickerCount === 0
+                      ? 'Google Sheets 6 表并发 · 毫秒级防雪崩抖动 · 支持全盘 14,897 家扩展'
+                      : '市场交易时段自适应 · 官方精度核验 · 合规存证归档'}
                   </span>
                 </button>
               </div>
@@ -514,6 +594,144 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
                 </div>
               </div>
             )}
+
+            {/* 🌊 全盘流式分批并发采集管线 (Chunk-and-Stream Option 1) 控制卡片 */}
+            <div className="rounded-2xl border border-sky-200/80 bg-gradient-to-br from-sky-50/70 via-white/80 to-blue-50/50 p-4 shadow-xs space-y-3">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-sky-100/80 pb-2.5">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center text-white text-base shadow-xs">
+                    🌊
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-slate-800 text-xs sm:text-sm">
+                        全盘流式分批并发采集管线 (Chunk-and-Stream 方案1)
+                      </span>
+                      <span className="text-[10px] bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded-full border border-sky-200 font-mono">
+                        全量 14,897 家上市公司
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-500">
+                      将万家企业按批次切分（每批 50~100 家），流式轮询生成公式矩阵并并发入账，边渲染边采集，防范云端超时崩溃
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="text-[11px] font-mono text-slate-600 bg-white/90 border border-sky-100 px-2.5 py-1 rounded-lg">
+                    已入账标的: <strong className="text-emerald-600">{streamStatus?.total_tickers_archived ?? 0}</strong> 条
+                  </span>
+                  <span className="text-[11px] font-mono text-slate-600 bg-white/90 border border-sky-100 px-2.5 py-1 rounded-lg">
+                    已完成分块: <strong className="text-sky-600">{streamStatus?.completed_chunks_count ?? 0}</strong> / {streamStatus?.total_chunks_available ?? 100}
+                  </span>
+                </div>
+              </div>
+
+              {/* 流式分块全景进度条 */}
+              {streamStatus && (
+                <div className="space-y-1">
+                  <div className="flex justify-between items-center text-[10px] font-mono text-slate-500">
+                    <span>全盘分块覆盖进度: {streamStatus.completed_chunks_count} / {streamStatus.total_chunks_available} Chunks</span>
+                    <span>{Math.round(((streamStatus.completed_chunks_count || 0) / (streamStatus.total_chunks_available || 100)) * 100)}%</span>
+                  </div>
+                  <div className="w-full bg-slate-200/70 rounded-full h-2 overflow-hidden">
+                    <div
+                      className="bg-gradient-to-r from-sky-500 to-indigo-600 h-2 rounded-full transition-all duration-500"
+                      style={{ width: `${Math.min(100, Math.round(((streamStatus.completed_chunks_count || 0) / (streamStatus.total_chunks_available || 100)) * 100))}%` }}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* 批次选择与流式触发控制栏 */}
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+                <div className="flex flex-wrap items-center gap-2 text-xs">
+                  <span className="text-slate-600 font-semibold">分块区间:</span>
+                  <div className="flex items-center gap-1 font-mono">
+                    <span className="text-[11px] text-slate-500">Chunk</span>
+                    <input
+                      type="number"
+                      min={1}
+                      max={150}
+                      value={streamStartChunk}
+                      onChange={e => setStreamStartChunk(Math.max(1, parseInt(e.target.value) || 1))}
+                      className="w-14 rounded-lg border border-sky-200 bg-white px-2 py-1 text-xs text-center font-bold text-slate-800"
+                    />
+                    <span className="text-slate-400">至</span>
+                    <input
+                      type="number"
+                      min={streamStartChunk}
+                      max={150}
+                      value={streamEndChunk}
+                      onChange={e => setStreamEndChunk(Math.max(streamStartChunk, parseInt(e.target.value) || streamStartChunk))}
+                      className="w-14 rounded-lg border border-sky-200 bg-white px-2 py-1 text-xs text-center font-bold text-slate-800"
+                    />
+                  </div>
+
+                  {/* 预设批次快捷选择 */}
+                  <div className="flex items-center gap-1.5 ml-2">
+                    <button
+                      type="button"
+                      onClick={() => { setStreamStartChunk(1); setStreamEndChunk(5); }}
+                      className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-white hover:bg-sky-50 text-slate-600 border border-sky-200 transition-all cursor-pointer"
+                    >
+                      示范: 1~5
+                    </button>
+                    {streamStatus && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const n = streamStatus.next_chunk_to_process || 1;
+                          setStreamStartChunk(n);
+                          setStreamEndChunk(Math.min(100, n + 4));
+                        }}
+                        className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-sky-100/70 hover:bg-sky-100 text-sky-800 border border-sky-300 font-bold transition-all cursor-pointer"
+                      >
+                        推进下 5 个批次 (Chunk {streamStatus.next_chunk_to_process}~)
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => { setStreamStartChunk(1); setStreamEndChunk(100); }}
+                      className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-white hover:bg-sky-50 text-slate-600 border border-sky-200 transition-all cursor-pointer"
+                    >
+                      全盘 1~100 批
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <button
+                    type="button"
+                    disabled={runningStreamCollect}
+                    onClick={() => void handleStreamCollect(streamStartChunk, streamEndChunk)}
+                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-sky-600 hover:from-indigo-500 hover:to-sky-500 text-white font-bold text-xs shadow-md hover:shadow-lg transition-all cursor-pointer disabled:opacity-50 flex items-center gap-2"
+                  >
+                    <span>🌊</span>
+                    <span>
+                      {runningStreamCollect
+                        ? `正在流式采集 Chunk ${streamStartChunk} ~ ${streamEndChunk}…`
+                        : `启动流式分批并发采集 (Chunk ${streamStartChunk} ~ ${streamEndChunk})`}
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              {/* 最近一次流式采集结果提示 */}
+              {streamResult && (
+                <div className="rounded-xl bg-white/90 border border-emerald-200 p-2.5 text-xs flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-1.5 text-emerald-800 font-medium">
+                    <span>✅</span>
+                    <span>
+                      本轮流式成功处理 <strong>{streamResult.total_chunks_processed}</strong> 个分块，新落盘 <strong>{streamResult.total_tickers_collected}</strong> 条权威行情，总耗时 {streamResult.elapsed_seconds} 秒
+                    </span>
+                  </div>
+                  <div className="text-[10px] text-slate-400 font-mono">
+                    最新检查点已保存至 data/google-finance/manifests/stream_chunk_checkpoint.json
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* 批量采集统计指标与对账结果表格 */}
             {batchResult && (

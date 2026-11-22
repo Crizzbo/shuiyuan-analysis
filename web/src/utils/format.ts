@@ -180,13 +180,13 @@ export function toList(val?: string[] | string | null): string[] {
 export function getSeverityBadge(sev?: string): { text: string; cls: string } {
   switch (String(sev || '').toUpperCase()) {
     case 'P0':
-      return { text: '极高影响', cls: 'bg-rose-50 text-rose-700 border border-rose-200' }
+      return { text: '极高影响', cls: 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800' }
     case 'P1':
-      return { text: '重要关注', cls: 'bg-amber-50 text-amber-700 border border-amber-200' }
+      return { text: '重要关注', cls: 'bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800' }
     case 'P2':
-      return { text: '行业动态', cls: 'bg-slate-100 text-slate-700 border border-slate-200' }
+      return { text: '行业动态', cls: 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700' }
     default:
-      return { text: '常规资讯', cls: 'bg-slate-100 text-slate-500 border border-slate-200' }
+      return { text: '常规资讯', cls: 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700' }
   }
 }
 
@@ -196,13 +196,13 @@ export function getSeverityBadge(sev?: string): { text: string; cls: string } {
 export function getVerificationBadge(status?: string): { text: string; cls: string } {
   switch (status) {
     case 'Confirmed_Fact':
-      return { text: '官方权威核实', cls: 'bg-emerald-50 text-emerald-700 border border-emerald-200' }
+      return { text: '官方权威核实', cls: 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800' }
     case 'Corroborated_Report':
-      return { text: '主流媒体采信', cls: 'bg-slate-100 text-slate-700 border border-slate-200' }
+      return { text: '主流媒体采信', cls: 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700' }
     case 'Unverified_Rumor':
-      return { text: '待核实传闻隔离', cls: 'bg-rose-50 text-rose-700 border border-rose-200' }
+      return { text: '待核实传闻隔离', cls: 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800' }
     default:
-      return { text: '已归档', cls: 'bg-slate-100 text-slate-500 border border-slate-200' }
+      return { text: '已归档', cls: 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700' }
   }
 }
 
@@ -242,15 +242,15 @@ export function formatCredibilityTier(tier?: string): { text: string; cls: strin
   const t = String(tier || '').trim()
   switch (t) {
     case 'Tier1_Official_Regulatory':
-      return { text: '官方原发 (一级)', cls: 'bg-[#176249]/10 text-[#176249] border border-[#176249]/25' }
+      return { text: '官方原发 (一级)', cls: 'bg-[#176249]/10 dark:bg-[#176249]/25 text-[#176249] dark:text-emerald-400 border border-[#176249]/25 dark:border-[#176249]/40' }
     case 'Tier2_Issuer_Direct':
-      return { text: '企业直发 (二级)', cls: 'bg-slate-100 text-slate-700 border border-slate-200' }
+      return { text: '企业直发 (二级)', cls: 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700' }
     case 'Tier3_Mainstream_Wire':
-      return { text: '主流财经 (三级)', cls: 'bg-amber-50 text-amber-700 border border-amber-200' }
+      return { text: '主流财经 (三级)', cls: 'bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800' }
     case 'Tier4_Public_Flash_Social':
-      return { text: '公开快讯 (四级)', cls: 'bg-slate-100 text-slate-500 border border-slate-200' }
+      return { text: '公开快讯 (四级)', cls: 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700' }
     default:
-      return { text: t ? '已归档' : '', cls: 'bg-slate-100 text-slate-500 border border-slate-200' }
+      return { text: t ? '已归档' : '', cls: 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700' }
   }
 }
 

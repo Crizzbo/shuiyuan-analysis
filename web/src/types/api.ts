@@ -520,6 +520,8 @@ export interface CandidateItem {
   readiness_status?: string
   priority?: number
   vcp_code?: string | null
+  asset_category?: string
+  multi_asset_action?: string
 }
 
 export interface CandidatesData {
@@ -531,13 +533,64 @@ export interface CandidatesData {
   tier0_pivot_ready_count: number
   tier1_watchlist_count: number
   market: string
+  asset_category?: string
+  asset_category_breakdown?: Record<string, number>
   candidates: CandidateItem[]
+}
+
+export interface ETFProfile {
+  benchmark_index: string
+  expense_ratio_pct: number
+  tracking_error_bps: number
+  aum_billions: number
+  holdings_count: number
+  top_holdings: Array<{ ticker: string; name: string; weight_pct: number }>
+  style_factors: {
+    market_cap_style: string
+    beta_to_sp500: number
+    dividend_yield_pct: number
+    interest_rate_duration_years: number
+  }
+  rate_cut_sensitivity: string
+  rebalance_frequency: string
+}
+
+export interface CommodityProfile {
+  asset_sub_type: string
+  backing_type: string
+  real_yield_10y_tips_pct: number
+  real_yield_elasticity: number
+  central_bank_buying_trend: string
+  physical_premium_pct: number
+  gold_silver_ratio?: number
+  aisc_cost_per_oz?: number | null
+  vault_location?: string
+  inflation_hedge_rating: string
+}
+
+export interface DividendProfile {
+  dividend_yield_pct: number
+  payout_ratio_pct: number
+  consecutive_dividend_growth_years: number
+  free_cash_flow_coverage_ratio: number
+  downside_volatility_pct: number
+  defensive_moat_type: string
+}
+
+export interface MultiAssetProfile {
+  asset_category: 'Growth_Equity' | 'Broad_Or_Sector_ETF' | 'Gold_And_Commodity' | 'Dividend_And_Defensive' | string
+  category_name_zh: string
+  etf_profile?: ETFProfile | null
+  commodity_profile?: CommodityProfile | null
+  dividend_profile?: DividendProfile | null
 }
 
 export interface CompanyAnalysisData {
   ticker: string
   market: 'US' | 'JP' | string
   company_name: string
+  asset_category?: 'Growth_Equity' | 'Broad_Or_Sector_ETF' | 'Gold_And_Commodity' | 'Dividend_And_Defensive' | string
+  multi_asset_profile?: MultiAssetProfile | null
   scoring_disabled: boolean
   quote: MarketQuoteItem
   industry_profile: {

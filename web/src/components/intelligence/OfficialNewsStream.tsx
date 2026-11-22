@@ -94,7 +94,7 @@ export const OfficialNewsStream: React.FC<OfficialNewsStreamProps> = ({
             className={`px-2.5 py-1 rounded text-xs font-medium cursor-pointer transition-all ${
               newsSourceFilter === 'ALL'
                 ? 'bg-[#176249] text-white shadow-sm'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-slate-100'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             全部信源 ({newsItems.length})
@@ -110,7 +110,7 @@ export const OfficialNewsStream: React.FC<OfficialNewsStreamProps> = ({
               className={`px-2.5 py-1 rounded text-xs font-medium cursor-pointer transition-all ${
                 newsSourceFilter === s
                   ? 'bg-[#176249] text-white shadow-sm'
-                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-slate-100'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-slate-100 dark:hover:bg-slate-800'
               }`}
             >
               {formatSourceName(s)}
@@ -145,7 +145,7 @@ export const OfficialNewsStream: React.FC<OfficialNewsStreamProps> = ({
             className={`px-2.5 py-1 rounded text-xs font-medium cursor-pointer transition-all ${
               newsCategoryFilter === 'ALL'
                 ? 'bg-[#176249] text-white shadow-sm'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-slate-100'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             全部类别 ({newsItems.length})
@@ -161,13 +161,13 @@ export const OfficialNewsStream: React.FC<OfficialNewsStreamProps> = ({
               className={`px-2.5 py-1 rounded text-xs font-medium cursor-pointer transition-all flex items-center gap-1 ${
                 newsCategoryFilter === cat
                   ? 'bg-[#176249] text-white shadow-sm'
-                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--surface-color)] border border-[var(--border-color)] hover:border-slate-300'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--surface-color)] border border-[var(--border-color)] hover:border-slate-300 dark:hover:border-slate-700'
               }`}
             >
               <span>{cat}</span>
               <span
                 className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                  newsCategoryFilter === cat ? 'bg-white/20' : 'bg-slate-100 text-slate-600'
+                  newsCategoryFilter === cat ? 'bg-white/20' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
                 }`}
               >
                 {count}

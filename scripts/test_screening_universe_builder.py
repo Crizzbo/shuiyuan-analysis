@@ -4,15 +4,18 @@
 
 import json
 from pathlib import Path
+import sys
 import tempfile
 import unittest
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 from finance_tools.screening_universe_builder import (
     ScreeningUniverseBuilder,
     StockScreeningRecord,
 )
-
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
 class TestScreeningUniverseBuilder(unittest.TestCase):
@@ -98,13 +101,17 @@ class TestScreeningUniverseBuilder(unittest.TestCase):
 
             self.assertTrue(sample_file.exists())
             data = json.loads(sample_file.read_text(encoding="utf-8"))
-            self.assertEqual(data["total_samples"], 5)
+            self.assertEqual(data["total_samples"], 9)
             tickers = [s["ticker"] for s in data["samples"]]
             self.assertIn("NVDA", tickers)
             self.assertIn("TSM", tickers)
             self.assertIn("8035", tickers)
             self.assertIn("6857", tickers)
             self.assertIn("INTC", tickers)
+            self.assertIn("GLD", tickers)
+            self.assertIn("SPY", tickers)
+            self.assertIn("SCHD", tickers)
+            self.assertIn("NEM", tickers)
 
     def test_schema_conformance(self):
         """测试生成的初筛数据契约结构与字段完整性."""

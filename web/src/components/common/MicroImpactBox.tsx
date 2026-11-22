@@ -19,41 +19,20 @@ export const MicroImpactBox: React.FC<MicroImpactBoxProps> = ({
 
   return (
     <div
-      style={{
-        marginTop: 8,
-        padding: '8px 12px',
-        background: 'rgba(255, 255, 255, 0.03)',
-        borderRadius: 6,
-        borderLeft: '3px solid #ff9800',
-        fontSize: '0.82rem',
-        ...style,
-      }}
+      style={style}
+      className="mt-2 p-3 rounded-lg border-l-4 border-l-amber-500 bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-900/50 text-xs shadow-2xs"
     >
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 6,
-          color: '#ffb74d',
-          fontWeight: 600,
-          marginBottom: 4,
-        }}
-      >
+      <div className="flex items-center gap-1.5 text-amber-900 dark:text-amber-400 font-bold mb-1.5">
         <span>{title}</span>
         {catLabel && (
-          <span
-            style={{
-              fontSize: '0.72rem',
-              padding: '1px 6px',
-              background: 'rgba(255, 152, 0, 0.15)',
-              borderRadius: 4,
-            }}
-          >
+          <span className="text-[10px] px-1.5 py-0.2 rounded font-semibold bg-amber-100 dark:bg-amber-900/60 text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
             {catLabel}
           </span>
         )}
       </div>
-      <div style={{ color: '#ccc', lineHeight: 1.4 }}>{impact}</div>
+      <div className="text-[var(--text-secondary)] dark:text-slate-200 text-xs leading-relaxed font-normal">
+        {impact}
+      </div>
     </div>
   );
 };

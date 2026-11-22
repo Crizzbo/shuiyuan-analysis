@@ -11,6 +11,7 @@ import { formatDeviceTime } from '../utils/format'
 import { showToast } from './Toast'
 import { CandidateListSidebar } from './analytics/CandidateListSidebar'
 import { CompanyHeaderCard } from './analytics/CompanyHeaderCard'
+import { MultiAssetPenetrationCard } from './analytics/MultiAssetPenetrationCard'
 import { DcfValuationCorridorCard } from './analytics/DcfValuationCorridorCard'
 import { QuantMetricsSuiteCard } from './analytics/QuantMetricsSuiteCard'
 import { MoatAndSupplyChainCard } from './analytics/MoatAndSupplyChainCard'
@@ -26,6 +27,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
   // 左侧标的资产池状态
   const [candidatesData, setCandidatesData] = useState<CandidatesData | null>(null)
   const [marketFilter, setMarketFilter] = useState<'ALL' | 'US' | 'JP'>('ALL')
+  const [assetCategoryFilter, setAssetCategoryFilter] = useState<string>('ALL')
   const [selectedTicker, setSelectedTicker] = useState<string>('NVDA')
   const [searchQuery, setSearchQuery] = useState('')
   const [activeQuery, setActiveQuery] = useState('')
@@ -50,6 +52,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
   const [tuning, setTuning] = useState(false)
   const [overrideValuation, setOverrideValuation] = useState<AutomatedValuationData | null>(null)
   const [recollectingTicker, setRecollectingTicker] = useState(false)
+  const [showMobileSidebar, setShowMobileSidebar] = useState(false)
 
   const scrollToSection = (sectionId: string) => {
     const el = document.getElementById(sectionId)
@@ -58,11 +61,16 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
     }
   }
 
-  // 1. 加载左侧标的池（支持分页与搜索）
-  const loadCandidates = async (page = 1, market = marketFilter, query = activeQuery) => {
+  // 1. 加载左侧标的池（支持分页、搜索与资产类别过滤）
+  const loadCandidates = async (
+    page = 1,
+    market = marketFilter,
+    query = activeQuery,
+    category = assetCategoryFilter
+  ) => {
     try {
       setLoadingCandidates(true)
-      const res = await api.getAnalyticsCandidates(market, 20, page, query)
+      const res = await api.getAnalyticsCandidates(market, 20, page, query, category)
       if (res.ok) {
         setCandidatesData(res.data)
         setCurrentPage(res.data.page || page)
@@ -163,7 +171,14 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
   const handleMarketChange = (m: 'ALL' | 'US' | 'JP') => {
     setMarketFilter(m)
     setCurrentPage(1)
-    void loadCandidates(1, m, activeQuery)
+    void loadCandidates(1, m, activeQuery, assetCategoryFilter)
+  }
+
+  // 资产类别过滤器切换
+  const handleAssetCategoryChange = (cat: string) => {
+    setAssetCategoryFilter(cat)
+    setCurrentPage(1)
+    void loadCandidates(1, marketFilter, activeQuery, cat)
   }
 
   // 搜索提交
@@ -172,7 +187,7 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
     const trimmed = searchQuery.trim()
     setActiveQuery(trimmed)
     setCurrentPage(1)
-    void loadCandidates(1, marketFilter, trimmed)
+    void loadCandidates(1, marketFilter, trimmed, assetCategoryFilter)
   }
 
   // 清除搜索
@@ -180,13 +195,13 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
     setSearchQuery('')
     setActiveQuery('')
     setCurrentPage(1)
-    void loadCandidates(1, marketFilter, '')
+    void loadCandidates(1, marketFilter, '', assetCategoryFilter)
   }
 
   // 分页切换
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
-    void loadCandidates(page, marketFilter, activeQuery)
+    void loadCandidates(page, marketFilter, activeQuery, assetCategoryFilter)
   }
 
   // 应用敏感性微调
@@ -284,30 +299,57 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
         </div>
       </div>
 
+      {/* 移动端/窄视口快速折叠标的池指示条 */}
+      <div className="lg:hidden mb-3 bg-[var(--surface-color)] border border-[var(--border-color)] rounded-xl p-2.5 flex items-center justify-between shadow-2xs">
+        <div className="flex items-center gap-2 text-xs font-semibold text-[var(--text-primary)]">
+          <span className="w-2 h-2 rounded-full bg-[#176249]" />
+          <span>当前标的: <span className="font-mono font-bold text-[#176249]">{selectedTicker || '未选择'}</span></span>
+          {analysis?.company_name && (
+            <span className="text-[11px] text-[var(--text-muted)] truncate max-w-[130px] sm:max-w-xs">
+              · {analysis.company_name}
+            </span>
+          )}
+        </div>
+        <button
+          type="button"
+          onClick={() => setShowMobileSidebar(prev => !prev)}
+          className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--bg-card)] border border-[var(--border-color)] text-[#176249] hover:bg-[#176249]/10 cursor-pointer transition-all flex items-center gap-1 shrink-0"
+        >
+          <span>{showMobileSidebar ? '收起标的池 ✕' : '切换标的 (14,892家) ▼'}</span>
+        </button>
+      </div>
+
       {/* 左右分栏核心工作区 */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
         {/* 左侧：标的资产全量索引与检索栏 */}
-        <CandidateListSidebar
-          candidatesData={candidatesData}
-          marketFilter={marketFilter}
-          selectedTicker={selectedTicker}
-          searchQuery={searchQuery}
-          currentPage={currentPage}
-          loadingCandidates={loadingCandidates}
-          recollectingTicker={recollectingTicker}
-          onMarketChange={handleMarketChange}
-          onSearchChange={setSearchQuery}
-          onSearchSubmit={handleSearchSubmit}
-          onClearSearch={handleClearSearch}
-          onSelectTicker={setSelectedTicker}
-          onPageChange={handlePageChange}
-          onRecollectStock={handleRecollectStock}
-        />
+        <div className={`${showMobileSidebar ? 'block' : 'hidden'} lg:block lg:col-span-4 xl:col-span-3`}>
+          <CandidateListSidebar
+            candidatesData={candidatesData}
+            marketFilter={marketFilter}
+            assetCategoryFilter={assetCategoryFilter}
+            selectedTicker={selectedTicker}
+            searchQuery={searchQuery}
+            currentPage={currentPage}
+            loadingCandidates={loadingCandidates}
+            recollectingTicker={recollectingTicker}
+            onMarketChange={handleMarketChange}
+            onAssetCategoryChange={handleAssetCategoryChange}
+            onSearchChange={setSearchQuery}
+            onSearchSubmit={handleSearchSubmit}
+            onClearSearch={handleClearSearch}
+            onSelectTicker={(tk) => {
+              setSelectedTicker(tk)
+              setShowMobileSidebar(false)
+            }}
+            onPageChange={handlePageChange}
+            onRecollectStock={handleRecollectStock}
+          />
+        </div>
 
         {/* 右侧：个股深度研究与多模型估值主工作台 */}
         <div className="lg:col-span-8 xl:col-span-9 space-y-5">
           {/* 顶层标的工作台导航与快捷锚点栏 */}
-          <div className="flex flex-wrap items-center justify-between gap-3 bg-[var(--surface-color)] border border-[var(--border-color)] p-2.5 rounded-xl shadow-sm sticky top-0 z-30 backdrop-blur-md bg-opacity-95">
+          <div className="flex flex-wrap items-center justify-between gap-3 bg-[var(--surface-color)] dark:bg-slate-900/95 border border-[var(--border-color)] p-2.5 rounded-xl shadow-xs sticky top-[49px] z-30 backdrop-blur-md">
             <div className="flex flex-wrap items-center gap-1.5">
               <span className="text-[11px] text-[var(--text-muted)] font-medium mr-1">标的工作台导航:</span>
               <button
@@ -317,6 +359,23 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
               >
                 <span>标的概览</span>
               </button>
+              {analysis?.multi_asset_profile && (
+                <button
+                  type="button"
+                  onClick={() => scrollToSection('sec-multi-asset')}
+                  className="px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 cursor-pointer transition-all flex items-center gap-1.5 shadow-sm"
+                >
+                  <span>
+                    {analysis.asset_category === 'Broad_Or_Sector_ETF'
+                      ? '📊 ETF穿透分析'
+                      : analysis.asset_category === 'Gold_And_Commodity'
+                      ? '🪙 黄金与实际利率'
+                      : analysis.asset_category === 'Dividend_And_Defensive'
+                      ? '🛡️ 红利安全造血'
+                      : '🚀 多资产专有通道'}
+                  </span>
+                </button>
+              )}
               <button
                 type="button"
                 onClick={() => scrollToSection('sec-dcf')}
@@ -429,6 +488,13 @@ export function AnalyticsTab({ refreshKey, initialTicker }: AnalyticsTabProps) {
                 sym={sym}
                 recollectingTicker={recollectingTicker}
                 onRecollectStock={handleRecollectStock}
+              />
+
+              {/* 1.5 买方多资产差异化穿透深度分析卡片 */}
+              <MultiAssetPenetrationCard
+                profile={analysis.multi_asset_profile}
+                ticker={selectedTicker}
+                companyName={analysis.company_name}
               />
 
               {/* 2. 自动带入数据多阶段 DCF 内在价值走廊 */}

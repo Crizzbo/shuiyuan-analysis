@@ -18,6 +18,14 @@ import math
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
 
+from financial_core.engines.multi_asset_screening_engine import (
+    AssetCategory,
+    AssetClassClassifier,
+    MultiAssetScreeningDecision,
+    MultiAssetScreeningEngine,
+    MultiAssetScreeningInput,
+)
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -92,10 +100,12 @@ class StockScreeningRecord:
     volume_and_supply_dryup: VolumeAndSupplyDryup
     vcp_pattern_footprints: VcpPatternFootprints
     sepa_qualification: SepaQualification
+    asset_category: str = "Growth_Equity"
+    multi_asset_action: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
         """序列化为符合 schemas/stock_screening_metrics.schema.json 的字典."""
-        return {
+        res = {
             "ticker": self.ticker,
             "market": self.market,
             "company_name": self.company_name,
@@ -106,7 +116,11 @@ class StockScreeningRecord:
             "volume_and_supply_dryup": asdict(self.volume_and_supply_dryup),
             "vcp_pattern_footprints": asdict(self.vcp_pattern_footprints),
             "sepa_qualification": asdict(self.sepa_qualification),
+            "asset_category": self.asset_category,
         }
+        if self.multi_asset_action:
+            res["multi_asset_action"] = self.multi_asset_action
+        return res
 
 
 class ScreeningUniverseBuilder:
@@ -119,6 +133,7 @@ class ScreeningUniverseBuilder:
         self.us_chunk_dir = self.screening_dir / "us_10k"
         self.jp_chunk_dir = self.screening_dir / "jp_4k"
         self.samples_dir = self.screening_dir / "samples"
+        self.multi_asset_engine = MultiAssetScreeningEngine()
 
     def ensure_directories(self) -> None:
         """创建初筛专属存储目录体系."""
@@ -170,16 +185,47 @@ class ScreeningUniverseBuilder:
         base_duration_weeks: int = 8,
         contraction_sequence: Optional[List[float]] = None,
         pivot_price: Optional[float] = None,
+        asset_category: Optional[Union[AssetCategory, str]] = None,
+        ma20: Optional[float] = None,
+        real_rate_10y_tips: Optional[float] = None,
+        dividend_yield_pct: Optional[float] = None,
+        industry_id: str = "",
     ) -> StockScreeningRecord:
-        """执行 0-Token 纯本地数学计算，生成四维初筛指标契约."""
+        """执行 0-Token 纯本地数学计算，生成多资产四维初筛指标契约."""
         if contraction_sequence is None:
             contraction_sequence = [24.0, 12.0, 5.0, 2.0]
         if pivot_price is None:
             pivot_price = round(latest_price * 1.02, 2)
 
-        # ① 价格与均线系统逻辑断言
-        is_price_above = (latest_price > ma50 > ma150 > ma200)
-        is_ma200_up = (ma200 > ma200_20d_ago)
+        # 委托多资产自适应选股路由引擎进行定界与判定
+        inp = MultiAssetScreeningInput(
+            ticker=ticker,
+            market=market,
+            company_name=company_name,
+            latest_price=latest_price,
+            ma20=ma20,
+            ma50=ma50,
+            ma150=ma150,
+            ma200=ma200,
+            ma200_20d_ago=ma200_20d_ago,
+            high_52w=high_52w,
+            low_52w=low_52w,
+            volume_today=volume_today,
+            volume_50d_avg=volume_50d_avg,
+            volume_min_consolidation=volume_min_consolidation,
+            base_duration_weeks=base_duration_weeks,
+            contraction_sequence=contraction_sequence,
+            pivot_price=pivot_price,
+            asset_category=asset_category,
+            industry_id=industry_id,
+            real_rate_10y_tips=real_rate_10y_tips,
+            dividend_yield_pct=dividend_yield_pct,
+        )
+        decision = self.multi_asset_engine.screen(inp)
+
+        # ① 价格与均线系统逻辑断言 (多资产自适应对齐)
+        is_price_above = decision.trend_alignment_pass
+        is_ma200_up = (ma200 > ma200_20d_ago) if decision.asset_category == AssetCategory.GROWTH_EQUITY.value else (ma200 >= ma200_20d_ago * 0.995)
 
         price_mas = PriceAndMovingAverages(
             latest_price=round(latest_price, 2),
@@ -194,7 +240,7 @@ class ScreeningUniverseBuilder:
         # ② 周期位置与高低点
         gain_from_low = round(((latest_price - low_52w) / max(0.01, low_52w)) * 100.0, 2)
         pullback_from_high = round(((high_52w - latest_price) / max(0.01, high_52w)) * 100.0, 2)
-        meets_cycle = (gain_from_low >= 30.0 and pullback_from_high <= 25.0)
+        meets_cycle = decision.channel_or_cycle_pass
 
         cycle_pos = CycleAndHighLowPositions(
             high_52w=round(high_52w, 2),
@@ -206,7 +252,7 @@ class ScreeningUniverseBuilder:
 
         # ③ 成交量与筹码抽干
         dryup_ratio = round(volume_min_consolidation / max(1.0, volume_50d_avg), 4)
-        is_dryup = (dryup_ratio <= 0.50)
+        is_dryup = decision.risk_or_volatility_pass
 
         vol_dryup = VolumeAndSupplyDryup(
             volume_today=volume_today,
@@ -216,16 +262,16 @@ class ScreeningUniverseBuilder:
             is_volume_dryup_confirmed=is_dryup,
         )
 
-        # ④ 形态收敛足迹 VCP
+        # ④ 形态收敛足迹 VCP (兼顾多资产足迹语义)
         t_count = len(contraction_sequence)
         last_contraction = contraction_sequence[-1] if contraction_sequence else 10.0
         vcp_code = f"{base_duration_weeks}W {int(contraction_sequence[0])}/{int(last_contraction)} {t_count}T"
 
-        if last_contraction <= 5.0 and is_dryup:
+        if decision.pivot_ready_pass:
             vcp_stage = "Tight_Pivot_Ready"
-        elif last_contraction <= 10.0:
+        elif decision.is_watchlist:
             vcp_stage = "Contracting"
-        elif last_contraction <= 20.0:
+        elif decision.channel_or_cycle_pass:
             vcp_stage = "Loose_Shaping"
         else:
             vcp_stage = "No_Contraction"
@@ -238,38 +284,15 @@ class ScreeningUniverseBuilder:
             vcp_stage=vcp_stage,
         )
 
-        # 综合准入判定
-        stage_2_pass = (is_price_above and is_ma200_up and meets_cycle)
-        vcp_ready_pass = (vcp_stage == "Tight_Pivot_Ready")
-        overall_pass = (stage_2_pass and vcp_ready_pass)
-
-        if overall_pass:
-            decision = "Stage_2_Pivot_Ready"
-            rationale = (
-                f"【第二阶段主升浪确认 · 枢轴买点就绪】现价 ${latest_price:.2f} 站上所有均线，"
-                f"年线持续上翘；较低点反弹 {gain_from_low:.1f}%、距高点仅回撤 {pullback_from_high:.1f}%；"
-                f"VCP 收敛足迹 {vcp_code} 形成，地量抽干比 {dryup_ratio:.1%}，浮动筹码锁定，"
-                f"准入深度三表法证与 DCF 估值管道。"
-            )
-        elif stage_2_pass:
-            decision = "Watchlist_Forming"
-            rationale = (
-                f"【主升趋势良好 · 形态收敛中】趋势 8 大指标全票通过，但当前 VCP 阶段为 {vcp_stage}，"
-                f"末端收缩幅度 {last_contraction:.1f}%，需等待筹码进一步极窄收敛与地量确认。"
-            )
-        else:
-            decision = "Trend_Disqualified"
-            rationale = (
-                f"【趋势一票否决】未进入机构主导第二阶段主升浪。均线排列或年线倾角不达标，"
-                f"严禁提前抄底弱势股与阴跌破位股。"
-            )
+        # 综合准入判定 (满足 JSON Schema: Stage_2_Pivot_Ready / Watchlist_Forming / Trend_Disqualified)
+        action = "Stage_2_Pivot_Ready" if decision.is_qualified else ("Watchlist_Forming" if decision.is_watchlist else "Trend_Disqualified")
 
         qualification = SepaQualification(
-            stage_2_markup_pass=stage_2_pass,
-            vcp_ready_pass=vcp_ready_pass,
-            overall_preliminary_pass=overall_pass,
-            decision_action=decision,
-            business_rationale_zh=rationale,
+            stage_2_markup_pass=decision.trend_alignment_pass and decision.channel_or_cycle_pass,
+            vcp_ready_pass=decision.pivot_ready_pass,
+            overall_preliminary_pass=decision.is_qualified,
+            decision_action=action,
+            business_rationale_zh=decision.business_rationale_zh,
         )
 
         return StockScreeningRecord(
@@ -283,6 +306,8 @@ class ScreeningUniverseBuilder:
             volume_and_supply_dryup=vol_dryup,
             vcp_pattern_footprints=vcp_footprints,
             sepa_qualification=qualification,
+            asset_category=decision.asset_category,
+            multi_asset_action=decision.decision_action,
         )
 
     def generate_golden_samples(self) -> List[StockScreeningRecord]:
@@ -393,6 +418,93 @@ class ScreeningUniverseBuilder:
                 base_duration_weeks=12,
                 contraction_sequence=[45.0, 32.0],
                 pivot_price=28.00,
+            ),
+            # 6. GLD (SPDR Gold Shares · 黄金贵金属宏观中枢就绪打样)
+            self.compute_screening_metrics(
+                ticker="GLD",
+                market="US",
+                company_name="SPDR Gold Trust (Physical Gold ETF)",
+                cik_or_code="0001222333",
+                as_of_date=as_of,
+                latest_price=242.0,
+                ma50=238.0,
+                ma150=226.0,
+                ma200=218.0,
+                ma200_20d_ago=215.0,
+                high_52w=252.0,
+                low_52w=195.0,
+                volume_today=8500000,
+                volume_50d_avg=8200000,
+                volume_min_consolidation=4100000,
+                base_duration_weeks=8,
+                contraction_sequence=[10.0, 5.0, 2.5],
+                pivot_price=245.0,
+                real_rate_10y_tips=1.85,
+            ),
+            # 7. SPY (SPDR S&P 500 ETF Trust · 核心大盘指数顺势通道打样)
+            self.compute_screening_metrics(
+                ticker="SPY",
+                market="US",
+                company_name="SPDR S&P 500 ETF Trust",
+                cik_or_code="0000884394",
+                as_of_date=as_of,
+                latest_price=592.0,
+                ma50=578.0,
+                ma150=555.0,
+                ma200=532.0,
+                ma200_20d_ago=528.0,
+                high_52w=602.0,
+                low_52w=468.0,
+                volume_today=45000000,
+                volume_50d_avg=48000000,
+                volume_min_consolidation=22000000,
+                base_duration_weeks=6,
+                contraction_sequence=[8.0, 4.0, 1.8],
+                pivot_price=596.0,
+            ),
+            # 8. SCHD (Schwab U.S. Dividend Equity ETF · 高股息护城河防御打样)
+            self.compute_screening_metrics(
+                ticker="SCHD",
+                market="US",
+                company_name="Schwab U.S. Dividend Equity ETF",
+                cik_or_code="0001509378",
+                as_of_date=as_of,
+                latest_price=84.20,
+                ma50=82.50,
+                ma150=80.80,
+                ma200=79.20,
+                ma200_20d_ago=78.90,
+                high_52w=85.50,
+                low_52w=71.0,
+                volume_today=3200000,
+                volume_50d_avg=3500000,
+                volume_min_consolidation=1800000,
+                base_duration_weeks=8,
+                contraction_sequence=[6.0, 3.0, 1.2],
+                pivot_price=84.80,
+                dividend_yield_pct=3.45,
+            ),
+            # 9. NEM (Newmont Corp · 金矿龙头股打样)
+            self.compute_screening_metrics(
+                ticker="NEM",
+                market="US",
+                company_name="Newmont Corporation (Gold Mining)",
+                cik_or_code="0001164727",
+                as_of_date=as_of,
+                latest_price=48.50,
+                ma50=46.20,
+                ma150=42.80,
+                ma200=39.50,
+                ma200_20d_ago=38.60,
+                high_52w=51.0,
+                low_52w=29.40,
+                volume_today=9500000,
+                volume_50d_avg=10200000,
+                volume_min_consolidation=4600000,
+                base_duration_weeks=7,
+                contraction_sequence=[12.0, 6.0, 2.8],
+                pivot_price=49.50,
+                industry_id="gold_mining",
             ),
         ]
         return samples

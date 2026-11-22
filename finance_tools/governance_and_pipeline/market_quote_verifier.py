@@ -167,6 +167,7 @@ class MarketQuoteVerifier:
         quote_timestamp_iso: Optional[str] = None,
         source_label: str = "google_finance_verified_quote",
         market: Optional[str] = None,
+        time_slug: Optional[str] = None,
     ) -> VerifiedQuote:
         """核验并增量归档最新行情快照至本地二级来源 (绝不篡改已有历史文件)。"""
         ticker_clean = ticker.strip().upper()
@@ -178,8 +179,8 @@ class MarketQuoteVerifier:
         ts_iso = quote_timestamp_iso
         session_type = self.inspect_session(ts_iso)
 
-        time_slug = now_utc.strftime("%Y%m%dT%H%M%S_%fZ")
-        archive_file = self.raw_dir / f"{time_slug}_{ticker_clean}_market_quote.json"
+        slug = time_slug or now_utc.strftime("%Y%m%dT%H%M%S_%fZ")
+        archive_file = self.raw_dir / f"{slug}_{ticker_clean}_market_quote.json"
         counter = 1
         while archive_file.exists():
             archive_file = self.raw_dir / f"{time_slug}_{ticker_clean}_market_quote_v{counter}.json"
@@ -187,12 +188,15 @@ class MarketQuoteVerifier:
 
         # 执行 QuoteFreshnessGateway 前置核验
         mkt = market if market else ("JP" if (ticker_clean.isdigit() or ticker_clean.startswith("TYO:") or ticker_clean.endswith(".T") or ticker_clean in ("^N225", "^N225VI", "USDJPY")) else "US")
+        is_weekend = now_utc.weekday() in (5, 6)
+        staleness_limit = 96.0 if (is_weekend or session_type == "previous_close_baseline") else None
         gateway_res = QuoteFreshnessGateway.verify_quote(
             price=price,
             currency=currency,
             quote_timestamp=ts_iso,
             market=mkt,
             current_time_iso=now_utc.isoformat(),
+            max_staleness_hours=staleness_limit,
         )
         session_type = gateway_res.session_status
 
