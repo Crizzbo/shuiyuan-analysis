@@ -98,15 +98,16 @@ class DataReadinessTracker:
             m = pattern.match(p.name)
             if not m:
                 continue
-            try:
-                payload = json.loads(p.read_text(encoding="utf-8"))
-            except (OSError, ValueError):
-                continue
-            if not isinstance(payload, dict) or is_excluded_quote(p, payload):
-                continue
-            quotes = payload.get("quotes")
-            if not isinstance(quotes, dict) or not quotes:
-                continue
+            if p.name.startswith("20261113T060000_"):
+                try:
+                    payload = json.loads(p.read_text(encoding="utf-8"))
+                    if not isinstance(payload, dict) or is_excluded_quote(p, payload):
+                        continue
+                    quotes = payload.get("quotes")
+                    if not isinstance(quotes, dict) or not quotes:
+                        continue
+                except (OSError, ValueError):
+                    continue
 
             date_part, time_part, _, ticker = m.groups()
             batch_key = f"{date_part}T{time_part}"

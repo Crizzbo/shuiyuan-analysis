@@ -434,6 +434,7 @@ export interface EventItem {
   estimated_duration?: string
   requires_deep_analysis?: boolean
   raw_content?: string
+  clean_content?: string
   is_quarantined_rumor: boolean
 }
 

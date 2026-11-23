@@ -15,6 +15,46 @@ export interface EventDetailDrawerProps {
   onSelectTicker?: (ticker: string) => void
 }
 
+function formatRawContent(raw?: string): React.ReactNode {
+  if (!raw) return null
+  const clean = raw
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+
+  const segments = clean
+    .split(/<br\s*\/?>|\n|\r\n/)
+    .map((s) => s.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim())
+    .filter(Boolean)
+
+  if (segments.length === 0) return null
+
+  return (
+    <div className="space-y-1.5">
+      {segments.map((seg, idx) => {
+        const isItem = /Item\s+\d+\.\d+/i.test(seg)
+        const isFiled = /Filed:|AccNo:|Size:/i.test(seg)
+        return (
+          <div
+            key={idx}
+            className={`text-[11px] leading-relaxed ${
+              isItem
+                ? 'p-2 rounded bg-amber-500/10 border border-amber-500/20 text-amber-900 dark:text-amber-200 font-medium'
+                : isFiled
+                ? 'p-1.5 rounded bg-[var(--surface-color)] font-mono text-[var(--text-secondary)] text-[10px]'
+                : 'text-[var(--text-secondary)]'
+            }`}
+          >
+            {seg}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 /**
  * 权威事件深度详情抽屉 (Event Detail Drawer)
  * 穿透展示官方信源、时间戳、未核实隔离警示与微观因果传导分析
@@ -138,9 +178,9 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({
 
           {activeEvent.raw_content && (
             <div className="space-y-1.5">
-              <div className="text-xs font-bold text-[var(--text-primary)]">原始情报摘要</div>
-              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-3 text-[11px] text-[var(--text-muted)] max-h-40 overflow-y-auto leading-relaxed">
-                {activeEvent.raw_content}
+              <div className="text-xs font-bold text-[var(--text-primary)]">官方原始事实与披露项明细</div>
+              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-3 max-h-56 overflow-y-auto leading-relaxed">
+                {formatRawContent(activeEvent.raw_content)}
               </div>
             </div>
           )}

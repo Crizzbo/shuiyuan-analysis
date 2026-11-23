@@ -265,6 +265,31 @@ class TerminalEventMixin:
                     else "行业分析 (三级)"
                 )
 
+                raw_content = row_d.get("raw_content") or ""
+                micro_impact = row_d.get("micro_physical_impact")
+                entities_list = _parse_json_list(row_d.get("involved_entities"))
+                segments_list = _parse_json_list(row_d.get("affected_business_segments"))
+
+                # 动态提炼守卫：若未提纯或与标题机械相同，即时调用提炼引擎补全买方微观研判
+                if not hasattr(self, "_distillation_engine"):
+                    from finance_tools.events_and_verification.event_distillation_engine import EventDistillationEngine
+                    self._distillation_engine = EventDistillationEngine(self.root)
+
+                clean_content = self._distillation_engine.clean_html_text(raw_content)
+
+                if not micro_impact or micro_impact == row_d.get("title"):
+                    distilled = self._distillation_engine.distill_single_event(
+                        row_d.get("title", ""),
+                        raw_content,
+                        row_d.get("source_name", ""),
+                        fallback_category=row_d.get("category", "Other_Macro_Event"),
+                    )
+                    micro_impact = distilled.get("micro_physical_impact") or micro_impact
+                    if not entities_list or entities_list == ["未知实体"] or entities_list == ["美国证监会 (SEC)"]:
+                        entities_list = distilled.get("involved_entities", entities_list)
+                    if not segments_list or segments_list == ["通用产业"]:
+                        segments_list = distilled.get("affected_business_segments", segments_list)
+
                 parsed_events.append(
                     {
                         "event_id": row_d.get("event_id"),
@@ -286,12 +311,13 @@ class TerminalEventMixin:
                         "verification_status_zh": ver_zh_map.get(vstat, "待核实传闻隔离" if vstat == "Unverified_Rumor" else "主流媒体采信"),
                         "verification_status_tone": ver_tone_map.get(vstat, "info"),
                         "verification_note": row_d.get("verification_note"),
-                        "micro_physical_impact": row_d.get("micro_physical_impact"),
-                        "involved_entities": _parse_json_list(row_d.get("involved_entities")),
-                        "affected_business_segments": _parse_json_list(row_d.get("affected_business_segments")),
+                        "micro_physical_impact": micro_impact,
+                        "involved_entities": entities_list,
+                        "affected_business_segments": segments_list,
                         "estimated_duration": row_d.get("estimated_duration"),
                         "requires_deep_analysis": bool(row_d.get("requires_deep_analysis")),
-                        "raw_content": row_d.get("raw_content"),
+                        "raw_content": raw_content,
+                        "clean_content": clean_content,
                         "is_quarantined_rumor": vstat == "Unverified_Rumor",
                         "_dt_obj": dt_obj,
                     }
@@ -650,12 +676,12 @@ class TerminalEventMixin:
             news_items = scheduler.news()
             for n in news_items:
                 raw_items.append({
-                    "id": n.get("title", ""),
+                    "id": n.get("id") or n.get("title", ""),
                     "title": n.get("title", ""),
-                    "content": n.get("title", ""),
+                    "content": n.get("content") or n.get("summary") or n.get("description") or n.get("title", ""),
                     "source": n.get("source", "Official_RSS"),
                     "published_at": n.get("published_at", ""),
-                    "url": n.get("source", ""),
+                    "url": n.get("url") or n.get("source", ""),
                 })
 
         if not raw_items:

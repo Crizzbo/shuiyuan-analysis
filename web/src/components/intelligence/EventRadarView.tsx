@@ -4,6 +4,7 @@ import { Pagination } from '../Pagination'
 import { toList, getSeverityBadge, getVerificationBadge, formatSourceName, formatCredibilityTier } from '../../utils/format'
 import {
   EntityPills,
+  MicroImpactBox,
   CalendarIcon,
   ShieldCheckIcon,
   FilterIcon,
@@ -44,6 +45,19 @@ const SEVERITY_FILTERS = [
   { id: 'P2', label: '行业动态' },
   { id: 'P3', label: '常规资讯' },
 ]
+
+function cleanContentSnippet(raw?: string): string {
+  if (!raw) return ''
+  let text = raw.replace(/<(?:br|p|div)\s*\/?>/gi, ' · ').replace(/<[^>]+>/g, ' ')
+  text = text
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+  text = text.replace(/\s+/g, ' ').trim()
+  return text.replace(/^[·\s]+/, '').replace(/[·\s]+$/, '')
+}
 
 /**
  * 事件雷达全息深度研判子视图 (Event Radar View)
@@ -324,13 +338,50 @@ export const EventRadarView: React.FC<EventRadarViewProps> = ({
                       </div>
                     </div>
 
-                    {/* 关联主体信息 */}
-                    {toList(ev.involved_entities).length > 0 && (
-                      <div className="flex flex-wrap items-center gap-1.5 mt-3 pt-2.5 border-t border-[var(--border-color)]/50">
-                        <span className="text-[11px] text-[var(--text-muted)] mr-1">关联主体:</span>
-                        <EntityPills entities={ev.involved_entities} onSelectTicker={onSelectTicker} />
+                    {/* 微观物理与买方研判解读 */}
+                    {ev.micro_physical_impact && (
+                      <MicroImpactBox
+                        impact={ev.micro_physical_impact}
+                        category={ev.category}
+                        title="买方微观研判与传导影响"
+                      />
+                    )}
+
+                    {/* 原始情报与披露事实摘要预览 */}
+                    {(ev.clean_content || ev.raw_content) && (
+                      <div className="mt-2.5 px-3 py-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)]/70 text-xs text-[var(--text-secondary)] leading-relaxed">
+                        <span className="font-semibold text-[var(--text-muted)] mr-1.5 shrink-0">
+                          📄 事实概要:
+                        </span>
+                        <span className="line-clamp-2">
+                          {ev.clean_content || cleanContentSnippet(ev.raw_content)}
+                        </span>
                       </div>
                     )}
+
+                    {/* 底部关联主体与受影响分部 */}
+                    <div className="flex flex-wrap items-center justify-between gap-2 mt-3 pt-2.5 border-t border-[var(--border-color)]/50">
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        {toList(ev.involved_entities).length > 0 && (
+                          <>
+                            <span className="text-[11px] text-[var(--text-muted)] mr-1">关联主体:</span>
+                            <EntityPills entities={ev.involved_entities} onSelectTicker={onSelectTicker} />
+                          </>
+                        )}
+                      </div>
+                      {toList(ev.affected_business_segments).length > 0 && (
+                        <div className="flex flex-wrap items-center gap-1">
+                          {toList(ev.affected_business_segments).slice(0, 3).map((seg, idx) => (
+                            <span
+                              key={idx}
+                              className="text-[10px] px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium"
+                            >
+                              {seg}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )
               })}

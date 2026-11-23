@@ -26,6 +26,7 @@ from financial_core.engines.event_radar_engine import (
     RawNewsItem,
     StructuredEventSummary,
 )
+from .event_distillation_engine import EventDistillationEngine
 
 logger = logging.getLogger(__name__)
 
@@ -505,6 +506,9 @@ class RadarDatabaseManager:
 class MockModelSummarizer:
     """测试与沙箱环境下的确定性 2-B 结构化摘要生成器 (零成本 Mock)."""
 
+    def __init__(self, distillation_engine: Optional[EventDistillationEngine] = None):
+        self.distillation_engine = distillation_engine or EventDistillationEngine()
+
     def generate_summary_json(self, prompt_payload: Dict[str, str], fallback_item: RawNewsItem) -> str:
         """基于快讯事实确定性构造标准的 2-B JSON 输出."""
         title_lower = fallback_item.title.lower()
@@ -701,6 +705,21 @@ class MockModelSummarizer:
                         entities.append(ent)
         if len(entities) > 1 and "未知实体" in entities:
             entities.remove("未知实体")
+
+        # 若未能命中关键词且影响与标题相同，调用事件提炼引擎进行全息结构化因果提取
+        if impact == fallback_item.title:
+            distilled = self.distillation_engine.distill_single_event(
+                fallback_item.title,
+                fallback_item.content,
+                fallback_item.source,
+                fallback_category=category,
+            )
+            category = distilled.get("category", category)
+            entities = distilled.get("involved_entities", entities)
+            impact = distilled.get("micro_physical_impact", impact)
+            duration = distilled.get("estimated_duration", duration)
+            segments = distilled.get("affected_business_segments", segments)
+            severity = distilled.get("severity_level", severity)
 
         summary_dict = {
             "category": category,
