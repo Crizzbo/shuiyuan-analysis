@@ -702,6 +702,15 @@ class TerminalEventMixin:
             "summarized": cycle_res.get("summarized_count", 0),
             "total_events": radar.get("total_events", 0),
         })
+        self._broadcast_sse("collection_update", {
+            "type": "events",
+            "summarized": cycle_res.get("summarized_count", 0),
+            "total_events": radar.get("total_events", 0),
+        })
+        try:
+            self._broadcast_sse("snapshot", self.get_dashboard_summary()["data"])
+        except Exception:
+            pass
         return 200, self._envelope({
             "message": f"提炼完成：扫描 {cycle_res.get('scanned_count', 0)} 篇 · 提炼入雷达 {cycle_res.get('summarized_count', 0)} 条 · 重大事件 {cycle_res.get('p0_p1_triggered_count', 0)} 条",
             "cycle_result": cycle_res,

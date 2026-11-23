@@ -169,7 +169,9 @@
         "www.sec.gov",
         "blogs.microsoft.com",
         "blog.google",
-        "www.apple.com"
+        "www.apple.com",
+        "www.federalregister.gov",
+        "www.ecb.europa.eu"
       ],
       "source_kind": "secondary",
       "dataset_kind": "news",
@@ -225,6 +227,24 @@
           "name": "WSJ 市场标题",
           "url": "https://feeds.a.dj.com/rss/RSSMarketsMain.xml",
           "authority": "media",
+          "status": "candidate"
+        },
+        {
+          "name": "SEC EDGAR 全量实时 8-K 重大申报",
+          "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=8-K&output=atom",
+          "authority": "official",
+          "status": "candidate"
+        },
+        {
+          "name": "美国联邦公报 - BIS 出口管制与实体清单",
+          "url": "https://www.federalregister.gov/api/v1/documents.rss?conditions%5Bagencies%5D%5B%5D=industry-and-security-bureau",
+          "authority": "official",
+          "status": "candidate"
+        },
+        {
+          "name": "欧洲央行货币政策决策 (ECB)",
+          "url": "https://www.ecb.europa.eu/rss/press.html",
+          "authority": "official",
           "status": "candidate"
         }
       ],

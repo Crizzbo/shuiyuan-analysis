@@ -63,6 +63,28 @@ export function useSSE(handlers: SSEHandlers) {
       }
     })
 
+    const handleCollectionEvent = (e: MessageEvent) => {
+      try {
+        const data = JSON.parse(e.data)
+        handlersRef.current.onCollectionUpdate?.(data)
+      } catch (err) {
+        console.error('Failed to parse SSE collection event:', err)
+      }
+    }
+
+    es.addEventListener('batch_quotes_collected', handleCollectionEvent)
+    es.addEventListener('full_universe_collected', handleCollectionEvent)
+    es.addEventListener('radar_update', handleCollectionEvent)
+    es.addEventListener('stream_collection_update', handleCollectionEvent)
+    es.addEventListener('task_status', (e: MessageEvent) => {
+      try {
+        const data = JSON.parse(e.data)
+        handlersRef.current.onCollectionUpdate?.(data)
+      } catch (err) {
+        console.error('Failed to parse task_status SSE:', err)
+      }
+    })
+
     es.addEventListener('heartbeat', () => {
       setLastHeartbeat(Date.now())
     })

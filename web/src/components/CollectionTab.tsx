@@ -25,9 +25,10 @@ interface CollectionTabProps {
   refreshKey?: number
   onAudit?: () => void
   onNavigateToAnalytics?: (ticker: string) => void
+  onCollectionComplete?: () => void
 }
 
-export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: CollectionTabProps) {
+export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics, onCollectionComplete }: CollectionTabProps) {
   // 1. 数据概览与全系统 8 大数据类型盘点
   const [overview, setOverview] = useState<CollectionOverviewData | null>(null)
   const [, setLoadingOverview] = useState(true)
@@ -195,6 +196,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
           message: res.data.message || `已成功入账 ${res.data.data.total_tickers_collected} 条权威报价`,
         })
         void loadData()
+        onCollectionComplete?.()
       } else {
         const errMsg = typeof res.error === 'string' ? res.error : (res.error as any)?.message || '全盘抽取过程中遇到错误'
         showToast({
@@ -268,6 +270,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
           message: `时效状态: ${res.data.market_session_note || '已安全落盘'}`,
         })
         void loadData()
+        onCollectionComplete?.()
       } else {
         showToast({
           type: 'error',
@@ -300,6 +303,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
           message: `全系统定时任务调度已${targetState ? '开启' : '暂停'}`,
         })
         await loadData()
+        onCollectionComplete?.()
       } else {
         showToast({
           type: 'error',
@@ -422,7 +426,11 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
           </p>
         </div>
 
-        <div className="flex items-center gap-2 font-mono text-xs">
+        <div className="flex flex-wrap items-center gap-2.5 font-mono text-xs">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 text-[11px] font-semibold">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            全端自动同步已就绪
+          </span>
           <span className="text-slate-500">定时守护调度:</span>
           <span
             className={`px-2 py-0.5 rounded font-bold ${
@@ -437,7 +445,7 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
             type="button"
             disabled={togglingAutomatic || !schedulerInfo}
             onClick={() => void handleToggleAutomatic()}
-            className="ml-1 px-3 py-1 rounded-lg border border-sky-200 bg-white hover:bg-sky-50 text-sky-800 text-[11px] font-bold cursor-pointer disabled:opacity-50"
+            className="ml-1 px-3 py-1 rounded-lg border border-sky-200 bg-white hover:bg-sky-50 text-sky-800 text-[11px] font-bold cursor-pointer disabled:opacity-50 transition-colors"
           >
             {schedulerInfo?.automatic_enabled ? '暂停自动守护' : '开启自动守护'}
           </button>

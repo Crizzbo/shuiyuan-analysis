@@ -268,6 +268,8 @@ class TerminalScheduler:
             self.leader.close()
 
     def set_enabled(self, task, enabled):
+        if task == "__automatic__" and enabled:
+            self.scheduled = True
         with self._connect() as conn:
             conn.execute("BEGIN IMMEDIATE")
             conn.execute("UPDATE settings SET enabled=? WHERE task=?", (enabled, task))

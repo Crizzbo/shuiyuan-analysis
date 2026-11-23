@@ -45,10 +45,12 @@ export function DataInventoryOverview({
     <div className="space-y-2.5">
       <div className="flex items-center justify-between px-1">
         <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
           <span>全市场投研核心数据资产盘点</span>
         </h2>
-        <span className="text-[11px] text-slate-400 font-mono">
-          最后同步: {overview?.readiness?.latest_timestamp_utc || '实时更新'}
+        <span className="text-[11px] text-slate-400 font-mono flex items-center gap-1">
+          <span className="text-slate-400">最后同步:</span>
+          <span className="text-slate-600 dark:text-slate-300 font-semibold">{overview?.readiness?.latest_timestamp_utc || '实时更新'}</span>
         </span>
       </div>
 

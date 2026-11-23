@@ -112,8 +112,26 @@ export default function App() {
       void refreshHealth()
     },
     onLogEntry: (log) => setRealtimeLogs((previous) => [log, ...previous].slice(0, 100)),
-    onCollectionUpdate: () => setRefreshKey((key) => key + 1),
+    onCollectionUpdate: () => {
+      setRefreshKey((key) => key + 1)
+      void refreshHealth()
+    },
   })
+
+  // 自动心跳与静默同步机制 (每 15 秒检测一次，支持自动保持全盘时效最新)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+        void refreshHealth()
+      }
+    }, 15000)
+    return () => clearInterval(timer)
+  }, [refreshHealth])
+
+  // 切换选项卡时静默触发时效核验与数据同步
+  useEffect(() => {
+    void refreshHealth()
+  }, [tab, refreshHealth])
 
   return (
     <>
@@ -176,10 +194,17 @@ export default function App() {
         )}
 
         {tab === 'collection' && (
-          <CollectionTab pipelineStatus={pipelineStatus} refreshKey={refreshKey} onAudit={() => setTab('settings')}
+          <CollectionTab
+            pipelineStatus={pipelineStatus}
+            refreshKey={refreshKey}
+            onAudit={() => setTab('settings')}
             onNavigateToAnalytics={(ticker) => {
               setSelectedTicker(ticker)
               setTab('analytics')
+            }}
+            onCollectionComplete={() => {
+              setRefreshKey((key) => key + 1)
+              void refreshHealth()
             }}
           />
         )}

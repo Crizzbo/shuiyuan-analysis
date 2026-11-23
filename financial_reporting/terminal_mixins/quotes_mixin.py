@@ -645,12 +645,21 @@ class TerminalQuotesMixin:
             "items": collected_items,
         }
 
-        # 广播 SSE 更新通知
+        # 广播 SSE 更新通知与全局快照联动
         self._broadcast_sse("batch_quotes_collected", {
             "count": len(collected_items),
             "success_count": success_count,
             "tickers": [x["ticker"] for x in collected_items if x.get("is_valid")],
         })
+        self._broadcast_sse("collection_update", {
+            "type": "quotes",
+            "count": len(collected_items),
+            "success_count": success_count,
+        })
+        try:
+            self._broadcast_sse("snapshot", self.get_dashboard_summary()["data"])
+        except Exception:
+            pass
 
         return 200, self._envelope(
             res_payload,
@@ -909,6 +918,15 @@ class TerminalQuotesMixin:
                         "elapsed": result["elapsed_seconds"],
                     },
                 )
+                self._broadcast_sse(
+                    "collection_update",
+                    {
+                        "type": "full_universe",
+                        "market": market,
+                        "total_tickers": result["total_tickers_collected"],
+                    },
+                )
+                self._broadcast_sse("snapshot", self.get_dashboard_summary()["data"])
             except Exception:
                 pass
 

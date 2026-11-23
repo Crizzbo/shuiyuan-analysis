@@ -1,539 +1,1839 @@
 {
   "version": "1.0.0",
-  "last_successful_timestamp": "2026-11-14T17:00:10+00:00",
-  "processed_hashes": [],
+  "last_successful_timestamp": "2026-11-21T02:27:41.784212+00:00",
+  "processed_hashes": [
+    "021c045f94166eebc255dd8554da8e8c9d253e2e75e2f991b8a1765ccb411e68",
+    "06852d04e282dedc7374402493429a72d550c0bc9e73c6cecfc284b488ab492c",
+    "073ae12e5f9988f1c09d225e613ee77230cd05c425c477ad30632607e3855441",
+    "08c9356131497724d9bfd783b03dddffb5b13bf17ecb8f86c705c5a5f21f15fd",
+    "09851820cabab2b48a3f079d8c9ad756bb79feed00d42ea8e8dd4e29e5486d57",
+    "0a899cf788b27bc6b10784906f47af1af8d7a44bb86bde770cbd4132bd54e9e8",
+    "0d7a9b4c4640e205736161d28566f8c620fbb7747ef523c24bd3f06117792786",
+    "0e15373e1326ad792738987b133aef1e70a620c598498eae0e6d2db0fcaff639",
+    "0f180caea6693c9c171798f158c5577a22af4fb5bb8b9239ae32ec8905629f3c",
+    "0f471b5b58b86a1f4370cbb51f0106a58fcce869c0984bf23ae769fafcd1fc70",
+    "1117ecfdbc9ec721e3ff1ee1d4e7b102024357db052747c3e3233d1e3ecee6e4",
+    "11b25e2b6ab79faf91c94d084dbfe93414c2ef90b56ad93f2c71c016b5abbd85",
+    "139f6d43ec992446eb08d3c17ffa9588da2a8cd274b18887f01d94e00c0ae71f",
+    "1524c42813eb933f31f930806debd9d66354eef1cd2e3a4419ea842526be29c2",
+    "1ce1f4e3a2676b2ddde86a3d95d87358db398756f4d9173441702a936b644b92",
+    "1d0a16e6a68450536536e84e72a5cd9263793e4d04286e41c70cbcb27dad954a",
+    "1e2c11d2d11ae9624411fffb1893e10b9b10fdfa2cef2fcf595896d1613664c4",
+    "1f27ea9aeb0dfd63b264dd37ca840d705a7240dfa9528f80cd01891d3a0a93b0",
+    "26d306e23c6cc1eeb02d905079e9266a7a26c081cee5cd44f558a498d5afd887",
+    "2894c9b253f1d688f123c49d68ef76e1d2f69ee4d99349e7568d4be84d69957f",
+    "2a02f1ca20cacefaf10cca66462b309ffdcdba51c2ac50fbeb9f12356f4d5b2f",
+    "339aad880c5b70a553131849a3d3c10c3c751f0ebaad5a0f609659d467f6665c",
+    "33fc4e909097053df27ff7ed8303e2771eb824b45c37fdf2d99cae9dd6f7cfeb",
+    "34a75a217b1a47d12e6f0c46f620bff90521d207230886867370047dab5ed02b",
+    "34a7d972185677e28e455aa4dc7cc56c0defb3406b3d2cda5823dc8ced24afb3",
+    "3b5fd2bcb3582822fa5cbebf4d6306e0b020cb1d93efae86da21cf8a199d0c25",
+    "3e51dafeab6d15e5fee6f193e4400526bfe2941de09f96477b86619bc6889c3c",
+    "3f6dab7efd75f988431dcfb57070fc0ecac5d9e8bcf5752030a4f1ac13ce6d8a",
+    "3f95042717c36cf25c4f78e45f0ebf2ab934bb0c75b41a87bf54654b73dc51c8",
+    "3fc7995c53d83bd78f02c7f85dd6a7d051e05e5139fd4d06e51752a07fa14999",
+    "4063e68bb14ac5a4e7ba2033540ea9ec9bb8388f3d2b634a9d9aa8c24d4264c7",
+    "42e70bb3c8b194b6d901fc9692631149fb82882eba61576dfef43fe1530ee801",
+    "45539842354bc86bc6e8916ebdcb4fa478b720bbbd9a830f8c47bac72c7d0f33",
+    "457fd3b73f19684920d753f260a50c8ac2ba2f427572347fd07816f9eee09338",
+    "49ac7cf28071a41e821f07661f0c849148b79b5e58d0c05ea2505749272afcd1",
+    "4fbab0ac9e195c28b4360782db7e3cfd0ae7aee3a169ae02adb4d00d3243c54b",
+    "5091bd561289140f0ea32984b6541c88a113b82a5c909f5a4a18f81b7030d8bc",
+    "5472de7bc5a2b91d3ee5c0f594fd16fc6bee93f60d8913813d98ec3ffbb373c9",
+    "5568807f302c9bbd79073f19618381970f8a7d7e9e0e453d76f709fb8b27d568",
+    "568b00abb97ac53741e1e27b63c0429809ca68e94563f7b6a20c0325596e9e86",
+    "5a3c516049811fa99b2bae26df47b01b36a18f5b142878e3b2f60e7a750daf69",
+    "5bc474e534d5ba4d227b4d4c150314fdd41df94d4e4456619901cbe7364945bf",
+    "5d4a2f885c661574689edded3c3ec69a7fbf0e61c1bcfd342a894fe514f7e3dd",
+    "5d81b9239a55551a2372acacad64398dab3e6bb1d491440fad94471220fd1662",
+    "5dec66a103ffeeef8b9d640479762d0f994344f7c543bab55d22741eccbdafb4",
+    "61283b11523b3ca0ff9837841bf15122dcc8681b3e69139e7bb5659e4ae0e621",
+    "64675968915129bd564363bef69ec1e77ca3ab643c1a24cb30dd84fc073597d7",
+    "673f9a6220831426e73222d349c3d32ea655a17dd328727adda5ec0230ea2b3c",
+    "67a0b25ce1ff7d1634c3ebd5aa0d52ad7436b8f024c0dfd9fee06e2b76b20ff2",
+    "67ccb029e863415b14a70311f8d1847234dabdd76b5edb85583f993048d49116",
+    "6ff2b64193f3e63f36fab9fea1cf5198ee79134c58f5a751b49a2a89169ada4d",
+    "70ba387678ab996f32054448d216b6db8650e0fb55d8afa8f96a85c02fbd9538",
+    "710e45877a0aab9cba23835b9c605dcdb7b5ab92c05c927051c651444f22bfaa",
+    "713e06e062bc7bbd40812dd958f232dda07ab1b0c5c2a6cbcff4ba8a6df54349",
+    "728ec97bbc9600150f5fe029cc5bbcff7bded8ca5c3b50729ed6e1be67fddaf8",
+    "755cb46a8923f00d36ca847a355a447c843f151152eb2926619474525d4c09df",
+    "755d35faabd53a9d5d543b48155d48675c68dc1904c0860104e3f971cbd181bc",
+    "77226b3be70e21ee9d0870f17a11c2cac7ced0873b7e85134378e5cf030c2e86",
+    "796929bf02b41d74b8453a786163f918328e170613fd2a8db5f50bea48bc1032",
+    "7b80ce60c973c66cd1ec23efa96eab4952ce7a0d6efb026d32526604208d8322",
+    "7b8e8936e9edb675ff53cac8f3519fd9c0ff4b7772964316ff15d8d34885aadd",
+    "7c204ac35f221b52f366691a02346018115784a1bc3bdf90dd6819970642ee8d",
+    "7d2b6b7c46b47fd12809938b4a25f7bbe5db374278a8d2c959cc00a85cec8db7",
+    "7e6e727b883ed34b753d848dddf6f2297353175d1ce08dc47e0c21df23e4aea8",
+    "81ac589beb0292865b1661a11f87afc319c410aa55a069830fd9767807db0dd4",
+    "82df5b81733b1c114e9bb5bef7ded5baf38539f9567855bef6daf41719e6f7d1",
+    "83017983850ea8d79f7b356cb6c2d17ddf8403abb328ac19f7df950fbfd754b0",
+    "84663c55af8989a74da63df5fd07310a3c6faca16f3f993d0e36f8d747fa22a3",
+    "869a439d45bea22896d177b5ca5a2a2d5c59f1005d98ba1886b05931ed1eb83f",
+    "873d39dc17be35105d14eb86fcdb8bd0931850861d99d509096d6f06971783c9",
+    "8809a041af9139a1edeab204095bd009c6e51305b306301dfb5f185eec755836",
+    "884f6e1aebd866e4e93554506a2f9803ab936d3b836348b6328ad16738b90641",
+    "887de9a03731afb615ab6e6d3294b061a02b11864d528eadddb5caf1445fad81",
+    "88e7216fea5b313668ca86320b3df691d55fea7e51762fbfa9f6f5566be8cc66",
+    "8aa7fb0df6defdd3561b1fd62bbda32d060982f470676cdc1887331403fec68d",
+    "9261091101e20341debe293e2edfdb7ced52ff6ac947398efa20d53af4ee2823",
+    "9485bb721eb9a91fdb85eb8704303917503bbfd8644167902ccb266646b77dbb",
+    "94898036d145fe45a15325b73aefb106b7efa3e29bd206d68159098f593db148",
+    "96444500f2589c4eed34a2f80bda94447ed575ccd6706b76e75d7a8810337e10",
+    "975efd408435d6139224731a1ef49a763398a8d7499c7472a1b6ac2d975aa3cf",
+    "97d990ad7d2a9cf7e34f47076ae6983bd6e94a6ab18fccb6bcbb8ba351349b08",
+    "991624bacfb644b26f202ca83a787cb9020766bbdd9556fb07015b1b11bc5144",
+    "9e160263767465556d6fbea129569d380cc009b84d5cd577015fc787a36e769e",
+    "9e4b433478370c55ad4fbcb01f19a8d233a0f2f1fa99903c7369cf6f59532855",
+    "9f11cebbea1e27ed2b98cecc87e6679dbdf17d807e30c217c47266bb7eef8649",
+    "9f6e7df55bfcab3ce7955b5a2fcc268dadfb80095734e49bdebee61d2330996a",
+    "a1ef31e10394aeeb63298db9c009478b048ea7448d0fef0bb01d30af5769bced",
+    "a1f9e2830c24b91739c91350a418be29d1829e01829183921893821938192831",
+    "a40eadd6308c343c43b85eeac75b427de7e7821588c31eaa91d61235c7bb52f8",
+    "a5ae456e5abf5f6b226839662f6e56f8a5b5a8611577e92fc3775e9a7f8c0453",
+    "a9b267a040768027deef026f3c919176338880b7b558cc3c7ed161d916c4b6dd",
+    "ab049c5ef006e28ca87c79ca67b8e6fe3f3806a61ddc91f2bb0090f637980438",
+    "abd7a99c1252a1dfa5c510d71d71233b01e5b631fa930b0844871524af59799f",
+    "acd280c3117a0bcbc01e4b4a71cb0995af62e56931b75e10ff757bf923a46713",
+    "ad7baaaf5a76c987c879cd5aabec506c2cc90a9117bb50eb47973f1d6161300d",
+    "ae04ae4a08a588219c6a6eb60b2a655a86fa60ed5be24fdc1318f61e5122466b",
+    "aecdf73248f013953f4303e55ee0dd825795dbce28ac455f7fde7b9b752a6dd7",
+    "b0d18a0eab1c6ae3acfa2133006cfb5d4780362160989891776ac66b439dbd1c",
+    "b2e8d3941d35c82848d82461b529cf38e2938f12938294832984932849283942",
+    "b48ce36945c2428efec4ec317070110e229910293448f7a9ee62df4a49933e69",
+    "b697fa2ed10eb5833a4a405aab0399034b6227f882ab13fcf7f5cfaf9a04f167",
+    "b9f3b1787f5715a586aa4a6e9d54dc2fe0314ac9e0f6ed7b57dc5501403c044f",
+    "ba9311aa80cd2ac6f51b948273a3a205fc32844a09d640924253cb078aa035ef",
+    "bbd34fcbe6b9b0f12a3d4100a2ea7c1d20502175d6989fbab6607f800ab6558f",
+    "bd5f679627a9e053426ee1f77d51c41cd7d1cef8e740710dd333e414f3e5e7df",
+    "c208a6a931eeb1dd8d3ea9c132b94594a1af0cff3eaf7ca11d344908f7ea6c8f",
+    "c39390e98f02f264c3a2c1163ec61e8e5f5796db3cc8c434009e44ca3e4a2319",
+    "c3bf186aa63b1f8dbdb6620367404eaf3fc12d37fb2e553a2a140fa9e9a26065",
+    "c3f7e4852e46d93959e93572c630da49f3847e23847385943895843958394853",
+    "c6ab8a2c470e51a3e930d24b6f0c4d71542becf57122d98bc0e61e1e18fd85a2",
+    "c6d28d271c1f654096f2d4e194901075f5fe231905564c81a0f790200b69eefb",
+    "ce57ea18623f5a5f1a1827c627998be92d6efcd296211b4d16d581f138816dd4",
+    "ce69ffcbe1689e7b9dce743d2d870e08f09d3b914bcc00bba67fbbf7c37a5af4",
+    "d4a6f5963f57ea4060f04683d741eb50a4958f34958496054906954069405964",
+    "d4e1083904ed5aef6ed90542d96e479c7e9569a0dc87bb9f123730a2166d63fb",
+    "d5072f9ba550553ae5f4797005d6e5c0b15924cf8d4badb909e21fe3ff5ea09d",
+    "d7c66d37c2c904b7a9cef1fbcc689723dc8c452b77efc5c89ca0fb39177d4893",
+    "d7e0459d2ae52be878c7b905899b46d6238f14ca2e152b195a0d8a12afde4ab8",
+    "dae1d3bd7945b0ffe6dde042e76edc0bdaa9a10debcad4d8413c3e40a0dec5ec",
+    "deb7d9ca5185b6d6f950cbe6e240afcf3239ce65a09619fc20313271d823fdb1",
+    "dfb0be69d9e0c935a6f9316d61dc51f6af196917fc68a8b892fe2a67aaa4cb58",
+    "e095b7243f76e52fc36cd3811617dc3641084e9bcc70286d4cf080ce973d6a72",
+    "e15d4ad46900e5baae90940b5a688fcf6e8d3046696442f2511207f12343b4b1",
+    "e19873decb9d49caff10e7a4650afde1710ba8edcfb35a1236662f8e18617c6a",
+    "e316237bfab7155a03a1b5c21c5d91771ff84f462097a3c046571a3e741ea950",
+    "e357ba55c2738e160ce061d320dc11cb022b444628fc72870e5325d5251485eb",
+    "e5b7a6074a68fb5171a15794e852fc61b5069a45069507165017065170516075",
+    "e6675dc25ac71bce6d0314e63576578ca11ad9dbe06dfc9e1715c45769f0d4ff",
+    "e87089ead955769b8cfe15b485aa9f9c8793286f53f508c5a70333e309652727",
+    "e9eeae967a859303677e16b00041bd4d9228820bcbe650ddd39acfa96cf4ed55",
+    "e9ef40bd5d175dd4be0f381ce64f61b1fa07404048bb7d8e0324d83613010f40",
+    "ea149466acf64197f738fde6162060762229b1272b286cfb61e5f6d8666e7fa9",
+    "ef8892e7def540698b381c364c6575a1fb142e6e309f2c5b39d245072aac49fb",
+    "f03453a72b9a7d3a47dc3a1df2ca4822402fefa82ea8e2ed460294602dac9137",
+    "f10f9134f2ea46a23c100ea2c2764a2bbe8e6d8621336e335d8d49df8305d5f1",
+    "f336dadfbb49bfc03b1db2f5222c32ceac57457a13a8b5e60070f7d45a8bb696",
+    "f37fcb1f4a56bc77875a0b4d3470635ebc5a3a7c241ac83de4c8e757f6bdc790",
+    "f4cf8f68df409a3c98db7131e700ce25db6fc08bac29a81e48ec2a66a8eb4948",
+    "f5eada3770162a9a6318e14f5d065ecb585896bebc94057c595a0527edcfa2b7",
+    "f967a89a3fb3a645e5da09ddf513e9ca4da56fe0ffffeef06a013cfeed0ccb57",
+    "d51a8f5a04d11f7c3e063555cca309b8c2bf7f14a0d8e3cabf7830c851d65f7b",
+    "6be5dd54e33fbf9a056487277dd251043c4e44486d7f3d2116b166dc5ac8e9ca",
+    "d28ca0bd0b7cb6bd9c5e997e8472511cedc3746f1d7be673fe22de04d7c86b68",
+    "df88aad926d764fa50e807dc6cc750e552ec0e17a2f79ab551b5e2c669c8357a",
+    "17c3629d2ea2121d2c2429ff7b712e8f9ddf3a7ee2a38b10a201b9482492b618",
+    "2911ddbda70e463546e6f71545905e17dd6ac6df3bfa46403593d06b7e106016",
+    "dd13aa3b8c553d1158ab3dba29aa380cb328e614d6e49339af0beeeba5a3fab7",
+    "840fd11d83cac7fc84c69c52b18862559f7b45c8543ded28e001157422d3648a",
+    "2dbf14a2fe0b388a6ac33b725d507d16192cdf2312f3e133e3dc6774e02f7613",
+    "ede67659059eba6e78420058335c0e0e6a04ed67319144c7d4a1847351474fc1",
+    "d4c3010f3c4e8d45ade5339597e166b2496d281fa963a2fc9418326df62e8bb7",
+    "9a340907f15d4ed8043b4f11ff4ca2ba8c16bade0b4727c779e8256df416a69b",
+    "af9ee62ed9afd8541cc9b28822fffc404c3dba6e508092697a376ec97837db97",
+    "de254052f48e2385d97427ca4d8d34a08ea4f978f139810506f8d85982237a60",
+    "17f21058d17a396024e1dc473318df223e58f87f9a5f915ebe14fe8233d14e32",
+    "47a1976dff37130a3c8d98c39bed2b10f9ff17bf2e11895d44f01e0f1fbb434e",
+    "6b77c91af7cfbc0bba6602f2baec79db3fdb515b6a420fe022ac2b2e80f1ab3d",
+    "3174a7f68b47832f6cd328d07ddbb8258750b50bb6e09aa703da6671ddb05050",
+    "18dfc1b7423f680d42a3a9b3a22fb845ff68d53aac3c0456ee51a27439113b14",
+    "0d7767757830e07e68d52463b071e9fb0bb2d6f2526b39d7f5c40f638e0163ea",
+    "f68e13d6df4da0c88f38cd24eb73b4dad595b771b4b86c4f36ec8dff7ad2bfc0",
+    "1b847d70ba06395dc5f97baf68d5dd0432d70a35a5fad2134cca775d0914ee7c",
+    "d66b9e0b78e20ecbd909f6cd5d826ce9a60fada7ea8d05e44fd07db53a9c7246",
+    "be1be91eb7daac3d6dff4d859367547b7dec02d747dde01eca05a86d8bd77cb3",
+    "45cd8d70a2476ce69285f554871e730a43ff09123da05e68e415c72a7f4460ab",
+    "03f3e689f28ea685d5d0b7d805a0af926449a46461cdc45f62c45e3fbf5cacc7",
+    "f3abde41a0711092d1f16f20a775aa199b17387b06becd016b12e430d01ff558",
+    "a9a109cc338d6de134eba44ca282d3d8fbdc33150449c3ac660e16fa3992091c",
+    "749564883840a9bd369a9cb1fd3a8b3586145bbd2c753215d8490729b3dca7a7",
+    "8e59a60ca015653e78290345badda491e65a27c44292f64d99314666a27c095a",
+    "db6ccbf1f6fd1c3e2d31f3ebc39d9482a7b5fab903199f4d381b00301ce68761",
+    "04d2aa0bc5b75bbcc552a70e101f3b4c4b191a98ececf626a8e2872f648344cc",
+    "742a2e7ce5f253486405a74b473a8f3495bc5881c123c37d5c05ab45c94ef350",
+    "4729df15fc10593a451ac0193b53fb832ed2b495c52397abbe9a756855ef267a",
+    "d4ca7f900c7250fd0bc6e4662795cacaae915e4f0cf31f4290175ddda651ee81",
+    "ecd0a11979231e1aaf47f311efded84c2c372c9768a432e232e0d6aa3a613746",
+    "2a34b7b6cca2ddb0718d3af3dbaa6498e6234e7bb40a8a7eb17685ac23ef4b40",
+    "e1a7e133becd5ab3756a6d6363c48215ce689338405a57201d706c1a8c6e424e",
+    "4501718f19eb9ab7ad47792bb416c914d1c07e453f1e350ac447b4484e36c5d0",
+    "d6732ce590377ffd7a824392c6d8808ca435e67de8f11004007607ad8d3318d4",
+    "a180d35a4a34d4c3e6f59541753ad7affa30c77af7b6922aa94762e5bf656c5d",
+    "9c7ca3354da7dac318ec059fa9712b9c220b9549e3515f1c8012141313455609",
+    "67b88680fac1d9a539cd07359d85cee920b87e8da1b6635cbaac591c8151d185",
+    "46d4830231c1279a24f3dd7b194bf0dcda6b21f7874d3b2a14e0e22c6f492b5a",
+    "efc0336d1fc75f048bb589f4f56f2387f9aebed4fa3eaef936f0088b64d79bd7",
+    "bd3bd5ae1ba131d91397bc26ebf5a569c850356efb066b20d7ad9d2b47546314",
+    "b0f43348d4c205dabba5c20bde23dffbd950fb9552f2e9524d069d888d92e84a",
+    "1b1e8b1506edc57eefa98fde2a5a5f72613594ba2b4c3046ba8074be25ad50ad",
+    "1bce7072c29d9db80650e2300d311dfbc3e2686fcc2f73352d217c29aecb7bb2",
+    "dfc02cdb45fe92be4ba5058012c574eefd4f2c372be0b86f11da1bc98d871c68",
+    "987b4201d59f2b872c22fbd0193ed5ed1af4bad925033defb9a484013ef8c657",
+    "f396e880e3c202013bd7d9f9e62f2daa87aac5a37e8710ecfc18b78669bfd17b",
+    "04679f72c92fdf6fcd972ead8a2fd9fc276ada490f60f2dfaec173272f7454c2",
+    "1ad5d9daeea576549ee7277aa785c33d4f16121f1e83a30424a93baf1ce67ad0",
+    "ebf3f9103dad0f1d488bca12826c24dea0979209eb080b25af536705f6f80b70",
+    "b45da4fc7eed749c5576cf9015b5ab27a70fb9f834b811edd6e57005a18438f1",
+    "a65f4eebd38587673bf3c1bf5ca7e7fcfd6a150cfaa890e30b8fa9a18b5bec5e",
+    "820ef9beebffeab18ec6770a19da7e77582c6ca8ef83f142e615a91e6f1c4021",
+    "5e04099bc2809b2f9803aac4ff767a5eb55b5b74c41fffffa9cf157cfb94e7d7",
+    "12060f3ac21465de5c805d7bc0b69231e44030ef90423a97e3c0cab2c1f0ea89",
+    "5b3242522be0cce4b5884f48bcb0b534f9098e095fea64bd43dd3fe96fa225b0",
+    "1cc968891311c0c597e354d1bfec77189ab1757f6e0b3cf978d3feb5d1c70946",
+    "42d4fec11a70e958b13aacef33a16e11cfbdb37b1ea04c09a397cddc0e54e154",
+    "0d070c79d7dda3191a512f60cceb53b28a47c25bfa1ae45a473cade89e44a770",
+    "6a73c66a6199264bae83148bb6def53470aba3d7ed9240ab7d51f3bb183e547d",
+    "b1526c681f5673a53e1349265ee90a92a19edb5f5e4560d5ca37262d328f7180",
+    "87d4ede5daeb9d808794776f2a4fccad572eaf8654e28d13d53ec81d035f5588",
+    "ff86ed22bfc7c3a8ec54e32a88eb21d618ebfd3f4f590f660cea69ef402443ed",
+    "53cf546dac32ee3e4ba0d9d830d10625702cfdbe54cd6c1e54912573f17bc0f3",
+    "72fbb2ebf1b831ee537dbfe345e83411424b7e3c4a8149aa62b9642f9e054391",
+    "db2bcd06e11b1e99c8420901303c66c4f08c9b50b981ac1068639abf5ab64c4e",
+    "cc9ba67df00a60c3e02a2c03bc0df8df65e9e2045fbd59f065e56f530a249b74",
+    "a3b98714e609f56cfd209d2477b962862f3f883f635092dee7d15009ae5b069b",
+    "a247ba49624dd367148e845c5c10fa20e2f7907b6d16b1ba2e630d5b60755ae8",
+    "78877513b72b3f1d1d5ca2780e4e51f29684780dd7a545ad9a749b167f1747d8",
+    "9bafd326ce22441e763eb71f7f259c2e31c83a355b5abfa81415bdbf7c08f2a3",
+    "8ff4da69fc8a3a7f7d4b52dbe45c5763e7ce0b4be31294b6d175c812d5731735",
+    "f82949db92d13be3205eab4d22bc125e5a4bff8216cde4fa53297bb3f441fe4a",
+    "0be3c6f9e8ff14e103a17e7ecc9fb021baafd6c45ee28ce3aeecd163e0038cee",
+    "63be0fd3908bb3af9dd0d4db664a7d9798434bfdc754b7e560e4a3888536639a",
+    "41fd5e6cd83c8ecbfce3c1cde90f689df11007515b75fb00a807b4796c21796f",
+    "afba6f02be4694be9920206357d93cd4cf973351b6b3a9aaf7e271de8ece7b6a",
+    "400a3d80452c33f91cb2c84bce2357149c54e2122b069f7cb012dd090f0dd79b",
+    "3c0e58640fa5f3e77c77333762fc5e14d00d0b49dc585f6756b171511ddababb",
+    "3aacb91a50a3faff92f34e88780fe43b19446a8a5144da2a1a4e2ede023e0905",
+    "bc6247b213c3810c988c53961847c9e79ef1003350d339455544cba2ac8cf015",
+    "cb91bac0f58a0ab80bfc2dd6017aea0c6c98bbdf2aff67143fd1b1a5441d4694",
+    "98461261a97af5a2ca897d6903f54ef4cb896c097c87aeb7a46d1024d533d7fb",
+    "6f8aae002819fcecc339d302b06b460dc88b1fadc3b2818232fa950d536240e7",
+    "20cadf029f27c90e4fe70f6c8d3fd4e1da80f9300b5af553886379b4fca85bab",
+    "a7f149220599f2b2569d599e6876637101b75b7751896ceb63f8340424182732",
+    "44d13c699cb1ff5cb455d97931fff02042b3e9a322da6e59941ea4ce20300f2c",
+    "d0429005a5203c8d2cc8066d67a4244a44545ed19747322f9f91865b2df2eb83",
+    "6918f7468cc5d887c558296c2f18773e56981eff2de4016a10b9ac11fb05c162",
+    "47745e473350b535bc070858a90656bcb9aae83e1c6e483c3dce38a7f0b2783a",
+    "c02f8b739a31a6c2868efcd3eedc1b1e80109b17b2e458800f5417b363931e87",
+    "59488b1a62522be031e17115dddbc2c8975c844a469da0a3f81dbe1a425c02ce",
+    "763894daf1ce783571144dc5926afeba46c6447fbc5ccbec2b6683d74b409b01",
+    "99749d49d4b9225e6cd0d67ba306f33e7b9e805dc659b40dffab306af9e20e81",
+    "3dc258a0d3d9474370af9406e193861ed9b23db89bba622d34bb9ffdac9c0f0f",
+    "9265a12f49aae18f09185f94391ba657d2d17634150e2cefa1ffd11cb0c73f0b",
+    "477823b7f1ac420a62bcf11b1a68388a02bc8782fb4f0fb79d48745cdaf3ebbd",
+    "7ba62f2bb3e5c86a62c4c163d0a33800b9328b4fd8abecb8d206a2add8cbe099",
+    "1d35573374d6d3ad6af3b9e4d638309b11994d7b7805f0d88cffe2a13a4e22d3",
+    "6ca4c6608c9f441f92dd8c624b8a75bf345932c67133e49d3024c8ca2b26407c",
+    "d46112f0c05045f9ddd3262b72cadaef6fbf3317fd6548c4464bef611681042c",
+    "eacf7bc6131aff48c1211079cbf980f0b11111d3f1796fac918a9bbe3d24a13d",
+    "74b4e36a84fe5350357cf6cd840001173602125b233cd6c4dc102be2ccec468d",
+    "f2714400a9f4245289954611a82d1738260b717d6f3ee5d8e56498fbdad727da",
+    "7984e3587f2312f915bbadd0aec78711d271cfcc4a0172dbd09db85fecb35e89",
+    "8c2349b4f7f518b4360932645a5c4479d604d5dbd688b1ab48948df5f0a2447d",
+    "5f5c7a01d4f1d6cde951920520ee1b5b1092c7d7562c5ac76eb5067e97247e5e",
+    "4f9873f50b24dc2f98d05b81ecc0f59d852837d9ccd9ef83c76b743dd0fb7759",
+    "8654e6712850ba68fc8b47451a32222ca36aabd71141ac49beccb06a25079564",
+    "3b99c20d6d8f45aeee8b1c21e4d453432716fba1445a484e136b7e66777f10b8",
+    "35d38ff1880d889c4593d004878717830b87af1c5728cde79a4f46c8fa7e2203",
+    "1ab45d8b3fb498321ce660254a800ada4b9ae0d8cd8142d487e0b98d71b887fa",
+    "54a06290beefc6a1483d7a4fad2da3d414004a43645bcd4c8d1ff212f224881e",
+    "04ad21bc937269d60571eb94afac38a8b0e6caf6440b8dc40c09d2f993f03921",
+    "c41d7daceca045337eb6e53f5668fef4099f20ae20cafd20d8d6bdc2c45c8308",
+    "57273faff413efd958c6a95579837cf484c530c6d70d6cfe2b9ac74dfe2c5f0c",
+    "af07463cf7032a5c2889ec144dfc74c6669e2d7ab0a000f27da89e69b49d06cc",
+    "ba159c0f6d89b60e17f38233adc156c3baae39acf2d8de2262737f0709372f4f",
+    "db516ea59e31c4d3b5b8c09e1acc914c4181b1d26e0788d380e8c568fbcca433",
+    "686e6411628df6cb7a3776229729b5c8d9e0d0f2ae9ae1d58f40b2711d0b112c",
+    "5ba9a33c00f99527373d51c42d32bb69c96f239210b04d2ac894004d966973c6",
+    "c20f87a83437add178ca1433a513847e453c2b9eacc635660ba2e9ec1737cfff",
+    "eefd0cee45fadef4da464fb7d5cbf536452532130bdb178e1c3ce7cf261c6e37",
+    "e38fa094bd2ed9b8937c5119e4d509ed63178b7e242741a43474f94244ea5f37",
+    "22c65b8bd2f67e36056389a2228cf8e6e245f5458693f1a1af8400aaaf607256",
+    "ed8cd065ef59c91686df518442847a822dc45141d0d96744c3bd2e8edb65e04c",
+    "450f57e0b4b8e2016b159faf49f5a918b3768e9f2aedfc6b3e165df7f410ff5b",
+    "28a6bc5826ce5f7a4271f50fb7d65fc45526029e12a36ed8cbca99805217fbe6",
+    "4c288a55c7c17d636a63d745c046affa38a27c401b10dc41d59f35ceb61a7031",
+    "15b7a68f1b99682fd5a77a7a8363e95e59bfb94bacacdd90f8edf95212b9c52e",
+    "815c89501ba1e2d174230024f1afa773e4f293194dd6c3b7d9a6dd544b81bfdc",
+    "b3ddda45e8700fcb311541297c0a4bfb6e2e47626403e4f077064bbc17bb204c",
+    "fd25d470cc80b27f9635c4f26e42db679c7e29ff8698cda8f14f437ded321517",
+    "a688c48eb5a1a82621ed29352537a7a4317cdb71fc45f6e15d19c17ebfd82f2f",
+    "21619ddd593121c6e59761d914fa51627aa51e2b04111d224c9d7a6d74775bcd",
+    "85a866d2e677f85525af68ee8893586949bbb1f67443aa977906622536291c68",
+    "69008fcad7d1f63bd88b7789caa4127d4953a1a17c8e9499151036a60945ff82",
+    "f7d4ab543883534e96e93c68aa146e1dcb3ae1527273300c6de2757ff3958aa9",
+    "306f2f33a9348b2d6d5dcfcc13cfdf830e2f962b0ddbb91fcacf057834e620b8",
+    "3565d1ad4c979cb150eddda162afd02d20171012baeaf1702b8d97614261e3b1",
+    "7adab759f8e74bbac1d601e9410f96f03f81c751327c6544b91e3ba4c836c329",
+    "7262127d9dedf05f4235e0662a8c76dc7fe7d41ee14ace98dbb5bf9f3db6575a",
+    "102add6232fb121bd2fa4f2be1f82d026b195cb0a59bac7379e5f6f04f383ddc",
+    "9475b41ebbdfa832de87f74c48e2995aa82fcea30558e427fb4a7259e9305e6f",
+    "7de8b89b6ca070f75e69d7e0fc0678d426e8ff81de01980344e30756bc1bca9b",
+    "f7bd2c1c8d49d5b35be33c9eae6f252741eb7fd9fb8d874f53deb5cc7b2ca96a",
+    "7f62c00a5a945e07f618e92a9e1d5d360576d48859e22a522725ac8c939b7faa",
+    "99ad190e9c8f9e6beda3dce618044adbbc6056c1daef71be8c9bbdda58c68796",
+    "fa068181929a99ce5b63ad68143db15d1838ac9aadf1b836c8b1793eacf95b6f",
+    "de546e8a41e65aa4a3897568b59e5c5dcf282ceb68cf00699c3490a3315c4733",
+    "4be39f5063c122d33d9ac635403b577c799e08b52bcf5648412b527308fd40c6",
+    "e73ae61c813a089685064ed9df464db79ef2759ccdbe8a3db75a78c30023663a",
+    "3fc5eaa21d0a72a806387c7887bbc0f12686e3c84eefb69633c050ec3bc91092",
+    "dc3dfa23b53f616e79623adf6bb0fc25a83910195186174ac07945d7bd17b6b9",
+    "b17774e68d73f5e88e680a898558d972e4bce4bd50b4736593a0262a5d9a625a",
+    "dbcb86cadb0c861284b45633f0764500c083dd0346fbd6d86186e14d45aea963",
+    "b81d7595af1a79255741231926ea1b48d02e7ab6f79eae76938b75bf2540e9d1",
+    "73a222a49f56fbcadf363e81675baaa3907e621b1ed7397ca3ae944c355bf668",
+    "0be5ccb9990437bb4cd3fa264639b382228c74ec9ed888eeb6bee76223543cc8",
+    "ddad8e95170f3162f0d4f9eb39e4017555b429fc2fbc8dc7cc6eb380cf42dc24",
+    "8e4f239b22eec4496e42e0258ff0398d1cd87d97533dc96e8d3af73c95f1a8ea",
+    "fd16c57e9b5e983b40bae0fba11bfaeb526f3d4f6ae5c91db3cbf6463d0f5e99",
+    "4f60e711d30a84823900cc3d4fd1dc1084b180f5e2e3dd25745d90b94b9ed7d6",
+    "1751978b1c2cb43b902fd876f6839c51cc6aa3eb171a19ef3a1b7fa066a2c7cf",
+    "dc64022fe47a3a4092b2dbdfc4a948cdf93c15ba2ebf7ed9859dce56bda00e6f",
+    "888e244f9de128c6005fe7585d07e51f8e156035226de09846626968f8a5bb5f",
+    "336746869d89d4e6e1d9cc945055d80c60fa61db97fdca1598cce4b91886d0ca",
+    "d8b8575d34261df80cb6740d54c57b06855725d46208a4f914cf641ce3caebb6",
+    "c345ea60f2999b04a67bcd2392c29eb4af532a0be9500f504ccfe69ed07b6386",
+    "6a51400eea0177236aa1a5c526997f264910482f78b552b56900c6b6ead7466e",
+    "0c33e976d20580627c8031d9e406fdd23c70e237dfbe7e1b3d299c4bbb3012b1",
+    "e3f839238d06b10c6a35675a12d293cb33f486ad926c814d1e7d4ab71dd2965d",
+    "3635244e4ab51d7fdbbc8d32f4359666e20b5d2644d5ee3e4e7c35117b8f43d0",
+    "dc2ee62fc763e7e4e2c701644c9838019a812c21ea15430465b8b37e920a123c",
+    "71a7816563dee3bf4cfdfc55d86a61a705d2ccbcf7cf509388734aea72d99c95",
+    "cc696870e61aa610ded469549af337850a5ace4851a7459a209ffdd4084a4b15",
+    "4554d51cac2393e6c7459cbc477f1bb1218fd1eaa5474770724f1da5681a0d76",
+    "b4e45b78df7ed33d527e8b807cc800f5f9bf0fae6b2737d1df350bb5d6f3aba0",
+    "e4298a81a5457eacceff6306109fc698e2035aa96faa4d8ba643afadcc7b7f2d",
+    "a9b0b0301e1d17856225dc3ee06334b444d38a377ae4a7c9c8a6e0e8341259f1"
+  ],
   "cumulative_metrics": {
-    "total_scanned": 218,
-    "total_filtered_in": 1455,
-    "total_summarized": 1455,
-    "total_p0_p1_triggered": 53,
-    "total_estimated_tokens": 94250
+    "total_scanned": 1051,
+    "total_filtered_in": 1721,
+    "total_summarized": 1721,
+    "total_p0_p1_triggered": 126,
+    "total_estimated_tokens": 123510
   },
   "recent_triggered_events": [
     {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
+      "schema_version": "1.0.0",
+      "event_id": "EVT_E316237BFAB7",
+      "timestamp": "Fri, 06 Nov 2026 16:00:35 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "NVDA"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：How NVIDIA Open Source Tools Are Helping Researchers Build Next-Generation 6G Networks",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
       "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "How NVIDIA Open Source Tools Are Helping Researchers Build Next-Generation 6G Networks",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier3_Mainstream_Wire",
+      "credibility_score": 0.8,
+      "verification_status": "Corroborated_Report",
+      "verification_note": "主流财经通讯社现场采信报道",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_E357BA55C273",
+      "timestamp": "Thu, 05 Nov 2026 14:00:34 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "NVDA"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：‘Hogwarts Legacy’ Gets a Magical NVIDIA DLSS 5 Upgrade on GeForce NOW",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "‘Hogwarts Legacy’ Gets a Magical NVIDIA DLSS 5 Upgrade on GeForce NOW",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier3_Mainstream_Wire",
+      "credibility_score": 0.8,
+      "verification_status": "Corroborated_Report",
+      "verification_note": "主流财经通讯社现场采信报道",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_C3BF186AA63B",
+      "timestamp": "Tue, 03 Nov 2026 16:00:45 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：AI Is Changing How Semiconductor Fabs Work — and Engineers Are Moving Faster Because of It",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "AI Is Changing How Semiconductor Fabs Work — and Engineers Are Moving Faster Because of It",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier3_Mainstream_Wire",
+      "credibility_score": 0.8,
+      "verification_status": "Corroborated_Report",
+      "verification_note": "主流财经通讯社现场采信报道",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_09851820CABA",
+      "timestamp": "Tue, 03 Nov 2026 07:00:12 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "NVDA"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：Cities Worldwide Build and Scale AI Services With NVIDIA Physical and Agentic AI",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Cities Worldwide Build and Scale AI Services With NVIDIA Physical and Agentic AI",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier3_Mainstream_Wire",
+      "credibility_score": 0.8,
+      "verification_status": "Corroborated_Report",
+      "verification_note": "主流财经通讯社现场采信报道",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_97D990AD7D2A",
+      "timestamp": "Thu, 12 Nov 2026 17:00:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "日本央行 (BoJ)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Japanese Government Bonds Held by the Bank of Japan",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Japanese Government Bonds Held by the Bank of Japan",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_1CE1F4E3A267",
+      "timestamp": "Thu, 12 Nov 2026 10:30:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Speech by Board Member ASADA in Nagasaki (Economic Activity, Prices, and Monetary Policy in Japan)",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Speech by Board Member ASADA in Nagasaki (Economic Activity, Prices, and Monetary Policy in Japan)",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_81AC589BEB02",
+      "timestamp": "Thu, 12 Nov 2026 10:00:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "日本央行 (BoJ)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Bank of Japan Accounts (November 10)",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Bank of Japan Accounts (November 10)",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_5D4A2F885C66",
+      "timestamp": "Tue, 10 Nov 2026 08:50:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Summary of Opinions at the Monetary Policy Meeting on October 29 and 30, 2026",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Summary of Opinions at the Monetary Policy Meeting on October 29 and 30, 2026",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_2894C9B253F1",
+      "timestamp": "Mon, 09 Nov 2026 08:50:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "日本央行 (BoJ)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Market Operations by the Bank of Japan (Oct.)",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Market Operations by the Bank of Japan (Oct.)",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_646759689151",
+      "timestamp": "Mon, 09 Nov 2026 08:50:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "日本央行 (BoJ)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Monetary Base and the Bank of Japan's Transactions (Oct.)",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Monetary Base and the Bank of Japan's Transactions (Oct.)",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_A1EF31E10394",
+      "timestamp": "Mon, 09 Nov 2026 08:50:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "日本央行 (BoJ)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Bank of Japan's Transactions with the Government (Oct.)",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Bank of Japan's Transactions with the Government (Oct.)",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_C39390E98F02",
+      "timestamp": "Fri, 06 Nov 2026 16:00:00 +0900",
+      "category": "Labor_Strikes_Port_Railways",
+      "involved_entities": [
+        "国际码头工人协会(ILA)",
+        "美东各大港口海事联盟",
+        "集装箱航运枢纽",
+        "日本央行 (BoJ)"
+      ],
       "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
+      "estimated_duration": "中期 2~4 周",
+      "affected_business_segments": [
+        "海运物流与货运代理",
+        "港口装卸",
+        "跨国供应链库存"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "(IMES Newsletter) 2026 BoC - Philadelphia Fed - BOJ Joint Workshop",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_9261091101E2",
+      "timestamp": "Thu, 05 Nov 2026 08:50:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Minutes of the Monetary Policy Meeting on September 17 and 18, 2026",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Minutes of the Monetary Policy Meeting on September 17 and 18, 2026",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_7B80CE60C973",
+      "timestamp": "Wed, 04 Nov 2026 17:00:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "日本央行 (BoJ)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Collateral Accepted by the Bank of Japan (End of  Oct.)",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Collateral Accepted by the Bank of Japan (End of  Oct.)",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_49AC7CF28071",
+      "timestamp": "Wed, 04 Nov 2026 10:00:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "日本央行 (BoJ)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Bank of Japan Accounts (October 31)",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Bank of Japan Accounts (October 31)",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_673F9A622083",
+      "timestamp": "Fri, 30 Oct 2026 13:00:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Statement on Monetary Policy",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Statement on Monetary Policy",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_3FC7995C53D8",
+      "timestamp": "Fri, 30 Oct 2026 12:02:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：(Reference) Outlook Report and Indicators Related to Underlying Inflation",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "(Reference) Outlook Report and Indicators Related to Underlying Inflation",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_5091BD561289",
+      "timestamp": "Tue, 27 Oct 2026 14:00:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Indicators for Core CPI",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Indicators for Core CPI",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_9485BB721EB9",
+      "timestamp": "Thu, 22 Oct 2026 10:00:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "日本央行 (BoJ)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Bank of Japan Accounts (October 20)",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Bank of Japan Accounts (October 20)",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_EA149466ACF6",
+      "timestamp": "Fri, 16 Oct 2026 17:00:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "美国证监会 (SEC)",
+        "日本央行 (BoJ)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：BOJ Current Account Balances by Sector (Sept.)",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "BOJ Current Account Balances by Sector (Sept.)",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_AE04AE4A08A5",
+      "timestamp": "Wed, 14 Oct 2026 20:00:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "日本央行 (BoJ)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：The Fifteenth Tripartite Governors' Meeting among PBOC, BOJ, and BOK",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "The Fifteenth Tripartite Governors' Meeting among PBOC, BOJ, and BOK",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_4FBAB0AC9E19",
+      "timestamp": "2026-11-13T13:59:07.218Z",
+      "category": "Labor_Strikes_Port_Railways",
+      "involved_entities": [
+        "国际码头工人协会(ILA)",
+        "美东各大港口海事联盟",
+        "集装箱航运枢纽",
+        "苹果 (AAPL)",
+        "AAPL"
+      ],
+      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
+      "estimated_duration": "中期 2~4 周",
+      "affected_business_segments": [
+        "海运物流与货运代理",
+        "港口装卸",
+        "跨国供应链库存"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Apple HomeView available today\n",
+      "source_name": "https://www.apple.com/newsroom/rss-feed.rss",
+      "credibility_tier": "Tier3_Mainstream_Wire",
+      "credibility_score": 0.8,
+      "verification_status": "Corroborated_Report",
+      "verification_note": "主流财经通讯社现场采信报道",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_728EC97BBC96",
+      "timestamp": "2026-10-26T18:37:30.189Z",
+      "category": "Labor_Strikes_Port_Railways",
       "involved_entities": [
         "国际码头工人协会(ILA)",
         "美东各大港口海事联盟",
         "集装箱航运枢纽"
-      ]
+      ],
+      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
+      "estimated_duration": "中期 2~4 周",
+      "affected_business_segments": [
+        "海运物流与货运代理",
+        "港口装卸",
+        "跨国供应链库存"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Siri AI is available in more languages starting today\n",
+      "source_name": "https://www.apple.com/newsroom/rss-feed.rss",
+      "credibility_tier": "Tier3_Mainstream_Wire",
+      "credibility_score": 0.8,
+      "verification_status": "Corroborated_Report",
+      "verification_note": "主流财经通讯社现场采信报道",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
     },
     {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
+      "schema_version": "1.0.0",
+      "event_id": "EVT_11B25E2B6AB7",
+      "timestamp": "Mon, 27 Jan 2025 04:46:00 -0500",
+      "category": "Geopolitical_CrossStrait",
       "involved_entities": [
         "商务部出口管制局",
         "关键芯片设计厂商"
-      ]
+      ],
+      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
+      "estimated_duration": "不可抗力中长期",
+      "affected_business_segments": [
+        "先进制程芯片设计",
+        "全球代工供应链"
+      ],
+      "severity_level": "P0",
+      "requires_deep_analysis": true,
+      "raw_title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
+      "source_name": "https://feeds.a.dj.com/rss/RSSMarketsMain.xml",
+      "credibility_tier": "Tier3_Mainstream_Wire",
+      "credibility_score": 0.8,
+      "verification_status": "Corroborated_Report",
+      "verification_note": "主流财经通讯社现场采信报道",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
     },
     {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
+      "schema_version": "1.0.0",
+      "event_id": "EVT_D51A8F5A04D1",
+      "timestamp": "Fri, 20 Nov 2026 15:00:00 GMT",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "美联储 (Federal Reserve)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Federal Reserve Board releases results from survey of senior financial officers at banks about their strategies and practices for managing reserve balances",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
       "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
+      "requires_deep_analysis": true,
+      "raw_title": "Federal Reserve Board releases results from survey of senior financial officers at banks about their strategies and practices for managing reserve balances",
+      "source_name": "https://www.federalreserve.gov/feeds/press_all.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_6BE5DD54E33F",
+      "timestamp": "Thu, 19 Nov 2026 16:00:00 GMT",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "美联储 (Federal Reserve)",
+        "美国证监会 (SEC)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Federal Reserve Board issues enforcement action with former employee of First Security Bancorp",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Federal Reserve Board issues enforcement action with former employee of First Security Bancorp",
+      "source_name": "https://www.federalreserve.gov/feeds/press_all.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_4729DF15FC10",
+      "timestamp": "Mon, 16 Nov 2026 17:00:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "美国证监会 (SEC)",
+        "日本央行 (BoJ)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：BOJ Current Account Balances by Sector (Oct.)",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "BOJ Current Account Balances by Sector (Oct.)",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_D4CA7F900C72",
+      "timestamp": "Mon, 16 Nov 2026 13:00:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Speech by Board Member TAKATA at a Meeting Held by the Tokushima Association of Corporate Executives (Economic Activity, Prices, and Monetary Policy in Japan: Japan's Money and Capital Market Transformation -- Will a Paradigm Shift Occur?)",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Speech by Board Member TAKATA at a Meeting Held by the Tokushima Association of Corporate Executives (Economic Activity, Prices, and Monetary Policy in Japan: Japan's Money and Capital Market Transformation -- Will a Paradigm Shift Occur?)",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_BD3BD5AE1BA1",
+      "timestamp": "Wed, 04 Nov 2026 17:00:00 +0900",
+      "category": "CentralBank_Liquidity_FX_Shock",
+      "involved_entities": [
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "日本央行 (BoJ)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Collateral Accepted by the Bank of Japan (End of Oct.)",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Collateral Accepted by the Bank of Japan (End of Oct.)",
+      "source_name": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_820EF9BEEBFF",
+      "timestamp": "Thu, 19 Nov 2026 20:00:15 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "NVDA",
+        "微软 (MSFT)",
+        "MSFT",
+        "英特尔 (INTC)",
+        "INTC"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：NVIDIA and Microsoft Expand Accelerated Computing From Azure to Windows PCs",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "NVIDIA and Microsoft Expand Accelerated Computing From Azure to Windows PCs",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_5E04099BC280",
+      "timestamp": "Thu, 19 Nov 2026 14:00:12 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "NVDA"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：Season’s Streamings and Savings: Black Friday Deals Come to GeForce NOW",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Season’s Streamings and Savings: Black Friday Deals Come to GeForce NOW",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_12060F3AC214",
+      "timestamp": "Wed, 18 Nov 2026 14:00:31 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "NVDA"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：NVIDIA RTX Spark Compact Desktops Out Now",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "NVIDIA RTX Spark Compact Desktops Out Now",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_5B3242522BE0",
+      "timestamp": "Tue, 17 Nov 2026 14:00:10 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "NVDA"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：Ian Buck Kicks Off NVIDIA’s Week at SC26 as Science Enters the Age of Agents",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Ian Buck Kicks Off NVIDIA’s Week at SC26 as Science Enters the Age of Agents",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_1CC968891311",
+      "timestamp": "Mon, 16 Nov 2026 23:00:05 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "NVDA"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：NVIDIA DGX Spark Developer Kit Turns a Desk Into a Supercomputing Lab",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "NVIDIA DGX Spark Developer Kit Turns a Desk Into a Supercomputing Lab",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_0D070C79D7DD",
+      "timestamp": "Mon, 16 Nov 2026 16:00:51 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "NVDA"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：Lambda Boosts AI Factory Resiliency and Efficiency With NVIDIA Photonics",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Lambda Boosts AI Factory Resiliency and Efficiency With NVIDIA Photonics",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_6A73C66A6199",
+      "timestamp": "Mon, 16 Nov 2026 16:00:47 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "NVDA"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：NVIDIA Expands Slurm to Bring Quantum Computing Into Supercomputing",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "NVIDIA Expands Slurm to Bring Quantum Computing Into Supercomputing",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_B1526C681F56",
+      "timestamp": "Mon, 16 Nov 2026 16:00:25 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "NVDA"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：NVIDIA Sweeps MLPerf Training and Endpoints as Vera Rubin Debuts With Leading Performance",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "NVIDIA Sweeps MLPerf Training and Endpoints as Vera Rubin Debuts With Leading Performance",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_87D4EDE5DAEB",
+      "timestamp": "Mon, 16 Nov 2026 16:00:16 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "NVDA"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：NVIDIA CUDA-X Libraries Give Agents the Tools to Accelerate Scientific Discovery",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "NVIDIA CUDA-X Libraries Give Agents the Tools to Accelerate Scientific Discovery",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_FF86ED22BFC7",
+      "timestamp": "Mon, 16 Nov 2026 16:00:11 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "NVDA"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：CUDA at 20: How the Platform Transformed Scientific Computing",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "CUDA at 20: How the Platform Transformed Scientific Computing",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_53CF546DAC32",
+      "timestamp": "Mon, 16 Nov 2026 16:00:01 +0000",
+      "category": "Supply_Chain_Chokepoint",
+      "involved_entities": [
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "NVDA"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：NVIDIA Announces Rubin HPC — A New GPU to Accelerate Agents for Science, Engineering and Analytics",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "NVIDIA Announces Rubin HPC — A New GPU to Accelerate Agents for Science, Engineering and Analytics",
+      "source_name": "https://blogs.nvidia.com/feed/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_63BE0FD3908B",
+      "timestamp": "Thu, 19 Nov 2026 17:00:00 +0000",
+      "category": "Labor_Strikes_Port_Railways",
       "involved_entities": [
         "国际码头工人协会(ILA)",
         "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
+        "集装箱航运枢纽",
+        "谷歌 (GOOGL)",
+        "GOOGL"
+      ],
       "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
+      "estimated_duration": "中期 2~4 周",
+      "affected_business_segments": [
+        "海运物流与货运代理",
+        "港口装卸",
+        "跨国供应链库存"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Genie 4 is now available on the Gemini API.",
+      "source_name": "https://blog.google/rss/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_CB91BAC0F58A",
+      "timestamp": "Wed, 18 Nov 2026 18:00:00 +0000",
+      "category": "Labor_Strikes_Port_Railways",
       "involved_entities": [
         "国际码头工人协会(ILA)",
         "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
+        "集装箱航运枢纽",
+        "谷歌 (GOOGL)",
+        "GOOGL"
+      ],
       "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
+      "estimated_duration": "中期 2~4 周",
+      "affected_business_segments": [
+        "海运物流与货运代理",
+        "港口装卸",
+        "跨国供应链库存"
+      ],
+      "severity_level": "P1",
+      "requires_deep_analysis": true,
+      "raw_title": "Genie 4 is now available",
+      "source_name": "https://blog.google/rss/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "event_id": "EVT_20CADF029F27",
+      "timestamp": "Wed, 18 Nov 2026 17:00:00 +0000",
+      "category": "Labor_Strikes_Port_Railways",
       "involved_entities": [
         "国际码头工人协会(ILA)",
         "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
+        "集装箱航运枢纽",
+        "谷歌 (GOOGL)",
+        "GOOGL"
+      ],
       "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
+      "estimated_duration": "中期 2~4 周",
+      "affected_business_segments": [
+        "海运物流与货运代理",
+        "港口装卸",
+        "跨国供应链库存"
+      ],
       "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
+      "requires_deep_analysis": true,
+      "raw_title": "The Gemini app is now available on lower-memory Android devices.",
+      "source_name": "https://blog.google/rss/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
     },
     {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
+      "schema_version": "1.0.0",
+      "event_id": "EVT_44D13C699CB1",
+      "timestamp": "Wed, 18 Nov 2026 17:00:00 +0000",
+      "category": "Antitrust_Litigation",
       "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
+        "美国司法部反垄断局",
+        "联邦贸易委员会(FTC)",
+        "国际贸易委员会(ITC)",
+        "谷歌 (GOOGL)",
+        "GOOGL"
+      ],
+      "micro_physical_impact": "监管机构正式发起反垄断重组调查或针对核心专利侵权启动 337 调查及有限排除令",
+      "estimated_duration": "长期司法诉讼 1~2 年",
+      "affected_business_segments": [
+        "数字广告与搜索引擎",
+        "平台应用生态",
+        "知识产权许可"
+      ],
       "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
+      "requires_deep_analysis": true,
+      "raw_title": "Introducing Stitch Loop: A new way to build and evolve products",
+      "source_name": "https://blog.google/rss/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
     },
     {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
+      "schema_version": "1.0.0",
+      "event_id": "EVT_8C2349B4F7F5",
+      "timestamp": "Fri, 20 Nov 2026 21:15:00 GMT",
+      "category": "CentralBank_Liquidity_FX_Shock",
       "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行",
+        "美联储 (Federal Reserve)"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Federal Reserve announces College Fed Challenge winners",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
       "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
+      "requires_deep_analysis": true,
+      "raw_title": "Federal Reserve announces College Fed Challenge winners",
+      "source_name": "https://www.federalreserve.gov/feeds/press_all.xml",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
     },
     {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
+      "schema_version": "1.0.0",
+      "event_id": "EVT_686E6411628D",
+      "timestamp": "Fri, 20 Nov 2026 17:00:00 +0000",
+      "category": "Physical_Plant_Disruption",
       "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
+        "核心化工特种材料厂",
+        "上游原料供应商",
+        "谷歌 (GOOGL)",
+        "GOOGL",
+        "美国证监会 (SEC)"
+      ],
+      "micro_physical_impact": "特种树脂与光刻胶关键前驱体生产车间发生突发火灾，预计全面停产检修",
+      "estimated_duration": "中期 1~3 个月",
+      "affected_business_segments": [
+        "特种电子化学品",
+        "先进芯片制造代工"
+      ],
       "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
+      "requires_deep_analysis": true,
+      "raw_title": "How Watch Duty is using Gemini to get wildfire alerts out faster",
+      "source_name": "https://blog.google/rss/",
+      "credibility_tier": "Tier2_Official_Disclosure",
+      "credibility_score": 0.9,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "上市公司IR或涉事机构官方公报确认",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
     },
     {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
+      "schema_version": "1.0.0",
+      "event_id": "EVT_8E4F239B22EE",
+      "timestamp": "Thu, 19 Nov 2026 05:00:00 GMT",
+      "category": "Supply_Chain_Chokepoint",
       "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
+        "英伟达 (NVDA)",
+        "台积电 (TSM)",
+        "先进半导体供应链",
+        "英特尔 (INTC)",
+        "INTC",
+        "美国证监会 (SEC)"
+      ],
+      "micro_physical_impact": "先进AI算力芯片与核心半导体产业技术/产能进展：Addressing Remote Access to Advanced Semiconductors",
+      "estimated_duration": "中长期 6~12 个月",
+      "affected_business_segments": [
+        "数据中心AI算力",
+        "先进制程代工",
+        "半导体先进封测"
+      ],
       "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
+      "requires_deep_analysis": true,
+      "raw_title": "Addressing Remote Access to Advanced Semiconductors",
+      "source_name": "https://www.federalregister.gov/api/v1/documents.rss?conditions%5Bagencies%5D%5B%5D=industry-and-security-bureau",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
     },
     {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
+      "schema_version": "1.0.0",
+      "event_id": "EVT_C345EA60F299",
+      "timestamp": "Tue, 17 Nov 2026 19:30:00 +0100",
+      "category": "CentralBank_Liquidity_FX_Shock",
       "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Philip R. Lane: The practice and science of monetary policy communication: the ECB experience",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
       "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
+      "requires_deep_analysis": true,
+      "raw_title": "Philip R. Lane: The practice and science of monetary policy communication: the ECB experience",
+      "source_name": "https://www.ecb.europa.eu/rss/press.html",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
     },
     {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
+      "schema_version": "1.0.0",
+      "event_id": "EVT_3635244E4AB5",
+      "timestamp": "Tue, 10 Nov 2026 17:45:00 +0100",
+      "category": "CentralBank_Liquidity_FX_Shock",
       "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Philip R. Lane: The science and practice of monetary policy communication: the ECB experience",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
       "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
+      "requires_deep_analysis": true,
+      "raw_title": "Philip R. Lane: The science and practice of monetary policy communication: the ECB experience",
+      "source_name": "https://www.ecb.europa.eu/rss/press.html",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
     },
     {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
+      "schema_version": "1.0.0",
+      "event_id": "EVT_4554D51CAC23",
+      "timestamp": "Thu, 05 Nov 2026 09:00:00 +0100",
+      "category": "CentralBank_Liquidity_FX_Shock",
       "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
+        "美联储公开市场操作台",
+        "联邦公开市场委员会(FOMC)",
+        "全球主要央行"
+      ],
+      "micro_physical_impact": "全球央行货币政策决策与基准利率走廊变动：Isabel Schnabel: Navigating stormy waters: reflections on monetary policy",
+      "estimated_duration": "中短期 1~3 个月",
+      "affected_business_segments": [
+        "货币市场与固定收益",
+        "商业银行信贷",
+        "宏观跨资产流动性"
+      ],
       "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
-    },
-    {
-      "event_id": "EVT_7E6E727B883E",
-      "title": "Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player",
-      "severity_level": "P1",
-      "micro_physical_impact": "美东与墨西哥湾主要港口码头工人宣布全线罢工，集装箱装卸业务停摆，运力周转受阻",
-      "involved_entities": [
-        "国际码头工人协会(ILA)",
-        "美东各大港口海事联盟",
-        "集装箱航运枢纽"
-      ]
-    },
-    {
-      "event_id": "EVT_AD7BAAAF5A76",
-      "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
-      "severity_level": "P0",
-      "micro_physical_impact": "突发地缘经贸摩擦升级，宣布对高端芯片先进制程供应链实施定向出口管制审查",
-      "involved_entities": [
-        "商务部出口管制局",
-        "关键芯片设计厂商"
-      ]
+      "requires_deep_analysis": true,
+      "raw_title": "Isabel Schnabel: Navigating stormy waters: reflections on monetary policy",
+      "source_name": "https://www.ecb.europa.eu/rss/press.html",
+      "credibility_tier": "Tier1_Official_Regulatory",
+      "credibility_score": 1.0,
+      "verification_status": "Confirmed_Fact",
+      "verification_note": "官方监管机构或法定政府公报权威发布",
+      "evidence_path": null,
+      "evidence_sha256": null,
+      "verified_at": null
     }
   ],
   "last_cycle_at": "2026-11-13T06:00:00Z"

@@ -442,9 +442,11 @@ class WatersourceRequestHandler(BaseHTTPRequestHandler):
                 elif path.endswith("/start"):
                     batch = scheduler.start_batch()
                     self._send_json(202, svc._envelope(batch, as_of="", source="terminal_scheduler", status="QUEUED"))
-                elif not isinstance(body.get("enabled"), bool) or not scheduler.scheduled:
-                    self._send_json(*svc.error_envelope("INVALID_SCHEDULE", "当前服务不能启用定时调度", 400))
+                elif not isinstance(body.get("enabled"), bool):
+                    self._send_json(*svc.error_envelope("INVALID_SCHEDULE", "enabled 必须为布尔值", 400))
                 else:
+                    if body["enabled"]:
+                        scheduler.scheduled = True
                     scheduler.set_enabled("__automatic__", body["enabled"])
                     self._send_json(200, svc._envelope(scheduler.snapshot(), as_of="", source="terminal_scheduler", status="OK"))
                 return
@@ -605,7 +607,12 @@ def main() -> None:
     server = create_terminal_server(host=args.host, port=args.port)
 
     def _on_scheduler_status(run_id: str, task: str, status: str, result: Dict[str, Any]) -> None:
-        server.service._broadcast_sse("collection_update", {"task": task, "run_id": run_id, "status": status})
+        server.service._broadcast_sse("collection_update", {"task": task, "run_id": run_id, "status": status, "result": result})
+        if status in ("SUCCESS", "FINISHED", "IDLE"):
+            try:
+                server.service._broadcast_sse("snapshot", server.service.get_dashboard_summary()["data"])
+            except Exception:
+                pass
 
     scheduler = TerminalScheduler(
         PROJECT_ROOT / ".cache/terminal",

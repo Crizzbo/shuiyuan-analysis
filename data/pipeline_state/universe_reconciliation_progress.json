@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "2.0.0",
-    "last_updated": "2026-11-06T04:34:42.780619+00:00",
+    "last_updated": "2026-11-23T06:10:37.490970+00:00",
     "summary": {
       "total_attempted": 1038,
       "balanced_count": 1038,
@@ -6889,7 +6889,7 @@
       "balance_sheet_rel_ratio": 0.0,
       "deficiency_reason": "",
       "source_filing": "SEC EDGAR 40-F (accn: 0001104659-26-020411)",
-      "updated_at": "2026-11-06T04:34:30.163571+00:00"
+      "updated_at": "2026-11-23T06:10:24.547635+00:00"
     },
     "US:DHR": {
       "ticker": "DHR",
@@ -17336,7 +17336,7 @@
       "balance_sheet_rel_ratio": 0.0,
       "deficiency_reason": "",
       "source_filing": "SEC EDGAR 20-F (accn: 0001193125-25-149706)",
-      "updated_at": "2026-11-06T04:34:30.170083+00:00"
+      "updated_at": "2026-11-23T06:10:24.553635+00:00"
     },
     "US:SMFNF": {
       "ticker": "SMFNF",
@@ -17367,7 +17367,7 @@
       "balance_sheet_rel_ratio": 0.0,
       "deficiency_reason": "",
       "source_filing": "SEC EDGAR 20-F (accn: 0001193125-25-149706)",
-      "updated_at": "2026-11-06T04:34:30.176607+00:00"
+      "updated_at": "2026-11-23T06:10:24.560635+00:00"
     },
     "US:ROK": {
       "ticker": "ROK",
