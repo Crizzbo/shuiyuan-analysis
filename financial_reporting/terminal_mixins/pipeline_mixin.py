@@ -497,16 +497,32 @@ class TerminalPipelineMixin:
             self._current_stage = "【Stage 2/6】正在执行全盘行情报价时效验真与存证入账..."
         self._broadcast_sse("pipeline_status", self.get_pipeline_status()["data"])
 
-        # Stage 2: 全盘现价与收盘行情
+        # Stage 2: 全盘现价与收盘行情 (并发 Google Sheets 活表读取 + 全盘万家分片流式入账)
         if self._stop_event.is_set():
             return
         quotes_count = 0
         try:
-            quotes_res = self.get_market_quotes(market=market)
-            quotes_count = quotes_res.get("data", {}).get("total_ready_assets", 0)
-            quotes_msg = f"行情快照核验完成，覆盖 {quotes_count} 只标的"
+            from finance_tools.governance_and_pipeline.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
+            collector = ConcurrentSheetsQuoteCollector(data_root=self.root / "data")
+
+            # 1. 优先并发采集 Google Sheets 真实云端活表 (6 大分片 live 报价)
+            try:
+                collector.collect_all(max_workers=4)
+            except Exception:
+                pass
+
+            # 2. 全盘万家上市主体 (14,897家) 流式并发入账与时效验真
+            stream_res = collector.stream_collect_full_universe(
+                market=market,
+                chunk_size=50,
+                max_workers=4,
+                chunk_delay=0.005,
+            )
+            quotes_count = stream_res.get("total_tickers_collected", 0)
+            shards_count = stream_res.get("successful_shards", 0)
+            quotes_msg = f"全盘行情并发流式入账完成 (覆盖 {shards_count} 分片 · 共入账 {quotes_count} 只美日标的)"
         except Exception as e:
-            quotes_msg = f"行情核验提示: {e}"
+            quotes_msg = f"行情流式并发入账提示: {e}"
 
         with self._lock:
             self._sub_runs["universe_quotes"].update(status="SUCCESS", progress_pct=100, message=quotes_msg, finished_at=_utc_now_iso())

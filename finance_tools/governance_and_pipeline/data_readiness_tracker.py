@@ -136,11 +136,18 @@ class DataReadinessTracker:
                 banner_text="本地暂无可用的行情批次。",
             )
 
-        # 按最新批次键排序获取最新批次
+        # 按最新批次键获取最新基准日期与最近一跳时间戳
         latest_batch_key = sorted(batches.keys())[-1]
         latest_info = batches[latest_batch_key]
         latest_date = latest_info["date"]
-        all_tickers = sorted(list(latest_info["tickers"]))
+
+        # 汇总最新基准日期当天全部入账标的 (支持全盘 14,897 家上市公司分片并发多批次聚合)
+        date_tickers = set()
+        for b_key, b_info in batches.items():
+            if b_info["date"] == latest_date:
+                date_tickers.update(b_info["tickers"])
+
+        all_tickers = sorted(list(date_tickers))
 
         # 分流宏观与个股
         macro_indices: List[str] = []
@@ -156,7 +163,11 @@ class DataReadinessTracker:
 
         # 构造自然语言提醒横幅
         macro_str = ", ".join(macro_indices) if macro_indices else "暂无"
-        equities_str = ", ".join(equities) if equities else "暂无"
+        if len(equities) > 50:
+            core_preview = [t for t in ["NVDA", "AAPL", "MSFT", "TSLA", "AMZN", "META", "GOOGL", "TSM", "AVGO", "8035", "6857", "9984", "7203", "PLTR", "ARM"] if t in equities]
+            equities_str = f"{', '.join(core_preview)} 等共计 {len(equities)} 只美日全盘上市主体"
+        else:
+            equities_str = ", ".join(equities) if equities else "暂无"
 
         banner = (
             f"📊 **【最新数据拉取完成度与时效底账前置提醒】**\n"
