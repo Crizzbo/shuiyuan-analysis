@@ -313,8 +313,16 @@ class TerminalValuationMixin:
         company_name = (TICKER_ZH_FALLBACK.get(clean_ticker) or quote_info.get("company_name")
                         or (dossier or {}).get("overview", {}).get("company_name") or clean_ticker)
 
-        # 4. 组装金融模型参数（支持用户敏感性微调覆盖）
-        base_discount_rate = float(adjustments.get("discount_rate") or 0.095)
+        # 4. 组装金融模型参数（从宏观基准 ^TNX 与 ^VIX 动态推导无风险利率与风险溢价，支持用户敏感性微调覆盖）
+        tnx_quote = quotes_map.get("^TNX") or {}
+        raw_tnx = tnx_quote.get("price") or tnx_quote.get("raw_price") or 4.42
+        dynamic_rf = round(float(raw_tnx) / 100.0, 4) if float(raw_tnx) > 0 else 0.0442
+        vix_quote = quotes_map.get("^VIX") or {}
+        raw_vix = float(vix_quote.get("price") or vix_quote.get("raw_price") or 20.0)
+        # 宏观恐慌溢价联动：当 VIX >= 25 时风险溢价上调 0.5%，反映买方更高要求之折现率
+        macro_erp = 0.055 if raw_vix >= 25.0 else 0.050
+        dynamic_default_wacc = round(dynamic_rf + macro_erp, 4)
+        base_discount_rate = float(adjustments.get("discount_rate") or dynamic_default_wacc)
         base_terminal_growth = float(adjustments.get("terminal_growth") or 0.025)
         raw_growth = adjustments.get("growth_rates")
         if isinstance(raw_growth, list) and len(raw_growth) >= 1:

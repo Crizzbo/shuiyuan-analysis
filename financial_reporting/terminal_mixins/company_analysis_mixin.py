@@ -895,6 +895,9 @@ class TerminalCompanyAnalysisMixin:
                 mkt_cap = num_cur_price * num_shares
                 st_debt = num_debt * 0.35
                 lt_debt = num_debt * 0.65
+                tnx_quote = quotes_map.get("^TNX") or {}
+                raw_tnx = tnx_quote.get("price") or tnx_quote.get("raw_price") or 4.42
+                dynamic_rf = round(float(raw_tnx) / 100.0, 4) if float(raw_tnx) > 0 else 0.0442
                 cre = gw.analyze_credit(
                     symbol=clean_ticker,
                     raw_financials={
@@ -904,7 +907,7 @@ class TerminalCompanyAnalysisMixin:
                     },
                     equity_market_cap=mkt_cap,
                     equity_volatility=0.35,
-                    risk_free_rate=0.0442,
+                    risk_free_rate=dynamic_rf,
                     as_of_date=as_of_iso[:10],
                 )
                 credit_probe = {"status": "COMPUTED_FROM_SEC_AND_QUOTE", **cre}
