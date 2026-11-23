@@ -895,9 +895,19 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics, onCo
                       ))}
                     </div>
 
-                    <p className="text-[11px] text-slate-500 leading-relaxed">
-                      校准结果: {data?.is_balanced !== false ? '数据匹配平衡，无未映射标的' : '存在未映射标的'} · 本地量化计算引擎
-                    </p>
+                    <div className="space-y-1 pt-1 border-t border-sky-50">
+                      <p className="text-[11px] text-slate-500 leading-relaxed flex items-center justify-between">
+                        <span>
+                          校准结果: {data?.is_balanced !== false ? '数据匹配平衡，无未映射标的' : '存在未映射标的'} · 本地量化计算引擎
+                        </span>
+                        <span className="text-[10px] text-slate-400 font-mono">
+                          平账检验: {data?.is_balanced !== false ? '✅ 差额为0 (完全平账)' : '⚠️ 存在差额'}
+                        </span>
+                      </p>
+                      <p className="text-[10px] text-slate-400 leading-relaxed bg-slate-50/80 p-2 rounded-lg border border-slate-100">
+                        💡 <strong>时序数据维度说明</strong>：此面板校验的是全量标的在目标交易日（{data?.target_trading_day || '2026-11-20'}）的历史 250 日 OHLCV（开/高/低/收/量）日线时序落盘情况，由盘前/盘后定时调度任务（US_DAILY / JP_DAILY）增量归档；与「批量行情同步工作台」的最新现价快照（Quotes）相互独立。
+                      </p>
+                    </div>
                   </div>
                 )
               })}
