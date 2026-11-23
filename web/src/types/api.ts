@@ -711,6 +711,34 @@ export interface CompanyAnalysisData {
       sepa_telemetry?: any
       note?: string
     }
+    forensics_m_score_probe?: {
+      status?: string
+      m_score?: number
+      is_manipulation_suspect?: boolean
+      risk_rating?: string
+      manipulation_probability_pct?: number
+      interpretation_zh?: string
+      variables?: Record<string, number>
+      note?: string
+    }
+    reverse_dcf_probe?: {
+      status: string
+      target_price?: number
+      implied_fcf_growth_5y_pct?: number
+      discount_rate_pct?: number
+      terminal_growth_pct?: number
+      iterations?: number
+      summary_zh?: string
+      note?: string
+    }
+    inventory_dio_probe?: {
+      status?: string
+      inventory_val?: number
+      estimated_dio_days?: number
+      inventory_to_revenue_pct?: number
+      dio_health?: string
+      note?: string
+    }
   }
   automated_valuation?: AutomatedValuationData | null
   automated_valuation_issue?: string | null

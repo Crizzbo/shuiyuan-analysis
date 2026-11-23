@@ -20,7 +20,7 @@ export function QuantitativeProbesCard({ probes }: QuantitativeProbesCardProps) 
           </h3>
         </div>
         <span className="text-xs text-[var(--text-muted)]">
-          报表勾稽核验与偿债信用度量
+          6 大买方量化诊断：勾稽核验 · 偿债信用 · SEPA 形态 · 法证防舞弊 · 反向 DCF · 存货周转
         </span>
       </div>
 
@@ -94,6 +94,92 @@ export function QuantitativeProbesCard({ probes }: QuantitativeProbesCardProps) 
           />
           <div className="text-[11px] text-[var(--text-secondary)] pt-1.5 border-t border-[var(--border-color)]/40 truncate">
             {probes?.timing_and_ohlcv_probe?.note || 'SEPA 均线多头排列 · 波动收缩买点监控中'}
+          </div>
+        </div>
+
+        {/* 4. 法证会计与防舞弊诊断 (Beneish M-Score 8因子) */}
+        <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-4 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-muted)]">法证会计防舞弊诊断</span>
+              <span
+                className={`text-[10px] px-2 py-0.5 rounded font-semibold ${
+                  probes?.forensics_m_score_probe?.is_manipulation_suspect
+                    ? 'bg-rose-50 text-rose-700 border border-rose-200'
+                    : probes?.forensics_m_score_probe?.m_score !== undefined
+                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                    : 'bg-slate-100 text-slate-500 border border-slate-200'
+                }`}
+              >
+                {probes?.forensics_m_score_probe?.is_manipulation_suspect
+                  ? '存在粉饰嫌疑'
+                  : probes?.forensics_m_score_probe?.m_score !== undefined
+                  ? '财务质量稳健'
+                  : '待补充财报细节'}
+              </span>
+            </div>
+            <div className="text-lg font-bold font-mono text-[var(--text-primary)] mt-2">
+              {probes?.forensics_m_score_probe?.m_score !== undefined
+                ? `M-Score ${probes.forensics_m_score_probe.m_score.toFixed(3)}`
+                : 'Beneish 8因子排查中'}
+            </div>
+          </div>
+          <div className="text-[11px] text-[var(--text-secondary)] mt-2 pt-2 border-t border-[var(--border-color)]/40 truncate" title={probes?.forensics_m_score_probe?.interpretation_zh}>
+            {probes?.forensics_m_score_probe?.interpretation_zh || probes?.forensics_m_score_probe?.note || 'M < -1.78 无财务粉饰嫌疑'}
+          </div>
+        </div>
+
+        {/* 5. 反向 DCF 市场预期增速 (Reverse DCF 5-Year Implied FCF CAGR) */}
+        <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-4 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-muted)]">反向 DCF 市场预期</span>
+              <span
+                className={`text-[10px] px-2 py-0.5 rounded font-semibold ${
+                  probes?.reverse_dcf_probe?.status === 'CONVERGED'
+                    ? 'bg-sky-50 text-sky-700 border border-sky-200'
+                    : 'bg-slate-100 text-slate-500 border border-slate-200'
+                }`}
+              >
+                {probes?.reverse_dcf_probe?.status === 'CONVERGED' ? '折现增速收敛' : '待输入正向FCF'}
+              </span>
+            </div>
+            <div className="text-lg font-bold font-mono text-[var(--text-primary)] mt-2">
+              {probes?.reverse_dcf_probe?.implied_fcf_growth_5y_pct !== undefined
+                ? `隐含 CAGR ${probes.reverse_dcf_probe.implied_fcf_growth_5y_pct > 0 ? '+' : ''}${probes.reverse_dcf_probe.implied_fcf_growth_5y_pct}%`
+                : '暂无收敛结果'}
+            </div>
+          </div>
+          <div className="text-[11px] text-[var(--text-secondary)] mt-2 pt-2 border-t border-[var(--border-color)]/40 truncate" title={probes?.reverse_dcf_probe?.summary_zh || probes?.reverse_dcf_probe?.note}>
+            {probes?.reverse_dcf_probe?.summary_zh || probes?.reverse_dcf_probe?.note || '市价二分法反推未来 5 年复合现金流增长底线'}
+          </div>
+        </div>
+
+        {/* 6. 存货运转与周转天数 (DIO Efficiency Probe) */}
+        <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-4 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-muted)]">存货周转效率 (DIO)</span>
+              <span
+                className={`text-[10px] px-2 py-0.5 rounded font-semibold ${
+                  probes?.inventory_dio_probe?.estimated_dio_days !== undefined
+                    ? 'bg-slate-100 text-slate-700 border border-slate-200'
+                    : 'bg-slate-100 text-slate-500 border border-slate-200'
+                }`}
+              >
+                {probes?.inventory_dio_probe?.estimated_dio_days !== undefined ? '周转测算完成' : '轻资产/无实体存货'}
+              </span>
+            </div>
+            <div className="text-lg font-bold font-mono text-[var(--text-primary)] mt-2">
+              {probes?.inventory_dio_probe?.estimated_dio_days !== undefined
+                ? `DIO ${probes.inventory_dio_probe.estimated_dio_days} 天`
+                : '轻资产/未披露存货'}
+            </div>
+          </div>
+          <div className="text-[11px] text-[var(--text-secondary)] mt-2 pt-2 border-t border-[var(--border-color)]/40 truncate">
+            {probes?.inventory_dio_probe?.inventory_to_revenue_pct !== undefined
+              ? `存货/营收比: ${probes.inventory_dio_probe.inventory_to_revenue_pct}% · ${probes.inventory_dio_probe.dio_health || ''}`
+              : probes?.inventory_dio_probe?.note || '无实体库存或三表未单独拆分'}
           </div>
         </div>
       </div>

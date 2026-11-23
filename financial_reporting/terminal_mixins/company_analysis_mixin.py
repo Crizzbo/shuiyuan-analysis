@@ -1009,6 +1009,96 @@ class TerminalCompanyAnalysisMixin:
             "PREVIOUS_CLOSE" if financial_probe["has_audited_statement"] or sepa_record else "PARTIAL"
         )
 
+        # 8b. 法证质量与财务舞弊探针 (Beneish M-Score 8 因子)
+        forensics_probe: Dict[str, Any] = {}
+        try:
+            forensics_res = gw.analyze_forensics(
+                symbol=clean_ticker,
+                raw_financials={
+                    "Revenue": num_rev,
+                    "GrossProfit": num_gp,
+                    "AccountsReceivableNetCurrent": raw_table.get("accounts_receivable") or (sec_rec or {}).get("accounts_receivable") or 0.0,
+                    "TotalAssets": num_assets,
+                    "DepreciationAndAmortization": raw_table.get("depreciation") or 0.0,
+                    "OperatingIncome": num_ebit,
+                    "NetIncome": num_ni,
+                    "FreeCashFlow": num_fcf,
+                },
+                as_of_date=as_of_iso[:10],
+            )
+            if forensics_res:
+                forensics_probe = forensics_res
+        except Exception as e:
+            forensics_probe = {"status": "UNAVAILABLE", "note": f"法证探针分析跳过: {e}"}
+
+        # 8c. 反向 DCF 市场隐含 FCF 复合年化增速探针
+        reverse_dcf_probe: Dict[str, Any] = {}
+        eval_price = float(cur_price) if (cur_price and float(cur_price) > 0) else (float(quote_info.get("raw_price") or 0.0) if quote_info else 0.0)
+        if eval_price > 0 and num_fcf and num_shares and num_fcf > 0 and num_shares > 0:
+            try:
+                from finance_tools.forensics_and_valuation.valuation import reverse_dcf
+                p_target = eval_price
+                net_d = float(num_debt or 0.0) - float(num_cash or 0.0)
+                tnx_quote = quotes_map.get("^TNX") or {}
+                raw_tnx = tnx_quote.get("price") or tnx_quote.get("raw_price") or 4.42
+                dyn_rf = round(float(raw_tnx) / 100.0, 4) if float(raw_tnx) > 0 else 0.0442
+                discount_r = max(0.065, min(0.15, dyn_rf + 0.055))
+                rev_res = reverse_dcf(
+                    target_price=p_target,
+                    cash_flow=float(num_fcf),
+                    years=5,
+                    discount_rate=discount_r,
+                    terminal_growth=0.025,
+                    shares=float(num_shares),
+                    scope="FCFF",
+                    net_debt=net_d,
+                    lower=-0.4,
+                    upper=0.9,
+                )
+                if rev_res.get("status") == "converged":
+                    implied_g = round(float(rev_res["implied_growth"]) * 100.0, 2)
+                    reverse_dcf_probe = {
+                        "status": "CONVERGED",
+                        "target_price": p_target,
+                        "implied_fcf_growth_5y_pct": implied_g,
+                        "discount_rate_pct": round(discount_r * 100.0, 2),
+                        "terminal_growth_pct": 2.5,
+                        "iterations": rev_res.get("iterations", 0),
+                        "summary_zh": f"当前市价 ${p_target:.2f} 隐含未来 5 年自由现金流需维持年化 {implied_g}% 复合高增速 (基于 WACC {discount_r*100:.1f}%)",
+                    }
+                else:
+                    reverse_dcf_probe = {
+                        "status": rev_res.get("status", "OUT_OF_BOUNDS"),
+                        "note": "当前股价超出 5 年 -40%~+90% FCF 增速收敛区间",
+                    }
+            except Exception as e:
+                reverse_dcf_probe = {"status": "INSUFFICIENT_INPUTS", "note": str(e)}
+        else:
+            reverse_dcf_probe = {
+                "status": "REQUIRES_POSITIVE_FCF_AND_PRICE",
+                "note": "需具备真实正向自由现金流、现价与总股本底账方可反推增长预期",
+            }
+
+        # 8d. 存货周期与 DIO 运转效率探针
+        inventory_probe: Dict[str, Any] = {}
+        inv = raw_table.get("inventory") or (sec_rec or {}).get("inventory") or facts.get("finished_goods")
+        num_inv = _safe_parse_num(inv)
+        if num_inv is not None and num_rev and num_rev > 0:
+            cogs = num_rev - (num_gp or (num_rev * 0.45))
+            dio = round((num_inv / cogs) * 365.0, 1) if cogs > 0 else None
+            inventory_probe = {
+                "status": "COMPUTED",
+                "inventory_val": num_inv,
+                "estimated_dio_days": dio,
+                "inventory_to_revenue_pct": round((num_inv / num_rev) * 100.0, 2),
+                "dio_health": "DIO 处于健康周转区间" if (dio and dio < 150) else "DIO 存货偏高需防范滞销与跌价",
+            }
+        else:
+            inventory_probe = {
+                "status": "NOT_APPLICABLE_OR_NO_INVENTORY",
+                "note": "该标的无大额实体存货或三表未单独披露存货细目（轻资产/服务型）",
+            }
+
         # 9. 嵌入全自动带入底层事实的多阶段 DCF、WACC 与杜邦估值模型
         auto_val_res = None
         auto_valuation_issue = None
@@ -1075,6 +1165,9 @@ class TerminalCompanyAnalysisMixin:
                     "financial_audit": financial_probe,
                     "credit_kmv_probe": credit_probe,
                     "timing_and_ohlcv_probe": ohlcv_probe,
+                    "forensics_m_score_probe": forensics_probe,
+                    "reverse_dcf_probe": reverse_dcf_probe,
+                    "inventory_dio_probe": inventory_probe,
                 },
                 "automated_valuation": auto_val_res,
                 "automated_valuation_issue": auto_valuation_issue,

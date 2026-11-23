@@ -9,6 +9,8 @@
 """
 
 import json
+import os
+import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -16,6 +18,8 @@ import re
 from typing import Any, Dict, List, Optional, Set
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+_READINESS_CACHE: Dict[str, Any] = {}
 
 
 def is_excluded_quote(path: Path, payload: Dict[str, Any]) -> bool:
@@ -75,7 +79,7 @@ class DataReadinessTracker:
 
     def inspect_latest_readiness(self) -> DataReadinessSnapshot:
         """扫描本地行情底账，提取最新日期拉取完成的核心标的清单."""
-        if not self.raw_dir.exists() or not self.raw_dir.is_dir() or not any(self.raw_dir.iterdir()):
+        if not self.raw_dir.exists() or not self.raw_dir.is_dir():
             return DataReadinessSnapshot(
                 latest_date_str="未知",
                 latest_timestamp_utc="无落盘数据",
@@ -87,45 +91,61 @@ class DataReadinessTracker:
                 banner_text="【数据时效底账提醒】本地暂无行情数据落盘记录。",
             )
 
+        raw_path_str = str(self.raw_dir)
+        try:
+            current_mtime = self.raw_dir.stat().st_mtime
+        except OSError:
+            current_mtime = 0.0
+
+        now_ts = time.time()
+        cached = _READINESS_CACHE.get(raw_path_str)
+        if cached and (cached.get("mtime") == current_mtime) and (now_ts - cached.get("cached_at", 0) < 30.0):
+            return cached["snapshot"]
+
         # 匹配形如 20261107T124149_134772Z_SPY_market_quote.json 的文件
         pattern = re.compile(r"^(\d{8})T(\d{6})_(\d+Z)_([A-Za-z0-9_\^]+)_market_quote\.json$")
 
         batches: Dict[str, Dict[str, Any]] = {}
 
-        for p in self.raw_dir.iterdir():
-            if not p.is_file():
-                continue
-            m = pattern.match(p.name)
-            if not m:
-                continue
-            if p.name.startswith("20261113T060000_"):
-                try:
-                    payload = json.loads(p.read_text(encoding="utf-8"))
-                    if not isinstance(payload, dict) or is_excluded_quote(p, payload):
+        try:
+            with os.scandir(self.raw_dir) as entries:
+                for entry in entries:
+                    if not entry.is_file():
                         continue
-                    quotes = payload.get("quotes")
-                    if not isinstance(quotes, dict) or not quotes:
+                    m = pattern.match(entry.name)
+                    if not m:
                         continue
-                except (OSError, ValueError):
-                    continue
+                    if entry.name.startswith("20261113T060000_"):
+                        try:
+                            p = Path(entry.path)
+                            payload = json.loads(p.read_text(encoding="utf-8"))
+                            if not isinstance(payload, dict) or is_excluded_quote(p, payload):
+                                continue
+                            quotes = payload.get("quotes")
+                            if not isinstance(quotes, dict) or not quotes:
+                                continue
+                        except (OSError, ValueError):
+                            continue
 
-            date_part, time_part, _, ticker = m.groups()
-            batch_key = f"{date_part}T{time_part}"
-            date_formatted = f"{date_part[:4]}-{date_part[4:6]}-{date_part[6:]}"
+                    date_part, time_part, _, ticker = m.groups()
+                    batch_key = f"{date_part}T{time_part}"
+                    date_formatted = f"{date_part[:4]}-{date_part[4:6]}-{date_part[6:]}"
 
-            if batch_key not in batches:
-                batches[batch_key] = {
-                    "date": date_formatted,
-                    "batch_key": batch_key,
-                    "tickers": set(),
-                    "file_count": 0,
-                }
-            batches[batch_key]["tickers"].add(ticker)
-            batches[batch_key]["file_count"] += 1
+                    if batch_key not in batches:
+                        batches[batch_key] = {
+                            "date": date_formatted,
+                            "batch_key": batch_key,
+                            "tickers": set(),
+                            "file_count": 0,
+                        }
+                    batches[batch_key]["tickers"].add(ticker)
+                    batches[batch_key]["file_count"] += 1
+        except OSError:
+            pass
 
         if not batches:
             # 兼容历史无前缀格式如 20261014_market_quotes.json
-            return DataReadinessSnapshot(
+            snap = DataReadinessSnapshot(
                 latest_date_str="未知",
                 latest_timestamp_utc="无可用批次",
                 macro_indices_completed=[],
@@ -135,6 +155,8 @@ class DataReadinessTracker:
                 market_session_note="待补数",
                 banner_text="本地暂无可用的行情批次。",
             )
+            _READINESS_CACHE[raw_path_str] = {"mtime": current_mtime, "cached_at": now_ts, "snapshot": snap}
+            return snap
 
         # 按最新批次键获取最新基准日期与最近一跳时间戳
         latest_batch_key = sorted(batches.keys())[-1]
@@ -178,7 +200,7 @@ class DataReadinessTracker:
             f"- **覆盖范围**：上述数量仅统计行情快照归档。日线、成交量与三表需要分别核对。"
         )
 
-        return DataReadinessSnapshot(
+        snapshot = DataReadinessSnapshot(
             latest_date_str=latest_date,
             latest_timestamp_utc=timestamp_utc,
             macro_indices_completed=macro_indices,
@@ -188,6 +210,8 @@ class DataReadinessTracker:
             market_session_note="前一交易日收盘基准 (闭市状态)",
             banner_text=banner,
         )
+        _READINESS_CACHE[raw_path_str] = {"mtime": current_mtime, "cached_at": now_ts, "snapshot": snapshot}
+        return snapshot
 
 
 def get_data_readiness_banner() -> str:
