@@ -225,7 +225,7 @@ class TerminalQuotesMixin:
                 "STALE_BLOCKED" if not is_valid else
                 "PREVIOUS_CLOSE" if staleness == "previous_close_baseline" else "FRESH"
             )
-            from scripts.batch_replenish_universe_quotes import REPLENISHMENT_UNIVERSE
+            from finance_tools.governance_and_pipeline.universe_definitions import REPLENISHMENT_UNIVERSE
             meta = REPLENISHMENT_UNIVERSE.get(ticker)
             prev_close = meta.get("prev_close") if meta else obj.get("previous_close")
             chg = round(price - prev_close, 2) if (price is not None and prev_close) else None
@@ -461,8 +461,8 @@ class TerminalQuotesMixin:
 
         # 调度多表并发采集引擎以获取全量或指定标的最新云端报价
         try:
-            from scripts.batch_replenish_universe_quotes import REPLENISHMENT_UNIVERSE
-            from scripts.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
+            from finance_tools.governance_and_pipeline.universe_definitions import REPLENISHMENT_UNIVERSE
+            from finance_tools.governance_and_pipeline.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
             collector = ConcurrentSheetsQuoteCollector(data_root=self.root / "data")
             is_full = (len(cleaned_tickers) >= len(REPLENISHMENT_UNIVERSE))
             filter_targets = None if is_full else cleaned_tickers
@@ -547,7 +547,7 @@ class TerminalQuotesMixin:
                 company_name = base_info.get("name", company_name)
                 volume = base_info.get("vol", "—")
             else:
-                price = 100.00 if market == "US" else 1000.00
+                price = None
 
             if price is None or not math.isfinite(price) or price <= 0:
                 failed_count += 1
@@ -837,7 +837,7 @@ class TerminalQuotesMixin:
         max_workers: int = 4,
     ) -> Tuple[int, Dict[str, Any]]:
         """全盘流式分批并发采集 (Chunk-and-Stream Option 1)."""
-        from scripts.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
+        from finance_tools.governance_and_pipeline.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
 
         collector = ConcurrentSheetsQuoteCollector(data_root=self.root / "data", max_workers=max_workers)
         result = collector.stream_collect_chunks(
@@ -869,7 +869,7 @@ class TerminalQuotesMixin:
 
     def get_stream_chunk_status(self) -> Tuple[int, Dict[str, Any]]:
         """获取全盘流式分批采集全局检查点与进度状态."""
-        from scripts.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
+        from finance_tools.governance_and_pipeline.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
 
         collector = ConcurrentSheetsQuoteCollector(data_root=self.root / "data")
         status = collector.get_stream_chunk_status()
@@ -887,7 +887,7 @@ class TerminalQuotesMixin:
         max_workers: int = 4,
     ) -> Tuple[int, Dict[str, Any]]:
         """全盘万家美日标的固化流式抽取 (14,897 家上市公司全覆盖)."""
-        from scripts.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
+        from finance_tools.governance_and_pipeline.concurrent_sheets_quote_collector import ConcurrentSheetsQuoteCollector
 
         collector = ConcurrentSheetsQuoteCollector(data_root=self.root / "data", max_workers=max_workers)
         result = collector.stream_collect_full_universe(
@@ -898,10 +898,9 @@ class TerminalQuotesMixin:
             limit_chunks=limit_chunks,
         )
 
-        sse_mgr = getattr(self, "sse_manager", None)
-        if sse_mgr:
+        if hasattr(self, "_broadcast_sse"):
             try:
-                sse_mgr.broadcast(
+                self._broadcast_sse(
                     "full_universe_collected",
                     {
                         "market": market,

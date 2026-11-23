@@ -245,7 +245,7 @@ class TerminalDashboardMixin:
     def get_market_statistics(self) -> Dict[str, Any]:
         """全市场每日股票量化统计全景数据 (基于本地真实报价与已核验档案动态聚合，杜绝静态虚假字典)."""
         quotes_map, _ = self._read_latest_raw_quotes()
-        from scripts.batch_replenish_universe_quotes import REPLENISHMENT_UNIVERSE
+        from finance_tools.governance_and_pipeline.universe_definitions import REPLENISHMENT_UNIVERSE
 
         us_returns: List[float] = []
         jp_returns: List[float] = []

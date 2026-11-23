@@ -179,6 +179,16 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
       setBatchProgress(100)
       if (res.ok && res.data) {
         setStreamResult(res.data.data)
+        const streamData = res.data.data
+        setBatchResult({
+          total_requested: streamData.total_universe_tickers || streamData.total_tickers_collected,
+          total_collected: streamData.total_tickers_collected,
+          success_count: streamData.total_tickers_collected,
+          failed_count: streamData.total_tickers_failed || 0,
+          collected_at: new Date().toISOString(),
+          market_session_note: `全盘流式覆盖完成: 处理 ${streamData.successful_shards}/${streamData.total_shards} 分片，入账 ${streamData.total_tickers_collected} 只标的`,
+          items: [],
+        })
         showToast({
           type: 'success',
           title: '🎯 全盘万家标的抽取成功！',
@@ -755,10 +765,10 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics }: Co
                             : 'bg-white/80 hover:bg-sky-50 text-slate-600 border border-sky-100'
                         }`}
                       >
-                        {mode === 'ALL' && `全部 (${batchResult.items.length})`}
-                        {mode === 'US' && `美股 US (${batchResult.items.filter(i => i.market === 'US').length})`}
-                        {mode === 'JP' && `日股 JP (${batchResult.items.filter(i => i.market === 'JP').length})`}
-                        {mode === 'UP_ONLY' && `仅大涨标的 🔥 (${batchResult.items.filter(i => (i.change_percent ?? 0) > 0).length})`}
+                        {mode === 'ALL' && `全部 (${batchResult.items?.length ?? 0})`}
+                        {mode === 'US' && `美股 US (${batchResult.items?.filter(i => i.market === 'US').length ?? 0})`}
+                        {mode === 'JP' && `日股 JP (${batchResult.items?.filter(i => i.market === 'JP').length ?? 0})`}
+                        {mode === 'UP_ONLY' && `仅大涨标的 🔥 (${batchResult.items?.filter(i => (i.change_percent ?? 0) > 0).length ?? 0})`}
                       </button>
                     ))}
                   </div>

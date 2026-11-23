@@ -463,14 +463,5 @@ class WatersourceTerminalService(
             return 200, self._envelope(new_config, as_of=_utc_now_iso(), source="config/terminal_tasks.json", status="UPDATED")
         except Exception as e:
             return self.error_envelope("WRITE_FAILED", f"保存任务配置失败: {e}", 500)
-        return 200, self._envelope(
-            {
-                "pipeline_id": pipeline_id,
-                "enabled": current_state,
-                "message": f"任务 [{pipeline_id}] 子开关状态已切换为: {state_zh}",
-            },
-            as_of=_utc_now_iso(),
-            source="WatersourceTerminalService.toggle_collection_task",
-            status="FRESH",
-        )
+
 
