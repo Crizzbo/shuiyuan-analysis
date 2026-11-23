@@ -13,6 +13,7 @@ import { showToast } from './Toast'
 import { TaskConfigModal } from './TaskConfigModal'
 import { ProductionTaskMatrix } from './collection/ProductionTaskMatrix'
 import { DataInventoryOverview } from './collection/DataInventoryOverview'
+import { MacroMicroOrchestratorCard } from './collection/MacroMicroOrchestratorCard'
 import { formatDeviceTime } from '../utils/format'
 import {
   ZapIcon,
@@ -28,7 +29,7 @@ interface CollectionTabProps {
   onCollectionComplete?: () => void
 }
 
-export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics, onCollectionComplete }: CollectionTabProps) {
+export function CollectionTab({ pipelineStatus, refreshKey, onAudit, onNavigateToAnalytics, onCollectionComplete }: CollectionTabProps) {
   // 1. 数据概览与全系统 8 大数据类型盘点
   const [overview, setOverview] = useState<CollectionOverviewData | null>(null)
   const [, setLoadingOverview] = useState(true)
@@ -451,6 +452,12 @@ export function CollectionTab({ refreshKey, onAudit, onNavigateToAnalytics, onCo
           </button>
         </div>
       </div>
+
+      {/* 宏微观全流程流水线全自动总调度中枢 */}
+      <MacroMicroOrchestratorCard
+        pipelineStatus={pipelineStatus}
+        onSyncComplete={onCollectionComplete}
+      />
 
       {/* 一、8 大数据类型资产全景盘点卡片矩阵 (Data Type Inventory Gauges) */}
       <DataInventoryOverview
