@@ -453,14 +453,9 @@ class TerminalQuotesMixin:
             if item and item not in cleaned_tickers:
                 cleaned_tickers.append(item)
 
-        # 固化全量美日万家标的快捷指令支持
-        if len(cleaned_tickers) == 1 and cleaned_tickers[0] in ("ALL", "FULL", "FULL_UNIVERSE", "GLOBAL"):
+        # 默认一键跑完全盘美日万家标的 (14,897 家上市公司全盘流式覆盖)
+        if not cleaned_tickers or (len(cleaned_tickers) == 1 and cleaned_tickers[0] in ("ALL", "FULL", "FULL_UNIVERSE", "GLOBAL")):
             return self.stream_collect_full_universe_quotes(market="ALL", dry_run=False)
-
-        if not cleaned_tickers:
-            # 默认拉取全量最新价格 (覆盖全部分片多资产池)
-            from scripts.batch_replenish_universe_quotes import REPLENISHMENT_UNIVERSE
-            cleaned_tickers = list(REPLENISHMENT_UNIVERSE.keys())
 
         verifier = MarketQuoteVerifier(self.root)
 

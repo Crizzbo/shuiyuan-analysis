@@ -12,7 +12,8 @@
 """
 
 import argparse
-from datetime import datetime, timezone
+import copy
+from datetime import datetime, timezone, timedelta
 import json
 import os
 from pathlib import Path
@@ -758,10 +759,12 @@ def locate_or_generate_dossier_pdf(ticker: str, market: str) -> Optional[Path]:
 
 def main():
     parser = argparse.ArgumentParser(description="美日股每日大盘总行情与公司深度档案纯净 PDF 自动化投研流水线")
-    parser.add_argument("--as-of", default="2026-11-16", help="研报报告基准日期 (YYYY-MM-DD)")
+    parser.add_argument("--as-of", default=None, help="研报报告基准日期 (YYYY-MM-DD，默认当日)")
     args = parser.parse_args()
 
-    report_date = args.as_of
+    now_utc = datetime.now(timezone.utc)
+    current_sys_date = now_utc.strftime("%Y-%m-%d")
+    report_date = args.as_of or current_sys_date
     print("=" * 80)
     print(f"[每日研报流水线] [{report_date} 07:00 JST] 启动美日股每日大盘总行情与公司深度档案纯净 PDF 自动化投研流水线")
     print(f"当前执行环境: Windows PowerShell | 报告基准日: {report_date}")
@@ -779,19 +782,45 @@ def main():
     current_sys_date = now_utc.strftime("%Y-%m-%d")
     if report_date == current_sys_date:
         current_time_iso = now_utc.isoformat()
+        sess_us = QuoteFreshnessGateway.resolve_latest_market_session("US", now_utc)
+        sess_jp = QuoteFreshnessGateway.resolve_latest_market_session("JP", now_utc)
+        us_quote_ts = f"{sess_us.trading_date} 16:00 EST"
+        us_label_status = f"{sess_us.trading_date} 16:00 EST {sess_us.session_label_zh}/盘前等待开市"
+        jp_local = now_utc.astimezone(timezone(timedelta(hours=9)))
+        if jp_local.hour < 9:
+            jp_quote_ts = f"{sess_jp.trading_date} 15:30 JST"
+            jp_label_status = f"{sess_jp.trading_date} 15:30 JST 收盘基准"
+        elif jp_local.hour < 11 or (jp_local.hour == 11 and jp_local.minute < 30):
+            past_m = jp_local - timedelta(minutes=5)
+            jp_quote_ts = f"{sess_jp.trading_date} {past_m.strftime('%H:%M')} JST"
+            jp_label_status = f"{sess_jp.trading_date} {past_m.strftime('%H:%M')} JST 盘中现价"
+        elif jp_local.hour == 11 or (jp_local.hour == 12 and jp_local.minute <= 30):
+            jp_quote_ts = f"{sess_jp.trading_date} 11:30 JST"
+            jp_label_status = f"{sess_jp.trading_date} 11:30 JST 午间休市/前收盘基准"
+        elif jp_local.hour < 15 or (jp_local.hour == 15 and jp_local.minute < 30):
+            past_m = jp_local - timedelta(minutes=5)
+            jp_quote_ts = f"{sess_jp.trading_date} {past_m.strftime('%H:%M')} JST"
+            jp_label_status = f"{sess_jp.trading_date} {past_m.strftime('%H:%M')} JST 盘中现价"
+        else:
+            jp_quote_ts = f"{sess_jp.trading_date} 15:30 JST"
+            jp_label_status = f"{sess_jp.trading_date} 15:30 JST {sess_jp.session_label_zh}/当日收盘基准"
     else:
         # 当回溯或执行指定基准日流水线时，时效时间对齐该报告日美股收盘基准 (21:00 UTC)
         current_time_iso = f"{report_date}T21:00:00Z"
+        us_quote_ts = f"{report_date} 16:00 EST"
+        us_label_status = f"{report_date} 16:00 EST 收盘基准/盘后"
+        jp_quote_ts = f"{report_date} 15:30 JST"
+        jp_label_status = f"{report_date} 15:30 JST 当日收盘基准/盘后"
 
-    # 美股核验 (以 2026-11-16 16:00 EST 收盘价为基准)
+    # 美股核验
     us_checks = [
-        ("NVDA", 186.64, "USD", f"{report_date} 16:00 EST"),
-        ("PLTR", 175.40, "USD", f"{report_date} 16:00 EST"),
-        ("STX", 132.80, "USD", f"{report_date} 16:00 EST"),
-        ("RXRX", 4.36, "USD", f"{report_date} 16:00 EST"),
-        ("LLY", 818.28, "USD", f"{report_date} 16:00 EST"),
-        ("AVGO", 245.50, "USD", f"{report_date} 16:00 EST"),
-        ("TSM", 375.44, "USD", f"{report_date} 16:00 EST"),
+        ("NVDA", 186.64, "USD", us_quote_ts),
+        ("PLTR", 175.40, "USD", us_quote_ts),
+        ("STX", 132.80, "USD", us_quote_ts),
+        ("RXRX", 4.36, "USD", us_quote_ts),
+        ("LLY", 818.28, "USD", us_quote_ts),
+        ("AVGO", 245.50, "USD", us_quote_ts),
+        ("TSM", 375.44, "USD", us_quote_ts),
     ]
     for sym, px, ccy, ts in us_checks:
         res = QuoteFreshnessGateway.verify_quote(
@@ -804,14 +833,14 @@ def main():
         print(f"  [美股] {sym}: {res.formatted_label} | 时效有效: {res.is_valid} | 状态: {res.session_status}")
         assert res.is_valid, f"美股行情校验失败: {res.message}"
 
-    # 日股核验 (以 2026-11-16 15:30 JST 当日收盘价为基准)
+    # 日股核验
     jp_checks = [
-        ("8035", 8263.0, "JPY", f"{report_date} 15:30 JST"),
-        ("6857", 9850.0, "JPY", f"{report_date} 15:30 JST"),
-        ("7203", 2910.5, "JPY", f"{report_date} 15:30 JST"),
-        ("9984", 11200.0, "JPY", f"{report_date} 15:30 JST"),
-        ("6501", 4020.0, "JPY", f"{report_date} 15:30 JST"),
-        ("7974", 8360.0, "JPY", f"{report_date} 15:30 JST"),
+        ("8035", 8263.0, "JPY", jp_quote_ts),
+        ("6857", 9850.0, "JPY", jp_quote_ts),
+        ("7203", 2910.5, "JPY", jp_quote_ts),
+        ("9984", 11200.0, "JPY", jp_quote_ts),
+        ("6501", 4020.0, "JPY", jp_quote_ts),
+        ("7974", 8360.0, "JPY", jp_quote_ts),
     ]
     for sym, px, ccy, ts in jp_checks:
         res = QuoteFreshnessGateway.verify_quote(
@@ -837,11 +866,16 @@ def main():
     work_dir.mkdir(parents=True, exist_ok=True)
 
     briefing_results = []
-    datasets = [BRIEFING_DATA_US, BRIEFING_DATA_JP]
+    datasets = [copy.deepcopy(BRIEFING_DATA_US), copy.deepcopy(BRIEFING_DATA_JP)]
     for d in datasets:
         d["header"]["report_date"] = report_date
         market = d["header"]["market"]
         name_zh = d["header"]["market_name_zh"]
+        label_status = us_label_status if market == "US" else jp_label_status
+        quote_ts = us_quote_ts if market == "US" else jp_quote_ts
+        for st in d.get("recommended_stocks", []):
+            st["current_price"] = re.sub(r"\[.*?\]", f"[{label_status}]", st["current_price"])
+        d["ai_executive_summary"] = re.sub(r"2026-\d{2}-\d{2}\s+\d{2}:\d{2}\s+(?:EST|JST)", quote_ts, d["ai_executive_summary"])
         print(f"\n  [处理中] 正在处理大盘总研报: {name_zh} ({market})...")
 
         # 1. Schema 强校验
@@ -1265,7 +1299,7 @@ def main():
 
     receipt_content = {
         "title": f"{report_date} 美日股每日大盘总行情与公司深度档案流水线审计收据",
-        "session_snapshot": f"{report_date} 07:00 JST (东证收盘盘后 / 美股盘前等待开市)",
+        "session_snapshot": f"{report_date} (美股: {us_label_status} / 日股: {jp_label_status})",
         "daily_folder_id": TARGET_DAILY_FOLDER_ID,
         "executed_at": datetime.now(timezone.utc).isoformat(),
         "briefings": briefing_results,

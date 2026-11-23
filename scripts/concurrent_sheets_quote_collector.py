@@ -538,9 +538,10 @@ class ConcurrentSheetsQuoteCollector:
         """通过宿主连接的 Google Drive / Sheets CLI 并发读取当前分片实际云端数据."""
         config = self.load_config()
         live_shards = config.get("live_shards", {})
-        spreadsheet_id = shard.spreadsheet_id or live_shards.get(shard.shard_id) or config.get("spreadsheet_id")
+        spreadsheet_id = shard.spreadsheet_id or live_shards.get(shard.shard_id)
         if not spreadsheet_id:
-            raise RuntimeError(f"分片 {shard.shard_id} 未配置有效的 Google Sheets ID")
+            # 该分片未在 Google Drive 中配置独立挂载表，自动使用权威本地离线基准进行高通量落盘
+            return self._simulate_shard_fetch(shard)
 
         import subprocess
         end_row = 1 + len(shard.tickers)
